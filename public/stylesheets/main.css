@@ -769,6 +769,13 @@ h3 {
     box-shadow: none;
 }
 
+.form-control-invalid {
+    --input-border-color: #ee0b0b;
+    outline: 0;
+    box-shadow: none;
+}
+
+
 input:focus ~ label.form-label,
 input:not(:placeholder-shown) ~ label.form-label{
     bottom: 4.65em;
@@ -777,7 +784,7 @@ input:not(:placeholder-shown) ~ label.form-label{
     padding: 0 0.5em;
     font-size: 0.8em;
     opacity: 1;
-    color: #1266f1;
+    color: #418CFD;
 }
 
 input:not(:focus) ~ label.form-label{
@@ -785,7 +792,7 @@ input:not(:focus) ~ label.form-label{
 }
 
 input.red:focus {
-    border-color: #1266f1;
+    border-color: #418CFD;
     outline: 0;
     box-shadow: none;
 }
@@ -804,6 +811,13 @@ label.form-label {
     margin: none;
 }
 
+input.form-control:-webkit-autofill,
+input.form-control:-webkit-autofill:hover, 
+input.form-control:-webkit-autofill:focus, 
+input.form-control:-webkit-autofill:active  {
+  background-color:white;
+}
+
 ::-webkit-scrollbar {
     width: 6px;
   }
@@ -814,5 +828,5 @@ label.form-label {
     background-color: rgba(255, 255, 255, 0.7); 
   }
   ::-webkit-scrollbar-thumb:hover {
-    background-color:#3f43fd ; 
+    background-color:#418CFD ; 
   }
