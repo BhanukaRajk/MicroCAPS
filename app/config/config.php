@@ -4,7 +4,7 @@
     define('APP_ROOT',dirname(dirname(__FILE__)));
 
     /** URL Root */
-    const URL_ROOT = 'http://localhost/MicroCAPS';
+    const URL_ROOT = 'http://localhost/MicroCAPS/';
 
     /** Site Name */
     const SITE_NAME = 'MicroCAPS';

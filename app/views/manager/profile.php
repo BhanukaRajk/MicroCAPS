@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
-    <link href="<?php echo URL_ROOT;?>/public/stylesheets/main.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/main.css" rel="stylesheet" />
 
     <!-- <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" /> -->
 
@@ -22,20 +21,19 @@
 </head>
 
 <body class="color">
-
 <section class="">
     <!-- <div class="container"> -->
     <div class="column align-items-center border padding-5  width-rem-25 height-25">
 
         <div class="text-center">
-            <img src="<?php echo URL_ROOT;?>/public/images/logo.png" class="text-center width-50" alt="logo"/>
+            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-50" alt="logo"/>
         </div>
 
         <div class="text-center">
             <h3 class="margin-top-4 margin-bottom-5">Log In</h3>
         </div>
 
-        <form action="<?php echo URL_ROOT; ?>/login" method="post" autocomplete="off">
+        <form action="<?php echo URL_ROOT; ?>Managers/login" method="post" autocomplete="off">
 
             <div>
                 <input type="text"

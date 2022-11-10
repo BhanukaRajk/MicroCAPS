@@ -6,7 +6,7 @@
     class Core {
 
         protected $currentController = 'Users';
-        protected $currentMethod = 'login';
+        protected $currentMethod = 'index';
         protected $params = [];
 
         public function __construct(){
@@ -58,7 +58,8 @@
 
                 $url = rtrim($_GET['url'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
-                return explode('/', $url);
+                $url = explode('/', $url);
+                return $url;
 
             }
 

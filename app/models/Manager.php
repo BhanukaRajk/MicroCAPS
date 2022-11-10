@@ -1,5 +1,5 @@
 <?php
-class User {
+class Manager {
     private $db;
 
     public function __construct(){
