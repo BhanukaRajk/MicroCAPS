@@ -76,7 +76,7 @@ class Managers extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = $this->getUrl();
+            $url = getUrl();
             $this->view('manager/dashboard',$url);
         }
     }
@@ -88,22 +88,10 @@ class Managers extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = $this->getUrl();
+            $url = getUrl();
             $this->view('manager/bodyshell', $url);
         }
     }
 
-    public function getUrl(){
-
-        if(isset($_GET['url'])){
-
-            $url = rtrim($_GET['url'], '/');
-            $url = filter_var($url, FILTER_SANITIZE_URL);
-            $url = explode('/', $url);
-            return $url;
-
-        }
-
-    }
 
 }
