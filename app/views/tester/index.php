@@ -1,14 +1,15 @@
 <?php require_once APP_ROOT . '\views\includes\header.php'; ?>
-<section class="">
+<body class="display-flex-column align-items-center justify-content-center">
+<section>
     <!-- <div class="container"> -->
-    <div class="column align-items-center border padding-5  width-rem-25 height-25">
+    <div class="row align-items-center border padding-5  width-rem-20 justify-content-center">
 
         <div class="text-center">
             <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-50" alt="logo"/>
         </div>
 
         <div class="text-center">
-            <h3 class="margin-top-4 margin-bottom-5">Log In</h3>
+            <h3 class="margin-top-4">Log In</h3>
         </div>
 
         <form action="<?php echo URL_ROOT; ?>Testers/login" method="post" autocomplete="off">
@@ -40,7 +41,7 @@
                 <label class="form-label <?php echo (empty($data['password_err'])) ? '' : 'red' ; ?>"><?php echo (empty($data['password_err'])) ? 'Password' : 'Incorrect Password' ; ?></label>
             </div>
 
-            <div class="text-center margin-top-3 margin-bottom-5">
+            <div class="text-center margin-top-3">
                 <button class="btn btn-primary" type="submit" onClick={this.onSubmit}>
                     Submit
                 </button>

@@ -76,7 +76,8 @@ class Testers extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $this->view('tester/dashboard');
+            $url = getUrl();
+            $this->view('tester/dashboard', $url);
         }
     }
 

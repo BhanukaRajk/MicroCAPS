@@ -19,5 +19,3 @@
 
     <title>MicroCAPS</title>
 </head>
-
-<body class="color">
