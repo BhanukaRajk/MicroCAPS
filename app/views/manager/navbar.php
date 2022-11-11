@@ -8,17 +8,17 @@
         </li>
         <li>
             <div class="nav_section_headings margin-top-5">MAIN MENU</div>
-            <a class="active" href="#home"><img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a>
+            <a class="<?php echo ($data[1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>managers/dashboard"><img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a>
         </li>
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
-            <a href="#news"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Body Shell</a>
-            <a href="#contact"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
-            <a href="#about"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
+            <a class="<?php echo ($data[1] == "bodyshell") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>managers/bodyshell"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Body Shell</a>
+            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
+            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
         </li>
         <li>
             <div class="nav_section_headings">GENERAL</div>
-            <a href="#about"><img src="<?php echo URL_ROOT; ?>public/images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings</a>
+            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings</a>
         </li>
     </ul>
 
