@@ -80,20 +80,4 @@ class Supervisors extends controller {
             $this->view('supervisors/dashboard',$url);
         }
     }
-
-    // public function bodyshell() {
-    public function home() {
-
-        if(!isLoggedIn()){
-            redirect('supervisors/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('supervisor/home', $url);
-            // $this->view('supervisor/bodyshell', $url);
-        }
-    }
-
-
 }
