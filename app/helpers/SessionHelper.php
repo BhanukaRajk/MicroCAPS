@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-// Flash message helper
-// EXAMPLE - flash('register_success', 'You are now registered');
-// DISPLAY IN VIEW - echo flash('register_success');
+
 function flash($name = '', $message = '', $class = 'alert alert-success')
 {
     if (!empty($name)) {
