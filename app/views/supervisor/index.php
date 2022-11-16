@@ -5,7 +5,7 @@
     <!--FULL PAGE-->
     <div>
         <!--LOGIN FORM BOX-->
-        <div class="row align-items-center border-gray padding-5  width-rem-20 justify-content-center">
+        <div class="row align-items-center border padding-5  width-rem-20 justify-content-center">
             <form action="<?php echo URL_ROOT; ?>Supervisors/login" method="post" autocomplete="off">
 
                 <!--LOGO-->

@@ -62,7 +62,11 @@
             </div>
             <div class="quick bold">
                 <div class="sidebox">Quick Access</div>
-                <div class="sidebox activity_btn"><button type="button" class="blue_button">Issue Parts</button><button type="button" class="blue_button" onclick="<?php echo URL_ROOT; ?>supervisors/addleave">Add Leave</button></div>
+                <div class="sidebox activity_btn">
+                    <button type="button" class="blue_button">Issue Parts</button>
+                    <a href="<?php echo URL_ROOT; ?>supervisors/leaves">
+                        <button type="button" class="blue_button">Leaves</button>
+                </div>
             </div>
             <div class="calender"></div>
         </div>

@@ -1161,10 +1161,6 @@ li a:hover:not(.active) {
     font-size: 14px;
     font-weight: 600;
 }
-/*
-div {
-    border: 1px #000 solid;
-}
 
 
 /* --------------- supervisor ---------------*/
@@ -1206,7 +1202,7 @@ div {
 .upper {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .graph {
@@ -1325,7 +1321,7 @@ div {
 
 /* -> RIGHT SIDE QUICK ACCESS BOX OUTER */
 .quick {
-    min-height: 7rem;
+    min-height: 8rem;
     min-width: 16.5rem;
     margin-top: 0.75rem;
 
@@ -1386,4 +1382,24 @@ div {
 #vehicles {
     width: 1.2rem;
     border: none;
+}
+
+.new {
+    margin-inline: 10rem;
+    margin-top: 3rem;
+    width: 50rem;
+}
+
+.col-width {
+    width:10rem;
+    text-align: left;
+}
+
+.sidebox-2 {
+    margin-inline: 15rem;
+}
+
+.reasonbox {
+    min-height: 5rem;
+    min-width: 5rem;
 }
