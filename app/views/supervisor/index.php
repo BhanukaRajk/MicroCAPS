@@ -1,12 +1,12 @@
 <?php require_once APP_ROOT . '\views\includes\header.php'; ?>
 
-<body class="display-flex-column justify-content-center align-items-center">
+<div class="display-flex-column justify-content-center align-items-center">
 
     <!--FULL PAGE-->
     <div>
         <!--LOGIN FORM BOX-->
         <div class="row align-items-center border padding-5  width-rem-20 justify-content-center">
-            <form <?php echo URL_ROOT; ?>Supervisors/login" method="post" autocomplete="off">
+            <form action="<?php echo URL_ROOT; ?>Supervisors/login" method="post" autocomplete="off">
 
                 <!--LOGO-->
                 <div class="text-center"><img class="width-50" src="<?php echo URL_ROOT; ?>public/images/logo.png" alt="MicroCAPS-logo"></div>
@@ -32,7 +32,7 @@
                 <div>
                     <input type="password"
                         id="password"
-                        name="pw"
+                        name="password"
                         onchange=""
                         class="form-control <?php echo (!empty($data['password_err'])) ? 'form-control-invalid' : '' ; ?>"
                         value="<?php echo $data['password'] ; ?>"
@@ -49,6 +49,6 @@
             </form>
         </div>
     </div>
-</body>
+</div>
 
-</html>
+<?php require_once APP_ROOT . '\views\includes\footer.php'; ?>
