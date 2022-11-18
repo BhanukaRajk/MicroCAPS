@@ -1,8 +1,8 @@
-<?php require_once APP_ROOT . '\views\includes\header.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/header.php'; ?>
 
 
-<?php require_once APP_ROOT . '\views\supervisor\leftnavbar.php'; ?>
-<?php require_once APP_ROOT . '\views\supervisor\topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/topnavbar.php'; ?>
 
 <section class="position-absolute page-content">
     <div class="detailed_content">
@@ -73,4 +73,4 @@
     </div>
 </section>
 
-<?php require_once APP_ROOT . '\views\includes\footer.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/footer.php'; ?>

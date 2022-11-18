@@ -1,8 +1,8 @@
-<?php require_once APP_ROOT . '\views\includes\header.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/header.php'; ?>
 
 
-<?php require_once APP_ROOT . '\views\supervisor\leftnavbar.php'; ?>
-<?php require_once APP_ROOT . '\views\supervisor\topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/topnavbar.php'; ?>
 
 
 <section class="new position-absolute page-content">
@@ -10,7 +10,7 @@
         <div>
             <h1>Leaves</h1>
         </div>
-        <div><a class="text-decoration-none" href="">
+        <div><a class="text-decoration-none" href="<?php echo URL_ROOT; ?>supervisors/addleave">
                 <h3>Add new +</h3>
             </a></div>
     </div>
@@ -42,4 +42,4 @@
 </section>
 
 
-<?php require_once APP_ROOT . '\views\includes\footer.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/footer.php'; ?>

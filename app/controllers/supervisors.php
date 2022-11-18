@@ -76,8 +76,52 @@ class Supervisors extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('supervisors/dashboard',$url);
+            $data['url'] = getUrl();
+            $this->view('supervisor/dashboard',$data);
+        }
+    }
+
+    public function addleave() {
+
+        if (!isLoggedIn()) {
+            redirect('supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'employeeId' => trim($_POST['employeeId']),
+                'leavedate' => trim($_POST['leavedate']),
+                'reason' => trim($_POST['reason'])
+            ];
+
+            if($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'], $data['reason'])) {
+                $_SESSION['addleave_Message'] = 'Successful';
+            } else {
+                $_SESSION['addleave_Message'] = 'Error';
+            }
+
+            redirect('supervisors/leaves');
+        }
+        else {
+            $data['url'] = getUrl();
+            $this->view('supervisor/addleave', $data);
+        }
+    }
+
+
+    public function leaves() {
+
+        if(!isLoggedIn()){
+            redirect('supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
+            $this->view('supervisor/leaves', $data);
         }
     }
 }

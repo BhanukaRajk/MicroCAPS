@@ -2,9 +2,11 @@
 class Supervisor {
     private $db;
 
+
     public function __construct(){
         $this->db = new Database;
     }
+
 
     public function findUserByUsername($username) {
 
@@ -19,8 +21,8 @@ class Supervisor {
         } else {
             return false;
         }
-
     }
+
 
     public function login($username,$password) {
         $this->db->query(
@@ -42,6 +44,7 @@ class Supervisor {
         }
     }
 
+
     public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjusment, $Clutch, $RAP, $Visual) {
         $this->db->query(
             'INSERT INTO paqresult(ChassisNo, BrakeBleeding, GearOilLevel, RackEnd, Clutch, RearAxelPlate, Visual, Supervisor1) 
@@ -55,7 +58,7 @@ class Supervisor {
         $this->db->bind(':clutch', $Clutch);
         $this->db->bind(':rap', $RAP);
         $this->db->bind(':visual', $Visual);
-        $this->db->bind(':supervisor', $_SESSION[]);
+        $this->db->bind(':supervisor', $_SESSION['_name']);
 
         if ( $this->db->execute() ) {
             return true;
@@ -64,7 +67,8 @@ class Supervisor {
         }
     }
 
-    public function addNewLeave($EmpId, $leavedate, $reason) {
+
+    public function addleave($EmpId, $leavedate, $reason) {
         $this->db->query(
             'INSERT INTO leaves(EmployeeId, LeaveDate, Reason) 
             VALUES (:empid,:leavedate,:reason)'
@@ -80,6 +84,24 @@ class Supervisor {
             return false;
         }
     }
+
+
+    public function addNewTask($chassis_no, $task_name) {
+        $this->db->query(
+            'INSERT INTO tasks(ChassisNo, taskName) 
+            VALUES (:chassis_number, :task)'
+        );
+
+        $this->db->bind(':chassis_number', $chassis_no);
+        $this->db->bind(':task', $task_name);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function viewPAQresults($ChassisNo) {
         $this->db->query(
@@ -103,6 +125,7 @@ class Supervisor {
         }
     }
 
+
     public function ViewLeaves() {
 
         $this->db->query(
@@ -120,5 +143,108 @@ class Supervisor {
         }
     }
 
+
+    public function ViewAssignedTasks() {
+
+        $this->db->query(
+            'SELECT *
+                FROM tasks 
+                where EmployeeId != NULL; '
+        );
+
+        $tasks = $this->db->resultSet();
+
+        if ( $tasks ) {
+            return $tasks;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function ViewReturnDefectSheet() {
+
+        $this->db->query(
+            'SELECT *
+                FROM tasks 
+                where EmployeeId != NULL; '
+        );
+
+        $tasks = $this->db->resultSet();
+
+        if ( $tasks ) {
+            return $tasks;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function updateToolStatus($chassis_no, $task_name) {
+        $this->db->query(
+            'INSERT INTO tasks(ChassisNo, taskName) 
+            VALUES (:chassis_number, :task)'
+        );
+
+        $this->db->bind(':chassis_number', $chassis_no);
+        $this->db->bind(':task', $task_name);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function ViewTools() {
+
+        $this->db->query(
+            'SELECT *
+                FROM tools; '
+        );
+
+        $tools = $this->db->resultSet();
+
+        if ( $tools ) {
+            return $tools;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function ViewVehicles() {
+
+        $this->db->query(
+            'SELECT *
+                FROM vehicles; '
+        );
+
+        $vehicles = $this->db->resultSet();
+
+        if ( $vehicles ) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
+
+    
+    public function ViewPDIresults() {
+
+        $this->db->query(
+            'SELECT *
+                FROM vehicles; '//pdi results table
+        );
+
+        $vehicles = $this->db->resultSet();
+
+        if ( $vehicles ) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
 
 }
