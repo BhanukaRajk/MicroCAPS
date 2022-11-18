@@ -684,9 +684,10 @@ h3 {
 .container {
     background-color: var(--white);
     position: absolute;
-    width: 74rem;
+    right: 0;
     height: 4rem;
     left: 16.25rem;
+    padding-inline: 1rem;
 }
 
 /* row */
@@ -1104,6 +1105,42 @@ li a:hover:not(.active) {
     font-size: 32px;
     color: var(--fontblue);
 }
+
+.arrowbtn {
+    background-color: white;
+    padding-block: 1rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  
+  .profilemenu {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profilemenu-content {
+    display: none;
+    position: absolute;
+    right: 0.25rem;
+    top: 4rem;
+    width: 7rem;
+    border: 1px solid dodgerblue;
+    background-color: white;
+    border-radius:0.5rem;
+    overflow: auto;
+  }
+  
+  .profilemenu-content a {
+    color: dodgerblue;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .profilemenu a:hover {font-weight:bold;}
+  
+  .show {display: block;}
 
 /*--------------------------------------------------------------*/
 /*                            Managers                          */

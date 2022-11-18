@@ -5,10 +5,16 @@
                 <?php echo $_SESSION['_firstname'] . ' ' . $_SESSION['_lastname']; ?>
             </div>
             <img src="<?php echo URL_ROOT; ?>public/images/profilepic.png" class="width-rem-2p5" alt="profilepic" />
-            <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="width-rem-0p75" alt="drop" id="drop" />
-            <div class="logout position-relative display-none border-gray" id="logout">
-                <a href="<?php echo URL_ROOT; ?>supervisors/logout" class="text-decoration-none text-black">logout</a>
+            <div class="profilemenu">
+                <button onclick="profiledropdown()" class="arrowbtn">
+                    <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="width-rem-0p75" alt="drop">
+                </button>
+                <div id="profileDropdown" class="profilemenu-content">
+                    <a href="<?php echo URL_ROOT; ?>supervisors/logout">Log out</a>
+                    <a href="#home">Settings</a>
+                </div>
             </div>
+
         </div>
     </div>
 </header>
