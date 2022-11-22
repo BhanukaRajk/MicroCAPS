@@ -16,6 +16,7 @@
     <link href="<?php echo URL_ROOT;?>public/stylesheets/main.css" rel="stylesheet" />
 
     <!-- <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" /> -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
     <title>MicroCAPS</title>
 </head>
