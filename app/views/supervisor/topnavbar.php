@@ -11,7 +11,7 @@
                 </button>
                 <div id="profileDropdown" class="profilemenu-content">
                     <a href="<?php echo URL_ROOT; ?>supervisors/logout">Log out</a>
-                    <a href="#home">Settings</a>
+                    <a href="<?php echo URL_ROOT; ?>supervisors/editprofile">Settings</a>
                 </div>
             </div>
 

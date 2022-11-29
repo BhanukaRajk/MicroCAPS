@@ -4,39 +4,52 @@
 <?php require_once APP_ROOT . '/views/supervisor/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/topnavbar.php'; ?>
 
+<section id="main" class="sup-leave-list-page">
+    <!-- take 2rem margin from left and right -->
+    <div class="sup-leave-list-content">
 
-<section class="new position-absolute page-content">
-    <div class="display-flex-row justify-content-between">
-        <div>
-            <h1>Leaves</h1>
-        </div>
-        <div><a class="text-decoration-none" href="<?php echo URL_ROOT; ?>supervisors/addleave">
-                <h3>Add new +</h3>
-            </a></div>
-    </div>
-    <div class="display-flex-column border-radius-1 background-white paddingx-5 paddingy-5">
-        <div class="paddingy-3 text-center font-weight">
-            <h2>Employee leaves</h2>
-        </div>
-        <div class="display-flex-row justify-content-center">
-            <div>
-                <table class="border-1">
-                    <tr>
-                        <th class="col-width">Employee Id</th>
-                        <th class="col-width">Leave date</th>
-                        <th class="text-align-left">Reason</th>
-                    </tr>
-                    <?php
-                    foreach ($data['LeaveDetails'] as $value) {
-                        echo '<tr>
-                        <td class="col-width text-black">' . $value->EmployeeId . '</td>
-                        <td class="col-width text-black">' . $value->LeaveDate . '</td>
-                        <td class="text-align-left text-black">' . $value->Reason . '</td>
-                    </tr>';
-                    }
-                    ?>
-                </table>
+        <!-- Content window -->
+        <div class="sup-leave-list-databox">
+
+            <div class="sup-leave-list-headbox">
+                <div class="sup-leave-list-heading">
+                    <h1>Accepted leave info</h1>
+                </div>
+                <div class="display-flex-column justify-content-center">
+                    <a class="text-decoration-none" href="<?php echo URL_ROOT; ?>supervisors/addleave">
+                        <button class="head-button" type="button">Add New Leave</button>
+                    </a>
+                </div>
             </div>
+
+            <!-- Your info not-editable -->
+            <div class="sup-leave-list-info-box">
+                <div class="sup-leave-list-non-edit">
+                    <div class="leave-value block-heading">Employee Id</div>
+                    <div class="leave-value block-heading">First Name</div>
+                    <div class="leave-value block-heading">Last Name</div>
+                    <div class="leave-value block-heading">Leave date</div>
+                    <div class="leave-value block-heading padding-right-5">Reason</div>
+                </div>
+                <?php
+                foreach ($data['LeaveDetails'] as $value) {
+                    echo '<div class="div-ender"></div>
+                            <div class="sup-leave-list-non-edit">
+                                <div class="leave-value">' . $value->EmployeeId . '</div>
+                                <div class="leave-value">' . $value->Firstname . '</div>
+                                <div class="leave-value">' . $value->Lastname . '</div>
+                                <div class="leave-value">' . $value->LeaveDate . '</div>
+                                <div class="leave-value padding-right-5">' . $value->Reason . '</div>
+
+                                <!-- <div class="leave-edit-info"><a href="'.URL_ROOT.'supervisors/editleave?id='.$value->EmployeeId.'&ldate='.$value->LeaveDate.'" class="edit-button">Edit</a></div> -->
+                                
+                                <div class="leave-edit-info padding-left-3"><a href="'.URL_ROOT.'supervisors/editleave?id='.$value->Leave_Id.'" class="edit-button">Edit</a></div>
+                                <div class="leave-edit-info"><a href="'.URL_ROOT.'supervisors/removeleave?id='.$value->Leave_Id.'" class="delete-button">Remove</a></div>
+                            </div>';
+                }
+                ?>
+            </div>
+
         </div>
     </div>
 </section>

@@ -1,4 +1,4 @@
-<header class="position-absolute">
+<header id="topbar" class="position-absolute">
 
     <ul class="display-flex-column">
         <li>
@@ -14,12 +14,12 @@
             <div class="nav_section_headings">WORKSPACE</div>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks</a>
-            <a href="<?php echo URL_ROOT; ?>supervisors/testing"><img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing</a>
+            <a class="<?php echo ($data['url'][1] == "scheduletasks") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>supervisors/scheduletasks"><img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks</a>
+            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing</a>
         </li>
         <li>
             <div class="nav_section_headings">GENERAL</div>
-            <a href="#"><img src="../images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings</a>
+            <a class="<?php echo ($data['url'][1] == "editprofile") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>supervisors/editprofile"><img src="../images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings</a>
         </li>
     </ul>
 

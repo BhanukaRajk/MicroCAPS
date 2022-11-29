@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Stylesheet link -->
-    <link rel="stylesheet" href="<?php echo URL_ROOT; ?>public/stylesheets/styles.css">
+    <link rel="stylesheet" href="<?php echo URL_ROOT; ?>public/stylesheets/styles.css?version=1">
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
 
 

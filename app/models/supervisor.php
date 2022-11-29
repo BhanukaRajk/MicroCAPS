@@ -1,14 +1,17 @@
 <?php
-class Supervisor {
+class Supervisor
+{
+
     private $db;
 
-
-    public function __construct(){
+    public function __construct()
+    {
         $this->db = new Database;
     }
 
 
-    public function findUserByUsername($username) {
+    public function findUserByUsername($username)
+    {
 
         $this->db->query('SELECT * FROM credentials  WHERE credentials.Username = :username');
 
@@ -24,7 +27,8 @@ class Supervisor {
     }
 
 
-    public function login($username,$password) {
+    public function login($username, $password)
+    {
         $this->db->query(
             'SELECT credentials.Username, credentials.Password, employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position
             FROM credentials
@@ -37,7 +41,7 @@ class Supervisor {
 
         $row = $this->db->single();
 
-        if ( $password == $row->Password ) {
+        if ($password == $row->Password) {
             return $row;
         } else {
             return null;
@@ -45,7 +49,8 @@ class Supervisor {
     }
 
 
-    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjusment, $Clutch, $RAP, $Visual) {
+    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjusment, $Clutch, $RAP, $Visual)
+    {
         $this->db->query(
             'INSERT INTO paqresult(ChassisNo, BrakeBleeding, GearOilLevel, RackEnd, Clutch, RearAxelPlate, Visual, Supervisor1) 
             VALUES (:chassisNo,:brake,:gearOil,:adjusment,:clutch,:rap,:visual,:supervisor)'
@@ -60,7 +65,7 @@ class Supervisor {
         $this->db->bind(':visual', $Visual);
         $this->db->bind(':supervisor', $_SESSION['_name']);
 
-        if ( $this->db->execute() ) {
+        if ($this->db->execute()) {
             return true;
         } else {
             return false;
@@ -68,7 +73,8 @@ class Supervisor {
     }
 
 
-    public function addleave($EmpId, $leavedate, $reason) {
+    public function addleave($EmpId, $leavedate, $reason)
+    {
         $this->db->query(
             'INSERT INTO leaves(EmployeeId, LeaveDate, Reason) 
             VALUES (:empid,:leavedate,:reason)'
@@ -78,7 +84,28 @@ class Supervisor {
         $this->db->bind(':leavedate', $leavedate);
         $this->db->bind(':reason', $reason);
 
-        if ( $this->db->execute() ) {
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function EditLeave($EmpId, $leavedate, $reason, $id)
+    {
+        $this->db->query(
+            'UPDATE leaves
+            SET EmployeeId = :empid, LeaveDate = :leavedate, Reason = :reason
+            WHERE Leave_Id = :id;'
+        );
+
+        $this->db->bind(':empid', $EmpId);
+        $this->db->bind(':leavedate', $leavedate);
+        $this->db->bind(':reason', $reason);
+
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
             return true;
         } else {
             return false;
@@ -86,7 +113,42 @@ class Supervisor {
     }
 
 
-    public function addNewTask($chassis_no, $task_name) {
+
+
+
+    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // public function removeleave($ID, $leavedate) {
+    public function removeleave($LeaveID)
+    {
+        $this->db->query(
+            'DELETE FROM leaves WHERE Leave_Id = :leave_id;'
+            // 'DELETE FROM leaves WHERE EmployeeId = :Empid AND LeaveDate = :LDate;'
+        );
+
+        $this->db->bind(':leave_id', $LeaveID);
+        // $this->db->bind(':Empid', $ID);
+        // $this->db->bind(':LDate', $leavedate);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+    public function addNewTask($chassis_no, $task_name)
+    {
         $this->db->query(
             'INSERT INTO tasks(ChassisNo, taskName) 
             VALUES (:chassis_number, :task)'
@@ -95,7 +157,7 @@ class Supervisor {
         $this->db->bind(':chassis_number', $chassis_no);
         $this->db->bind(':task', $task_name);
 
-        if ( $this->db->execute() ) {
+        if ($this->db->execute()) {
             return true;
         } else {
             return false;
@@ -103,7 +165,8 @@ class Supervisor {
     }
 
 
-    public function viewPAQresults($ChassisNo) {
+    public function viewPAQresults($ChassisNo)
+    {
         $this->db->query(
             'SELECT car.ChassisNo, car.EngineNo, car.VehicleModel, paqresult.BrakeBleeding,
                     paqresult.GearOilLevel, paqresult.RackEnd, paqresult.Clutch,
@@ -118,7 +181,7 @@ class Supervisor {
 
         $results = $this->db->single();
 
-        if ( $results ) {
+        if ($results) {
             return $results;
         } else {
             return false;
@@ -126,17 +189,22 @@ class Supervisor {
     }
 
 
-    public function ViewLeaves() {
+    public function ViewLeaves()
+    {
 
         $this->db->query(
-            'SELECT *
+            'SELECT leaves.Leave_Id, leaves.EmployeeId, employee.Firstname, employee.Lastname, leaves.LeaveDate, leaves.Reason
                 FROM leaves 
-                ORDER BY LeaveDate DESC; '
+                INNER JOIN employee
+            ON leaves.EmployeeId = employee.EmployeeId
+            -- WHERE LeaveDate > GETDATE()
+            ORDER BY LeaveDate ASC;'
         );
 
         $leaves = $this->db->resultSet();
+        // print_r($leaves);
 
-        if ( $leaves ) {
+        if ($leaves) {
             return $leaves;
         } else {
             return false;
@@ -144,7 +212,48 @@ class Supervisor {
     }
 
 
-    public function ViewAssignedTasks() {
+    public function SendEditLeave($ID)
+    {
+
+        $this->db->query(
+            'SELECT *
+                FROM leaves 
+                WHERE Leave_Id = :id;'
+        );
+
+        $this->db->bind(':id', $ID);
+
+        $editor = $this->db->single();
+
+        if ($editor) {
+            return $editor;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function ViewAssignedTasks()
+    {
+
+        $this->db->query(
+            'SELECT *
+                FROM tasks 
+                WHERE EmployeeId != NULL; '
+        );
+
+        $tasks = $this->db->resultSet();
+
+        if ($tasks) {
+            return $tasks;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function ViewReturnDefectSheet()
+    {
 
         $this->db->query(
             'SELECT *
@@ -154,7 +263,7 @@ class Supervisor {
 
         $tasks = $this->db->resultSet();
 
-        if ( $tasks ) {
+        if ($tasks) {
             return $tasks;
         } else {
             return false;
@@ -162,25 +271,8 @@ class Supervisor {
     }
 
 
-    public function ViewReturnDefectSheet() {
-
-        $this->db->query(
-            'SELECT *
-                FROM tasks 
-                where EmployeeId != NULL; '
-        );
-
-        $tasks = $this->db->resultSet();
-
-        if ( $tasks ) {
-            return $tasks;
-        } else {
-            return false;
-        }
-    }
-
-
-    public function updateToolStatus($chassis_no, $task_name) {
+    public function updateToolStatus($chassis_no, $task_name)
+    {
         $this->db->query(
             'INSERT INTO tasks(ChassisNo, taskName) 
             VALUES (:chassis_number, :task)'
@@ -189,7 +281,7 @@ class Supervisor {
         $this->db->bind(':chassis_number', $chassis_no);
         $this->db->bind(':task', $task_name);
 
-        if ( $this->db->execute() ) {
+        if ($this->db->execute()) {
             return true;
         } else {
             return false;
@@ -197,7 +289,8 @@ class Supervisor {
     }
 
 
-    public function ViewTools() {
+    public function ViewTools()
+    {
 
         $this->db->query(
             'SELECT *
@@ -206,7 +299,7 @@ class Supervisor {
 
         $tools = $this->db->resultSet();
 
-        if ( $tools ) {
+        if ($tools) {
             return $tools;
         } else {
             return false;
@@ -214,7 +307,8 @@ class Supervisor {
     }
 
 
-    public function ViewVehicles() {
+    public function ViewVehicles()
+    {
 
         $this->db->query(
             'SELECT *
@@ -223,28 +317,28 @@ class Supervisor {
 
         $vehicles = $this->db->resultSet();
 
-        if ( $vehicles ) {
+        if ($vehicles) {
             return $vehicles;
         } else {
             return false;
         }
     }
 
-    
-    public function ViewPDIresults() {
+
+    public function ViewPDIresults()
+    {
 
         $this->db->query(
             'SELECT *
-                FROM vehicles; '//pdi results table
+                FROM vehicles; ' //pdi results table
         );
 
         $vehicles = $this->db->resultSet();
 
-        if ( $vehicles ) {
+        if ($vehicles) {
             return $vehicles;
         } else {
             return false;
         }
     }
-
 }
