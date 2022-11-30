@@ -5,10 +5,11 @@
 <?php require_once APP_ROOT . '/views/supervisor/topnavbar.php'; ?>
 
 <section id="main" class="sup-leave-list-page">
-    <!-- take 2rem margin from left and right -->
+    
+    <!-- TAKE 2REM MARGIN FROM LEFT AND RIGHT -->
     <div class="sup-leave-list-content">
 
-        <!-- Content window -->
+        <!-- CONTENT WINDOW -->
         <div class="sup-leave-list-databox">
 
             <div class="sup-leave-list-headbox">
@@ -22,7 +23,7 @@
                 </div>
             </div>
 
-            <!-- Your info not-editable -->
+            <!-- LEAVES DATA TABLE -->
             <div class="sup-leave-list-info-box">
                 <div class="sup-leave-list-non-edit">
                     <div class="leave-value block-heading">Employee Id</div>
@@ -43,7 +44,7 @@
 
                                 <!-- <div class="leave-edit-info"><a href="'.URL_ROOT.'supervisors/editleave?id='.$value->EmployeeId.'&ldate='.$value->LeaveDate.'" class="edit-button">Edit</a></div> -->
                                 
-                                <div class="leave-edit-info padding-left-3"><a href="'.URL_ROOT.'supervisors/editleave?id='.$value->Leave_Id.'" class="edit-button">Edit</a></div>
+                                <div class="leave-edit-info padding-left-2"><a href="'.URL_ROOT.'supervisors/editleave?id='.$value->Leave_Id.'" class="edit-button">Edit</a></div>
                                 <div class="leave-edit-info"><a href="'.URL_ROOT.'supervisors/removeleave?id='.$value->Leave_Id.'" class="delete-button">Remove</a></div>
                             </div>';
                 }

@@ -14,7 +14,9 @@
             <section class="content-area position-absolute">
                 <div class="border-gray display-flex-column formbox">
                     <div class="display-flex-row justify-content-between wider">
-                        <div><p class="display-none">X</p></div>
+                        <div>
+                            <p class="display-none">X</p>
+                        </div>
                         <div class="form-headings text-center">
                             Record new leave
                         </div>

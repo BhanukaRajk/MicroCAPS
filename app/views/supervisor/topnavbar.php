@@ -4,7 +4,7 @@
             <div class="font-weight">
                 <?php echo $_SESSION['_firstname'] . ' ' . $_SESSION['_lastname']; ?>
             </div>
-            <img src="<?php echo URL_ROOT; ?>public/images/profilepic.png" class="width-rem-2p5" alt="profilepic" />
+            <img src="<?php echo URL_ROOT; ?>public/images/profile.png" class="width-rem-2p5" alt="profilepic" />
             <div class="profilemenu">
                 <button onclick="profiledropdown()" class="arrowbtn">
                     <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="width-rem-0p75" alt="drop">
