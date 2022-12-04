@@ -1138,86 +1138,30 @@ li a:hover:not(.active) {
     right: 0.25rem;
     top: 4rem;
     width: 6.25rem;
-    border: 1px solid #2773FF;
+    border: 1px solid #081A51;
     background-color: white;
     border-radius: 0.5rem;
     overflow: auto;
 }
 
 .profilemenu-content a {
-    color: #2773FF;
+    color: #081A51;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
 .profilemenu a:hover {
-    font-weight: bold;
+    background-color: #dce2f6;
 }
 
 .show {
     display: block;
 }
 
-/*--------------------------------------------------------------*/
-/*                            Managers                          */
-/*--------------------------------------------------------------*/
-
-.shell-btn {
-    border: 1px solid var(--gray);
-    width: 15.7rem;
-    color: var(--blue);
-    background-color: var(--white);
-    cursor: pointer;
-}
-
-.shell-btn.active {
-    border: 1px solid var(--blue);
-    color: var(--white);
-    background-color: var(--blue);
-}
-
-.shell-btn:hover {
-    border: 1px solid var(--blue);
-    color: var(--white);
-    background-color: var(--blue);
-}
-
-.shell-forms {
-    display: none;
-    left: 20rem;
-    top: 18rem;
-    width: 72.3rem;
-}
-
-.section-heading {
-    font-family: 'Gilroy';
-    font-style: normal;
-    font-size: 24px;
-    color: var(--fontblue);
-}
-
-.success-flash {
-    display: none;
-    position: absolute;
-    border: 1px solid #29CC97;
-    background: #d1e7dd;
-    color: #0f5132;
-    border-radius: 1rem;
-    padding: 2rem;
-    bottom: 3rem;
-    right: 3rem;
-    transition: 0.2s ease all;
-}
-
-.view-more {
-    color: var(--linkblue);
-    font-size: 14px;
-    font-weight: 600;
-}
 
 
-/* --------------- supervisor ---------------*/
+/* --------------- SUPERVISOR DASHBOARD ---------------*/
 
 
 /* DASHBOARD PAGE CONTENT */
@@ -1299,7 +1243,7 @@ li a:hover:not(.active) {
     border-radius: 0.2rem;
     margin-inline: 0.36rem;
 
-    min-width: 6rem;
+    min-width: 7rem;
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -1509,6 +1453,8 @@ li a:hover:not(.active) {
     position: absolute;
     left: 16.25rem;
     top: 4rem;
+    right: 0rem;
+    bottom: 0rem;
 }
 
 .sup-edit-prof-content {
@@ -1519,7 +1465,8 @@ li a:hover:not(.active) {
 }
 
 .sup-edit-prof-databox {
-    margin-inline-start: 2rem;
+    margin-inline: 2rem;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -1528,6 +1475,7 @@ li a:hover:not(.active) {
 
 .sup-edit-prof-info-box {
     margin-block: 1rem;
+    padding-inline: 0.5rem;
 
     display: flex;
     flex-direction: column;
@@ -1541,14 +1489,15 @@ li a:hover:not(.active) {
     display: flex;
     flex-direction: row;
 
-    padding: 1rem;
+    padding: 0.75rem;
 }
 
 .sup-edit-prof-edit {
     display: flex;
     flex-direction: row;
 
-    padding: 1rem;
+    padding: 0.75rem;
+    cursor: pointer;
 }
 
 .sup-edit-prof-edit:hover {
@@ -1556,7 +1505,7 @@ li a:hover:not(.active) {
 }
 
 .prof-property {
-    width: 15rem;
+    width: 20rem;
 }
 
 .prof-value {
@@ -1684,10 +1633,15 @@ li a:hover:not(.active) {
     padding-block: 0.25rem;
 }
 
-.delete-button:hover {
-    font-weight: bold;
+/* .delete-button:hover {
     color: #fb6e32;
     border: 0.1rem solid #fb6e32;
+    background-color: #fff0e9;
+} */
+
+.delete-button:hover {
+    color: #ffffff;
+    background-color: #960000;
 }
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1703,9 +1657,10 @@ li a:hover:not(.active) {
 
 
 .edit-button {
-    color: #2773FF;
+    color: #081A51;
+    /* color: #2773FF; */
     text-decoration: none;
-    border: 0.1rem solid #2773FF;
+    border: 0.1rem solid #081A51;
     background-color: #ffffff;
     border-radius: 0.5rem;
     padding-inline: 2rem;
@@ -1713,12 +1668,15 @@ li a:hover:not(.active) {
     padding-block: 0.25rem;
 }
 
-.edit-button:hover {
-    font-weight: bold;
+/* .edit-button:hover {
     color: #5fc1f5;
     border: 0.1rem solid #5fc1f5;
+    background-color: #ebf8ff;
+} */
+.edit-button:hover {
+    color: #ffffff;
+    background-color: #081A51;
 }
-
 
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
@@ -1775,16 +1733,16 @@ li a:hover:not(.active) {
     text-decoration: none;
     font-size: medium;
     /* border: 0.1rem solid #2773FF; */
-    border: 0.1rem solid #0A194E;
+    border: 0.1rem solid #081A51;
     height: 2.5rem;
-    background-color: #0A194E;
+    background-color: #081A51;
     /* background-color: #ffffff; */
     border-radius: 0.5rem;
     cursor: pointer;
 }
 
 .submit-button:hover {
-    background-color: #0a194ec0;
+    background-color: #081A51C0;
 }
 
 .reset-button {
@@ -1906,8 +1864,8 @@ li a:hover:not(.active) {
 
 /*MICROCAPS LOGO*/
 .logo {
-    height: 3rem;
-    margin-top: 1rem;
+    height: 4rem;
+    /* margin-top: 1rem; */
 }
 
 /*INPUT BOX*/
@@ -1923,15 +1881,20 @@ li a:hover:not(.active) {
 .btn_submit {
     width: 18rem;
     height: 3rem;
-    border: 0.15rem solid #081A51;
+    font-size: medium;
+
+    border: 0.15rem solid #2773FF;
+    /* border: 0.15rem solid #081A51; */
     border-radius: 0.4rem;
 
-    color: #ffffff;
-    background-color:#081A51;
+    color: #2773FF;
+    /* color: #ffffff; */
+    background-color:#ffffff;
+    /* background-color:#081A51; */
 }
 
 .btn_submit:hover {
-    background-color:#081a51bb;
+    background-color:#2773ff20;
 }
 
 /*FORGOT PASSWORD*/
@@ -1949,5 +1912,102 @@ li a:hover:not(.active) {
     color: red;
 }
 
+
+
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
 /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* XXXXXXXXXXXXXX          SUCCESS/ERROR MESSAGE           XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+.hideme {
+    visibility: hidden;
+}
+.showme {
+    visibility: visible;
+}
+
+#messagebox {
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #081a51;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 16px;
+
+    text-align: center;
+    font-size: 17px;
+
+    position: fixed;
+    z-index: 10;
+    right: 2rem;
+    bottom: 5rem;
+  }
+  
+  #messagebox.shows {
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {right: 2rem; opacity: 1;} 
+    to {right: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {right: 2rem; opacity: 1;}
+    to {right: 0; opacity: 0;}
+  }
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+.fp_form{
+    min-height: 350px;
+    min-width: 450px;
+    padding: 2rem 0.5rem;
+    margin-block: auto;
+    background-color: white;
+    border: 2px solid rgb(225, 225, 225);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+p.grey-indicator {
+    margin-top: 40px;
+}
+
+.fp-email {
+    width: 272px;
+    height: 42px;
+    border: 0.15rem solid #F0F1F7;
+    border-radius: 0.4rem;
+    padding-inline: 1rem;
+}
+
+
+.fpcont {
+    width: 256px;
+    height: 40px;
+    border: 0.15rem solid #081A51;
+    border-radius: 0.4rem;
+    color: #ffffff;
+    background-color: #081A51;
+}

@@ -1,4 +1,4 @@
-<!-- <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script> -->
+<!-- <script type="text/javascript" src="<?php //echo URL_ROOT; ?>public/javascripts/main.js"></script> -->
 
 </body>
 

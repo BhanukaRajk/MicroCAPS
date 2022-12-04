@@ -4,10 +4,41 @@
 <?php require_once APP_ROOT . '/views/supervisor/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/topnavbar.php'; ?>
 
-<section id="main" class="sup-leave-list-page">
+<!-- <?php
+    // $messege = $_SESSION['editleave_Message'];
     
+    ?>
+    <div id="messagebox" class="hideme"><?php //echo $messege;?></div>
+    <?php  
+
+    // echo (empty($messege)) ? '<section id="main" class="sup-leave-list-page">' : '<section id="main" class="sup-leave-list-page" onload="myFunction()">';
+    // echo ($messege == '') ? '<section id="main" class="sup-leave-list-page">' : '<section id="main" class="sup-leave-list-page" onmouseover="myFunction()">';
+    // $_SESSION['editleave_Message'] = '';
+?> -->
+
+    <!-- <div id="messagebox" class="hideme"><?php //echo $messege;?></div> -->
+
+<?php
+    // echo (empty($data['editleave_Message'])) ? "" : "<script type='text/javascript'>alert('Data edited successfully!');</script>";
+?>
+
+<section id="main" class="sup-leave-list-page">
+
+<?php
+    $messege = $_SESSION['return_message'];
+    $_SESSION['return_message'] = '';    
+?>
+
+    <div id="messagebox" class="hideme"><?php echo $messege;?></div>
+
+<?php  
+    echo ($messege == '') ? '<div class="sup-leave-list-content">' : '<div class="sup-leave-list-content">
+    <script type="text/javascript">myFunction();</script>
+     ';
+?>
+
     <!-- TAKE 2REM MARGIN FROM LEFT AND RIGHT -->
-    <div class="sup-leave-list-content">
+    <!-- <div class="sup-leave-list-content"> -->
 
         <!-- CONTENT WINDOW -->
         <div class="sup-leave-list-databox">
@@ -42,10 +73,10 @@
                                 <div class="leave-value">' . $value->LeaveDate . '</div>
                                 <div class="leave-value padding-right-5">' . $value->Reason . '</div>
 
-                                <!-- <div class="leave-edit-info"><a href="'.URL_ROOT.'supervisors/editleave?id='.$value->EmployeeId.'&ldate='.$value->LeaveDate.'" class="edit-button">Edit</a></div> -->
+                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'supervisors/editleave?id=' . $value->EmployeeId . '&ldate=' . $value->LeaveDate . '" class="edit-button">Edit</a></div> -->
                                 
-                                <div class="leave-edit-info padding-left-2"><a href="'.URL_ROOT.'supervisors/editleave?id='.$value->Leave_Id.'" class="edit-button">Edit</a></div>
-                                <div class="leave-edit-info"><a href="'.URL_ROOT.'supervisors/removeleave?id='.$value->Leave_Id.'" class="delete-button">Remove</a></div>
+                                <div class="leave-edit-info padding-left-2"><a href="' . URL_ROOT . 'supervisors/editleave?id=' . $value->Leave_Id . '" class="edit-button">Edit</a></div>
+                                <div class="leave-edit-info"><a href="' . URL_ROOT . 'supervisors/removeleave?id=' . $value->Leave_Id . '" class="delete-button">Remove</a></div>
                             </div>';
                 }
                 ?>

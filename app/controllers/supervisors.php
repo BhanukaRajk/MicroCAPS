@@ -59,6 +59,8 @@ class Supervisors extends controller
         $_SESSION['_id'] = $user->EmployeeID;
         $_SESSION['_firstname'] = $user->Firstname;
         $_SESSION['_lastname'] = $user->Lastname;
+        $_SESSION['return_message'] = '';    
+
         redirect('supervisors/dashboard');
     }
 
@@ -80,6 +82,8 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
+            $data['count'] = $this->supervisorModel->dashdetails();
+
             $this->view('supervisor/dashboard', $data);
         }
     }
@@ -102,9 +106,9 @@ class Supervisors extends controller
             ];
 
             if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'], $data['reason'])) {
-                $_SESSION['addleave_Message'] = 'Successful';
+                $_SESSION['return_message'] = 'New record saved!';
             } else {
-                $_SESSION['addleave_Message'] = 'Error';
+                $_SESSION['return_message'] = 'Error! record saving failed!';
             }
 
             redirect('supervisors/leaves');
@@ -126,7 +130,7 @@ class Supervisors extends controller
             $data['url'] = getUrl();
             $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
             // echo "-------------";
-            // print_r($data);
+            //print_r($data);
             $this->view('supervisor/leaves', $data);
         }
 
@@ -196,9 +200,9 @@ class Supervisors extends controller
             ];
 
             if ($this->supervisorModel->EditLeave($data['employeeId'], $data['leavedate'], $data['reason'], $data['leave_id'])) {
-                $_SESSION['editleave_Message'] = 'Successful';
+                $_SESSION['return_message'] = 'Changes saved!';
             } else {
-                $_SESSION['editleave_Message'] = 'Error';
+                $_SESSION['return_message'] = 'Error! Could not save changes..';
             }
 
             redirect('supervisors/leaves');
@@ -244,9 +248,9 @@ class Supervisors extends controller
             // if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'])) {
             // if ($this->supervisorModel->removeleave($id, $ldate)) {
             if ($this->supervisorModel->removeleave($key)) {
-                $_SESSION['removeleave_Message'] = 'Successful';
+                $_SESSION['return_message'] = 'Record deletion success!';
             } else {
-                $_SESSION['removeleave_Message'] = 'Error';
+                $_SESSION['return_message'] = 'Error! Could not delete record..';
             }
 
             redirect('supervisors/leaves');
@@ -269,9 +273,14 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
+            $data['ProfileDetails'] = $this->supervisorModel->viewProfile($_SESSION['_id']);
             $this->view('supervisor/editprofile', $data);
+
         }
     }
+
+
+
 
     public function scheduletasks()
     {

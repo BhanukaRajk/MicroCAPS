@@ -18,29 +18,38 @@
                 <h1>Profile info</h1>
             </div>
 
+            <?php $userdata = $data['ProfileDetails']; ?>
+
             <!-- Your info not-editable -->
             <div class="sup-edit-prof-info-box">
                 <div class="sup-edit-prof-non-edit">
                     <div class="block-heading">Basic Info</div>
                 </div>
-                <div class="sup-edit-prof-non-edit">
+                <div class="sup-edit-prof-edit">
                     <div class="prof-property">First Name</div>
-                    <div class="prof-value">Alex</div>
+                    <div class="prof-value"><?php echo $userdata->Firstname; ?></div>
+                    <div class="sup-edit-info">Edit</div>
                 </div>
                 <div class="div-ender"></div>
-                <div class="sup-edit-prof-non-edit">
+                <div class="sup-edit-prof-edit">
                     <div class="prof-property">Last Name</div>
-                    <div class="prof-value">Hales</div>
+                    <div class="prof-value"><?php echo $userdata->Lastname; ?></div>
+                    <div class="sup-edit-info">Edit</div>
                 </div>
                 <div class="div-ender"></div>
                 <div class="sup-edit-prof-non-edit">
                     <div class="prof-property">Employee ID</div>
-                    <div class="prof-value">EMP1203</div>
+                    <div class="prof-value"><?php echo $userdata->EmployeeId; ?></div>
                 </div>
                 <div class="div-ender"></div>
                 <div class="sup-edit-prof-non-edit">
                     <div class="prof-property">Role</div>
-                    <div class="prof-value">Supervisor</div>
+                    <div class="prof-value"><?php echo $userdata->Position; ?></div>
+                </div>
+                <div class="div-ender"></div>
+                <div class="sup-edit-prof-non-edit">
+                    <div class="prof-property">Stage</div>
+                    <div class="prof-value"><?php echo $userdata->StageNo; ?></div>
                 </div>
             </div>
 
@@ -49,15 +58,14 @@
                 <div class="sup-edit-prof-non-edit">
                     <div class="block-heading">Contact & security Info</div>
                 </div>
-                <div class="sup-edit-prof-edit">
+                <div class="sup-edit-prof-non-edit">
                     <div class="prof-property">Mobile Number</div>
-                    <div class="prof-value">077 6655990</div>
-                    <div class="sup-edit-info">Edit</div>
+                    <div class="prof-value"><?php echo $userdata->TelephoneNo; ?></div>
                 </div>
                 <div class="div-ender"></div>
                 <div class="sup-edit-prof-edit">
                     <div class="prof-property">Email</div>
-                    <div class="prof-value">alexhalesengland@gmail.com</div>
+                    <div class="prof-value"><?php echo $userdata->Email; ?></div>
                     <div class="sup-edit-info">Edit</div>
                 </div>
                 <div class="div-ender"></div>

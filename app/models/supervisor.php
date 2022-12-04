@@ -41,6 +41,10 @@ class Supervisor
 
         $row = $this->db->single();
 
+
+        // COMPARING HASHED PASSWORDS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // if (password_hash($password, PASSWORD_DEFAULT) == password_hash($row->Password, PASSWORD_DEFAULT)) {
         if ($password == $row->Password) {
             return $row;
         } else {
@@ -48,6 +52,28 @@ class Supervisor
         }
     }
 
+
+
+    public function dashdetails()
+    {
+
+        $this->db->query(
+            'SELECT COUNT(*)
+                FROM carprocess
+                WHERE StageNo != NOT NULL;'
+        );
+
+        $assemblingCount = $this->db->rowCount();
+
+        if ($assemblingCount >= 0) {
+            return $assemblingCount;
+        } else {
+            return false;
+        }
+    }
+
+
+    
 
     public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjusment, $Clutch, $RAP, $Visual)
     {
@@ -341,4 +367,24 @@ class Supervisor
             return false;
         }
     }
+
+    public function viewProfile($user)
+    {
+
+        $this->db->query(
+                'SELECT * 
+                FROM employee
+                WHERE EmployeeId = :id;'
+        );
+
+        $this->db->bind(':id', $user);
+        $userdata = $this->db->single();
+
+        if ($userdata) {
+            return $userdata;
+        } else {
+            return false;
+        }
+    }
+
 }

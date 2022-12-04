@@ -14,8 +14,9 @@
             <div class="nav_section_headings">WORKSPACE</div>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts</a>
-            <a class="<?php echo ($data['url'][1] == "scheduletasks") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>supervisors/scheduletasks"><img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks</a>
+            <a class="<?php echo ($data['url'][1] == "scheduletasks") ? 'active' : '' ; ?>" href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks</a>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing</a>
+            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Tools & Consumables</a>
         </li>
         <li>
             <div class="nav_section_headings">GENERAL</div>

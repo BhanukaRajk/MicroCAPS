@@ -30,6 +30,10 @@
 
                         <?php $value = $data['EditorDetails']; ?>
 
+                        <div>
+                            <input type="text" id="leaveId" name="leaveId" class="display-none" value="<?php echo $value->Leave_Id; ?>" required>
+                        </div>
+
                         <div class="display-flex-row justify-content-between marginy-3 wide">
                             <div>
                                 <label><b>Employee Id:</b></label>

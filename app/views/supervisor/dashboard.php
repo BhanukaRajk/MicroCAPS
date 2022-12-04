@@ -6,6 +6,9 @@
 
 <section class="position-absolute">
     <div class="detailed_content dec">
+
+        <?php $count = $data['count']; ?>
+
         <div class="heading dec"><b>Dashboard</b></div>
         <div class="display-flex-row dec">
             <div class="left dec">
@@ -43,7 +46,7 @@
                 </div>
                 <div class="count dec">
                     <div class="countbox dec">
-                        <div class="number dec">5</div>
+                        <div class="number dec"><?php echo $count; ?></div>
                         <div>On Assembly</div>
                     </div>
                     <div class="countbox dec">
