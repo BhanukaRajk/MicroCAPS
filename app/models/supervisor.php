@@ -99,6 +99,41 @@ class Supervisor
     }
 
 
+    public function checkEmployee($empid)
+    {
+
+        $this->db->query('SELECT EmployeeId FROM employee WHERE EmployeeId = :employee AND Progress = 1');
+
+        $this->db->bind(':employee', $empid);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function checkLeaves($empid, $reqdate)
+    {
+
+        $this->db->query('SELECT EmployeeId, LeaveDate FROM leaves WHERE leaves.EmployeeId = :employee AND leaves.LeaveDate = :req_date');
+
+        $this->db->bind(':employee', $empid);
+        $this->db->bind(':req_date', $reqdate);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     public function addleave($EmpId, $leavedate, $reason)
     {
         $this->db->query(

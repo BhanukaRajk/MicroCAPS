@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '/views/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/includes_b/header.php'; ?>
 
 
 <?php require_once APP_ROOT . '/views/supervisor/leftnavbar.php'; ?>
@@ -73,4 +73,4 @@
 </section>
 
 
-<?php require_once APP_ROOT . '/views/includes/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/includes_b/footer.php'; ?>

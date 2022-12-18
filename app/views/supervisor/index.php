@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '/views/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/includes_b/header.php'; ?>
 
 
 <!-- FULL PAGE -->
@@ -17,7 +17,7 @@
 
             <!--USERNAME FIELD-->
             <div class="display-box">
-                <label><?php echo (empty($data['username_err'])) ? '' : 'Incorrect Username'; ?></label>
+                <label><?php echo (empty($data['username_err'])) ? '' : 'Incorrect Username or Password'; ?><?php echo (empty($data['password_err'])) ? '' : 'Incorrect Username or Password'; ?></label>
             </div>
             <div>
                 <input type="email" id="username" name="username" onchange="" class="ipbox" value="<?php echo $data['username']; ?>" placeholder="Username" autocomplete="off" required>
@@ -25,7 +25,11 @@
 
             <!-- PASSWORD FIELD -->
             <div class="display-box">
-                <label><?php echo (empty($data['password_err'])) ? '' : 'Incorrect Password'; ?></label>
+                <label>
+                    <!-- <?php
+                    //  echo (empty($data['password_err'])) ? '' : 'Incorrect Password'; 
+                     ?> -->
+                </label>
             </div>
             <div>
                 <input type="password" id="password" name="password" onchange="" class="ipbox" value="<?php echo $data['password']; ?>" placeholder="Password" required>
@@ -41,4 +45,4 @@
 </div>
 
 
-<?php require_once APP_ROOT . '/views/includes/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/includes_b/footer.php'; ?>

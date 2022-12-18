@@ -32,5 +32,5 @@ function myFunction() {
     var msg = document.getElementById("messagebox");
     // message.className = "show";
     msg.className = msg.className.replace("hideme", "shows showme");
-    setTimeout(function(){ msg.className = msg.className.replace("shows showme", "hideme"); }, 3000);
+    setTimeout(function(){ msg.className = msg.className.replace("shows showme", "hideme"); }, 5000);
 }
