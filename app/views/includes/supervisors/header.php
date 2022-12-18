@@ -1,3 +1,5 @@
+<!-- HEADER FILE FOR ALL SUPERVISOR PAGES -->
+
 <!DOCTYPE html>
 <html lang="en-us">
 
