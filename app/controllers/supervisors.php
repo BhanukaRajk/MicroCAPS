@@ -3,12 +3,30 @@
 class Supervisors extends controller
 {
 
+
+
+
+
+
+
+
     private $supervisorModel;
 
     public function __construct()
     {
         $this->supervisorModel = $this->model('Supervisor');
     }
+
+
+
+
+
+
+
+
+
+
+
 
     public function login()
     {
@@ -54,6 +72,29 @@ class Supervisors extends controller
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function createUserSession($user)
     {
         $_SESSION['_id'] = $user->EmployeeID;
@@ -84,7 +125,7 @@ class Supervisors extends controller
             $data['url'] = getUrl();
             $data['count'] = $this->supervisorModel->dashdetails();
 
-            $this->view('supervisor/dashboard', $data);
+            $this->view('supervisor/landing/dashboard', $data);
         }
     }
 

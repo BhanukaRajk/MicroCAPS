@@ -1,21 +1,24 @@
-<?php require_once APP_ROOT . '/views/includes_b/header.php'; ?>
+<!-- ADD COMMON HEADER FILE FOR DASHBOARD PAGE -->
+<?php require_once APP_ROOT . '/views/includes/supervisors/header.php'; ?>
+
+<!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR ON DASHBOARD PAGE -->
+<?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
+
+<!-- GET DATA FROM CONTROLLER -->
+<?php $count = $data['count']; ?>
 
 
-<?php require_once APP_ROOT . '/views/supervisor/leftnavbar.php'; ?>
-<?php require_once APP_ROOT . '/views/supervisor/topnavbar.php'; ?>
-
-<section class="position-absolute">
-    <div class="detailed_content dec">
-
-        <?php $count = $data['count']; ?>
-
-        <div class="heading dec"><b>Dashboard</b></div>
-        <div class="display-flex-row dec">
-            <div class="left dec">
-                <div class="indetail dec">
-                    <div class="graph dec">
-                        <div class="upper dec">
-                            <div class="bold dec">Ongoing Assembly</div>
+<!-- DASHBOARD DETAILED CONTENT -->
+<section class="dash-section">
+    <div class="dash-section-frame test1">
+        <div class="dash-section-heading test1"><b>Dashboard</b></div>
+        <div class="dash-section-cardsframe test1">
+            <div class="dash-cardsframe-left test1">
+                <div class="dash-card-left-top test1">
+                    <div class="dash-graph-frame test1">
+                        <div class="dash-graph-top test1">
+                            <div class="dash-frame-headings test1">Ongoing Assembly</div>
                             <div><label for="vehicles" class="small">Select Vehicle</label>
                                 <select name="vehicles" id="vehicles">
                                     <option value=""></option>
@@ -23,60 +26,71 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="chart dec"><img src="../temp/graph.jpg" class="donut" alt="status graph"></div>
-                        <div class="map_list dec">
-                            <div class="map dec">
-                                <div class="circle_db dec"></div>
+                        <div class="dash-graph-view test1"><img src="../temp/graph.jpg" class="donut" alt="status graph"></div>
+                        <div class="dash-graph-bottom test1">
+                            <div class="dash-graph-menu test1">
+                                <div class="dash-graph-color-circle dash-darkblue-circle test1"></div>
                                 <div>Done</div>
                             </div>
-                            <div class="map dec">
-                                <div class="circle_lb dec"></div>
+                            <div class="dash-graph-menu test1">
+                                <div class="dash-graph-color-circle dash-lightblue-circle test1"></div>
                                 <div>On-going</div>
                             </div>
                         </div>
+
                     </div>
-                    <div class="line dec"></div>
-                    <div class="damages dec">
+
+                    <div class="dash-line-breaker test1"></div>
+
+                    <div class="dash-damages-frame test1">
                         <div>
-                            <div class="bold dec">Damaged Parts</div>
+                            <div class="dash-frame-headings test1">Damaged Parts</div>
                             <div></div>
                         </div>
                         <div></div>
                     </div>
+
                 </div>
-                <div class="count dec">
-                    <div class="countbox dec">
-                        <div class="number dec"><?php echo $count; ?></div>
+
+
+                <div class="dash-card-left-bottom test1">
+                    <div class="dash-card-left-bottom-countbox test1">
+                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
                         <div>On Assembly</div>
                     </div>
-                    <div class="countbox dec">
-                        <div class="number dec"><?php echo $count; ?></div>
+                    <div class="dash-card-left-bottom-countbox test1">
+                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
                         <div>Dispatched</div>
                     </div>
-                    <div class="countbox dec">
-                        <div class="number dec"><?php echo $count; ?></div>
+                    <div class="dash-card-left-bottom-countbox test1">
+                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
                         <div>On Hold</div>
                     </div>
                 </div>
+
             </div>
-            <div class="right dec">
-                <div class="logs bold dec">
-                    <div class="sidebox dec">Activity Log</div>
-                    <div class="sidebox dec"></div>
+
+
+            <div class="dash-cardsframe-right test1">
+
+                <div class="dash-card-logs test1">
+                    <div class="dash-card-right-datalines dash-card-headings test1">Activity Log</div>
+                    <div class="dash-card-right-datalines test1"></div>
                 </div>
-                <div class="quick bold dec">
-                    <div class="sidebox dec">Quick Access</div>
-                    <div class="sidebox activity_btn dec">
-                        <button type="button" class="blue_button">Issue Parts</button>
+                <div class="dash-card-quickaccess test1">
+                    <div class="dash-card-right-datalines dash-card-headings test1">Quick Access</div>
+                    <div class="dash-card-right-datalines dash-quickbtns-frame test1">
+                        <button type="button" class="dash-quickbtn">Issue Parts</button>
                         <a href="<?php echo URL_ROOT; ?>supervisors/leaves">
-                            <button type="button" class="blue_button">Leaves</button>
+                            <button type="button" class="dash-quickbtn">Leaves</button>
                         </a>
                     </div>
                 </div>
-                <div class="calender dec"></div>
+                <div class="dash-card-calender test1"></div>
             </div>
         </div>
     </div>
 </section>
 
-<?php require_once APP_ROOT . '/views/includes_b/footer.php'; ?>
+<!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
+<?php require_once APP_ROOT . '/views/includes/supervisors/footer.php'; ?>

@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '/views/includes_b/header.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/supervisors/header.php'; ?>
 
 
 <!-- FULL PAGE -->
@@ -45,4 +45,4 @@
 </div>
 
 
-<?php require_once APP_ROOT . '/views/includes_b/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/supervisors/footer.php'; ?>

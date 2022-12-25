@@ -1,6 +1,6 @@
-<?php require_once APP_ROOT . '/views/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/supervisors/header.php'; ?>
 <a href=""> Admin </a>
 <a href=""> Manager </a>
 <a href="<?php echo URL_ROOT; ?>supervisors/login"> Supervisor </a>
 <a href=""> Tester </a>
-<?php require_once APP_ROOT . '/views/includes/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/includes/supervisors/footer.php'; ?>

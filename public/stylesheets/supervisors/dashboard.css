@@ -1,0 +1,358 @@
+/* 
+
+-- CSS NAVIGATION - SUPERVISOR DASHBOARD --
+
+dash-section
+|-- dash-section-frame
+    |-- dash-section-heading
+    |-- dash-section-cardsframe
+        |-- dash-cardsframe-left
+        |   |-- dash-card-left-top
+        |   |   |-- dash-graph-frame
+        |   |   |   |-- dash-graph-top
+        |   |   |   |   |-- dash-frame-headings
+        |   |   |   |-- dash-graph-view
+        |   |   |   |-- dash-graph-bottom
+        |   |   |       |-- dash-graph-menu
+        |   |   |           |-- dash-graph-color-circle
+        |   |   |-- dash-line-breaker
+        |   |   |-- dash-damages-frame
+        |   |       |-- dash-card-headings     
+        |   |-- dash-card-left-bottom
+        |       |-- dash-card-left-bottom-countbox
+        |           |-- dash-countbox-number
+        |-- dash-cardsframe-right
+            |-- dash-card-logs
+            |   |-- dash-card-right-datalines dash-card-heading
+            |   |-- dash-card-right-datalines
+            |-- dash-card-quickaccess
+            |   |-- dash-card-right-datalines dash-card-heading
+            |   |-- dash-card-right-datalines dash-quickbtns-frame
+            |       |-- dash-quickbtn
+            |-- dash-card-calender
+
+*/
+
+
+
+
+
+/* XXXXXXXXXXXXXXXXXXXX TESTING AREA BEGIN XXXXXXXXXXXXXXXXXXXX */
+
+/* TO ADD BORDERS ON EVERY COMPONENT - FOR TESTING PROGRESS */
+/* .test1 {
+    border: 1px solid rgb(0, 0, 0);
+} */
+
+/* XXXXXXXXXXXXXXXXXXXX TESTING AREA END XXXXXXXXXXXXXXXXXXXX */
+
+
+
+
+
+
+/* DASHBOARD AREA POSITION */
+.dash-section {
+    position: absolute;
+}
+
+/* DETAILED CONTAINER ON DASHBOARD AREA */
+.dash-section-frame {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(235, 235, 235);
+
+    left: 16.25rem;
+    right: 0rem;
+    top: 4rem;
+    bottom: 0rem;
+}
+
+/* HEADING - TOP OF DETAILED CONTAINER */
+.dash-section-heading {
+    margin: 1rem 2rem 0.25rem 2rem;
+    font-size: x-large;
+}
+
+/* CARDS FRAME - BOTTOM OF DETAILED CONTAINER */
+.dash-section-cardsframe {
+    display: flex;
+    flex-direction: row;
+}
+
+/* FOR ALL FRAME HEADINGS */
+.dash-frame-headings {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+
+
+
+/* LEFT SIDE OF CARDS FRAME */
+.dash-cardsframe-left {
+    margin-left: 2rem;
+}
+
+
+
+
+
+/* LEFT TOP CARD */
+.dash-card-left-top {
+    min-height: 22.75rem;
+    min-width: 42rem;
+    /* margin-top: 1rem; */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    background-color: white;
+    border-radius: 1.2rem;
+    padding: 1rem;
+}
+
+
+
+
+
+/* GRAPH FRAME (LEFT SIDE OF LEFT TOP CARD)*/
+.dash-graph-frame {
+    margin: 1rem;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* GRAPH FRAME TOP */
+.dash-graph-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* GRAPH FRAME MIDDLE (GRAPH) */
+.dash-graph-view {
+    text-align: center;
+}
+
+/* GRAPH FRAME BOTTOM */
+.dash-graph-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* GRAPH MENU */
+.dash-graph-menu {
+    min-height: 1.2rem;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 0.2rem;
+    margin-inline: 0.36rem;
+
+    min-width: 7rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+
+    font-size: small;
+}
+
+/* GRAPH MENU CIRCLE */
+.dash-graph-color-circle {
+    height: 0.75rem;
+    width: 0.75rem;
+    margin: auto 1rem auto 0.5rem;
+    border-radius: 50%;
+}
+
+/* GRAPH OPTION 1 */
+.dash-darkblue-circle {
+    background-color: #0853dd;
+}
+
+/* GRAPH OPTION 2 */
+.dash-lightblue-circle {
+    background-color: #3ba5fb;
+}
+
+
+
+
+
+
+/* MIDDLE LINE (LEFT TOP CARD BREAKER) */
+.dash-line-breaker {
+    border-left: 0.05rem solid rgb(199, 199, 199);
+    height: 20.75rem;
+    margin-block: auto;
+}
+
+
+
+
+
+
+/* DAMAGES FRAME (RIGHT SIDE OF LEFT TOP CARD)*/
+.dash-damages-frame {
+    margin: 1rem;
+    min-width: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+/* LEFT BOTTOM CARD */
+.dash-card-left-bottom {
+    min-height: 13.5rem;
+    min-width: 42rem;
+
+    margin-top: 1.5rem;
+
+    background-color: white;
+    border-radius: 1.2rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* LEFT BOTTOM CARD COUNTABLE DETAILS BOX */
+.dash-card-left-bottom-countbox {
+    margin-block: auto;
+    height: 9rem;
+    width: 9rem;
+
+    border: 0.1rem solid rgb(150, 150, 150);
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+    font-weight: bolder;
+    color: rgb(49, 121, 253);
+}
+
+/* LEFT BOTTOM CARD COUNTABLE DETAILS BOX NUMBER */
+.dash-countbox-number {
+    font-size: 4rem;
+}
+
+
+
+
+
+
+
+
+/* RIGHT SIDE OF CARDS FRAME */
+.dash-cardsframe-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding-left: 2rem;
+}
+
+
+
+
+/* ACTIVITY LOG & QUICK ACCESS BOX INNER DATA ROWS */
+.dash-card-right-datalines {
+    margin-inline: 1rem;
+}
+
+/* CARD HEADINGS */
+.dash-card-headings {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+
+
+
+/* RIGHT SIDE ACTIVITY LOG CARD */
+.dash-card-logs {
+    min-height: 10rem;
+    min-width: 19rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: white;
+    border-radius: 1.2rem;
+    padding-block: 1rem;
+}
+
+
+
+
+
+
+/* RIGHT SIDE QUICK ACCESS CARD */
+.dash-card-quickaccess {
+    min-height: 7rem;
+    min-width: 19rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    background-color: white;
+    border-radius: 1.2rem;
+}
+
+/* QUICK ACCESS CARD BUTTONS FRAME */
+.dash-quickbtns-frame {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+/* QUICK ACCESS CARD BUTTONS */
+.dash-quickbtn {
+    min-width: 6rem;
+    min-height: 2rem;
+
+    background-color: #2773FF;
+    color: white;
+    font-size: small;
+    border: none;
+    border-radius: 10rem;
+}
+
+/* QUICK ACCESS CARD BUTTONS-HOVER */
+.dash-quickbtn:hover {
+    background-color: rgb(99, 174, 250);
+    box-shadow: 0 0 0.2rem #2773FF;
+}
+
+
+
+
+
+
+/* RIGHT SIDE CALENDER CARD */
+.dash-card-calender {
+    min-height: 19rem;
+    min-width: 19rem;
+
+    background-color: white;
+    border-radius: 1.2rem;
+}
