@@ -19,10 +19,13 @@
                     <div class="dash-graph-frame test1">
                         <div class="dash-graph-top test1">
                             <div class="dash-frame-headings test1">Ongoing Assembly</div>
-                            <div><label for="vehicles" class="small">Select Vehicle</label>
+                            <div>
+                                <!-- <label for="vehicles" class="small">Select Vehicle</label> -->
                                 <select name="vehicles" id="vehicles">
-                                    <option value=""></option>
-                                    <option value="test">Test</option>
+                                    <option value="NULL">Select vehicle</option>
+                                    <option value="CN1294B0934">CN1294B0934</option>
+                                    <option value="CN1294G0836">CN1294G0836</option>
+                                    <option value="CN1294L9302">CN1294L9302</option>
                                 </select>
                             </div>
                         </div>

@@ -1176,12 +1176,14 @@ li a:hover:not(.active) {
 
 
 .small {
-    font-size: 10px;
+    font-size: 12px;
+    color: #017EFA;
 }
 
 #vehicles {
-    width: 1.2rem;
+    /* width: 1.2rem; */
     border: none;
+    color: #017EFA;
 }
 
 

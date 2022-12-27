@@ -54,19 +54,19 @@ dash-section
 /* DASHBOARD AREA POSITION */
 .dash-section {
     position: absolute;
-}
-
-/* DETAILED CONTAINER ON DASHBOARD AREA */
-.dash-section-frame {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(235, 235, 235);
 
     left: 16.25rem;
     right: 0rem;
     top: 4rem;
     bottom: 0rem;
+    /* background-color: rgb(235, 235, 235); */
+    background-color: rgb(242, 243, 247);
+}
+
+/* DETAILED CONTAINER ON DASHBOARD AREA */
+.dash-section-frame {
+    display: flex;
+    flex-direction: column;
 }
 
 /* HEADING - TOP OF DETAILED CONTAINER */
@@ -79,6 +79,14 @@ dash-section
 .dash-section-cardsframe {
     display: flex;
     flex-direction: row;
+    /* width:100px; */
+    /* justify-content: space-evenly; */
+
+    margin-inline: 2rem;
+    justify-content: center;
+    /* border: 2px solid red; */
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 /* FOR ALL FRAME HEADINGS */
@@ -93,7 +101,9 @@ dash-section
 
 /* LEFT SIDE OF CARDS FRAME */
 .dash-cardsframe-left {
-    margin-left: 2rem;
+    /* border: 2px solid black; */
+    left:2rem;
+    /* margin-left: 2rem; */
 }
 
 
@@ -103,7 +113,8 @@ dash-section
 /* LEFT TOP CARD */
 .dash-card-left-top {
     min-height: 22.75rem;
-    min-width: 42rem;
+    /* min-width: 42rem; */
+    min-width: 45.5rem;
     /* margin-top: 1rem; */
 
     display: flex;
@@ -149,8 +160,8 @@ dash-section
 
 /* GRAPH MENU */
 .dash-graph-menu {
-    min-height: 1.2rem;
-    border: 1px solid rgb(199, 199, 199);
+    min-height: 1.5rem;
+    border: 1px solid #00000020;
     border-radius: 0.2rem;
     margin-inline: 0.36rem;
 
@@ -158,6 +169,7 @@ dash-section
     display: flex;
     flex-direction: row;
     justify-content: left;
+    align-items: center;
 
     font-size: small;
 }
@@ -187,7 +199,7 @@ dash-section
 
 /* MIDDLE LINE (LEFT TOP CARD BREAKER) */
 .dash-line-breaker {
-    border-left: 0.05rem solid rgb(199, 199, 199);
+    border-left: 0.05rem solid #D7D7D7;
     height: 20.75rem;
     margin-block: auto;
 }
@@ -235,7 +247,7 @@ dash-section
     height: 9rem;
     width: 9rem;
 
-    border: 0.1rem solid rgb(150, 150, 150);
+    border: 0.1rem solid #D7D7D7;
     border-radius: 1rem;
 
     display: flex;
@@ -244,7 +256,7 @@ dash-section
 
     text-align: center;
     font-weight: bolder;
-    color: rgb(49, 121, 253);
+    color: #418CFD;
 }
 
 /* LEFT BOTTOM CARD COUNTABLE DETAILS BOX NUMBER */
@@ -264,8 +276,9 @@ dash-section
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* border: 2px solid black; */
 
-    padding-left: 2rem;
+    /* padding-left: 2rem; */
 }
 
 
@@ -298,6 +311,7 @@ dash-section
     background-color: white;
     border-radius: 1.2rem;
     padding-block: 1rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
 }
 
 
@@ -316,6 +330,7 @@ dash-section
 
     background-color: white;
     border-radius: 1.2rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
 }
 
 /* QUICK ACCESS CARD BUTTONS FRAME */
@@ -330,7 +345,7 @@ dash-section
     min-width: 6rem;
     min-height: 2rem;
 
-    background-color: #2773FF;
+    background-color: #418CFD;
     color: white;
     font-size: small;
     border: none;
@@ -339,8 +354,9 @@ dash-section
 
 /* QUICK ACCESS CARD BUTTONS-HOVER */
 .dash-quickbtn:hover {
-    background-color: rgb(99, 174, 250);
-    box-shadow: 0 0 0.2rem #2773FF;
+    background-color: #75abfb;
+    /* box-shadow: 0 0 0.2rem #aaaaaa; */
+    cursor: pointer;
 }
 
 
@@ -355,4 +371,5 @@ dash-section
 
     background-color: white;
     border-radius: 1.2rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
 }
