@@ -56,10 +56,10 @@ class Supervisors extends controller
                     $this->createUserSession($loggedUser);
                 } else {
                     $data['password_err'] = 'Incorrect Password';
-                    $this->view('supervisor/index', $data);
+                    $this->view('supervisorview/index', $data);
                 }
             } else {
-                $this->view('supervisor/index', $data);
+                $this->view('supervisorview/index', $data);
             }
         } else {
             $data = [
@@ -68,7 +68,7 @@ class Supervisors extends controller
                 'username_err' => '',
                 'password_err' => ''
             ];
-            $this->view('supervisor/index', $data);
+            $this->view('supervisorview/index', $data);
         }
     }
 
@@ -125,7 +125,7 @@ class Supervisors extends controller
             $data['url'] = getUrl();
             $data['count'] = $this->supervisorModel->dashdetails();
 
-            $this->view('supervisor/landing/dashboard', $data);
+            $this->view('supervisoview/landing/dashboard', $data);
         }
     }
 

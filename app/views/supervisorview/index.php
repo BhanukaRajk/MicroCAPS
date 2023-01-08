@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '/views/includes/supervisors/header.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisorview/includes/header.php'; ?>
 
 
 <!-- FULL PAGE -->
@@ -7,7 +7,7 @@
     <!--LOGIN FORM BOX-->
     <div class="login_form">
         <!--LOGO-->
-        <div><img class="logo" src="../images/logo2.png" alt="MicroCAPS-logo"></div>
+        <div><img class="logo" src="../images/loginpagelogo.png" alt="MicroCAPS-logo"></div>
 
         <form action="<?php echo URL_ROOT; ?>Supervisors/login" method="post">
 
@@ -44,5 +44,4 @@
     </div>
 </div>
 
-
-<?php require_once APP_ROOT . '/views/includes/supervisors/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisorview/includes/footer.php'; ?>
