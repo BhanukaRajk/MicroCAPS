@@ -1,8 +1,8 @@
 <?php require_once APP_ROOT . '/views/includes_b/header.php'; ?>
 
 
-<?php require_once APP_ROOT . '/views/supervisor/leftnavbar.php'; ?>
-<?php require_once APP_ROOT . '/views/supervisor/topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/sup/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/sup/topnavbar.php'; ?>
 
 <!-- top navbar bottom -> bottom
      left navbar right -> right
