@@ -1,0 +1,109 @@
+.outercard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 40px;
+
+    /* position: absolute; */
+    width: 416.92px;
+    height: 216px;
+
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+.innercard {
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 30px;
+
+    width: 356px;
+    height: 136px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.emp-card-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+
+    width: 169px;
+    height: 53px;
+}
+
+.emp-card-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 30px;
+
+    width: 356px;
+    height: 136px;
+}
+
+.emp-card-edit-btn {
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+
+    width: 170px;
+    height: 53px;
+
+    /* /Primary / Default */
+
+    border: 1px solid #2773FF;
+    border-radius: 4px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.emp-card-del-btn {
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+
+    width: 170px;
+    height: 53px;
+
+    border: 1px solid #FD4A4A;
+    border-radius: 6px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+}
