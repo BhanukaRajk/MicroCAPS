@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '\views\includes\header.php'; ?>
+<?php require_once APP_ROOT . '\views\includes_r\header.php'; ?>
 <body class="display-flex-column align-items-center justify-content-center">
 <section>
     <!-- <div class="container"> -->

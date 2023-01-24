@@ -1,4 +1,50 @@
 <?php
+class Tester {
+    private $db;
+
+    public function __construct(){
+        $this->db = new Database;
+    }
+
+    public function findUserByUsername($username) {
+
+        $this->db->query('SELECT * FROM credentials  WHERE credentials.Username = :username');
+
+        $this->db->bind(':username', $username);
+
+        $row = $this->db->single();
+
+        if ($this->db->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function login($username,$password) {
+        $this->db->query(
+            'SELECT credentials.Username, credentials.Password, employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position
+            FROM credentials
+            INNER JOIN employee
+            ON credentials.EmployeeID = employee.EmployeeId
+            WHERE credentials.Username = :username'
+        );
+
+        $this->db->bind(':username', $username);
+
+        $row = $this->db->single();
+
+        if ( $password == $row->Password ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+}
+
+
 
 class Testers extends controller {
 
@@ -78,6 +124,76 @@ class Testers extends controller {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $url = getUrl();
             $this->view('tester/dashboard', $url);
+        }
+    }
+
+    public function defectsheet() {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $url = getUrl();
+            $this->view('tester/defectsheet', $url);
+        }
+    }
+
+    public function defect_sheet() {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $url = getUrl();
+            $this->view('tester/defect_sheet', $url);
+        }
+    }
+
+    public function add_defect() {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $url = getUrl();
+            $this->view('tester/add_defect', $url);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $url = getUrl();
+            $this->view('tester/add_defect', $url);
+        }
+    }
+
+    public function add_defect2() {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $url = getUrl();
+            $this->view('tester/add_defect2', $url);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $url = getUrl();
+            $this->view('tester/add_defect2', $url);
+        }
+    }
+
+    public function select_vehicle() {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $url = getUrl();
+            $this->view('tester/select_vehicle', $url);
         }
     }
 

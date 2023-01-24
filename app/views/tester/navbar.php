@@ -12,8 +12,8 @@
         </li>
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Body Shell</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
+            <a class="<?php echo ($data[1] == "defect_sheet") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Deffect Sheet</a>
+            <a class="<?php echo ($data[1] == "select_vehicle") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Select Vehicle</a>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
         </li>
         <li>
