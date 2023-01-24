@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '/views/supervisorview/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
 <div class="display-flex-column height-vh-100 gap-2 align-items-center justify-content-center">
 
@@ -51,4 +51,4 @@
     </div>
 </div>
 
-<?php require_once APP_ROOT . '/views/supervisorview/includes/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

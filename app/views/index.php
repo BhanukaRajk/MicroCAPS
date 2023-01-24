@@ -1,8 +1,8 @@
-<?php require_once APP_ROOT . '/views/supervisorview/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
-<a href=""> Admin </a>
-<a href=""> Manager </a>
+<a href="<?php echo URL_ROOT; ?>Admin/login"> Admin </a>
+<a href="<?php echo URL_ROOT; ?>Manager/login"> Manager </a>
 <a href="<?php echo URL_ROOT; ?>Supervisors/login"> Supervisor </a>
-<a href=""> Tester </a>
+<a href="<?php echo URL_ROOT; ?>Tester/login"> Tester </a>
 
-<?php require_once APP_ROOT . '/views/supervisorview/includes/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

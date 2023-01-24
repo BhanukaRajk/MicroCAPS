@@ -56,10 +56,10 @@ class Supervisors extends controller
                     $this->createUserSession($loggedUser);
                 } else {
                     $data['password_err'] = 'Incorrect Password';
-                    $this->view('supervisorview/index', $data);
+                    $this->view('supervisor/index', $data);
                 }
             } else {
-                $this->view('supervisorview/index', $data);
+                $this->view('supervisor/index', $data);
             }
         } else {
             $data = [
@@ -68,7 +68,7 @@ class Supervisors extends controller
                 'username_err' => '',
                 'password_err' => ''
             ];
-            $this->view('supervisorview/index', $data);
+            $this->view('supervisor/index', $data);
         }
     }
 
@@ -102,7 +102,7 @@ class Supervisors extends controller
         $_SESSION['_lastname'] = $user->Lastname;
         $_SESSION['return_message'] = '';
 
-        redirect('supervisors/dashboard');
+        redirect('supervisor/landing/dashboard');
     }
 
     public function logout()
@@ -111,7 +111,7 @@ class Supervisors extends controller
         unset($_SESSION['_email']);
         unset($_SESSION['_name']);
         session_destroy();
-        redirect('supervisors/login');
+        redirect('supervisor/landing/dashboard');
     }
 
     public function dashboard()
@@ -125,7 +125,7 @@ class Supervisors extends controller
             $data['url'] = getUrl();
             $data['count'] = $this->supervisorModel->dashdetails();
 
-            $this->view('supervisoview/landing/dashboard', $data);
+            $this->view('supervisor/landing/dashboard', $data);
         }
     }
 

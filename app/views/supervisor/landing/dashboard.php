@@ -1,9 +1,9 @@
 <!-- ADD COMMON HEADER FILE FOR DASHBOARD PAGE -->
-<?php require_once APP_ROOT . '/views/supervisorview/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
 <!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR ON DASHBOARD PAGE -->
-<?php require_once APP_ROOT . '/views/supervisorview/common/leftnavbar.php'; ?>
-<?php require_once APP_ROOT . '/views/supervisorview/common/topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 <!-- GET DATA FROM CONTROLLER -->
 <?php $count = $data['count']; ?>
@@ -96,4 +96,4 @@
 </section>
 
 <!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
-<?php require_once APP_ROOT . '/views/supervisorview/includes/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

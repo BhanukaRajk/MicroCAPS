@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '/views/supervisorview/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
 <div class="display-flex-row">
     <div>
@@ -81,4 +81,4 @@
     </div>
 </div>
 
-<?php require_once APP_ROOT . '/views/supervisorview/includes/footer.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>
