@@ -1,4 +1,6 @@
 @import "dashboard.css";
+@import "consumablelist.css";
+/* @import "vehiclelist.css"; */
 
 body {
     margin: 0;
@@ -1059,7 +1061,7 @@ div.select {
     z-index: 1;
 }
 
-ul {
+.navigation-bar {
     list-style-type: none;
     margin: 0;
     padding: 0;

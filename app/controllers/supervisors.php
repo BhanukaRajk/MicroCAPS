@@ -102,7 +102,7 @@ class Supervisors extends controller
         $_SESSION['_lastname'] = $user->Lastname;
         $_SESSION['return_message'] = '';
 
-        redirect('supervisor/landing/dashboard');
+        redirect('Supervisors/dashboard');
     }
 
     public function logout()
@@ -111,14 +111,14 @@ class Supervisors extends controller
         unset($_SESSION['_email']);
         unset($_SESSION['_name']);
         session_destroy();
-        redirect('supervisor/landing/dashboard');
+        redirect('Supervisors/login');
     }
 
     public function dashboard()
     {
 
         if (!isLoggedIn()) {
-            redirect('supervisors/login');
+            redirect('Supervisors/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -126,6 +126,39 @@ class Supervisors extends controller
             $data['count'] = $this->supervisorModel->dashdetails();
 
             $this->view('supervisor/landing/dashboard', $data);
+        }
+    }
+
+    public function linevehicleview()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->view('supervisor/assembling/vehiclelist');
+        }
+    }
+
+    public function consumableview()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->view('supervisor/consumables/consumablelist');
+        }
+    }
+
+    public function vehicleview()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->view('supervisor/inspection/vehiclelist');
         }
     }
 
@@ -228,7 +261,7 @@ class Supervisors extends controller
                             $_SESSION['return_message'] = 'Error! record saving failed!';
                         }
 
-                        redirect('supervisors/leaves');
+                        redirect('supervisor/leaves');
                     }
                 }
 
@@ -465,4 +498,22 @@ class Supervisors extends controller
             $this->view('supervisor/scheduletasks', $data);
         }
     }
+
+
+
+    public function S4vehicles()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['S4Details'] = $this->supervisorModel->ViewS4Vehicles();
+            $this->view('supervisor/inspection/vehiclelist', $data);
+        }
+    }
+
+
 }
