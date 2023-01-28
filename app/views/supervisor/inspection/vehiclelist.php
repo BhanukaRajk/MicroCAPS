@@ -13,21 +13,28 @@
             <div class="vehicle-detail-board">
                 <div class="vehicle-data-board">
 
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Red.png" class="carpic" alt="micro panda red">
-                        </div>
-                        <div class="carstatus">Inspected</div>
-                    </div>
+                    <?php
+                    foreach ($data['S4Finishers'] as $car) {
+                        echo '<div class="carcard">
+                                <div class="cardhead">
+                                    <div class="cardid">
+                                        <div class="carmodel">', $car->consumable_name, '</div>
+                                        <div class="chassisno">', ($car->volume == NULL) ? 'Grease' : 'Lubricants', '</div>
+                                    </div>
+                                    <div class="carstatuscolor">
+                                        <div class="status-circle ', ($car->volume == NULL) ? (($car->volume > 100) ? 'status-green-circle' : 'status-orange-circle') : (($car->weight > 100) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
+                                    </div>
+                                </div>
+                                <div class="carpicbox">
+                                    <img src="' . URL_ROOT . 'public/images/consumables/' . $car->image . '" class="carpic" alt="micro panda red">
+                                </div>
+                                <div class="carstatus ', ($car->volume == NULL) ? (($car->volume > 100) ? 'available' : 'lower') : (($car->weight > 100) ? 'available' : 'lower'), '">', ($car->volume == NULL) ? (($car->volume > 100) ? 'Available' : 'Low in stock') : (($car->weight > 100) ? 'Available' : 'Low in stock'), '</div>
+                                <div class="chassisno">Last update: ', $car->last_update, '</div>
+                            </div>';
+                        //print_r($car);
+                        //echo $car->consumable_id;
+                    }
+                    ?>
 
                     <div class="carcard">
                         <div class="cardhead">

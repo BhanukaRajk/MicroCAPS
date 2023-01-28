@@ -129,6 +129,8 @@ class Supervisors extends controller
         }
     }
 
+
+
     public function linevehicleview()
     {
         if(!isLoggedIn()) {
@@ -140,6 +142,20 @@ class Supervisors extends controller
         }
     }
 
+
+    // public function consumableview()
+    // {
+    //     if(!isLoggedIn()) {
+    //         redirect('Supervisors/login');
+    //     }
+
+    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //         $this->view('supervisor/consumables/consumablelist');
+    //     }
+    // }
+
+
+
     public function consumableview()
     {
         if(!isLoggedIn()) {
@@ -147,9 +163,17 @@ class Supervisors extends controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $this->view('supervisor/consumables/consumablelist');
+            $data['url'] = getUrl();
+            $data['consumableset'] = $this->supervisorModel->ViewAllConsumables();
+            // echo "\n\n\n\n\n";
+            // print_r($data);
+            $this->view('supervisor/consumables/consumablelist', $data);
         }
     }
+
+
+
+
 
     public function vehicleview()
     {

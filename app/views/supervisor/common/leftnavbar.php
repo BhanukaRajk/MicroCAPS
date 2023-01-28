@@ -15,7 +15,7 @@
         <!-- MAIN CATEGORY ON NAV BAR -->
         <li>
             <div class="nav_section_headings margin-top-5">MAIN MENU</div>
-            <a class="<?php echo ($data['url'][1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>supervisor/landing/dashboard">
+            <a class="<?php echo ($data['url'][1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/dashboard">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard
             </a>
         </li>
@@ -24,7 +24,7 @@
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
 
-            <a class="<?php echo ($data['url'][1] == "assembly") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/linevehicleview">
+            <a class="<?php echo ($data['url'][1] == "linevehicleview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/linevehicleview">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process
             </a>
 
@@ -36,11 +36,11 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "testing") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/vehicleview">
+            <a class="<?php echo ($data['url'][1] == "vehicleview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/vehicleview">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "tools") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/consumableview">
+            <a class="<?php echo ($data['url'][1] == "consumableview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/consumableview">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Tools & Consumables
             </a>
         </li>

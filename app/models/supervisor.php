@@ -272,6 +272,41 @@ class Supervisor
         }
     }
 
+    
+    public function ViewAllConsumables()
+    {
+
+        $this->db->query(
+            'SELECT * FROM `consumable`;'
+        );
+
+        $consumables = $this->db->resultSet();
+        //print_r($consumables);
+
+        if ($consumables) {
+            return $consumables;
+        } else {
+            return false;
+        }
+    }
+
+    public function ViewS4Finishers()
+    {
+
+        $this->db->query(
+            'SELECT * FROM `vehicles`;'
+        );
+
+        $S4FVehicles = $this->db->resultSet();
+        //print_r($S4FVehicles);
+
+        if ($S4FVehicles) {
+            return $S4FVehicles;
+        } else {
+            return false;
+        }
+    }
+
 
     public function SendEditLeave($ID)
     {
