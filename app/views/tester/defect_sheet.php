@@ -1,7 +1,6 @@
-<?php require_once APP_ROOT . '\views\includes_r\header.php'; ?>
+<?php require_once APP_ROOT . '\views\includes\header.php'; ?>
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
 
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
 
 <style>
     body {
@@ -28,51 +27,31 @@
     <th>Chassis</th>
     <th>EmployeeID</th>
     <th>Recorrection</th>
-
-    <!-- <th colspan="2"> Edit/Delete </th> -->
+    <th colspan="2">Edit / Delete</th>
   </tr>
   
-<?php
 
-$id = $_GET['ChassisNo'];
+<?php foreach($data['defects'] as $values) : ?>
 
-$connection = mysqli_connect('localhost', 'root', '', 'microcaps');
-$records = mysqli_query($connection,"SELECT cardefect.DefectNo, 
-                                            defects.DefectDescription, 
-                                            cardefect.InspectionDate, 
-                                            cardefect.ChassisNo,
-                                            cardefect.EmployeeID, 
-                                            cardefect.ReCorrection 
-                                            FROM `cardefect` INNER JOIN `defects` 
-                                            ON cardefect.DefectNo = defects.DefectNo 
-                                            WHERE cardefect.ChassisNo = '$id';");
+<tr>
+  <td><?php echo $values->DefectNo; ?></td>
+  <td><?php echo $values->DefectDescription; ?></td>
+  <td><?php echo $values->InspectionDate; ?></td>
+  <td><?php echo $values->ChassisNo; ?></td>
+  <td><?php echo $values->EmployeeID; ?></td>
+  <td><?php echo $values->ReCorrection; ?></td>
+  <td><button style='text-decoration: none' class='edit-button' onClick="location.href='<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $values->ChassisNo; ?>/<?php echo $values->DefectNo; ?>'">Edit</a> </button></td>
+  <td><button style='text-decoration: none' class='delete-button' onClick="location.href='<?php echo URL_ROOT; ?>testers/delete_defect/<?php echo $values->ChassisNo; ?>/<?php echo $values->DefectNo; ?>'">Delete</button></td>
+</tr>
 
-while($data = mysqli_fetch_array($records))
-{
-?>
-  <tr>
-    <td><?php echo $data['DefectNo']; ?></td>
-    <td><?php echo $data['DefectDescription']; ?></td>
-    <td><?php echo $data['InspectionDate']; ?></td>
-    <td><?php echo $data['ChassisNo']; ?></td>  
-    <td><?php echo $data['EmployeeID']; ?></td> 
-    <td><?php echo $data['ReCorrection']; ?></td>   
-   
-    <!-- <td> <button class="edit"><a href="">Edit</a> </button></td>
-    <td ><button class="delete"><a href="">Delete</a></button></td> -->
-  </tr>	
-<?php
-}
-?>
+<?php endforeach; ?>
+
 
 </tbody>
 </table>
 <br><br>
 
-<!-- <button type="submit" class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect'">
-        Add Defects
-</button> -->
-<button type="submit" class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect ? ChassisNo=<?php echo $id; ?>'">
+<button type="submit" class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect/<?php echo $values->ChassisNo; ?>'">
         Add Defects
 </button>
 </div>

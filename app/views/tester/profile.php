@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/mainr.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/main.css" rel="stylesheet" />
 
     <!-- <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" /> -->
 
@@ -26,7 +26,7 @@
     <div class="column align-items-center border padding-5  width-rem-25 height-25">
 
         <div class="text-center">
-            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-50" alt="logo"/>
+            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-75" alt="logo"/>
         </div>
 
         <div class="text-center">

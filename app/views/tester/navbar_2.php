@@ -1,28 +1,4 @@
-<!-- <header>
 
-    <ul class="display-flex-column">
-        <li>
-            <div class="nav_logo">
-                <img src="<?php echo URL_ROOT; ?>public/images/nav_logo.png" class="text-center width-50" alt="logo" />
-            </div>
-        </li>
-        <li>
-            <div class="nav_section_headings margin-top-5">MAIN MENU</div>
-            <a class="<?php echo ($data[1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/dashboard"><img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a>
-        </li>
-        <li>
-            <div class="nav_section_headings">WORKSPACE</div>
-            <a class="<?php echo ($data[1] == "defect_sheet") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Deffect Sheet</a>
-            <a class="<?php echo ($data[1] == "select_vehicle") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Select Vehicle</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
-        </li>
-        <li>
-            <div class="nav_section_headings">GENERAL</div>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings</a>
-        </li>
-    </ul>
-
-</header> -->
 
 <header id="header" class="fixed-top display-flex align-items-start">
     <div class="container_navbar_2 display-flex align-items-center justify-content-end">

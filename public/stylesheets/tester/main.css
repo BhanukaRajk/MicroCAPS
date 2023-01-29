@@ -1052,9 +1052,11 @@ Table
 }
 
 .container1 {
-    margin-top: 150px;
     display: block;
     text-align: center;
+    position: absolute;
+    left: 24%;
+    top: 20%;
 }
 
 @-webkit-keyframes leftRight {
@@ -1156,8 +1158,8 @@ Table
 
 .map {
     min-height: 1.2rem;
-    border: 1px solid rgb(199, 199, 199);
-    border-radius: 0.2rem;
+    /* border: 1px solid rgb(199, 199, 199);
+    border-radius: 0.2rem; */
     margin-inline: 0.36rem;
 
     min-width: 6rem;
@@ -1165,14 +1167,22 @@ Table
     flex-direction: row;
     justify-content: left;
 
-    font-size: small;
+    /* font-size: small; */
 }
 
-.circle {
+.circle-dark {
     height: 0.75rem;
     width: 0.75rem;
     margin: auto 1rem auto 0.5rem;
-    background-color: rgb(23, 7, 114);
+    background-color: #4B56D2;
+    border-radius: 50%;
+}
+
+.circle-lite {
+    height: 0.75rem;
+    width: 0.75rem;
+    margin: auto 1rem auto 0.5rem;
+    background-color: #82C3EC;
     border-radius: 50%;
 }
 
@@ -1536,4 +1546,62 @@ Table
 
 #redline, #redline1 {
     color: red;
+}
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* SUPERVISOR DELETE BUTTONS */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+.delete-button {
+    color: #B10202;
+    text-decoration: none;
+    border: 0.1rem solid #B10202;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    padding-inline: 1rem;
+    cursor: pointer;
+    padding-block: 0.25rem;
+    transition: 0.2s;
+}
+
+/* .delete-button:hover {
+    color: #fb6e32;
+    border: 0.1rem solid #fb6e32;
+    background-color: #fff0e9;
+} */
+
+.delete-button:hover {
+    color: #ffffff;
+    background-color: #FFC4C4;
+    opacity: 1;
+}
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* SUPERVISOR EDIT BUTTONS */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+.edit-button {
+    color: #017EFA;
+    /* color: #2773FF; */
+    text-decoration: none;
+    border: 0.1rem solid #017EFA;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    padding-inline: 2rem;
+    cursor: pointer;
+    padding-block: 0.25rem;
+    transition: 0.2s;
+}
+
+/* .edit-button:hover {
+    color: #5fc1f5;
+    border: 0.1rem solid #5fc1f5;
+    background-color: #ebf8ff;
+} */
+.edit-button:hover {
+    color: #ffffff;
+    background-color: #C0DEFF;
+    opacity: 1;
 }

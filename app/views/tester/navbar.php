@@ -8,13 +8,13 @@
         </li>
         <li>
             <div class="nav_section_headings margin-top-5">MAIN MENU</div>
-            <a class="<?php echo ($data[1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/dashboard"><img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a>
+            <a class="<?php echo ($data['url'][1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/dashboard"><img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a>
         </li>
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
-            <a class="<?php echo ($data[1] == "defect_sheet") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Deffect Sheet</a>
-            <a class="<?php echo ($data[1] == "select_vehicle") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Select Vehicle</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
+            <a class="<?php echo ($data['url'][1] == "defect_sheet") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Deffect Sheet</a>
+            <a class="<?php echo ($data['url'][1] == "select_vehicle") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/select_vehicle"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Select Vehicle</a>
+            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Testing</a>
         </li>
         <li>
             <div class="nav_section_headings">GENERAL</div>

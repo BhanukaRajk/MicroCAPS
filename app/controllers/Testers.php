@@ -1,48 +1,4 @@
 <?php
-class Tester {
-    private $db;
-
-    public function __construct(){
-        $this->db = new Database;
-    }
-
-    public function findUserByUsername($username) {
-
-        $this->db->query('SELECT * FROM credentials  WHERE credentials.Username = :username');
-
-        $this->db->bind(':username', $username);
-
-        $row = $this->db->single();
-
-        if ($this->db->rowCount()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    public function login($username,$password) {
-        $this->db->query(
-            'SELECT credentials.Username, credentials.Password, employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position
-            FROM credentials
-            INNER JOIN employee
-            ON credentials.EmployeeID = employee.EmployeeId
-            WHERE credentials.Username = :username'
-        );
-
-        $this->db->bind(':username', $username);
-
-        $row = $this->db->single();
-
-        if ( $password == $row->Password ) {
-            return $row;
-        } else {
-            return null;
-        }
-    }
-
-}
 
 
 
@@ -122,66 +78,21 @@ class Testers extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('tester/dashboard', $url);
+            $data['url'] = getUrl();
+            $this->view('tester/dashboard', $data);
         }
     }
 
-    public function defectsheet() {
+    public function defect_sheet($id) {
 
         if(!isLoggedIn()){
             redirect('testers/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('tester/defectsheet', $url);
-        }
-    }
-
-    public function defect_sheet() {
-
-        if(!isLoggedIn()){
-            redirect('testers/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('tester/defect_sheet', $url);
-        }
-    }
-
-    public function add_defect() {
-
-        if(!isLoggedIn()){
-            redirect('testers/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('tester/add_defect', $url);
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $url = getUrl();
-            $this->view('tester/add_defect', $url);
-        }
-    }
-
-    public function add_defect2() {
-
-        if(!isLoggedIn()){
-            redirect('testers/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('tester/add_defect2', $url);
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $url = getUrl();
-            $this->view('tester/add_defect2', $url);
+            $data['url'] = getUrl();
+            $data['defects'] = $this->testerModel->viewDefectSheets($id);
+            $this->view('tester/defect_sheet', $data);
         }
     }
 
@@ -192,8 +103,129 @@ class Testers extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $url = getUrl();
-            $this->view('tester/select_vehicle', $url);
+            $data['url'] = getUrl();
+            $data['vehicles'] = $this->testerModel->selectVehicle();
+            $this->view('tester/select_vehicle', $data);
+        }
+    }
+
+    public function add_defect() {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'DefectNo' => trim($_POST['DefectNo']),
+                'InspectionDate' => trim($_POST['InspectionDate']),
+                'ChassisNo' => trim($_POST['ChassisNo']),
+                'EmployeeID' => trim($_POST['EmployeeID']),
+                'ReCorrection' => trim($_POST['ReCorrection']),
+                'defect_err' => '',
+                'defect_id_err' => '',
+                'user_err' => ''
+            ];
+
+            if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
+                $data['user_err'] = 'Incorrect Employee ID';
+            }
+            else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
+                $data['defect_id_err'] = 'Incorrect Defect Number';
+            }
+            else if($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
+                $data['defect_err'] = 'Defect Already Recorded';
+            }
+
+            if(empty($data['user_err']) && empty($data['defect_id_err']) && empty($data['defect_err'])){
+                if($this->testerModel->addDefect($data)){
+                    redirect('testers/defect_sheet/'. $data['ChassisNo']);
+                } else {
+                    die("Something went wrong");
+                }
+            } else {
+                $this->view('tester/add_defect', $data);
+            }
+        } else {
+            $data = [
+                'DefectNo' => '',
+                'InspectionDate' => '',
+                'ChassisNo' => '',
+                'EmployeeID' => '',
+                'ReCorrection' => '',
+            ];
+
+            $this->view('tester/add_defect', $data);
+        }
+    }
+
+    public function edit_defect($ChassisNo, $DefectNo) {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'DefectNo' => $DefectNo,
+                'InspectionDate' => trim($_POST['InspectionDate']),
+                'ChassisNo' => $ChassisNo,
+                'EmployeeID' => trim($_POST['EmployeeID']),
+                'ReCorrection' => trim($_POST['ReCorrection']),
+                'defect_err' => '',
+                'defect_id_err' => '',
+                'user_err' => ''
+            ];
+
+            if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
+                $data['user_err'] = 'Incorrect Employee ID';
+            }
+            else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
+                $data['defect_id_err'] = 'Incorrect Defect Number';
+            }
+
+            if(empty($data['user_err']) && empty($data['defect_id_err'])){
+                if($this->testerModel->editDefect($data)){
+                    redirect('testers/defect_sheet/'.$data['ChassisNo']);
+                } else {
+                    die("Something went wrong");
+                }
+            } else {
+                $this->view('tester/edit_defect', $data);
+            }
+        } else {
+            
+            $defect = $this->testerModel->getDefect($ChassisNo, $DefectNo);
+
+            $data = [
+                'DefectNo' => $DefectNo,
+                'InspectionDate' => $defect->InspectionDate,
+                'ChassisNo' => $ChassisNo,
+                'EmployeeID' => $defect->EmployeeID,
+                'ReCorrection' => $defect->ReCorrection
+            ];
+
+            $this->view('tester/edit_defect', $data);
+        }
+    }
+
+    public function delete_defect($ChassisNo, $DefectNo){
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+            if($this->testerModel->deleteDefect($ChassisNo, $DefectNo)){
+                redirect('testers/defect_sheet/'. $ChassisNo);
+            } else {
+                die("Something went wrong");
+            }
+        } else {
+            redirect('testers/defect_sheet/'. $ChassisNo);
         }
     }
 

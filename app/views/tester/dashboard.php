@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '\views\includes_r\header.php'; ?>
+<?php require_once APP_ROOT . '\views\includes\header.php'; ?>
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
 
 
@@ -12,22 +12,22 @@
             <div class="indetail">
                 <div class="graph">
                     <div class="upper">
-                        <div class="bold">Ongoing Assembly</div>
+                        <div class="bold">Ongoing Assembly Progress</div>
                     </div>
-                    <div><label for="vehicles" class="small"><br>Select Vehicle</label>
+                    <!-- <div><label for="vehicles" class="small"><br>Select Vehicle</label>
                             <select name="vehicles" id="vehicles">
                                 <option value=""></option>
                                 <option value=""></option>
                             </select>
-                    </div>
+                    </div> -->
                     <div class="chart"><img src="<?php echo URL_ROOT; ?>public/images/graph.jpg" class="donut" alt="status graph"></div>
                     <div class="map_list">
                         <div class="map">
-                            <div class="circle"></div>
+                            <div class="circle-dark"></div>
                             <div>Done</div>
                         </div>
                         <div class="map">
-                            <div class="circle"></div>
+                            <div class="circle-lite"></div>
                             <div>On-going</div>
                         </div>
                     </div>
@@ -35,8 +35,12 @@
                 <div class="line"></div>
                 <div class="damages">
                     <div>
-                        <div class="bold">Damaged Parts</div>
-                        <div></div>
+                        <!-- <div class="bold">Defect Count</div>
+                        <br><br> -->
+                        <div class="countbox">
+                            <div class="number">13</div>
+                            <div>Unsolved Defect Count</div>
+                        </div>
                     </div>
                     <div></div>
                 </div>
