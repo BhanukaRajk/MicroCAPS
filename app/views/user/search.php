@@ -4,14 +4,18 @@
     <div class="row align-items-center border-gray padding-5  width-rem-20 justify-content-center">
 
         <div class="text-center">
-            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-50" alt="logo"/>
+            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-75" alt="logo"/>
         </div>
 
         <div class="text-center">
-            <h3 class="margin-top-4">Search User</h3>
+            <h3 class="margin-top-4">Forget Password</h3>
         </div>
 
-        <form action="<?php echo URL_ROOT; ?>Managers/search" method="post" autocomplete="off">
+        <div class="text-center text-gray font-size margin-bottom-3">
+            Enter the email address associated with your account and we’ll send you an verification code to verify you
+        </div>
+
+        <form action="<?php echo URL_ROOT; ?>users/search" method="post" autocomplete="off">
 
             <div>
                 <input type="text"
@@ -28,11 +32,13 @@
 
             </div>
 
-            <div class="text-center margin-top-3">
+            <div class="text-center margin-top-2">
                 <button class="btn btn-primary" type="submit">
-                    Search
+                    Continue
                 </button>
             </div>
+
+            <div class="text-center text-gray font-size margin-top-3">Back to<a class = "text-blue text-decoration-none" href="<?php echo URL_ROOT; ?>users/login"> Login </a></div>
 
         </form>
     </div>

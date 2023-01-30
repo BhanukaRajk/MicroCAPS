@@ -12,6 +12,7 @@ body {
     --darkblue: #1B2B65;
     --lightblue: #51CBFF;
     --fontblue: #1C1F37;
+    --fontgray: #7c7a7a;
     --checkblue: #1266F1;
     --btnhover: #D4E3FF76;
     --linkblue: #017EFA;
@@ -154,6 +155,11 @@ h3 {
     margin-top: 3rem !important
 }
 
+.margin-top-6 {
+    margin-top: 2rem !important
+}
+
+
 .margin-top-auto {
     margin-top: auto !important
 }
@@ -180,6 +186,10 @@ h3 {
 
 .margin-right-5 {
     margin-right: 3rem !important
+}
+
+.margin-right-6 {
+    margin-right: 6rem !important
 }
 
 .margin-right-auto {
@@ -297,6 +307,16 @@ h3 {
     padding-left: 3rem !important
 }
 
+.paddingx-6 {
+    padding-right: 7rem !important;
+    padding-left: 7rem !important
+}
+
+.paddingx-7 {
+    padding-right: 10rem !important;
+    padding-left: 10rem !important
+}
+
 .paddingy-0 {
     padding-top: 0 !important;
     padding-bottom: 0 !important
@@ -325,6 +345,11 @@ h3 {
 .paddingy-5 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important
+}
+
+.paddingy-6 {
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important
 }
 
 .padding-top-0 {
@@ -421,6 +446,21 @@ h3 {
 
 .padding-left-5 {
     padding-left: 3rem !important
+}
+
+.padding-z {
+    padding: 3rem 13rem !important;
+}
+
+/* Grid */
+.grid-columns-1 {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.grid-col-80 {
+    display: grid;
+    grid-template-columns: 80%;
 }
 
 /* Text alignment */
@@ -540,6 +580,10 @@ h3 {
     gap: 5rem;
 }
 
+.gap-10 {
+    gap: 10rem;
+}
+
 .gap-46 {
     gap: 46rem;
 }
@@ -570,6 +614,10 @@ h3 {
     height: 75% !important
 }
 
+.height-90 {
+    height: 90% !important
+}
+
 .height-100 {
     height: 100% !important
 }
@@ -593,6 +641,10 @@ h3 {
 
 .width-75 {
     width: 75% !important
+}
+
+.width-80 {
+    width: 80% !important
 }
 
 .width-100 {
@@ -631,6 +683,14 @@ h3 {
     border-radius: 1rem;
 }
 
+.border-radius-11 {
+    border-radius: 11rem;
+}
+
+.background-none {
+    background: none !important;
+}
+
 .background-white {
     background-color: var(--white);
 }
@@ -654,6 +714,10 @@ h3 {
 
 .text-gray {
     color: var(--gray) !important
+}
+
+.text-fontgray {
+    color: var(--fontgray) !important
 }
 
 .text-center {
@@ -694,10 +758,17 @@ h3 {
 .container {
     background-color: var(--white);
     position: absolute;
-    width: 90.125rem;
+    right: 0;
     height: 5.625rem;
     left: 16.25rem;
+    padding-inline: 2rem;
 }
+
+.profilemenu {
+    position: relative;
+    display: inline-block;
+}
+
 
 /* row */
 .row {
@@ -728,6 +799,14 @@ h3 {
     height: 2rem !important;
 }
 
+.height-rem-2p5 {
+    height: 2.5rem !important;
+}
+
+.height-rem-25 {
+    height: 25rem !important;
+}
+
 
 /* Width in REM */
 .width-rem-0p75 {
@@ -740,6 +819,14 @@ h3 {
 
 .width-rem-2p5 {
     width: 2.5rem !important;
+}
+
+.width-rem-8p5 {
+    width: 8.5rem !important
+}
+
+.width-rem-12p5 {
+    width: 12.5rem !important
 }
 
 .width-rem-15p7 {
@@ -758,6 +845,9 @@ h3 {
     width: 25rem !important
 }
 
+.width-rem-38p75 {
+    width: 38.75rem !important
+}
 
 /* Position */
 .position-relative {
@@ -780,6 +870,19 @@ h3 {
 /* Font Weight */
 .font-weight {
     font-weight: 700;
+}
+
+.font-size {
+    font-size: 12px !important;
+    ;
+}
+
+.font-size-24 {
+    font-size: 24px !important;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 /* Card */
@@ -844,7 +947,7 @@ h3 {
 }
 
 .btn:hover {
-    background-color: var(--btnhover);
+    background-color: var(--btn-hover-bg);
 }
 
 .btn:focus {
@@ -862,7 +965,7 @@ h3 {
     --btn-bg: white;
     --btn-border-color: var(--blue);
     --btn-hover-color: var(--blue);
-    --btn-hover-bg: #F2F2F2;
+    --btn-hover-bg: #D4E3FF76;
     --btn-hover-border-color: var(--blue);
     --btn-width: 16.75rem;
     --btn-height: 3rem;
@@ -886,6 +989,14 @@ h3 {
     --btn-disabled-color: #fff;
     --btn-disabled-bg: #0d6efd;
     --btn-disabled-border-color: #0d6efd; */
+}
+
+.btn-green {
+    --btn-color: var(--green);
+    --btn-border-color: var(--green);
+    --btn-hover-color: var(--green);
+    --btn-hover-bg: #e8f5e973;
+    --btn-hover-border-color: var(--green);
 }
 
 /* Form */
@@ -954,6 +1065,12 @@ h3 {
     box-shadow: none;
 }
 
+.form-control-blue {
+    --input-border-color: var(--blue);
+    outline: 0;
+    box-shadow: none;
+}
+
 
 input:focus~label.form-label,
 input:not(:placeholder-shown)~label.form-label {
@@ -990,6 +1107,10 @@ input:focus~label.green {
 
 input:not(:focus)~label.green {
     color: var(--green);
+}
+
+input:not(:focus)~label.blue {
+    color: var(--blue);
 }
 
 label.form-label {
@@ -1083,6 +1204,7 @@ div.select {
     position: absolute;
     top: 14rem;
     cursor: pointer;
+    z-index: 1;
 }
 
 /* input:focus~div.select {
@@ -1092,7 +1214,38 @@ div.select {
     cursor: pointer;
 } */
 
+.img-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1.25rem);
+    grid-template-rows: repeat(10, 1.25rem);
+}
 
+.grid-add {
+    grid-row: 2;
+    grid-column: 9;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(20, 1rem);
+    grid-template-rows: repeat(20, 1rem);
+}
+
+.chart-grid-add {
+    grid-row: 9;
+    grid-column: 7;
+}
+
+.chart-grid-stage {
+    display: grid;
+    grid-template-columns: repeat(10, 1rem);
+    grid-template-rows: repeat(10, 1rem);
+}
+
+.chart-grid-stage-add {
+    grid-row: 6;
+    grid-column: 5;
+}
 /*--------------------------------------------------------------*/
 /*                        Navigation Menu                       */
 /*--------------------------------------------------------------*/
@@ -1136,8 +1289,8 @@ li a:hover:not(.active) {
 .nav_logo {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 1.875rem;
-    margin-top: 1.5rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
 }
 
 .nav_section_headings {
@@ -1150,9 +1303,10 @@ li a:hover:not(.active) {
 
 .logout {
     background: var(--white);
-    top: 2rem;
-    right: 6rem;
+    right: -0.5rem;
+    top: 2.3rem;
     padding: 0.5rem 1rem;
+    overflow: auto;
 }
 
 .page-content {
@@ -1205,22 +1359,205 @@ li a:hover:not(.active) {
     color: var(--fontblue);
 }
 
-.success-flash {
-    display: none;
-    position: absolute;
-    border: 1px solid #29CC97;
-    background: #d1e7dd;
-    color: #0f5132;
-    border-radius: 1rem;
-    padding: 2rem;
-    bottom: 3rem;
-    right: 3rem;
-    transition: 0.2s ease all;
-}
-
 .view-more {
     color: var(--linkblue);
     font-size: 14px;
     font-weight: 600;
 }
 
+/*--------------------------------------------------------------*/
+/*                       Flash Message                          */
+/*--------------------------------------------------------------*/
+
+.fade {
+    transition: opacity .10s linear;
+}
+
+.fade:not(.show) {
+    opacity: 0;
+}
+
+.alert {
+    --alert-bg: transparent;
+    --alert-padding-x: 1.5rem;
+    --alert-padding-y: 1.25rem;
+    --alert-margin-bottom: 1rem;
+    --alert-color: inherit;
+    --alert-border-color: transparent;
+    --alert-border: 1px solid var(--alert-border-color);
+    --alert-border-radius: 0.5rem;
+    position: relative;
+    z-index: 1070;
+    padding: var(--alert-padding-y) var(--alert-padding-x);
+    margin-bottom: var(--alert-margin-bottom);
+    color: var(--alert-color);
+    background-color: var(--alert-bg);
+    border: var(--alert-border);
+    border-radius: var(--alert-border-radius);
+    font-style: italic;
+    display: none;
+    width: 20rem;
+    bottom: unset;
+    right: unset;
+    top: 35rem;
+    left: 68rem;
+    transform: unset;
+}
+
+.alert-success {
+    --alert-color: #0d6832;
+    --alert-bg: #d0eddb;
+    --alert-border-color: #b9e4ca;
+}
+
+.alert-failure {
+    --alert-color: #af233a;
+    --alert-bg: #f8dbe0;
+    --alert-border-color: #f5c9d1;
+}
+
+.alert-success i {
+    color: #139647;
+}
+
+.icon {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* Select */
+select {
+    border: none;
+    color: #017EFA;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+}
+
+select.type2 {
+    color: #ced4da;
+}
+
+select:focus-visible {
+    outline: none;
+}
+
+.custom-select, 
+.custom-select-2 {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.custom-select .selector-options, 
+.custom-select-2 .selector-options {
+    list-style: none;
+    color: #017EFA;
+    border: 1px solid;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.custom-select .selector-options li,
+.custom-select-2 .selector-options li {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.custom-select .selector-options li:hover,
+.custom-select-2 .selector-options li:hover {
+    background: #017EFA;
+    color: white
+}
+
+.chassis-label {
+    position: relative;
+    bottom: 3.9em;
+    left: 1.5em;
+    background-color: white;
+    padding: 0 0.5em;
+    opacity: 1;
+    color: var(--gray);
+}
+
+/* Calender */
+#calender>.calender-title {
+    word-spacing: 0.5rem;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#calender th, #calender td {
+    font-size: 14px;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+}
+
+#calender .current {
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 4rem;
+}
+
+/* Charts */
+#myChart {
+    width: 300px !important;
+    height: 230px !important;
+}
+
+#stage01,
+#stage02,
+#stage03,
+#stage04 {
+    width: 10rem !important;
+    height: 10rem !important;
+}
+
+.chart-percentage {
+    position: absolute;
+    top: 12.3rem;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--fontgray);
+}
+
+.chart-percentage-ao {
+    font-size: 4rem;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: var(--fontgray);
+}
+
+.chart-percentage-stage{
+    font-size: 2rem;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: var(--fontgray);
+    height: 2rem;
+    width: 2rem;
+}
+
+.dash-darkblue-circle {
+    background-color: #0853dd;
+}
+
+.dash-lightblue-circle {
+    background-color: #3ba5fb;
+}
+
+.dash-graph-color-circle {
+    height: 0.5rem;
+    width: 0.5rem;
+    margin: auto 0.5rem auto 0rem;
+    border-radius: 50%;
+}

@@ -1,6 +1,6 @@
 <?php
 
-class Managers extends controller {
+class Managers extends Controller {
 
     private $managerModel;
 
@@ -8,71 +8,10 @@ class Managers extends controller {
         $this->managerModel = $this->model('Manager');
     }
 
-    public function login(){
-
-        /* Post */
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'username' => trim($_POST['username']),
-                'password' => trim($_POST['password']),
-                'username_err' => '',
-                'password_err' => ''
-            ];
-
-            if(!$this->managerModel->findUserByUsername($data['username'])) {
-                $data['username_err'] = 'Incorrect Username';
-            }
-
-
-            if (empty($data['username_err']) && empty($data['password_err'])) {
-
-                $loggedUser = $this->managerModel->login($data['username'],$data['password']);
-
-                if( $loggedUser ) {
-                    $this->createUserSession($loggedUser);
-                } else {
-                    $data['password_err'] = 'Incorrect Password';
-                    $this->view('manager/index', $data);
-                }
-
-            } else {
-                $this->view('manager/index', $data);
-            }
-
-        }  else {
-            $data = [
-                'username' => '',
-                'password' => '',
-                'username_err' => '',
-                'password_err' => ''
-            ];
-            $this->view('manager/index',$data);
-        }
-
-    }
-
-    public function createUserSession($user){
-        $_SESSION['_id'] = $user->EmployeeID;
-        $_SESSION['_firstname'] = $user->Firstname;
-        $_SESSION['_lastname'] = $user->Lastname;
-        redirect('managers/dashboard');
-    }
-
-    public function logout(){
-        unset($_SESSION['_id']);
-        unset($_SESSION['_email']);
-        unset($_SESSION['_name']);
-        session_destroy();
-        redirect('managers/login');
-    }
-
     public function dashboard() {
 
         if(!isLoggedIn()){
-            redirect('managers/login');
+            redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -84,7 +23,7 @@ class Managers extends controller {
     public function bodyshell() {
 
         if(!isLoggedIn()){
-            redirect('managers/login');
+            redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -99,7 +38,7 @@ class Managers extends controller {
     public function shellRequest() {
 
         if (!isLoggedIn()) {
-            redirect('managers/login');
+            redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -107,43 +46,21 @@ class Managers extends controller {
                 'suvQty' => trim($_POST['suvQty']),
                 'normalQty' => trim($_POST['normalQty']),
             ];
-            $body = "<table border='1'>
-                        <th>
-                            <td>
-                                Chassis Type
-                            </td>
-                            <td>
-                                Quantity
-                            </td>
-                        </th>
-                        <tr>
-                            <td></td>
-                            <td>
-                                SUV
-                            </td>
-                            <td>
-                                " . $data['suvQty'] . "
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                Normal
-                            </td>
-                            <td>
-                                " . $data['normalQty'] . "
-                            </td>
-                        </tr>
-                      </table>";
-            sendmail($body);
-            redirect('managers/bodyshell');
+            $body = file_get_contents("../app/views/templates/shellRequest.html", "r");
+            $body = str_replace("--suvQty--", $data['suvQty'], $body);
+            $body = str_replace("--normalQty--", $data['normalQty'], $body);
+            if (sendmail($body)) {
+                echo 'Successful';
+            } else {
+                echo 'Failed';
+            }
         }
     }
 
     public function addShell() {
 
         if (!isLoggedIn()) {
-            redirect('managers/login');
+            redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -154,61 +71,31 @@ class Managers extends controller {
                 'chassisNo' => trim($_POST['chassisNo']),
                 'color' => trim($_POST['color']),
                 'chassisType' => trim($_POST['chassisType']),
-                'repair' => isset($_POST['repair']) ? trim($_POST['repair']) : 'No',
-                'paint' => isset($_POST['paint']) ? trim($_POST['paint']) : 'No'
+                'repair' => $_POST['repair'] === 'true' ? 'Yes' : 'No',
+                'paint' => $_POST['paint'] === 'true' ? 'Yes' : 'No',
+                'repairDescription' => trim($_POST['repairDescription'])
             ];
 
-            if($this->managerModel->addShell($data['chassisNo'], $data['chassisType'], $data['color'], $data['repair'], $data['paint'])) {
-                $_SESSION['addShell_Message'] = 'Successful';
+            if($this->managerModel->addShell($data['chassisNo'], $data['chassisType'], $data['color'])) {
+                if ($data['repair'] === 'Yes') {
+                    $this->managerModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
+                    $this->managerModel->addPaintJob($data['chassisNo']);
+                } else {
+                    if ($data['paint'] === 'Yes') {
+                        $this->managerModel->addPaintJob($data['chassisNo']);
+                    }
+                }
+                echo 'Successful';
             } else {
-                $_SESSION['addShell_Message'] = 'Error';
+                echo 'Error';
             }
-
-            redirect('managers/bodyshell');
         }
     }
 
-    public function search() {
+    public function jobDone() {
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'username' => trim($_POST['username']),
-                'username_err' => '',
-            ];
-
-            if (!$this->managerModel->findUserByUsername($data['username'])) {
-                $data['username_err'] = 'Username Not Found ';
-                $this->view('manager/search', $data);
-            } else {
-
-                $token = [
-                    'username' => $data['username'],
-                    'verificationCode' => ''
-                ];
-
-                $_SESSION['resetPassword'] = $token;
-                redirect('managers/authUser');
-            }
-
-        } else {
-
-            $data = [
-                'username' => '',
-                'username_err' => ''
-            ];
-
-            $this->view('manager/search',$data);
-
-        }
-    }
-
-    public function authUser() {
-
-        if(empty($_SESSION['resetPassword'])) {
-            redirect('managers/login');
+        if (!isLoggedIn()) {
+            redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -216,71 +103,87 @@ class Managers extends controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'vCode' => trim($_POST['vCode']),
-                'vCode_err' => ''
+                'id' => trim($_POST['id']),
+                'job' => trim($_POST['job'])
             ];
 
-            if ($data['vCode'] == $_SESSION['resetPassword']['verificationCode']) {
-                unset($_SESSION['resetPassword']['verificationCode']);
-                redirect('managers/resetPassword');
+            $result = $this->managerModel->jobDone($data['id'], $data['job']);
+
+            if($result) {
+                echo 'Successful';
             } else {
-                $data['vCode_err'] = 'Incorrect Verification Code';
-                $this->view('manager/auth', $data);
+                echo 'Error';
             }
-
-
-        } else {
-
-            $data = [
-                'vCode' => '',
-                'vCode_err' => ''
-            ];
-
-            if (empty($_SESSION['resetPassword']['verificationCode'])) {
-                $_SESSION['resetPassword']['verificationCode'] = rand(1000000, 9999999);
-                authCodeEmail($_SESSION['resetPassword']['verificationCode'], $_SESSION['resetPassword']['username']);
-            }
-
-            $this->view('manager/auth',$data);
         }
-
     }
 
-    public function resetPassword() {
+    public function settings() {
 
-        if(empty($_SESSION['resetPassword'])) {
-            redirect('managers/login');
+        if(!isLoggedIn()){
+            redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-
             $data = [
-                'password' => trim($_POST['newPassword']),
-                'password_err' => ''
+                'id' => $_SESSION['_id'],
+                'firstname' => trim($_POST['firstname']),
+                'lastname' => trim($_POST['lastname']),
+                'email' => trim($_POST['email']),
+                'mobile' => trim($_POST['mobile']),
+                'nic' => trim($_POST['nic'])
             ];
 
-            $reset = $this->managerModel->resetPassword($_SESSION['resetPassword']['username'], $data['password']);
+            if (isset($_FILES['image'])) {
 
-            if ($reset) {
-                unset($_SESSION['resetPassword']);
-                $_SESSION['resetPassword_Message'] = 'Successful';
-                redirect('managers/login');
-            } else {
-                die('Error');
+                $profile = strval($data['nic']) . '.jpg';
+                $to = '../public/images/profile/' . $profile;
+
+                $from = $_FILES['image']['tmp_name'];
+
+                if (move_uploaded_file($from, $to)) {
+                    if ($this->managerModel->updateProfile($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic'], $profile))
+                        echo 'Successful';
+                    else
+                        echo 'Error';
+                } else {
+                    echo 'Error';
+                }
+
             }
 
         } else {
-
-            $data = [
-                'password' => '',
-                'password_err' => ''
-            ];
-
-            $this->view('manager/resetpassword',$data);
+            $data['url'] = getUrl();
+            $data['userDetails'] = $this->managerModel->userDetails($_SESSION['_id']);
+            $this->view('manager/settings',$data);
         }
     }
+
+    public function assembly() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $this->view('manager/assembly',$data);
+        }
+    }
+
+    public function test() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $this->view('manager/test',$data);
+        }
+    }
+
 
 }

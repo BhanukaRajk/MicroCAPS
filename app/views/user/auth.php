@@ -4,14 +4,18 @@
     <div class="row align-items-center border-gray padding-5  width-rem-20 justify-content-center">
 
         <div class="text-center">
-            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-50" alt="logo"/>
+            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-75" alt="logo"/>
         </div>
 
         <div class="text-center">
-            <h3 class="margin-top-4">Verify</h3>
+            <h3 class="margin-top-4">Verify Email</h3>
         </div>
 
-        <form action="<?php echo URL_ROOT; ?>Managers/authUser" method="post" autocomplete="off">
+        <div class="text-center text-gray font-size margin-bottom-4">
+            You will receive a verification code to your email <?php echo $_SESSION['resetPassword']['username']; ?>
+        </div>
+
+        <form action="<?php echo URL_ROOT; ?>users/authUser" method="post" autocomplete="off">
 
             <div>
                 <input type="text"
@@ -35,6 +39,8 @@
                     Submit
                 </button>
             </div>
+
+            <div class="text-center text-gray font-size margin-top-3">Back to<a class = "text-blue text-decoration-none" href="<?php echo URL_ROOT; ?>users/login"> Login </a></div>
 
         </form>
     </div>

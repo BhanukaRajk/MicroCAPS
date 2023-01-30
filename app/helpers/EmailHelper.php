@@ -40,7 +40,7 @@
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
-            echo 'Message has been sent';
+            return true;
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
         }
@@ -78,8 +78,8 @@ function authCodeEmail($body,$recipient) {
 
         //Content
         $mail->isHTML();                                  //Set email format to HTML
-        $mail->Subject = 'Password Reset';
-        $mail->Body = 'Your MicroCAPS password reset code is: <b>'.$body.'</b>';
+        $mail->Subject = 'MicroCAPS Email Verification';
+        $mail->Body = $body;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();

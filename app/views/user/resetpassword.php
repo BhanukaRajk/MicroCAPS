@@ -4,14 +4,14 @@
     <div class="row align-items-center border-gray padding-5  width-rem-20 justify-content-center">
 
         <div class="text-center">
-            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-50" alt="logo"/>
+            <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-75" alt="logo"/>
         </div>
 
         <div class="text-center">
-            <h3 class="margin-top-4">Verify</h3>
+            <h3 class="margin-top-4">Set New Password</h3>
         </div>
 
-        <form action="<?php echo URL_ROOT; ?>Managers/resetPassword" method="post" autocomplete="off">
+        <form action="<?php echo URL_ROOT; ?>users/resetPassword" method="post" autocomplete="off">
 
             <div>
                 <input type="password"
@@ -45,9 +45,11 @@
 
             <div class="text-center margin-top-3">
                 <button class="btn btn-primary" type="submit" id="update-btn" disabled="true">
-                    Update
+                    Change Password
                 </button>
             </div>
+
+            <div class="text-center text-gray font-size margin-top-3">Back to<a class = "text-blue text-decoration-none" href="<?php echo URL_ROOT; ?>users/login"> Login </a></div>
 
         </form>
     </div>

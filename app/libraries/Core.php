@@ -6,7 +6,7 @@
     class Core {
 
         protected $currentController = 'Users';
-        protected $currentMethod = 'index';
+        protected $currentMethod = 'login';
         protected $params = [];
 
         public function __construct(){
@@ -33,6 +33,7 @@
 
             // Find Method
             if(isset($url[1])){
+
 
                 // Check to see if method exists in controller
                 if( method_exists( $this->currentController , $url[1] ) ) {
