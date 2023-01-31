@@ -1,6 +1,5 @@
 .dash-section {
     position: absolute;
-
     left: 16.25rem;
     right: 0rem;
     top: 12rem;
@@ -174,12 +173,12 @@
 .dash-quickbtn {
     min-width: 6rem;
     min-height: 2rem;
-
     background-color: #418CFD;
     color: white;
     font-size: small;
     border: none;
     border-radius: 10rem;
+    word-break: break-all;
 }
 
 .dash-quickbtn:hover {

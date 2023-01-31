@@ -76,6 +76,11 @@ class Managers extends Controller {
                 'repairDescription' => trim($_POST['repairDescription'])
             ];
 
+            if (empty($data['chassisNo']) || empty($data['color']) || empty($data['chassisType'])) {
+                echo 'Error';
+                return;
+            }
+
             if($this->managerModel->addShell($data['chassisNo'], $data['chassisType'], $data['color'])) {
                 if ($data['repair'] === 'Yes') {
                     $this->managerModel->addRepairJob($data['chassisNo'], $data['repairDescription']);

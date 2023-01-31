@@ -9,7 +9,7 @@
     </div>
 </section>
 <section class="dash-section height-90">
-        <div class="dash-section-cardsframe  margin-bottom-5">
+        <div class="dash-section-cardsframe  margin-bottom-4">
             <div class="dash-cardsframe-left ">
                 <div class="dash-card-left-top ">
                     <div class="dash-graph-frame ">
@@ -81,9 +81,11 @@
                 <div class="dash-card-quickaccess ">
                     <div class="dash-card-right-datalines dash-card-headings ">Quick Access</div>
                     <div class="dash-card-right-datalines dash-quickbtns-frame ">
-                        <button type="button" class="dash-quickbtn">Issue Parts</button>
-                        <a href="<?php echo URL_ROOT; ?>supervisors/leaves">
-                            <button type="button" class="dash-quickbtn">Leaves</button>
+                        <a href="<?php echo URL_ROOT; ?>managers/bodyshell">
+                            <button type="button" class="dash-quickbtn">Request Body Shell</button>
+                        </a>
+                        <a href="<?php echo URL_ROOT; ?>managers/test">
+                            <button type="button" class="dash-quickbtn">Dispatch Vehicles</button>
                         </a>
                     </div>
                 </div>

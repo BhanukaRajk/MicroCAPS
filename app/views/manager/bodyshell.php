@@ -68,7 +68,7 @@
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
             <div class="section-heading font-weight"> New Body Shell </div>
             <form id="add-shell">
-                <div class="display-flex-row align-items-center gap-2">
+                <div class="display-flex-row align-items-start gap-2">
                     <div>
                         <input type="text"
                             id="chassisNo"
@@ -82,34 +82,28 @@
                         <label class="form-label">Chassis Number</label>
                     </div>
                     <div>
-                        <input type="text"
-                            id="color"
-                            name="color"
-                            onChange=""
-                            value=""
-                            class="form-control"
-                            placeholder="Color"
-                            required />
-                        <label class="form-label">Color</label>
+                        <div class="custom-select-color">
+                            <select name="color" class="form-control text-gray width-rem-20" id="color">
+                                <option value="">Select Color</option>
+                                <option value="White">White</option>
+                                <option value="Black">Black</option>
+                                <option value="Red">Red</option>
+                                <option value="Green">Green</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Yellow">Yellow</option>
+                            </select>
+                            <label class="color-label display-none" id="color-label">Color</label>
+                        </div>
                     </div>
                 </div>
                 <div class="display-flex-row align-items-center gap-2p1">
                     <div>
-                        <!-- <input type="text"
-                            id="dropdown"
-                            name="chassisType"
-                            onChange=""
-                            value=""
-                            class="form-control custom-select-2"
-                            placeholder="Chassis Type"
-                            autocomplete="off"
-                            required />
-                        <label class="form-label">Chassis Type</label> -->
-                        <div class="custom-select-2">
+                        <div class="custom-select-model">
                             <select name="chassis" class="form-control text-gray width-rem-20" id="chassis">
                                 <option value="">Select Chassis Type</option>
-                                <option value="SUV">SUV</option>
-                                <option value="Normal">Normal</option>
+                                <option value="Micro Panda">Micro Panda</option>
+                                <option value="Micro Panda Cross">Micro Panda Cross</option>
+                                <option value="MG ZS SUV">MG ZS SUV</option>
                             </select>
                             <label class="chassis-label display-none" id="chassis-label">Chassis Type</label>
                         </div>
@@ -159,25 +153,55 @@
     </section>
 
     <section class="shell-forms position-absolute" id="three">
-        <div class="display-flex-column align-items-center border-radius-1 background-white paddingx-5 paddingy-5 margin-bottom-4">
-            <?php
-                foreach($data['shellDetails'] as $value) {
-                    echo '<div class="display-flex-row justify-content-center align-items-center paddingy-2 paddingx-3 border-bottom gap-46">
-                    <div class="display-flex-row align-items-start">
+        <div class="vehicle-detail-board  margin-bottom-4">
+            <div class="vehicle-data-board">
+        <?php
+            if ( $data['shellDetails'] == false ) {
+                echo '<div class="display-flex-row justify-content-center align-items-center padding-z border-bottom gap-3">
+                <div class="display-flex-row align-items-start">
                         <div class="display-flex-column align-items-start">
-                            <div class="font-weight">'.$value->ChassisNo.'</div>
-                            <div class="text-gray">'.rearrange($value->ArrivalDate).'</div>
+                            <div class="font-weight">No Details</div>
                         </div>
                     </div>
-                    <div class="display-flex-row align-items-end inner-layout">
-                        <div class="display-flex-row align-items-center gap-0p5 padding-3">
-                            <div class="view-more">View More Details</div>
-                            <img src="'. URL_ROOT .'public/images/right.png" class="width-rem-0p75" alt="right" id="right"/>
+            </div>';
+            } else {
+                foreach($data['shellDetails'] as $value) {
+
+                    $repairS = array_search($value->ChassisNo, array_column($data['repairDetails'], 'ChassisNo'));
+                    $paintS = array_search($value->ChassisNo, array_column($data['paintDetails'], 'ChassisNo'));
+                    $status = $color = "";
+
+                    if ($repairS || $repairS === 0) {
+                        $status = "Repair & Paint";
+                        $color = "red";
+                    } 
+                    else if ($paintS  || $paintS === 0) {
+                        $status = "Paint";
+                        $color = "orange";
+                    }
+                    else {
+                        $status = "Ready";
+                        $color = "green";
+                    }
+
+                    echo '<div class="carcard">
+                    <div class="cardhead">
+                        <div class="cardid">
+                            <div class="carmodel">'.$value->VehicleModel.'</div>
+                            <div class="chassisno">'.$value->ChassisNo.'</div>
                         </div>
                     </div>
+                    <div class="carpicbox">
+                        <img src="'. URL_ROOT .'public/images/chassis.jpg" class="carpic" alt="'.$value->VehicleModel.' '. $value->Color.'">
+                    </div>
+                    <div class="carstatus '.$color.'">'.$status.'</div>
+                    <div class="arrivaldate">Arrival Date: ' , $value->ArrivalDate, '</div>
                 </div>';
+                
                 }
-            ?>
+            }
+        ?>
+            </div>
         </div>
     </section>
 

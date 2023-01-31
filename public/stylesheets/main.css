@@ -1444,14 +1444,16 @@ select:focus-visible {
 }
 
 .custom-select, 
-.custom-select-2 {
+.custom-select-model,
+.custom-select-color {
     position: relative;
     display: inline-block;
     font-size: 14px;
 }
 
 .custom-select .selector-options, 
-.custom-select-2 .selector-options {
+.custom-select-model .selector-options,
+.custom-select-color .selector-options {
     list-style: none;
     color: #017EFA;
     border: 1px solid;
@@ -1463,7 +1465,8 @@ select:focus-visible {
 }
 
 .custom-select .selector-options li,
-.custom-select-2 .selector-options li {
+.custom-select-model .selector-options li,
+.custom-select-color .selector-options  li {
     padding: 0.5rem;
     display: flex;
     align-items: center;
@@ -1473,12 +1476,14 @@ select:focus-visible {
 }
 
 .custom-select .selector-options li:hover,
-.custom-select-2 .selector-options li:hover {
+.custom-select-model .selector-options li:hover,
+.custom-select-color .selector-options  li:hover {
     background: #017EFA;
     color: white
 }
 
-.chassis-label {
+.chassis-label,
+.color-label {
     position: relative;
     bottom: 3.9em;
     left: 1.5em;
