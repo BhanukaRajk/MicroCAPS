@@ -9,7 +9,7 @@
     <div class="display-flex-row align-items-center gap-10 border-radius-1 background-white paddingx-6 paddingy-5 height-rem-25 margin-top-4">
         <div class="display-flex-column align-items-center justify-content-center margin-left-5">
             <div class="img-grid">
-                <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profilepic" id="img-preview"/>
+                <div style="background-image:url(<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>)" class="border-radius-11 width-rem-12p5 height-rem-12p5 background-image" title="profilepic" id="img-preview"></div>
                 <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5"/>
             </div>
             <div class="page-heading font-size-24 font-weight margin-top-4">
@@ -44,7 +44,7 @@
                             name="firstname"
                             onChange=""
                             value="<?php echo $data['userDetails']->Firstname; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="Firstname"
                             autocomplete="off"
                             disabled
@@ -57,7 +57,7 @@
                             name="lastname"
                             onChange=""
                             value="<?php echo $data['userDetails']->Lastname; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="Lastname"
                             disabled />
                         <label class="form-label blue">Last Name</label>
@@ -68,7 +68,7 @@
                             name="email"
                             onChange=""
                             value="<?php echo $data['userDetails']->Email; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="Email"
                             disabled />
                         <label class="form-label blue">Email</label>
@@ -79,7 +79,7 @@
                             name="mobile"
                             onChange=""
                             value="<?php echo $data['userDetails']->TelephoneNo; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="mobile"
                             disabled />
                         <label class="form-label blue">Mobile Number</label>
@@ -90,7 +90,7 @@
                             name="nic"
                             onChange=""
                             value="<?php echo $data['userDetails']->NIC; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="nic"
                             disabled />
                         <label class="form-label blue">NIC</label>
@@ -116,7 +116,7 @@
 </section>
 
 
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
+<script type="module" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/cors.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/settings.js"></script>
 

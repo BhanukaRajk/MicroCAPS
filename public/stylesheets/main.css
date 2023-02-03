@@ -614,6 +614,10 @@ h3 {
     height: 75% !important
 }
 
+.height-80 {
+    height: 80% !important
+}
+
 .height-90 {
     height: 90% !important
 }
@@ -697,6 +701,13 @@ h3 {
 
 .background-blue {
     background-color: var(--blue);
+}
+
+.background-image {
+    background-clip: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -0.5rem;
 }
 
 /* Text */
@@ -803,6 +814,10 @@ h3 {
     height: 2.5rem !important;
 }
 
+.height-rem-12p5 {
+    height: 12.5rem !important;
+}
+
 .height-rem-25 {
     height: 25rem !important;
 }
@@ -813,8 +828,16 @@ h3 {
     width: 0.75rem !important;
 }
 
+.width-rem-1 {
+    width: 1rem !important;
+}
+
 .width-rem-1p25 {
     width: 1.25rem !important;
+}
+
+.width-rem-2 {
+    width: 2rem !important;
 }
 
 .width-rem-2p5 {
@@ -874,7 +897,6 @@ h3 {
 
 .font-size {
     font-size: 12px !important;
-    ;
 }
 
 .font-size-24 {
@@ -1565,4 +1587,19 @@ select:focus-visible {
     width: 0.5rem;
     margin: auto 0.5rem auto 0rem;
     border-radius: 50%;
+}
+
+.addBtn {
+    margin-top: 0.3rem;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addBtn:hover {
+    cursor: pointer;
+    background-color: white !important;
+    color: var(--blue) !important;
 }

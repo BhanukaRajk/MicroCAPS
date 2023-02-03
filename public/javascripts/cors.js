@@ -15,8 +15,25 @@ $(document).ready(() => {
 // C.O.R.S
 function requestShell() {
 
-    let Chassis01 = document.getElementById("Chassis01").value;
-    let chasis02 = document.getElementById("chasis02").value;
+    let array = [];
+    let cnt = 1;
+
+    while (document.getElementById(`type${cnt}`)) {
+        let type = document.getElementById(`type${cnt}`).value;
+        let qty = document.getElementById(`qty${cnt}`).value;
+        array.push({ type, qty });
+        cnt++;
+    }
+
+    let string = "";
+    cnt = 1;
+
+    array.forEach(element => {
+        string = string + `&type${cnt}=${element.type}&qty${cnt}=${element.qty}`;
+        cnt++;
+    });
+
+    console.log(string);
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -29,17 +46,15 @@ function requestShell() {
                 setLocalStorage("Successful","Email Sent Successfully");
 
             } else {
-
                 location.reload();
                 setLocalStorage("Error","Error Sending Email");
-
             }
 
         }
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/shellRequest", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("suvQty="+Chassis01+"&normalQty="+chasis02);
+    xhttp.send(string);
 }
 
 function addShell() {
@@ -103,43 +118,6 @@ function jobDone(id,job) {
 
 }
 
-// function saveChanges(id) {
-
-//     let image = document.getElementById("image").files[0];
-    
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             var response = this.responseText;
-
-//             if (response == "Successful") {
-
-//                 location.reload();
-//                 setLocalStorage("Successful","Saved Changes");
-
-//             } else {
-
-//                 // console.log(image);
-//                 console.log(response);
-//                 // location.reload();
-//                 setLocalStorage("Error","Error Saving Changes");
-
-//             }
-
-//         }
-//     };
-//     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/settings", true);
-//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     xhttp.send("id="+id+"&image="+image);
-//     // if (image) {
-//     //     console.log("Methanin");
-       
-//     // } else {
-//     //     xhttp.send("id"+id); //,"firstname="+firstname+"&lastname="+lastname+"email="+email+"&mobile="+mobile+"&nic="+nic);
-//     // }
-
-// }
-
 function saveChanges(id) {
     let formdata = new FormData();
     formdata.append("id", id);
@@ -157,7 +135,7 @@ function saveChanges(id) {
         contentType: false,
         success: (response) => {
             if (response == "Successful") {
-                location.reload();
+                location.reload(true);
                 setLocalStorage("Successful","Saved Changes");
             } else {
                 location.reload();

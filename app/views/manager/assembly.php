@@ -72,7 +72,7 @@
         </div>
     </section>
 
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/assemblyCharts.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/cors.js"></script>
 

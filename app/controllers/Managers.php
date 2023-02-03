@@ -42,14 +42,34 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = [
-                'suvQty' => trim($_POST['suvQty']),
-                'normalQty' => trim($_POST['normalQty']),
-            ];
-            $body = file_get_contents("../app/views/templates/shellRequest.html", "r");
-            $body = str_replace("--suvQty--", $data['suvQty'], $body);
-            $body = str_replace("--normalQty--", $data['normalQty'], $body);
-            if (sendmail($body)) {
+
+            $data = [];
+
+            foreach ($_POST as $key => $value) {
+                $data[$key] = $value;
+            }
+
+            $cnt = 0;
+            $body = '';
+            foreach ($data as $value) {
+                if ($cnt == 0) {
+                    $body .= '<tr>';
+                }
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$value.'</td>';
+                $cnt++;
+                if ($cnt == 2) {
+                    $body .= '</tr>';
+                    $cnt = 0;
+                }
+            }
+
+            $file = file_get_contents("../app/views/templates/shellRequest.html");
+            $position = strpos($file, '<!-- Insert Point -->');
+            if ($position !== false) {
+                $file = substr_replace($file, $body, $position, 0);
+            }
+
+            if (sendmail($file)) {
                 echo 'Successful';
             } else {
                 echo 'Failed';
@@ -157,6 +177,11 @@ class Managers extends Controller {
                     echo 'Error';
                 }
 
+            } else {
+                if ($this->managerModel->updateProfileValues($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic']))
+                    echo 'Successful';
+                else
+                    echo 'Error';
             }
 
         } else {

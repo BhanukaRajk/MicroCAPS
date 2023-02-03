@@ -30,28 +30,34 @@
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
             <div class="section-heading font-weight"> Send a Request </div>
             <form id="request-shell">
-                <div>
-                    <input type="number"
-                        id="Chassis01"
-                        name="suvQty"
-                        onChange=""
-                        value="0"
-                        class="form-control"
-                        placeholder="Username"
-                        autocomplete="off"
-                        required />
-                    <label class="form-label">SUV Chassis - Quantity</label>
-                </div>
-                <div>
-                    <input type="number"
-                        id="chasis02"
-                        name="normalQty"
-                        onChange=""
-                        value="0"
-                        class="form-control"
-                        placeholder="Password"
-                        required />
-                    <label class="form-label">Normal Chassis - Quantity</label>
+                <div id="fields">
+                    <div class="display-flex-row align-items-start gap-1">
+                        <div>
+                            <div class="custom-select">
+                                <select name="type1" class="form-control form-control-blue text-blue" id="type1">
+                                    <option value="">Select Chassis Type</option>
+                                    <option value="Micro Panda">Micro Panda</option>
+                                    <option value="Micro Panda Cross">Micro Panda Cross</option>
+                                    <option value="MG ZS SUV">MG ZS SUV</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="number"
+                                id="qty1"
+                                name="qty1"
+                                onChange=""
+                                value="0"
+                                class="form-control"
+                                placeholder="Username"
+                                autocomplete="off"
+                                required />
+                            <label class="form-label">Quantity</label>
+                        </div>
+                        <div class="addBtn font-size-24 font-weight border-blue background-blue text-white padding-2 border-radius-11" id="addBtnContainer">
+                            <i class="fas fa-plus" id="addBtn"></i>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="text-center margin-top-3">
@@ -101,9 +107,9 @@
                         <div class="custom-select-model">
                             <select name="chassis" class="form-control text-gray width-rem-20" id="chassis">
                                 <option value="">Select Chassis Type</option>
-                                <option value="Micro Panda">Micro Panda</option>
-                                <option value="Micro Panda Cross">Micro Panda Cross</option>
-                                <option value="MG ZS SUV">MG ZS SUV</option>
+                                <option value="M0001">Micro Panda</option>
+                                <option value="M0002">Micro Panda Cross</option>
+                                <option value="M0003">MG ZS SUV</option>
                             </select>
                             <label class="chassis-label display-none" id="chassis-label">Chassis Type</label>
                         </div>
@@ -167,8 +173,8 @@
             } else {
                 foreach($data['shellDetails'] as $value) {
 
-                    $repairS = array_search($value->ChassisNo, array_column($data['repairDetails'], 'ChassisNo'));
-                    $paintS = array_search($value->ChassisNo, array_column($data['paintDetails'], 'ChassisNo'));
+                    $repairS = $data['repairDetails'] ? array_search($value->ChassisNo, array_column($data['repairDetails'], 'ChassisNo')) : false ;
+                    $paintS = $data['paintDetails'] ? array_search($value->ChassisNo, array_column($data['paintDetails'], 'ChassisNo')) : false ;
                     $status = $color = "";
 
                     if ($repairS || $repairS === 0) {
@@ -187,12 +193,12 @@
                     echo '<div class="carcard">
                     <div class="cardhead">
                         <div class="cardid">
-                            <div class="carmodel">'.$value->VehicleModel.'</div>
+                            <div class="carmodel">'.$value->ModelName.'</div>
                             <div class="chassisno">'.$value->ChassisNo.'</div>
                         </div>
                     </div>
                     <div class="carpicbox">
-                        <img src="'. URL_ROOT .'public/images/chassis.jpg" class="carpic" alt="'.$value->VehicleModel.' '. $value->Color.'">
+                        <img src="'. URL_ROOT .'public/images/chassis.jpg" class="carpic" alt="'.$value->ModelName.' '. $value->Color.'">
                     </div>
                     <div class="carstatus '.$color.'">'.$status.'</div>
                     <div class="arrivaldate">Arrival Date: ' , $value->ArrivalDate, '</div>
@@ -311,7 +317,8 @@
 
     </section>
 
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/addFields.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/bodyshell.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/cors.js"></script>
 

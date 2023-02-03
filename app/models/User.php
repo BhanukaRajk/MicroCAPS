@@ -10,7 +10,7 @@ private $db;
 
     public function findUserByUsername($username): bool {
 
-        $this->db->query('SELECT * FROM credentials  WHERE credentials.Username = :username');
+        $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.Username = :username');
 
         $this->db->bind(':username', $username);
 
@@ -26,11 +26,11 @@ private $db;
 
     public function findCredentialsByUsername($username,$password): bool {
         $this->db->query(
-            'SELECT credentials.Username, credentials.Password
-                FROM credentials
+            'SELECT `employee-credentials`.Username, `employee-credentials`.Password
+                FROM `employee-credentials`
                 INNER JOIN employee
-                ON credentials.EmployeeID = employee.EmployeeId
-                WHERE credentials.Username = :username'
+                ON `employee-credentials`.EmployeeID = employee.EmployeeId
+                WHERE `employee-credentials`.Username = :username'
         );
 
         $this->db->bind(':username', $username);
@@ -45,7 +45,7 @@ private $db;
         if ($username == 'admin') {
             $this->db->query(
                 'SELECT Password
-                    FROM credentials
+                    FROM `employee-credentials`
                     WHERE Username = :username'
             );
 
@@ -65,10 +65,10 @@ private $db;
 
         $this->db->query(
             'SELECT employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position, employee.Image
-                FROM credentials
+                FROM `employee-credentials`
                 INNER JOIN employee
-                ON credentials.EmployeeID = employee.EmployeeId
-                WHERE credentials.Username = :username'
+                ON `employee-credentials`.EmployeeID = employee.EmployeeId
+                WHERE `employee-credentials`.Username = :username'
         );
 
         $this->db->bind(':username', $username);
@@ -83,9 +83,9 @@ private $db;
     }
 
     public function resetPassword($username,$password): bool {
-        $this->db->query('UPDATE credentials
-                SET credentials.Password = :password
-                WHERE credentials.Username = :username'
+        $this->db->query('UPDATE `employee-credentials`
+                SET `employee-credentials`.Password = :password
+                WHERE `employee-credentials`.Username = :username'
         );
 
         $password = password_hash($password,PASSWORD_DEFAULT,['cost' => 12]);

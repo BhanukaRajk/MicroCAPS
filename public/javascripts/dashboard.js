@@ -21,10 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let start = firstDay - 1;
 
     for (let i = 1; i < nod + 1; i++) {
-        console.log(start);
         dates[start].innerHTML = i;
         start = (start + 1) % 35;
     }
 
-    dates[firstDay + date - 2].classList.add("current");
+    dates[(firstDay + date - 2)%35].classList.add("current");
 });

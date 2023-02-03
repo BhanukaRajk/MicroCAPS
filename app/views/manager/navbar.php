@@ -31,7 +31,7 @@
             <div class="font-weight">
                 <?php echo $_SESSION['_firstname'] . ' ' . $_SESSION['_lastname']; ?>
             </div>
-            <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $_SESSION['_profile'];; ?>" class="width-rem-2p5" alt="profilepic" />
+            <div style="background-image:url(<?php echo URL_ROOT; ?>public/images/profile/<?php echo $_SESSION['_profile']; ?>)" class="width-rem-2p5 height-rem-2p5 background-image border-radius-11"></div>
             <div class="profilemenu"> 
                 <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="pointer width-rem-0p75" alt="drop" id="drop" />
                 <div class="logout position-absolute display-none border-blue" id="logout">
