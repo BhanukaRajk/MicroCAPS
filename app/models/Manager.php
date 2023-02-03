@@ -28,7 +28,7 @@ class Manager {
     public function addRepairJob($chassisNo, $repairDescription): bool
     {
         $this->db->query(
-            'INSERT INTO `vehicle-repair-job`(`RepairID`, `ChassisNo`, `RepirDescription`, `RequestDate`, `Status`) 
+            'INSERT INTO `vehicle-repair-job`(`RepairId`, `ChassisNo`, `RepairDescription`, `RequestDate`, `Status`) 
             VALUES (:repairId, :chassisNo, :repairDescription, :requestDate, :status)'
         );
 
@@ -48,7 +48,7 @@ class Manager {
     public function addPaintJob($chassisNo): bool
     {
         $this->db->query(
-            'INSERT INTO `vehicle-paint-job`(`PaintID`, `ChassisNo`, `RequestDate`, `Status`)
+            'INSERT INTO `vehicle-paint-job`(`PaintId`, `ChassisNo`, `RequestDate`, `Status`)
             VALUES (:paintId, :chassisNo, :requestDate, :status)'
         );
 

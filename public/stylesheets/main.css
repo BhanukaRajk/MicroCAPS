@@ -1391,39 +1391,54 @@ li a:hover:not(.active) {
 /*                       Flash Message                          */
 /*--------------------------------------------------------------*/
 
-.fade {
-    transition: opacity .10s linear;
+
+.hideme {
+    visibility: hidden;
 }
 
-.fade:not(.show) {
-    opacity: 0;
+.showme {
+    visibility: visible;
 }
 
-.alert {
-    --alert-bg: transparent;
-    --alert-padding-x: 1.5rem;
-    --alert-padding-y: 1.25rem;
-    --alert-margin-bottom: 1rem;
-    --alert-color: inherit;
-    --alert-border-color: transparent;
-    --alert-border: 1px solid var(--alert-border-color);
-    --alert-border-radius: 0.5rem;
-    position: relative;
-    z-index: 1070;
-    padding: var(--alert-padding-y) var(--alert-padding-x);
-    margin-bottom: var(--alert-margin-bottom);
+#alert {
+    min-width: 250px;
+    margin-left: -125px;
     color: var(--alert-color);
     background-color: var(--alert-bg);
     border: var(--alert-border);
-    border-radius: var(--alert-border-radius);
-    font-style: italic;
-    display: none;
-    width: 20rem;
-    bottom: unset;
-    right: unset;
-    top: 35rem;
-    left: 68rem;
-    transform: unset;
+    border-radius: 5px;
+    padding: 16px;
+    text-align: center;
+    font-size: 17px;
+    position: fixed;
+    z-index: 10;
+    right: 2rem;
+    bottom: 3rem;
+}
+
+#alert.shows {
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+    animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {right: 2rem; opacity: 1;} 
+    to {right: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {right: 2rem; opacity: 1;}
+    to {right: 0; opacity: 0;}
 }
 
 .alert-success {
@@ -1436,10 +1451,6 @@ li a:hover:not(.active) {
     --alert-color: #af233a;
     --alert-bg: #f8dbe0;
     --alert-border-color: #f5c9d1;
-}
-
-.alert-success i {
-    color: #139647;
 }
 
 .icon {
@@ -1603,3 +1614,8 @@ select:focus-visible {
     background-color: white !important;
     color: var(--blue) !important;
 }
+
+
+/*-----------------------------*/
+/*       Pop Up                */
+/*-----------------------------*/

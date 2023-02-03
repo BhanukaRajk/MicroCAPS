@@ -33,8 +33,6 @@ function requestShell() {
         cnt++;
     });
 
-    console.log(string);
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -64,8 +62,7 @@ function addShell() {
     let chassis = document.getElementById("chassis").value;
     let repair = document.getElementById("repair").checked;
     let paint = document.getElementById("paint").checked;
-    let repairDescription = document.getElementById("repairDescription").value
-
+    let repairDescription = document.getElementById("repairDescription").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -78,7 +75,7 @@ function addShell() {
                 setLocalStorage("Successful","Shell Added Successfully");
 
             } else {
-
+                
                 location.reload();
                 setLocalStorage("Error","Shell Adding Failed");
 
@@ -147,27 +144,35 @@ function saveChanges(id) {
 
 //Alert Success
 function alertSuccess(message) {
-    let alert = document.getElementById("alert-success");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
+    let alert = document.getElementById("alert");
+    alert.classList.remove("hideme");
+    alert.classList.add("shows");
+    alert.classList.add("showme");
+    alert.classList.add("alert-success");
     alert.innerHTML = "<i class='icon fa-check-circle margin-right-3'></i>"+message;
 
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
+    setTimeout(() => { 
+        alert.classList.add("hideme");
+        alert.classList.remove("shows");
+        alert.classList.remove("showme");
+        alert.classList.remove("alert-success");
     }, 5000);
 }
 
 //Alert Faliure
 function alertFaliure(message) {
-    let alert = document.getElementById("alert-faliure");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
+    let alert = document.getElementById("alert");
+    alert.classList.remove("hideme");
+    alert.classList.add("shows");
+    alert.classList.add("showme");
+    alert.classList.add("alert-failure");
     alert.innerHTML = "<i class='icon fa-times-circle margin-right-3'></i>"+message;
 
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
+    setTimeout(() => { 
+        alert.classList.add("hideme");
+        alert.classList.remove("shows");
+        alert.classList.remove("showme");
+        alert.classList.remove("alert-failure");
     }, 5000);
 }
 

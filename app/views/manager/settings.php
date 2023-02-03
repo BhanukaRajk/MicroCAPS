@@ -103,15 +103,7 @@
 
 <section class="display-flex-column">
 
-    <div class="alert fade alert-success" id="alert-success" role="alert">
-        <i class="icon fa-check-circle margin-right-3"></i>
-        Success
-    </div>
-
-    <div class="alert fade alert-failure" id="alert-faliure" role="alert">
-        <i class="icon fa-times-circle margin-right-3"></i>
-        Falied
-    </div>
+    <div id="alert" class="hideme" role="alert"></div>
 
 </section>
 

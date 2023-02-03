@@ -159,18 +159,16 @@
     </section>
 
     <section class="shell-forms position-absolute" id="three">
-        <div class="vehicle-detail-board  margin-bottom-4">
-            <div class="vehicle-data-board">
         <?php
             if ( $data['shellDetails'] == false ) {
-                echo '<div class="display-flex-row justify-content-center align-items-center padding-z border-bottom gap-3">
-                <div class="display-flex-row align-items-start">
-                        <div class="display-flex-column align-items-start">
-                            <div class="font-weight">No Details</div>
-                        </div>
-                    </div>
-            </div>';
+                echo '
+                        <div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                                <div class="font-weight">No Details</div>
+                            </div>
+                        ';
             } else {
+                echo '<div class="vehicle-detail-board  margin-bottom-4">
+                        <div class="vehicle-data-board">';
                 foreach($data['shellDetails'] as $value) {
 
                     $repairS = $data['repairDetails'] ? array_search($value->ChassisNo, array_column($data['repairDetails'], 'ChassisNo')) : false ;
@@ -191,24 +189,26 @@
                     }
 
                     echo '<div class="carcard">
-                    <div class="cardhead">
-                        <div class="cardid">
-                            <div class="carmodel">'.$value->ModelName.'</div>
-                            <div class="chassisno">'.$value->ChassisNo.'</div>
-                        </div>
-                    </div>
-                    <div class="carpicbox">
-                        <img src="'. URL_ROOT .'public/images/chassis.jpg" class="carpic" alt="'.$value->ModelName.' '. $value->Color.'">
-                    </div>
-                    <div class="carstatus '.$color.'">'.$status.'</div>
-                    <div class="arrivaldate">Arrival Date: ' , $value->ArrivalDate, '</div>
-                </div>';
-                
+                            <div class="cardhead">
+                                <div class="cardid">
+                                    <div class="carmodel">'.$value->ModelName.'</div>
+                                    <div class="chassisno">'.$value->ChassisNo.'</div>
+                                </div>
+                            </div>
+                            <div class="carpicbox">
+                                <img src="'. URL_ROOT .'public/images/chassis.jpg" class="carpic" alt="'.$value->ModelName.' '. $value->Color.'">
+                            </div>
+                            <div class="carstatus '.$color.'">'.$status.'</div>
+                            <div class="arrivaldate">Arrival Date: ' , $value->ArrivalDate, '</div>
+                        </div>';
                 }
+
+                echo '  </div>
+                    </div>';
+                
             }
         ?>
-            </div>
-        </div>
+            
     </section>
 
     <section class="shell-forms position-absolute" id="four">
@@ -228,12 +228,12 @@
                     </div>';
                     } else {
                         foreach($data['repairDetails'] as $value) {
-                            $id = "'".$value->RepairID."'";
+                            $id = "'".$value->RepairId."'";
                             echo '<div class="display-flex-row justify-content-center align-items-center paddingy-2 paddingx-3 border-bottom gap-3">
                             <div class="display-flex-row align-items-start">
                                 <div class="display-flex-column align-items-start">
                                     <div class="font-weight">'.$value->ChassisNo.'</div>
-                                    <div class="text-gray">'.$value->RepairID.'</div>
+                                    <div class="text-gray">'.$value->RepairId.'</div>
                                 </div>
                             </div>
                             <div class="display-flex-row align-items-end inner-layout">
@@ -272,12 +272,12 @@
                     </div>';
                     } else {
                     foreach($data['paintDetails'] as $value) {
-                        $id = "'".$value->PaintID."'";
+                        $id = "'".$value->PaintId."'";
                         echo '<div class="display-flex-row justify-content-center align-items-center paddingy-2 paddingx-3 border-bottom gap-3">
                         <div class="display-flex-row align-items-start">
                             <div class="display-flex-column align-items-start">
                                 <div class="font-weight">'.$value->ChassisNo.'</div>
-                                <div class="text-gray">'.$value->PaintID.'</div>
+                                <div class="text-gray">'.$value->PaintId.'</div>
                             </div>
                         </div>
                         <div class="display-flex-row align-items-end inner-layout">
@@ -305,15 +305,7 @@
 
     <section class="display-flex-column">
 
-        <div class="alert fade alert-success" id="alert-success" role="alert">
-            <i class="icon fa-check-circle margin-right-3"></i>
-            Success
-        </div>
-
-        <div class="alert fade alert-failure" id="alert-faliure" role="alert">
-            <i class="icon fa-times-circle margin-right-3"></i>
-            Falied
-        </div>
+        <div id="alert" class="hideme" role="alert"></div>
 
     </section>
 
