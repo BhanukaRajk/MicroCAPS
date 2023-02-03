@@ -1,8 +1,8 @@
 <?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
 
-<?php require_once APP_ROOT . '/views/sup/leftnavbar.php'; ?>
-<?php require_once APP_ROOT . '/views/sup/topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 <!-- <?php
     // $messege = $_SESSION['editleave_Message'];
@@ -48,7 +48,7 @@
                     <h1>Accepted leave info</h1>
                 </div>
                 <div class="display-flex-column justify-content-center">
-                    <a class="text-decoration-none" href="<?php echo URL_ROOT; ?>supervisors/addleave">
+                    <a class="text-decoration-none" href="<?php echo URL_ROOT; ?>Supervisors/addleave">
                         <button class="head-button" type="button">Add New Leave</button>
                     </a>
                 </div>
@@ -73,10 +73,10 @@
                                 <div class="leave-value">' . $value->LeaveDate . '</div>
                                 <div class="leave-value padding-right-5">' . $value->Reason . '</div>
 
-                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'supervisors/editleave?id=' . $value->EmployeeId . '&ldate=' . $value->LeaveDate . '" class="edit-button">Edit</a></div> -->
+                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->EmployeeId . '&ldate=' . $value->LeaveDate . '" class="edit-button">Edit</a></div> -->
                                 
-                                <div class="leave-edit-info padding-left-2"><a href="' . URL_ROOT . 'supervisors/editleave?id=' . $value->Leave_Id . '" class="edit-button">Edit</a></div>
-                                <div class="leave-edit-info"><a href="' . URL_ROOT . 'supervisors/removeleave?id=' . $value->Leave_Id . '" class="delete-button">Remove</a></div>
+                                <div class="leave-edit-info padding-left-2"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->Leave_Id . '" class="edit-button">Edit</a></div>
+                                <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/removeleave?id=' . $value->Leave_Id . '" class="delete-button">Remove</a></div>
                             </div>';
                 }
                 ?>

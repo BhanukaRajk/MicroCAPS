@@ -25,13 +25,13 @@
                         <div class="chassisno">' , ($item->volume == NULL) ? 'Grease' : 'Lubricants'  , '</div>
                       </div>
                       <div class="carstatuscolor">
-                        <div class="status-circle ' , ($item->volume == NULL) ? (($item->volume > 100) ? 'status-green-circle' : 'status-orange-circle') : (($item->weight > 100) ? 'status-green-circle' : 'status-orange-circle')  , ' "></div>
+                        <div class="status-circle ' , ($item->volume == NULL) ? (($item->weight >= 100) ? 'status-green-circle' : 'status-orange-circle') : (($item->volume >= 100) ? 'status-green-circle' : 'status-orange-circle')  , ' "></div>
                       </div>
                     </div>
                     <div class="carpicbox">
                       <img src="' . URL_ROOT . 'public/images/consumables/'.$item->image.'" class="carpic" alt="micro panda red">
                     </div>
-                    <div class="carstatus ' , ($item->volume == NULL) ? (($item->volume > 100) ? 'available' : 'lower') : (($item->weight > 100) ? 'available' : 'lower')  , '">' , ($item->volume == NULL) ? (($item->volume > 100) ? 'Available' : 'Low in stock') : (($item->weight > 100) ? 'Available' : 'Low in stock')  , '</div>
+                    <div class="carstatus ' , ($item->volume == NULL) ? (($item->weight >= 100) ? 'available' : 'lower') : (($item->volume >= 100) ? 'available' : 'lower')  , '">' , ($item->volume == NULL) ? (($item->weight > 100) ? 'Available' : 'Low in stock') : (($item->volume > 100) ? 'Available' : 'Low in stock')  , '</div>
                     <div class="chassisno">Last update: ' , $item->last_update, '</div>
                   </div>';
             //print_r($item);

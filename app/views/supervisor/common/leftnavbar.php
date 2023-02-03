@@ -28,7 +28,7 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "components") ? 'active' : '' ; ?>" href="#">
+            <a class="<?php echo ($data['url'][1] == "components") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/viewComponents">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts
             </a>
 
@@ -40,15 +40,19 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing
             </a>
 
+            <a class="<?php echo ($data['url'][1] == "toolview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
+                <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Tools
+            </a>
+
             <a class="<?php echo ($data['url'][1] == "consumableview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/consumableview">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Tools & Consumables
+                <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Consumables
             </a>
         </li>
 
         <!-- GENERAL SETTINGS CATEGORY ON NAV BAR -->
         <li>
             <div class="nav_section_headings">GENERAL</div>
-            <a class="<?php echo ($data['url'][1] == "editprofile") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>supervisors/editprofile">
+            <a class="<?php echo ($data['url'][1] == "editprofile") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/settings">
                 <img src="../images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings
             </a>
         </li>

@@ -58,7 +58,7 @@
 
                 <div class="dash-card-left-bottom test1">
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo /*$count*/10 ; ?></div>
                         <div>On Assembly</div>
                     </div>
                     <div class="dash-card-left-bottom-countbox test1">

@@ -2,11 +2,11 @@
 
 <div class="display-flex-row">
     <div>
-        <?php require_once APP_ROOT . '/views/sup/leftnavbar.php'; ?>
+        <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
     </div>
     <div class="display-flex-column">
         <div>
-            <?php require_once APP_ROOT . '/views/sup/topnavbar.php'; ?>
+            <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
         </div>
         <div>
 

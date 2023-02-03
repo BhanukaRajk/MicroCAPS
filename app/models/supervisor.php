@@ -272,6 +272,47 @@ class Supervisor
         }
     }
 
+
+    public function userDetails($id) {
+        $this->db->query(
+            'SELECT *
+                FROM employee
+                WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->single();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return null;
+        }
+    }
+
+    public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image): bool {
+        $this->db->query(
+            'UPDATE employee
+            SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic, image = :image
+            WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':firstname', $firstname);
+        $this->db->bind(':lastname', $lastname);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':mobile', $mobile);
+        $this->db->bind(':nic', $nic);
+        $this->db->bind(':image', $image);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     
     public function ViewAllConsumables()
     {

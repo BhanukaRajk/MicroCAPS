@@ -40,7 +40,7 @@
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112150768A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-green-circle"></div>
@@ -49,7 +49,7 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Black.png" class="carpic" alt="micro panda black">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Ready</div>
                     </div>
 
                     <div class="carcard">
@@ -65,7 +65,7 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Blue.png" class="carpic" alt="micro panda blue">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Not Ready</div>
                     </div>
 
                     <div class="carcard">
@@ -81,14 +81,14 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Cross Green.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Not Ready</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112745594A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -97,14 +97,14 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Blue.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Not Ready</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112881202A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-green-circle"></div>
@@ -113,30 +113,30 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro%20Panda%20Cross%20Blue.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Ready</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112910320A</div>
                             </div>
                             <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
+                                <div class="status-circle status-green-circle"></div>
                             </div>
                         </div>
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda White.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Ready</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112902287A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -145,46 +145,46 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Red.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Not Ready</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112087629A</div>
                             </div>
                             <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
+                                <div class="status-circle status-green-circle"></div>
                             </div>
                         </div>
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Yellow.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Ready</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112767681A</div>
                             </div>
                             <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
+                                <div class="status-circle status-green-circle"></div>
                             </div>
                         </div>
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Black.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Ready</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
+                                <div class="chassisno">CN112142532A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-green-circle"></div>
@@ -193,7 +193,7 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Green.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Ready</div>
                     </div>
 
                     <a href="DON'T CLICK HERE">
@@ -201,7 +201,7 @@
                             <div class="cardhead">
                                 <div class="cardid">
                                     <div class="carmodel">Micro Panda</div>
-                                    <div class="chassisno">CN112215000A</div>
+                                    <div class="chassisno">CN112297310A</div>
                                 </div>
                                 <div class="carstatuscolor">
                                     <div class="status-circle status-orange-circle"></div>
@@ -210,7 +210,7 @@
                             <div class="carpicbox">
                                 <img src="<?php echo URL_ROOT; ?>public/images/cars/MG ZS SUV Blue.png" class="carpic" alt="micro panda green">
                             </div>
-                            <div class="carstatus">Inspected</div>
+                            <div class="carstatus">Not Ready</div>
                         </div>
                     </a>
 
@@ -218,7 +218,7 @@
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">MG ZS SUV</div>
-                                <div class="chassisno">CG112215000A</div>
+                                <div class="chassisno">CN112764853A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -227,24 +227,9 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/MG ZS SUV Black.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Inspected</div>
+                        <div class="carstatus">Not Ready</div>
                     </div>
 
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">MOTUL 300V FL 10W-40</div>
-                                <div class="chassisno">Lubricants</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/consumables/image1.png" class="carpic" alt="micro panda black">
-                        </div>
-                        <div class="carstatus">Low stock</div>
-                    </div>
                 </div>
 
                 <div class="thisfilter">

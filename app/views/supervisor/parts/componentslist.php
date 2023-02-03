@@ -60,7 +60,7 @@
                                 <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
+                                <div class="status-circle status-orange-circle"></div>
                             </div>
                         </div>
                         <div class="carpicbox">
@@ -74,10 +74,10 @@
                             <div class="cardhead">
                                 <div class="cardid">
                                     <div class="carmodel">Micro Panda</div>
-                                    <div class="chassisno">CN112745594A</div>
+                                    <div class="chassisno">CN112215000A</div>
                                 </div>
                                 <div class="carstatuscolor">
-                                    <div class="status-circle status-green-circle"></div>
+                                    <div class="status-circle status-orange-circle"></div>
                                 </div>
                             </div>
                             <div class="carpicbox">
@@ -91,23 +91,23 @@
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112881202A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
+                                <div class="status-circle status-green-circle"></div>
                             </div>
                         </div>
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Black.png" class="carpic" alt="micro panda black">
                         </div>
-                        <div class="carstatus">Not Inspected</div>
+                        <div class="carstatus">Inspected</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112910320A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -116,17 +116,17 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Blue.png" class="carpic" alt="micro panda blue">
                         </div>
-                        <div class="carstatus">Not Inspected</div>
+                        <div class="carstatus">Inspected</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112902287A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
+                                <div class="status-circle status-orange-circle"></div>
                             </div>
                         </div>
                         <div class="carpicbox">
@@ -139,7 +139,7 @@
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112087629A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -148,14 +148,14 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Blue.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Not Inspected</div>
+                        <div class="carstatus">Inspected</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112767681A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-green-circle"></div>
@@ -171,7 +171,7 @@
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112142532A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -180,14 +180,14 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda White.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Not Inspected</div>
+                        <div class="carstatus">Inspected</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112297310A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -196,17 +196,17 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Red.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Not Inspected</div>
+                        <div class="carstatus">Inspected</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112764853A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
+                                <div class="status-circle status-orange-circle"></div>
                             </div>
                         </div>
                         <div class="carpicbox">
@@ -219,7 +219,7 @@
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112109283A</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -228,14 +228,14 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Black.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Not Inspected</div>
+                        <div class="carstatus">Inspected</div>
                     </div>
 
                     <div class="carcard">
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112875209Q</div>
+                                <div class="chassisno">CN112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-green-circle"></div>
@@ -251,7 +251,7 @@
                         <div class="cardhead">
                             <div class="cardid">
                                 <div class="carmodel">MG ZS SUV</div>
-                                <div class="chassisno">CG112876543A</div>
+                                <div class="chassisno">CG112215000A</div>
                             </div>
                             <div class="carstatuscolor">
                                 <div class="status-circle status-orange-circle"></div>
@@ -260,7 +260,7 @@
                         <div class="carpicbox">
                             <img src="<?php echo URL_ROOT; ?>public/images/cars/MG ZS SUV Black.png" class="carpic" alt="micro panda green">
                         </div>
-                        <div class="carstatus">Not Inspected</div>
+                        <div class="carstatus">Inspected</div>
                     </div>
 
                     
