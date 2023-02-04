@@ -1,6 +1,9 @@
 @import "dashboard.css";
 @import "consumablelist.css";
 @import "pdiresults.css";
+@import "schedule.css";
+@import "paqrecord.css";
+@import "paqresults.css";
 /* @import "vehiclelist.css"; */
 
 body {
@@ -1713,6 +1716,9 @@ li a:hover:not(.active) {
     border-radius: 5px;
     padding: 16px;
 
+    box-shadow: 0px 5px 10px rgb(76 92 107 / 15%), 0px 18px 36px rgb(166 175 186 / 20%);
+    word-wrap: normal;
+
     text-align: center;
     font-size: 17px;
 
@@ -1721,6 +1727,19 @@ li a:hover:not(.active) {
     right: 2rem;
     bottom: 3rem;
   }
+
+.success-message {
+    background-color: #dffde4;
+    border: 1.5px solid #2c8a3c;
+    color: #2c8a3c;
+}
+
+.error-message {
+
+    background-color: #fddfe4;
+    border: 1.5px solid #8a2c3c;
+    color: #8a2c3c;
+}
   
   #messagebox.shows {
     -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;

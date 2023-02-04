@@ -32,7 +32,7 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "scheduletasks") ? 'active' : '' ; ?>" href="#">
+            <a class="<?php echo ($data['url'][1] == "scheduletasks") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>
 

@@ -58,7 +58,7 @@
 
                 <div class="dash-card-left-bottom test1">
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo /*$count*/10 ; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo /*$count*/ 10; ?></div>
                         <div>On Assembly</div>
                     </div>
                     <div class="dash-card-left-bottom-countbox test1">
@@ -83,7 +83,9 @@
                 <div class="dash-card-quickaccess test1">
                     <div class="dash-card-right-datalines dash-card-headings test1">Quick Access</div>
                     <div class="dash-card-right-datalines dash-quickbtns-frame test1">
-                        <button type="button" class="dash-quickbtn">Issue Parts</button>
+                        <a href="<?php echo URL_ROOT; ?>supervisors/PAQrecord">
+                            <button type="button" class="dash-quickbtn">Issue Parts</button>
+                        </a>
                         <a href="<?php echo URL_ROOT; ?>supervisors/leaves">
                             <button type="button" class="dash-quickbtn">Leaves</button>
                         </a>

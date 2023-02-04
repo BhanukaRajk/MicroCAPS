@@ -10,12 +10,11 @@
     <div class="paq-form-screen">
         <div class="paq-form-area">
 
-
             <div class="paq-form-header-box">
                 <div class="paq-form-heading">
-                    <div class="paq-title">Quality Inspection - CB619256612L</div>
+                    <div class="paq-title">Quality Inspection Update - CB619256612L</div>
                     <div class="paq-back-button-box">
-                        <button type="button" class="paq-back-button">Go back</button>
+                        <button type="button" class="paq-back-button">Cancel</button>
                     </div>
                 </div>
                 <div>
@@ -24,7 +23,6 @@
                     <div class="engine-no">Engine No : EN562VD59J5N37</div>
                 </div>
             </div>
-
 
             <div class="paq-form-box">
 
@@ -104,12 +102,9 @@
                     </div>
                 </div>
 
-                <div class="paq-input-set-6">
+                <div class="paq-input-set-7">
                     <div>
-                        <button type="button" class="paq-reset-button">Reset</button>
-                    </div>
-                    <div>
-                        <button type="button" class="paq-submit-button">Submit</button>
+                        <button type="button" class="paq-submit-button">Update</button>
                     </div>
                 </div>
 

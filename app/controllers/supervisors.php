@@ -185,6 +185,30 @@ class Supervisors extends controller
         }
     }
 
+    public function PAQrecord()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $this->view('supervisor/inspection/paqresults', $data);
+        }
+    }
+
+    public function taskSchedule()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $this->view('supervisor/scheduler/scheduletasks', $data);
+        }
+    }
+
 
     // public function consumableview()
     // {
