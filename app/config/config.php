@@ -21,7 +21,7 @@
     const DB_HOST = 'localhost';
     const DB_USER = 'root';
     const DB_PASS = 'root';             // USE PASSWORD AS '' FOR OTHER COMPUTERS
-    const DB_NAME = 'microcaps2';       // USE NAME AS 'microcaps' FOR OTHER COMPUTERS
+    const DB_NAME = 'microcaps';       // USE NAME AS 'microcaps' FOR OTHER COMPUTERS
 
 
     /* DATABASE CONNECTION FOR CLOUD SERVER */

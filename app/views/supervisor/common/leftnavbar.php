@@ -28,7 +28,7 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "components") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/viewComponents">
+            <a class="<?php echo ($data['url'][1] == "components") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/lineVehicles">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts
             </a>
 

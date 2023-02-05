@@ -13,7 +13,7 @@ class Supervisor
     public function findUserByUsername($username)
     {
 
-        $this->db->query('SELECT * FROM credentials  WHERE credentials.Username = :username');
+        $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.Username = :username');
 
         $this->db->bind(':username', $username);
 
@@ -30,11 +30,11 @@ class Supervisor
     public function login($username, $password)
     {
         $this->db->query(
-            'SELECT credentials.Username, credentials.Password, employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position
-            FROM credentials
-            INNER JOIN employee
-            ON credentials.EmployeeID = employee.EmployeeId
-            WHERE credentials.Username = :username'
+            'SELECT `employee-credentials`.Username, `employee-credentials`.Password, `employee`.EmployeeID, `employee`.Firstname, `employee`.Lastname, `employee`.Position
+            FROM `employee-credentials`
+            INNER JOIN `employee`
+            ON `employee-credentials`.EmployeeID = `employee`.EmployeeId
+            WHERE `employee-credentials`.Username = :username'
         );
 
         $this->db->bind(':username', $username);
@@ -59,8 +59,8 @@ class Supervisor
 
         $this->db->query(
             'SELECT COUNT(*)
-                FROM carprocess
-                WHERE StageNo != NOT NULL;'
+                FROM `vehicle`
+                WHERE `CurrentStatus` != "PA";'
         );
 
         $assemblingCount = $this->db->rowCount();
@@ -125,6 +125,22 @@ class Supervisor
         $this->db->bind(':req_date', $reqdate);
 
         $row = $this->db->single();
+
+        if ($this->db->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkLeaveByID($LeaveID)
+    {
+
+        $this->db->query('SELECT `LeaveId` FROM `employee-leaves` WHERE `LeaveId` = :Leave;');
+
+        $this->db->bind(':Leave', $LeaveID);
+
+        // $row = $this->db->single();
 
         if ($this->db->rowCount()) {
             return true;
@@ -254,12 +270,12 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT leaves.Leave_Id, leaves.EmployeeId, employee.Firstname, employee.Lastname, leaves.LeaveDate, leaves.Reason
-                FROM leaves 
-                INNER JOIN employee
-            ON leaves.EmployeeId = employee.EmployeeId
+            'SELECT `employee-leaves`.`LeaveId`, `employee-leaves`.`EmployeeId`, `employee`.`Firstname`, `employee`.`Lastname`, `employee-leaves`.`LeaveDate`, `employee-leaves`.`Reason`
+                FROM `employee-leaves`
+                INNER JOIN `employee`
+            ON `employee-leaves`.`EmployeeId` = `employee`.`EmployeeId`
             -- WHERE LeaveDate > GETDATE()
-            ORDER BY LeaveDate ASC;'
+            ORDER BY `LeaveDate` ASC;'
         );
 
         $leaves = $this->db->resultSet();

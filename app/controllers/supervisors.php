@@ -193,7 +193,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $this->view('supervisor/inspection/paqresults', $data);
+            $this->view('supervisor/pdi/defectsheet', $data);
         }
     }
 
@@ -281,6 +281,30 @@ class Supervisors extends controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $this->view('supervisor/inspection/vehiclelist', $data);
+        }
+    }
+
+    public function lineVehicles()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $this->view('supervisor/parts/linevehiclelist', $data);
+        }
+    }
+
+    public function componentsView()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $this->view('supervisor/parts/vehicleparts', $data);
         }
     }
 
@@ -409,13 +433,14 @@ class Supervisors extends controller
 
         if (!isLoggedIn()) {
             redirect('supervisors/login');
+            // echo "-------------";
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
-            // echo "-------------";
-            //print_r($data);
+            // echo "------00-----";
+            // print_r($data);
             $this->view('supervisor/leaves/leaves', $data);
         }
     }
@@ -548,6 +573,61 @@ class Supervisors extends controller
 
     // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
     public function removeleave()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('supervisors/login');
+        }
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'LeaveID' => trim($_POST['leave_id'])
+            ];
+
+            if ($this->supervisorModel->checkLeaveByID($data['LeaveID'])) {
+
+                if ($this->supervisorModel->removeleave($data['LeaveID'])) {
+                    $_SESSION['return_message'] = 'New record saved!';
+                    // $_SESSION['success_msg'] = 'New record saved!';
+                } else {
+                    $_SESSION['return_message'] = 'Error! record saving failed!';
+                    // $_SESSION['err_msg'] = 'Error! record saving failed!';
+                }
+
+                redirect('supervisor/leaves/leaves');
+
+            } else {
+
+                    $_SESSION['return_message'] = 'Record has been already deleted!';
+                    // $_SESSION['err_msg'] = 'Record has been already deleted!';
+    
+                    $data['url'] = getUrl();
+                    $this->view('supervisor/leaves/leaves', $data);
+    
+                    
+            }
+
+        } else {
+            
+            $_SESSION['return_message'] = 'Request failed!';
+            // $_SESSION['err_msg'] = 'Request failed!';
+
+            redirect('supervisor/leaves/leaves');
+
+            // $data['url'] = getUrl();
+            // $this->view('supervisor/leaves/leaves', $data);
+        }
+
+    }
+    
+    
+    
+    
+    public function removeleave2()
     {
 
         if (!isLoggedIn()) {

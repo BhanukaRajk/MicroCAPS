@@ -4,23 +4,6 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
-<!-- <?php
-    // $messege = $_SESSION['editleave_Message'];
-    
-    ?>
-    <div id="messagebox" class="hideme"><?php //echo $messege;?></div>
-    <?php  
-
-    // echo (empty($messege)) ? '<section id="main" class="sup-leave-list-page">' : '<section id="main" class="sup-leave-list-page" onload="myFunction()">';
-    // echo ($messege == '') ? '<section id="main" class="sup-leave-list-page">' : '<section id="main" class="sup-leave-list-page" onmouseover="myFunction()">';
-    // $_SESSION['editleave_Message'] = '';
-?> -->
-
-    <!-- <div id="messagebox" class="hideme"><?php //echo $messege;?></div> -->
-
-<?php
-    // echo (empty($data['editleave_Message'])) ? "" : "<script type='text/javascript'>alert('Data edited successfully!');</script>";
-?>
 
 <section id="main" class="sup-leave-list-page">
 
@@ -38,7 +21,6 @@
 ?>
 
     <!-- TAKE 2REM MARGIN FROM LEFT AND RIGHT -->
-    <!-- <div class="sup-leave-list-content"> -->
 
         <!-- CONTENT WINDOW -->
         <div class="sup-leave-list-databox">
@@ -75,10 +57,31 @@
 
                                 <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->EmployeeId . '&ldate=' . $value->LeaveDate . '" class="edit-button">Edit</a></div> -->
                                 
-                                <div class="leave-edit-info padding-left-2"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->Leave_Id . '" class="edit-button">Edit</a></div>
-                                <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/removeleave?id=' . $value->Leave_Id . '" class="delete-button">Remove</a></div>
+                                <!-- <div class="leave-edit-info padding-left-2"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->Leave_Id . '" class="edit-button">Edit</a></div> -->
+                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/removeleave?id=' . $value->Leave_Id . '" class="delete-button">Remove</a></div> -->
+
+
+                                <form method="POST" action="'. URL_ROOT. 'Supervisors/editleave">
+                                <div class="leave-edit-info padding-left-2">
+                                    <input type="hidden" name="leave_id" value="<?= $value->Leave_Id ?>">
+                                    <input type="submit" name="edit" class="edit-button" value="Edit">
+                                    </div>
+                                </form>
+    
+                                <form method="POST" action="'. URL_ROOT. 'Supervisors/removeleave">
+                                <div class="leave-edit-info">
+                                    <input type="hidden" name="leave_id" value="<?= $value->Leave_Id ?>">
+                                    <input type="submit" name="remove" class="delete-button" value="Remove">
+                                    </div>
+                                </form>
+                                
                             </div>';
                 }
+
+                if($value == NULL) {
+                    echo '<div class="horizontal-centralizer"><div>Nothing to show</div></div>';
+                }
+                
                 ?>
             </div>
 

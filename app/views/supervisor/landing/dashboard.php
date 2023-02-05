@@ -86,7 +86,7 @@
                         <a href="<?php echo URL_ROOT; ?>supervisors/PAQrecord">
                             <button type="button" class="dash-quickbtn">Issue Parts</button>
                         </a>
-                        <a href="<?php echo URL_ROOT; ?>supervisors/leaves">
+                        <a href="<?php echo URL_ROOT; ?>Supervisors/leaves">
                             <button type="button" class="dash-quickbtn">Leaves</button>
                         </a>
                     </div>
