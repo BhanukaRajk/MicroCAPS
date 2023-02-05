@@ -34,3 +34,7 @@ function myFunction() {
     msg.className = msg.className.replace("hideme", "shows showme");
     setTimeout(function(){ msg.className = msg.className.replace("shows showme", "hideme"); }, 5000);
 }
+
+function expandConsumable() {
+    document.getElementById("popupbox").classList.toggle("show");
+}

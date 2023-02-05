@@ -18,28 +18,66 @@
 
           <?php
           foreach ($data['consumableset'] as $item) {
-            echo '<div class="carcard">
+            echo '<div class="carcard" onclick="expandConsumable()">
                     <div class="cardhead">
                       <div class="cardid">
-                        <div class="carmodel">' , $item->consumable_name , '</div>
-                        <div class="chassisno">' , ($item->volume == NULL) ? 'Grease' : 'Lubricants'  , '</div>
+                        <div class="carmodel">', $item->ConsumableName, '</div>
+                        <div class="chassisno">', ($item->Volume == NULL) ? 'Grease' : 'Lubricants', '</div>
                       </div>
                       <div class="carstatuscolor">
-                        <div class="status-circle ' , ($item->volume == NULL) ? (($item->weight >= 100) ? 'status-green-circle' : 'status-orange-circle') : (($item->volume >= 100) ? 'status-green-circle' : 'status-orange-circle')  , ' "></div>
+                        <div class="status-circle ', ($item->Volume == NULL) ? (($item->Weight >= 100) ? 'status-green-circle' : 'status-orange-circle') : (($item->Volume >= 100) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
                       </div>
                     </div>
                     <div class="carpicbox">
-                      <img src="' . URL_ROOT . 'public/images/consumables/'.$item->image.'" class="carpic" alt="micro panda red">
+                      <img src="' . URL_ROOT . 'public/images/consumables/' . $item->Image . '" class="carpic" alt="micro panda red">
                     </div>
-                    <div class="carstatus ' , ($item->volume == NULL) ? (($item->weight >= 100) ? 'available' : 'lower') : (($item->volume >= 100) ? 'available' : 'lower')  , '">' , ($item->volume == NULL) ? (($item->weight > 100) ? 'Available' : 'Low in stock') : (($item->volume > 100) ? 'Available' : 'Low in stock')  , '</div>
-                    <div class="chassisno">Last update: ' , $item->last_update, '</div>
+                    <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 100) ? 'available' : 'lower') : (($item->Volume >= 100) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight > 100) ? 'Available' : 'Low in stock') : (($item->Volume > 100) ? 'Available' : 'Low in stock'), '</div>
+                    <div class="chassisno">Last update: ', $item->LastUpdate, '</div>
                   </div>';
             //print_r($item);
             //echo $item->consumable_id;
           }
+
+          if ($item == NULL) {
+            echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
+          }
+
           ?>
 
         </div>
+
+
+
+        <div class="consumable-popup-window">
+          <div class="">
+            <div><button type="">Back</button></div>
+          </div>
+          <div class="horizontal-centralizer">
+            <div>Select Availability</div>
+          </div>
+          <form method="POST">
+            <div class="horizontal-centralizer">
+              <div><input type="text"></input></div>
+            </div>
+            <div class="horizontal-centralizer">
+              <div><select></select></div>
+            </div>
+            <div class="horizontal-centralizer">
+              <div><button type="submit">Update</button></div>
+            </div>
+          </form>
+          <form method="POST">
+            <div class="horizontal-centralizer display-none">
+              <div><input type="text"></input></div>
+            </div>
+            <div class="horizontal-centralizer">
+              <div><button type="submit">Remove item</button></div>
+            </div>
+          </form>
+        </div>
+
+
+
 
         <div class="thisfilter">
           <div class="filterbox">

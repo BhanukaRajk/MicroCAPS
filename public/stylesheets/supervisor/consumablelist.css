@@ -242,3 +242,46 @@ ul {
     margin-right: 0;
     padding-inline: 30px;
 }
+
+.no-data {
+    width: 880px;
+    height: 520px;
+
+    background-color: #FFFFFF;
+
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    line-height: 30px !important;
+
+}
+
+
+.consumable-popup-window {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    position: fixed;
+
+    width: 660px;
+    height: 360px;
+    left: 507px;
+    top: 200px;
+
+    padding: 20px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+    gap: 15px 0;
+
+    z-index: 1;
+}
