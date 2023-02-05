@@ -483,8 +483,8 @@ h3 {
 .display-flex-column {
     display: flex !important;
     flex-direction: column;
-    height: 100vh;
-    gap: 2rem;
+    /* height: 100vh;
+    gap: 2rem; */
 }
 
 .display-flex-row {
@@ -1122,8 +1122,8 @@ Table
     min-width: 40rem;
     margin-top: 1rem;
 
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    /* flex-direction: row; */
     justify-content: space-evenly;
 
     background-color: white;
@@ -1137,7 +1137,10 @@ Table
 }
 
 .graph {
-    margin-block: auto;
+    /* margin-block: auto; */
+    overflow-y:scroll;
+    max-height: 13rem;
+    padding-bottom: 1rem;
 }
 
 .chart {
@@ -1243,13 +1246,13 @@ Table
     justify-content: center;
     padding-left: 2rem;
     padding-top: 1rem;
+    gap: 1rem;
 }
 
 /* -> RIGHT SIDE ACTIVITY LOG BOX OUTER */
 .logs {
     min-height: 20vh;
     min-width: 16.5rem;
-    margin-top: 0.75rem;
 
     display: flex;
     flex-direction: column;
@@ -1263,7 +1266,6 @@ Table
 .quick {
     min-height: 8rem;
     min-width: 16.5rem;
-    margin-top: 0.75rem;
 
     display: flex;
     flex-direction: column;
@@ -1295,7 +1297,33 @@ Table
     border-radius: 10rem;
 }
 
+.blue_button_long {
+    min-width: 40rem;
+    min-height: 3rem;
+
+    background-color: dodgerblue;
+    color: white;
+    font-size: small;
+    border: none;
+    border-radius: 1rem;
+    display: block;
+    margin: 0.5rem 1.5rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.dash_cap{
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
 .blue_button:hover {
+    background-color: rgb(99, 174, 250);
+    box-shadow: 0 0 0.2rem rgb(144, 144, 255);
+}
+
+.blue_button_long:hover {
     background-color: rgb(99, 174, 250);
     box-shadow: 0 0 0.2rem rgb(144, 144, 255);
 }
@@ -1324,132 +1352,6 @@ Table
     border: none;
 }
 
-
-/* Add Defect Form */
-
-#add_defect {
-    line-height: 30px;
-    color: #777;
-    background: #D2DAFF;
-    font-family: "Montserrat", sans-serif;
-  }
-  
-  .container2 {
-    max-width: 600px;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-    
-  }
-  
-  #defect input[type="text"],
-  #defect input[type="email"],
-  #defect input[type="date"],
-  #defect textarea,
-  #defect button[type="submit"] {
-    font: 400 12px/16px ;
-  }
-  
-  #defect {
-    background: #F9F9F9;
-    padding: 25px;
-    margin: 150px 0;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  }
-  
-  #defect h3 {
-    display: block;
-    font-size: 30px;
-    font-weight: 300;
-    margin-bottom: 10px;
-    float: left;
-  }
-  
-  fieldset {
-    border: medium none !important;
-    margin: 0 0 10px;
-    min-width: 100%;
-    padding: 0;
-    width: 100%;
-  }
-  
-  #defect input[type="text"],
-  #defect input[type="email"],
-  #defect input[type="date"],
-  #defect textarea {
-    width: 100%;
-    border: 1px solid #ccc;
-    background: #FFF;
-    margin: 0 0 5px;
-    padding: 10px;
-  }
-  
-  #defect input[type="text"]:hover,
-  #defect input[type="email"]:hover,
-  #defect input[type="date"]:hover,
-  #defect textarea:hover {
-    -webkit-transition: border-color 0.3s ease-in-out;
-    -moz-transition: border-color 0.3s ease-in-out;
-    transition: border-color 0.3s ease-in-out;
-    border: 1px solid #aaa;
-  }
-  
-  #defect textarea {
-    height: 100px;
-    max-width: 100%;
-    resize: none;
-  }
-  
-  #defect button[type="submit"] {
-    cursor: pointer;
-    width: 100%;
-    border: none;
-    background: #428BCA;
-    color: #FFF;
-    margin: 0 0 5px;
-    padding: 10px;
-    font-size: 15px;
-  }
-  
-  #defect button[type="submit"]:hover {
-    background: #081A51;
-    -webkit-transition: background 0.3s ease-in-out;
-    -moz-transition: background 0.3s ease-in-out;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  #defect button[type="submit"]:active {
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-  }
-  
-  #defect input:focus,
-  #defect textarea:focus {
-    outline: 0;
-    border: 1px solid #aaa;
-  }
-  
-  ::-webkit-input-placeholder {
-    color: #888;
-  }
-  
-  :-moz-placeholder {
-    color: #888;
-  }
-  
-  ::-moz-placeholder {
-    color: #888;
-  }
-  
-  :-ms-input-placeholder {
-    color: #888;
-  }
-  
-  #label_ins, #label_cha {
-    display: block;
-    font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
-    margin-bottom: 5px;
-  }
-
 /* Select vehicle */
 
 #select_vehicle {
@@ -1460,7 +1362,7 @@ Table
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background: #D2DAFF;
+    /* background: #D2DAFF; */
     font-family: "Montserrat", sans-serif;
   }
   
@@ -1536,6 +1438,20 @@ Table
           text-align: center;
   }
 
+  .head_1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1B2B65;
+    margin-bottom: 20px;
+  }
+
+  .head_2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1B2B65;
+    margin-bottom: 30px;
+  }
+
 /* Navbar_2 */
 .container_navbar_2 {
     background-color: var(--white);
@@ -1603,5 +1519,117 @@ Table
 .edit-button:hover {
     color: #ffffff;
     background-color: #C0DEFF;
+    opacity: 1;
+}
+
+/* Calender */
+#calender>.calender-title {
+    word-spacing: 0.5rem;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#calender th, #calender td {
+    font-size: 14px;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+}
+
+#calender .current {
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius:4rem !important;
+}
+
+.background-white {
+    background-color: var(--white);
+}
+
+.border-radius-1 {
+    border-radius:1rem!important;
+}
+
+
+/*--------------------------------------------------------------
+Add Defect Form
+--------------------------------------------------------------*/
+
+#add-form-body {
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F7;
+    justify-content: center;
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+}
+
+.add-form-container {
+    background-color: white;
+    border-radius: 15px;
+    top: 12rem;
+    position: fixed;
+    padding: 1em;
+    width: 35%;
+}
+
+.add-form-title {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.5em 0;
+    color: #1B2B65;
+}
+
+#defect-form {
+    display: block;
+    padding: 0rem 2rem 0rem 2rem;
+}
+
+.add-form-field {
+    margin: 1em 0;
+    text-align: left;
+    display: block;
+}
+
+.add-form-label {
+    display: block;
+    font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+    margin-bottom: 0.5em;
+    color: #777777;
+}
+
+.add-form-input {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #CED4DA;
+    box-sizing: border-box;
+}
+
+.add-form-input::placeholder {
+    font-family: "Montserrat", sans-serif;
+}
+
+.add-form-error {
+    color: red;
+    font-size: 0.8em;
+    margin: 0.5em 0;
+}
+
+.add-form-update-button {
+    border: 1px solid #2773FF;
+    color: #2773FF;
+    background-color: white;
+    padding: 0.5em 1.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 2em auto 0 auto;
+}
+
+.add-form-update-button:hover {
+    color: #ffffff;
+    background-color: #1B2B65;
     opacity: 1;
 }

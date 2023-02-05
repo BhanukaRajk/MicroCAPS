@@ -79,6 +79,7 @@ class Testers extends controller {
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
+            $data['vehicles'] = $this->testerModel->selectVehicle();
             $this->view('tester/dashboard', $data);
         }
     }
@@ -117,7 +118,7 @@ class Testers extends controller {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+            
             $data = [
                 'DefectNo' => trim($_POST['DefectNo']),
                 'InspectionDate' => trim($_POST['InspectionDate']),
@@ -126,8 +127,10 @@ class Testers extends controller {
                 'ReCorrection' => trim($_POST['ReCorrection']),
                 'defect_err' => '',
                 'defect_id_err' => '',
-                'user_err' => ''
+                'user_err' => '',
             ];
+            $data['url'] = getUrl();
+            
 
             if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
@@ -156,6 +159,7 @@ class Testers extends controller {
                 'EmployeeID' => '',
                 'ReCorrection' => '',
             ];
+            $data['url'] = getUrl();
 
             $this->view('tester/add_defect', $data);
         }
@@ -180,6 +184,7 @@ class Testers extends controller {
                 'defect_id_err' => '',
                 'user_err' => ''
             ];
+            $data['url'] = getUrl();
 
             if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
@@ -208,6 +213,7 @@ class Testers extends controller {
                 'EmployeeID' => $defect->EmployeeID,
                 'ReCorrection' => $defect->ReCorrection
             ];
+            $data['url'] = getUrl();
 
             $this->view('tester/edit_defect', $data);
         }

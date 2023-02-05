@@ -2,7 +2,7 @@
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
 
 
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
 
 
 <section class="position-absolute page-content">
@@ -10,45 +10,32 @@
         <div class="left">
             <div class="heading bold">Tester - Dashboard</div>
             <div class="indetail">
+                <div class="dash_cap">Pending Tasks</div>
                 <div class="graph">
-                    <div class="upper">
-                        <div class="bold">Ongoing Assembly Progress</div>
-                    </div>
-                    <!-- <div><label for="vehicles" class="small"><br>Select Vehicle</label>
-                            <select name="vehicles" id="vehicles">
-                                <option value=""></option>
-                                <option value=""></option>
-                            </select>
-                    </div> -->
-                    <div class="chart"><img src="<?php echo URL_ROOT; ?>public/images/graph.jpg" class="donut" alt="status graph"></div>
-                    <div class="map_list">
-                        <div class="map">
-                            <div class="circle-dark"></div>
-                            <div>Done</div>
-                        </div>
-                        <div class="map">
-                            <div class="circle-lite"></div>
-                            <div>On-going</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="damages">
-                    <div>
-                        <!-- <div class="bold">Defect Count</div>
-                        <br><br> -->
-                        <div class="countbox">
-                            <div class="number">13</div>
-                            <div>Unsolved Defect Count</div>
-                        </div>
-                    </div>
-                    <div></div>
+
+                    <!-- <div class="dash_cap">Pending Tasks</div> -->
+
+                    <!-- <div class="blue_button_long">Vehicle 1</div>
+                    <div class="blue_button_long">Vehicle 2</div>
+                    <div class="blue_button_long">Vehicle 3</div>
+                    <div class="blue_button_long">Vehicle 2</div>
+                    <div class="blue_button_long">Vehicle 3</div>
+                    <div class="blue_button_long">Vehicle 2</div>
+                    <div class="blue_button_long">Vehicle 3</div> -->
+
+                    <?php foreach ($data['vehicles'] as $values) : ?>
+
+                        <div class="blue_button_long"  onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $values->ChassisNo; ?>'"><?php echo $values->ChassisNo; ?></div>
+                        
+
+                    <?php endforeach; ?>
+
                 </div>
             </div>
             <div class="count">
                 <div class="countbox">
                     <div class="number">5</div>
-                    <div>On Assembly</div>
+                    <div>Pending Tasks</div>
                 </div>
                 <div class="countbox">
                     <div class="number">10</div>
@@ -56,7 +43,7 @@
                 </div>
                 <div class="countbox">
                     <div class="number">2</div>
-                    <div>On Hold</div>
+                    <div>On Assembly</div>
                 </div>
             </div>
         </div>
@@ -71,9 +58,75 @@
                     <button type="button" class="blue_button">Defect Sheet</button>
                     <a href="<?php echo URL_ROOT; ?>testers/select_vehicle">
                         <button type="button" class="blue_button">Select Vehicle</button>
+                    </a>
                 </div>
             </div>
-            <div class="calender"></div>
+            <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">
+                    <div class="calender-title margin-top-3" id="calender-title">May 2021</div>
+                    <table class="margin-top-3">
+                        <thead>
+                            <tr>
+                                <th>Mo</th>
+                                <th>Tu</th>
+                                <th>We</th>
+                                <th>Th</th>
+                                <th>Fr</th>
+                                <th>Sa</th>
+                                <th>Su</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </section>
+
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/dashboard.js"></script>
