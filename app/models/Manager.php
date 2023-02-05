@@ -72,7 +72,7 @@ class Manager {
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
                 WHERE `vehicle`.CurrentStatus = :released
-                ORDER BY ArrivalDate DESC; '
+                ORDER BY `vehicle`.ChassisNo DESC; '
         );
 
         $this->db->bind(':released', 'PA');
@@ -219,4 +219,6 @@ class Manager {
             return false;
         }
     }
+
+
 }

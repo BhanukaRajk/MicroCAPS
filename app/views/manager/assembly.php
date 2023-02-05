@@ -38,34 +38,42 @@
                 </div>
             </div>
             <div class="row background-none gap-2">
-                <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                    <div class="section-heading font-weight"> Stage 01 </div>
-                    <div class="chart-grid-stage">
-                        <canvas id="stage01"></canvas>
-                        <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">100%</label>
-                    </div> 
-                </div>
-                <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                    <div class="section-heading font-weight"> Stage 02 </div>
-                    <div class="chart-grid-stage">
-                        <canvas id="stage02"></canvas>
-                        <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">100%</label>
-                    </div> 
-                </div>
-                <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                    <div class="section-heading font-weight"> Stage 03 </div>
-                    <div class="chart-grid-stage">
-                        <canvas id="stage03"></canvas>
-                        <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">55%</label>
-                    </div> 
-                </div>
-                <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                    <div class="section-heading font-weight"> Stage 04 </div>
-                    <div class="chart-grid-stage">
-                        <canvas id="stage04"></canvas>
-                        <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">&nbsp;0%</label>
-                    </div> 
-                </div>
+                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/stageone">
+                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
+                        <div class="section-heading font-weight"> Stage 01 </div>
+                        <div class="chart-grid-stage">
+                            <canvas id="stage01"></canvas>
+                            <label class="chart-grid-stage-add chart-percentage-stage width-rem-3" for="assemblyOverall">100%</label>
+                        </div> 
+                    </div>
+                </a>
+                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/stagetwo">
+                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
+                        <div class="section-heading font-weight"> Stage 02 </div>
+                        <div class="chart-grid-stage">
+                            <canvas id="stage02"></canvas>
+                            <label class="chart-grid-stage-add chart-percentage-stage width-rem-3" for="assemblyOverall">100%</label>
+                        </div> 
+                    </div>
+                </a>
+                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/stagethree">
+                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
+                        <div class="section-heading font-weight"> Stage 03 </div>
+                        <div class="chart-grid-stage">
+                            <canvas id="stage03"></canvas>
+                            <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">55%</label>
+                        </div> 
+                    </div>
+                </a>
+                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/stagefour">
+                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
+                        <div class="section-heading font-weight"> Stage 04 </div>
+                        <div class="chart-grid-stage">
+                            <canvas id="stage04"></canvas>
+                            <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">&nbsp;0%</label>
+                        </div> 
+                    </div>
+                </a>
                 
             </div>
             

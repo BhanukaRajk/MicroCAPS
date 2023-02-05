@@ -24,3 +24,8 @@ function addSelect(type,name) {
     selectArray[type] = new select(document.querySelectorAll(name));
     selectArray[type].create();
 }
+
+// Next Button
+function next(id) {
+    location.replace(id);
+}

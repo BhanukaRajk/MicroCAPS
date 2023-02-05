@@ -526,6 +526,10 @@ h3 {
     justify-content: space-around !important
 }
 
+.justify-content-evenly {
+    justify-content: space-evenly !important
+}
+
 /* Display */
 .display-flex-row {
     display: flex !important;
@@ -658,6 +662,11 @@ h3 {
 .width-inherit {
     width: inherit !important;
 }
+
+.width-fill-available {
+    width: -webkit-fill-available !important;
+}
+
 
 /* Borders */
 .border-gray {
@@ -842,6 +851,10 @@ h3 {
 
 .width-rem-2p5 {
     width: 2.5rem !important;
+}
+
+.width-rem-3 {
+    width: 3rem !important;
 }
 
 .width-rem-8p5 {
@@ -1334,6 +1347,7 @@ li a:hover:not(.active) {
 .page-content {
     left: 20rem;
     top: 8rem;
+    right: 3rem;
 }
 
 .page-heading {
@@ -1371,7 +1385,7 @@ li a:hover:not(.active) {
     display: none;
     left: 20rem;
     top: 18rem;
-    width: 72.3rem;
+    right: 3rem;
 }
 
 .section-heading {
@@ -1414,6 +1428,7 @@ li a:hover:not(.active) {
     z-index: 10;
     right: 2rem;
     bottom: 3rem;
+    text-transform: capitalize;
 }
 
 #alert.shows {
@@ -1619,3 +1634,13 @@ select:focus-visible {
 /*-----------------------------*/
 /*       Pop Up                */
 /*-----------------------------*/
+
+.next,
+.prev {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--blue);
+    cursor: pointer;
+}

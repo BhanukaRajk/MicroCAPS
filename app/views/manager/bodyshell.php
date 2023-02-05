@@ -8,8 +8,8 @@
             Body Shell
         </div>
 
-        <div class="display-flex-column align-items-start border-radius-1 background-white paddingx-5 paddingy-3 margin-top-3">
-            <div class="display-flex-row align-items-start align-self-center gap-1">
+        <div class="display-flex-column align-items-start margin-top-3">
+            <div class="display-flex-row align-items-start align-self-start width-fill-available gap-1 border-radius-1 background-white paddingx-5 paddingy-3 ">
                 <div onclick="rounds(event, 'one')" class="shell-btn active display-flex-column align-items-center justify-content-center border-radius-1">
                     <div class="padding-3 font-weight">Request New Shell</div>
                 </div>
@@ -168,7 +168,7 @@
                         ';
             } else {
                 echo '<div class="vehicle-detail-board  margin-bottom-4">
-                        <div class="vehicle-data-board">';
+                        <div class="vehicle-data-board justify-content-evenly">';
                 foreach($data['shellDetails'] as $value) {
 
                     $repairS = $data['repairDetails'] ? array_search($value->ChassisNo, array_column($data['repairDetails'], 'ChassisNo')) : false ;

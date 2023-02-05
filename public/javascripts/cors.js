@@ -99,11 +99,12 @@ function jobDone(id,job) {
 
                 location.reload();
                 setLocalStorage("Successful",id + " - " + job + " " + " Job is Completed");
+                
 
             } else {
 
                 location.reload();
-                // setLocalStorage("Error","Failed");
+                setLocalStorage("Error","Error Completing Job");
 
             }
 

@@ -14,7 +14,7 @@
             <div class="nav_section_headings">WORKSPACE</div>
             <a class="<?php echo ($data['url'][1] == "bodyshell") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/bodyshell"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Body Shell</a>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon3" />Components</a>
-            <a class="<?php echo ($data['url'][1] == "assembly") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/assembly"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
+            <a class="<?php echo ($data['url'][1] == "assembly") || ($data['url'][1] == "assemblystage") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/assembly"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
             <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
         </li>
         <li>

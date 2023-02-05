@@ -15,8 +15,8 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $this->view('manager/dashboard',$data);
+            
+            $this->view('manager/dashboard');
         }
     }
 
@@ -27,7 +27,6 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
             $data['shellDetails'] = $this->managerModel->shellDetails();
             $data['repairDetails'] = $this->managerModel->repairDetails();
             $data['paintDetails'] = $this->managerModel->paintDetails();
@@ -180,7 +179,6 @@ class Managers extends Controller {
             }
 
         } else {
-            $data['url'] = getUrl();
             $data['userDetails'] = $this->managerModel->userDetails($_SESSION['_id']);
             $this->view('manager/settings',$data);
         }
@@ -193,8 +191,17 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $this->view('manager/assembly',$data);
+            $this->view('manager/assembly');
+        }
+    }
+
+    public function assemblystage($stage) {
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->view('manager/'.$stage);
         }
     }
 
@@ -205,8 +212,7 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $this->view('manager/test',$data);
+            $this->view('manager/test');
         }
     }
 
