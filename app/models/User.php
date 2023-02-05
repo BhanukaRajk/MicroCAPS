@@ -42,33 +42,12 @@ private $db;
 
     public function login($username,$password) {
 
-        if ($username == 'admin') {
-            $this->db->query(
-                'SELECT Password
-                    FROM `employee-credentials`
-                    WHERE Username = :username'
-            );
-
-            $this->db->bind(':username', $username);
-
-            $row = $this->db->single();
-
-            $obj = (object) array('EmployeeID' => 0, 'Firstname' => 'Admin', 'Lastname' => 'Admin', 'Position' => 'Admin');
-
-            if ($password === $row->Password) {
-                return $obj;
-            } else {
-                return null;
-            }
-
-        }
-
         $this->db->query(
-            'SELECT employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position, employee.Image
-                FROM `employee-credentials`
-                INNER JOIN employee
-                ON `employee-credentials`.EmployeeID = employee.EmployeeId
-                WHERE `employee-credentials`.Username = :username'
+        'SELECT employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position, employee.Image
+            FROM `employee-credentials`
+            INNER JOIN employee
+            ON `employee-credentials`.EmployeeID = employee.EmployeeId
+            WHERE `employee-credentials`.Username = :username'
         );
 
         $this->db->bind(':username', $username);

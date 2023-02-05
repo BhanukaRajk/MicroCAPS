@@ -46,44 +46,44 @@
         }
     }
 
-function authCodeEmail($body,$recipient) {
+    function authCodeEmail($body,$recipient) {
 
-    // Ignore from here
+        // Ignore from here
 
-    require_once "PHPMailer/PHPMailer.php";
-    require_once "PHPMailer/SMTP.php";
-    require_once "PHPMailer/Exception.php";
-    $mail = new PHPMailer(true);
+        require_once "PHPMailer/PHPMailer.php";
+        require_once "PHPMailer/SMTP.php";
+        require_once "PHPMailer/Exception.php";
+        $mail = new PHPMailer(true);
 
-    // To Here
+        // To Here
 
-    try {
-        //Server settings
-//        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host = 'smtp.mailtrap.io';
-        $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '300967a1d4c63a';
-        $mail->Password = '293b094155e1eb';                                   //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        try {
+            //Server settings
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host = 'smtp.mailtrap.io';
+            $mail->SMTPAuth = true;
+            $mail->Port = 2525;
+            $mail->Username = '300967a1d4c63a';
+            $mail->Password = '293b094155e1eb';                                   //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-        //Recipients
-        $mail->setFrom('noreply@microcaps.com', 'MicroCAPS');
-        $mail->addAddress($recipient);     //Add a recipient
-        //$mail->addReplyTo('info@example.com', 'Information');
+            //Recipients
+            $mail->setFrom('noreply@microcaps.com', 'MicroCAPS');
+            $mail->addAddress($recipient);     //Add a recipient
+            //$mail->addReplyTo('info@example.com', 'Information');
 
-        //Attachments
-        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+            //Attachments
+            //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+            //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
-        //Content
-        $mail->isHTML();                                  //Set email format to HTML
-        $mail->Subject = 'MicroCAPS Email Verification';
-        $mail->Body = $body;
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            //Content
+            $mail->isHTML();                                  //Set email format to HTML
+            $mail->Subject = 'MicroCAPS Email Verification';
+            $mail->Body = $body;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-        $mail->send();
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
+            $mail->send();
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: $mail->ErrorInfo";
+        }
     }
-}
