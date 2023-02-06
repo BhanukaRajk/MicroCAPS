@@ -1,0 +1,161 @@
+.pagehead {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+    color: #1C1F37;
+}
+
+.databoard {
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-detail-board {
+    display: flex;
+    flex-direction: row;
+    padding-top: 25px;
+}
+
+.vehicle-data-board {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.8rem;
+}
+
+.carcard {
+    width: 221px;
+    height: 200px;
+    padding: 23px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.carmodel {
+    height: 15px;
+    left: 0px;
+    top: 0px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+    color: #000000;
+}
+
+.chassisno,
+.arrivaldate,
+.status {
+    height: 12px;
+    left: 0px;
+    top: 15px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: #A6AFBA;
+}
+
+.carstatus {
+    height: 18px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    color: var(--color);
+}
+
+.green {
+    --color: #17B978;
+}
+
+.orange {
+    --color: #FD5F00;
+}
+
+.red {
+    --color: #FF0000;
+}
+
+.cardhead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.carpicbox {
+    text-align: center;
+}
+
+.carpic {
+    height: 100px;
+}
+
+.filterbox {
+    position: fixed;
+    width: 212px;
+    height: 520px;
+    right: 20px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filterin {
+    margin: 22px 26px 22px 26px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.filtertype {
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    line-height: 14px !important;
+    color: #4C5C6B;
+}
+
+.filters {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #A6AFBA;
+    margin-block: 19px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.status-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.status-green-circle {
+    background-color: #17B978;
+}
+
+.status-orange-circle {
+    background-color: #FD5F00;
+}
+
+.available {
+    color: #17B978;
+}
+
+.lower {
+    color: #FD5F00;
+}
