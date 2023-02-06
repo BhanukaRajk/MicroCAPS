@@ -601,6 +601,10 @@ h3 {
     height: 100vh !important
 }
 
+.height-rem-12p5 {
+    height: 12.5rem !important;
+}
+
 .height-rem-25 {
     height: 25rem;
 }
@@ -658,12 +662,23 @@ h3 {
     border-radius: 1rem;
 }
 
+.border-radius-11 {
+    border-radius: 11rem;
+}
+
 .background-white {
     background-color: var(--white);
 }
 
 .background-blue {
     background-color: var(--blue);
+}
+
+.background-image {
+    background-clip: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -0.5rem;
 }
 
 /* Text */
@@ -762,6 +777,11 @@ h3 {
 
 .width-rem-10 {
     width: 14rem !important
+}
+
+
+.width-rem-12p5 {
+    width: 12.5rem !important
 }
 
 .width-rem-15p7 {
@@ -1155,7 +1175,7 @@ li a:hover:not(.active) {
 }
 
 .page-content-2 {
-    left: 18rem;
+    left: 20rem;
     top: 8rem;
 }
 
