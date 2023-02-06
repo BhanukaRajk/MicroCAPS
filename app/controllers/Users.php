@@ -186,6 +186,8 @@
             unset($_SESSION['_id']);
             unset($_SESSION['_email']);
             unset($_SESSION['_name']);
+            unset($_SESSION['_position']);
+            unset($_SESSION['_profile']);
             session_destroy();
             redirect('users/login');
         }
@@ -204,3 +206,4 @@
 
 
     }
+    

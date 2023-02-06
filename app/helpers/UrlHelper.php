@@ -1,17 +1,18 @@
 <?php
-  // Simple page redirect
-  function redirect($page){
+// Simple page redirect
+function redirect($page)
+{
     header('location: ' . URL_ROOT . $page);
-  }
+}
 
-function getUrl(){
+function getUrl()
+{
 
-    if(isset($_GET['url'])){
+    if (isset($_GET['url'])) {
 
         $url = rtrim($_GET['url'], '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
-        return explode('/', $url);
-
+        $url = explode('/', $url);
+        return $url;
     }
-
 }

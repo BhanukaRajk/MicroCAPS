@@ -116,7 +116,7 @@ function jobDone(id,job) {
 
 }
 
-function saveChanges(id) {
+function saveChanges(id, position) {
     let formdata = new FormData();
     formdata.append("id", id);
     formdata.append("image", document.getElementById("image").files[0]);
@@ -127,7 +127,7 @@ function saveChanges(id) {
     formdata.append("nic", document.getElementById("nic").value);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MicroCAPS/Managers/settings',
+        url: 'http://localhost/MicroCAPS/'+position+'s/settings',
         data: formdata,
         processData: false,
         contentType: false,

@@ -1,0 +1,113 @@
+
+.content-area {
+
+    margin-inline: 10rem;
+    /* margin-block: 2.5rem; */
+    margin-block: 38px;
+
+    left: 16.5rem;
+    right: 0rem;
+    top: 4rem;
+    bottom: 0rem;
+}
+
+.form-headings{
+    font-size: 24px;
+    font-weight: bold;
+    padding-block: 0.5rem;
+}
+.formbox {
+    margin-inline: auto;
+    /* padding: 0 3rem; */
+    background-color: white;
+    padding: 1rem;
+
+    width: auto;
+    min-width: 714px;
+    /* height:621px; */
+
+    align-items: center;
+}
+
+.wide {
+     width: 600px;
+}
+
+.wider {
+    width: 700px;
+}
+
+.submit-button {
+    color: #017EFA;
+    /* color: #ffffff; */
+    text-decoration: none;
+    font-size: medium;
+    border: 0.1rem solid #017EFA;
+    /* border: 0.1rem solid #081A51; */
+    height: 2.5rem;
+    /* background-color: #081A51; */
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 2sec;
+}
+
+.submit-button:hover {
+    background-color: #017EFA22;
+}
+
+.reset-button {
+    color: #FD5F00;/*27BEFF */
+    /* color: #000000; */
+    text-decoration: none;
+    font-size: medium;
+    border: 0.1rem solid #FD5F00;
+    /* border: 0.1rem solid #27BEFF; */
+    background-color: #ffffff;
+    /* background-color: #27BEFF; */
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    transition: 5sec;
+}
+
+.reset-button:hover {
+    background-color: #FD5F0022;
+}
+
+.form-input {
+    --input-border: 1px;
+    --input-border-color: var(--gray);
+    --input-border-radius: 0.5rem;
+    display: block;
+    width: 200px;
+    padding: .6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: var(--input-border) solid var(--input-border-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: var(--input-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-input::placeholder {
+    opacity: 0;
+}
+
+.form-input:focus {
+    --input-border-color: var(--blue);
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-input-invalid {
+    --input-border-color: #ee0b0b;
+    outline: 0;
+    box-shadow: none;
+}
