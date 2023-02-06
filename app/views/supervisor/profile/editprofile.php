@@ -110,6 +110,6 @@
 </section>
 
 
-<script type="module" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
+<script type="module" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/cors.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/settings.js"></script>

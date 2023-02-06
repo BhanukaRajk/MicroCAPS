@@ -10,7 +10,7 @@
                     <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="width-rem-0p75" alt="drop">
                 </button>
                 <div id="profileDropdown" class="profilemenu-content">
-                    <a href="<?php echo URL_ROOT; ?>supervisors/logout">Log out</a>
+                    <a href="<?php echo URL_ROOT; ?>users/logout">Log out</a>
                     <a href="<?php echo URL_ROOT; ?>supervisors/editprofile">Settings</a>
                 </div>
             </div>
