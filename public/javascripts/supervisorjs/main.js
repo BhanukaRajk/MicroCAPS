@@ -28,7 +28,6 @@ window.onclick = function (event) {
 
 
 function myFunction() {
-
     var msg = document.getElementById("messagebox");
     // message.className = "show";
     msg.className = msg.className.replace("hideme", "shows showme");
