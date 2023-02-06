@@ -50,9 +50,9 @@
         </div>
     </section>
 
-    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/assemblyCharts.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/cors.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/assemblyCharts.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
 
     
 </body>

@@ -309,9 +309,9 @@
 
     </section>
 
-    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
-    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/addFields.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/bodyshell.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/cors.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/addFields.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/bodyshell.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
 
 </body>

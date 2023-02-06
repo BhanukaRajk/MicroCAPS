@@ -158,9 +158,9 @@
     </div>
 </section>
 
-<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/main.js"></script>
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/dashboard.js"></script>
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/charts.js"></script>
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/dashboard.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/charts.js"></script>
 
 </body>
 

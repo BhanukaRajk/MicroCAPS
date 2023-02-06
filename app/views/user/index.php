@@ -53,7 +53,7 @@
     </div>
 </section>
 
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/form.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/userjs/form.js"></script>
 
 </body>
 
