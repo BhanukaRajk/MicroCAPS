@@ -3,13 +3,6 @@
 class Supervisors extends controller
 {
 
-
-
-
-
-
-
-
     private $supervisorModel;
 
     public function __construct()
@@ -17,14 +10,10 @@ class Supervisors extends controller
         $this->supervisorModel = $this->model('Supervisor');
     }
 
-
-
-
-
     public function settings() {
 
         if(!isLoggedIn()){
-            redirect('Supervisors/login');
+            redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -56,105 +45,19 @@ class Supervisors extends controller
                     echo 'Error';
                 }
 
-            }
-
-        } else {
-            $data['url'] = getUrl();
-            $data['userDetails'] = $this->supervisorModel->userDetails($_SESSION['_id']);
-            $this->view('supervisor/profile/editprofile', $data);
-        }
-    }
-
-
-
-
-
-
-    public function login()
-    {
-
-        /* Post */
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'username' => trim($_POST['username']),
-                'password' => trim($_POST['password']),
-                'username_err' => '',
-                'password_err' => ''
-            ];
-
-            if (!$this->supervisorModel->findUserByUsername($data['username'])) {
-                $data['username_err'] = 'Incorrect Username';
-            }
-
-
-            if (empty($data['username_err']) && empty($data['password_err'])) {
-
-                $loggedUser = $this->supervisorModel->login($data['username'], $data['password']);
-
-                if ($loggedUser) {
-                    $this->createUserSession($loggedUser);
-                } else {
-                    $data['password_err'] = 'Incorrect Password';
-                    $this->view('supervisor/index', $data);
-                }
             } else {
-                $this->view('supervisor/index', $data);
+                if ($this->supervisorModel->updateProfileValues($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic']))
+                    echo 'Successful';
+                else
+                    echo 'Error';
             }
+
         } else {
-            $data = [
-                'username' => '',
-                'password' => '',
-                'username_err' => '',
-                'password_err' => ''
-            ];
-            $this->view('supervisor/index', $data);
+            $data['userDetails'] = $this->supervisorModel->userDetails($_SESSION['_id']);
+            $this->view('supervisor/profile/editprofile',$data);
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function createUserSession($user)
-    {
-        $_SESSION['_id'] = $user->EmployeeID;
-        $_SESSION['_firstname'] = $user->Firstname;
-        $_SESSION['_lastname'] = $user->Lastname;
-        $_SESSION['return_message'] = '';
-
-        redirect('Supervisors/dashboard');
-    }
-
-    public function logout()
-    {
-        unset($_SESSION['_id']);
-        unset($_SESSION['_email']);
-        unset($_SESSION['_name']);
-        session_destroy();
-        redirect('Supervisors/login');
-    }
 
     public function dashboard()
     {
@@ -727,6 +630,5 @@ class Supervisors extends controller
             $this->view('supervisor/inspection/vehiclelist', $data);
         }
     }
-
 
 }
