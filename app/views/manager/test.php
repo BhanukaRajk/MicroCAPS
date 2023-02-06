@@ -1,6 +1,5 @@
-<?php require_once APP_ROOT . '\views\includes\header.php'; ?>
-
-<?php require_once APP_ROOT . '\views\manager\navbar.php'; ?>
+<?php require_once APP_ROOT . '\views\manager\includes\header.php'; ?>
+<?php require_once APP_ROOT . '\views\manager\includes\navbar.php'; ?>
 
 <!-- <div class="item-2-2">
     <section class="position-absolute page-content">
