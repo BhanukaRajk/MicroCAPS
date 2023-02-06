@@ -76,7 +76,6 @@ class Tester {
 
         $this->db->query('SELECT * FROM `cardefect` WHERE `cardefect`.`DefectNo` = :DefectNo AND `cardefect`.`ChassisNo` = :ChassisNo');
 
-
         $this->db->bind(':DefectNo', $DefectNo);
         $this->db->bind(':ChassisNo', $ChassisNo);
 
@@ -84,6 +83,18 @@ class Tester {
 
         return $row;
 
+    }
+
+    public function getPDI($ChassisNo, $CheckId) {
+
+        $this->db->query('SELECT * FROM `carpdi` WHERE `carpdi`.`CheckId` = :CheckId AND `carpdi`.`ChassisNo` = :ChassisNo');
+
+        $this->db->bind(':DefectNo', $CheckId);
+        $this->db->bind(':ChassisNo', $ChassisNo);
+
+        $row = $this->db->single();
+
+        return $row;
     }
 
 
@@ -204,6 +215,18 @@ class Tester {
         } else {
             return false;
         }
+    }
+
+    public function recordPDI($data) {
+        $this->db->query(
+            "INSERT INTO `carpdi` (`ChassisNo`, `CheckId`, `Status`, `EmployeeID`) 
+            VALUES (:ChassisNo, :CheckId, :Status, :EmployeeID)"
+        );
+
+        $this->db->bind(':ChassisNo', $data['ChassisNo']);
+        $this->db->bind(':CheckId', $data['CheckId']);
+        $this->db->bind(':Status', $data['Status']);
+        $this->db->bind(':EmployeeID', $data['EmployeeID']);
     }
 
 

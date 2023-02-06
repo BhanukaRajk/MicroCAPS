@@ -1106,6 +1106,7 @@ Table
     position: absolute;
     display: flex;
     flex-direction: row;
+    top: -2rem;
 }
 
 /* <- LEFT SIDE OF PAGE CONTENT */
