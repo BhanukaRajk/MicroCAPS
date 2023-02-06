@@ -55,6 +55,37 @@ function requestShell() {
     xhttp.send(string);
 }
 
+
+// C.O.R.S
+// function requestShell() {
+
+//     let Chassis01 = document.getElementById("Chassis01").value;
+//     let chasis02 = document.getElementById("chasis02").value;
+
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             var response = this.responseText;
+
+//             if (response == "Successful") {
+
+//                 location.reload();
+//                 setLocalStorage("Successful","Email Sent Successfully");
+
+//             } else {
+
+//                 location.reload();
+//                 setLocalStorage("Error","Error Sending Email");
+
+//             }
+
+//         }
+//     };
+//     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/shellRequest", true);
+//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     xhttp.send("suvQty="+Chassis01+"&normalQty="+chasis02);
+// }
+
 function addShell() {
 
     let chassisNo = document.getElementById("chassisNo").value;
