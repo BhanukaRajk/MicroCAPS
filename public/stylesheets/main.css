@@ -1,3 +1,6 @@
+@import "dashboard.css";
+@import "vehiclelist.css";
+
 body {
     margin: 0;
     background: #F2F2F7;
