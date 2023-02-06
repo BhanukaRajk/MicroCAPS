@@ -22,7 +22,7 @@
                 <button id="edit" class="btn btn-primary width-rem-8p5 height-rem-2p5" type="button">
                     Edit Details
                 </button>
-                <button id="change" class="btn btn-primary btn-green display-none width-rem-8p5 height-rem-2p5" type="submit" onclick="saveChanges(<?php echo $_SESSION['_id'] ?>)">
+                <button id="change" class="btn btn-primary btn-green display-none width-rem-8p5 height-rem-2p5" type="submit" onclick="saveChanges(<?php echo $_SESSION['_id'] ?>, '<?php echo $_SESSION['_position'] ?>')">
                     Change
                 </button>
             </div>
