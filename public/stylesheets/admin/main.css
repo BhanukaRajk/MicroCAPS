@@ -1,3 +1,7 @@
+@import 'dash.css';
+@import 'add.css';
+@import 'edit.css';
+@import 'viewemployees.css';
 body {
     margin: 0;
     background: #F2F2F7;
@@ -1272,7 +1276,7 @@ li a {
     color: #fff;
     height: 1.5rem;
     margin-left: 1rem;
-    padding: 1rem 0rem 1rem 0.875rem;
+    padding: 2rem 0rem 1rem 0.875rem !important;
     text-decoration: none;
 }
 

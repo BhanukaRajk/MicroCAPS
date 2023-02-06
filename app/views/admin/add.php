@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php require_once APP_ROOT . '/views/admin/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/admin/navbar.php'; ?>
     
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/add.css" rel="stylesheet" />
-</head>
-
-<body>
-    <header>
+    <!-- <header>
 
         <ul class="display-flex-column">
             <li>
@@ -45,7 +38,7 @@
                 <div class="logout" id="logout"><a href="http://localhost/MicroCAPS/admins/logout" class="text-decoration-none text-black">logout</a></div>
             </div>
         </div>
-    </header>
+    </header> -->
 
     <div class="container1">
         <h3>Add Employee</h3>

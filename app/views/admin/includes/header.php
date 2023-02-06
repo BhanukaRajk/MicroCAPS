@@ -13,9 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
 
     <!-- Template Main CSS File -->
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/main.css" rel="stylesheet" />
-
-    <!-- <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" /> -->
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/main.css" rel="stylesheet" />
 
     <title>MicroCAPS</title>
 </head>

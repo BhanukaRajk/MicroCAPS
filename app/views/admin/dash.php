@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en-us">
-
-<head>
-    <meta charset="utf-8">
-    <title>Dashboard</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/dash.css" rel="stylesheet" />
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/main.css" rel="stylesheet" />
-</head>
-
-<body>
-    <header>
+<?php require_once APP_ROOT . '/views/admin/includes/header.php'; ?>
+<?php require_once APP_ROOT . '/views/admin/navbar.php'; ?>
+    <!-- <header>
 
         <ul class="display-flex-column">
             <li>
@@ -48,7 +37,7 @@
           <div class="logout" id="logout"><a href="http://localhost/MicroCAPS/admins/logout" class="text-decoration-none text-black">logout</a></div>
           </div>
       </div>
-    </header>
+    </header> -->
     <!--<script src="" async defer></script>-->
     <!-- <div class="page"> -->
         <!-- <div class="navigation"></div> -->
@@ -56,7 +45,7 @@
             <!-- <div class="top_content"></div> -->
             <div class="detailed_content">
                 <div class="left" style="margin-top: -30%">
-                    <div class="heading bold" style="margin-top: 45%" >Dashboard</div>
+                    <div class="heading bold" style="margin-top: 40%" >Dashboard</div>
                     <div class="row">
                         <div class="column le">
                             <div class="c1">
@@ -120,7 +109,7 @@
                     </div>
                     
                 </div>
-                <div class="right" style="margin-top: -20%">
+                <div class="right" style="margin-top: -10%">
                     <div class="logs bold">
                         <div class="sidebox">Activity Logs</div>
                         <div class="sidebox"></div>

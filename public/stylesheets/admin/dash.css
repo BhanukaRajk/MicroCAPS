@@ -43,7 +43,7 @@ body {
     display: flex;
     flex-direction: row;
 
-    background-color:rgb(235, 235, 235);
+    background-color:#F2F2F7;
     margin-left: 20%;
     margin-top: 15%;
 }
@@ -59,13 +59,13 @@ body {
 /*  <- LEFT SIDE HEADING */
 .heading {
     margin-top: 100px;
-    margin-bottom: -50px;
+    margin-bottom: -20px;
     font-size: x-large;
     height: 5%;
 }
 
 .row{
-    margin-top: 10%;
+    margin-top: 7%;
 }
 
 /* LEFT SIDE DETAILED BOX (UPPER) */
@@ -260,7 +260,7 @@ body {
     flex-direction: column;
     justify-content: center;
 
-    padding-left: 1rem;
+    padding-left: 6rem;
     margin-top: 10%;
 }
 
@@ -999,6 +999,9 @@ h3 {
     flex-direction: row;
     background-color: var(--white);
     margin-left: -30px;
+    border-radius: 1.2rem;
+    width: 110%;
+
 }
 
 .column {
@@ -1266,7 +1269,7 @@ li a {
     color: #fff;
     height: 1.5rem;
     margin-left: 1rem;
-    padding: 1rem 0rem 1rem 0.875rem;
+    padding: 2rem 0rem 1rem 0.875rem;
     text-decoration: none;
 }
 
