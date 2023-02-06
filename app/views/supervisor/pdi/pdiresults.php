@@ -19,6 +19,18 @@
                             <label for="vehicles"></label>
                             <select class="pdi-vehicles" name="vehicles" id="vehicles">
                                 <option value="NULL">Select vehicle</option>
+
+                                <?php 
+                                foreach ($data['pdivehicles'] as $vehicle) {
+                                    echo '<option value="'. $vehicle->chassisno .'">'. $vehicle->chassisno .'</option>';
+                                  }
+                        
+                        
+                                  // DISPLAY THIS IF THERE IS NO DATA IN THE TABLE
+                                  // if ($item == NULL) {
+                                  //   echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
+                                  // }
+                                ?>
                                 <option value="CN1294B0934">CN1294B0934</option>
                                 <option value="CN1294G0836">CN1294G0836</option>
                                 <option value="CN1294L9302">CN1294L9302</option>

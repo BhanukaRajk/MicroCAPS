@@ -1,7 +1,9 @@
 <?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
+<!-- <?php //require_once APP_ROOT . '/views/includes/header.php'; ?> -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
-<section class = "position-absolute page-content" >
+<section class = "position-absolute page-content-2" >
     <div class="page-heading  font-weight">
         Account Settings
     </div>

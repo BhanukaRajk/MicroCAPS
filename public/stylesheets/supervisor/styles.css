@@ -9,6 +9,7 @@
 @import "flashmessage.css";
 @import "addleave.css";
 @import "buttons.css";
+@import "settings.css";
 
 /* @import "vehiclelist.css"; */
 
@@ -167,6 +168,10 @@ h3 {
     margin-top: 3rem !important
 }
 
+.margin-top-6 {
+    margin-top: 2rem !important
+}
+
 .margin-top-auto {
     margin-top: auto !important
 }
@@ -308,6 +313,11 @@ h3 {
 .paddingx-5 {
     padding-right: 3rem !important;
     padding-left: 3rem !important
+}
+
+.paddingx-6 {
+    padding-right: 7rem !important;
+    padding-left: 7rem !important
 }
 
 .paddingy-0 {
@@ -545,6 +555,10 @@ h3 {
     gap: 2rem;
 }
 
+.gap-10 {
+    gap: 10rem;
+}
+
 .gap-2p6 {
     gap: 2.6rem;
 }
@@ -585,6 +599,10 @@ h3 {
 
 .height-vh-100 {
     height: 100vh !important
+}
+
+.height-rem-25 {
+    height: 25rem;
 }
 
 /* Widths */
@@ -1134,6 +1152,11 @@ li a:hover:not(.active) {
 .page-content {
     left: 16.25rem;
     top: 4rem;
+}
+
+.page-content-2 {
+    left: 18rem;
+    top: 8rem;
 }
 
 .page-heading {
