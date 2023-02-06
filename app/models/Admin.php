@@ -38,4 +38,41 @@ class Admin {
 
     }
 
+    public function userdetails() {
+        $this->db->query('SELECT * FROM Employee WHERE Position = "Manager"');
+
+        $row = $this->db->resultSet();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+    public function userdetails_2() {
+        $this->db->query('SELECT * FROM Employee WHERE Position = "Supervisor"');
+
+        $row = $this->db->resultSet();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+    public function userdetails_3() {
+        $this->db->query('SELECT * FROM Employee WHERE Position = "Tester"');
+
+        $row = $this->db->resultSet();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+
 }

@@ -67,24 +67,24 @@ class Admins extends controller {
         redirect('admins/login');
     }
 
-    public function dashboard() {
+    public function dash() {
 
-        if(!isLoggedIn()){
-            redirect('admins/login');
-        }
+        // if(!isLoggedIn()){
+        //     redirect('admins/login');
+        // }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $url = getUrl();
-            $this->view('admin/dash');
+            $this->view('admin/dash', $url );
         }
     }
 
 
     public function add() {
 
-        if(!isLoggedIn()){
-            redirect('admins/login');
-        }
+        // if(!isLoggedIn()){
+        //     redirect('admins/login');
+        // }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $url = getUrl();
@@ -99,9 +99,9 @@ class Admins extends controller {
 
     public function edit() {
 
-        if(!isLoggedIn()){
-            redirect('admins/login');
-        }
+        // if(!isLoggedIn()){
+        //     redirect('admins/login');
+        // }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $url = getUrl();
@@ -114,15 +114,23 @@ class Admins extends controller {
         }
     }
 
-    public function just() {
+    public function viewemployees() {
 
-        if(!isLoggedIn()){
-            redirect('admins/login');
-        }
+        // if(!isLoggedIn()){
+        //     redirect('admins/login');
+        // }
 
+        // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        //     $url = getUrl();
+        //     
+        //     $this->view('admin/viewemployees',$data);
+        // }
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $url = getUrl();
-            $this->view('admin/just');
+            $data['managerdetail'] = $this->adminModel->userdetails();
+            $data['supervisordetail'] = $this->adminModel->userdetails_2();
+            $data['testerdetail'] = $this->adminModel->userdetails_3();
+            $this->view('admin/viewemployees',$data);
         }
     }
 
