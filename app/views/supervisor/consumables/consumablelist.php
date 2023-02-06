@@ -34,10 +34,10 @@
                     <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 100) ? 'available' : 'lower') : (($item->Volume >= 100) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight > 100) ? 'Available' : 'Low in stock') : (($item->Volume > 100) ? 'Available' : 'Low in stock'), '</div>
                     <div class="chassisno">Last update: ', $item->LastUpdate, '</div>
                   </div>';
-            //print_r($item);
-            //echo $item->consumable_id;
           }
 
+
+          // DISPLAY THIS IF THERE IS NO DATA IN THE TABLE
           if ($item == NULL) {
             echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
           }
@@ -48,7 +48,7 @@
 
 
 
-        <div class="consumable-popup-window">
+        <div class="consumable-popup-window display-none">
           <div class="">
             <div><button type="">Back</button></div>
           </div>
@@ -82,51 +82,62 @@
         <div class="thisfilter">
           <div class="filterbox">
             <div class="filterin">Filter by</div>
+            <div class="line"></div>
             <div class="">
-              <hr>
-            </div>
-            <div class="">
-              <ul id="consume_filter">
+              <form method="POST" action="">
+                <ul id="consume_filter">
 
-                <li>
-                  <div class="filtertype">Consumable Type</div>
-                  <div class="filters">
-                    <input type="checkbox" id="enoil" name="enoil" checked>
-                    <label for="enoil">Engine Oil</label>
-                  </div>
-                  <div class="filters">
-                    <input type="checkbox" id="coolant" name="coolant">
-                    <label for="coolant">Radiator coolants</label>
-                  </div>
-                  <div class="filters">
-                    <input type="checkbox" id="grease" name="grease">
-                    <label for="mg">Grease</label>
-                  </div>
-                </li>
+                  <li>
+                    <div class="filtertype">Consumable Type</div>
+                    <div class="filters">
+                      <input type="radio" id="lubricant" name="constype" value="Lubricants">
+                      <label for="lubricant">Lubricants</label>
+                      <!-- <input type="checkbox" id="lubricant" name="lubricant" checked>
+                      <label for="lubricant">Lubricants</label> -->
+                    </div>
+                    <!-- <div class="filters">
+                      <input type="checkbox" id="coolant" name="coolant">
+                      <label for="coolant">Radiator coolants</label>
+                    </div> -->
+                    <div class="filters">
+                      <!-- <input type="checkbox" id="grease" name="grease">
+                      <label for="mg">Grease</label> -->
+                      <input type="radio" id="grease" name="constype" value="Grease">
+                      <label for="grease">Grease</label>
+                    </div>
+                    <div class="filters">
+                      <input type="radio" id="gandl" name="constype" value="All">
+                      <label for="gandl">All</label>
+                    </div>
+                  </li>
 
-                <li>
-                  <div class="filtertype">Timeline</div>
-                  <div class="filters">
-                    <input type="checkbox" id="all" name="all">
-                    <label for="all">All</label>
-                  </div>
-                  <div class="filters">
-                    <input type="checkbox" id="current" name="current">
-                    <label for="current">Current</label>
-                  </div>
-                </li>
-                <li>
-                  <div class="filtertype">Status</div>
-                  <div class="filters">
-                    <input type="checkbox" id="available" name="available">
-                    <label for="available">Available</label>
-                  </div>
-                  <div class="filters">
-                    <input type="checkbox" id="lowst" name="lowst">
-                    <label for="lowst">Low in stock</label>
-                  </div>
-                </li>
-              </ul>
+                  <!-- <li>
+                    <div class="filtertype">Timeline</div>
+                    <div class="filters">
+                      <input type="checkbox" id="all" name="all">
+                      <label for="all">All</label>
+                    </div>
+                    <div class="filters">
+                      <input type="checkbox" id="current" name="current" >
+                      <label for="current">Current</label>
+                    </div>
+                  </li> -->
+                  <li>
+                    <div class="filtertype">Status</div>
+                    <div class="filters">
+                      <input type="checkbox" id="available" name="available" checked>
+                      <label for="available">Available</label>
+                    </div>
+                    <div class="filters">
+                      <input type="checkbox" id="lowst" name="lowst" checked>
+                      <label for="lowst">Low in stock</label>
+                    </div>
+                    <div class="filters filter-btn">
+                      <div><button type="submit" id="filtering" name="submit" class="filter-button">Search</button></div>
+                    </div>
+                  </li>
+                </ul>
+              </form>
             </div>
           </div>
         </div>
