@@ -1,7 +1,7 @@
 <?php
 
-class Testers
-{
+class Testers extends Controller {
+
     private $testerModel;
 
     public function __construct(){

@@ -1,0 +1,62 @@
+/* Text */
+.text-left {
+    text-align: left !important
+}
+
+.text-center {
+    text-align: center !important
+}
+
+.text-right {
+    text-align: right !important
+}
+
+.text-justify {
+    text-align: justify !important
+}
+
+.text-center {
+    text-align: center !important
+}
+
+/* Color */
+.text-black {
+    color: var(--black) !important
+}
+
+.text-white {
+    color: var(--white) !important
+}
+
+.text-blue {
+    color: var(--blue) !important
+}
+
+.text-gray {
+    color: var(--gray) !important
+}
+
+.text-fontgray {
+    color: var(--fontgray) !important
+}
+
+.text-decoration-none {
+    text-decoration: none !important
+}
+
+/* Weights */
+.font-weight {
+    font-weight: 700;
+}
+
+.font-size {
+    font-size: 12px !important;
+}
+
+.font-size-24 {
+    font-size: 24px !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
