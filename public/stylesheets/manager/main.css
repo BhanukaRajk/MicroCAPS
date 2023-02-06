@@ -63,5 +63,7 @@
 
 /* Page */
 @import "pages/common.css";
+
 @import "pages/dashboard.css";
+
 @import "pages/vehiclelist.css";
