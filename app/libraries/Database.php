@@ -86,3 +86,4 @@ class Database
         return $this->statement->rowCount();
     }
 }
+

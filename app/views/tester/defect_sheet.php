@@ -1,4 +1,4 @@
-<?php require_once APP_ROOT . '\views\includes\header.php'; ?>
+<?php require_once APP_ROOT . '\views\tester\includes\header.php'; ?>
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
 
 
