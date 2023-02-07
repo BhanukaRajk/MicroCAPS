@@ -1,0 +1,53 @@
+/* Height in % */
+.height-0 {
+    height: 0% !important
+}
+
+.height-25 {
+    height: 25% !important
+}
+
+.height-50 {
+    height: 50% !important
+}
+
+.height-75 {
+    height: 75% !important
+}
+
+.height-80 {
+    height: 80% !important
+}
+
+.height-90 {
+    height: 90% !important
+}
+
+.height-100 {
+    height: 100% !important
+}
+
+.height-vh-100 {
+    height: 100vh !important
+}
+
+/* Height in REM */
+.height-rem-1 {
+    height: 1rem !important;
+}
+
+.height-rem-2 {
+    height: 2rem !important;
+}
+
+.height-rem-2p5 {
+    height: 2.5rem !important;
+}
+
+.height-rem-12p5 {
+    height: 12.5rem !important;
+}
+
+.height-rem-25 {
+    height: 25rem !important;
+}

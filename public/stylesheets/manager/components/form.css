@@ -1,0 +1,129 @@
+.form-control {
+    --input-border: 1px;
+    --input-border-color: var(--gray);
+    --input-border-radius: 1rem;
+    display: block;
+    width: 16.75rem;
+    padding: .6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: var(--input-border) solid var(--input-border-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: var(--input-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-label {
+    margin-bottom: .5rem
+}
+
+.form-control::placeholder {
+    opacity: 0;
+}
+
+.form-control:focus {
+    --input-border-color: var(--blue);
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-control-invalid {
+    --input-border-color: #ee0b0b;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-control-red {
+    --input-border-color: var(--red);
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-control-red:focus {
+    --input-border-color: var(--red);
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-control-green {
+    --input-border-color: var(--green);
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-control-green:focus {
+    --input-border-color: var(--green);
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-control-blue {
+    --input-border-color: var(--blue);
+    outline: 0;
+    box-shadow: none;
+}
+
+
+input:focus~label.form-label,
+input:not(:placeholder-shown)~label.form-label {
+    bottom: 4.5em;
+    left: 1.5em;
+    background-color: white;
+    padding: 0 0.5em;
+    font-size: 0.8em;
+    opacity: 1;
+    color: var(--blue);
+}
+
+input:not(:focus)~label.form-label {
+    color: #ced4da;
+}
+
+input.red:focus {
+    border-color: var(--blue);
+    outline: 0;
+    box-shadow: none;
+}
+
+input:focus~label.red {
+    color: #ee0b0b;
+}
+
+input:not(:focus)~label.red {
+    color: #ee0b0b;
+}
+
+input:focus~label.green {
+    color: var(--green);
+}
+
+input:not(:focus)~label.green {
+    color: var(--green);
+}
+
+input:not(:focus)~label.blue {
+    color: var(--blue);
+}
+
+label.form-label {
+    position: relative;
+    bottom: 2em;
+    left: 1.5em;
+    color: #ced4da;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    margin: none;
+}
+
+input.form-control:-webkit-autofill,
+input.form-control:-webkit-autofill:hover,
+input.form-control:-webkit-autofill:focus,
+input.form-control:-webkit-autofill:active {
+    background-color: white;
+}

@@ -1,0 +1,77 @@
+.page-content {
+    left: 20rem;
+    top: 8rem;
+    right: 3rem;
+}
+
+.page-heading {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-size: 32px;
+    color: var(--fontblue);
+}
+
+.shell-btn {
+    border: 1px solid var(--gray);
+    width: 15.7rem;
+    color: var(--blue);
+    background-color: var(--white);
+    cursor: pointer;
+}
+
+.shell-btn.active {
+    border: 1px solid var(--blue);
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+.shell-btn:hover {
+    border: 1px solid var(--blue);
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+.shell-forms {
+    display: none;
+    left: 20rem;
+    top: 18rem;
+    right: 3rem;
+}
+
+.section-heading {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-size: 24px;
+    color: var(--fontblue);
+}
+
+.view-more {
+    color: var(--linkblue);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.next,
+.prev {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--blue);
+    cursor: pointer;
+}
+
+.addBtn {
+    margin-top: 0.3rem;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addBtn:hover {
+    cursor: pointer;
+    background-color: white !important;
+    color: var(--blue) !important;
+}
