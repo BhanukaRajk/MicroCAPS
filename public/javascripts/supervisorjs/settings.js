@@ -3,8 +3,6 @@ const change = document.getElementById("change");
 const image = document.getElementById("image");
 const preview = document.getElementById("img-preview");
 
-
-
 edit?.addEventListener("click", () => {
 
     $("#details :input").prop("disabled", false);
@@ -39,8 +37,7 @@ function getImgData() {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
-            preview.style.backgroundImage = `url(${this.result})`;
-            // preview.setAttribute('src', this.result);
+            preview.setAttribute('src', this.result);
         });
     }
     

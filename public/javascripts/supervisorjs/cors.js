@@ -15,23 +15,8 @@ $(document).ready(() => {
 // C.O.R.S
 function requestShell() {
 
-    let array = [];
-    let cnt = 1;
-
-    while (document.getElementById(`type${cnt}`)) {
-        let type = document.getElementById(`type${cnt}`).value;
-        let qty = document.getElementById(`qty${cnt}`).value;
-        array.push({ type, qty });
-        cnt++;
-    }
-
-    let string = "";
-    cnt = 1;
-
-    array.forEach(element => {
-        string = string + `&type${cnt}=${element.type}&qty${cnt}=${element.qty}`;
-        cnt++;
-    });
+    let Chassis01 = document.getElementById("Chassis01").value;
+    let chasis02 = document.getElementById("chasis02").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -44,15 +29,17 @@ function requestShell() {
                 setLocalStorage("Successful","Email Sent Successfully");
 
             } else {
+
                 location.reload();
                 setLocalStorage("Error","Error Sending Email");
+
             }
 
         }
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/shellRequest", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(string);
+    xhttp.send("suvQty="+Chassis01+"&normalQty="+chasis02);
 }
 
 function addShell() {
@@ -62,7 +49,8 @@ function addShell() {
     let chassis = document.getElementById("chassis").value;
     let repair = document.getElementById("repair").checked;
     let paint = document.getElementById("paint").checked;
-    let repairDescription = document.getElementById("repairDescription").value;
+    let repairDescription = document.getElementById("repairDescription").value
+
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -75,7 +63,7 @@ function addShell() {
                 setLocalStorage("Successful","Shell Added Successfully");
 
             } else {
-                
+
                 location.reload();
                 setLocalStorage("Error","Shell Adding Failed");
 
@@ -99,12 +87,11 @@ function jobDone(id,job) {
 
                 location.reload();
                 setLocalStorage("Successful",id + " - " + job + " " + " Job is Completed");
-                
 
             } else {
 
                 location.reload();
-                setLocalStorage("Error","Error Completing Job");
+                // setLocalStorage("Error","Failed");
 
             }
 
@@ -116,7 +103,44 @@ function jobDone(id,job) {
 
 }
 
-function saveChanges(id, position) {
+// function saveChanges(id) {
+
+//     let image = document.getElementById("image").files[0];
+    
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             var response = this.responseText;
+
+//             if (response == "Successful") {
+
+//                 location.reload();
+//                 setLocalStorage("Successful","Saved Changes");
+
+//             } else {
+
+//                 // console.log(image);
+//                 console.log(response);
+//                 // location.reload();
+//                 setLocalStorage("Error","Error Saving Changes");
+
+//             }
+
+//         }
+//     };
+//     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/settings", true);
+//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     xhttp.send("id="+id+"&image="+image);
+//     // if (image) {
+//     //     console.log("Methanin");
+       
+//     // } else {
+//     //     xhttp.send("id"+id); //,"firstname="+firstname+"&lastname="+lastname+"email="+email+"&mobile="+mobile+"&nic="+nic);
+//     // }
+
+// }
+
+function saveChanges(id) {
     let formdata = new FormData();
     formdata.append("id", id);
     formdata.append("image", document.getElementById("image").files[0]);
@@ -127,13 +151,13 @@ function saveChanges(id, position) {
     formdata.append("nic", document.getElementById("nic").value);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MicroCAPS/'+position+'s/settings',
+        url: 'http://localhost/MicroCAPS/Managers/settings',
         data: formdata,
         processData: false,
         contentType: false,
         success: (response) => {
             if (response == "Successful") {
-                location.reload(true);
+                location.reload();
                 setLocalStorage("Successful","Saved Changes");
             } else {
                 location.reload();
@@ -145,35 +169,27 @@ function saveChanges(id, position) {
 
 //Alert Success
 function alertSuccess(message) {
-    let alert = document.getElementById("alert");
-    alert.classList.remove("hideme");
-    alert.classList.add("shows");
-    alert.classList.add("showme");
-    alert.classList.add("alert-success");
+    let alert = document.getElementById("alert-success");
+    alert.classList.add("display-block");
+    alert.classList.add("show");
     alert.innerHTML = "<i class='icon fa-check-circle margin-right-3'></i>"+message;
 
-    setTimeout(() => { 
-        alert.classList.add("hideme");
-        alert.classList.remove("shows");
-        alert.classList.remove("showme");
-        alert.classList.remove("alert-success");
+    setTimeout(() => {
+        alert.classList.remove("display-block");
+        alert.classList.remove("show");
     }, 5000);
 }
 
 //Alert Faliure
 function alertFaliure(message) {
-    let alert = document.getElementById("alert");
-    alert.classList.remove("hideme");
-    alert.classList.add("shows");
-    alert.classList.add("showme");
-    alert.classList.add("alert-failure");
+    let alert = document.getElementById("alert-faliure");
+    alert.classList.add("display-block");
+    alert.classList.add("show");
     alert.innerHTML = "<i class='icon fa-times-circle margin-right-3'></i>"+message;
 
-    setTimeout(() => { 
-        alert.classList.add("hideme");
-        alert.classList.remove("shows");
-        alert.classList.remove("showme");
-        alert.classList.remove("alert-failure");
+    setTimeout(() => {
+        alert.classList.remove("display-block");
+        alert.classList.remove("show");
     }, 5000);
 }
 

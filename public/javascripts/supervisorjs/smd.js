@@ -1,5 +1,3 @@
-import select from './select.js';
-
 /* Common */
 // Logout Dropdown
 const drop = document.getElementById("drop");
@@ -78,26 +76,4 @@ function addshellSelect(selector) {
             document.getElementById("repairD").classList.remove("margin-top-4");
         }
     }
-}
-
-
-// Select
-let dashboard = new select(document.querySelectorAll('.custom-select'));
-dashboard.create();
-
-let color = new select(document.querySelectorAll('.custom-select-color'));
-color.create("color");
-
-let model = new select(document.querySelectorAll('.custom-select-model'));
-model.create("chassis");
-
-let selectArray = [];
-function addSelect(type,name) {
-    selectArray[type] = new select(document.querySelectorAll(name));
-    selectArray[type].create();
-}
-
-// Next Button
-function next(id) {
-    location.replace(id);
 }
