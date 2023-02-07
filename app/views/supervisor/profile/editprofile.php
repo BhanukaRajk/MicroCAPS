@@ -116,6 +116,6 @@
 </section>
 
 
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/cors.js"></script>
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/settings.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/smd.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/cors.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/settings.js"></script>
