@@ -30,7 +30,7 @@
             <img src="<?php echo URL_ROOT; ?>public/images/profilepic.png" class="width-rem-2p5" alt="profilepic" />
             <div class="font-weight"><?php echo $_SESSION['_firstname'] . ' ' . $_SESSION['_lastname']; ?></div>
             <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="width-rem-0p75" alt="drop" id="drop"/>
-        <div class="logout" id="logout"> <a href="<?php echo URL_ROOT; ?>testers/logout" class="text-decoration-none text-black">logout</a></div>
+        <div class="logout" id="logout"> <a href="<?php echo URL_ROOT; ?>users/logout" class="text-decoration-none text-black">logout</a></div>
         </div>
     </div>
 </header>
