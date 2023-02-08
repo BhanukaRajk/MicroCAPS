@@ -5,10 +5,10 @@
 
 
     /* URL ROOT FOR BHANUKA*/
-    // const URL_ROOT = 'http://localhost:8888/MicroCAPS/';
+    const URL_ROOT = 'http://localhost:8888/MicroCAPS/';
 
     /* URL ROOT FOR SAMINDU*/
-    const URL_ROOT = 'http://localhost/MicroCAPS/';
+    // const URL_ROOT = 'http://localhost/MicroCAPS/';
 
 
     /* SITE NAME */

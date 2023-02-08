@@ -14,6 +14,11 @@ section {
     top: 90px;
 }
 
+#middler {
+    position: fixed !important;
+    left: 70rem !important;
+}
+
 .pagehead {
     font-family: 'Noto Sans';
     font-style: normal;
@@ -194,7 +199,7 @@ section {
     /* Grey/500 */
 
     color: #A6AFBA;
-    margin-block: 19px;
+    margin-block: 15px;
     /*border: black solid 1px;*/
 }
 

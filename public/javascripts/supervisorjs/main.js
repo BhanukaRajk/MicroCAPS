@@ -37,3 +37,8 @@ function myFunction() {
 function expandConsumable() {
     document.getElementById("popupbox").classList.toggle("show");
 }
+
+// Next Button
+function next(id) {
+    location.replace(id);
+}

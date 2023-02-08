@@ -187,6 +187,18 @@ class Supervisors extends controller
         }
     }
 
+    public function testRunQueue()
+    {
+        if(!isLoggedIn()) {
+            redirect('Supervisors/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $this->view('supervisor/pdi/vehiclelist', $data);
+        }
+    }
+
     public function lineVehicles()
     {
         if(!isLoggedIn()) {

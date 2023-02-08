@@ -28,19 +28,19 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "components") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/lineVehicles">
+            <a class="<?php echo ($data['url'][1] == "componentsView") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/componentsView">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "scheduletasks") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
+            <a class="<?php echo ($data['url'][1] == "taskSchedule") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "vehicleview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/vehicleview">
+            <a class="<?php echo ($data['url'][1] == "testRunQueue") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/testRunQueue">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "toolview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
+            <a class="<?php echo ($data['url'][1] == "pdiresults") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Tools
             </a>
 
@@ -52,7 +52,7 @@
         <!-- GENERAL SETTINGS CATEGORY ON NAV BAR -->
         <li>
             <div class="nav_section_headings">GENERAL</div>
-            <a class="<?php echo ($data['url'][1] == "editprofile") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/settings">
+            <a class="<?php echo ($data['url'][1] == "settings") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/settings">
                 <img src="../images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings
             </a>
         </li>

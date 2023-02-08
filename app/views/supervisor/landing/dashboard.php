@@ -29,7 +29,10 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="dash-graph-view test1"><img src="../temp/graph.jpg" class="donut" alt="status graph"></div>
+                        <div class="dash-graph-view">
+                            <canvas id="myChart"></canvas>
+                            <label class="chart-percentage" for="myChart">60%</label>
+                        </div>
                         <div class="dash-graph-bottom test1">
                             <div class="dash-graph-menu test1">
                                 <div class="dash-graph-color-circle dash-darkblue-circle test1"></div>
@@ -58,7 +61,7 @@
 
                 <div class="dash-card-left-bottom test1">
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo /*$count*/ 10; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
                         <div>On Assembly</div>
                     </div>
                     <div class="dash-card-left-bottom-countbox test1">
