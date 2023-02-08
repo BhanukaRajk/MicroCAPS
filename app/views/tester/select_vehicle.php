@@ -1,7 +1,7 @@
 <?php require_once APP_ROOT . '\views\tester\includes\header.php'; ?>
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
 
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/testerjs/main.js"></script>
     
 <body id="select_vehicle">
   <br/>

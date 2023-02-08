@@ -229,5 +229,19 @@ class Tester {
         $this->db->bind(':EmployeeID', $data['EmployeeID']);
     }
 
+    public function viewPDI(){
+        $this->db->query(
+            "SELECT * FROM `pdichecks`"
+        );
+
+        $row = $this->db->resultSet();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
 
 }

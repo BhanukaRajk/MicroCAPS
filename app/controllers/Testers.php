@@ -174,51 +174,63 @@ class Testers extends controller {
         }
     }
 
-    public function record_pdi($ChassisNo, $CheckId) {
+    // public function record_pdi($ChassisNo, $CheckId) {
 
+    //     if(!isLoggedIn()){
+    //         redirect('testers/login');
+    //     }
+
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
+    //         $data = [
+    //             'ChassisNo' => trim($_POST['ChassisNo']),
+    //             'CheckId' => trim($_POST['CheckId']),
+    //             'Status' => trim($_POST['Status']),
+    //             'EmployeeID' => trim($_POST['EmployeeID']),
+    //             'user_err' => '',
+    //             'chassis_err' => '',
+    //             'pdi_err' => ''
+    //         ];
+    //         $data['url'] = getUrl();
+
+    //         if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
+    //             $data['user_err'] = 'Incorrect Employee ID';
+    //         }
+
+    //         if(empty($data['user_err']) && empty($data['chassis_err']) && empty($data['pdi_err'])){
+    //             if($this->testerModel->recordPDI($data)){
+    //                 redirect('testers/dashboard');
+    //             } else {
+    //                 die("Something went wrong");
+    //             }
+    //         } else {
+    //             $this->view('tester/record_pdi', $data);
+    //         }
+    //     } else {
+    //         $data = [
+    //             'ChassisNo' => '',
+    //             'CheckId' => '',
+    //             'Status' => '',
+    //             'EmployeeID' => '',
+    //             'user_err' => '',
+    //             'chassis_err' => '',
+    //             'pdi_err' => ''
+    //         ];
+    //         $data['url'] = getUrl();
+
+    //         $this->view('tester/record_pdi', $data);
+    //     }
+    // }
+
+    public function record_pdi(){
         if(!isLoggedIn()){
             redirect('testers/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
-            $data = [
-                'ChassisNo' => trim($_POST['ChassisNo']),
-                'CheckId' => trim($_POST['CheckId']),
-                'Status' => trim($_POST['Status']),
-                'EmployeeID' => trim($_POST['EmployeeID']),
-                'user_err' => '',
-                'chassis_err' => '',
-                'pdi_err' => ''
-            ];
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-
-            if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
-                $data['user_err'] = 'Incorrect Employee ID';
-            }
-
-            if(empty($data['user_err']) && empty($data['chassis_err']) && empty($data['pdi_err'])){
-                if($this->testerModel->recordPDI($data)){
-                    redirect('testers/dashboard');
-                } else {
-                    die("Something went wrong");
-                }
-            } else {
-                $this->view('tester/record_pdi', $data);
-            }
-        } else {
-            $data = [
-                'ChassisNo' => '',
-                'CheckId' => '',
-                'Status' => '',
-                'EmployeeID' => '',
-                'user_err' => '',
-                'chassis_err' => '',
-                'pdi_err' => ''
-            ];
-            $data['url'] = getUrl();
-
+            $data['pdi_tests'] = $this->testerModel->viewPDI();
             $this->view('tester/record_pdi', $data);
         }
     }
