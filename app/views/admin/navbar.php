@@ -8,7 +8,7 @@
         </li>
         <li>
             <div class="nav_section_headings margin-top-5">MAIN MENU</div>
-            <a class="<?php echo ($data[1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>admins/dash"><img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a>
+            <a class="<?php echo ($data[1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>admins/dashboard"><img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a>
         </li>
         <li>
             <div class="nav_section_headings">WORKSPACE</div>

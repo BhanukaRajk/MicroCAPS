@@ -62,11 +62,11 @@
         }
 
         .left {
-            width: 50%;
+            width: 60%;
         }
 
         .right {
-            width: 50%;
+            width: 40%;
         }
 
         /* Clear floats after the columns */
@@ -1085,7 +1085,7 @@
         .c1 {
             float: left;
             width: 33.33%;
-            margin-left: -20px;
+            margin-left: 1%;
         }
 
         .a222{
@@ -1094,6 +1094,7 @@
             flex-wrap: wrap;
             gap: 1rem;
             left: 20rem;
+            margin-left: -10%;
         }
 
         .a222:after {

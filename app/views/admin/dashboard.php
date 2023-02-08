@@ -45,13 +45,13 @@
             <!-- <div class="top_content"></div> -->
             <div class="detailed_content">
                 <div class="left" style="margin-top: -30%">
-                    <div class="heading bold" style="margin-top: 40%" >Dashboard</div>
+                    <div class="heading bold" style="margin-top: 30%" >Dashboard</div>
                     <div class="row">
                         <div class="column le">
                             <div class="c1">
                                 <div class="c11"><h4>Employees</h4></div>
                                 <div class="c11">
-                                    <div class="c111">
+                                    <div class="c111 le">
                                         <div class="c112">
                                             <div class="countbox">
                                                 <div class="number1">1</div>
@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="c111">
+                                    <div class="c111 ri">
                                         <div class="c112">
                                             <div class="countbox">
                                                 <div class="number1">4</div>
@@ -185,7 +185,7 @@
                 </div>
                 </div>
             </div>
-            <script src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
+            <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
             <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/dashboard.js"></script>
         <!-- </div> -->
     <!-- </div> -->

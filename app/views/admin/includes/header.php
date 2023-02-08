@@ -14,6 +14,10 @@
 
     <!-- Template Main CSS File -->
     <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/main.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/dash.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/add.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/edit.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/viewemployees.css" rel="stylesheet" />
 
     <title>MicroCAPS</title>
 </head>

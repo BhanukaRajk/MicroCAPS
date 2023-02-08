@@ -45,7 +45,7 @@ body {
 
     background-color:#F2F2F7;
     margin-left: 20%;
-    margin-top: 15%;
+    margin-top: 20%;
 }
 
 /* <- LEFT SIDE OF PAGE CONTENT */
@@ -61,7 +61,7 @@ body {
     margin-top: 100px;
     margin-bottom: -20px;
     font-size: x-large;
-    height: 5%;
+    height: 10%;
 }
 
 .row{
@@ -120,7 +120,7 @@ body {
     float: left;
     padding: 30px;
     height: 400px; /* Should be removed. Only for demonstration */
-    border-radius: 15px;
+    /* border-radius: 15px; */
   }
 
   
@@ -260,7 +260,8 @@ body {
     flex-direction: column;
     justify-content: center;
 
-    padding-left: 6rem;
+    margin-right: 10%;
+    padding-left: 8rem;
     margin-top: 10%;
 }
 
