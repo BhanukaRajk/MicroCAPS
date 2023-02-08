@@ -217,23 +217,44 @@ class Tester {
         }
     }
 
-    public function recordPDI($data) {
+    public function addPDI($data) {
         $this->db->query(
-            "INSERT INTO `carpdi` (`ChassisNo`, `CheckId`, `Status`, `EmployeeID`) 
-            VALUES (:ChassisNo, :CheckId, :Status, :EmployeeID)"
+            "UPDATE `carpdi` 
+            SET `Status` = :Status,
+                `EmployeeID` = :EmployeeID
+            WHERE `carpdi`.`CheckId` = :CheckId AND `carpdi`.`ChassisNo` = :ChassisNo"
         );
 
         $this->db->bind(':ChassisNo', $data['ChassisNo']);
         $this->db->bind(':CheckId', $data['CheckId']);
         $this->db->bind(':Status', $data['Status']);
         $this->db->bind(':EmployeeID', $data['EmployeeID']);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public function viewPDI(){
+    public function viewPDI($id){
+        // $this->db->query(
+        //     "SELECT * FROM `carpdi` WHERE carpdi.ChassisNo = :id"
+        // );
         $this->db->query(
-            "SELECT * FROM `pdichecks`"
+            "SELECT `carpdi`.`ChassisNo`,
+                         `carpdi`.`CheckId`, 
+                         `carpdi`.`Status`, 
+                         `carpdi`.`EmployeeID`, 
+                         `pdichecks`.`CheckName`, 
+                         `pdichecks`.`categoryid` 
+            FROM `carpdi` 
+            INNER JOIN `pdichecks` 
+            ON `carpdi`.`CheckId` = `pdichecks`.`CheckId` 
+            WHERE `carpdi`.`ChassisNo` = :id"
         );
 
+        $this->db->bind(':id', $id);
         $row = $this->db->resultSet();
 
         if ( $row ) {

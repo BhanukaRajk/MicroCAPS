@@ -49,6 +49,19 @@ class Testers extends controller {
         }
     }
 
+    public function select_vehicle_2() {
+
+        if(!isLoggedIn()){
+            redirect('testers/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['vehicles'] = $this->testerModel->selectVehicle();
+            $this->view('tester/select_vehicle_2', $data);
+        }
+    }
+
     public function add_defect() {
 
         if(!isLoggedIn()){
@@ -223,15 +236,42 @@ class Testers extends controller {
     //     }
     // }
 
-    public function record_pdi(){
+    public function record_pdi($id){
         if(!isLoggedIn()){
             redirect('testers/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['pdi_tests'] = $this->testerModel->viewPDI();
+            $data['pdi_tests'] = $this->testerModel->viewPDI($id);
             $this->view('tester/record_pdi', $data);
+        }
+    }
+
+    public function addPDI() {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['ChassisNo']),
+                'CheckId' => trim($_POST['CheckId']),
+                'Status' => trim($_POST['Status']),
+                'EmployeeID' => trim($_POST['EmployeeID'])
+            ];
+
+            $result = $this->testerModel->addPDI($data);
+
+            if($result) {
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
         }
     }
 

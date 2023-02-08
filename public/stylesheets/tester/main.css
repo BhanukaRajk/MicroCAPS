@@ -612,7 +612,7 @@ h3 {
     background-color: var(--white);
     position: absolute;
     width: 90.125rem;
-    height: 5.625rem;
+    height: 4rem;
     left: 16.25rem;
 }
 
@@ -1555,6 +1555,66 @@ Table
 /*--------------------------------------------------------------
 Add Defect Form
 --------------------------------------------------------------*/
+.form-page {
+    position: absolute;
+    left: 16.25rem;
+    right: 0rem;
+    top: 4rem;
+    bottom: 0rem;
+    background-color: rgb(242, 243, 247);
+}
+
+.form-board-2 {
+    margin-inline: 45px;
+    margin-block: 10px;
+}
+
+.pagehead {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+
+    color: #1C1F37;
+}
+
+.form-section {
+    height: 97px;
+}
+
+.form-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-block: 10px;
+}
+
+.form-page-heading {
+    width: 165px;
+    height: 30px;
+    left: 305px;
+    top: 79px;
+
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+
+    color: #1C1F37;
+}
+
+.form-data-board {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    flex-wrap: wrap;
+    gap: 110px;
+}
 
 #add-form-body {
     margin: 0;
@@ -1562,7 +1622,7 @@ Add Defect Form
     background-color: #F2F2F7;
     justify-content: center;
     display: flex;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Noto Sans';
 }
 
 .add-form-container {

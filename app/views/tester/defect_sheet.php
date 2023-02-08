@@ -2,20 +2,6 @@
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
 
 
-<style>
-  /* body {
-    background: #D2DAFF;
-  } */
-
-  /* .head1 {
-    font-size: 30px;
-    font-weight: bold;
-    color: #1B2B65;
-    margin-bottom: 30px;
-  } */
-</style>
-
-
 <body>
   <div class="container1">
     <div class="head_1">Defect Sheet</div>
