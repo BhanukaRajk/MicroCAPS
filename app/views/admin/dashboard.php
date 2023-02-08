@@ -1,194 +1,134 @@
 <?php require_once APP_ROOT . '/views/admin/includes/header.php'; ?>
-<?php require_once APP_ROOT . '/views/admin/navbar.php'; ?>
-    <!-- <header>
+<?php require_once APP_ROOT . '/views/admin/includes/navbar.php'; ?>
 
-        <ul class="display-flex-column">
-            <li>
-                <div class="nav_logo">
-                    <img src="http://localhost/MicroCAPS/public/images/nav_logo.png" class="text-center width-50" alt="logo" />
-                </div>
-            </li>
-            <li>
-                <div class="nav_section_headings margin-top-5">MAIN MENU</div>
-                <a href="<?php echo URL_ROOT; ?>admins/dash"><img src="http://localhost/MicroCAPS/public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard</a><br>
-            </li>
-            <li>
-                <div class="nav_section_headings">WORKSPACE</div>
-                <a href="<?php echo URL_ROOT; ?>admins/viewemployees"><img src="http://localhost/MicroCAPS/public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Manage Employees</a><br>
-                <a href="#"><img src="http://localhost/MicroCAPS/public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a><br>
-                <a href="#"><img src="http://localhost/MicroCAPS/public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Testing</a><br>
-                <a href="#"><img src="http://localhost/MicroCAPS/public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a><br>
-            </li>
-            <li>
-                <div class="nav_section_headings">GENERAL</div>
-                <a href="#"><img src="http://localhost/MicroCAPS/public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Reports</a><br>
-                <a href="#"><img src="http://localhost/MicroCAPS/public/images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings</a><br>
-            </li>
-        </ul>
-    
-    </header>
-    
-    <header id="header" class="fixed-top display-flex align-items-start">
-      <div class="container display-flex align-items-center justify-content-end">
-          <div class="top_nav_content display-flex align-items-center gap-4 width-rem-25">
-              <img src="http://localhost/MicroCAPS/public/images/profilepic.png" class="width-rem-2p5" alt="profilepic" />
-              <div class="font-weight"><?php echo "Admin" ?></div>
-              <img src="http://localhost/MicroCAPS/public/images/drop.png" class="width-rem-0p75" alt="drop" id="drop"/>
-          <div class="logout" id="logout"><a href="http://localhost/MicroCAPS/admins/logout" class="text-decoration-none text-black">logout</a></div>
-          </div>
-      </div>
-    </header> -->
-    <!--<script src="" async defer></script>-->
-    <!-- <div class="page"> -->
-        <!-- <div class="navigation"></div> -->
-        <!-- <div class="full_content"> -->
-            <!-- <div class="top_content"></div> -->
-            <div class="detailed_content">
-                <div class="left" style="margin-top: -30%">
-                    <div class="heading bold" style="margin-top: 30%" >Dashboard</div>
-                    <div class="row">
-                        <div class="column le">
-                            <div class="c1">
-                                <div class="c11"><h4>Employees</h4></div>
-                                <div class="c11">
-                                    <div class="c111 le">
-                                        <div class="c112">
-                                            <div class="countbox">
-                                                <div class="number1">1</div>
-                                                <div>Manager</div>
-                                            </div>
-                                        </div><br>
-                                        <div class="c112">
-                                            <div class="countbox">
-                                                <div class="number1">10</div>
-                                                <div>Assemblers</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="c111 ri">
-                                        <div class="c112">
-                                            <div class="countbox">
-                                                <div class="number1">4</div>
-                                                <div>Supervisors</div>
-                                            </div>
-                                    </div>
-                                        <br><div class="c112">
-                                            <div class="countbox">
-                                                <div class="number1">5</div>
-                                                <div class="text1">Testers</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                
-                            <!-- <div class="map_list">
-                                <div class="map">
-                                    <div class="circle"></div>
-                                    <div>Done</div>
-                                </div>
-                                <div class="map">
-                                    <div class="circle"></div>
-                                    <div>On-going</div>
-                                </div>
-                            </div> -->
+<section class="position-absolute page-content">
+    <div class="page-heading font-weight">
+        Dashboard
+    </div>
+
+    <div class="admin-dash-content">
+
+        <div class="admin-dash-left-content">
+            <div class="admin-dash-left-content-inner">
+                <div class="admin-dash-emp-count">
+                    <div class="admin-dash-emp-count-head">Employees</div>
+                    <div class="admin-dash-emp-count-content">
+                        <div class="admin-dash-count-box">
+                            <div class="admin-dash-count-box-value">1</div>
+                            <div class="admin-dash-count-box-category">Manager</div>
                         </div>
-                        <!-- <div class="line">fhfhfh</div> -->
-                        
-                            <div class="column ri">
-                                <div class="oal1">
-                                    <h4>On Assembly Line</h4>
-                                </div>
-                                <div class="oal2">
-                                    <div class="countbox2">
-                                        <div class="number2">5</div>
-                                        <div class="text2">Vehicles</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="admin-dash-count-box">
+                            <div class="admin-dash-count-box-value">4</div>
+                            <div class="admin-dash-count-box-category">Supervisors</div>
+                        </div>
+                        <div class="admin-dash-count-box">
+                            <div class="admin-dash-count-box-value">10</div>
+                            <div class="admin-dash-count-box-category">Assemblers</div>
+                        </div>
+                        <div class="admin-dash-count-box">
+                            <div class="admin-dash-count-box-value">5</div>
+                            <div class="admin-dash-count-box-category">Testers</div>
+                        </div>
                     </div>
-                    
                 </div>
-                <div class="right" style="margin-top: -10%">
-                    <div class="logs bold">
-                        <div class="sidebox">Activity Logs</div>
-                        <div class="sidebox"></div>
+                <div class="admin-dash-car-count">
+                    <div class="admin-dash-car-count-head">On Assembly Line</div>
+                    <div class="admin-dash-car-count-content">
+                        <div class="admin-dash-count-box-value">5</div>
+                        <div class="admin-dash-count-box-category">Vehicles</div>
                     </div>
-                    <div class="quick bold">
-                        <div class="sidebox">Quick Access</div>
-                        <div class="sidebox btn">
-                            <a href="<?php echo URL_ROOT; ?>admins/add"><button type="button" class="blue_button">Add New Employee</button></a>
-                            <button type="button" class="red_button">Edit PDI Content</button></div>
-                    </div>
-                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">
-                    <div class="calender-title margin-top-3" id="calender-title">May 2021</div>
-                    <table class="margin-top-3">
-                        <thead>
-                            <tr>
-                                <th>Mo</th>
-                                <th>Tu</th>
-                                <th>We</th>
-                                <th>Th</th>
-                                <th>Fr</th>
-                                <th>Sa</th>
-                                <th>Su</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                            </tr>
-                            <tr>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                            </tr>
-                            <tr>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                            </tr>
-                            <tr>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                            </tr>
-                            <tr>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                                <td class="date"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
                 </div>
             </div>
-            <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
-            <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/dashboard.js"></script>
-        <!-- </div> -->
-    <!-- </div> -->
+        </div>
+
+        <div class="admin-dash-right-content">
+            <div class="admin-dash-activity-logs">
+                <div class="dash-card-right-datalines dash-card-headings ">Activity Log</div>
+                <div class="dash-card-right-datalines "></div>
+            </div>
+            <div class="admin-dash-quick-access">
+                <div class="dash-card-right-datalines dash-card-headings ">Quick Access</div>
+                <div class="dash-card-right-datalines dash-quickbtns-frame ">
+                    <!-- <a href="<?php //echo URL_ROOT; ?>managers/bodyshell">
+                        <button type="button" class="dash-quickbtn">Request Body Shell</button>
+                    </a>
+                    <a href="<?php //echo URL_ROOT; ?>managers/test">
+                        <button type="button" class="dash-quickbtn">Dispatch Vehicles</button>
+                    </a> -->
+                </div>
+            </div>
+            <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">
+                <div class="calender-title margin-top-3" id="calender-title">May 2021</div>
+                <table class="margin-top-3">
+                    <thead>
+                        <tr>
+                            <th>Mo</th>
+                            <th>Tu</th>
+                            <th>We</th>
+                            <th>Th</th>
+                            <th>Fr</th>
+                            <th>Sa</th>
+                            <th>Su</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                        <tr>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                            <td class="date"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/dashboard.js"></script>
+
 
 </body>
 
