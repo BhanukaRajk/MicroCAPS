@@ -13,8 +13,29 @@ $(document).ready(() => {
 })
 
 // C.O.R.S
-function deleteEmployee(id) {
-    
+function addEmployee() {
+    let form = document.getElementById("add-employee");
+    let formData = new FormData(form);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/admins/addEmployee',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response == "Successful") {
+                location.reload(true);
+                setLocalStorage("Successful","Employee Added Successfully");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Adding Employee");
+            }
+        }
+    });
+}
+
+function deleteEmployee($id) {
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -23,12 +44,12 @@ function deleteEmployee(id) {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful","Employee " + id + " is Successfully Deleted");
-                
+                setLocalStorage("Successful","Shell Added Successfully");
 
             } else {
+                
                 location.reload();
-                setLocalStorage("Error","Deletion Unsuccessful");
+                setLocalStorage("Error","Shell Adding Failed");
 
             }
 
@@ -36,8 +57,31 @@ function deleteEmployee(id) {
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Admins/employees", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("id="+id);
+    xhttp.send("id="+$id);
+}
 
+function saveChanges(id, position) {
+    let formdata = new FormData();
+    formdata.append("id", id);
+    formdata.append("image", document.getElementById("image").files[0]);
+    formdata.append("firstname", document.getElementById("firstname").value);
+    formdata.append("email", document.getElementById("email").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/'+position+'s/settings',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response == "Successful") {
+                location.reload(true);
+                setLocalStorage("Successful","Saved Changes");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Saving Changes");
+            }
+        }
+    });
 }
 
 //Alert Success

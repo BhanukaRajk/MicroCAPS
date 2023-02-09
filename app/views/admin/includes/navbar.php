@@ -12,9 +12,9 @@
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
             <a class="<?php echo ($data['url'][1] == "employees") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>admins/employees"><img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Manage Employees</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Testing</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
+            <a class="<?php echo ($data['url'][1] == "assembly") || ($data['url'][1] == "assemblystage") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>admins/assembly"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
+            <a class="<?php echo ($data['url'][1] == "pdi") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>admins/pdi"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Testing</a>
+            <a class="<?php echo ($data['url'][1] == "dispatch") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>admins/dispatch"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>
         </li>
         <li>
             <div class="nav_section_headings">GENERAL</div>

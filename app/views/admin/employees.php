@@ -1,5 +1,5 @@
-<?php require_once APP_ROOT . '/views/admin/includes/header.php'; ?>
-<?php require_once APP_ROOT . '/views/admin/includes/navbar.php'; ?>
+<?php require_once APP_ROOT . '\views\admin\includes\header.php'; ?>
+<?php require_once APP_ROOT . '\views\admin\includes\navbar.php'; ?>
 
 <section class="position-absolute page-content">
     <div class="display-flex-row margin-bottom-3 align-items-center justify-content-between width-100">
@@ -7,7 +7,7 @@
             Employees
         </div>
         <div>
-            <a href="<?php echo URL_ROOT; ?>admins/add">
+            <a href="<?php echo URL_ROOT; ?>admins\addEmployee">
                 <div class="next">
                     <button type="button" class="btn btn-primary btn-noback">Add New Employees</button>
                 </div>
@@ -27,7 +27,7 @@
                             </div>
                             <div class="display-flex-row gap-1">
                                 <i class="fa-solid fa-pen-to-square text-gray text-hover-blue"></i>
-                                <i class="fa-solid fa-trash-can text-gray text-hover-red"></i>
+                                <i class="fa-solid fa-trash-can text-gray text-hover-red" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
                             </div>
                         </div>
                         <div class="cardhead">
@@ -83,7 +83,7 @@
                             </div>
                             <div class="display-flex-row gap-1">
                                 <i class="fa-solid fa-pen-to-square text-gray text-hover-blue"></i>
-                                <i class="fa-solid fa-trash-can text-gray text-hover-red"></i>
+                                <i class="fa-solid fa-trash-can text-gray text-hover-red"  onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
                             </div>
                         </div>
                         <div class="cardhead">
@@ -107,7 +107,7 @@
 
 </section>
 
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/adminjs/main.js"></script>
+<script type="module" src="<?php echo URL_ROOT;?>public/javascripts/adminjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/adminjs/cors.js"></script>
 
 </body>

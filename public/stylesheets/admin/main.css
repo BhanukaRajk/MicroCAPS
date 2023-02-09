@@ -1,6 +1,10 @@
 @import 'dashboard.css';
 @import 'employee.css';
 @import 'flash.css';
+@import 'pdi.css';
+@import 'vehiclelist.css';
+/* @import 'addEmployee.css'; */
+
 body {
     margin: 0;
     background: #F2F2F7;
@@ -21,6 +25,7 @@ body {
     --linkblue: #017EFA;
     --green: #29CC97;
     --red: #ee0b0b;
+    --yellow: #FEC400;
 }
 
 
@@ -827,6 +832,10 @@ h3 {
     height: 8.5rem !important;
 }
 
+.height-rem-12p5 {
+    height: 12.5rem !important;
+}
+
 .height-rem-25 {
     height: 25rem !important;
 }
@@ -1197,7 +1206,20 @@ input.form-control:-webkit-autofill:active {
     border-radius: 0.65rem;
 }
 
+.checkmark-small {
+    height: 1.2rem;
+    width: 1.2rem;
+    border: 1px solid var(--gray);
+    box-shadow: inset 3.2px 3.2px 5.6px rgb(0 0 0 / 5%);
+    border-radius: 0.5rem;
+}
+
 .form-control-checkbox input:checked~.checkmark {
+    border: 1px solid var(--checkblue);
+    background-color: var(--checkblue);
+}
+
+.form-control-checkbox input:checked~.checkmark-small {
     border: 1px solid var(--checkblue);
     background-color: var(--checkblue);
 }
@@ -1214,6 +1236,19 @@ input:checked~.checkmark:after {
     margin: 0.15rem 0.45rem;
     width: 0.4rem;
     height: 0.8rem;
+    border: solid var(--white);
+    border-width: 0 0.2rem 0.2rem 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+input:checked~.checkmark-small:after {
+    content: "";
+    position: absolute;
+    margin: 0.05rem 0.35rem;
+    width: 0.3rem;
+    height: 0.7rem;
     border: solid var(--white);
     border-width: 0 0.2rem 0.2rem 0;
     -webkit-transform: rotate(45deg);
@@ -1373,6 +1408,12 @@ li a:hover:not(.active) {
     left: 20rem;
     top: 18rem;
     width: 72.3rem;
+}
+
+.employee-forms {
+    display: none;
+    left: 33rem;
+    top: 12rem;
 }
 
 .section-heading {
@@ -1588,4 +1629,14 @@ select:focus-visible {
     width: 0.5rem;
     margin: auto 0.5rem auto 0rem;
     border-radius: 50%;
+}
+
+.next,
+.prev {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--blue);
+    cursor: pointer;
 }
