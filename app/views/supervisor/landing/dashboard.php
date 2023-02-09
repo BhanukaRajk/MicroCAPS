@@ -30,8 +30,8 @@
                             </div>
                         </div>
                         <div class="dash-graph-view">
-                            <canvas id="myChart"></canvas>
-                            <label class="chart-percentage" for="myChart">60%</label>
+                            <!-- <canvas id="myChart"></canvas>
+                            <label class="chart-percentage" for="myChart">60%</label> -->
                         </div>
                         <div class="dash-graph-bottom test1">
                             <div class="dash-graph-menu test1">
