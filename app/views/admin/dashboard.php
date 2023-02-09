@@ -126,7 +126,7 @@
 
 </section>
 
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/dashboard.js"></script>
 
 

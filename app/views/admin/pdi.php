@@ -43,7 +43,7 @@
 
                             if ($value2->Status == 'OK') {
                                 $color = 'green-box';
-                            } else if ($value2->Status == 'S/A') {
+                            } else if ($value2->Status == 'SA') {
                                 $color = 'red-box';
                             } else {
                                 $color = 'yellow-box';
