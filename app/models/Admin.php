@@ -33,5 +33,19 @@ class Admin {
         }
     }
 
+    public function deleteEmployees($EmployeeId) {
 
+        $this->db->query(
+            "DELETE FROM `employee` 
+            WHERE `employee`.`EmployeeId` = :EmployeeId"
+        );
+
+        $this->db->bind(':EmployeeId', $EmployeeId);
+
+        if($this->db->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
