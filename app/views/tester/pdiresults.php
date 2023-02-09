@@ -11,8 +11,8 @@
         </div>
 
         <div>
-            <div class="paddingy-2 font-weight">VIN : <?php echo $data['pdiVehicle']->ChassisNo ?></div>
-            <div class="paddingy-2 font-weight">Engine : <?php echo $data['pdiVehicle']->EngineNo ?></div>
+            <div class="paddingy-2 font-weight">VIN : <?php echo $data['onPDIVehicles'][0]->ChassisNo ?></div>
+            <div class="paddingy-2 font-weight">Engine : <?php echo $data['onPDIVehicles'][0]->EngineNo ?></div>
         <!-- </div> -->
 
 
@@ -24,7 +24,7 @@
                         <div class="pdi-card">
                             <div class="pdi-card-head">
                                 <div class="pdi-card-main">'.$value->Title.'</div>
-                                <div class="pdi-card-sub"></div>
+                                <div class="pdi-card-sub">'.$value->SubTitle.'</div>
 
                                 <div class="pdiresultbox paddingy-3">
                     ';
@@ -33,11 +33,11 @@
                         if ($value2->CategoryId == $value->CategoryId) {
 
                             if ($value2->Status == 'OK') {
-                                $color = 'green';
+                                $color = 'green-box';
                             } else if ($value2->Status == 'SA') {
-                                $color = 'red';
+                                $color = 'red-box';
                             } else {
-                                $color = 'yellow';
+                                $color = 'yellow-box';
                             }
 
                             echo '
