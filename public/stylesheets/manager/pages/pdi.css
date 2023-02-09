@@ -50,14 +50,14 @@
     color: var(--white);
 }
 
-.green {
+.green-box {
     background-color: var(--green);
 }
 
-.red {
+.red-box {
     background-color: var(--red);
 }
 
-.yellow {
+.yellow-box {
     background-color: var(--yellow);
 }

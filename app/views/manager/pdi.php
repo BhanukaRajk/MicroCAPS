@@ -42,11 +42,11 @@
                         if ($value2->CategoryId == $value->CategoryId) {
 
                             if ($value2->Status == 'OK') {
-                                $color = 'green';
+                                $color = 'green-box';
                             } else if ($value2->Status == 'S/A') {
-                                $color = 'red';
+                                $color = 'red-box';
                             } else {
-                                $color = 'yellow';
+                                $color = 'yellow-box';
                             }
 
                             echo '
