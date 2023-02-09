@@ -94,9 +94,72 @@
                         </a>
                     </div>
                 </div>
-                <div class="dash-card-calender test1"></div>
+                <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">
+                    <div class="calender-title margin-top-3" id="calender-title">May 2021</div>
+                    <table class="margin-top-3">
+                        <thead>
+                            <tr>
+                                <th>Mo</th>
+                                <th>Tu</th>
+                                <th>We</th>
+                                <th>Th</th>
+                                <th>Fr</th>
+                                <th>Sa</th>
+                                <th>Su</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                            <tr>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                                <td class="date"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 

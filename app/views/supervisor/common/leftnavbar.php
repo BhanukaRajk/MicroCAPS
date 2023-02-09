@@ -40,12 +40,12 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "pdiresults") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Tools
-            </a>
+            <!-- <a class="<?php //echo ($data['url'][1] == "pdiresults") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
+                <img src="<?php //echo URL_ROOT; ?>public/images/icon10.png" class="width-rem-1p25" alt="icon7" />Tools
+            </a> -->
 
             <a class="<?php echo ($data['url'][1] == "consumableview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/consumableview">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Consumables
+                <img src="<?php echo URL_ROOT; ?>public/images/icon12.png" class="width-rem-1p25" alt="icon7" />Consumables
             </a>
         </li>
 

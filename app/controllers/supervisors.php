@@ -13,7 +13,7 @@ class Supervisors extends controller
     public function settings() {
 
         if(!isLoggedIn()){
-            redirect('users/login');
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -62,9 +62,13 @@ class Supervisors extends controller
     public function dashboard()
     {
 
-        if (!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
+
+        // if($_SESSION['_position'] == 'Supervisor') {
+        //     redirect($_SESSION['_position'].'s/login');
+        // }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
@@ -513,7 +517,7 @@ class Supervisors extends controller
                     // $_SESSION['err_msg'] = 'Error! record saving failed!';
                 }
 
-                redirect('supervisor/leaves/leaves');
+                redirect('supervisor/leaves/leaves', $data);
 
             } else {
 

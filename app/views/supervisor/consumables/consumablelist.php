@@ -25,13 +25,14 @@
                         <div class="chassisno">', ($item->Volume == NULL) ? 'Grease' : 'Lubricants', '</div>
                       </div>
                       <div class="carstatuscolor">
-                        <div class="status-circle ', ($item->Volume == NULL) ? (($item->Weight >= 100) ? 'status-green-circle' : 'status-orange-circle') : (($item->Volume >= 100) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
+                        // <div class="'. ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'available' : 'lower') : (($item->Volume >= 60) ? 'available' : 'lower'). '">'. (($item->Volume == NULL) ? $item->Weight : $item->Volume). '</div>
+                        <div class="status-circle ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'status-green-circle' : 'status-orange-circle') : (($item->Volume >= 60) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
                       </div>
                     </div>
                     <div class="carpicbox">
                       <img src="' . URL_ROOT . 'public/images/consumables/' . $item->Image . '" class="carpic" alt="micro panda red">
                     </div>
-                    <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 100) ? 'available' : 'lower') : (($item->Volume >= 100) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight > 100) ? 'Available' : 'Low in stock') : (($item->Volume > 100) ? 'Available' : 'Low in stock'), '</div>
+                    <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'available' : 'lower') : (($item->Volume >= 60) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'Available' : 'Low in stock') : (($item->Volume >= 60) ? 'Available' : 'Low in stock'), '</div>
                     <div class="chassisno">Last update: ', $item->LastUpdate, '</div>
                   </div>';
           }
