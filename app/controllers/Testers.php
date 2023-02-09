@@ -247,7 +247,6 @@ class Testers extends controller {
         }
     }
 
-
     public function record_pdi($id){
         if(!isLoggedIn()){
             redirect('testers/login');
