@@ -29,7 +29,7 @@ function addPDI(ChassisNo,CheckId, Status) {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful",ChassisNo + " - " + CheckId + " " +Status  + " " + "  Completed");
+                setLocalStorage("Successful",ChassisNo + " - " + CheckId + " Status Changed");
 
             } else {
 

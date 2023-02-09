@@ -2053,7 +2053,7 @@ Table
 
 /* Select vehicle */
 
-#select_vehicle {
+/* #select_vehicle {
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -2061,7 +2061,7 @@ Table
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    /* background: #D2DAFF; */
+    background: #D2DAFF;
     font-family: "Montserrat", sans-serif;
   }
   
@@ -2135,7 +2135,7 @@ Table
           margin-bottom: 30px;
           margin-left: 15%;
           text-align: center;
-  }
+  } */
 
   .head_1 {
     font-size: 30px;
@@ -2473,3 +2473,120 @@ Add Defect Form
 .padding-left-form {
     padding-left: 1rem;
 }
+
+
+.sv-data-board {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  .sv-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 1rem 2rem;
+    column-gap: 2rem;
+    top: 16rem;
+    position: fixed;
+  }
+  
+  .sv-item {
+    display: flex;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    gap: 1rem;
+    flex-direction: column;
+    min-height: 180px;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    width: 15rem;
+  }
+  
+  #select_vehicle {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* background: #D2DAFF; */
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  div[class*=box_sv] {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+  }
+  
+  
+  .btn_sv {
+    line-height: 150px;
+    height: 150px;
+    text-align: center;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    width: 30%;
+    cursor: pointer;
+  }
+  
+  .btn_sv-three {
+    color: #000;
+    transition: all 0.5s;
+    position: relative;
+  }
+  
+  .btn_sv-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .btn_sv-three:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+  }
+  
+  .btn_sv-three::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    transform: scale(1.2, 1.2);
+  }
+  
+  .btn_sv-three:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  
+  .head_sv {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1B2B65;
+    margin-bottom: 30px;
+    margin-left: 15%;
+    text-align: center;
+  }

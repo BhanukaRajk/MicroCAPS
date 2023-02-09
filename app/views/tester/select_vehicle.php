@@ -3,7 +3,7 @@
 
 <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/testerjs/main.js"></script>
     
-<body id="select_vehicle">
+<body id=".select_vehicle">
   <br/>
   <br/>
   <br/>
