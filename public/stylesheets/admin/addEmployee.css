@@ -1,0 +1,62 @@
+input[type=text],
+input[type=tel],
+input[type=email],
+select,
+textarea {
+    width: 100%;
+    padding: 6px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.formbox {
+    height: 50px;
+}
+
+input[type=submit] {
+    background-color: white;
+    color: rgb(147, 141, 226);
+    align-items: right;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border-color: rgb(147, 141, 226);
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    color: white;
+    background-color: #ccc;
+}
+
+.container1 {
+    border-radius: 5px;
+    width: 500px;
+    height: 570px;
+    background-color: white;
+    padding: 20px;
+    margin-left: 40%;
+    margin-top: 8%;
+}
+
+h3 {
+    text-align: center;
+}
+
+input.btn {
+    float: right;
+}
+
+
+.column {
+    float: right;
+    padding: -20%;
+}
+
+.left {
+    width: 45%;
+}
+
+.right {
+    width: 45%;
+}

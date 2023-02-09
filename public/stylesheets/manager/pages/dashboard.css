@@ -1,0 +1,196 @@
+.dash-section {
+    position: absolute;
+    left: 16.25rem;
+    right: 0rem;
+    top: 10rem;
+    bottom: 0rem;
+    background-color: rgb(242, 243, 247);
+}
+
+.dash-section-frame {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-section-heading {
+    margin: 1rem 2rem 0.25rem 2rem;
+    font-size: x-large;
+}
+
+.dash-section-cardsframe {
+    display: flex;
+    flex-direction: row;
+    margin-inline: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.dash-frame-headings {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.dash-cardsframe-left {
+    left: 2rem;
+}
+
+.dash-card-left-top {
+    min-height: 22.75rem;
+    min-width: 49rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 1.2rem;
+    padding: 1rem;
+}
+
+.dash-graph-frame {
+    margin: 1rem;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dash-graph-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dash-graph-view {
+    text-align: center;
+}
+
+.dash-graph-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.dash-graph-menu {
+    min-height: 1.5rem;
+    border: 1px solid #00000020;
+    border-radius: 0.2rem;
+    margin-inline: 0.36rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
+    padding: 0 0.5rem;
+}
+
+.dash-line-breaker {
+    border-left: 0.05rem solid #D7D7D7;
+    height: 20.75rem;
+    margin-block: auto;
+}
+
+.dash-damages-frame {
+    margin: 1rem;
+    min-width: 18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dash-card-left-bottom {
+    min-height: 13.5rem;
+    min-width: 42rem;
+    margin-top: 1.5rem;
+    background-color: white;
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.dash-card-left-bottom-countbox {
+    margin-block: auto;
+    height: 9rem;
+    width: 9rem;
+    border: 0.1rem solid #D7D7D7;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-weight: bolder;
+    color: #418CFD;
+}
+
+.dash-countbox-number {
+    font-size: 4rem;
+}
+
+.dash-cardsframe-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dash-card-right-datalines {
+    margin-inline: 1rem;
+}
+
+.dash-card-headings {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.dash-card-logs {
+    min-height: 10rem;
+    min-width: 19rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 1.2rem;
+    padding-block: 1rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
+}
+
+.dash-card-quickaccess {
+    min-height: 7rem;
+    min-width: 19rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 1.2rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
+}
+
+.dash-quickbtns-frame {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.dash-quickbtn {
+    min-width: 6rem;
+    min-height: 2rem;
+    background-color: #418CFD;
+    color: white;
+    font-size: small;
+    border: none;
+    border-radius: 10rem;
+    word-break: break-all;
+}
+
+.dash-quickbtn:hover {
+    background-color: #75abfb;
+    cursor: pointer;
+}
+
+.dash-card-calender {
+    min-height: 19rem;
+    min-width: 19rem;
+    background-color: white;
+    border-radius: 1.2rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
+}
+

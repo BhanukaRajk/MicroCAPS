@@ -1,0 +1,39 @@
+.position-relative {
+    position: relative !important
+}
+
+.position-absolute {
+    position: absolute !important
+}
+
+.position-fixed {
+    position: fixed !important
+}
+
+/* Container */
+.container {
+    background-color: var(--white);
+    position: absolute;
+    right: 0;
+    height: 4rem;
+    left: 16.25rem;
+    padding-inline: 2rem;
+}
+
+.profilemenu {
+    position: relative;
+    display: inline-block;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030
+}
+
+/* Other */
+.z-index-1 {
+    z-index: 1 !important
+}

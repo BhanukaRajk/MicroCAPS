@@ -1,0 +1,18 @@
+.background-none {
+    background: none !important;
+}
+
+.background-white {
+    background-color: var(--white);
+}
+
+.background-blue {
+    background-color: var(--blue);
+}
+
+.background-image {
+    background-clip: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -0.5rem;
+}

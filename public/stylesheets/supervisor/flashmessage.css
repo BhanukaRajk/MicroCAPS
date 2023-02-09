@@ -1,0 +1,65 @@
+
+.hideme {
+    visibility: hidden;
+}
+.showme {
+    visibility: visible;
+}
+
+#messagebox {
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #081a51;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 16px;
+
+    box-shadow: 0px 5px 10px rgb(76 92 107 / 15%), 0px 18px 36px rgb(166 175 186 / 20%);
+    word-wrap: normal;
+
+    text-align: center;
+    font-size: 17px;
+
+    position: fixed;
+    z-index: 10;
+    right: 2rem;
+    bottom: 3rem;
+  }
+
+.success-message {
+    background-color: #dffde4;
+    border: 1.5px solid #2c8a3c;
+    color: #2c8a3c;
+}
+
+.error-message {
+
+    background-color: #fddfe4;
+    border: 1.5px solid #8a2c3c;
+    color: #8a2c3c;
+}
+  
+  #messagebox.shows {
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+    animation: fadein 0.5s, fadeout 0.5s 4.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {right: 2rem; opacity: 1;} 
+    to {right: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {right: 2rem; opacity: 1;}
+    to {right: 0; opacity: 0;}
+  }
