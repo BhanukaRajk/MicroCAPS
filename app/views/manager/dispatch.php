@@ -4,10 +4,11 @@
 <body>
 
     <section class="position-absolute page-content">
-        <div class="page-heading font-weight">
+        <div class="page-heading font-weight  margin-bottom-4">
             Dispatched Vehicles
         </div>
 
+        <!-- <div class="display-flex-column align-items-start margin-top-3"> -->
         <?php
         if ($data['dispatchDetails'] == false) {
             echo '
@@ -38,4 +39,5 @@
                     </div>';
         }
         ?>
+        <!-- </div> -->
     </section>

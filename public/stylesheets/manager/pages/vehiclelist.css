@@ -17,7 +17,6 @@
 .vehicle-detail-board {
     display: flex;
     flex-direction: row;
-    padding-top: 25px;
 }
 
 .vehicle-data-board {

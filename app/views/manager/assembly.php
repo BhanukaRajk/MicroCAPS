@@ -4,7 +4,7 @@
 <body>
 
     <section class="position-absolute page-content">
-        <div class="display-flex-row margin-bottom-3 align-items-center justify-content-between margin-right-6">
+        <div class="display-flex-row margin-bottom-3 align-items-center justify-content-between margin-right-6 margin-bottom-4">
             <div class="page-heading font-weight">
                 On Going Assembly
             </div>
