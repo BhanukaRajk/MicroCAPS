@@ -217,7 +217,7 @@ class Tester {
         }
     }
 
-    public function addPDI($data) {
+    public function addPDI($v1,$v2,$v3,$v4) {
         $this->db->query(
             "UPDATE `carpdi` 
             SET `Status` = :Status,
@@ -226,10 +226,10 @@ class Tester {
             AND `carpdi`.`ChassisNo` = :ChassisNo"
         );
 
-        $this->db->bind(':ChassisNo', $data['ChassisNo']);
-        $this->db->bind(':CheckId', $data['CheckId']);
-        $this->db->bind(':Status', $data['Status']);
-        $this->db->bind(':EmployeeID', $data['EmployeeID']);
+        $this->db->bind(':ChassisNo', $v1);
+        $this->db->bind(':CheckId', $v2);
+        $this->db->bind(':Status', $v3);
+        $this->db->bind(':EmployeeID', $v4);
 
         if ( $this->db->execute() ) {
             return true;

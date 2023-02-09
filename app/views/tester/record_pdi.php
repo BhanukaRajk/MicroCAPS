@@ -39,13 +39,13 @@
         <input type="radio" name="<?php echo $values->CheckId; ?>" 
                   value="OK" 
                   class="round-checkbox" 
-                  onChange="jobDone('.$id.','.$job.')"
+                  onChange="addPDI('<?php echo $values->ChassisNo; ?>','<?php echo $values->CheckId; ?>','OK','<?php echo $values->EmployeeID; ?>')"
                   <?php echo $values->Status == 'OK' ? "checked" : ''; ?>>
         <input type="radio" 
                   name="<?php echo $values->CheckId; ?>" 
                   value="SA" 
                   class="round-checkbox" 
-                  onChange="jobDone('<?php echo $values->CheckName; ?>','<?php echo $values->CheckName; ?>','<?php echo $values->CheckName; ?>','<?php echo $values->CheckName; ?>')"
+                  onChange="addPDI('<?php echo $values->ChassisNo; ?>','<?php echo $values->CheckId; ?>','SA','<?php echo $values->EmployeeID; ?>')"
                   <?php echo $values->Status == 'SA' ? "checked" : ''; ?>>
       </div>
       <?php 
