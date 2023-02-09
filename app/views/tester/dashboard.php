@@ -13,20 +13,10 @@
                 <div class="dash_cap">Pending Tasks</div>
                 <div class="graph">
 
-                    <!-- <div class="dash_cap">Pending Tasks</div> -->
-
-                    <!-- <div class="blue_button_long">Vehicle 1</div>
-                    <div class="blue_button_long">Vehicle 2</div>
-                    <div class="blue_button_long">Vehicle 3</div>
-                    <div class="blue_button_long">Vehicle 2</div>
-                    <div class="blue_button_long">Vehicle 3</div>
-                    <div class="blue_button_long">Vehicle 2</div>
-                    <div class="blue_button_long">Vehicle 3</div> -->
-
                     <?php foreach ($data['vehicles'] as $values) : ?>
 
                         <!-- <div class="blue_button_long"  onClick="location.href='<?php // echo URL_ROOT; ?>testers/defect_sheet/<?php //echo $values->ChassisNo; ?>'"><?php //echo $values->ChassisNo; ?></div> -->
-                        <div class="blue_button_long"  onClick="location.href='<?php echo URL_ROOT; ?>testers/pdi/<?php echo $values->ChassisNo; ?>'"><?php echo $values->ChassisNo; ?></div>
+                        <div class="blue_button_long"  onClick="location.href='<?php echo URL_ROOT; ?>testers/select_view/<?php echo $values->ChassisNo; ?>'"><?php echo $values->ChassisNo; ?></div>
                         
 
                     <?php endforeach; ?>
@@ -56,9 +46,9 @@
             <div class="quick bold">
                 <div class="sidebox">Quick Access</div>
                 <div class="sidebox activity_btn">
-                    <button type="button" class="blue_button">Defect Sheet</button>
-                    <a href="<?php echo URL_ROOT; ?>testers/select_vehicle">
-                        <button type="button" class="blue_button">Select Vehicle</button>
+                    <button type="button" class="blue_button">Select Vehicle</button>
+                    <a href="<?php echo URL_ROOT; ?>testers/add_defect">
+                        <button type="button" class="blue_button">Add Defect</button>
                     </a>
                 </div>
             </div>
