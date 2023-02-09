@@ -136,6 +136,18 @@ class Managers extends Controller {
         }
     }
 
+    public function dispatch() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['dispatchDetails'] = $this->managerModel->dispatchDetails();
+            $this->view('manager/dispatch', $data);
+        }
+    }
+
     public function settings() {
 
         if(!isLoggedIn()){

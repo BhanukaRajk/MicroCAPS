@@ -72,7 +72,7 @@ class Manager {
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
                 WHERE `vehicle`.CurrentStatus = :released
-                ORDER BY `vehicle`.ChassisNo DESC; '
+                ORDER BY `vehicle`.ChassisNo DESC;'
         );
 
         $this->db->bind(':released', 'PA');
@@ -157,6 +157,29 @@ class Manager {
             return false;
         }
 
+    }
+
+    public function dispatchDetails()
+    {
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.ReleaseDate, `vehicle`.ShowRoomName, `vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus = :released
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':released', 'D');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
     }
 
     public function userDetails($id) {
