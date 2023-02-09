@@ -1,0 +1,63 @@
+.pdi-card-head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pdi-card-main {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    width: 22rem;
+    line-height: 20px;
+    color: var(--fontblue);
+}
+
+.pdi-card-sub {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
+    color: var(--fontblue);
+    opacity: 0.5;
+}
+
+.pdiresultbox {
+    background-color: var(--white);
+    border-radius: 0.5rem;
+}
+
+.pdi-checklist {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray);
+}
+
+.pdi-checking-result {
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pdi-checking-result-text {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.red {
+    background-color: var(--red);
+}
+
+.yellow {
+    background-color: var(--yellow);
+}

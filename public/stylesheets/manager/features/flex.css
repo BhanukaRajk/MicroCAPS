@@ -118,3 +118,11 @@
 .gap-46 {
     gap: 46rem;
 }
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+}

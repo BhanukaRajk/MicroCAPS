@@ -217,6 +217,20 @@ class Managers extends Controller {
         }
     }
 
+    public function pdi() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
+            $data['pdiCheckCategories'] = $this->managerModel->pdiCheckCategories();
+            $data['pdiCheckList'] = $this->managerModel->pdiCheckList($data['onPDIVehicles'][0]->ChassisNo);
+            $this->view('manager/pdi',$data);
+        }
+    }
+
     public function test() {
 
         if(!isLoggedIn()){

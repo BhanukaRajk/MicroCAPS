@@ -159,6 +159,63 @@ class Manager {
 
     }
 
+    public function onPDIVehicles() {
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo
+                FROM `vehicle`
+                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':pdi', 'NC');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function pdiCheckCategories() {
+        $this->db->query(
+            'SELECT *
+                FROM `pdi-check-category`'
+        );
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function pdiCheckList($id) {
+        $this->db->query(
+            'SELECT `pdi-result`.*,`pdi-check`.CategoryId, `pdi-check`.CheckName
+                FROM `pdi-result`
+                INNER JOIN `pdi-check`
+                ON `pdi-result`.CheckId = `pdi-check`.CheckId 
+                WHERE `pdi-result`.ChassisNo = :id;'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
     public function dispatchDetails()
     {
         $this->db->query(
