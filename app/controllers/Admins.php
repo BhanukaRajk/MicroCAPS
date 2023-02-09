@@ -44,7 +44,6 @@ class Admins extends controller {
             $data['testerDetail'] = $this->adminModel->userDetails("Tester");
             $this->view('admin/employees', $data );
         }
-
     }
 
 //    public function add() {
@@ -116,21 +115,5 @@ class Admins extends controller {
 //            $this->view('admin/insertadd');
 //        }
 //    }
-
-    public function delete_employees($EmployeeId){
-        if(!isLoggedIn()){
-            redirect('admins/login');
-        }
-
-        // if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-            if($this->adminModel->deleteEmployees($EmployeeId)){
-                echo "Successful";
-            } else {
-                echo "Error";
-            }
-        // } else {
-            // redirect('admins/viewemployees/'. $EmployeeId);
-        // }
-    }
 
 }

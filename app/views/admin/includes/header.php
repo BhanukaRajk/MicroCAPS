@@ -17,10 +17,6 @@
 
     <!-- Template Main CSS File -->
     <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/main.css" rel="stylesheet" />
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/dash.css" rel="stylesheet" />
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/add.css" rel="stylesheet" />
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/edit.css" rel="stylesheet" />
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/viewemployees.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
