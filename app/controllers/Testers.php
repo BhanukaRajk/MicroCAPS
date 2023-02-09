@@ -73,6 +73,7 @@ class Testers extends controller {
             
             $data = [
                 'DefectNo' => trim($_POST['DefectNo']),
+                'RepairDescription' => trim($_POST['RepairDescription']),
                 'InspectionDate' => trim($_POST['InspectionDate']),
                 'ChassisNo' => trim($_POST['ChassisNo']),
                 'EmployeeID' => trim($_POST['EmployeeID']),
@@ -87,14 +88,14 @@ class Testers extends controller {
             if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
             }
-            else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
-                $data['defect_id_err'] = 'Incorrect Defect Number';
-            }
+            // else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
+            //     $data['defect_id_err'] = 'Incorrect Defect Number';
+            // }
             else if($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
                 $data['defect_err'] = 'Defect Already Recorded';
             }
 
-            if(empty($data['user_err']) && empty($data['defect_id_err']) && empty($data['defect_err'])){
+            if(empty($data['user_err']) && empty($data['defect_err'])){
                 if($this->testerModel->addDefect($data)){
                     redirect('testers/defect_sheet/'. $data['ChassisNo']);
                 } else {
@@ -106,6 +107,7 @@ class Testers extends controller {
         } else {
             $data = [
                 'DefectNo' => '',
+                'RepairDescription' => '',
                 'InspectionDate' => '',
                 'ChassisNo' => '',
                 'EmployeeID' => '',
@@ -128,6 +130,7 @@ class Testers extends controller {
 
             $data = [
                 'DefectNo' => $DefectNo,
+                'RepairDescription' => trim($_POST['RepairDescription']),
                 'InspectionDate' => trim($_POST['InspectionDate']),
                 'ChassisNo' => $ChassisNo,
                 'EmployeeID' => trim($_POST['EmployeeID']),
@@ -141,11 +144,11 @@ class Testers extends controller {
             if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
             }
-            else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
-                $data['defect_id_err'] = 'Incorrect Defect Number';
-            }
+            // else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
+            //     $data['defect_id_err'] = 'Incorrect Defect Number';
+            // }
 
-            if(empty($data['user_err']) && empty($data['defect_id_err'])){
+            if(empty($data['user_err'])){
                 if($this->testerModel->editDefect($data)){
                     redirect('testers/defect_sheet/'.$data['ChassisNo']);
                 } else {
@@ -160,6 +163,7 @@ class Testers extends controller {
 
             $data = [
                 'DefectNo' => $DefectNo,
+                'RepairDescription' => $defect->RepairDescription,
                 'InspectionDate' => $defect->InspectionDate,
                 'ChassisNo' => $ChassisNo,
                 'EmployeeID' => $defect->EmployeeID,

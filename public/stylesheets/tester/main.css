@@ -1141,7 +1141,7 @@ Table
 
 .graph {
     /* margin-block: auto; */
-    overflow-y:scroll;
+    /* overflow-y:scroll; */
     max-height: 13rem;
     padding-bottom: 1rem;
 }

@@ -30,7 +30,7 @@
     </div>
     <?php foreach ($data['pdi_tests'] as $values) : ?>
       <?php 
-      //if ($values->categoryid == '01000') { 
+      if ($values->categoryid == '01000') { 
       ?>
       <div class="grid-item-1">
         <div class="padding-left-form"><?php echo $values->CheckName; ?></div>
@@ -49,7 +49,7 @@
                   <?php echo $values->Status == 'SA' ? "checked" : ''; ?>>
       </div>
       <?php 
-      //} 
+      } 
       ?>
     <?php endforeach; ?>
   </div>

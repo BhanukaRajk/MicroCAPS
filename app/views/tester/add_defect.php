@@ -27,7 +27,7 @@
                     echo !empty($data['defect_err']) ? $data['defect_err'] : '';
                     ?>
                   </span>
-                  <input type="text" id="DefectNo" name="DefectNo" value="<?php echo $data['DefectNo']; ?>" placeholder="Defect Number" class="add-form-input" required autofocus />
+                  <input type="text" id="DefectNo" name="DefectNo" value="<?php echo $data['DefectNo']; ?>" placeholder="Defect Number" class="add-form-input" required />
                 </div>
 
                 <div class="add-form-field">
@@ -45,8 +45,7 @@
                 </div>
 
                 <div class="add-form-field">
-                  <input type="text" id="RepairDescription" name="RepairDescription" value="<?php //echo $data['RepairDescription']; 
-                                                                                            ?>" placeholder="Repair Description" class="add-form-input" />
+                  <input type="text" id="RepairDescription" name="RepairDescription" value="<?php echo $data['RepairDescription']; ?>" placeholder="Repair Description" class="add-form-input" />
                 </div>
 
                 <div class="add-form-field">

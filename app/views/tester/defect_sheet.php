@@ -23,7 +23,7 @@
 
           <tr>
             <td><?php echo $values->DefectNo; ?></td>
-            <td><?php echo $values->DefectDescription; ?></td>
+            <td><?php echo $values->RepairDescription; ?></td>
             <td><?php echo $values->InspectionDate; ?></td>
             <!-- <td><?php //echo $values->ChassisNo; ?></td> -->
             <td><?php echo $values->EmployeeID; ?></td>

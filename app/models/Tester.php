@@ -38,25 +38,25 @@ class Tester {
 
     }
 
-    public function findDefectByID($DefectNo) {
+    // public function findDefectByID($DefectNo) {
 
-        $this->db->query('SELECT * FROM `defects`  WHERE `defects`.`DefectNo` = :DefectNo');
+    //     $this->db->query('SELECT * FROM `defects`  WHERE `defects`.`DefectNo` = :DefectNo');
 
-        $this->db->bind(':DefectNo', $DefectNo);
+    //     $this->db->bind(':DefectNo', $DefectNo);
 
-        $row = $this->db->single();
+    //     $row = $this->db->single();
 
-        if ($this->db->rowCount()) {
-            return true;
-        } else {
-            return false;
-        }
+    //     if ($this->db->rowCount()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
 
-    }
+    // }
 
     public function findDefectExists($DefectNo, $ChassisNo) {
 
-        $this->db->query('SELECT * FROM `cardefect` WHERE `cardefect`.`DefectNo` = :DefectNo AND `cardefect`.`ChassisNo` = :ChassisNo');
+        $this->db->query('SELECT * FROM `pdi-defect` WHERE `pdi-defect`.`DefectNo` = :DefectNo AND `pdi-defect`.`ChassisNo` = :ChassisNo');
 
 
         $this->db->bind(':DefectNo', $DefectNo);
@@ -74,7 +74,7 @@ class Tester {
 
     public function getDefect($ChassisNo, $DefectNo) {
 
-        $this->db->query('SELECT * FROM `cardefect` WHERE `cardefect`.`DefectNo` = :DefectNo AND `cardefect`.`ChassisNo` = :ChassisNo');
+        $this->db->query('SELECT * FROM `pdi-defect` WHERE `pdi-defect`.`DefectNo` = :DefectNo AND `pdi-defect`.`ChassisNo` = :ChassisNo');
 
         $this->db->bind(':DefectNo', $DefectNo);
         $this->db->bind(':ChassisNo', $ChassisNo);
@@ -87,7 +87,7 @@ class Tester {
 
     public function getPDI($ChassisNo, $CheckId) {
 
-        $this->db->query('SELECT * FROM `carpdi` WHERE `carpdi`.`CheckId` = :CheckId AND `carpdi`.`ChassisNo` = :ChassisNo');
+        $this->db->query('SELECT * FROM `pdi-result` WHERE `pdi-result`.`CheckId` = :CheckId AND `pdi-result`.`ChassisNo` = :ChassisNo');
 
         $this->db->bind(':DefectNo', $CheckId);
         $this->db->bind(':ChassisNo', $ChassisNo);
@@ -97,30 +97,8 @@ class Tester {
         return $row;
     }
 
-
-
-    public function login($username, $password) {
-        $this->db->query(
-            'SELECT employee-credentials.Username, employee-credentials.Password, employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position
-            FROM employee-credentials
-            INNER JOIN employee
-            ON employee-credentials.EmployeeID = employee.EmployeeId
-            WHERE employee-credentials.Username = :username'
-        );
-
-        $this->db->bind(':username', $username);
-
-        $row = $this->db->single();
-
-        if ( $password == $row->Password ) {
-            return $row;
-        } else {
-            return null;
-        }
-    }
-
     public function selectVehicle(){
-        $this->db->query('SELECT ChassisNo FROM `car`');
+        $this->db->query('SELECT ChassisNo FROM `vehicle` WHERE `vehicle`.`CurrentStatus` = "PDI"');
 
         $row = $this->db->resultSet();
 
@@ -133,15 +111,14 @@ class Tester {
 
     public function viewDefectSheets($id) {
         $this->db->query(
-            "SELECT cardefect.DefectNo, 
-            defects.DefectDescription, 
-            cardefect.InspectionDate, 
-            cardefect.ChassisNo,
-            cardefect.EmployeeID, 
-            cardefect.ReCorrection 
-            FROM `cardefect` INNER JOIN `defects` 
-            ON cardefect.DefectNo = defects.DefectNo 
-            WHERE cardefect.ChassisNo = :id"
+            "SELECT `pdi-defect`.`DefectNo`, 
+            `pdi-defect`.`RepairDescription`, 
+            `pdi-defect`.`InspectionDate`, 
+            `pdi-defect`.`ChassisNo`,
+            `pdi-defect`.`EmployeeID`, 
+            `pdi-defect`.`ReCorrection` 
+            FROM `pdi-defect`
+            WHERE `pdi-defect`.`ChassisNo` = :id"
         );
 
         $this->db->bind(':id', $id);
@@ -157,8 +134,8 @@ class Tester {
 
     public function addDefect($data) {
         $this->db->query(
-            "INSERT INTO `cardefect` (`DefectNo`, `InspectionDate`, `ChassisNo`, `EmployeeID`, `ReCorrection`) 
-            VALUES (:DefectNo, :InspectionDate, :ChassisNo, :EmployeeID, :ReCorrection)"
+            "INSERT INTO `pdi-defect` (`DefectNo`, `ChassisNo`, `EmployeeID`, `InspectionDate`, `RepairDescription`, `ReCorrection`) 
+            VALUES (:DefectNo, :ChassisNo, :EmployeeID, :InspectionDate, :RepairDescription, :ReCorrection)"
         );
 
         $this->db->bind(':DefectNo', $data['DefectNo']);
@@ -166,6 +143,7 @@ class Tester {
         $this->db->bind(':ChassisNo', $data['ChassisNo']);
         $this->db->bind(':EmployeeID', $data['EmployeeID']);
         $this->db->bind(':ReCorrection', $data['ReCorrection']);
+        $this->db->bind(':RepairDescription', $data['RepairDescription']);
 
 
         if($this->db->execute()){
@@ -178,10 +156,11 @@ class Tester {
     public function editDefect($data) {
 
         $this->db->query(
-            "UPDATE `cardefect`
+            "UPDATE `pdi-defect`
             SET `InspectionDate` = :InspectionDate,
             `EmployeeID` = :EmployeeID,
-            `ReCorrection` = :ReCorrection
+            `ReCorrection` = :ReCorrection,
+            `RepairDescription` = :RepairDescription,
             WHERE `ChassisNo` = :ChassisNo AND `DefectNo` = :DefectNo"
         );
 
@@ -190,6 +169,7 @@ class Tester {
         $this->db->bind(':ChassisNo', $data['ChassisNo']);
         $this->db->bind(':EmployeeID', $data['EmployeeID']);
         $this->db->bind(':ReCorrection', $data['ReCorrection']);
+        $this->db->bind(':RepairDescription', $data['RepairDescription']);
 
 
         if($this->db->execute()){
@@ -202,8 +182,8 @@ class Tester {
     public function deleteDefect($ChassisNo, $DefectNo) {
 
         $this->db->query(
-            "DELETE FROM `cardefect` 
-            WHERE `cardefect`.`DefectNo` = :DefectNo AND `cardefect`.`ChassisNo` = :ChassisNo"
+            "DELETE FROM `pdi-defect` 
+            WHERE `pdi-defect`.`DefectNo` = :DefectNo AND `pdi-defect`.`ChassisNo` = :ChassisNo"
         );
 
         $this->db->bind(':DefectNo', $DefectNo);
@@ -219,11 +199,11 @@ class Tester {
 
     public function addPDI($v1,$v2,$v3,$v4) {
         $this->db->query(
-            "UPDATE `carpdi` 
+            "UPDATE `pdi-result` 
             SET `Status` = :Status,
                   `EmployeeID` = :EmployeeID
-            WHERE `carpdi`.`CheckId` = :CheckId 
-            AND `carpdi`.`ChassisNo` = :ChassisNo"
+            WHERE `pdi-result`.`CheckId` = :CheckId 
+            AND `pdi-result`.`ChassisNo` = :ChassisNo"
         );
 
         $this->db->bind(':ChassisNo', $v1);
@@ -240,16 +220,16 @@ class Tester {
 
     public function viewPDI($id){
         $this->db->query(
-            "SELECT `carpdi`.`ChassisNo`,
-                         `carpdi`.`CheckId`, 
-                         `carpdi`.`Status`, 
-                         `carpdi`.`EmployeeID`, 
-                         `pdichecks`.`CheckName`, 
-                         `pdichecks`.`categoryid` 
-            FROM `carpdi` 
-            INNER JOIN `pdichecks` 
-            ON `carpdi`.`CheckId` = `pdichecks`.`CheckId` 
-            WHERE `carpdi`.`ChassisNo` = :id"
+            "SELECT `pdi-result`.`ChassisNo`,
+                         `pdi-result`.`CheckId`, 
+                         `pdi-result`.`Status`, 
+                         `pdi-result`.`EmployeeID`, 
+                         `pdi-check`.`CheckName`, 
+                         `pdi-check`.`categoryid` 
+            FROM `pdi-result` 
+            INNER JOIN `pdi-check` 
+            ON `pdi-result`.`CheckId` = `pdi-check`.`CheckId` 
+            WHERE `pdi-result`.`ChassisNo` = :id"
         );
 
         $this->db->bind(':id', $id);
