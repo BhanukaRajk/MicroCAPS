@@ -19,8 +19,7 @@ $(document).ready(() => {
 
 })
 
-
-function addPDI(c_no,chk_id, status, emp_id) {
+function addPDI(ChassisNo,CheckId, Status) {
     
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -30,13 +29,12 @@ function addPDI(c_no,chk_id, status, emp_id) {
             if (response == "Successful") {
 
                 location.reload();
-                // setLocalStorage("Successful",c_no + " - " + chk_id + " " +status + " - " + emp_id + " " + "  Completed");
-                
+                setLocalStorage("Successful",ChassisNo + " - " + CheckId + " " +Status  + " " + "  Completed");
 
             } else {
 
                 location.reload();
-                // setLocalStorage("Error","Error Completing Job");
+                setLocalStorage("Error","Error Completing Job");
 
             }
 
@@ -44,7 +42,7 @@ function addPDI(c_no,chk_id, status, emp_id) {
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Testers/addPDI", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("c_no="+c_no+"&chk_id="+chk_id+"&status="+status+"&emp_id="+emp_id);
+    xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Status="+Status);
 }
 
 //Alert Success

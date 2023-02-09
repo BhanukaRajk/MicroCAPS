@@ -191,6 +191,20 @@ class Testers extends controller {
         }
     }
 
+    public function pdi($id) {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
+            $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
+            $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
+            $this->view('tester/pdi',$data);
+        }
+    }
+
     // public function record_pdi($ChassisNo, $CheckId) {
 
     //     if(!isLoggedIn()){
@@ -265,11 +279,10 @@ class Testers extends controller {
             $data = [
                 'ChassisNo' => trim($_POST['ChassisNo']),
                 'CheckId' => trim($_POST['CheckId']),
-                'Status' => trim($_POST['Status']),
-                'EmployeeID' => trim($_POST['EmployeeID'])
+                'Status' => trim($_POST['Status'])
             ];
 
-            $result = $this->testerModel->addPDI($data['ChassisNo'], $data['CheckId'], $data['Status'], $data['EmployeeID']);
+            $result = $this->testerModel->addPDI($data['ChassisNo'], $data['CheckId'], $data['Status']);
 
             if($result) {
                 echo 'Successful';

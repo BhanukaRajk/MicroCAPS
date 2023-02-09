@@ -25,7 +25,8 @@
 
                     <?php foreach ($data['vehicles'] as $values) : ?>
 
-                        <div class="blue_button_long"  onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $values->ChassisNo; ?>'"><?php echo $values->ChassisNo; ?></div>
+                        <!-- <div class="blue_button_long"  onClick="location.href='<?php // echo URL_ROOT; ?>testers/defect_sheet/<?php //echo $values->ChassisNo; ?>'"><?php //echo $values->ChassisNo; ?></div> -->
+                        <div class="blue_button_long"  onClick="location.href='<?php echo URL_ROOT; ?>testers/pdi/<?php echo $values->ChassisNo; ?>'"><?php echo $values->ChassisNo; ?></div>
                         
 
                     <?php endforeach; ?>
