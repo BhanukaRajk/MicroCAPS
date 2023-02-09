@@ -6,7 +6,7 @@ drop.addEventListener("click", () => {
     logout.classList.toggle("show");
 });
 
-function addPDI(id,job) {
+function addPDI(c_no,chk_id, status, emp_id) {
     
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -16,7 +16,7 @@ function addPDI(id,job) {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful",id + " - " + job + " " + " Job is Completed");
+                setLocalStorage("Successful",c_no + " - " + chk_id + " " +status + " - " + emp_id + " " + "  Completed");
                 
 
             } else {
@@ -28,7 +28,7 @@ function addPDI(id,job) {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/jobDone", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/addPDI", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("id="+id+"&job="+job);
+    xhttp.send("c_no="+c_no+"&chk_id="+chk_id+"status="+status+"&emp_id="+emp_id);
 }

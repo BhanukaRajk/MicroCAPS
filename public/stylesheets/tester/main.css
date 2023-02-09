@@ -1695,6 +1695,9 @@ Add Defect Form
     opacity: 1;
 }
 
+.times input[type="date"] {
+    font-family: "Montserrat", sans-serif;
+ }
 
 /* PDI FORM */
 

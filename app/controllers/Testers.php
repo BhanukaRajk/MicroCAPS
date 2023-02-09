@@ -265,7 +265,7 @@ class Testers extends controller {
                 'EmployeeID' => trim($_POST['EmployeeID'])
             ];
 
-            $result = $this->testerModel->addPDI($data);
+            $result = $this->testerModel->addPDI($data['ChassisNo'], $data['CheckId'], $data['Status'], $data['EmployeeID']);
 
             if($result) {
                 echo 'Successful';

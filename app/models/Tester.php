@@ -8,7 +8,7 @@ class Tester {
 
     public function findUserByUsername($username) {
 
-        $this->db->query('SELECT * FROM credentials  WHERE credentials.Username = :username');
+        $this->db->query('SELECT * FROM employee-credentials  WHERE employee-credentials.Username = :username');
 
         $this->db->bind(':username', $username);
 
@@ -24,7 +24,7 @@ class Tester {
 
     public function findUserByID($EmployeeID) {
 
-        $this->db->query('SELECT * FROM `credentials`  WHERE `credentials`.`EmployeeID` = :EmployeeID');
+        $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.`EmployeeID` = :EmployeeID');
 
         $this->db->bind(':EmployeeID', $EmployeeID);
 
@@ -99,13 +99,13 @@ class Tester {
 
 
 
-    public function login($username,$password) {
+    public function login($username, $password) {
         $this->db->query(
-            'SELECT credentials.Username, credentials.Password, employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position
-            FROM credentials
+            'SELECT employee-credentials.Username, employee-credentials.Password, employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position
+            FROM employee-credentials
             INNER JOIN employee
-            ON credentials.EmployeeID = employee.EmployeeId
-            WHERE credentials.Username = :username'
+            ON employee-credentials.EmployeeID = employee.EmployeeId
+            WHERE employee-credentials.Username = :username'
         );
 
         $this->db->bind(':username', $username);
@@ -221,8 +221,9 @@ class Tester {
         $this->db->query(
             "UPDATE `carpdi` 
             SET `Status` = :Status,
-                `EmployeeID` = :EmployeeID
-            WHERE `carpdi`.`CheckId` = :CheckId AND `carpdi`.`ChassisNo` = :ChassisNo"
+                  `EmployeeID` = :EmployeeID
+            WHERE `carpdi`.`CheckId` = :CheckId 
+            AND `carpdi`.`ChassisNo` = :ChassisNo"
         );
 
         $this->db->bind(':ChassisNo', $data['ChassisNo']);
@@ -238,9 +239,6 @@ class Tester {
     }
 
     public function viewPDI($id){
-        // $this->db->query(
-        //     "SELECT * FROM `carpdi` WHERE carpdi.ChassisNo = :id"
-        // );
         $this->db->query(
             "SELECT `carpdi`.`ChassisNo`,
                          `carpdi`.`CheckId`, 
