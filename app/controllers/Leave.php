@@ -18,8 +18,8 @@ class Leave extends controller {
     public function addNewLeave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -86,8 +86,8 @@ class Leave extends controller {
     public function leaves()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -105,8 +105,8 @@ class Leave extends controller {
     public function editleave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -229,8 +229,8 @@ class Leave extends controller {
     public function removeleave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if (isset($_GET['id'])) {

@@ -15,31 +15,44 @@
 
 
                     <?php
-                    foreach ($data['consumableset'] as $item) {
+                    foreach ($data['LineCarsSet'] as $car) {
                         echo '<div class="carcard">
-                            <div class="cardhead">
-                                <div class="cardid">
-                                    <div class="carmodel">', $item->consumable_name, '</div>
-                                    <div class="chassisno">', ($item->volume == NULL) ? 'Grease' : 'Lubricants', '</div>
+                                <div class="cardhead">
+                                    <div class="cardid">
+                                        <div class="carmodel">' , ($car->ModelNo == "M0001") ? 'Micro Panda ' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross ' : 'MG ZS SUV ') , '</div>
+                                        <div class="chassisno">' ,$car->ChassisNo, '</div>
+                                    </div>
                                 </div>
-                                <div class="carstatuscolor">
-                                    <div class="status-circle ', ($item->volume == NULL) ? (($item->weight >= 100) ? 'status-green-circle' : 'status-orange-circle') : (($item->volume >= 100) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
+                                <div class="carpicbox">
+                                    <img src="' , URL_ROOT , 'public/images/cars/' , ($car->ModelNo == "M0001") ? 'Micro Panda ' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross ' : 'MG ZS SUV ') , '' , $car->Color , '.png" class="carpic" alt="Car image">
                                 </div>
-                            </div>
-                            <div class="carpicbox">
-                                <img src="' . URL_ROOT . 'public/images/consumables/' . $item->image . '" class="carpic" alt="micro panda red">
-                            </div>
-                            <div class="carstatus ', ($item->volume == NULL) ? (($item->weight >= 100) ? 'available' : 'lower') : (($item->volume >= 100) ? 'available' : 'lower'), '">', ($item->volume == NULL) ? (($item->weight > 100) ? 'Available' : 'Low in stock') : (($item->volume > 100) ? 'Available' : 'Low in stock'), '</div>
-                            <div class="chassisno">Last update: ', $item->last_update, '</div>
-                        </div>';
-                        //print_r($item);
+                                <div></div>
+                            </div>';
+                        // print_r($car);
                         //echo $item->consumable_id;
                     }
 
-                    // if($item == NULL) {
-                    //     echo '<div id="middler">Nothing to show!</div>';
-                    // }
+                    if($car == NULL) {
+                        echo '<div id="middler">Nothing to show!</div>';
+                    }
                     ?>
+
+                    <!-- <div class="carcard">
+                        <div class="cardhead">
+                            <div class="cardid">
+                                <div class="carmodel">', ($car->ModelNo == "M0001") ? 'Micro Panda' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross' : 'MG ZS SUV'),'</div>
+                                <div class="chassisno">' , $car->ChassisNo , '</div>
+                            </div>
+                            <div class="carstatuscolor">
+                                <div class="status-circle ', ($item->volume == NULL) ? (($item->weight >= 100) ? 'status-green-circle' : 'status-orange-circle') : (($item->volume >= 100) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
+                            </div>
+                        </div>
+                        <div class="carpicbox">
+                            <img src="' . URL_ROOT . 'public/images/cars/' . ($car->ModelNo == " M0001") ? 'Micro Panda ' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross ' : 'MG ZS SUV ') . ''.$car->Color.'" class="carpic" alt="Car image">
+                        </div>
+                        <div class="carstatus ', ($item->volume == NULL) ? (($item->weight >= 100) ? 'available' : 'lower') : (($item->volume >= 100) ? 'available' : 'lower'), '">', ($item->volume == NULL) ? (($item->weight > 100) ? 'Available' : 'Low in stock') : (($item->volume > 100) ? 'Available' : 'Low in stock'), '</div>
+                        <div class="chassisno">Last update: ', $item->last_update, '</div>
+                    </div> -->
 
                     <div class="carcard">
                         <div class="cardhead">
@@ -57,216 +70,7 @@
                         <div class="carstatus">Not Inspected</div>
                     </div>
 
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112215000A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Red.png" class="carpic" alt="micro panda red">
-                        </div>
-                        <div class="carstatus">Inspected</div>
-                    </div>
-
-                    <a href="DON'T CLICK HERE">
-                        <div class="carcard">
-                            <div class="cardhead">
-                                <div class="cardid">
-                                    <div class="carmodel">Micro Panda</div>
-                                    <div class="chassisno">CN112745594A</div>
-                                </div>
-                                <div class="carstatuscolor">
-                                    <div class="status-circle status-green-circle"></div>
-                                </div>
-                            </div>
-                            <div class="carpicbox">
-                                <img src="<?php echo URL_ROOT; ?>public/images/cars/MG ZS SUV Blue.png" class="carpic" alt="micro panda green">
-                            </div>
-                            <div class="carstatus">Stage 01</div>
-                        </div>
-                    </a>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112881202A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Black.png" class="carpic" alt="micro panda black">
-                        </div>
-                        <div class="carstatus">Not Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112910320A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Blue.png" class="carpic" alt="micro panda blue">
-                        </div>
-                        <div class="carstatus">Not Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112902287A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Cross Green.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112087629A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Blue.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Not Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112767681A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro%20Panda%20Cross%20Blue.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112142532A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda White.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Not Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112297310A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Red.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Not Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112764853A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Yellow.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112109283A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Black.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Not Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">Micro Panda</div>
-                                <div class="chassisno">CN112875209Q</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-green-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/Micro Panda Green.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Inspected</div>
-                    </div>
-
-                    <div class="carcard">
-                        <div class="cardhead">
-                            <div class="cardid">
-                                <div class="carmodel">MG ZS SUV</div>
-                                <div class="chassisno">CG112876543A</div>
-                            </div>
-                            <div class="carstatuscolor">
-                                <div class="status-circle status-orange-circle"></div>
-                            </div>
-                        </div>
-                        <div class="carpicbox">
-                            <img src="<?php echo URL_ROOT; ?>public/images/cars/MG ZS SUV Black.png" class="carpic" alt="micro panda green">
-                        </div>
-                        <div class="carstatus">Not Inspected</div>
-                    </div>
-
+                    
 
                 </div>
 

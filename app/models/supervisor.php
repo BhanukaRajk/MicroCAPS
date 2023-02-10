@@ -12,7 +12,6 @@ class Supervisor
 
     public function findUserByUsername($username)
     {
-
         $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.Username = :username');
 
         $this->db->bind(':username', $username);
@@ -26,31 +25,31 @@ class Supervisor
         }
     }
 
+    // LOGIN FUNCTION
+    // public function login($username, $password)
+    // {
+    //     $this->db->query(
+    //         'SELECT `employee-credentials`.Username, `employee-credentials`.Password, `employee`.EmployeeID, `employee`.Firstname, `employee`.Lastname, `employee`.Position
+    //         FROM `employee-credentials`
+    //         INNER JOIN `employee`
+    //         ON `employee-credentials`.EmployeeID = `employee`.EmployeeId
+    //         WHERE `employee-credentials`.Username = :username'
+    //     );
 
-    public function login($username, $password)
-    {
-        $this->db->query(
-            'SELECT `employee-credentials`.Username, `employee-credentials`.Password, `employee`.EmployeeID, `employee`.Firstname, `employee`.Lastname, `employee`.Position
-            FROM `employee-credentials`
-            INNER JOIN `employee`
-            ON `employee-credentials`.EmployeeID = `employee`.EmployeeId
-            WHERE `employee-credentials`.Username = :username'
-        );
+    //     $this->db->bind(':username', $username);
 
-        $this->db->bind(':username', $username);
-
-        $row = $this->db->single();
+    //     $row = $this->db->single();
 
 
-        // COMPARING HASHED PASSWORDS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //     // COMPARING HASHED PASSWORDS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // if (password_hash($password, PASSWORD_DEFAULT) == password_hash($row->Password, PASSWORD_DEFAULT)) {
-        if ($password == $row->Password) {
-            return $row;
-        } else {
-            return null;
-        }
-    }
+    //     // if (password_hash($password, PASSWORD_DEFAULT) == password_hash($row->Password, PASSWORD_DEFAULT)) {
+    //     if ($password == $row->Password) {
+    //         return $row;
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
 
 
@@ -98,11 +97,13 @@ class Supervisor
         }
     }
 
-
+    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
     public function checkEmployee($empid)
     {
 
-        $this->db->query('SELECT EmployeeId FROM employee WHERE EmployeeId = :employee AND Progress = 1');
+        $this->db->query(
+            'SELECT EmployeeId FROM employee WHERE EmployeeId = :employee AND Progress = 1'
+        );
 
         $this->db->bind(':employee', $empid);
 
@@ -115,11 +116,13 @@ class Supervisor
         }
     }
 
-
+    // CHECK THIS EMPLOYEE REQUESTED ANOTHER LEAVE ON THIS DATE
     public function checkLeaves($empid, $reqdate)
     {
 
-        $this->db->query('SELECT EmployeeId, LeaveDate FROM leaves WHERE leaves.EmployeeId = :employee AND leaves.LeaveDate = :req_date');
+        $this->db->query(
+            'SELECT EmployeeId, LeaveDate FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date;'
+        );
 
         $this->db->bind(':employee', $empid);
         $this->db->bind(':req_date', $reqdate);
@@ -136,11 +139,13 @@ class Supervisor
     public function checkLeaveByID($LeaveID)
     {
 
-        $this->db->query('SELECT `LeaveId` FROM `employee-leaves` WHERE `LeaveId` = :Leave;');
+        $this->db->query(
+            'SELECT `LeaveId` FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
+        );
 
         $this->db->bind(':Leave', $LeaveID);
 
-        // $row = $this->db->single();
+        $row = $this->db->single();
 
         if ($this->db->rowCount()) {
             return true;
@@ -153,8 +158,8 @@ class Supervisor
     public function addleave($EmpId, $leavedate, $reason)
     {
         $this->db->query(
-            'INSERT INTO leaves(EmployeeId, LeaveDate, Reason) 
-            VALUES (:empid,:leavedate,:reason)'
+            'INSERT INTO `employee-leaves`(EmployeeId, LeaveDate, Reason) 
+            VALUES (:empid,:leavedate,:reason);'
         );
 
         $this->db->bind(':empid', $EmpId);
@@ -171,9 +176,9 @@ class Supervisor
     public function EditLeave($EmpId, $leavedate, $reason, $id)
     {
         $this->db->query(
-            'UPDATE leaves
+            'UPDATE `employee-leaves`
             SET EmployeeId = :empid, LeaveDate = :leavedate, Reason = :reason
-            WHERE Leave_Id = :id;'
+            WHERE LeaveId = :id;'
         );
 
         $this->db->bind(':empid', $EmpId);
@@ -199,7 +204,7 @@ class Supervisor
     public function removeleave($LeaveID)
     {
         $this->db->query(
-            'DELETE FROM leaves WHERE Leave_Id = :leave_id;'
+            'DELETE FROM `employee-leaves` WHERE LeaveId = :leave_id;'
             // 'DELETE FROM leaves WHERE EmployeeId = :Empid AND LeaveDate = :LDate;'
         );
 
@@ -338,7 +343,6 @@ class Supervisor
         );
 
         $consumables = $this->db->resultSet();
-        //print_r($consumables);
 
         if ($consumables) {
             return $consumables;
@@ -460,12 +464,15 @@ class Supervisor
     }
 
 
-    public function ViewVehicles()
+    public function viewAssemblyLineVehicles()
     {
 
         $this->db->query(
-            'SELECT *
-                FROM vehicles; '
+            'SELECT `ChassisNo`,
+                    `ModelNo`,
+                    `Color` 
+                    FROM `vehicle` 
+                    WHERE `CurrentStatus` = "PA";'
         );
 
         $vehicles = $this->db->resultSet();

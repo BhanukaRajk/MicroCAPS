@@ -10,6 +10,30 @@
 
         public function login(){
 
+            if (isLoggedIn()) {
+
+                if($_SESSION['_position'] == 'Admin')
+                {
+                    redirect('Admins/dashboard');
+                }
+                
+                else if($_SESSION['_position'] == 'Manager')
+                {
+                    redirect('Managers/dashboard');
+                }
+                
+                else if($_SESSION['_position'] == 'Supervisor')
+                {
+                    redirect('Supervisors/dashboard');
+                }
+                
+                else if($_SESSION['_position'] == 'Tester')
+                {
+                    redirect('Testers/dashboard');
+                }
+                
+            }
+
             /* Post */
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

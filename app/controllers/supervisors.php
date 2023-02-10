@@ -5,10 +5,15 @@ class Supervisors extends controller
 
     private $supervisorModel;
 
+
+
+
     public function __construct()
     {
         $this->supervisorModel = $this->model('Supervisor');
     }
+
+
 
     public function settings() {
 
@@ -59,16 +64,13 @@ class Supervisors extends controller
     }
 
 
+
     public function dashboard()
     {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
         }
-
-        // if($_SESSION['_position'] == 'Supervisor') {
-        //     redirect($_SESSION['_position'].'s/login');
-        // }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
@@ -82,20 +84,23 @@ class Supervisors extends controller
 
     public function linevehicleview()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
             $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
 
+
+
     public function PAQrecord()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -104,10 +109,12 @@ class Supervisors extends controller
         }
     }
 
+
+    
     public function taskSchedule()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -117,23 +124,12 @@ class Supervisors extends controller
     }
 
 
-    // public function consumableview()
-    // {
-    //     if(!isLoggedIn()) {
-    //         redirect('Supervisors/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //         $this->view('supervisor/consumables/consumablelist');
-    //     }
-    // }
-
 
 
     public function consumableview()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -162,8 +158,8 @@ class Supervisors extends controller
 
     public function pdiresults()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -181,8 +177,8 @@ class Supervisors extends controller
 
     public function vehicleview()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -193,8 +189,8 @@ class Supervisors extends controller
 
     public function testRunQueue()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -205,20 +201,21 @@ class Supervisors extends controller
 
     public function lineVehicles()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $this->view('supervisor/parts/linevehiclelist', $data);
+            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
+            $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
 
     public function componentsView()
     {
-        if(!isLoggedIn()) {
-            redirect('Supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -283,8 +280,8 @@ class Supervisors extends controller
     public function addleave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -302,7 +299,6 @@ class Supervisors extends controller
                 if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
 
                     $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
-
                     $data['url'] = getUrl();
                     $this->view('supervisor/leaves/addleave', $data);
 
@@ -321,7 +317,7 @@ class Supervisors extends controller
                     } else {
 
                         if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'], $data['reason'])) {
-                            $_SESSION['return_message'] = 'New record saved!';
+                            $_SESSION['return_message'] = 'Success! New record saved';
                         } else {
                             $_SESSION['return_message'] = 'Error! record saving failed!';
                         }
@@ -350,16 +346,13 @@ class Supervisors extends controller
     public function leaves()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
-            // echo "-------------";
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
-            // echo "------00-----";
-            // print_r($data);
             $this->view('supervisor/leaves/leaves', $data);
         }
     }
@@ -370,8 +363,8 @@ class Supervisors extends controller
     public function editleave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -494,8 +487,8 @@ class Supervisors extends controller
     public function removeleave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
 
@@ -510,7 +503,7 @@ class Supervisors extends controller
             if ($this->supervisorModel->checkLeaveByID($data['LeaveID'])) {
 
                 if ($this->supervisorModel->removeleave($data['LeaveID'])) {
-                    $_SESSION['return_message'] = 'New record saved!';
+                    $_SESSION['return_message'] = 'Record deletion Success!';
                     // $_SESSION['success_msg'] = 'New record saved!';
                 } else {
                     $_SESSION['return_message'] = 'Error! record saving failed!';
@@ -549,8 +542,8 @@ class Supervisors extends controller
     public function removeleave2()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if (isset($_GET['id'])) {
@@ -588,8 +581,8 @@ class Supervisors extends controller
     public function viewComponents()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -604,8 +597,8 @@ class Supervisors extends controller
     public function editprofile()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -621,8 +614,8 @@ class Supervisors extends controller
     public function scheduletasks()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -636,8 +629,8 @@ class Supervisors extends controller
     public function S4vehicles()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {

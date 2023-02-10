@@ -55,22 +55,17 @@
                                 <div class="leave-value">' . $value->LeaveDate . '</div>
                                 <div class="leave-value padding-right-5">' . $value->Reason . '</div>
 
-                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->EmployeeId . '&ldate=' . $value->LeaveDate . '" class="edit-button">Edit</a></div> -->
-                                
-                                <!-- <div class="leave-edit-info padding-left-2"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->Leave_Id . '" class="edit-button">Edit</a></div> -->
-                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/removeleave?id=' . $value->Leave_Id . '" class="delete-button">Remove</a></div> -->
 
-
-                                <form method="POST" action="'. URL_ROOT. 'Supervisors/editleave">
+                                <form method="POST" action="'.URL_ROOT.'Supervisors/editleave">
                                 <div class="leave-edit-info padding-left-2">
-                                    <input type="hidden" name="leave_id" value="<?= $value->Leave_Id ?>">
+                                    <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
                                     <input type="submit" name="edit" class="edit-button" value="Edit">
                                     </div>
                                 </form>
     
-                                <form method="POST" action="'. URL_ROOT. 'Supervisors/removeleave">
+                                <form method="POST" action="'.URL_ROOT.'Supervisors/removeleave">
                                 <div class="leave-edit-info">
-                                    <input type="hidden" name="leave_id" value="<?= $value->Leave_Id ?>">
+                                    <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
                                     <input type="submit" name="remove" class="delete-button" value="Remove">
                                     </div>
                                 </form>
@@ -79,7 +74,11 @@
                 }
 
                 if($value == NULL) {
-                    echo '<div class="horizontal-centralizer"><div>Nothing to show</div></div>';
+                    echo '<div class="horizontal-centralizer no-leave-data">
+                            <div class="vertical-centralizer">
+                                <div>Nothing to show</div>
+                            </div>
+                        </div>';
                 }
                 
                 ?>

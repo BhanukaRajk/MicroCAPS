@@ -27,7 +27,7 @@
 
                 <div class="border-gray display-flex-column formbox">
 
-                    <form action="<?php echo URL_ROOT; ?>Supervisors/addleave" method="post" class="wide"><br>
+                    <form action="<?php echo URL_ROOT; ?>Supervisors/addleave" method="POST" class="wide"><br>
                         <div class="form-headings align-self-start">
                             Record new leave
                         </div>
@@ -57,7 +57,7 @@
                                 <label>REASON</label>
                             </div>
                             <div>
-                                <textarea id="reason" name="reason" class="form-input" placeholder="Maximum 500 characters" required><?php echo $data['reason']; ?></textarea>
+                                <textarea id="reason" name="reason" class="form-input" placeholder="Maximum 500 characters" required></textarea>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
                             <button class="submit-button wide" type="submit" onClick={this.onSubmit}>Submit</button>
                         </div>
                         <div class="text-center marginy-2">
-                            <a href="<?php echo URL_ROOT; ?>supervisors/leaves" class="text-decoration-none">Cancel</a>
+                            <a href="<?php echo URL_ROOT; ?>Supervisors/leaves" class="text-decoration-none">Cancel</a>
                         </div>
 
                     </form>
