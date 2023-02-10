@@ -28,7 +28,7 @@ class Testers extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
+            $data['id'] = $id;
             $data['defects'] = $this->testerModel->viewDefectSheets($id);
             $this->view('tester/defect_sheet', $data);
         }
@@ -127,8 +127,6 @@ class Testers extends controller {
                 'EmployeeID' => '',
                 'ReCorrection' => '',
             ];
-            $data['url'] = getUrl();
-
             $this->view('tester/add_defect', $data);
         }
     }
