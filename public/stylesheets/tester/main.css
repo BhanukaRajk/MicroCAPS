@@ -2268,7 +2268,7 @@ Add Defect Form
 }
 
 .pagehead {
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -2296,7 +2296,7 @@ Add Defect Form
     left: 305px;
     top: 79px;
 
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -2320,7 +2320,7 @@ Add Defect Form
     background-color: #F2F2F7;
     justify-content: center;
     display: flex;
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
 }
 
 .add-form-container {
@@ -2531,7 +2531,7 @@ Add Defect Form
     line-height: 150px;
     height: 150px;
     text-align: center;
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;

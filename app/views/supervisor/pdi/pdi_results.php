@@ -1,5 +1,6 @@
-<?php require_once APP_ROOT . '\views\tester\includes\header.php'; ?>
-<?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
+<?php require_once APP_ROOT . '\views\supervisor\includes\header.php'; ?>
+<?php require_once APP_ROOT . '\views\supervisor\common\leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '\views\supervisor\common\topnavbar.php'; ?>
 
 <body>
 

@@ -72,10 +72,6 @@ class Supervisors extends controller
             redirect('Users/login');
         }
 
-        // if($_SESSION['_position'] == 'Supervisor') {
-        //     redirect($_SESSION['_position'].'s/login');
-        // }
-
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $data['count'] = $this->supervisorModel->dashdetails();
@@ -94,6 +90,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
             $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
@@ -126,17 +123,6 @@ class Supervisors extends controller
         }
     }
 
-
-    // public function consumableview()
-    // {
-    //     if(!isLoggedIn()) {
-    //         redirect('Supervisors/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //         $this->view('supervisor/consumables/consumablelist');
-    //     }
-    // }
 
 
 
@@ -185,10 +171,6 @@ class Supervisors extends controller
         }
     }
 
-
-
-
-
     public function vehicleview()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -208,7 +190,7 @@ class Supervisors extends controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
+            $data['PdiCarsSet'] = $this->supervisorModel->onPDIVehicles();
             $this->view('supervisor/pdi/vehiclelist', $data);
         }
     }
@@ -221,7 +203,8 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $this->view('supervisor/parts/linevehiclelist', $data);
+            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
+            $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
 
@@ -293,8 +276,8 @@ class Supervisors extends controller
     public function addleave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -312,8 +295,6 @@ class Supervisors extends controller
                 if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
 
                     $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
-
-                    $data['url'] = getUrl();
                     $this->view('supervisor/leaves/addleave', $data);
 
                 } else {
@@ -324,33 +305,28 @@ class Supervisors extends controller
                     if ($diff <= 1) {
 
                         $_SESSION['return_message'] = 'Please enter a valid date! ';
-    
-                        $data['url'] = getUrl();
                         $this->view('supervisor/leaves/addleave', $data);
     
                     } else {
 
                         if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'], $data['reason'])) {
-                            $_SESSION['return_message'] = 'New record saved!';
+                            $_SESSION['return_message'] = 'Success! New record saved';
                         } else {
                             $_SESSION['return_message'] = 'Error! record saving failed!';
                         }
 
-                        redirect('supervisor/leaves/leaves');
+                        $this->view('supervisor/leaves/leaves', $data);
                     }
                 }
 
             } else {
 
                 $_SESSION['return_message'] = 'Oops! An employee with employee Id '.$data["employeeId"].' could not be found';
-
-                $data['url'] = getUrl();
                 $this->view('supervisor/leaves/addleave', $data);
 
             }
         } else {
-            $data['url'] = getUrl();
-            $this->view('supervisor/leaves/addleave', $data);
+            $this->view('supervisor/leaves/addleave');
         }
     }
 
@@ -360,16 +336,12 @@ class Supervisors extends controller
     public function leaves()
     {
 
-        if (!isLoggedIn()) {
-            redirect('Supervisors/login');
-            // echo "-------------";
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
             $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
-            // echo "------00-----";
-            // print_r($data);
             $this->view('supervisor/leaves/leaves', $data);
         }
     }
@@ -377,11 +349,11 @@ class Supervisors extends controller
 
 
 
-    public function editleave()
+    public function editleave($id)
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -393,16 +365,14 @@ class Supervisors extends controller
         //     $this->view('supervisor/editleave', $data);
         // }
 
-        if (isset($_GET['id'])) {
-            $key = $_GET['id'];
-
-            $data['url'] = getUrl();
-            $data['EditorDetails'] = $this->supervisorModel->SendEditLeave($key);
-
-            // $EMPLOYEE = $data['EmployeeId'];
-            // $LDATE = $data['LeaveDate'];
-
-            $this->view('supervisor/leaves/editleave', $data);
+//        if (isset($_GET['id'])) {
+//            $key = $_GET['id'];
+//
+//
+//            // $EMPLOYEE = $data['EmployeeId'];
+//            // $LDATE = $data['LeaveDate'];
+//
+//            $this->view('supervisor/leaves/editleave', $data);
 
             // if (isset($_GET['id']) && isset($GET_['ldate'])) {
             //     $id = $_GET['id'];
@@ -426,7 +396,7 @@ class Supervisors extends controller
             // } else {
             //     $_SESSION['removeleave_Message'] = 'Error';
             // }
-        }
+//        }
 
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -445,8 +415,8 @@ class Supervisors extends controller
                 if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
 
                     $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
-                    $data['url'] = getUrl();
-                    $this->view('supervisor/leaves/editleave', $data);
+                    $data['EditorDetails'] = $this->supervisorModel->SendEditLeave($id);
+                    $this->view('supervisor/leaves/editleave/'.$id, $data);
 
                 } else {
 
@@ -458,9 +428,8 @@ class Supervisors extends controller
                     if ($diff <= 1) {
 
                         $_SESSION['return_message'] = 'Please enter a valid date! ';
-    
-                        $data['url'] = getUrl();
-                        $this->view('supervisor/leaves/editleave', $data);
+                        $data['EditorDetails'] = $this->supervisorModel->SendEditLeave($id);
+                        $this->view('supervisor/leaves/editleave/'.$id, $data);
     
                     } else {
 
@@ -469,8 +438,8 @@ class Supervisors extends controller
                         } else {
                             $_SESSION['return_message'] = 'Error! Could not save changes..';
                         }
-    
-                        redirect('supervisors/leaves/leaves');
+                        $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
+                        $this->view('supervisor/leaves/leaves', $data);
                     }
 
 
@@ -486,11 +455,11 @@ class Supervisors extends controller
 
             } else {
                 $_SESSION['return_message'] = 'Oops! An employee with employee Id '.$data["employeeId"].' could not be found';
-                $data['url'] = getUrl();
+                $data['EditorDetails'] = $this->supervisorModel->SendEditLeave($id);
                 $this->view('supervisor/leaves/editleave', $data);
             }
         } else {
-            $data['url'] = getUrl();
+            $data['EditorDetails'] = $this->supervisorModel->SendEditLeave($id);
             $this->view('supervisor/leaves/editleave', $data);
         }
     }
@@ -504,8 +473,8 @@ class Supervisors extends controller
     public function removeleave()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
 
@@ -520,21 +489,20 @@ class Supervisors extends controller
             if ($this->supervisorModel->checkLeaveByID($data['LeaveID'])) {
 
                 if ($this->supervisorModel->removeleave($data['LeaveID'])) {
-                    $_SESSION['return_message'] = 'New record saved!';
+                    $_SESSION['return_message'] = 'Record deletion Success!';
                     // $_SESSION['success_msg'] = 'New record saved!';
                 } else {
                     $_SESSION['return_message'] = 'Error! record saving failed!';
                     // $_SESSION['err_msg'] = 'Error! record saving failed!';
                 }
 
-                redirect('supervisor/leaves/leaves', $data);
+                $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
+                $this->view('supervisor/leaves/leaves', $data);
 
             } else {
 
                     $_SESSION['return_message'] = 'Record has been already deleted!';
-                    // $_SESSION['err_msg'] = 'Record has been already deleted!';
-    
-                    $data['url'] = getUrl();
+                    $data['LeaveDetails'] = $this->supervisorModel->ViewLeaves();
                     $this->view('supervisor/leaves/leaves', $data);
     
                     
@@ -559,8 +527,8 @@ class Supervisors extends controller
     public function removeleave2()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if (isset($_GET['id'])) {
@@ -598,8 +566,8 @@ class Supervisors extends controller
     public function viewComponents()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -614,8 +582,8 @@ class Supervisors extends controller
     public function editprofile()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -631,8 +599,8 @@ class Supervisors extends controller
     public function scheduletasks()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -646,14 +614,28 @@ class Supervisors extends controller
     public function S4vehicles()
     {
 
-        if (!isLoggedIn()) {
-            redirect('supervisors/login');
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $data['S4Details'] = $this->supervisorModel->ViewS4Vehicles();
             $this->view('supervisor/inspection/vehiclelist', $data);
+        }
+    }
+
+    public function pdi($id) {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['pdiVehicle'] = $this->supervisorModel->pdiVehicle($id);
+            $data['pdiCheckCategories'] = $this->supervisorModel->pdiCheckCategories();
+            $data['pdiCheckList'] = $this->supervisorModel->pdiCheckList($id);
+            $this->view('supervisor/pdi/pdi_results',$data);
         }
     }
 

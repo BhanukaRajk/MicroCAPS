@@ -119,5 +119,5 @@
     </div>
 </section>
 
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/dashboard.js"></script>

@@ -163,5 +163,7 @@
     </div>
 </section>
 
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascript/supervisorjs/main.js"></script>
+
 <!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

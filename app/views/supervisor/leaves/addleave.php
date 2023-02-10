@@ -27,7 +27,7 @@
 
                 <div class="border-gray display-flex-column formbox">
 
-                    <form action="<?php echo URL_ROOT; ?>Supervisors/addleave" method="post" class="wide"><br>
+                    <form action="<?php echo URL_ROOT; ?>Supervisors/addleave" method="POST" class="wide"><br>
                         <div class="form-headings align-self-start">
                             Record new leave
                         </div>
@@ -37,7 +37,7 @@
                                     <label>EMPLOYEE ID</label>
                                 </div>
                                 <div>
-                                    <input type="text" id="employeeId" name="employeeId" class="form-input" value="<?php echo $data['employeeId']; ?>" placeholder="Employee Id" autocomplete="off" required>
+                                    <input type="text" id="employeeId" name="employeeId" class="form-input" value="" placeholder="Employee Id" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="width-25"> </div>
@@ -46,7 +46,7 @@
                                     <label>REQUESTED DATE</label>
                                 </div>
                                 <div>
-                                    <input type="date" id="leavedate" name="leavedate" class="form-input" value="<?php echo $data['leavedate']; ?>" placeholder="Leave Date" required>
+                                    <input type="date" id="leavedate" name="leavedate" class="form-input" value="" placeholder="Leave Date" required>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                 <label>REASON</label>
                             </div>
                             <div>
-                                <textarea id="reason" name="reason" class="form-input" placeholder="Maximum 500 characters" required><?php echo $data['reason']; ?></textarea>
+                                <textarea id="reason" name="reason" class="form-input" placeholder="Maximum 500 characters" required></textarea>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
                             <button class="submit-button wide" type="submit" onClick={this.onSubmit}>Submit</button>
                         </div>
                         <div class="text-center marginy-2">
-                            <a href="<?php echo URL_ROOT; ?>supervisors/leaves" class="text-decoration-none">Cancel</a>
+                            <a href="<?php echo URL_ROOT; ?>Supervisors/leaves" class="text-decoration-none">Cancel</a>
                         </div>
 
                     </form>

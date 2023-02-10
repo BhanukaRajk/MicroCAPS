@@ -25,34 +25,6 @@ class Supervisor
         }
     }
 
-    // LOGIN FUNCTION
-    // public function login($username, $password)
-    // {
-    //     $this->db->query(
-    //         'SELECT `employee-credentials`.Username, `employee-credentials`.Password, `employee`.EmployeeID, `employee`.Firstname, `employee`.Lastname, `employee`.Position
-    //         FROM `employee-credentials`
-    //         INNER JOIN `employee`
-    //         ON `employee-credentials`.EmployeeID = `employee`.EmployeeId
-    //         WHERE `employee-credentials`.Username = :username'
-    //     );
-
-    //     $this->db->bind(':username', $username);
-
-    //     $row = $this->db->single();
-
-
-    //     // COMPARING HASHED PASSWORDS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //     // if (password_hash($password, PASSWORD_DEFAULT) == password_hash($row->Password, PASSWORD_DEFAULT)) {
-    //     if ($password == $row->Password) {
-    //         return $row;
-    //     } else {
-    //         return null;
-    //     }
-    // }
-
-
-
     public function dashdetails()
     {
 
@@ -70,9 +42,6 @@ class Supervisor
             return false;
         }
     }
-
-
-    
 
     public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjusment, $Clutch, $RAP, $Visual)
     {
@@ -101,7 +70,9 @@ class Supervisor
     public function checkEmployee($empid)
     {
 
-        $this->db->query('SELECT EmployeeId FROM employee WHERE EmployeeId = :employee AND Progress = 1');
+        $this->db->query(
+            'SELECT EmployeeId FROM employee WHERE EmployeeId = :employee'
+        );
 
         $this->db->bind(':employee', $empid);
 
@@ -118,7 +89,9 @@ class Supervisor
     public function checkLeaves($empid, $reqdate)
     {
 
-        $this->db->query('SELECT EmployeeId, LeaveDate FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date');
+        $this->db->query(
+            'SELECT EmployeeId, LeaveDate FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date;'
+        );
 
         $this->db->bind(':employee', $empid);
         $this->db->bind(':req_date', $reqdate);
@@ -135,11 +108,13 @@ class Supervisor
     public function checkLeaveByID($LeaveID)
     {
 
-        $this->db->query('SELECT `LeaveId` FROM `employee-leaves` WHERE `LeaveId` = :Leave;');
+        $this->db->query(
+            'SELECT `LeaveId` FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
+        );
 
         $this->db->bind(':Leave', $LeaveID);
 
-        // $row = $this->db->single();
+        $row = $this->db->single();
 
         if ($this->db->rowCount()) {
             return true;
@@ -148,12 +123,11 @@ class Supervisor
         }
     }
 
-
     public function addleave($EmpId, $leavedate, $reason)
     {
         $this->db->query(
-            'INSERT INTO leaves(EmployeeId, LeaveDate, Reason) 
-            VALUES (:empid,:leavedate,:reason)'
+            'INSERT INTO `employee-leaves`(EmployeeId, LeaveDate, Reason) 
+            VALUES (:empid,:leavedate,:reason);'
         );
 
         $this->db->bind(':empid', $EmpId);
@@ -170,9 +144,9 @@ class Supervisor
     public function EditLeave($EmpId, $leavedate, $reason, $id)
     {
         $this->db->query(
-            'UPDATE leaves
+            'UPDATE `employee-leaves`
             SET EmployeeId = :empid, LeaveDate = :leavedate, Reason = :reason
-            WHERE Leave_Id = :id;'
+            WHERE LeaveId = :id;'
         );
 
         $this->db->bind(':empid', $EmpId);
@@ -188,17 +162,10 @@ class Supervisor
         }
     }
 
-
-
-
-
-    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // public function removeleave($ID, $leavedate) {
     public function removeleave($LeaveID)
     {
         $this->db->query(
-            'DELETE FROM leaves WHERE Leave_Id = :leave_id;'
+            'DELETE FROM `employee-leaves` WHERE LeaveID = :leave_id;'
             // 'DELETE FROM leaves WHERE EmployeeId = :Empid AND LeaveDate = :LDate;'
         );
 
@@ -212,16 +179,6 @@ class Supervisor
             return false;
         }
     }
-    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
 
     public function addNewTask($chassis_no, $task_name)
     {
@@ -239,7 +196,6 @@ class Supervisor
             return false;
         }
     }
-
 
     public function viewPAQresults($ChassisNo)
     {
@@ -264,7 +220,6 @@ class Supervisor
         }
     }
 
-
     public function ViewLeaves()
     {
 
@@ -286,7 +241,6 @@ class Supervisor
             return false;
         }
     }
-
 
     public function userDetails($id) {
         $this->db->query(
@@ -328,7 +282,6 @@ class Supervisor
         }
     }
 
-    
     public function ViewAllConsumables()
     {
 
@@ -337,7 +290,6 @@ class Supervisor
         );
 
         $consumables = $this->db->resultSet();
-        //print_r($consumables);
 
         if ($consumables) {
             return $consumables;
@@ -363,14 +315,13 @@ class Supervisor
         }
     }
 
-
     public function SendEditLeave($ID)
     {
 
         $this->db->query(
             'SELECT *
-                FROM leaves 
-                WHERE Leave_Id = :id;'
+                FROM `employee-leaves` 
+                WHERE LeaveId = :id;'
         );
 
         $this->db->bind(':id', $ID);
@@ -383,7 +334,6 @@ class Supervisor
             return false;
         }
     }
-
 
     public function ViewAssignedTasks()
     {
@@ -403,7 +353,6 @@ class Supervisor
         }
     }
 
-
     public function ViewReturnDefectSheet()
     {
 
@@ -422,7 +371,6 @@ class Supervisor
         }
     }
 
-
     public function updateToolStatus($chassis_no, $task_name)
     {
         $this->db->query(
@@ -439,7 +387,6 @@ class Supervisor
             return false;
         }
     }
-
 
     public function ViewTools()
     {
@@ -458,13 +405,15 @@ class Supervisor
         }
     }
 
-
-    public function ViewVehicles()
+    public function viewAssemblyLineVehicles()
     {
 
         $this->db->query(
-            'SELECT *
-                FROM vehicles; '
+            'SELECT `ChassisNo`,
+                    `ModelNo`,
+                    `Color` 
+                    FROM `vehicle` 
+                    WHERE `CurrentStatus` = "A";'
         );
 
         $vehicles = $this->db->resultSet();
@@ -475,7 +424,6 @@ class Supervisor
             return false;
         }
     }
-
 
     public function ViewPDIresults()
     {
@@ -508,6 +456,77 @@ class Supervisor
 
         if ($userdata) {
             return $userdata;
+        } else {
+            return false;
+        }
+    }
+
+    public function onPDIVehicles() {
+        $this->db->query(
+            'SELECT *
+                FROM `vehicle`
+                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':pdi', 'NC');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function pdiVehicle($id){
+        $this->db->query('SELECT ChassisNo, EngineNo FROM `vehicle` WHERE `vehicle`.`ChassisNo` = :id');
+
+        $this->db->bind(':id', $id);
+
+        $result = $this->db->single();
+
+        if ( $result ) {
+            return $result;
+        } else {
+            return null;
+        }
+    }
+
+    public function pdiCheckCategories() {
+        $this->db->query(
+            'SELECT *
+                FROM `pdi-check-category`'
+        );
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function pdiCheckList($id) {
+        $this->db->query(
+            'SELECT `pdi-result`.*,`pdi-check`.CategoryId, `pdi-check`.CheckName
+                FROM `pdi-result`
+                INNER JOIN `pdi-check`
+                ON `pdi-result`.CheckId = `pdi-check`.CheckId 
+                WHERE `pdi-result`.ChassisNo = :id;'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
         } else {
             return false;
         }

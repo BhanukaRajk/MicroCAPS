@@ -5,8 +5,75 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ee4979e-7774-459f-9271-05e4cab65f5a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/Testers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Testers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Leave.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Leave.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Supervisors.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Supervisors.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Supervisor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Supervisor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Tester.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Tester.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/admin/pdi.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin/pdi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/manager/pdi.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/assembling/vehiclelist.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/assembling/vehiclelist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/common/leftnavbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/common/leftnavbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/common/topnavbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/common/topnavbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/consumables/consumablelist.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/consumables/consumablelist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/includes/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/includes/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/inspection/paqrecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/inspection/paqrecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/inspection/paqresults.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/inspection/paqresults.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/inspection/paqupdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/inspection/paqupdate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/inspection/vehiclelist.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/inspection/vehiclelist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/landing/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/landing/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/leaves/addleave.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/leaves/addleave.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/leaves/editleave.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/leaves/editleave.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/leaves/leaves.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/leaves/leaves.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/parts/linevehiclelist.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/parts/linevehiclelist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/parts/vehicleparts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/parts/vehicleparts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/pdi/defectsheet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/pdi/defectsheet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/pdi/pdiresults.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/pdi/vehiclelist.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/pdi/vehiclelist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/portal/forgotpassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/portal/forgotpassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/portal/login-test.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/portal/login-test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/portal/newpassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/portal/newpassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/portal/verify.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/portal/verify.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/profile/editprofile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/profile/editprofile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/supervisor/scheduler/scheduletasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/supervisor/scheduler/scheduletasks.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/tester/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/tester/dashboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/tester/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/tester/navbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/tester/pdi_results.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/consumables/image11.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/consumables/image11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/consumables/image13.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/consumables/image13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/consumables/image15.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/consumables/image15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/consumables/image18.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/consumables/image18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/consumables/image19.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/consumables/image19.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/consumables/image7.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/consumables/image7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/consumables/image9.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/consumables/image9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/supervisorjs/assemblyCharts.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/supervisorjs/assemblyCharts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/supervisorjs/calender.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/supervisorjs/calender.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/supervisorjs/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/supervisorjs/charts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/supervisorjs/cors.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/supervisorjs/cors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/supervisorjs/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/supervisorjs/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/supervisorjs/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/supervisorjs/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/testerjs/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/testerjs/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/admin/vehiclelist.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/admin/vehiclelist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/manager/pages/vehiclelist.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/manager/pages/vehiclelist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/addleave.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/addleave.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/buttons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/calender.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/calender.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/chart.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/chart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/consumablelist.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/consumablelist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/defectsheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/defectsheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/flashmessage.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/flashmessage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/grid.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/paqrecord.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/paqrecord.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/paqresults.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/paqresults.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/pdiresults.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/pdiresults.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/schedule.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/schedule.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/vehiclelist.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/vehiclelist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/supervisor/vehicleparts.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/supervisor/vehicleparts.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/tester/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/tester/main.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,14 +83,43 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2LWoNJwwgoT4YQ7XjuJm4MdKpPk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2ee4979e-7774-459f-9271-05e4cab65f5a" name="Changes" comment="" />
+      <created>1675996162895</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675996162895</updated>
+      <workItem from="1675996165449" duration="6529000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

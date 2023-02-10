@@ -1,11 +1,3 @@
-// const drop = document.getElementById("drop");
-const logout = document.getElementById("logout");
-
-
-/*drop.addEventListener("click", () => {
-    logout.classList.toggle("display-block");
-});*/
-
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function profiledropdown() {

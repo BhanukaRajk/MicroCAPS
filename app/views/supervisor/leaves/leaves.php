@@ -46,40 +46,39 @@
                     <div class="leave-value block-heading padding-right-5">Reason</div>
                 </div>
                 <?php
-                foreach ($data['LeaveDetails'] as $value) {
-                    echo '<div class="div-ender"></div>
-                            <div class="sup-leave-list-non-edit">
-                                <div class="leave-value">' . $value->EmployeeId . '</div>
-                                <div class="leave-value">' . $value->Firstname . '</div>
-                                <div class="leave-value">' . $value->Lastname . '</div>
-                                <div class="leave-value">' . $value->LeaveDate . '</div>
-                                <div class="leave-value padding-right-5">' . $value->Reason . '</div>
+                if($data['LeaveDetails'] == NULL) {
+                    echo '<div class="horizontal-centralizer no-leave-data">
+                            <div class="vertical-centralizer">
+                                <div>Nothing to show</div>
+                            </div>
+                        </div>';
+                } else {
+                    foreach ($data['LeaveDetails'] as $value) {
+                        echo '<div class="div-ender"></div>
+                                <div class="sup-leave-list-non-edit">
+                                    <div class="leave-value">' . $value->EmployeeId . '</div>
+                                    <div class="leave-value">' . $value->Firstname . '</div>
+                                    <div class="leave-value">' . $value->Lastname . '</div>
+                                    <div class="leave-value">' . $value->LeaveDate . '</div>
+                                    <div class="leave-value padding-right-5">' . $value->Reason . '</div>
 
-                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->EmployeeId . '&ldate=' . $value->LeaveDate . '" class="edit-button">Edit</a></div> -->
-                                
-                                <!-- <div class="leave-edit-info padding-left-2"><a href="' . URL_ROOT . 'Supervisors/editleave?id=' . $value->Leave_Id . '" class="edit-button">Edit</a></div> -->
-                                <!-- <div class="leave-edit-info"><a href="' . URL_ROOT . 'Supervisors/removeleave?id=' . $value->Leave_Id . '" class="delete-button">Remove</a></div> -->
 
-
-                                <form method="POST" action="'. URL_ROOT. 'Supervisors/editleave">
-                                <div class="leave-edit-info padding-left-2">
-                                    <input type="hidden" name="leave_id" value="<?= $value->Leave_Id ?>">
-                                    <input type="submit" name="edit" class="edit-button" value="Edit">
-                                    </div>
-                                </form>
-    
-                                <form method="POST" action="'. URL_ROOT. 'Supervisors/removeleave">
-                                <div class="leave-edit-info">
-                                    <input type="hidden" name="leave_id" value="<?= $value->Leave_Id ?>">
-                                    <input type="submit" name="remove" class="delete-button" value="Remove">
-                                    </div>
-                                </form>
-                                
-                            </div>';
-                }
-
-                if($value == NULL) {
-                    echo '<div class="horizontal-centralizer"><div>Nothing to show</div></div>';
+                                    <form method="GET" action="'.URL_ROOT.'Supervisors/editleave/'. $value->LeaveId.'">
+                                    <div class="leave-edit-info padding-left-2">
+                                        <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
+                                        <input type="submit" name="edit" class="edit-button" value="Edit">
+                                        </div>
+                                    </form>
+        
+                                    <form method="POST" action="'.URL_ROOT.'Supervisors/removeleave/">
+                                    <div class="leave-edit-info">
+                                        <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
+                                        <input type="submit" name="remove" class="delete-button" value="Remove">
+                                        </div>
+                                    </form>
+                                    
+                                </div>';
+                    }
                 }
                 
                 ?>

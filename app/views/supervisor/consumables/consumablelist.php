@@ -17,31 +17,29 @@
         <div class="vehicle-data-board">
 
           <?php
-          foreach ($data['consumableset'] as $item) {
-            echo '<div class="carcard" onclick="expandConsumable()">
-                    <div class="cardhead">
-                      <div class="cardid">
-                        <div class="carmodel">', $item->ConsumableName, '</div>
-                        <div class="chassisno">', ($item->Volume == NULL) ? 'Grease' : 'Lubricants', '</div>
-                      </div>
-                      <div class="carstatuscolor">
-                        <div class="status-circle ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'status-green-circle' : 'status-orange-circle') : (($item->Volume >= 60) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
-                      </div>
-                    </div>
-                    <div class="carpicbox">
-                      <img src="' . URL_ROOT . 'public/images/consumables/' . $item->Image . '" class="carpic" alt="micro panda red">
-                    </div>
-                    <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'available' : 'lower') : (($item->Volume >= 60) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'Available' : 'Low in stock') : (($item->Volume >= 60) ? 'Available' : 'Low in stock'), '</div>
-                    <div class="chassisno">Last update: ', $item->LastUpdate, '</div>
-                  </div>';
-          }
-
-
-          // DISPLAY THIS IF THERE IS NO DATA IN THE TABLE
-          if ($item == NULL) {
+          if ($data['consumableset'] == NULL) {
             echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
           }
-
+          else {
+            foreach ($data['consumableset'] as $item) {
+              echo '<div class="carcard" onclick="expandConsumable()">
+                      <div class="cardhead">
+                        <div class="cardid">
+                          <div class="carmodel">', $item->ConsumableName, '</div>
+                          <div class="chassisno">', ($item->Volume == NULL) ? 'Grease' : 'Lubricants', '</div>
+                        </div>
+                        <div class="carstatuscolor">
+                          <div class="status-circle ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'status-green-circle' : 'status-orange-circle') : (($item->Volume >= 60) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
+                        </div>
+                      </div>
+                      <div class="carpicbox">
+                        <img src="' . URL_ROOT . 'public/images/consumables/' . $item->Image . '" class="carpic" alt="micro panda red">
+                      </div>
+                      <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'available' : 'lower') : (($item->Volume >= 60) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'Available' : 'Low in stock') : (($item->Volume >= 60) ? 'Available' : 'Low in stock'), '</div>
+                      <div class="chassisno">Last update: ', $item->LastUpdate, '</div>
+                    </div>';
+            }
+          }
           ?>
 
         </div>

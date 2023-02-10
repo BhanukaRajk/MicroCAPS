@@ -3,7 +3,7 @@
     <ul class="display-flex-column height-100 gap-2 z-index-1">
         <li>
             <div class="nav_logo">
-                <img src="<?php echo URL_ROOT; ?>public/images/nav_logo.png" class="text-center width-80" alt="logo" />
+                <img src="<?php echo URL_ROOT; ?>public/images/logo.png" class="text-center width-50" alt="logo" />
             </div>
         </li>
         <li>

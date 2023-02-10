@@ -20,7 +20,7 @@ section {
 }
 
 .pagehead {
-    font-family: 'Noto Sans';
+    /*/* font-family: 'Noto Sans'; */*/
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -78,7 +78,7 @@ section {
     left: 0px;
     top: 0px;
 
-    font-family: 'Proxima Nova';
+    /*/* font-family: 'Proxima Nova'; */*/
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -96,7 +96,7 @@ section {
     left: 0px;
     top: 15px;
 
-    font-family: 'Proxima Nova';
+    /*/* font-family: 'Proxima Nova'; */*/
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
@@ -114,7 +114,7 @@ section {
 
     /* Title 3/Regular */
 
-    font-family: 'Proxima Nova';
+    /*/* font-family: 'Proxima Nova'; */*/
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -165,7 +165,7 @@ section {
 
 .filterin {
     margin: 22px 26px 22px 26px;
-    font-family: 'Proxima Nova';
+    /*/* font-family: 'Proxima Nova'; */*/
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -173,7 +173,7 @@ section {
 }
 
 .filtertype {
-    font-family: 'Proxima Nova';
+    /*/* font-family: 'Proxima Nova'; */*/
     font-style: normal;
     font-weight: 600 !important;
     font-size: 14px !important;
@@ -188,7 +188,7 @@ section {
 
 .filters {
 
-    font-family: 'Proxima Nova';
+    /*/* font-family: 'Proxima Nova'; */*/
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -235,9 +235,10 @@ a {
 ul {
     display: block;
     list-style-type: disc;
-    margin-top: 1em;
-    margin-bottom: 1 em;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 1rem 0;
     padding-inline: 30px;
+}
+
+.width-rem-12p5 {
+    width: 12.5rem;
 }

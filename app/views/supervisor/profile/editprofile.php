@@ -1,15 +1,16 @@
 <?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 <section class = "position-absolute page-content" >
     <div class="page-heading  font-weight">
         Account Settings
     </div>
 
-    <div class="display-flex-row align-items-center gap-10 border-radius-1 background-white paddingx-6 paddingy-5 height-rem-25 margin-top-4">
+    <div class="display-flex-row align-items-center justify-content-around gap-10 border-radius-1 background-white paddingx-6 paddingy-5 height-rem-25 margin-top-4">
         <div class="display-flex-column align-items-center justify-content-center margin-left-5">
             <div class="img-grid">
-                <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profilepic" id="img-preview"/>
+                <div style="background-image:url(<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>)" class="border-radius-11 width-rem-12p5 height-rem-12p5 background-image" title="profilepic" id="img-preview"></div>
                 <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5"/>
             </div>
             <div class="page-heading font-size-24 font-weight margin-top-4">
@@ -22,7 +23,7 @@
                 <button id="edit" class="btn btn-primary width-rem-8p5 height-rem-2p5" type="button">
                     Edit Details
                 </button>
-                <button id="change" class="btn btn-primary btn-green display-none width-rem-8p5 height-rem-2p5" type="submit" onclick="saveChanges(<?php echo $_SESSION['_id'] ?>)">
+                <button id="change" class="btn btn-primary btn-green display-none width-rem-8p5 height-rem-2p5" type="submit" onclick="saveChanges(<?php echo $_SESSION['_id'] ?>, '<?php echo $_SESSION['_position'] ?>')">
                     Change
                 </button>
             </div>
@@ -44,7 +45,7 @@
                             name="firstname"
                             onChange=""
                             value="<?php echo $data['userDetails']->Firstname; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="Firstname"
                             autocomplete="off"
                             disabled
@@ -57,7 +58,7 @@
                             name="lastname"
                             onChange=""
                             value="<?php echo $data['userDetails']->Lastname; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="Lastname"
                             disabled />
                         <label class="form-label blue">Last Name</label>
@@ -68,7 +69,7 @@
                             name="email"
                             onChange=""
                             value="<?php echo $data['userDetails']->Email; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="Email"
                             disabled />
                         <label class="form-label blue">Email</label>
@@ -79,7 +80,7 @@
                             name="mobile"
                             onChange=""
                             value="<?php echo $data['userDetails']->TelephoneNo; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="mobile"
                             disabled />
                         <label class="form-label blue">Mobile Number</label>
@@ -90,7 +91,7 @@
                             name="nic"
                             onChange=""
                             value="<?php echo $data['userDetails']->NIC; ?>"
-                            class="form-control form-control-blue text-fontgray width-rem-20"
+                            class="form-control form-control-blue text-fontgray width-rem-25"
                             placeholder="nic"
                             disabled />
                         <label class="form-label blue">NIC</label>
@@ -103,19 +104,11 @@
 
 <section class="display-flex-column">
 
-    <div class="alert fade alert-success" id="alert-success" role="alert">
-        <i class="icon fa-check-circle margin-right-3"></i>
-        Success
-    </div>
-
-    <div class="alert fade alert-failure" id="alert-faliure" role="alert">
-        <i class="icon fa-times-circle margin-right-3"></i>
-        Falied
-    </div>
+    <div id="alert" class="hideme" role="alert"></div>
 
 </section>
 
 
-<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/smd.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/cors.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/supervisorjs/settings.js"></script>

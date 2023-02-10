@@ -32,7 +32,11 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "taskSchedule") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
+            <a class="<?php echo ($data['url'][1] == "taskSchedule" ||
+                                  $data['url'][1] == "leaves" ||
+                                  $data['url'][1] == "addleave" ||
+                                  $data['url'][1] == "editleave"
+            ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>
 
@@ -53,7 +57,7 @@
         <li>
             <div class="nav_section_headings">GENERAL</div>
             <a class="<?php echo ($data['url'][1] == "settings") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/settings">
-                <img src="../images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings
+                <img src="<?php echo URL_ROOT; ?>public/images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings
             </a>
         </li>
 

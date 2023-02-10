@@ -27,17 +27,16 @@
 
                 <div class="border-gray display-flex-column formbox">
 
-                    <form action="<?php echo URL_ROOT; ?>Supervisors/editleave" method="post">
+                    <?php $value = $data['EditorDetails']; ?>
 
-                        <?php $value = $data['EditorDetails']; ?>
-
+                    <form action="<?php echo URL_ROOT . 'Supervisors/editleave/'.$value->LeaveID ?>" method="post">
 
                         <div class="form-headings align-self-start">
                             Update leave details
                         </div>
 
                         <div>
-                            <input type="text" id="leaveId" name="leaveId" class="display-none" value="<?php echo(empty($data['leaveId'])) ? $value->Leave_Id : $data['leaveId'];?>" required>
+                            <input type="text" id="leaveId" name="leaveId" class="display-none" value="<?php echo(empty($data['leaveId'])) ? $value->LeaveID : $data['leaveId'];?>" required>
                         </div>
 
                         <div class="display-flex-row justify-content-between marginy-3">
