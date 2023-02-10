@@ -203,7 +203,7 @@ class Testers extends controller {
         }
     }
 
-    public function pdiReseults() {
+    public function pdiResults() {
 
         if(!isLoggedIn()){
             redirect('users/login');
@@ -238,10 +238,11 @@ class Testers extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = NULL;
             $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
             $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
-            $this->view('tester/pdi_results',$data);
+            $this->view('tester/pdiresults',$data);
         }
     }
 

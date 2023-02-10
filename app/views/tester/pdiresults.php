@@ -11,9 +11,16 @@
         </div>
 
         <div>
-            <div class="paddingy-2 font-weight">VIN : <?php echo $data['onPDIVehicles'][0]->ChassisNo ?></div>
-            <div class="paddingy-2 font-weight">Engine : <?php echo $data['onPDIVehicles'][0]->EngineNo ?></div>
-        <!-- </div> -->
+
+        <?php
+            if ( $data['onPDIVehicles'] == NULL ) {
+                echo '<div class="paddingy-2 font-weight">VIN : '.$data['pdiVehicle']->ChassisNo.'</div>
+                <div class="paddingy-2 font-weight">Engine : '.$data['pdiVehicle']->EngineNo.'</div>';
+            } else {
+                echo '<div class="paddingy-2 font-weight">VIN : '.$data['onPDIVehicles'][0]->ChassisNo.'</div>
+                <div class="paddingy-2 font-weight">Engine : '.$data['onPDIVehicles'][0]->EngineNo.'</div>';
+            }
+        ?>
 
 
         <div class="display-flex-row justify-content-start gap-2 margin-top-3 flex-wrap">
