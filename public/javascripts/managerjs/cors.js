@@ -1,4 +1,3 @@
-
 // Flash Message
 $(document).ready(() => {
 
@@ -8,28 +7,41 @@ $(document).ready(() => {
         alertFaliure(getItem("FlashMessage"));
     }
 
-    removeLocalStorage()
+    removeLocalStorageFlash();
+
+    if (getItem("OptionState") === "Set") {
+        document.getElementById(getItem("OptionName")).click();
+    }
+
+    removeLocalStorageOption();
 
 })
 
 // C.O.R.S
 function requestShell() {
 
-    let array = [];
-    let cnt = 1;
-
-    while (document.getElementById(`type${cnt}`)) {
-        let type = document.getElementById(`type${cnt}`).value;
-        let qty = document.getElementById(`qty${cnt}`).value;
-        array.push({ type, qty });
-        cnt++;
+    if (!validaterequestShell()) {
+        alertFaliure("Please Fill All The Fields");
+        return;
     }
 
+    let id = [];
     let string = "";
-    cnt = 1;
+    let cnt = 1;
 
-    array.forEach(element => {
-        string = string + `&type${cnt}=${element.type}&qty${cnt}=${element.qty}`;
+    let parentNode = document.getElementById("fields");
+    let children = parentNode.querySelectorAll("*");
+
+    children.forEach(element => {
+        if (element.id && !element.id.search("field")) {
+            id.push(element.id);
+        }
+    });
+
+    id.forEach(element => {
+        let type = document.getElementById(`type${element[element.length - 1]}`).value;
+        let qty = document.getElementById(`qty${element[element.length - 1]}`).value;
+        string = string + `&type${cnt}=${type}&qty${cnt}=${qty}`;
         cnt++;
     });
 
@@ -41,11 +53,11 @@ function requestShell() {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful","Email Sent Successfully");
+                setLocalStorageFlash("Successful","Email Sent Successfully");
 
             } else {
                 location.reload();
-                setLocalStorage("Error","Error Sending Email");
+                setLocalStorageFlash("Error","Error Sending Email");
             }
 
         }
@@ -57,12 +69,12 @@ function requestShell() {
 
 function addShell() {
 
-    let chassisNo = document.getElementById("chassisNo").value;
-    let color = document.getElementById("color").value;
-    let chassis = document.getElementById("chassis").value;
-    let repair = document.getElementById("repair").checked;
-    let paint = document.getElementById("paint").checked;
-    let repairDescription = document.getElementById("repairDescription").value;
+    let data = validateAddShell();
+
+    if (!data["flag"]) {
+        alertFaliure("Please Fill All The Fields");
+        return;
+    }
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -72,20 +84,56 @@ function addShell() {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful","Shell Added Successfully");
+                setLocalStorageFlash("Successful","Shell Added Successfully");
 
             } else {
                 
                 location.reload();
-                setLocalStorage("Error","Shell Adding Failed");
+                setLocalStorageFlash("Error","Shell Adding Failed");
 
             }
+
+            setLocalStorageOption("option-two");
 
         }
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/addShell", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("chassisNo="+chassisNo+"&color="+color+"&chassisType="+chassis+"&repair="+repair+"&paint="+paint+"&repairDescription="+repairDescription);
+    xhttp.send("chassisNo="+data["chassisNo"]+"&color="+data["color"]+"&chassisType="+data["chassis"]+"&repair="+data["repair"]+"&paint="+data["paint"]+"&repairDescription="+data["repairDescription"]);
+}
+
+function sendRequest(id,job) {
+
+    let chassisNo = document.getElementById("jobchassis").value;
+    let previous = document.getElementById("previous").checked;
+    let repairDescription = document.getElementById("re-repairDescription").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response == "Successful") {
+
+                location.reload();
+                setLocalStorageFlash("Successful", "Successfully Re-Requested "+ job +" for " + chassisNo);
+                
+
+            } else {
+
+                location.reload();
+                setLocalStorageFlash("Error", "Error Re-Requesting "+ job +" for " + chassisNo);
+
+            }
+
+            setLocalStorageOption("option-four");
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/RequestJobs", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id="+id+"&job="+job+"&chassisNo="+chassisNo+"&previous="+previous+"&repairDescription="+repairDescription);
+
 }
 
 function jobDone(id,job) {
@@ -98,15 +146,17 @@ function jobDone(id,job) {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful",id + " - " + job + " " + " Job is Completed");
+                setLocalStorageFlash("Successful",id + " - " + job + " " + " Job is Completed");
                 
 
             } else {
 
                 location.reload();
-                setLocalStorage("Error","Error Completing Job");
+                setLocalStorageFlash("Error",response);
 
             }
+
+            setLocalStorageOption("option-four");
 
         }
     };
@@ -134,10 +184,10 @@ function saveChanges(id, position) {
         success: (response) => {
             if (response == "Successful") {
                 location.reload(true);
-                setLocalStorage("Successful","Saved Changes");
+                setLocalStorageFlash("Successful","Saved Changes");
             } else {
                 location.reload();
-                setLocalStorage("Error","Error Saving Changes");
+                setLocalStorageFlash("Error","Error Saving Changes");
             }
         }
     });
@@ -178,16 +228,109 @@ function alertFaliure(message) {
 }
 
 //Local Storage
-function setLocalStorage(FlashState,FlashMessage) {
+function setLocalStorageFlash(FlashState,FlashMessage) {
     localStorage.setItem("FlashState",FlashState);
     localStorage.setItem("FlashMessage",FlashMessage);
+}
+
+function setLocalStorageOption(OptionName) {
+    localStorage.setItem("OptionState","Set");
+    localStorage.setItem("OptionName",OptionName);
 }
 
 function getItem(key) {
     return localStorage.getItem(key);
 }
 
-function removeLocalStorage() {
+function removeLocalStorageFlash() {
     localStorage.removeItem("FlashState");
     localStorage.removeItem("FlashMessage");
 }
+
+function removeLocalStorageOption() {
+    localStorage.removeItem("OptionState");
+    localStorage.removeItem("OptionName");
+}
+
+// Form Validations
+
+function validaterequestShell() {
+    let form = document.getElementById("request-shell");
+    const formData = new FormData(form);
+
+    let type = [];
+    let qty = [];
+
+    for (const [key, value] of formData.entries()) {
+        if (key.search("type") != -1) {
+            type.push(value);
+        } else if (key.search("qty") != -1) {
+            qty.push(value);
+        }
+    }
+
+    let flag = [true,true];
+
+    type.forEach((element) => {
+        if (element === "") {
+            flag[0] = false;
+        }
+    });
+
+    qty.forEach((element) => {
+        if (element == 0) {
+            flag[1] = false;
+        }
+    });
+
+    return (flag[0] && flag[1]);
+}
+
+function validateAddShell() {
+
+    let flag = true;
+
+    const chassisNo = document.getElementById("chassisNo");
+    let chassisNoLabel = document.getElementById("chassisNo-label");
+    const color = document.getElementById("color");
+    const chassis = document.getElementById("chassis");
+    let repair = document.getElementById("repair").checked;
+    let paint = document.getElementById("paint").checked;
+    let repairDescription = document.getElementById("repairDescription");
+
+    const regex = /^CN\d{9}[A-Z]$/;
+
+    if (chassisNo.value === "") {
+        chassisNo.classList.add("form-control-red");
+        chassisNo.focus({ preventScroll: true });
+        chassisNoLabel.classList.add("red");
+        chassisNoLabel.innerHTML = "Chassis Number is Required";
+        flag = false;
+    } else if (!regex.test(chassisNo.value)) {
+        chassisNo.classList.add("form-control-red");
+        chassisNo.focus({ preventScroll: true });
+        chassisNoLabel.classList.add("red");
+        chassisNoLabel.innerHTML = "Invalid Chassis Number";
+        flag = false;
+    }
+
+    if (color.value === "") {
+        color.classList.add("form-control-red");
+        flag = false;
+    }
+
+    if (chassis.value === "") {
+        chassis.classList.add("form-control-red");
+        flag = false;
+    }
+
+    return {"flag":flag, "chassisNo":chassisNo.value,"color":color.value,"chassis":chassis.value,"repair":repair,"paint":paint,"repairDescription":repairDescription.value};
+
+}
+
+const cancel = document.getElementById("cancel");
+
+cancel?.addEventListener("click", () => {
+    location.reload();
+    setLocalStorageOption("option-four")
+});

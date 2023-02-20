@@ -8,6 +8,11 @@
     border-radius: 1rem;
 }
 
+.border-red {
+    border: 1px solid var(--red) !important;
+    border-radius: 1rem;
+}
+
 .border-bottom {
     border-bottom: 1px solid var(--gray) !important;
 }

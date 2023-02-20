@@ -73,5 +73,5 @@
 .addBtn:hover {
     cursor: pointer;
     background-color: white !important;
-    color: var(--blue) !important;
+    color: var(--text-color) !important;
 }

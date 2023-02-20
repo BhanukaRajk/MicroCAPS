@@ -111,6 +111,41 @@ class Managers extends Controller {
         }
     }
 
+    public function RequestJobs() {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id' => trim($_POST['id']),
+                'job' => trim($_POST['job']),
+                'chassisNo' => trim($_POST['chassisNo']),
+                'previous' => $_POST['previous'] === 'true' ? 'Yes' : 'No',
+                'repairDescription' => trim($_POST['repairDescription'])
+            ];
+
+            if ($data['previous'] === 'Yes') {
+                $this->managerModel->jobDone($data['id'], $data['job']);
+            }
+
+            if ($data['job'] === 'repair') {
+                $this->managerModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
+                echo 'Successful';
+            } else if ($data['job'] === 'paint') {
+                $this->managerModel->addPaintJob($data['chassisNo']);
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
+
+        }
+    }
+
     public function jobDone() {
 
         if (!isLoggedIn()) {
@@ -126,12 +161,19 @@ class Managers extends Controller {
                 'job' => trim($_POST['job'])
             ];
 
+            if ($data['job'] === 'paint') {
+                if ($this->managerModel->findRepairJobByChassis($this->managerModel->getChassisByPaintId($data['id'])->ChassisNo)) {
+                    echo 'Complete The Repair Job First';
+                    return;
+                }
+            }
+
             $result = $this->managerModel->jobDone($data['id'], $data['job']);
 
             if($result) {
                 echo 'Successful';
             } else {
-                echo 'Error';
+                echo "Error Completing Job";
             }
         }
     }

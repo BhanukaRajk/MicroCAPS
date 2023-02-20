@@ -49,6 +49,9 @@
 /* Flash Message */
 @import "components/flash.css";
 
+/* Pop Up*/
+@import "components/popup.css";
+
 /* Select */
 @import "components/select.css";
 

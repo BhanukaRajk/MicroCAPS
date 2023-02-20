@@ -32,7 +32,7 @@ class Manager {
             VALUES (:repairId, :chassisNo, :repairDescription, :requestDate, :status)'
         );
 
-        $this->db->bind(':repairId', 'R00' . ($chassisNo[8] + random_int(100,10000)));
+        $this->db->bind(':repairId', 'R00' . ($chassisNo[8] + random_int(1000,10000)));
         $this->db->bind(':chassisNo', $chassisNo);
         $this->db->bind(':repairDescription', $repairDescription);
         $this->db->bind(':requestDate', date("Y-m-d"));
@@ -132,7 +132,42 @@ class Manager {
         }
     }
 
-    public function jobDone($id,$job) {
+    public function getChassisByPaintId($paintId) {
+        $this->db->query(
+            'SELECT `vehicle-paint-job`.ChassisNo
+            FROM `vehicle-paint-job`
+            WHERE `vehicle-paint-job`.PaintId = :paintid'
+        );
+
+        $this->db->bind(':paintid', $paintId);
+
+        $results = $this->db->single();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function findRepairJobByChassis($ChassisNo): bool {
+        $this->db->query(
+            'SELECT *
+            FROM `vehicle-repair-job`
+            WHERE `vehicle-repair-job`.ChassisNo = :chassisNo AND `vehicle-repair-job`.Status = :status'
+        );
+
+        $this->db->bind(':chassisNo', $ChassisNo);
+        $this->db->bind(':status', 'NC');
+
+        if ( $this->db->single() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function jobDone($id,$job): bool {
 
         if ( $job == 'repair' ) {
             $this->db->query(

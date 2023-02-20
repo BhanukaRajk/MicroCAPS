@@ -19,7 +19,7 @@
                 <div onclick="rounds(event, 'three')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1">
                     <div class="padding-3 font-weight">Shell Details</div>
                 </div>
-                <div onclick="rounds(event, 'four')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1">
+                <div onclick="rounds(event, 'four')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1" id = "option-four">
                     <div class="padding-3 font-weight">Repair & Paint</div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="section-heading font-weight"> Send a Request </div>
             <form id="request-shell">
                 <div id="fields">
-                    <div class="display-flex-row align-items-start gap-1">
+                    <div class="display-flex-row align-items-start gap-1" id="field1">
                         <div>
                             <div class="custom-select">
                                 <select name="type1" class="form-control form-control-blue text-blue" id="type1">
@@ -54,14 +54,14 @@
                                 required />
                             <label class="form-label">Quantity</label>
                         </div>
-                        <div class="addBtn font-size-24 font-weight border-blue background-blue text-white padding-2 border-radius-11" id="addBtnContainer">
+                        <div class="addBtn text-hover-blue font-size-24 font-weight border-blue background-blue text-white padding-2 border-radius-11" id="addBtnContainer">
                             <i class="fas fa-plus" id="addBtn"></i>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center margin-top-3">
-                    <button class="btn btn-primary" type="button"  onclick="requestShell()">
+                    <button class="btn btn-primary" type="button" onclick="requestShell()">
                         Request Shell
                     </button>
                 </div>
@@ -84,8 +84,9 @@
                             class="form-control"
                             placeholder="Chassis Number"
                             autocomplete="off"
+                            title="Eg: CN112215014A"
                             required />
-                        <label class="form-label">Chassis Number</label>
+                        <label class="form-label" id="chassisNo-label">Chassis Number</label>
                     </div>
                     <div>
                         <div class="custom-select-color">
@@ -229,6 +230,7 @@
                     } else {
                         foreach($data['repairDetails'] as $value) {
                             $id = "'".$value->RepairId."'";
+                            $chassis = "'".$value->ChassisNo."'";
                             echo '<div class="display-flex-row justify-content-center align-items-center paddingy-2 paddingx-3 border-bottom gap-3">
                             <div class="display-flex-row align-items-start">
                                 <div class="display-flex-column align-items-start">
@@ -238,7 +240,7 @@
                             </div>
                             <div class="display-flex-row align-items-end inner-layout">
                                 <div class="display-flex-row align-items-center gap-2 padding-3">
-                                    <button class="btn btn-primary width-rem-12 height-rem-2 padding-0" type="submit">
+                                    <button class="btn btn-primary width-rem-12 height-rem-2 padding-0" type="button" onClick="reRequest('.$id.','.$job.','.$chassis.')">
                                             Request a Re-Repair
                                     </button>
                                     <label class="form-control-checkbox">
@@ -273,6 +275,7 @@
                     } else {
                     foreach($data['paintDetails'] as $value) {
                         $id = "'".$value->PaintId."'";
+                        $chassis = "'".$value->ChassisNo."'";
                         echo '<div class="display-flex-row justify-content-center align-items-center paddingy-2 paddingx-3 border-bottom gap-3">
                         <div class="display-flex-row align-items-start">
                             <div class="display-flex-column align-items-start">
@@ -282,7 +285,7 @@
                         </div>
                         <div class="display-flex-row align-items-end inner-layout">
                             <div class="display-flex-row align-items-center gap-2 padding-3">
-                                <button class="btn btn-primary  width-rem-12 height-rem-2 padding-0" type="submit">
+                                <button class="btn btn-primary  width-rem-12 height-rem-2 padding-0" type="button" onClick="reRequest('.$id.','.$job.','.$chassis.')">
                                     Request a Re-Paint
                                 </button>
                                 <label class="form-control-checkbox">
@@ -301,7 +304,62 @@
                 ?>
             </div>
         </div>
+
+        <div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
+            <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5 pop-container" id="pop-con">
+                <div class="section-heading font-weight" id="pop-title"></div>
+                <form id="re-requests">
+                    <div class="display-flex-row align-items-start gap-2" id="job-fields">
+                        <div>
+                            <input type="text"
+                                id="jobchassis"
+                                name="jobchassis"
+                                onChange=""
+                                value=""
+                                class="form-control"
+                                placeholder="Chassis Number"
+                                autocomplete="off"
+                                disabled />
+                            <label class="form-label" id="jobchassis-label">Chassis Number</label>
+                        </div>                        
+                    </div>
+                    <div class="display-flex-row align-items-center justify-content-center gap-2p1">
+                        <div>
+                            <label class="form-control-checkbox align-items-center font-size-14" id="job-checkbox">
+                                
+                            </label>
+                        </div>
+                    </div>
+                    <div class="display-none display-flex-row align-items-center justify-content-center gap-2 margin-top-4">
+                        <div class="">
+                            <input type="text"
+                                id="re-repairDescription"
+                                name="repairDescription"
+                                onChange=""
+                                value=""
+                                class="form-control"
+                                placeholder="Repair Description"
+                                autocomplete="off"
+                                required />
+                            <label class="form-label">Repair Description</label>
+                        </div>
+                    </div>
+                    <div class="text-center margin-top-3" id="re-buttons">
+                        <button class="btn btn-primary" type="button"  id="requestbtn" onclick="">
+                            Request
+                        </button>
+                        <button class="btn btn-primary btn-red" type="button" id="cancel">
+                            Cancel
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        
     </section>
+
+    
 
     <section class="display-flex-column">
 

@@ -32,6 +32,14 @@
     color: var(--blue) !important
 }
 
+.text-hover-blue {
+    --text-color: var(--blue) !important
+}
+
+.text-hover-red {
+    --text-color: var(--red) !important
+}
+
 .text-gray {
     color: var(--gray) !important
 }
@@ -51,6 +59,10 @@
 
 .font-size {
     font-size: 12px !important;
+}
+
+.font-size-14 {
+    font-size: 14px !important;
 }
 
 .font-size-24 {

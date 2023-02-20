@@ -10,6 +10,10 @@
     background-color: var(--blue);
 }
 
+.background-red {
+    background-color: var(--red);
+}
+
 .background-image {
     background-clip: content-box;
     background-repeat: no-repeat;
