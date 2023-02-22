@@ -15,8 +15,7 @@ class Leave extends controller {
 
 
 
-    public function addNewLeave()
-    {
+    public function recordLeave() {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');

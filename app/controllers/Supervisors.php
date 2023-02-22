@@ -15,6 +15,18 @@ class Supervisors extends controller
 
 
 
+    public function updateProgress() {}
+    public function recordSpecialTaskList() {}
+    public function recordLeaves() {}
+    public function recordIssuedComponents() {}
+    public function recordComponentDefects() {}
+    public function scheduleFutureTasks() {}
+    public function assignForFutureTasks() {}
+    public function updateToolStatus() {}
+    public function recordPAQInspectionResults() {}
+
+
+
     public function settings() {
 
         if(!isLoggedIn()){
