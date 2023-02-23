@@ -68,7 +68,7 @@
 
 .display-flex-row {
     display: flex !important;
-    flex-direction: row;
+    flex-direction: row !important;
 }
 
 .display-flex-column {

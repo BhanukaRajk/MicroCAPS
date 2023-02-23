@@ -16,7 +16,7 @@
                 <div onclick="rounds(event, 'two')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1" id = "option-two">
                     <div class="padding-3 font-weight">Add New Shell</div>
                 </div>
-                <div onclick="rounds(event, 'three')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1">
+                <div onclick="rounds(event, 'three')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1" id = "option-three">
                     <div class="padding-3 font-weight">Shell Details</div>
                 </div>
                 <div onclick="rounds(event, 'four')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1" id = "option-four">
@@ -172,6 +172,8 @@
                         <div class="vehicle-data-board justify-content-evenly">';
                 foreach($data['shellDetails'] as $value) {
 
+                    $chassis = "'".$value->ChassisNo."'";
+
                     $repairS = $data['repairDetails'] ? array_search($value->ChassisNo, array_column($data['repairDetails'], 'ChassisNo')) : false ;
                     $paintS = $data['paintDetails'] ? array_search($value->ChassisNo, array_column($data['paintDetails'], 'ChassisNo')) : false ;
                     $status = $color = "";
@@ -189,7 +191,7 @@
                         $color = "green";
                     }
 
-                    echo '<div class="carcard">
+                    echo '<div class="carcard" onClick = "viewShell('.$chassis.')">
                             <div class="cardhead">
                                 <div class="cardid">
                                     <div class="carmodel">'.$value->ModelName.'</div>
@@ -209,6 +211,13 @@
                 
             }
         ?>
+        
+        <div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
+            <div class="display-flex-column align-items-center border-radius-1 background-white padding-bottom-4 paddingx-4 pop-container" id="pop-con">
+            <div class="icon-grid padding-top-4"><i class='icon fa-times icon-grid-add font-size-20 cursor-pointer' id="cancel"></i>  </div>  
+            <div class="section-heading font-weight padding-bottom-3" id="pop-title">Shell Details</div>
+            
+        </div>
             
     </section>
 

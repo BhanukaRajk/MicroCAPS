@@ -9,6 +9,15 @@
     grid-column: 9;
 }
 
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(63, 1rem);
+}
+
+.icon-grid-add {
+    grid-column: 63;
+}
+
 .chart-grid {
     display: grid;
     grid-template-columns: repeat(20, 1rem);

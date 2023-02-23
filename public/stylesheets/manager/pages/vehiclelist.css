@@ -50,7 +50,8 @@
 
 .chassisno,
 .arrivaldate,
-.status {
+.status,
+.detail {
     height: 12px;
     left: 0px;
     top: 15px;
@@ -59,6 +60,12 @@
     font-size: 12px;
     line-height: 12px;
     color: #A6AFBA;
+}
+
+.detail {
+    height: auto;
+    font-weight: normal;
+    color: var(--fontgray);
 }
 
 .carstatus {

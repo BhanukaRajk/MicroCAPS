@@ -6,3 +6,7 @@
 .display-block {
     display: block !important
 }
+
+.visibility-hidden {
+    visibility: hidden !important
+}

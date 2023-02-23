@@ -274,6 +274,34 @@ class Manager {
         }
     }
 
+    public function assemblyDetails()
+    {
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus = :S1
+                OR `vehicle`.PDIStatus = :S2
+                OR `vehicle`.CurrentStatus = :S3
+                OR `vehicle`.CurrentStatus = :S4
+                ORDER BY `vehicle`.ChassisNo DESC;'
+        );
+
+        $this->db->bind(':S1', 'S1');
+        $this->db->bind(':S2', 'S2');
+        $this->db->bind(':S3', 'S3');
+        $this->db->bind(':S4', 'S4');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
     public function userDetails($id) {
         $this->db->query(
             'SELECT *

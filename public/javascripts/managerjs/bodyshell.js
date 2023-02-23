@@ -37,12 +37,14 @@ chassis?.addEventListener("change", () => {
     chassis.classList.remove("form-control-red");
 });
 
-// Body Shell - Re Request
+// Body Shell - Re Request Repair - Paint
 function reRequest(id, job, chassis) {
 
-    const overlay = document.getElementById("overlay");
-    const popcon = document.getElementById("pop-con");
-    const poptitle = document.getElementById("pop-title");
+    const parentNode = document.getElementById("four");
+
+    const overlay = parentNode.querySelector("#overlay");
+    const popcon = parentNode.querySelector("#pop-con");
+    const poptitle = parentNode.querySelector("#pop-title");
 
     const chassisNo = document.getElementById("jobchassis");
     const jobFields = document.getElementById("job-fields");
@@ -84,12 +86,35 @@ function reRequest(id, job, chassis) {
         reButtons.classList.add("display-flex-column", "align-items-center", "gap-0p5");
     }
 
-    const requestbtn = document.getElementById("requestbtn");
+    const requestbtn = parentNode.querySelector("#requestbtn");
     requestbtn.onclick = () => {
         sendRequest(id, job);
     };
-        
+       
+    const cancelbtn = parentNode.querySelector("#cancel");
+    cancelbtn.onclick = () => {
+        location.reload();
+        setLocalStorageOption("option-four");
+    };
 
+}
+
+// Body Shell Details
+function show(evt, option, set) {
+    var i = 0, shellOption;
+
+    content = document.getElementsByClassName(set);
+    for (i = 0; i < content.length; i++) {
+        content[i].classList.add("display-none");
+    }
+
+    shellOption = document.getElementsByClassName(set+"numbers");
+    for (i = 0; i < shellOption.length; i++) {
+        shellOption[i].classList.remove("active");
+    }
+
+    document.getElementById(option).classList.remove("display-none");
+    evt.currentTarget.classList.add("active");
 }
 
 // Repir - Paint Checkbox

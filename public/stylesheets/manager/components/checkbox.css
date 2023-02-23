@@ -43,3 +43,29 @@ input:checked~.checkmark:after {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+.checkmark-small {
+    height: 1rem;
+    width: 1rem;
+    border: 1px solid var(--gray);
+    box-shadow: inset 3.2px 3.2px 5.6px rgb(0 0 0 / 5%);
+    border-radius: 0.4rem;
+}
+
+.form-control-checkbox input:checked~.checkmark-small {
+    border: 1px solid var(--green);
+    background-color: var(--green);
+}
+
+input:checked~.checkmark-small:after {
+    content: "";
+    position: absolute;
+    margin: 0.05rem 0.3rem;
+    width: 0.2rem;
+    height: 0.6rem;
+    border: solid var(--white);
+    border-width: 0 0.15rem 0.15rem 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

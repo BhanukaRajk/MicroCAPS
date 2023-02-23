@@ -3,9 +3,11 @@
 class Managers extends Controller {
 
     private $managerModel;
+//    private $vehicleModel;
 
     public function __construct(){
         $this->managerModel = $this->model('Manager');
+//        $this->vehicleModel = $this->model('Vehicle');
     }
 
     public function dashboard() {
@@ -104,7 +106,9 @@ class Managers extends Controller {
                         $this->managerModel->addPaintJob($data['chassisNo']);
                     }
                 }
+
                 echo 'Successful';
+
             } else {
                 echo 'Error';
             }
@@ -245,7 +249,19 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $this->view('manager/assembly');
+            $data['assemblyDetails'] = $this->managerModel->assemblyDetails();
+            $this->view('manager/assembly', $data);
+        }
+
+    }
+
+    public function progress(){
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->view('manager/progress');
         }
     }
 

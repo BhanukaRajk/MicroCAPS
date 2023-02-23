@@ -75,3 +75,33 @@
     background-color: white !important;
     color: var(--text-color) !important;
 }
+
+.repairnumbers,
+.paintnumbers {
+    position: relative;
+    bottom: 2rem;
+    right: 1rem;
+}
+
+.repairnumbers.active,
+.paintnumbers.active {
+    color: var(--blue) !important;;
+}
+
+.repairnumbers:hover,
+.paintnumbers:hover {
+    color: var(--blue) !important;
+}
+
+.paint,
+.repair {
+    display: none;
+}
+
+.status-green {
+    color: var(--green) !important;
+}
+
+.status-red {
+    color: var(--red) !important;
+}

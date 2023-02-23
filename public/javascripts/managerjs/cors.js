@@ -102,6 +102,59 @@ function addShell() {
     xhttp.send("chassisNo="+data["chassisNo"]+"&color="+data["color"]+"&chassisType="+data["chassis"]+"&repair="+data["repair"]+"&paint="+data["paint"]+"&repairDescription="+data["repairDescription"]);
 }
 
+function viewShell(chassisNo) {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            let innerhtml = popUpInnerhtml(JSON.parse(response));
+
+            let classname = "display-flex-row gap-2"
+
+            popUp("three", "div", classname, innerhtml);
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/shellDetail", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("chassisNo="+chassisNo);
+
+
+}
+
+function startAssembly(chassisNo) {
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response == "Successful") {
+
+                document.getElementById("startAssembly").disabled = true;
+                location.reload();
+                setLocalStorageFlash("Successful",chassisNo + " Moved to Assembly Line");
+                
+
+            } else {
+
+                location.reload();
+                setLocalStorageFlash("Error",response);
+
+            }
+
+            setLocalStorageOption("option-three");
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/startAssembly", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("chassisNo="+chassisNo);
+    
+}
+
 function sendRequest(id,job) {
 
     let chassisNo = document.getElementById("jobchassis").value;
@@ -328,9 +381,198 @@ function validateAddShell() {
 
 }
 
-const cancel = document.getElementById("cancel");
+//Pop Up
 
-cancel?.addEventListener("click", () => {
-    location.reload();
-    setLocalStorageOption("option-four")
-});
+function popUp (parent, element, classname, innerhtml) {
+
+    const parentNode = document.getElementById(parent);
+
+    const overlay = parentNode.querySelector("#overlay");
+    const popcon = parentNode.querySelector("#pop-con");
+
+    overlay.classList.add('visible');
+    popcon.classList.add('pop');
+
+    const div = document.createElement(element);
+    div.className = classname;
+    div.innerHTML = innerhtml;
+    popcon.appendChild(div);
+
+    const cancelbtn = parentNode.querySelector("#cancel");
+    cancelbtn.onclick = () => {
+        location.reload();
+        setLocalStorageOption("option-" + parent);
+    };
+
+}
+
+function popUpInnerhtml (values) {
+    let repaircnt = paintcnt = 1;
+            let rC = pC = 0;
+            let status = repairDetails = paintDetails = repairNumbers = paintNumbers = "";
+
+            values['repairDetails'].forEach(value => {
+                if (value.Status === "NC") {
+                    status = "Not Completed";
+                }  else {
+                    rC++;
+                    status = "Completed";
+                }
+                repairDetails = repairDetails + 
+                    `<div class="repair display-flex-column gap-1 ${repaircnt === 1 ? "" : "display-none" }" id="Repair${repaircnt++}">
+                        <div>
+                            <div class="text-darkblue font-weight font-size-14">REPAIR ID</div>
+                            <div class="detail">${value.RepairId}</div>
+                        </div>
+                        <div>
+                            <div class="text-darkblue font-weight font-size-14">REPAIR DESCRIPTION</div>
+                            <div class="detail">${value.RepairDescription}</div>
+                        </div>
+                        <div>
+                            <div class="text-darkblue font-weight font-size-14">REQUEST DATE</div>
+                            <div class="detail">${value.RequestDate}</div>
+                        </div>
+                        <div>
+                            <div class="text-darkblue font-weight font-size-14">STATUS DATE</div>
+                            <div class="detail">${status}</div>
+                        </div>
+                    </div>`;
+            });
+
+            for (let i = 1; i < repaircnt; i++) {
+                repairNumbers = repairNumbers + `<div class="text-darkblue font-weight font-size-14 cursor-pointer repairnumbers ${i === 1 ? "active" : "" }" onclick="show(event, 'Repair${i}', 'repair')">${i}</div>`;
+            }
+
+            values['paintDetails'].forEach(value => {
+                if (value.Status === "NC") {
+                    status = "Not Completed";
+                }  else {
+                    status = "Completed";
+                    pC++;
+                }
+                paintDetails = paintDetails + 
+                    `<div class="paint display-flex-column gap-1 ${paintcnt === 1 ? "" : "display-none" }" id="Paint${paintcnt++}">
+                        <div>
+                            <div class="text-darkblue font-weight font-size-14">PAINT ID</div>
+                            <div class="detail">${value.PaintId}</div>
+                        </div>
+                        <div>
+                            <div class="text-darkblue font-weight font-size-14">REQUEST DATE</div>
+                            <div class="detail">${value.RequestDate}</div>
+                        </div>
+                        <div>
+                            <div class="text-darkblue font-weight font-size-14">STATUS DATE</div>
+                            <div class="detail">${status}</div>
+                        </div>
+                    </div>`;
+            });
+
+            for (let i = 1; i < paintcnt; i++) {
+                paintNumbers = paintNumbers + `<div class="text-darkblue font-weight font-size-14 cursor-pointer paintnumbers ${i === 1 ? "active" : "" }" onclick="show(event, 'Paint${i}', 'paint')">${i}</div>`;
+            }
+
+            if (rC === repaircnt-1) {
+                ricon = "fa-check-circle";
+                rstatusColor = "status-green";
+            } else {
+                ricon = "fa-times-circle";
+                rstatusColor = "status-red";
+            }
+
+            if (pC === paintcnt-1) {
+                picon = "fa-check-circle";
+                pstatusColor = "status-green";
+            } else {
+                picon = "fa-times-circle";
+                pstatusColor = "status-red";
+            }
+
+            if (rC === repaircnt-1 && pC === paintcnt-1) {
+                disable = "";
+            } else {
+                disable = "disabled";
+            }
+
+            let innerhtml = `<div class="">
+                                <img src="http://localhost/MicroCAPS/public/images/chassis-vertical.jpg" class="width-rem-12p5 paddingy-3 paddingx-5" alt="${values['shellDetails'].ModelName}' ${values['shellDetails'].Color}">
+                            </div>
+                            <div class="paddingy-3 padding-right-5">
+                                <div class="display-flex-row gap-1">
+                                    <div>
+                                        <label class="text-blue description">SHELL DESCRIPTION</label>
+                                        <div class="display-flex-column gap-1 border-gray padding-4 width-rem-15p7">
+                                            <div>
+                                                <div class="text-darkblue font-weight font-size-14">MODEL</div>
+                                                <div class="detail">${values['shellDetails'].ModelName}</div>
+                                            </div>
+                                            <div>
+                                                <div class="text-darkblue font-weight font-size-14">COLOR</div>
+                                                <div class="detail">${values['shellDetails'].Color}</div>
+                                            </div>
+                                            <div>
+                                                <div class="text-darkblue font-weight font-size-14">CHASSIS NO</div>
+                                                <div class="detail">${values['shellDetails'].ChassisNo}</div>
+                                            </div>
+                                            <div>
+                                                <div class="text-darkblue font-weight font-size-14">ARRIVAL DATE</div>
+                                                <div class="detail">${values['shellDetails'].ArrivalDate}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="text-blue description">REPAIR DETAILS</label>
+                                        <div class="display-flex-row gap-1 border-gray padding-4 width-rem-15p7">
+                                                ${repairDetails}
+                                        </div>
+                                        <div class="display-flex-row gap-1 justify-content-end">
+                                            ${repairNumbers}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="display-flex-row gap-1">
+                                    <div>
+                                        <label class="text-blue description">PAINT DETAILS</label>
+                                        <div class="display-flex-row gap-1 border-gray padding-4 width-rem-15p7">
+                                                ${paintDetails}
+                                        </div>
+                                        <div class="display-flex-row gap-1 justify-content-end">
+                                            ${paintNumbers}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="text-blue description visibility-hidden">OVERALL</label>
+                                        <div class="display-flex-column gap-1 justify-content-center border-gray padding-4 width-rem-15p7">
+                                            <div class="display-flex-row justify-content-between">
+                                                <div class="display-flex-row gap-0p5 ${rstatusColor}">
+                                                    <i class='icon ${ricon}'></i>
+                                                    <div class="${rstatusColor} font-weight font-size-14">REPAIR</div>
+                                                </div>
+                                                <div class="detail lette-spacing-5">${rC}/${repaircnt-1}</div>
+                                            </div>
+                                            <div class="display-flex-row justify-content-between">
+                                                <div class="display-flex-row gap-0p5 ${pstatusColor}">
+                                                    <i class='icon ${picon}'></i>
+                                                    <div class="${pstatusColor} font-weight font-size-14">PAINT</div>
+                                                </div>
+                                                <div class="detail lette-spacing-5">${pC}/${paintcnt-1}</div>
+                                            </div>
+                                            <div>
+                                                <label class="form-control-checkbox display-flex-row justify-content-between align-items-center font-size-14 text-darkblue" id="checkbox">
+                                                    Proceed to Assembly Line
+                                                    <input type="checkbox"
+                                                            id="startAssembly"
+                                                            name="assembly"
+                                                            onChange="startAssembly('${values['shellDetails'].ChassisNo}','${values['shellDetails'].Color}')"
+                                                            value="Yes"
+                                                            ${disable}>
+                                                    <div class="checkmark-small"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>`;
+
+                            return innerhtml;
+}
