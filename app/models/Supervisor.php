@@ -25,33 +25,6 @@ class Supervisor
         }
     }
 
-    // LOGIN FUNCTION
-    // public function login($username, $password)
-    // {
-    //     $this->db->query(
-    //         'SELECT `employee-credentials`.Username, `employee-credentials`.Password, `employee`.EmployeeID, `employee`.Firstname, `employee`.Lastname, `employee`.Position
-    //         FROM `employee-credentials`
-    //         INNER JOIN `employee`
-    //         ON `employee-credentials`.EmployeeID = `employee`.EmployeeId
-    //         WHERE `employee-credentials`.Username = :username'
-    //     );
-
-    //     $this->db->bind(':username', $username);
-
-    //     $row = $this->db->single();
-
-
-    //     // COMPARING HASHED PASSWORDS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //     // if (password_hash($password, PASSWORD_DEFAULT) == password_hash($row->Password, PASSWORD_DEFAULT)) {
-    //     if ($password == $row->Password) {
-    //         return $row;
-    //     } else {
-    //         return null;
-    //     }
-    // }
-
-
 
     public function dashdetails()
     {
@@ -71,8 +44,6 @@ class Supervisor
         }
     }
 
-
-    
 
     public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjusment, $Clutch, $RAP, $Visual)
     {
@@ -97,6 +68,7 @@ class Supervisor
         }
     }
 
+
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
     public function checkEmployee($empid)
     {
@@ -115,6 +87,7 @@ class Supervisor
             return false;
         }
     }
+
 
     // CHECK THIS EMPLOYEE REQUESTED ANOTHER LEAVE ON THIS DATE
     public function checkLeaves($empid, $reqdate)
@@ -135,6 +108,7 @@ class Supervisor
             return false;
         }
     }
+
 
     public function checkLeaveByID($LeaveID)
     {
@@ -173,6 +147,7 @@ class Supervisor
         }
     }
 
+
     public function EditLeave($EmpId, $leavedate, $reason, $id)
     {
         $this->db->query(
@@ -193,9 +168,6 @@ class Supervisor
             return false;
         }
     }
-
-
-
 
 
     // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
