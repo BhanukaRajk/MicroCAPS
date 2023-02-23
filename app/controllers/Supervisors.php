@@ -28,6 +28,7 @@ class Supervisors extends controller
 
 
     public function settings() {
+        // Hello world 
 
         if(!isLoggedIn()){
             redirect('Users/login');

@@ -79,30 +79,44 @@ class Leave extends controller {
 
     }
 
-
-
-
-    public function leaves()
-    {
+    // NO CONFIRMATION INCLUDED FOR REMOVING ////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function removeLeave() {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['LeaveDetails'] = $this->leaveModel->ViewLeaves();
-            // echo "-------------";
-            //print_r($data);
-            $this->view('supervisor/leaves', $data);
+        if (isset($_GET['id'])) {
+            $key = $_GET['id'];
+
+            // if (isset($_GET['id']) && isset($GET_['ldate'])) {
+            //     $id = $_GET['id'];
+            //     $ldate = $_GET['ldate'];
+
+            //echo "ttttttttttttt".$id."gggggggg".$ldate."uuuuuuuu";
+
+            // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            //     $_GET = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // $data = [
+            //     'employeeId' => trim($_GET['EmployeeId']),
+            //     'leavedate' => trim($_GET['LeaveDate'])
+            // ];
+
+            // if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'])) {
+            // if ($this->supervisorModel->removeleave($id, $ldate)) {
+            if ($this->leaveModel->removeleave($key)) {
+                $_SESSION['return_message'] = 'Record deletion success!';
+            } else {
+                $_SESSION['return_message'] = 'Error! Could not delete record..';
+            }
+
+            redirect('supervisors/leaves');
         }
     }
 
-
-
-
-    public function editleave()
-    {
+    public function editLeave() {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
@@ -219,50 +233,20 @@ class Leave extends controller {
         }
     }
 
-
-
-
-
-
-    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function removeleave()
-    {
+    public function viewLeaves() {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
         }
 
-        if (isset($_GET['id'])) {
-            $key = $_GET['id'];
-
-            // if (isset($_GET['id']) && isset($GET_['ldate'])) {
-            //     $id = $_GET['id'];
-            //     $ldate = $_GET['ldate'];
-
-            //echo "ttttttttttttt".$id."gggggggg".$ldate."uuuuuuuu";
-
-            // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-            //     $_GET = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            // $data = [
-            //     'employeeId' => trim($_GET['EmployeeId']),
-            //     'leavedate' => trim($_GET['LeaveDate'])
-            // ];
-
-            // if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'])) {
-            // if ($this->supervisorModel->removeleave($id, $ldate)) {
-            if ($this->leaveModel->removeleave($key)) {
-                $_SESSION['return_message'] = 'Record deletion success!';
-            } else {
-                $_SESSION['return_message'] = 'Error! Could not delete record..';
-            }
-
-            redirect('supervisors/leaves');
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['LeaveDetails'] = $this->leaveModel->ViewLeaves();
+            // echo "-------------";
+            //print_r($data);
+            $this->view('supervisor/leaves', $data);
         }
     }
-    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 }
 
