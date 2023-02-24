@@ -26,22 +26,54 @@ class Supervisor
     }
 
 
-    public function dashdetails()
+    public function dashboardCounters()
     {
 
+        // CALCULATE THE NUMBER OF VEHICLES IN ASSEMBLY LINE
         $this->db->query(
-            'SELECT COUNT(*)
+            'SELECT `ChassisNo`
                 FROM `vehicle`
                 WHERE `CurrentStatus` != "PA";'
         );
-
+        // array_push($count, pg_fetch_assoc($this->db->single()));
         $assemblingCount = $this->db->rowCount();
 
-        if ($assemblingCount >= 0) {
-            return $assemblingCount;
+        // CALCULATE THE NUMBER OF VEHICLES DISPATCHED
+        $this->db->query(
+            'SELECT `ChassisNo`
+                FROM `vehicle`
+                WHERE `Color` != "Red";'
+        );
+        // array_push($count, pg_fetch_assoc($this->db->single()));
+        $dispatchCount = $this->db->rowCount();
+
+        // CALCULATE THE NUMBER OF VEHICLES IN ON-HOLD STATE
+        $this->db->query(
+            'SELECT `ChassisNo`
+                FROM `vehicle`
+                WHERE `CurrentStatus` = "Hold";'
+        );
+        // array_push($count, mysqli_fetch_assoc($this->db->single()));
+        $holdCount = $this->db->rowCount();
+
+        print_r($assemblingCount);
+        print_r($dispatchCount);
+        print_r($holdCount);
+
+
+        // THIS FUNCTION RETURNS A VALUE ONLY IF ALL THE QUERIES ARE WORKED SUCCUESSFULLY
+        if ($assemblingCount >= 0 && $dispatchCount >= 0 && $holdCount >= 0) {
+            return array('onAssemble' => $assemblingCount, 'dispatched' => $dispatchCount, 'onHold' => $holdCount);
         } else {
             return false;
         }
+
+        // if ($count) {
+        //     return $count;
+        // } else {
+        //     return false;
+        // }
+
     }
 
 

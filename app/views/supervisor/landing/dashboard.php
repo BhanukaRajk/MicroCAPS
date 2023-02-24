@@ -61,15 +61,15 @@
 
                 <div class="dash-card-left-bottom test1">
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo $count['onAssemble']; ?></div>
                         <div>On Assembly</div>
                     </div>
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo $count['dispatched']; ?></div>
                         <div>Dispatched</div>
                     </div>
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo $count; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo $count['onHold']; ?></div>
                         <div>On Hold</div>
                     </div>
                 </div>
