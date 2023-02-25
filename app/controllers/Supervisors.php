@@ -89,6 +89,7 @@ class Supervisors extends controller
             $data['url'] = getUrl();
             $data['count'] = $this->supervisorModel->dashboardCounters();
 
+            print_r($data['count']);
             $this->view('supervisor/landing/dashboard', $data);
         }
     }

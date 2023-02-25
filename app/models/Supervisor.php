@@ -29,50 +29,47 @@ class Supervisor
     public function dashboardCounters()
     {
 
+        $count = array();
+
         // CALCULATE THE NUMBER OF VEHICLES IN ASSEMBLY LINE
         $this->db->query(
-            'SELECT `ChassisNo`
+            'SELECT COUNT(`ChassisNo`) AS asLine
                 FROM `vehicle`
                 WHERE `CurrentStatus` != "PA";'
         );
-        // array_push($count, pg_fetch_assoc($this->db->single()));
-        $assemblingCount = $this->db->rowCount();
+        array_push($count, $this->db->single());
+
 
         // CALCULATE THE NUMBER OF VEHICLES DISPATCHED
         $this->db->query(
-            'SELECT `ChassisNo`
+            'SELECT COUNT(`ChassisNo`) AS dispatched
                 FROM `vehicle`
                 WHERE `Color` != "Red";'
         );
-        // array_push($count, pg_fetch_assoc($this->db->single()));
-        $dispatchCount = $this->db->rowCount();
+        array_push($count, $this->db->single());
 
         // CALCULATE THE NUMBER OF VEHICLES IN ON-HOLD STATE
         $this->db->query(
-            'SELECT `ChassisNo`
+            'SELECT COUNT(`ChassisNo`) AS onHold
                 FROM `vehicle`
                 WHERE `CurrentStatus` = "Hold";'
         );
-        // array_push($count, mysqli_fetch_assoc($this->db->single()));
-        $holdCount = $this->db->rowCount();
-
-        print_r($assemblingCount);
-        print_r($dispatchCount);
-        print_r($holdCount);
+        array_push($count, $this->db->single());
 
 
-        // THIS FUNCTION RETURNS A VALUE ONLY IF ALL THE QUERIES ARE WORKED SUCCUESSFULLY
-        if ($assemblingCount >= 0 && $dispatchCount >= 0 && $holdCount >= 0) {
-            return array('onAssemble' => $assemblingCount, 'dispatched' => $dispatchCount, 'onHold' => $holdCount);
-        } else {
-            return false;
-        }
 
-        // if ($count) {
-        //     return $count;
+        // THIS FUNCTION RETURNS A VALUE ONLY IF ALL THE QUERIES ARE WORKED SUCCUSSFULLY
+        // if ($assemblingCount >= 0 && $dispatchCount >= 0 && $holdCount >= 0) {
+        //     return array('onAssemble' => $assemblingCount, 'dispatched' => $dispatchCount, 'onHold' => $holdCount);
         // } else {
         //     return false;
         // }
+
+        if ($count) {
+            return $count;
+        } else {
+            return false;
+        }
 
     }
 
