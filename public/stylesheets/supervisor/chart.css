@@ -1,6 +1,6 @@
 #myChart {
     width: 300px !important;
-    height: 230px !important;
+    height: 250px !important;
 }
 
 #stage01,
@@ -13,40 +13,26 @@
 
 .chart-percentage {
     position: absolute;
-    top: 12.3rem;
+    top: 15.3rem;
     transform: translate(-50%, -50%);
     font-size: 3rem;
     font-weight: 600;
-    color: var(--fontgray);
+    color: #071aa9 !important;
 }
 
 .chart-percentage-ao {
     font-size: 4rem;
     transform: translate(-50%, -50%);
     font-weight: 600;
-    color: var(--fontgray);
+    color: #1C1F37;
+
 }
 
 .chart-percentage-stage{
     font-size: 2rem;
     transform: translate(-50%, -50%);
     font-weight: 600;
-    color: var(--fontgray);
+    color: #1C1F37;
     height: 2rem;
     width: 2rem;
-}
-
-.dash-darkblue-circle {
-    background-color: #0853dd;
-}
-
-.dash-lightblue-circle {
-    background-color: #3ba5fb;
-}
-
-.dash-graph-color-circle {
-    height: 0.5rem;
-    width: 0.5rem;
-    margin: auto 0.5rem auto 0rem;
-    border-radius: 50%;
 }

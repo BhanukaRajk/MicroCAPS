@@ -44,7 +44,7 @@ class Supervisor
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS dispatched
                 FROM `vehicle`
-                WHERE `Color` != "Red";'
+                WHERE `PDIStatus` = "CM";'
         );
         array_push($counts, $this->db->single());
 
