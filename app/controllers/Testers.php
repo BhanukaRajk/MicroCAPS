@@ -1,7 +1,5 @@
 <?php
 
-
-
 class Testers extends controller {
 
     private $testerModel;
@@ -208,6 +206,20 @@ class Testers extends controller {
         }
     }
 
+    public function pdiReseults() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
+            $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
+            $data['pdiCheckList'] = $this->testerModel->pdiCheckList($data['onPDIVehicles'][0]->ChassisNo);
+            $this->view('tester/pdiresults',$data);
+        }
+    }
+
     public function pdi($id) {
 
         if(!isLoggedIn()){
@@ -235,7 +247,6 @@ class Testers extends controller {
             $this->view('tester/pdi_results',$data);
         }
     }
-
 
     public function record_pdi($id){
         if(!isLoggedIn()){
@@ -272,6 +283,54 @@ class Testers extends controller {
             } else {
                 echo 'Error';
             }
+        }
+    }
+
+    public function settings() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id' => $_SESSION['_id'],
+                'firstname' => trim($_POST['firstname']),
+                'lastname' => trim($_POST['lastname']),
+                'email' => trim($_POST['email']),
+                'mobile' => trim($_POST['mobile']),
+                'nic' => trim($_POST['nic'])
+            ];
+
+            if (isset($_FILES['image'])) {
+
+                $profile = strval($data['nic']) . '.jpg';
+                $to = '../public/images/profile/' . $profile;
+
+                $from = $_FILES['image']['tmp_name'];
+
+                if (move_uploaded_file($from, $to)) {
+                    if ($this->testerModel->updateProfile($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic'], $profile))
+                        echo 'Successful';
+                    else
+                        echo 'Error';
+                } else {
+                    echo 'Error';
+                }
+
+            } else {
+                if ($this->testerModel->updateProfileValues($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic']))
+                    echo 'Successful';
+                else
+                    echo 'Error';
+            }
+
+        } else {
+            $data['userDetails'] = $this->testerModel->userDetails($_SESSION['_id']);
+            $this->view('tester/settings',$data);
         }
     }
 

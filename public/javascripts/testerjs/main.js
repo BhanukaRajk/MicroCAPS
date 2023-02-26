@@ -45,6 +45,33 @@ function addPDI(ChassisNo,CheckId, Status) {
     xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Status="+Status);
 }
 
+function saveChanges(id, position) {
+    let formdata = new FormData();
+    formdata.append("id", id);
+    formdata.append("image", document.getElementById("image").files[0]);
+    formdata.append("firstname", document.getElementById("firstname").value);
+    formdata.append("lastname", document.getElementById("lastname").value);
+    formdata.append("email", document.getElementById("email").value);
+    formdata.append("mobile", document.getElementById("mobile").value);
+    formdata.append("nic", document.getElementById("nic").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/'+position+'s/settings',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response == "Successful") {
+                location.reload(true);
+                setLocalStorage("Successful","Saved Changes");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Saving Changes");
+            }
+        }
+    });
+}
+
 //Alert Success
 function alertSuccess(message) {
     let alert = document.getElementById("alert");
