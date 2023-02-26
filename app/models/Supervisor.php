@@ -26,10 +26,10 @@ class Supervisor
     }
 
 
-    public function dashboardCounters()
+    public function statusCounters()
     {
 
-        $count = array();
+        $counts = array();
 
         // CALCULATE THE NUMBER OF VEHICLES IN ASSEMBLY LINE
         $this->db->query(
@@ -37,7 +37,7 @@ class Supervisor
                 FROM `vehicle`
                 WHERE `CurrentStatus` != "PA";'
         );
-        array_push($count, $this->db->single());
+        array_push($counts, $this->db->single());
 
 
         // CALCULATE THE NUMBER OF VEHICLES DISPATCHED
@@ -46,7 +46,7 @@ class Supervisor
                 FROM `vehicle`
                 WHERE `Color` != "Red";'
         );
-        array_push($count, $this->db->single());
+        array_push($counts, $this->db->single());
 
         // CALCULATE THE NUMBER OF VEHICLES IN ON-HOLD STATE
         $this->db->query(
@@ -54,19 +54,10 @@ class Supervisor
                 FROM `vehicle`
                 WHERE `CurrentStatus` = "Hold";'
         );
-        array_push($count, $this->db->single());
+        array_push($counts, $this->db->single());
 
-
-
-        // THIS FUNCTION RETURNS A VALUE ONLY IF ALL THE QUERIES ARE WORKED SUCCUSSFULLY
-        // if ($assemblingCount >= 0 && $dispatchCount >= 0 && $holdCount >= 0) {
-        //     return array('onAssemble' => $assemblingCount, 'dispatched' => $dispatchCount, 'onHold' => $holdCount);
-        // } else {
-        //     return false;
-        // }
-
-        if ($count) {
-            return $count;
+        if ($counts) {
+            return $counts;
         } else {
             return false;
         }
@@ -472,6 +463,25 @@ class Supervisor
             'SELECT `ChassisNo`,
                     `ModelNo`,
                     `Color` 
+                    FROM `vehicle` 
+                    WHERE `CurrentStatus` = "PA";'
+        );
+
+        $vehicles = $this->db->resultSet();
+
+        if ($vehicles) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function viewAssemblyLineVehicleNos()
+    {
+
+        $this->db->query(
+            'SELECT `ChassisNo`
                     FROM `vehicle` 
                     WHERE `CurrentStatus` = "PA";'
         );

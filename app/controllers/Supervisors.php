@@ -87,9 +87,12 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['count'] = $this->supervisorModel->dashboardCounters();
 
-            print_r($data['count']);
+            $data['counts'] = $this->supervisorModel->statusCounters();
+            $data['assemblyLine'] = $this->supervisorModel->viewAssemblyLineVehicleNos();
+            // $data['activities'] = $this->supervisorModel->activityLogs();
+            // $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
+
             $this->view('supervisor/landing/dashboard', $data);
         }
     }

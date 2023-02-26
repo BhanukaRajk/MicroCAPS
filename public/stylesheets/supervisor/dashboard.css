@@ -149,6 +149,7 @@ dash-section
 /* GRAPH FRAME MIDDLE (GRAPH) */
 .dash-graph-view {
     text-align: center;
+    height: 250px;
 }
 
 /* GRAPH FRAME BOTTOM */

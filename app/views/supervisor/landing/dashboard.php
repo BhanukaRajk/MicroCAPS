@@ -6,7 +6,7 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 <!-- GET DATA FROM CONTROLLER -->
-<?php $count = $data['count']; ?>
+<?php $counts = $data['counts']; ?>
 
 
 <!-- DASHBOARD DETAILED CONTENT -->
@@ -23,15 +23,19 @@
                                 <!-- <label for="vehicles" class="small">Select Vehicle</label> -->
                                 <select name="vehicles" id="vehicles">
                                     <option value="NULL">Select vehicle</option>
-                                    <option value="CN1294B0934">CN1294B0934</option>
-                                    <option value="CN1294G0836">CN1294G0836</option>
-                                    <option value="CN1294L9302">CN1294L9302</option>
+
+                                    <?php
+                                    foreach ($data['assemblyLine'] as $lineCar) {
+                                        echo '<option value="'. $lineCar->ChassisNo .'">'. $lineCar->ChassisNo .'</option>';
+                                    }
+                                    ?>
+
                                 </select>
                             </div>
                         </div>
                         <div class="dash-graph-view">
-                            <!-- <canvas id="myChart"></canvas>
-                            <label class="chart-percentage" for="myChart">60%</label> -->
+                            <canvas id="myChart"></canvas>
+                            <label class="chart-percentage" for="myChart">60%</label>
                         </div>
                         <div class="dash-graph-bottom test1">
                             <div class="dash-graph-menu test1">
@@ -61,21 +65,20 @@
 
                 <div class="dash-card-left-bottom test1">
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo $count['onAssemble']; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo $counts[0]->asLine; ?></div>
                         <div>On Assembly</div>
                     </div>
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo $count['dispatched']; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo $counts[1]->dispatched; ?></div>
                         <div>Dispatched</div>
                     </div>
                     <div class="dash-card-left-bottom-countbox test1">
-                        <div class="dash-countbox-number test1"><?php echo $count['onHold']; ?></div>
+                        <div class="dash-countbox-number test1"><?php echo $counts[2]->onHold; ?></div>
                         <div>On Hold</div>
                     </div>
                 </div>
 
             </div>
-
 
             <div class="dash-cardsframe-right test1">
 
@@ -83,6 +86,7 @@
                     <div class="dash-card-right-datalines dash-card-headings test1">Activity Log</div>
                     <div class="dash-card-right-datalines test1"></div>
                 </div>
+
                 <div class="dash-card-quickaccess test1">
                     <div class="dash-card-right-datalines dash-card-headings test1">Quick Access</div>
                     <div class="dash-card-right-datalines dash-quickbtns-frame test1">
@@ -94,6 +98,7 @@
                         </a>
                     </div>
                 </div>
+
                 <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">
                     <div class="calender-title margin-top-3" id="calender-title">May 2021</div>
                     <table class="margin-top-3">
