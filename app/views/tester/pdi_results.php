@@ -35,7 +35,7 @@
                             if ($value2->Status == 'OK') {
                                 $color = 'green';
                             } else if ($value2->Status == 'SA') {
-                                $color = 'red';
+                                $color = 'yellow';
                             } else {
                                 $color = 'yellow';
                             }

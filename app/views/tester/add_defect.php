@@ -55,7 +55,6 @@
                 <div class="add-form-field">
                   <button name="submit" type="submit" class="add-form-update-button">Add Defect</button>
                 </div>
-
               </form>
             </div>
           </div>

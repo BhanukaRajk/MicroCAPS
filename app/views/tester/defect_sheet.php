@@ -5,7 +5,7 @@
 <body>
   <div class="container1">
     <div class="head_1">Defect Sheet</div>
-    <div class="head_2">Chassis Number : <?php echo $data['defects'][1]->ChassisNo; ?></div>
+    <div class="head_2">Chassis Number : <?php echo $data['id']; ?></div>
     <table class="rwd-table">
       <tbody>
         <tr>
@@ -19,7 +19,12 @@
         </tr>
 
 
-        <?php foreach ($data['defects'] as $values) : ?>
+        <?php 
+        if (empty($data['defects'])) {
+          echo "<tr><td colspan='7'>No Defects Found</td></tr>";
+        }
+        else {
+        foreach ($data['defects'] as $values) : ?>
 
           <tr>
             <td><?php echo $values->DefectNo; ?></td>
@@ -33,13 +38,13 @@
           </tr>
 
         <?php endforeach; ?>
-
+        <?php } ?>
 
       </tbody>
     </table>
     <br><br>
 
-    <button type="submit" class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect/<?php echo $values->ChassisNo; ?>'">
+    <button type="submit" class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect/<?php echo $data['id']; ?>'">
       Add Defects
     </button>
   </div>

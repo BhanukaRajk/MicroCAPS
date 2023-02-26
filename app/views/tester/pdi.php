@@ -40,11 +40,11 @@
                                         <div>
                                         <input type="radio" name="' .$value2->CheckId.'" 
                                         value="OK" 
-                                        class="round-checkbox" 
+                                        class="round-checkbox-green" 
                                         onChange="addPDI(\''.$value2->ChassisNo.'\',\''.$value2->CheckId.'\',\'OK\')" '.$check1.'>
                                 <input type="radio" name="' .$value2->CheckId.'" 
                                         value="SA" 
-                                        class="round-checkbox" 
+                                        class="round-checkbox-red" 
                                         onChange="addPDI(\''.$value2->ChassisNo.'\',\''.$value2->CheckId.'\',\'SA\')" '.$check2.'>
                                         </div>
                                     </div>

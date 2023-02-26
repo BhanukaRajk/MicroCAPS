@@ -20,7 +20,7 @@ body {
     --linkblue: #017EFA;
     --green: #29CC97;
     --red: #ee0b0b;
-    --yellow: #FEC400;
+    --yellow:#FEC400;
 }
 
 h3 {
@@ -1745,16 +1745,12 @@ Add Defect Form
     text-align: left;
 }
 
-/* .grid-item-2{
-
-} */
-
 .grid-item-caption{
     font:400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
     color: #777777;
 }
 
-.round-checkbox {
+.round-checkbox-green {
     width: 15px;
     height: 15px;
     background-color: white;
@@ -1766,26 +1762,25 @@ Add Defect Form
     cursor: pointer;
 }
 
-.round-checkbox:checked {
+.round-checkbox-green:checked {
     background-color: #29CC97;
 }
 
-.grid-center {
-    text-align: center;
+.round-checkbox-red {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 2px solid #ddd;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
 }
 
-.grid-left {
-    text-align: left;
+.round-checkbox-red:checked {
+    background-color: #FF6464;
 }
-
-.grid-right {
-    text-align: right;
-}
-
-.padding-left-form {
-    padding-left: 1rem;
-}
-
 
 .sv-data-board {
     display: flex;
@@ -1867,7 +1862,7 @@ Add Defect Form
     z-index: 1;
     background-color: rgba(255, 255, 255, 0.2);
     transition: all 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
   }
   
   .btn_sv-three:hover::before {
