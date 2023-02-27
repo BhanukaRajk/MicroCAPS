@@ -104,6 +104,60 @@
                         </div>
                     </div>
 
+
+
+
+                    <!-- THIS IS THE POP UP BOX FOR UPDATES AND DELETIONS -->
+                    <div class="background-blurer display-none">
+                        <div class="consumable-popup-window position-fixed">
+                            <div class="">
+                                <div><button type="">Close</button></div>
+                            </div>
+                            <div class="horizontal-centralizer">
+                                <div class="popup-box-heading1">Assign for task</div>
+                            </div>
+                            <form method="POST">
+                                <div class="horizontal-centralizer">
+                                    <div>Adjusting clutch</div>
+                                </div>
+                                <div class="horizontal-centralizer">
+                                    <div class="margin-top-1">CN83JH43HG636</div>
+                                </div>
+                                <div class="horizontal-centralizer margin-top-3">
+                                    <div>
+
+                                        <label for="stock">Assembler:</label>
+                                        <input id="stock" type="text"></input>
+
+
+                                        <!-- <select name="status" id="status">
+                                        <option value="$state">$state</option>
+                                        <?php
+                                            // foreach ($data['states'] as $state) {
+                                            //   if($state1 != $state2) {
+                                            //     echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
+                                            //   }
+                                            // }
+                                            ?>
+                                        </select> -->
+
+                                    </div>
+                                </div>
+                                <div class="horizontal-centralizer margin-top-3">
+                                    <div><button type="submit">Update</button></div>
+                                </div>
+                            </form>
+                            <form method="POST">
+                                <div class="horizontal-centralizer display-none">
+                                    <div><input type="text"></input></div>
+                                </div>
+                                <div class="horizontal-centralizer">
+                                    <div><button type="submit">Remove item</button></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

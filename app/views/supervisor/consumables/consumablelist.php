@@ -48,37 +48,9 @@
 
 
 
-        <div class="consumable-popup-window display-none">
-          <div class="">
-            <div><button type="">Back</button></div>
-          </div>
-          <div class="horizontal-centralizer">
-            <div>Select Availability</div>
-          </div>
-          <form method="POST">
-            <div class="horizontal-centralizer">
-              <div><input type="text"></input></div>
-            </div>
-            <div class="horizontal-centralizer">
-              <div><select></select></div>
-            </div>
-            <div class="horizontal-centralizer">
-              <div><button type="submit">Update</button></div>
-            </div>
-          </form>
-          <form method="POST">
-            <div class="horizontal-centralizer display-none">
-              <div><input type="text"></input></div>
-            </div>
-            <div class="horizontal-centralizer">
-              <div><button type="submit">Remove item</button></div>
-            </div>
-          </form>
-        </div>
 
 
-
-
+        <!-- THIS IS THE FILTER BOX -->
         <div class="thisfilter">
           <div class="filterbox">
             <div class="filterin">Filter by</div>
@@ -126,6 +98,66 @@
             </div>
           </div>
         </div>
+
+
+        <!-- THIS IS THE POP UP BOX FOR UPDATES AND DELETIONS -->
+        <div class="background-blurer display-none">
+          <div class="consumable-popup-window position-fixed">
+            <div class="">
+              <div><button type="">Close</button></div>
+            </div>
+            <div class="horizontal-centralizer">
+              <div class="popup-box-heading1">Update status</div>
+            </div>
+            <form method="POST">
+              <div class="horizontal-centralizer">
+                <div>MOTUL 3000 4T Plus</div>
+              </div>
+              <div class="horizontal-centralizer">
+                <div class="margin-top-1">
+                  <img class="consumable-popup-img" src="<?php echo URL_ROOT; ?>public/images/consumables/image1.png" class="carpic" alt="Consumable">
+                </div>
+              </div>
+              <div class="horizontal-centralizer margin-top-3">
+                <div>
+
+                  <label for="stock">Current stock:</label>
+                  <input id="stock" type="number"></input>
+                  <!-- <?php //echo ($item['weight'] == NULL) ? 'L' : 'Kg' ; 
+                        ?> -->
+                  <?php echo (NULL == NULL) ? 'L' : 'Kg'; ?>
+
+
+                  <!-- <select name="status" id="status">
+                  <option value="$state">$state</option>
+                  <?php
+                  // foreach ($data['states'] as $state) {
+                  //   if($state1 != $state2) {
+                  //     echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
+                  //   }
+                  // }
+                  ?>
+                </select> -->
+
+                </div>
+              </div>
+              <div class="horizontal-centralizer margin-top-3">
+                <div><button type="submit">Update</button></div>
+              </div>
+            </form>
+            <form method="POST">
+              <div class="horizontal-centralizer display-none">
+                <div><input type="text"></input></div>
+              </div>
+              <div class="horizontal-centralizer">
+                <div><button type="submit">Remove item</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
 
       </div>
     </div>

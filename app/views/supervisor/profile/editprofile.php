@@ -1,5 +1,7 @@
 <?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
+
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 <section class = "position-absolute page-content" >
     <div class="page-heading  font-weight">
