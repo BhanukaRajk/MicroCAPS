@@ -307,12 +307,19 @@ dash-section
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     background-color: white;
     border-radius: 1.2rem;
     padding-block: 1rem;
     box-shadow: 0px 0px 10px 2px #8ba2fc10;
+
+    gap: 1rem 0;
+}
+
+.log-data {
+    font-size: 12px;
+    width: 130px;
+    word-wrap: normal;
 }
 
 

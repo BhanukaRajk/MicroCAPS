@@ -90,7 +90,7 @@ class Supervisors extends controller
 
             $data['counts'] = $this->supervisorModel->statusCounters();
             $data['assemblyLine'] = $this->supervisorModel->viewAssemblyLineVehicleNos();
-            // $data['activities'] = $this->supervisorModel->activityLogs();
+            $data['activities'] = $this->supervisorModel->activityLogs();
             // $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
 
             $this->view('supervisor/landing/dashboard', $data);

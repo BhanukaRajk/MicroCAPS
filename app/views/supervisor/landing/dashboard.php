@@ -26,7 +26,7 @@
 
                                     <?php
                                     foreach ($data['assemblyLine'] as $lineCar) {
-                                        echo '<option value="'. $lineCar->ChassisNo .'">'. $lineCar->ChassisNo .'</option>';
+                                        echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
                                     }
                                     ?>
 
@@ -82,9 +82,15 @@
 
             <div class="dash-cardsframe-right test1">
 
-                <div class="dash-card-logs test1">
+                <div class="dash-card-logs">
                     <div class="dash-card-right-datalines dash-card-headings test1">Activity Log</div>
-                    <div class="dash-card-right-datalines test1"></div>
+                    <div class="horizontal-centralizer"><table><?php
+                    foreach ($data['activities'] as $activityLog) {
+                        echo '<tr><td class="log-data">' . $activityLog->empName . '</td>
+                                <td class="log-data">' . $activityLog->lastLog . '</td></tr>';
+                    }
+                    ?></table></div>
+                    
                 </div>
 
                 <div class="dash-card-quickaccess test1">

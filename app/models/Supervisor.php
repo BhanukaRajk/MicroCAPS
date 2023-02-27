@@ -94,7 +94,7 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT EmployeeId FROM employee WHERE EmployeeId = :employee AND Progress = 1'
+            'SELECT EmployeeId FROM employee WHERE EmployeeId = :employee AND Progress = 1;'
         );
 
         $this->db->bind(':employee', $empid);
@@ -103,6 +103,26 @@ class Supervisor
 
         if ($this->db->rowCount()) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
+    public function activityLogs()
+    {
+
+        $this->db->query(
+            'SELECT CONCAT(`Firstname`," ",`Lastname`) AS `empName`, `lastLog` 
+            FROM `employee-logs`,`employee` 
+            WHERE `employee-logs`.`EmployeeId` = `employee`.`EmployeeId` 
+            ORDER BY `lastLog` LIMIT 6;'
+        );
+
+        $lastLogs = $this->db->resultSet();
+
+        if ($lastLogs) {
+            return $lastLogs;
         } else {
             return false;
         }
