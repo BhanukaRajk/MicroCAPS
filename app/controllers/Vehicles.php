@@ -62,4 +62,31 @@ class Vehicles extends Controller {
         }
     }
 
+    public function assemblyPercentageDetail() {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'chassisNo' => trim($_POST['chassisNo'])
+            ];
+
+            $data['overall'] = [
+                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($data['chassisNo'], 'Pending'), "Weight")),
+                'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($data['chassisNo'], 'Connected'), "Weight"))
+            ];
+
+            if ($data['overall']) {
+                echo json_encode($data);
+            }
+
+        }
+
+    }
+
 }

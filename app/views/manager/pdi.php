@@ -9,7 +9,7 @@
                 PDI Results
             </div>
             <div class="custom-select">
-                <select name="vehicles" class="background-none" id="vehicles">
+                <select name="vehicles" class="background-none" id="pdiVehicles">
                     <?php 
                         foreach($data['onPDIVehicles'] as $value) {
                             echo '<option value="'.$value->ChassisNo.'">'.$value->ChassisNo.'</option>';

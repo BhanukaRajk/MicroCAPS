@@ -24,9 +24,19 @@
     grid-template-rows: repeat(20, 1rem);
 }
 
-.chart-grid-add {
-    grid-row: 9;
-    grid-column: 7;
+.chart-grid-add-1 {
+    grid-row: 13;
+    grid-column: 14;
+}
+
+.chart-grid-add-2 {
+    grid-row: 13;
+    grid-column: 15;
+}
+
+.chart-grid-add-3 {
+    grid-row: 13;
+    grid-column: 16;
 }
 
 .chart-grid-stage {
@@ -35,7 +45,12 @@
     grid-template-rows: repeat(10, 1rem);
 }
 
-.chart-grid-stage-add {
+.chart-grid-stage-add-1 {
+    grid-row: 6;
+    grid-column: 6;
+}
+
+.chart-grid-stage-add-2 {
     grid-row: 6;
     grid-column: 5;
 }

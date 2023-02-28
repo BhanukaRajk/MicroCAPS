@@ -274,7 +274,7 @@ class Manager {
         }
     }
 
-    public function assemblyDetails()
+    public function assemblyDetails($order = 'DESC')
     {
         $this->db->query(
             'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName
@@ -282,10 +282,10 @@ class Manager {
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
                 WHERE `vehicle`.CurrentStatus = :S1
-                OR `vehicle`.PDIStatus = :S2
+                OR `vehicle`.CurrentStatus = :S2
                 OR `vehicle`.CurrentStatus = :S3
                 OR `vehicle`.CurrentStatus = :S4
-                ORDER BY `vehicle`.ChassisNo DESC;'
+                ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
 
         $this->db->bind(':S1', 'S1');

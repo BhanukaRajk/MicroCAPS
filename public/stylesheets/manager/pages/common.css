@@ -105,3 +105,10 @@
 .status-red {
     color: var(--red) !important;
 }
+
+.result-text {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--white);
+}

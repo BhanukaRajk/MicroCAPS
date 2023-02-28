@@ -27,3 +27,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     dates[(firstDay + date - 2)%35].classList.add("current");
 });
+    
+    

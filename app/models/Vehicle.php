@@ -8,6 +8,24 @@ class Vehicle {
         $this->db = new Database;
     }
 
+    public function vehicleCount($status): int {
+        $this->db->query(
+            'SELECT count(`vehicle`.ChassisNo) AS Count
+                FROM `vehicle` 
+                WHERE `vehicle`.CurrentStatus = :status'
+        );
+
+        $this->db->bind(':status', $status);
+
+        $results = $this->db->single();
+
+        if ( $results ) {
+            return $results->Count;
+        } else {
+            return 0;
+        }
+    }
+
     public function shellDetail($chassisNo)
     {
         $this->db->query(
@@ -121,5 +139,26 @@ class Vehicle {
         }
     }
 
+    public function getComponentStatus($chassisNo, $status = '%', $stage = '%') {
+        $this->db->query(
+            'SELECT `stage-vehicle-process`.Status, component.PartName, component.StageNo, component.Weight
+                    FROM `stage-vehicle-process`
+                    INNER JOIN component
+                    ON `stage-vehicle-process`.PartNo = component.PartNo
+                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND component.StageNo LIKE :stage;'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':stage', $stage);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
 
 }
