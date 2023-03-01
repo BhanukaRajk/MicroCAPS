@@ -1453,3 +1453,12 @@ p.grey-indicator {
     color: #ffffff;
     background-color: #081A51;
 }
+
+
+
+
+
+
+.mouse-pointer {
+    cursor: pointer;
+}

@@ -42,3 +42,9 @@ function expandConsumable() {
 function next(id) {
     location.replace(id);
 }
+
+function closePopup() {
+    var popupDiv = document.getElementById('popupWindow');
+    popupDiv.style.display = 'none';
+  }
+  

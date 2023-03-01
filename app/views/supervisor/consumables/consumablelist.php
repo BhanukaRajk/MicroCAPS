@@ -100,59 +100,61 @@
         </div>
 
 
-        <!-- THIS IS THE POP UP BOX FOR UPDATES AND DELETIONS -->
-        <div class="background-blurer display-none">
-          <div class="consumable-popup-window position-fixed">
-            <div class="">
-              <div><button type="">Close</button></div>
-            </div>
-            <div class="horizontal-centralizer">
-              <div class="popup-box-heading1">Update status</div>
-            </div>
-            <form method="POST">
-              <div class="horizontal-centralizer">
+
+
+        <!-- THIS IS THE POP UP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
+        <div class="background-blurer" id="popupWindow">
+          <div class="consumable-detail-popup position-fixed">
+
+            <div class="popup-left">
+              <div class="horizontal-centralizer cs-popup-csname">
                 <div>MOTUL 3000 4T Plus</div>
               </div>
               <div class="horizontal-centralizer">
-                <div class="margin-top-1">
+                <div class="">
                   <img class="consumable-popup-img" src="<?php echo URL_ROOT; ?>public/images/consumables/image1.png" class="carpic" alt="Consumable">
                 </div>
               </div>
-              <div class="horizontal-centralizer margin-top-3">
+              <div class="horizontal-centralizer">
+                <div>Current Stock: 5 Liters</div>
+              </div>
+            </div>
+
+            <div class="border-div"></div>
+            <div class="popup-right">
+              <div class="horizontal-centralizer">
+                <div class="popup-box-heading1 margin-top-4">Update stock</div>
+              </div>
+
+              <div class="horizontal-centralizer last-update margin-top-3">
+                <div>Last update: 10 February 2023 at 12.25 PM</div>
+              </div>
+
+              <div class="horizontal-centralizer margin-top-4">
                 <div>
 
-                  <label for="stock">Current stock:</label>
-                  <input id="stock" type="number"></input>
-                  <!-- <?php //echo ($item['weight'] == NULL) ? 'L' : 'Kg' ; 
+                  <input type="number" id="lastname" name="lastname" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Lastname" />
+                  <label class="form-label blue">Current stock <?php echo (NULL == NULL) ? '(Litres)' : '(Kgs)'; ?></label>
+
+                  <!-- <?php //echo ($item['weight'] == NULL) ? 'L' : 'Kg' ;
                         ?> -->
-                  <?php echo (NULL == NULL) ? 'L' : 'Kg'; ?>
-
-
-                  <!-- <select name="status" id="status">
-                  <option value="$state">$state</option>
-                  <?php
-                  // foreach ($data['states'] as $state) {
-                  //   if($state1 != $state2) {
-                  //     echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
-                  //   }
-                  // }
-                  ?>
-                </select> -->
 
                 </div>
               </div>
-              <div class="horizontal-centralizer margin-top-3">
-                <div><button type="submit">Update</button></div>
+              <form method="POST">
+                <div class="display-flex-row justify-content-center margin-top-2">
+                  <div><button type="submit" class="edit-button consume-update">Update</button></div>
+                </div>
+              </form>
+              <form method="POST">
+                <div class="display-flex-row justify-content-center marginy-3">
+                  <div><button type="submit" class="delete-button consume-update">Remove item</button></div>
+                </div>
+              </form>
+              <div class="display-flex-row justify-content-center margin-top-2">
+                <div><a onclick="closePopup()" class="mouse-pointer">Close</a></div>
               </div>
-            </form>
-            <form method="POST">
-              <div class="horizontal-centralizer display-none">
-                <div><input type="text"></input></div>
-              </div>
-              <div class="horizontal-centralizer">
-                <div><button type="submit">Remove item</button></div>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
 
@@ -161,6 +163,7 @@
 
       </div>
     </div>
+  </div>
   </div>
 </section>
 

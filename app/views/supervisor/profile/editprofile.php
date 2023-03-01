@@ -8,7 +8,7 @@
         Account Settings
     </div>
 
-    <div class="display-flex-row align-items-center gap-10 border-radius-1 background-white paddingx-6 paddingy-5 height-rem-25 margin-top-4">
+    <div class="display-flex-row align-items-center gap-10 bor  der-radius-1 background-white paddingx-6 paddingy-5 height-rem-25 margin-top-4">
         <div class="display-flex-column align-items-center justify-content-center margin-left-5">
             <div class="img-grid">
                 <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profilepic" id="img-preview"/>
