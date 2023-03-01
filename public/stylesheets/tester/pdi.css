@@ -73,3 +73,35 @@
 .gap-2 {
     gap: 2rem;
 }
+
+.round-checkbox-green {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 2px solid #ddd;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.round-checkbox-green:checked {
+    background-color: #29CC97;
+}
+
+.round-checkbox-red {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 2px solid #ddd;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.round-checkbox-red:checked {
+    background-color: #FF6464;
+}

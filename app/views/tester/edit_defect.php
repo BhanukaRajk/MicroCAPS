@@ -39,7 +39,7 @@
                                         echo !empty($data['user_err']) ? $data['user_err'] : '';
                                         ?>
                                     </span>
-                                    <input type="text" id="EmployeeID" name="EmployeeID" value="<?php echo $_SESSION['_id']; ?>" placeholder="Employee ID" class="add-form-input" required />
+                                    <input type="text" id="EmployeeID" name="EmployeeID" value="<?php echo $data['EmployeeID']; ?>" placeholder="Employee ID" class="add-form-input" required />
                                 </div>
 
                                 <div class="add-form-field">

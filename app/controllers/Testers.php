@@ -31,6 +31,8 @@ class Testers extends controller {
             $data['url'] = getUrl();
             $data['id'] = $id;
             $data['defects'] = $this->testerModel->viewDefectSheets($id);
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
+
             $this->view('tester/defect_sheet', $data);
         }
     }
@@ -181,7 +183,7 @@ class Testers extends controller {
                 'RepairDescription' => $defect->RepairDescription,
                 'InspectionDate' => $defect->InspectionDate,
                 'ChassisNo' => $ChassisNo,
-                'EmployeeID' => $defect->EmployeeID,
+                'EmployeeID' => $defect->EmployeeId,
                 'ReCorrection' => $defect->ReCorrection
             ];
             $data['url'] = getUrl();

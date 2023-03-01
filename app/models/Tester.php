@@ -160,8 +160,8 @@ class Tester {
             SET `InspectionDate` = :InspectionDate,
             `EmployeeID` = :EmployeeID,
             `ReCorrection` = :ReCorrection,
-            `RepairDescription` = :RepairDescription,
-            WHERE `ChassisNo` = :ChassisNo AND `DefectNo` = :DefectNo"
+            `RepairDescription` = :RepairDescription
+            WHERE `pdi-defect`.`ChassisNo` = :ChassisNo AND `pdi-defect`.`DefectNo` = :DefectNo"
         );
 
         $this->db->bind(':DefectNo', $data['DefectNo']);

@@ -8,7 +8,7 @@
     <div class="form-board-2">
       <div class="form-section">
         <div class="form-main">
-          <div class="form-page-heading">Defect Sheet</div>
+          <!-- <div class="form-page-heading">Defect Sheet</div> -->
         </div>
         <div class="form-section-2">
           <div class="form-data-board">
