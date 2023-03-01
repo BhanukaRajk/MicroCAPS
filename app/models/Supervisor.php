@@ -10,7 +10,7 @@ class Supervisor
     }
 
 
-    public function findUserByUsername($username)
+    public function findUserByUsername($username): bool
     {
         $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.Username = :username');
 
@@ -37,7 +37,7 @@ class Supervisor
                 FROM `vehicle`
                 WHERE `CurrentStatus` != "PA";'
         );
-        array_push($counts, $this->db->single());
+        $counts[] = $this->db->single();
 
 
         // CALCULATE THE NUMBER OF VEHICLES DISPATCHED
@@ -46,7 +46,7 @@ class Supervisor
                 FROM `vehicle`
                 WHERE `PDIStatus` = "CM";'
         );
-        array_push($counts, $this->db->single());
+        $counts[] = $this->db->single();
 
         // CALCULATE THE NUMBER OF VEHICLES IN ON-HOLD STATE
         $this->db->query(
@@ -54,7 +54,7 @@ class Supervisor
                 FROM `vehicle`
                 WHERE `CurrentStatus` = "Hold";'
         );
-        array_push($counts, $this->db->single());
+        $counts[] = $this->db->single();
 
         if ($counts) {
             return $counts;
@@ -65,17 +65,17 @@ class Supervisor
     }
 
 
-    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjusment, $Clutch, $RAP, $Visual)
+    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual): bool
     {
         $this->db->query(
             'INSERT INTO paqresult(ChassisNo, BrakeBleeding, GearOilLevel, RackEnd, Clutch, RearAxelPlate, Visual, Supervisor1) 
-            VALUES (:chassisNo,:brake,:gearOil,:adjusment,:clutch,:rap,:visual,:supervisor)'
+            VALUES (:chassisNo,:brake,:gearOil,:adjustment,:clutch,:rap,:visual,:supervisor)'
         );
 
         $this->db->bind(':chassisNo', $ChassisNo);
         $this->db->bind(':brake', $BrakeBleeding);
         $this->db->bind(':gearOil', $GearOilLevel);
-        $this->db->bind(':adjusment', $Adjusment);
+        $this->db->bind(':adjustment', $Adjustment);
         $this->db->bind(':clutch', $Clutch);
         $this->db->bind(':rap', $RAP);
         $this->db->bind(':visual', $Visual);
@@ -90,7 +90,7 @@ class Supervisor
 
 
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
-    public function checkEmployee($empid)
+    public function checkEmployee($empid): bool
     {
 
         $this->db->query(
@@ -130,7 +130,7 @@ class Supervisor
 
 
     // CHECK THIS EMPLOYEE REQUESTED ANOTHER LEAVE ON THIS DATE
-    public function checkLeaves($empid, $reqdate)
+    public function checkLeaves($empid, $reqdate): bool
     {
 
         $this->db->query(
@@ -150,7 +150,7 @@ class Supervisor
     }
 
 
-    public function checkLeaveByID($LeaveID)
+    public function checkLeaveByID($LeaveID): bool
     {
 
         $this->db->query(
@@ -169,7 +169,7 @@ class Supervisor
     }
 
 
-    public function addleave($EmpId, $leavedate, $reason)
+    public function addleave($EmpId, $leavedate, $reason): bool
     {
         $this->db->query(
             'INSERT INTO `employee-leaves`(EmployeeId, LeaveDate, Reason) 
@@ -188,7 +188,7 @@ class Supervisor
     }
 
 
-    public function EditLeave($EmpId, $leavedate, $reason, $id)
+    public function EditLeave($EmpId, $leavedate, $reason, $id): bool
     {
         $this->db->query(
             'UPDATE `employee-leaves`
@@ -213,7 +213,7 @@ class Supervisor
     // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // public function removeleave($ID, $leavedate) {
-    public function removeleave($LeaveID)
+    public function removeleave($LeaveID): bool
     {
         $this->db->query(
             'DELETE FROM `employee-leaves` WHERE LeaveId = :leave_id;'
@@ -241,7 +241,7 @@ class Supervisor
 
 
 
-    public function addNewTask($chassis_no, $task_name)
+    public function addNewTask($chassis_no, $task_name): bool
     {
         $this->db->query(
             'INSERT INTO tasks(ChassisNo, taskName) 
@@ -363,6 +363,7 @@ class Supervisor
         }
     }
 
+
     public function ViewS4Finishers()
     {
 
@@ -440,7 +441,7 @@ class Supervisor
     }
 
 
-    public function updateToolStatus($chassis_no, $task_name)
+    public function updateToolStatus($chassis_no, $task_name): bool
     {
         $this->db->query(
             'INSERT INTO tasks(ChassisNo, taskName) 
@@ -532,6 +533,7 @@ class Supervisor
             return false;
         }
     }
+
 
     public function viewProfile($user)
     {
