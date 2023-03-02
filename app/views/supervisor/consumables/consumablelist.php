@@ -9,9 +9,9 @@
 <section class="listsection">
   <div class="datawall">
     <div class="databoard">
-      <div class="pagehead">
+      <div class="pagehead display-flex-row justify-content-between">
         <div>Consumables</div>
-        <!-- <div>Add new</div> -->
+        <div class="margin-right-4"><button type="" class="edit-button">Add new</button></div>
       </div>
       <div class="vehicle-detail-board">
         <div class="vehicle-data-board">
@@ -133,8 +133,8 @@
               <div class="horizontal-centralizer margin-top-4">
                 <div>
 
-                  <input type="number" id="lastname" name="lastname" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Lastname" />
-                  <label class="form-label blue">Current stock <?php echo (NULL == NULL) ? '(Litres)' : '(Kgs)'; ?></label>
+                  <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
+                  <label class="form-label blue">Current stock update <?php echo (NULL == NULL) ? '(Litres)' : '(Kgs)'; ?></label>
 
                   <!-- <?php //echo ($item['weight'] == NULL) ? 'L' : 'Kg' ;
                         ?> -->

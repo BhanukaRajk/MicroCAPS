@@ -35,7 +35,7 @@ class Supervisor
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS asLine
                 FROM `vehicle`
-                WHERE `CurrentStatus` != "PA";'
+                WHERE `CurrentStatus` LIKE "S%";'
         );
         $counts[] = $this->db->single();
 
@@ -94,14 +94,14 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT EmployeeId FROM employee WHERE EmployeeId = :employee AND Progress = 1;'
+            'SELECT `EmployeeId` FROM `employee` WHERE `EmployeeId` = :employee AND `Progress` = 1;'
         );
 
         $this->db->bind(':employee', $empid);
-
         $row = $this->db->single();
 
-        if ($this->db->rowCount()) {
+        // if ($this->db->rowCount()) {
+        if ($row != NULL) {
             return true;
         } else {
             return false;
@@ -134,18 +134,20 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT EmployeeId, LeaveDate FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date;'
+            'SELECT COUNT(`LeaveId`) AS `LeaveCount` FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date;'
         );
 
         $this->db->bind(':employee', $empid);
         $this->db->bind(':req_date', $reqdate);
 
         $row = $this->db->single();
+        // print_r($row->LeaveCount);
 
-        if ($this->db->rowCount()) {
-            return true;
-        } else {
+        // if ($this->db->rowCount()) {
+        if ($row->LeaveCount == 0) {
             return false;
+        } else {
+            return true;
         }
     }
 

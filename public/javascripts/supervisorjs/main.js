@@ -34,9 +34,9 @@ function myFunction() {
     setTimeout(function(){ msg.className = msg.className.replace("shows showme", "hideme"); }, 5000);
 }
 
-function expandConsumable() {
-    document.getElementById("popupbox").classList.toggle("show");
-}
+// function expandConsumable() {
+//     document.getElementById("popupbox").classList.toggle("show");
+// }
 
 // Next Button
 function next(id) {

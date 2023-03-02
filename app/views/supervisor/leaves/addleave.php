@@ -57,7 +57,7 @@
                                 <label>REASON</label>
                             </div>
                             <div>
-                                <textarea id="reason" name="reason" class="form-input" placeholder="Maximum 500 characters" required></textarea>
+                                <textarea id="reason" name="reason" class="form-input" placeholder="Maximum 500 characters" required><?php echo $data['reason']; ?></textarea>
                             </div>
                         </div>
 
@@ -72,8 +72,9 @@
                         </div>
 
                     </form>
-
                 </div>
+
+            </div>
             </section>
 
 
