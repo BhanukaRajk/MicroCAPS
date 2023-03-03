@@ -103,7 +103,7 @@
 
 
         <!-- THIS IS THE POP UP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
-        <div class="background-blurer" id="popupWindow">
+        <div class="background-blurer display-none" id="popupWindow2">
           <div class="consumable-detail-popup position-fixed">
 
             <div class="popup-left">
@@ -162,10 +162,21 @@
 
 
         <!-- DELETE CONFIRMATION POPUP BOX -->
-        <div class="delete-conf-blur hc" id="deleteConf">
-          <div class="vc">
+        <div class="delete-conf-blur horizontal-centralizer" id="popupWindow">
+          <div class="vertical-centralizer">
 
-            <div class="">
+            <div class="del-confirm-box">
+                <div class="del-confirm-box-content">
+                    <div class="del-confirm-msg-box">Are you sure?</div>
+                    <div class="del-conf-button-set">
+                        <div class="del-conf-button-box">
+                            <button type="submit" class="delete-button-2">Remove</button>
+                        </div>
+                        <div class="del-conf-button-box">
+                            <button onclick="closePopup()" class="edit-button-2">Cancel</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
           </div>

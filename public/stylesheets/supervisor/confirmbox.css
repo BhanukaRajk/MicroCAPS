@@ -1,0 +1,89 @@
+.delete-conf-blur {
+    left: 0;
+    right: 0;
+
+    top: 0;
+    bottom: 0;
+
+    background-color: #FFFFFFAA;
+    position: fixed;
+
+    z-index: 1000;
+}
+
+.del-confirm-box {
+    position: fixed;
+
+    width: 300px;
+    height: 200px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 8px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+    z-index: 1200;
+}
+
+.del-confirm-box-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+    margin: 50px 25px;
+}
+
+.del-confirm-msg-box {
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+}
+
+.del-conf-button-set {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.edit-button-2 {
+    color: #000000;
+    text-decoration: none;
+
+    border: 1px solid #000000;
+    border-radius: 0.5rem;
+    background-color: #FFFFFF;
+
+    width: 100px;
+    height: 30px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.edit-button-2:hover {
+    color: #000000;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 4px 8px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+}
+
+.delete-button-2 {
+    color: #FFFFFF;
+    text-decoration: none;
+
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #B10202;
+
+    width: 100px;
+    height: 30px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete-button-2:hover {
+    color: #B10202;
+    background-color: rgba(177, 2, 2, 0.11);
+    box-shadow: 0px 4px 8px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+}

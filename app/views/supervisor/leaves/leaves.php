@@ -88,5 +88,26 @@
     </div>
 </section>
 
+    <!-- DELETE CONFIRMATION POPUP BOX -->
+    <div class="delete-conf-blur horizontal-centralizer" id="popupWindow">
+        <div class="vertical-centralizer">
+
+            <div class="del-confirm-box">
+                <div class="del-confirm-box-content">
+                    <div class="del-confirm-msg-box">Are you sure?</div>
+                    <div class="del-conf-button-set">
+                        <div class="del-conf-button-box">
+                            <button type="submit" class="delete-button-2">Remove</button>
+                        </div>
+                        <div class="del-conf-button-box">
+                            <button onclick="closePopup()" class="edit-button-2">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>
