@@ -161,6 +161,18 @@
 
 
 
+        <!-- DELETE CONFIRMATION POPUP BOX -->
+        <div class="delete-conf-blur hc" id="deleteConf">
+          <div class="vc">
+
+            <div class="">
+            </div>
+
+          </div>
+        </div>
+
+
+
       </div>
     </div>
   </div>
