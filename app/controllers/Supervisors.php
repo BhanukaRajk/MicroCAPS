@@ -258,58 +258,6 @@ class Supervisors extends controller
         }
     }
 
-    // public function addleave()
-    // {
-
-    //     if (!isLoggedIn()) {
-    //         redirect('supervisors/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-    //         $data = [
-    //             'employeeId' => trim($_POST['employeeId']),
-    //             'leavedate' => trim($_POST['leavedate']),
-    //             'reason' => trim($_POST['reason'])
-    //         ];
-
-    //         if ($this->supervisorModel->checkEmployee($data['employeeId'])) {
-
-    //             if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
-
-    //                 $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
-
-    //                 $data['url'] = getUrl();
-    //                 $this->view('supervisor/addleave', $data);
-
-    //             } else {
-
-    //                 if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'], $data['reason'])) {
-    //                     $_SESSION['return_message'] = 'New record saved!';
-    //                 } else {
-    //                     $_SESSION['return_message'] = 'Error! record saving failed!';
-    //                 }
-
-    //                 redirect('supervisors/leaves');
-    //             }
-
-    //         } else {
-
-    //             $_SESSION['return_message'] = 'Oops! An employee with employee Id '.$data["employeeId"].' could not be found';
-
-    //             $data['url'] = getUrl();
-    //             $this->view('supervisor/addleave', $data);
-
-    //         }
-    //     } else {
-    //         $data['url'] = getUrl();
-    //         $this->view('supervisor/addleave', $data);
-    //     }
-    // }
-
-
 
     public function addleave()
     {
