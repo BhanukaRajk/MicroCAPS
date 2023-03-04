@@ -56,7 +56,7 @@
                                 <div class="leave-value padding-right-5">' . $value->Reason . '</div>
 
 
-                                <form method="POST" action="'.URL_ROOT.'Supervisors/editleave">
+                                <form method="POST" action="'.URL_ROOT.'Supervisors/getEditingData">
                                 <div class="leave-edit-info padding-left-2">
                                     <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
                                     <input type="submit" name="edit" class="edit-button" value="Edit">
@@ -97,7 +97,7 @@
                     <div class="del-confirm-msg-box">Are you sure?</div>
                     <div class="del-conf-button-set">
                         <div class="del-conf-button-box">
-                            <button type="submit" class="delete-button-2">Remove</button>
+                            <button onclick="confirmDeletion()" class="delete-button-2">Remove</button>
                         </div>
                         <div class="del-conf-button-box">
                             <button onclick="closePopup()" class="edit-button-2">Cancel</button>
@@ -111,3 +111,8 @@
 
 
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>
+
+
+
+
+<!-- <form method="POST" action="'.URL_ROOT.'Supervisors/editleave"> -->

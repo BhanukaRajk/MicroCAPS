@@ -325,7 +325,6 @@ class Supervisors extends controller
 
     public function leaves()
     {
-
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
         }
@@ -412,8 +411,6 @@ class Supervisors extends controller
                     $this->view('supervisor/leaves/editleave', $data);
                 } else {
 
-
-
                     $ldate = strtotime($data['leavedate']);
                     $diff = ceil(($ldate - time()) / 60 / 60 / 24);
 
@@ -433,28 +430,131 @@ class Supervisors extends controller
 
                         redirect('Supervisors/leaves');
                     }
-
-
-
-                    // if ($this->supervisorModel->EditLeave($data['employeeId'], $data['leavedate'], $data['reason'], $data['leaveId'])) {
-                    //     $_SESSION['return_message'] = 'Changes saved!';
-                    // } else {
-                    //     $_SESSION['return_message'] = 'Error! Could not save changes..';
-                    // }
-
-                    // redirect('supervisors/leaves');
                 }
             } else {
+
                 $_SESSION['return_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
                 $data['url'] = getUrl();
                 $this->view('supervisor/leaves/editleave', $data);
             }
         } else {
+
             $data['url'] = getUrl();
             $this->view('supervisor/leaves/editleave', $data);
         }
     }
 
+
+
+
+
+
+    public function getEditingData()
+    {
+
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'leaveId' => trim($_POST['leaveId'])
+            ];
+
+            if ($this->supervisorModel->checkLeaveByID($data['leaveId'])) {
+
+                $data['url'] = getUrl();
+                $data['EditorDetails'] = $this->supervisorModel->SendEditLeave($data['leaveId']);
+                $this->view('supervisor/leaves/editleave', $data);
+
+            } else {
+
+                $_SESSION['return_message'] = 'Oops! requested leave details could not be found';
+                $data['url'] = getUrl();
+                $this->view('supervisor/leaves/leaves', $data);
+
+            }
+
+        } else {
+
+            $_SESSION['return_message'] = 'Request failed!';
+            $data['url'] = getUrl();
+            $this->view('supervisor/leaves/leaves', $data);
+
+        }
+
+    }
+
+
+    public function updateLeave()
+    {
+
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'leaveId' => trim($_POST['leaveId']),
+                'employeeId' => trim($_POST['employeeId']),
+                'leavedate' => trim($_POST['leavedate']),
+                'reason' => trim($_POST['reason'])
+            ];
+
+            if ($this->supervisorModel->checkEmployee($data['employeeId'])) {
+
+                if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
+
+                    $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
+                    $data['url'] = getUrl();
+                    $this->view('supervisor/leaves/editleave', $data);
+
+                } else {
+
+                    $ldate = strtotime($data['leavedate']);
+                    $diff = ceil(($ldate - time()) / 60 / 60 / 24);
+
+                    if ($diff <= 1) {
+
+                        $_SESSION['return_message'] = 'Please enter a valid date! ';
+
+                        $data['url'] = getUrl();
+                        $this->view('supervisor/leaves/editleave', $data);
+
+                    } else {
+
+                        if ($this->supervisorModel->EditLeave($data['employeeId'], $data['leavedate'], $data['reason'], $data['leaveId'])) {
+                            $_SESSION['return_message'] = 'Changes saved!';
+                        } else {
+                            $_SESSION['return_message'] = 'Error! Could not save changes..';
+                        }
+
+                        redirect('Supervisors/leaves');
+                    }
+                }
+                
+            } else {
+
+                $_SESSION['return_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
+                $data['url'] = getUrl();
+                $this->view('supervisor/leaves/editleave', $data);
+
+            }
+
+        } else {
+
+            $data['url'] = getUrl();
+            $this->view('supervisor/leaves/editleave', $data);
+
+        }
+    }
 
 
 
@@ -487,7 +587,7 @@ class Supervisors extends controller
                     // $_SESSION['err_msg'] = 'Error! record saving failed!';
                 }
 
-                redirect('supervisor/leaves/leaves', $data);
+                $this->view('supervisor/leaves/leaves', $data);
             } else {
 
                 $_SESSION['return_message'] = 'Record has been already deleted!';
