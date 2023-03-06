@@ -35,7 +35,8 @@
             <a class="<?php echo ($data['url'][1] == "taskSchedule" ||
                                   $data['url'][1] == "leaves" ||
                                   $data['url'][1] == "addleave" ||
-                                  $data['url'][1] == "editleave"
+                                  $data['url'][1] == "editleave" ||
+                                  $data['url'][1] == "getEditingData"
             ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>

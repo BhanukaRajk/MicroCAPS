@@ -106,6 +106,7 @@ class Supervisor
         } else {
             return false;
         }
+    
     }
 
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
@@ -126,6 +127,7 @@ class Supervisor
         } else {
             return false;
         }
+        
     }
 
 
@@ -144,27 +146,28 @@ class Supervisor
         // print_r($row->LeaveCount);
 
         // if ($this->db->rowCount()) {
-        if ($row->LeaveCount == 0) {
-            return false;
-        } else {
+        if ($row->LeaveCount > 0) {
             return true;
+        } else {
+            return false;
         }
+
     }
 
 
-    public function checkLeaveByID($LeaveID): bool
+    public function getLeaveByID($LeaveID)
     {
 
         $this->db->query(
-            'SELECT `LeaveId` FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
+            'SELECT * FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
         );
 
         $this->db->bind(':Leave', $LeaveID);
 
-        $row = $this->db->single();
+        $current_leave = $this->db->single();
 
-        if ($this->db->rowCount()) {
-            return true;
+        if ($current_leave) {
+            return $current_leave;
         } else {
             return false;
         }
@@ -384,25 +387,6 @@ class Supervisor
     }
 
 
-    public function SendEditLeave($ID)
-    {
-
-        $this->db->query(
-            'SELECT *
-                FROM leaves 
-                WHERE Leave_Id = :id;'
-        );
-
-        $this->db->bind(':id', $ID);
-
-        $editor = $this->db->single();
-
-        if ($editor) {
-            return $editor;
-        } else {
-            return false;
-        }
-    }
 
 
     public function ViewAssignedTasks()

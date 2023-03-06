@@ -27,7 +27,7 @@
 
                 <div class="border-gray display-flex-column formbox">
 
-                    <form action="<?php echo URL_ROOT; ?>Supervisors/editleave" method="post">
+                    <form action="<?php echo URL_ROOT; ?>Supervisors/updateLeave" method="post">
 
                         <?php $value = $data['EditorDetails']; ?>
 
