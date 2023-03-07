@@ -111,8 +111,3 @@
 
 
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>
-
-
-
-
-<!-- <form method="POST" action="'.URL_ROOT.'Supervisors/editleave"> -->

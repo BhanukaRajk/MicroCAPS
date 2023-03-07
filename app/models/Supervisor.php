@@ -314,7 +314,7 @@ class Supervisor
     public function userDetails($id) {
         $this->db->query(
             'SELECT *
-                FROM employee
+                FROM `employee`
                 WHERE EmployeeID = :id'
         );
 

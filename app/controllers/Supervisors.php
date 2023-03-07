@@ -485,7 +485,6 @@ class Supervisors extends controller
                 $leave_id = $data['EditorDetails']->LeaveId;
 
 
-                // methana aulak thiyanawa ekama leave id eka dala ekama date eke hadanna puluwan
                 if (($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) && ($leave_id != $data['leaveId'])) {
 
                     $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
@@ -534,7 +533,6 @@ class Supervisors extends controller
 
 
 
-    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
     public function removeleave()
     {
 
@@ -543,32 +541,36 @@ class Supervisors extends controller
         }
 
 
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
 
             $data = [
                 'LeaveID' => trim($_POST['leave_id'])
             ];
 
-            if ($this->supervisorModel->checkLeaveByID($data['LeaveID'])) {
+            if ($this->supervisorModel->getLeaveByID($data['LeaveID'])) {
 
                 if ($this->supervisorModel->removeleave($data['LeaveID'])) {
                     $_SESSION['return_message'] = 'Record deletion Success!';
                     // $_SESSION['success_msg'] = 'New record saved!';
                 } else {
-                    $_SESSION['return_message'] = 'Error! record saving failed!';
+                    $_SESSION['return_message'] = 'Error! record deletion failed!';
                     // $_SESSION['err_msg'] = 'Error! record saving failed!';
                 }
+                redirect('Supervisors/leaves');
+                // $this->view('supervisor/leaves/leaves', $data);
 
-                $this->view('supervisor/leaves/leaves', $data);
             } else {
 
                 $_SESSION['return_message'] = 'Record has been already deleted!';
                 // $_SESSION['err_msg'] = 'Record has been already deleted!';
 
-                $data['url'] = getUrl();
-                $this->view('supervisor/leaves/leaves', $data);
+                // $data['url'] = getUrl();
+                // $this->view('supervisor/leaves/leaves', $data);
+                redirect('Supervisors/leaves');
             }
         } else {
 
