@@ -1640,3 +1640,29 @@ select:focus-visible {
     color: var(--blue);
     cursor: pointer;
 }
+
+.edit {
+    background: var(--blue);
+    height: 1rem;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 2rem;
+}
+
+.delete {
+    background: var(--red);
+    height: 1rem;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 2rem;
+}
+
+.edit:hover {
+    color: var(--blue);
+    background: var(--gray);
+}
+
+.delete:hover {
+    color: var(--red);
+    background: var(--gray);
+}

@@ -25,9 +25,9 @@
                             <div class="profile-img">
                                 <div style="background-image:url('. URL_ROOT .'public/images/profile/'.$value->Image.')" class="width-rem-8p5 height-rem-8p5 background-image border-radius-11"></div>
                             </div>
-                            <div class="display-flex-row gap-1">
-                                <i class="fa-solid fa-pen-to-square text-gray text-hover-blue"></i>
-                                <i class="fa-solid fa-trash-can text-gray text-hover-red" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
+                            <div class="display-flex-row gap-0p5">
+                                <i class="fa-solid fa-pen-to-square edit"></i>
+                                <i class="fa-solid fa-trash-can delete" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
                             </div>
                         </div>
                         <div class="cardhead">
@@ -53,9 +53,9 @@
                             <div class="profile-img">
                                 <div style="background-image:url('. URL_ROOT .'public/images/profile/'.$value->Image.')" class="width-rem-8p5 height-rem-8p5 background-image border-radius-11"></div>
                             </div>
-                            <div class="display-flex-row gap-1">
-                                <i class="fa-solid fa-pen-to-square text-gray text-hover-blue"></i>
-                                <i class="fa-solid fa-trash-can text-gray text-hover-red" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
+                            <div class="display-flex-row gap-0p5">
+                                <i class="fa-solid fa-pen-to-square edit"></i>
+                                <i class="fa-solid fa-trash-can delete" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
                             </div>
                         </div>
                         <div class="cardhead">
@@ -81,9 +81,9 @@
                             <div class="profile-img">
                                 <div style="background-image:url('. URL_ROOT .'public/images/profile/'.$value->Image.')" class="width-rem-8p5 height-rem-8p5 background-image border-radius-11"></div>
                             </div>
-                            <div class="display-flex-row gap-1">
-                                <i class="fa-solid fa-pen-to-square text-gray text-hover-blue"></i>
-                                <i class="fa-solid fa-trash-can text-gray text-hover-red"  onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
+                            <div class="display-flex-row gap-0p5">
+                                <i class="fa-solid fa-pen-to-square edit"></i>
+                                <i class="fa-solid fa-trash-can delete" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
                             </div>
                         </div>
                         <div class="cardhead">

@@ -14,12 +14,11 @@
       </div>
 
       <input type="text" id="fname" name="nic" placeholder="nic">
-    <input type="text" id="fname" name="contact" placeholder="contact">
-    <input type="text" id="lname" name="address" placeholder="address">
-    <input type="text" id="fname" name="email" placeholder="email">
-    <input type="text" id="fname" name="role" placeholder="role">
+      <input type="text" id="fname" name="contact" placeholder="contact">
+      <input type="text" id="lname" name="address" placeholder="address">
+      <input type="text" id="fname" name="email" placeholder="email">
+      <input type="text" id="fname" name="role" placeholder="role">
 
-    <center><input type="submit" value="Update"></center>
   </form>
   </div>
 </div>

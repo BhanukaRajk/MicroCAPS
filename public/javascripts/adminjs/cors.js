@@ -44,12 +44,12 @@ function deleteEmployee($id) {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful","Shell Added Successfully");
+                setLocalStorage("Successful","Employee Deleted Successfully");
 
             } else {
                 
                 location.reload();
-                setLocalStorage("Error","Shell Adding Failed");
+                setLocalStorage("Error","Employee Deletion Failed");
 
             }
 

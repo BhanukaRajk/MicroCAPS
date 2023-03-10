@@ -164,14 +164,5 @@
             color: #000;
         }
 
-        /* .edit:hover {
-            box-shadow: 0 0 0.2rem rgb(144, 144, 255);
-            color: #000;
-        } */
-
-        .delete:hover {
-            box-shadow: 0 0 0.2rem rgb(248, 149, 149);
-            color: #000;
-        }
 
         
