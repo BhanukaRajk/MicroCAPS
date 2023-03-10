@@ -340,17 +340,32 @@ class Managers extends Controller {
         }
     }
 
-    public function pdi() {
+    public function pdi()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
+            $this->view('manager/pdi', $data);
+        }
+    }
+
+    public function pdidetails($chassisNo) {
 
         if(!isLoggedIn()){
             redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['ChassisNo'] = $chassisNo;
             $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
+            $data['onPDIVehicle'] = $this->vehicleModel->shellDetail($chassisNo);
             $data['pdiCheckCategories'] = $this->managerModel->pdiCheckCategories();
-            $data['pdiCheckList'] = $this->managerModel->pdiCheckList($data['onPDIVehicles'][0]->ChassisNo);
-            $this->view('manager/pdi',$data);
+            $data['pdiCheckList'] = $this->managerModel->pdiCheckList($chassisNo);
+            $this->view('manager/pdidetails',$data);
         }
     }
 

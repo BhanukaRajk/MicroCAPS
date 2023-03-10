@@ -195,9 +195,12 @@ class Manager {
     }
 
     public function onPDIVehicles() {
+
         $this->db->query(
-            'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo
-                FROM `vehicle`
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo 
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
                 WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi
                 ORDER BY `vehicle`.ChassisNo DESC
                 LIMIT 10;'
@@ -281,17 +284,9 @@ class Manager {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus = :S1
-                OR `vehicle`.CurrentStatus = :S2
-                OR `vehicle`.CurrentStatus = :S3
-                OR `vehicle`.CurrentStatus = :S4
+                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4")
                 ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
-
-        $this->db->bind(':S1', 'S1');
-        $this->db->bind(':S2', 'S2');
-        $this->db->bind(':S3', 'S3');
-        $this->db->bind(':S4', 'S4');
 
         $results = $this->db->resultSet();
 
