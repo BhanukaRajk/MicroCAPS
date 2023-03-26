@@ -161,4 +161,25 @@ class Vehicle {
         }
     }
 
+    public function componentQty($status) {
+        $this->db->query(
+            'SELECT component.PartName, COUNT(component.PartName) AS Qty, component.Color  
+                    FROM `stage-vehicle-process`
+                    INNER JOIN component
+                    ON `stage-vehicle-process`.PartNo = component.PartNo
+                    WHERE `stage-vehicle-process`.Status = :status
+                    GROUP BY component.PartNo;'
+        );
+
+        $this->db->bind(':status', $status);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
+
 }

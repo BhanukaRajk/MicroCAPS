@@ -89,22 +89,6 @@
                         <label class="form-label" id="chassisNo-label">Chassis Number</label>
                     </div>
                     <div>
-                        <div class="custom-select-color">
-                            <select name="color" class="form-control text-gray width-rem-20" id="color">
-                                <option value="">Select Color</option>
-                                <option value="White">White</option>
-                                <option value="Black">Black</option>
-                                <option value="Red">Red</option>
-                                <option value="Green">Green</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Yellow">Yellow</option>
-                            </select>
-                            <label class="color-label display-none" id="color-label">Color</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="display-flex-row align-items-center gap-2p1">
-                    <div>
                         <div class="custom-select-model">
                             <select name="chassis" class="form-control text-gray width-rem-20" id="chassis">
                                 <option value="">Select Chassis Type</option>
@@ -113,6 +97,17 @@
                                 <option value="M0003">MG ZS SUV</option>
                             </select>
                             <label class="chassis-label display-none" id="chassis-label">Chassis Type</label>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="display-flex-row align-items-center gap-2p1">
+                    <div>
+                        <div class="custom-select-color">
+                            <select name="color" class="form-control text-gray width-rem-20" id="color">
+                                <option value="">Select Color</option>
+                            </select>
+                            <label class="color-label display-none" id="color-label">Color</label>
                         </div>
                     </div>
                     <div>

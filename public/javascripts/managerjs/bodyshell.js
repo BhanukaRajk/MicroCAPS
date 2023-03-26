@@ -27,14 +27,35 @@ chassisNo?.addEventListener("input", () => {
     chassisNoLabel.innerHTML = "Chassis Number";
 });
 
-const color = document.getElementById("color");
-color?.addEventListener("change", () => {
-    color.classList.remove("form-control-red");
-});
-
 const chassis = document.getElementById("chassis");
+const color = document.getElementById("color");
+
 chassis?.addEventListener("change", () => {
     chassis.classList.remove("form-control-red");
+
+    console.log(color);
+
+    let Colors = []
+    
+    if (chassis.value === "M0001") {
+        Colors = ["White", "Black", "Red", "Green", "Blue", "Yellow"];
+    } else if (chassis.value === "M0002" || chassis.value === "M0003") {
+        Colors = ["Black", "Red", "Green", "Blue"];
+    } 
+
+    color.innerHTML = '<option value="">Select Color</option>';
+    
+    Colors.forEach(element => {
+        const option = document.createElement("option");
+        option.value = element;
+        option.innerHTML = element;
+        color.appendChild(option);
+    });
+
+});
+
+color?.addEventListener("change", () => {
+    color.classList.remove("form-control-red");
 });
 
 // Body Shell - Re Request Repair - Paint

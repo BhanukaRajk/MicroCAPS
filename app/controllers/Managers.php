@@ -28,9 +28,11 @@ class Managers extends Controller {
             $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
 
             $data['overall'] = [
-                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending'), "Weight")),
+                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold'), "Weight")),
                 'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected'), "Weight"))
             ];
+
+            $data['onHoldComponents'] = $this->vehicleModel->componentQty('OnHold');
             
             $this->view('manager/dashboard', $data);
         }
@@ -279,23 +281,23 @@ class Managers extends Controller {
             $data = [
                 'ChassisNo' => $chassisNo,
                 'overall' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending'), "Weight")),
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold'), "Weight")),
                     'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected'), "Weight"))
                 ],
                 'stage01' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S1'), "Weight")),
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S1'), "Weight")),
                     'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S1'), "Weight"))
                 ],
                 'stage02' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S2'), "Weight")),
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S2'), "Weight")),
                     'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S2'), "Weight"))
                 ],
                 'stage03' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S3'), "Weight")),
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S3'), "Weight")),
                     'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S3'), "Weight"))
                 ],
                 'stage04' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S4'), "Weight")),
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S4'), "Weight")),
                     'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S4'), "Weight"))
                 ],
                 'assemblyDetails' => $this->managerModel->assemblyDetails()
@@ -328,12 +330,13 @@ class Managers extends Controller {
                 $stage = 'S4';
 
             $data['stageSum'] = [
-                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage), "Weight")),
+                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage), "Weight")),
                 'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage), "Weight"))
             ];
             $data['stageDetails'] = [
                 'pending' => $this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage),
-                'connected' => $this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage)
+                'connected' => $this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage),
+                'hold' => $this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage)
             ];
 
             $this->view('manager/'.$data['stage'], $data);

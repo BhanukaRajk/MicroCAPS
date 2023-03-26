@@ -47,7 +47,25 @@
                             <div class="dash-frame-headings ">Damaged Parts</div>
                             <div></div>
                         </div>
-                        <div></div>
+                        <div class="display-flex-column gap-1 overflow">
+                            <?php 
+                                foreach ($data['onHoldComponents'] as $value) {
+                                    echo '<div class="display-flex-row justify-content-between border-bottom width-rem-25">
+                                            <div class="display-flex-column padding-bottom-3">
+                                                <div class="font-size">'.$value->PartName.'</div>
+                                                <div class="display-flex-row gap-1">
+                                                    <div class="qty">Quantity : ' , $value->Qty, '</div>
+                                                    <div class="qty">Color : ' , $value->Color, '</div>
+                                                </div>
+                                            </div>
+                                            <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
+                                                <div class="result-text">On Hold</div>
+                                            </div>
+                                        </div>
+                                        ';
+                                }
+                            ?>
+                        </div>
                     </div>
 
                 </div>
@@ -81,10 +99,10 @@
                     <div class="dash-card-right-datalines dash-card-headings ">Quick Access</div>
                     <div class="dash-card-right-datalines dash-quickbtns-frame ">
                         <a href="<?php echo URL_ROOT; ?>managers/bodyshell">
-                            <button type="button" class="dash-quickbtn">Request Body Shell</button>
+                            <button type="button" class="btn btn-primary btn-blue ">Request Body Shell</button>
                         </a>
-                        <a href="<?php echo URL_ROOT; ?>managers/test">
-                            <button type="button" class="dash-quickbtn">Dispatch Vehicles</button>
+                        <a href="<?php echo URL_ROOT; ?>managers/dispatch">
+                            <button type="button" class="btn btn-primary btn-blue ">Dispatch Vehicles</button>
                         </a>
                     </div>
                 </div>

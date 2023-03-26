@@ -10,3 +10,7 @@
 .visibility-hidden {
     visibility: hidden !important
 }
+
+.overflow-auto {
+    overflow: auto !important
+}
