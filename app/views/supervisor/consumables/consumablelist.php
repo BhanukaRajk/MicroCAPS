@@ -183,6 +183,40 @@
         </div>
 
 
+        
+        <!-- ADD NEW CONSUMABLE POPUP BOX -->
+        <div class="delete-conf-blur horizontal-centralizer" id="popupWindow3">
+          <div class="vertical-centralizer">
+
+            <div class="add-new-con-box">
+                <div class="add-new-con-box-content">
+                  <div class="img-grid">
+                        <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profile picture" id="img-preview" />
+                        <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
+                  </div>
+                  <div>
+                    <label for="conName">Name: </label>
+                    <input name="conName" type="text" placeholder="Enter consumable name" required>
+                  </div>
+                  <div>
+                    <label for="conStatus">Type: </label>
+                    <input name="conStatus" type="number" required>
+                  </div>
+                  <div>
+                    <label for="conStatus">Stock status: </label>
+                    <input name="conStatus" type="number" required>
+                  </div>
+                  <div class="display-flex">
+                    <div><button>Add</button></div>
+                    <div><button>Cancel</button></div>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+
 
       </div>
     </div>
