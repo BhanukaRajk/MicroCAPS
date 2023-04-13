@@ -195,6 +195,9 @@
                         <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
                   </div>
                   <div>
+                    <label>Remove image</label>
+                  </div>
+                  <div>
                     <label for="conName">Name: </label>
                     <input name="conName" type="text" placeholder="Enter consumable name" required>
                   </div>
