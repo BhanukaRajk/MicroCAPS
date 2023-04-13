@@ -5,8 +5,8 @@
     bottom: 0;
 }
 
-.stage-progress-margin {
-    margin: 50px;
+.single-stage-margin {
+    margin: 30px 40px;
     display: flex;
     flex-direction: row;
 }
@@ -14,19 +14,20 @@
 
 
 
-.stage-progress-head {
+.single-stage-head {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.stage-progress-head .heading{
+.single-stage-head .heading{
     color: black;
 }
 
 .stage-progress-head button {
     background-color: none;
-    
+    color: #017EFA;
+
     width: 175px;
     height: 36px;
     border: 1px solid #017EFA;
@@ -36,12 +37,12 @@
 
 
 
-.stage-progress-body {
+.single-stage-body {
     display: flex;
     flex-direction: column;
 }
 
-.stage-progress-body .main-chart {
+.single-stage-body .single-stage-chart {
     width: 400px;
     height: 525px;
 
@@ -53,30 +54,14 @@
     justify-content: center;
 }
 
-/* .stage-progress-body .main-chart .chart-heading {} */
+/* .stage-progress-body .single-stage-chart .chart-heading {} */
 
-/* .stage-progress-body .main-chart .chart-box {} */
+/* .stage-progress-body .single-stage-chart .chart-box {} */
 
-/* .stage-progress-body .main-chart .chart-legend {} */
+/* .stage-progress-body .single-stage-chart .chart-legend {} */
 
 
-.stage-progress-body .stage-charts {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.stage-charts .chart1,
-.stage-charts .chart2,
-.stage-charts .chart3,
-.stage-charts .chart4 {
-    display: flex;
-    flex-direction: row;
-
+.stage-progress-body .stage-controls {
     background-color: #FFFFFF;
     border-radius: 10px;
 }
-
-/*.stage-charts .small-chart-heading {}*/
-
-/*.stage-charts .chart-percentage {}*/

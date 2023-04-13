@@ -6,19 +6,19 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
-<section class="page-section">
-    <div class="stage-content">
+<section class="content">
+    <div class="single-stage-margin">
 
-        <div class="stage-progress-head">
-            <div class="stage-progress-heading">On Going Assembly - CH065BD3X00</div>
-            <div class="stage-progress-head-changer">
+        <div class="single-stage-head">
+            <div class="heading">On Going Assembly - CH065BD3X00</div>
+            <div class="stage-switch">
                 <button>Overall</button>
             </div>
         </div>
 
-        <div class="stage-progress-body">
+        <div class="single-stage-body">
 
-            <div class="stage-progress-chart">
+            <div class="single-stage-chart">
                 <div class="chart-heading">
                     <div>Stage 03</div>
                 </div>
@@ -39,7 +39,35 @@
             </div>
 
             // THIS IS THE AREA FOR CONTROL BUTTONS AND THGE LIST OF ASSEMBLY COMPONENTS
-            <div class="stage-progress-control"></div>
+            <div class="stage-controls">
+
+                <?php
+                foreach ($data['processDetails'] as $process) {
+                    echo '<div class=""></div>
+                            <div class="">
+                                <div class="">' . $process->ProcessName . '</div>
+                                <div class="">' . $process->Status . '</div>
+
+
+                                <form>
+                                    <input type="radio" name="color" value="Connected">
+                                    <input type="radio" name="color" value="Hold">
+                                </form>
+                                
+                            </div>';
+                }
+
+                if ($value == NULL) {
+                    echo '<div class="horizontal-centralizer no-leave-data">
+                            <div class="vertical-centralizer">
+                                <div>Nothing to show</div>
+                            </div>
+                        </div>';
+                }
+
+                ?>
+
+            </div>
 
         </div>
     </div>

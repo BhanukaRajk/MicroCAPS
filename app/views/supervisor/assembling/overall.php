@@ -47,8 +47,8 @@
                         <div>Stage 01</div>
                     </div>
                     <div class="chart-box-small">
-                        <canvas id="myChart"></canvas>
-                        <label class="chart-percentage" for="myChart">60%</label>
+                        <canvas id="stage01"></canvas>
+                        <label class="chart-percentage" for="stage01">60%</label>
                     </div>
                 </div>
 
@@ -57,8 +57,8 @@
                         <div>Stage 02</div>
                     </div>
                     <div class="chart-box-small">
-                        <canvas id="myChart"></canvas>
-                        <label class="chart-percentage" for="myChart">60%</label>
+                        <canvas id="stage02"></canvas>
+                        <label class="chart-percentage" for="stage02">60%</label>
                     </div>
                 </div>
 
@@ -67,8 +67,8 @@
                         <div>Stage 03</div>
                     </div>
                     <div class="chart-box-small">
-                        <canvas id="myChart"></canvas>
-                        <label class="chart-percentage" for="myChart">60%</label>
+                        <canvas id="stage03"></canvas>
+                        <label class="chart-percentage" for="stage03">60%</label>
                     </div>
                 </div>
 
@@ -77,8 +77,8 @@
                         <div>Stage 04</div>
                     </div>
                     <div class="chart-box-small">
-                        <canvas id="myChart"></canvas>
-                        <label class="chart-percentage" for="myChart">60%</label>
+                        <canvas id="stage04"></canvas>
+                        <label class="chart-percentage" for="stage04">60%</label>
                     </div>
                 </div>
 
