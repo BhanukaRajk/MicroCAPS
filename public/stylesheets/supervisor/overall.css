@@ -1,0 +1,11 @@
+.page-section {
+
+    margin-inline: 10rem;
+    /* margin-block: 2.5rem; */
+    margin-block: 38px;
+
+    left: 16.5rem;
+    right: 0rem;
+    top: 4rem;
+    bottom: 0rem;
+}

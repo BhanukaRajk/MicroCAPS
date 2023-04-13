@@ -6,8 +6,8 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
-<section class="page-section">
-    <div class="stage-content">
+<section class="page-body">
+    <div class="page-body-margin">
 
         <div class="stage-progress-head">
             <div class="stage-progress-heading">On Going Assembly - CH065BD3X00</div>
