@@ -64,6 +64,15 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+}
 
+.stage-charts .chart1,
+.stage-charts .chart2,
+.stage-charts .chart3,
+.stage-charts .chart4 {
+    display: flex;
+    flex-direction: row;
 
+    background-color: #FFFFFF;
+    border-radius: 10px;
 }
