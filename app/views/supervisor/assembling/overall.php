@@ -6,25 +6,27 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
-<section class="page-body">
-    <div class="page-body-margin">
+<section class="content">
+    <div class="stage-progress-margin">
 
         <div class="stage-progress-head">
-            <div class="stage-progress-heading">On Going Assembly - CH065BD3X00</div>
-            <div class="stage-progress-head-changer">
+            <div class="heading">On Going Assembly - CH065BD3X00</div>
+            <div class="stage-changer">
                 <button>Overall</button>
             </div>
         </div>
 
         <div class="stage-progress-body">
 
-            <div class="stage-progress-chart">
-                <div class="chart-heading">
+            <div class="main-chart">
+                <div class="chart-heading horizontal-centralizer">
                     <div>Stage 03</div>
                 </div>
-                <div class="chart-box">
-                    <canvas id="myChart"></canvas>
-                    <label class="chart-percentage" for="myChart">60%</label>
+                <div class="chart-box horizontal-centralizer">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                        <label class="chart-percentage" for="myChart">60%</label>
+                    </div>
                 </div>
                 <div class="chart-legend">
                     <div class="dash-graph-menu">
@@ -38,10 +40,10 @@
                 </div>
             </div>
 
-            <div class="stage-progress-control">
+            <div class="stage-charts">
 
-                <div class="stage-progress-chart-small">
-                    <div class="chart-heading-small">
+                <div class="chart1">
+                    <div class="small-chart-heading">
                         <div>Stage 01</div>
                     </div>
                     <div class="chart-box-small">
@@ -50,8 +52,8 @@
                     </div>
                 </div>
 
-                <div class="stage-progress-chart-small">
-                    <div class="chart-heading-small">
+                <div class="chart2">
+                    <div class="small-chart-heading">
                         <div>Stage 02</div>
                     </div>
                     <div class="chart-box-small">
@@ -60,8 +62,8 @@
                     </div>
                 </div>
 
-                <div class="stage-progress-chart-small">
-                    <div class="chart-heading-small">
+                <div class="chart3">
+                    <div class="small-chart-heading">
                         <div>Stage 03</div>
                     </div>
                     <div class="chart-box-small">
@@ -70,8 +72,8 @@
                     </div>
                 </div>
 
-                <div class="stage-progress-chart-small">
-                    <div class="chart-heading-small">
+                <div class="chart4">
+                    <div class="small-chart-heading">
                         <div>Stage 04</div>
                     </div>
                     <div class="chart-box-small">
@@ -83,6 +85,7 @@
             </div>
 
         </div>
+
     </div>
 </section>
 

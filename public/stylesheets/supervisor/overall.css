@@ -1,11 +1,69 @@
-.page-section {
-
-    margin-inline: 10rem;
-    /* margin-block: 2.5rem; */
-    margin-block: 38px;
-
+.content {
     left: 16.5rem;
-    right: 0rem;
+    right: 0;
     top: 4rem;
-    bottom: 0rem;
+    bottom: 0;
+}
+
+.stage-progress-margin {
+    margin: 50px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+.stage-progress-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stage-progress-head .heading{
+    color: black;
+}
+
+.stage-progress-head button {
+    background-color: none;
+    
+    width: 175px;
+    height: 36px;
+    border: 1px solid #017EFA;
+    border-radius: 6px;
+}
+
+
+
+
+.stage-progress-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.stage-progress-body .main-chart {
+    width: 400px;
+    height: 525px;
+
+    background-color: #FFFFFF;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* .stage-progress-body .main-chart .chart-heading {} */
+
+/* .stage-progress-body .main-chart .chart-box {} */
+
+/* .stage-progress-body .main-chart .chart-legend {} */
+
+
+.stage-progress-body .stage-charts {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+
 }
