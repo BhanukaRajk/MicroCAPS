@@ -12,7 +12,13 @@
         <div class="stage-progress-head">
             <div class="heading">On Going Assembly - CH065BD3X00</div>
             <div class="stage-changer">
-                <button>Overall</button>
+                <label for="vehicle"></label>
+                <select name="vehicle" id="vehicle">
+                    <option value="CH065BD3X00">CH065BD3X00</option>
+                    <option value="CH065BD3G98">CH065BD3G98</option>
+                    <option value="CH065B6YU32">CH065B6YU32</option>
+                    <option value="CH065B7YM00">CH065B7YM00</option>
+                </select>
             </div>
         </div>
 

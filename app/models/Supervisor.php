@@ -450,7 +450,7 @@ class Supervisor
 
         $this->db->query(
             'SELECT *
-                FROM tools; '
+                FROM toolset; '
         );
 
         $tools = $this->db->resultSet();

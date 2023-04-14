@@ -24,8 +24,9 @@
     color: black;
 }
 
-.stage-progress-head button {
+.stage-progress-head select {
     background-color: none;
+    color: #017EFA;
     
     width: 175px;
     height: 36px;
