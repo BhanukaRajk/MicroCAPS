@@ -208,10 +208,6 @@
                 <label for="toolStatus">Tool status: </label>
                 <select name="toolStatus" required>
               </div>
-              <div>
-                <label for="operativity">Operation status: </label>
-                <select name="operativity" type="number" required>
-              </div>
               <div class="display-flex">
                 <div><button>Add</button></div>
                 <div><button>Cancel</button></div>

@@ -2,6 +2,22 @@
 /*    background: #F2F2F6;*/
 /*}*/
 
+.content {
+    left: 16.5rem;
+    right: 0;
+    top: 4rem;
+    bottom: 0;
+}
+
+.toolset-margin {
+    margin: 30px 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
 carpic {
     border: 1px solid black;
 }
@@ -14,7 +30,7 @@ carpic {
     top: 90px;
 }
 
-.pagehead {
+/* .pagehead {
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
@@ -22,7 +38,7 @@ carpic {
     line-height: 33px;
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
+    // justify-content: space-between;
 
     color: #1C1F37;
 }
@@ -30,7 +46,7 @@ carpic {
 .databoard {
     display: flex;
     flex-direction: column;
-}
+} */
 
 .vehicle-detail-board {
     display: flex;
@@ -47,7 +63,7 @@ carpic {
     gap: 27px;
 }
 
-.carcard {
+.toolcard {
     /*position: absolute;*/
     width: 221px;
     height: 200px;
@@ -67,7 +83,7 @@ carpic {
     justify-content: space-between;
 }
 
-.carmodel {
+.toolname {
     /*position: absolute;
     width: 83px;*/
     height: 15px;
