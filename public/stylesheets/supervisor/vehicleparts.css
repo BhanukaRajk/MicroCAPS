@@ -1,25 +1,23 @@
 
-.parts-view {
-    position: absolute;
-
+.content {
     left: 16.25rem;
-    right: 0rem;
+    right: 0;
     top: 4rem;
-    bottom: 0rem;
+    bottom: 0;
     /* background-color: rgb(235, 235, 235); */
     background-color: rgb(242, 243, 247);
 }
 
-.parts-view-inner {
+.parts-view-margin {
     display: flex;
     flex-direction: column;
 
     margin-inline: 48px;
-    margin-top: 13px;
+    margin-block: 13px;
 }
 
 .parts-top-section {
-    width: 1100px;
+    width: 100%;
     height: 58px;
 
     background: #FFFFFF;
@@ -73,7 +71,7 @@
 }
 
 .parts-info-box {
-    width: 1100px;
+    width: 100%;
     /*height: 480px;*/
     /*height: 540px;*/
 
@@ -100,7 +98,19 @@
 }
 
 .parts-info-set-1 {
-    height: 75px;
+    /* padding-block: 18px; */
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5%;
+
+}
+
+.filter-btn-box {
+    margin-block: 18px;
 }
 
 
@@ -209,15 +219,33 @@
     font-weight: bold;
 }
 
-.task-vehicle-selection {
-    width: 175px;
-    height: 36px;
-    padding-inline: 10px;
+.vehicle-selection-box {
+    gap: 1rem;
+}
 
-    left: 5.71%;
-    right: 24.69%;
-    top: 16.67%;
-    bottom: 22.22%;
+.vehicle-selection-box .full-list-btn {
+    width: 150px;
+    height: 36px;
+    padding-inline: 10px !important;
+
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #017EFA !important;
+    background-color: #FFFFFF !important;
+
+    border: 1px solid #017EFA !important;
+    border-radius: 6px !important;
+
+}
+
+.vehicle-selection-box .vehicle-selection {
+    width: 200px;
+    height: 36px;
+    padding-inline: 10px !important;
 
     font-family: 'Noto Sans';
     font-style: normal;
@@ -226,18 +254,13 @@
     line-height: 22px;
     /* identical to box height */
 
-
-    color: #017EFA;
-
-    border: 1px solid #017EFA;
-    border-radius: 6px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+    color: #017EFA !important;
+    border: 1px solid #017EFA !important;
+    border-radius: 6px !important;
 }
+
+
+
 
 
 

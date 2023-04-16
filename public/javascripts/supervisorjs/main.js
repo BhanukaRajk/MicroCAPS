@@ -46,5 +46,18 @@ function next(id) {
 function closePopup() {
     var popupDiv = document.getElementById('popupWindow');
     popupDiv.style.display = 'none';
+}
+
+
+window.onscroll = function() {topFixer()};
+
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function topFixer() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
   }
-  
+}

@@ -342,7 +342,48 @@ ul {
     margin-block: 30px;
 }
 
+.add-new-con-box {
+    width: 24rem;
+    background-color: #FFFFFF;
+    padding: 3rem 3rem;
 
+    border: 1px solid #000000;
+    border-radius: 15px;
+}
+
+.img-remover-box {
+    width: 100%;
+    padding-block: 1rem;
+    text-align: center;
+}
+
+.add-new-con-box .img-remover {
+    color: red;
+}
+
+.add-new-con-box .new-con-name-box,
+.add-new-con-box .new-con-type-box,
+.add-new-con-box .new-con-status-box {
+    padding-top: 0.5rem;
+    width: 100%;
+}
+
+.new-con-name,
+.new-con-type,
+.new-con-status {
+    width: calc(100% - 2rem);
+    height: 1.75rem;
+    padding-inline: 1rem;
+
+    border: 1px solid #4C5C6B;
+    border-radius: 15px;
+
+}
+
+.new-con-add-btn-box {
+    margin-top: 2rem;
+    display: flex;
+}
 
 
 

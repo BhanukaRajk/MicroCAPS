@@ -46,6 +46,7 @@
 }
 
 .task-schedule-control-box {
+    position:sticky;
     width: 100%;
     /* width: calc(100% - 80px); */
     height: 75px;
@@ -55,6 +56,16 @@
     background: #FFFFFF;
     border-radius: 10px;
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .sticky + .content {
+    padding-top: 4rem;
+  }
 
 .task-schedule-control-box .control-box-inner {
     flex-wrap: wrap;
@@ -70,6 +81,10 @@
     border: 1px solid #CED4DA;
     border-radius: 6px;
 }
+
+/* .name-box .new-task-name:focus {
+    border: 1px solid #017EFA !important;
+} */
 
 .task-schedule-control-box .task-vehicle-selection {
     width: 280px !important;
@@ -107,7 +122,7 @@
     width: 90%;
     margin: 40px auto;
 
-    border: 1px solid black;
+    /* border: 1px solid black; */
 
 
 }

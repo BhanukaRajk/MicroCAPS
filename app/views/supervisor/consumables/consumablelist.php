@@ -194,24 +194,24 @@
                         <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profile picture" id="img-preview" />
                         <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
                   </div>
-                  <div>
-                    <label>Remove image</label>
+                  <div class="img-remover-box">
+                    <a class="img-remover">Remove image</a>
                   </div>
-                  <div>
-                    <label for="conName">Name: </label>
-                    <input name="conName" type="text" placeholder="Enter consumable name" required>
+                  <div class="new-con-name-box">
+                    <label for="conName" class="display-none">Name: </label>
+                    <input name="conName" type="text" placeholder="Enter consumable name" class="new-con-name" required>
                   </div>
-                  <div>
-                    <label for="conStatus">Type: </label>
-                    <input name="conStatus" type="number" required>
+                  <div class="new-con-type-box">
+                    <label for="conType" class="display-none">Type: </label>
+                    <input name="conType" type="text" placeholder="Enter type" class="new-con-type" required>
                   </div>
-                  <div>
-                    <label for="conStatus">Stock status: </label>
-                    <input name="conStatus" type="number" required>
+                  <div class="new-con-status-box">
+                    <label for="conStatus" class="display-none">Stock status: </label>
+                    <input name="conStatus" type="number" placeholder="Enter stock status name" class="new-con-status" required>
                   </div>
-                  <div class="display-flex">
-                    <div><button>Add</button></div>
-                    <div><button>Cancel</button></div>
+                  <div class="new-con-add-btn-box">
+                    <div><button class="green-btn">Add</button></div>
+                    <div><button onclick="closePopup()" class="red-btn">Cancel</button></div>
                   </div>
                 </div>
             </div>
