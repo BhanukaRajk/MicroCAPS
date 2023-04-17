@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="display-none display-flex-row align-items-center justify-content-center gap-2 margin-top-4" id="repairD">
-                    <div class="">
+                    <div class="margin-top-3">
                         <input type="text"
                             id="repairDescription"
                             name="repairDescription"
@@ -209,9 +209,9 @@
         
         <div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
             <div class="display-flex-column align-items-center border-radius-1 background-white padding-bottom-4 paddingx-4 pop-container" id="pop-con">
-            <div class="icon-grid padding-top-4"><i class='icon fa-times icon-grid-add font-size-20 cursor-pointer' id="cancel"></i>  </div>  
-            <div class="section-heading font-weight padding-bottom-3" id="pop-title">Shell Details</div>
-            
+                <div class="icon-grid padding-top-4"><i class='icon fa-times icon-grid-add font-size-20 cursor-pointer' id="cancel"></i>  </div>  
+                <div class="section-heading font-weight padding-bottom-3" id="pop-title">Shell Details</div>
+            </div>
         </div>
             
     </section>
@@ -375,5 +375,11 @@
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/addFields.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/bodyshell.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
+    <script>
+        var conn = new WebSocket('ws://localhost:8080');
+        conn.onopen = function (e) {
+            console.log("Connection established!");
+        };
 
+    </script>
 </body>

@@ -161,7 +161,17 @@ function startAssembly(chassisNo) {
                 document.getElementById("startAssembly").disabled = true;
                 location.reload();
                 setLocalStorageFlash("Successful",chassisNo + " Moved to Assembly Line");
-                
+
+                conn.send("New Vehicle Arrived to Assembly Line : " + chassisNo );
+
+                // conn.onmessage = function (e) {
+                //     let alert = document.getElementById("alert");
+                //     alert.classList.remove("hideme");
+                //     alert.classList.add("shows");
+                //     alert.classList.add("showme");
+                //     alert.classList.add("alert-success");
+                //     alert.innerHTML = "<i class='icon fa-check-circle margin-right-3'></i>"+e.data;
+                // };
 
             } else {
 
@@ -266,6 +276,29 @@ function saveChanges(id, position) {
             } else {
                 location.reload();
                 setLocalStorageFlash("Error","Error Saving Changes");
+            }
+        }
+    });
+}
+
+function updatePassword() {
+    let formdata = new FormData();
+    formdata.append("currentPassword", document.getElementById("currentpassword").value);
+    formdata.append("newPassword", document.getElementById("newpassword").value);
+    formdata.append("confirmPassword", document.getElementById("confirmpassword").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/Users/updatePassword',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response == "Successful") {
+                location.reload(true);
+                setLocalStorageFlash("Successful","Password Updated");
+            } else {
+                location.reload();
+                setLocalStorageFlash("Error",response);
             }
         }
     });
@@ -477,7 +510,7 @@ function popUpInnerhtml (values) {
     }
 
     if (!values['paintDetails']) {
-        repairDetails = `<div class="repair display-flex-column gap-1" id="NoRepair">
+        paintDetails = `<div class="repair display-flex-column gap-1" id="NoRepair">
                             <div>
                                 <div class="text-darkblue font-weight font-size-14">No Paint Works</div>
                             </div>

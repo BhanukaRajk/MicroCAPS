@@ -50,7 +50,7 @@
                         <div class="display-flex-column gap-1 overflow">
                             <?php 
                                 foreach ($data['onHoldComponents'] as $value) {
-                                    echo '<div class="display-flex-row justify-content-between border-bottom width-rem-25">
+                                    echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20">
                                             <div class="display-flex-column padding-bottom-3">
                                                 <div class="font-size">'.$value->PartName.'</div>
                                                 <div class="display-flex-row gap-1">
