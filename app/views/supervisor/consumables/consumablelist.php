@@ -190,7 +190,7 @@
 
             <div class="add-new-con-box">
                 <div class="add-new-con-box-content">
-                  <div class="img-grid">
+                  <div class="img-grid TB">
                         <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profile picture" id="img-preview" />
                         <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
                   </div>
@@ -199,15 +199,15 @@
                   </div>
                   <div class="new-con-name-box">
                     <label for="conName" class="display-none">Name: </label>
-                    <input name="conName" type="text" placeholder="Enter consumable name" class="new-con-name" required>
+                    <input name="conName" type="text" placeholder="New consumable name" class="new-con-name" required>
                   </div>
                   <div class="new-con-type-box">
                     <label for="conType" class="display-none">Type: </label>
-                    <input name="conType" type="text" placeholder="Enter type" class="new-con-type" required>
+                    <input name="conType" type="text" placeholder="Type" class="new-con-type" required>
                   </div>
                   <div class="new-con-status-box">
                     <label for="conStatus" class="display-none">Stock status: </label>
-                    <input name="conStatus" type="number" placeholder="Enter stock status name" class="new-con-status" required>
+                    <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" required>
                   </div>
                   <div class="new-con-add-btn-box">
                     <div><button class="green-btn">Add</button></div>

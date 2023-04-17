@@ -73,8 +73,8 @@
     transition: 0.25s;
 }
 
-.filter-btn,
-.filter-btn-clicked {
+.page-filter-btn,
+.page-filter-btn-clicked {
     width: 150px;
     height: 36px;
 
@@ -93,14 +93,48 @@
     border-radius: 18px;
 }
 
-.filter-btn {
+.page-filter-btn {
     color: #017EFA;
     background-color: #FFFFFF;
     border: 1px solid #017EFA;
 }
 
-.filter-btn-clicked {
+.page-filter-btn-clicked {
     color: #FFFFFF;
     background-color: #017EFA;
     border: 1px solid #017EFA;
+}
+
+.green-btn {
+    width: 100%;
+    height: 2rem;
+
+    color: #17B978;
+    background-color: #FFFFFF;
+    border: 1.5px solid #17B978;
+    border-radius: 10px;
+    
+    transition: 0.25s;
+}
+
+.green-btn:hover {
+    color: #FFFFFF;
+    background-color: #17B978;
+    transition: 0.25s;
+}
+
+.red-btn {
+    width: 100%;
+    height: 2rem;
+
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1.5px solid #000000;
+    border-radius: 10px;
+}
+
+.red-btn:hover {
+    color: #FFFFFF;
+    background-color: #000000;
+    transition: 0.25s;
 }

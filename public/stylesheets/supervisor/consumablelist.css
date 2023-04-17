@@ -372,7 +372,7 @@ ul {
 .new-con-type,
 .new-con-status {
     width: calc(100% - 2rem);
-    height: 1.75rem;
+    height: 2rem;
     padding-inline: 1rem;
 
     border: 1px solid #4C5C6B;
@@ -382,7 +382,10 @@ ul {
 
 .new-con-add-btn-box {
     margin-top: 2rem;
+    
     display: flex;
+    flex-direction: column;
+    gap: 1rem
 }
 
 

@@ -42,16 +42,16 @@
 
                     <div class="parts-info-set-1">
                         <div class="filter-btn-box">
-                            <button class="filter-btn">All: 22</button>
+                            <button class="page-filter-btn">All: 22</button>
                         </div>
                         <div class="filter-btn-box">
-                            <button class="filter-btn">Issued: 45</button>
+                            <button class="page-filter-btn">Issued: 45</button>
                         </div>
                         <div class="filter-btn-box">
-                            <button class="filter-btn">Pending: 10</button>
+                            <button class="page-filter-btn">Pending: 10</button>
                         </div>
                         <div class="filter-btn-box">
-                            <button class="filter-btn">Damaged: 2</button>
+                            <button class="page-filter-btn">Damaged: 2</button>
                         </div>
                     </div>
 
