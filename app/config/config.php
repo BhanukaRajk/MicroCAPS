@@ -5,11 +5,11 @@
 
 
     /* URL ROOT FOR BHANUKA*/
-    // const URL_ROOT = 'http://localhost:8080/MicroCAPS/';
+    const URL_ROOT = 'http://localhost:8080/MicroCAPS/';
 
 
     /* URL ROOT FOR BHANUKA'S WINDOWS PC */
-    const URL_ROOT = 'http://localhost/MicroCAPS/';
+    // const URL_ROOT = 'http://localhost/MicroCAPS/';
 
     /* URL ROOT FOR SAMINDU*/
     // const URL_ROOT = 'http://localhost/MicroCAPS/';
@@ -22,7 +22,7 @@
     /* DATABASE CONNECTION FOR LOCAL SERVER ON BHANUKA'S MACBOOK AIR */
     const DB_HOST = 'localhost';
     const DB_USER = 'root';
-    const DB_PASS = '';
+    const DB_PASS = 'password';
     const DB_NAME = 'microcaps';
 
     /* DATABASE CONNECTION FOR LOCAL SERVER ON SAMINDU'S PC */

@@ -36,6 +36,18 @@ class Supervisors extends controller
     public function assignForFutureTasks()
     {
     }
+    public function toolsView()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['toolset'] = $this->supervisorModel->ViewAllTools();
+            $this->view('supervisor/toolset/tools', $data);
+        }
+    }
     public function updateToolStatus()
     {
     }

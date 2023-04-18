@@ -166,33 +166,34 @@
           <div class="vertical-centralizer">
 
             <div class="del-confirm-box">
-                <div class="del-confirm-box-content">
-                    <div class="del-confirm-msg-box">Are you sure?</div>
-                    <div class="del-conf-button-set">
-                        <div class="del-conf-button-box">
-                            <button type="submit" class="delete-button-2">Remove</button>
-                        </div>
-                        <div class="del-conf-button-box">
-                            <button onclick="closePopup()" class="edit-button-2">Cancel</button>
-                        </div>
-                    </div>
+              <div class="del-confirm-box-content">
+                <div class="del-confirm-msg-box">Are you sure?</div>
+                <div class="del-conf-button-set">
+                  <div class="del-conf-button-box">
+                    <button type="submit" class="delete-button-2">Remove</button>
+                  </div>
+                  <div class="del-conf-button-box">
+                    <button onclick="closePopup()" class="edit-button-2">Cancel</button>
+                  </div>
                 </div>
+              </div>
             </div>
 
           </div>
         </div>
 
 
-        
+
         <!-- ADD NEW CONSUMABLE POPUP BOX -->
         <div class="delete-conf-blur horizontal-centralizer" id="popupWindow3">
           <div class="vertical-centralizer">
 
-            <div class="add-new-con-box">
+            <form>
+              <div class="add-new-con-box">
                 <div class="add-new-con-box-content">
                   <div class="img-grid TB">
-                        <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profile picture" id="img-preview" />
-                        <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
+                    <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profile picture" id="img-preview" />
+                    <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
                   </div>
                   <div class="img-remover-box">
                     <a class="img-remover">Remove image</a>
@@ -202,19 +203,25 @@
                     <input name="conName" type="text" placeholder="New consumable name" class="new-con-name" required>
                   </div>
                   <div class="new-con-type-box">
-                    <label for="conType" class="display-none">Type: </label>
-                    <input name="conType" type="text" placeholder="Type" class="new-con-type" required>
+                    <!-- <label for="conType" class="display-none">Type: </label>
+                    <input name="conType" type="text" placeholder="Type" class="new-con-type" required> -->
+                    <select name="consume-type" id="consume-type" class="con-type-select">
+                      <option class="" disabled selected value>- Select consumable type -</option>
+                      <option value="Lubricant">Lubricant</option>
+                      <option value="Grease">Grease</option>
+                    </select>
                   </div>
                   <div class="new-con-status-box">
                     <label for="conStatus" class="display-none">Stock status: </label>
                     <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" required>
                   </div>
                   <div class="new-con-add-btn-box">
-                    <div><button class="green-btn">Add</button></div>
-                    <div><button onclick="closePopup()" class="red-btn">Cancel</button></div>
+                    <div><button class="green-btn width-50px">Add</button></div>
+                    <div><button onclick="closeConsumeAddingPopup()" class="red-btn width-50px">Cancel</button></div>
                   </div>
                 </div>
-            </div>
+              </div>
+            </form>
 
           </div>
         </div>

@@ -1087,10 +1087,11 @@ div.select {
     position: fixed;
     height: 100%;
     overflow: auto;
-    width: 260px;
+    width: 16.25rem;
     left: 0px;
     top: 0px;
     background: #081A51;
+    border-radius: 0 10px 10px 0;
 }
 
 li a {
@@ -1100,7 +1101,8 @@ li a {
     gap: 0.5rem;
     border-radius: 0.75rem 0 0 0.75rem;
     color: #fff;
-    height: 1.5rem;
+    height: 2%;
+    /* height: 1.25rem; */
     margin-left: 1rem;
     padding: 1rem 0rem 1rem 0.875rem;
     text-decoration: none;
@@ -1128,7 +1130,7 @@ li a:hover:not(.active) {
     color: var(--lightblue);
     font-size: 12px;
     margin-left: 1.875rem;
-    margin-top: 1rem;
+    margin-top:2rem;
     margin-bottom: 0.5rem;
 }
 

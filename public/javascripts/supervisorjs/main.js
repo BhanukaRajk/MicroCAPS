@@ -49,6 +49,19 @@ function closePopup() {
 }
 
 
+function closeConsumeAddingPopup() {
+    var popupDiv = document.getElementById('popupWindow3');
+    popupDiv.style.display = 'none';
+}
+
+function closeAddNewToolPopup() {
+    var popupDiv = document.getElementById('tooladdpopupWindow');
+    popupDiv.style.display = 'none';   
+}
+
+
+
+
 window.onscroll = function() {topFixer()};
 
 var header = document.getElementById("myHeader");

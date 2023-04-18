@@ -14,7 +14,8 @@
 
         <!-- MAIN CATEGORY ON NAV BAR -->
         <li>
-            <div class="nav_section_headings margin-top-5">MAIN MENU</div>
+            <!-- <div class="nav_section_headings margin-top-5">MAIN MENU</div> -->
+            <div class="nav_section_headings">MAIN MENU</div>
             <a class="<?php echo ($data['url'][1] == "dashboard") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/dashboard">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon1.jpg" class="width-rem-1p25" alt="icon1" />Dashboard
             </a>
@@ -45,9 +46,13 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing
             </a>
 
-            <!-- <a class="<?php //echo ($data['url'][1] == "pdiresults") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
-                <img src="<?php //echo URL_ROOT; ?>public/images/icon10.png" class="width-rem-1p25" alt="icon7" />Tools
-            </a> -->
+            <a class="<?php echo ($data['url'][1] == "pdiresults") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
+                <img src="<?php echo URL_ROOT; ?>public/images/icon10.png" class="width-rem-1p25" alt="icon7" />PDI Results
+            </a>
+
+            <a class="<?php echo ($data['url'][1] == "toolsView") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/toolsView">
+                <img src="<?php echo URL_ROOT; ?>public/images/icon10.png" class="width-rem-1p25" alt="icon7" />Tools
+            </a>
 
             <a class="<?php echo ($data['url'][1] == "consumableview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/consumableview">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon12.png" class="width-rem-1p25" alt="icon7" />Consumables

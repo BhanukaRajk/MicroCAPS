@@ -28,11 +28,11 @@
                         <div class="toolname">', $tool->ToolName, '</div>
                       </div>
                       <div class="toolstatus">
-                        <div class="status-circle ', ($tool->Volume == NULL) ? (($tool->Weight >= 60) ? 'status-green-circle' : 'status-orange-circle') : (($tool->Volume >= 60) ? 'status-green-circle' : 'status-orange-circle'), ' "></div>
+                        <div class="status-circle ', ($tool->Status == 'Normal') ? 'status-green-circle' : 'status-orange-circle' ,' "></div>
                       </div>
                     </div>
                     <div class="toolpicbox">
-                      <img src="' . URL_ROOT . 'public/images/consumables/' . $tool->Image . '" class="carpic" alt="micro panda red">
+                      <img src="' . URL_ROOT . 'public/images/tools/' . ($tool->Image != NULL) ? $tool->Image : 'none.jpeg' . '" class="carpic" alt="'.$tool->ToolName.'">
                     </div>
                     <div class="toolupdate">Last update: ', $tool->LastUpdate, '</div>
                     <div class="tool-updater ', ($tool->Volume == NULL) ? (($tool->Weight >= 60) ? 'available' : 'lower') : (($tool->Volume >= 60) ? 'available' : 'lower'), '">', ($tool->Volume == NULL) ? (($tool->Weight >= 60) ? 'Available' : 'Low in stock') : (($tool->Volume >= 60) ? 'Available' : 'Low in stock'), '</div>
@@ -188,7 +188,7 @@
 
 
       <!-- ADD NEW CONSUMABLE POPUP BOX -->
-      <div class="delete-conf-blur horizontal-centralizer" id="popupWindow3">
+      <div class="delete-conf-blur horizontal-centralizer" id="tooladdpopupWindow">
         <div class="vertical-centralizer">
 
           <div class="add-new-con-box">
@@ -206,11 +206,11 @@
               </div>
               <div>
                 <label for="toolStatus">Tool status: </label>
-                <select name="toolStatus" required>
+                <select name="toolStatus" required></select>
               </div>
-              <div class="display-flex">
+              <div class="">
                 <div><button>Add</button></div>
-                <div><button>Cancel</button></div>
+                <div><button onclick="closeAddNewToolPopup()" >Cancel</button></div>
               </div>
             </div>
           </div>

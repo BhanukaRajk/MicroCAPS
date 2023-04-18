@@ -368,6 +368,22 @@ class Supervisor
         }
     }
 
+    public function ViewAllTools()
+    {
+
+        $this->db->query(
+            'SELECT * FROM `tool`;'
+        );
+
+        $tools = $this->db->resultSet();
+
+        if ($tools) {
+            return $tools;
+        } else {
+            return false;
+        }
+    }
+
 
     public function ViewS4Finishers()
     {
