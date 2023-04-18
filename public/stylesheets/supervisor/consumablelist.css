@@ -45,6 +45,7 @@ carpic {
 
     flex-wrap: wrap;
     gap: 27px;
+    margin-inline-end: 250px;
 }
 
 .carcard {

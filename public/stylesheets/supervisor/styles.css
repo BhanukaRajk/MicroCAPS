@@ -1068,12 +1068,12 @@ div.select {
 /*                        Navigation Menu                       */
 /*--------------------------------------------------------------*/
 
-#header {
-    z-index: 5;
-}
-
 #topbar {
     z-index: 3;
+}
+
+#navbar {
+    z-index: 100;
 }
 
 #main {
@@ -1101,7 +1101,7 @@ li a {
     gap: 0.5rem;
     border-radius: 0.75rem 0 0 0.75rem;
     color: #fff;
-    height: 2%;
+    height: 1rem;
     /* height: 1.25rem; */
     margin-left: 1rem;
     padding: 1rem 0rem 1rem 0.875rem;

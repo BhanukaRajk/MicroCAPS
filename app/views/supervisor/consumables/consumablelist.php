@@ -11,7 +11,7 @@
     <div class="databoard">
       <div class="pagehead display-flex-row justify-content-between">
         <div>Consumables</div>
-        <div class="margin-right-4"><button type="" class="edit-button">Add new</button></div>
+        <div class="margin-right-4"><button onclick="showConsumeAddingPopup()" class="edit-button">Add new</button></div>
       </div>
       <div class="vehicle-detail-board">
         <div class="vehicle-data-board">
@@ -192,7 +192,7 @@
               <div class="add-new-con-box">
                 <div class="add-new-con-box-content">
                   <div class="img-grid TB">
-                    <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profile picture" id="img-preview" />
+                    <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="Consumable" id="img-preview" />
                     <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
                   </div>
                   <div class="img-remover-box">

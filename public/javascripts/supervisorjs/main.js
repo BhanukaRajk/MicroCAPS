@@ -49,14 +49,27 @@ function closePopup() {
 }
 
 
+
 function closeConsumeAddingPopup() {
     var popupDiv = document.getElementById('popupWindow3');
     popupDiv.style.display = 'none';
 }
 
+function showConsumeAddingPopup() {
+    var popupDiv = document.getElementById('popupWindow3');
+    popupDiv.style.display = '';
+}
+
+
+
 function closeAddNewToolPopup() {
     var popupDiv = document.getElementById('tooladdpopupWindow');
     popupDiv.style.display = 'none';   
+}
+
+function showAddNewToolPopup() {
+    var popupDiv = document.getElementById('tooladdpopupWindow');
+    popupDiv.style.display = '';
 }
 
 

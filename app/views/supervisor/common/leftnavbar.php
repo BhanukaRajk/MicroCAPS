@@ -1,4 +1,4 @@
-<header id="topbar" class="position-absolute">
+<header id="navbar" class="position-absolute">
 
     <!-- LEFT NAVIGATION BAR MENU LIST -->
     <ul class="navigation-bar display-flex-column">
@@ -30,7 +30,7 @@
             </a>
 
             <a class="<?php echo ($data['url'][1] == "componentsView") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/componentsView">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Manage Parts
+                <img src="<?php echo URL_ROOT; ?>public/images/icon5.png" class="width-rem-1p25" alt="icon2" />Manage Parts
             </a>
 
             <a class="<?php echo ($data['url'][1] == "taskSchedule" ||
@@ -39,15 +39,15 @@
                                   $data['url'][1] == "editleave" ||
                                   $data['url'][1] == "getEditingData"
             ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
+                <img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>
 
             <a class="<?php echo ($data['url'][1] == "testRunQueue") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/testRunQueue">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Testing
+                <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Pre-Inspection
             </a>
 
             <a class="<?php echo ($data['url'][1] == "pdiresults") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdiresults">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon10.png" class="width-rem-1p25" alt="icon7" />PDI Results
+                <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Test run
             </a>
 
             <a class="<?php echo ($data['url'][1] == "toolsView") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/toolsView">
@@ -55,7 +55,7 @@
             </a>
 
             <a class="<?php echo ($data['url'][1] == "consumableview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/consumableview">
-                <img src="<?php echo URL_ROOT; ?>public/images/icon12.png" class="width-rem-1p25" alt="icon7" />Consumables
+                <img src="<?php echo URL_ROOT; ?>public/images/icon9.png" class="width-rem-1p25" alt="icon7" />Consumables
             </a>
         </li>
 
@@ -63,7 +63,7 @@
         <li>
             <div class="nav_section_headings">GENERAL</div>
             <a class="<?php echo ($data['url'][1] == "settings") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/settings">
-                <img src="../images/icon5.png" class="width-rem-1p25" alt="icon5" />Settings
+                <img src="../images/icon6.png" class="width-rem-1p25" alt="icon5" />Settings
             </a>
         </li>
 

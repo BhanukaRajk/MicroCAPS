@@ -189,34 +189,45 @@
 
       <!-- ADD NEW CONSUMABLE POPUP BOX -->
       <div class="delete-conf-blur horizontal-centralizer" id="tooladdpopupWindow">
-        <div class="vertical-centralizer">
+          <div class="vertical-centralizer">
 
-          <div class="add-new-con-box">
-            <div class="add-new-con-box-content">
-              <div class="img-grid">
-                <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="profile picture" id="img-preview" />
-                <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
+            <form>
+              <div class="add-new-con-box">
+                <div class="add-new-con-box-content">
+                  <div class="img-grid TB">
+                    <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="Consumable" id="img-preview" />
+                    <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
+                  </div>
+                  <div class="img-remover-box">
+                    <a class="img-remover">Remove image</a>
+                  </div>
+                  <div class="new-con-name-box">
+                    <label for="conName" class="display-none">Name: </label>
+                    <input name="toolName" type="text" placeholder="Enter tool name" class="new-con-name" required>
+                  </div>
+                  <div class="new-con-type-box">
+                    <!-- <label for="conType" class="display-none">Type: </label>
+                    <input name="conType" type="text" placeholder="Type" class="new-con-type" required> -->
+                    <select name="toolStatus" id="consume-type" class="con-type-select">
+                      <option class="" disabled selected value>- Select tool status -</option>
+                      <option value="Normal">Normal</option>
+                      <option value="NA">Need an attention</option>
+                    </select>
+                  </div>
+                  <!-- <div class="new-con-status-box">
+                    <label for="conStatus" class="display-none">Stock status: </label>
+                    <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" required>
+                  </div> -->
+                  <div class="new-con-add-btn-box">
+                    <div><button class="green-btn width-50px">Add</button></div>
+                    <div><button onclick="closeAddNewToolPopup()" class="red-btn width-50px">Cancel</button></div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label>Remove image</label>
-              </div>
-              <div>
-                <label for="toolName">Name: </label>
-                <input name="toolName" type="text" placeholder="Enter tool name" required>
-              </div>
-              <div>
-                <label for="toolStatus">Tool status: </label>
-                <select name="toolStatus" required></select>
-              </div>
-              <div class="">
-                <div><button>Add</button></div>
-                <div><button onclick="closeAddNewToolPopup()" >Cancel</button></div>
-              </div>
-            </div>
+            </form>
+
           </div>
-
         </div>
-      </div>
 
 
 
