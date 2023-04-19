@@ -6,47 +6,54 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
-<section class="content">
-  <div class="toolset-margin">
+<section>
 
-    <div class="toolset-head">
-      <div class="toolset-heading">Tools</div>
-      <div class="toolset-dropdown">
-        <button type="" class="tool-add-btn">Add new</button>
+  <div class="content">
+    <div class="toolset-margin">
+
+      <!-- THIS SHOULD BE A FIXED CONTENT -->
+      <div class="toolset-head">
+        <div class="toolset-heading">Tools</div>
+        <div class="toolset-adding">
+          <button onclick="" class="tool-add-btn adding-button">Add new</button>
+        </div>
       </div>
-    </div>
 
 
-    <div class="toolset-body">
-      <div class="toolset-toolview">
+      <div class="toolset-body">
+        <div class="toolset-toolview">
 
-        <?php
-        foreach ($data['toolset'] as $tool) {
-          echo '<div class="toolcard" onclick="expandConsumable()">
+          <?php
+          foreach ($data['toolset'] as $tool) {
+            echo '<div class="toolcard" onclick="expandConsumable()">
                     <div class="cardhead">
                       <div class="cardid">
-                        <div class="toolname">', $tool->ToolName, '</div>
+                        <div class="toolname">' . $tool->ToolName . '</div>
+                        <div class="tool-quantity">Quantity: ' . $tool->quantity . '</div>
                       </div>
-                      <div class="toolstatus">
-                        <div class="status-circle ', ($tool->Status == 'Normal') ? 'status-green-circle' : 'status-orange-circle' ,' "></div>
+                      <div class="toolstatuscolor">
+                        <div class="status-circle ' . (($tool->Status == "Normal") ? 'status-green-circle' : 'status-orange-circle') . ' "></div>
                       </div>
                     </div>
                     <div class="toolpicbox">
-                      <img src="' . URL_ROOT . 'public/images/tools/' . ($tool->Image != NULL) ? $tool->Image : 'none.jpeg' . '" class="carpic" alt="'.$tool->ToolName.'">
+                      <img src="' . URL_ROOT . 'public/images/tools/' . (($tool->Image != NULL) ? $tool->Image : 'none.jpeg') . '" class="toolpic" alt="' . $tool->ToolName . '">
                     </div>
-                    <div class="toolupdate">Last update: ', $tool->LastUpdate, '</div>
-                    <div class="tool-updater ', ($tool->Volume == NULL) ? (($tool->Weight >= 60) ? 'available' : 'lower') : (($tool->Volume >= 60) ? 'available' : 'lower'), '">', ($tool->Volume == NULL) ? (($tool->Weight >= 60) ? 'Available' : 'Low in stock') : (($tool->Volume >= 60) ? 'Available' : 'Low in stock'), '</div>
+                    <div class="tool-card-down">
+                      <div class="tool-updater ' . (($tool->Status == "Normal") ? 'available' : 'lower') . '">' . (($tool->Status == "Normal") ? 'Normal' : 'Need an attention') . '</div>
+                      <div class="toolupdate last-update">Last update: ' . $tool->LastUpdate . '</div>
+                    </div>
                   </div>';
-        }
+          }
 
 
-        // DISPLAY THIS IF THERE IS NO DATA IN THE TABLE
-        if ($tool == NULL) {
-          echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
-        }
+          // DISPLAY THIS IF THERE IS NO DATA IN THE TABLE
+          if ($tool == NULL) {
+            echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
+          }
 
-        ?>
+          ?>
 
+        </div>
       </div>
 
 
@@ -62,14 +69,14 @@
             <form method="POST" action="">
               <ul id="consume_filter">
                 <li>
-                  <div class="filtertype">Consumable Type</div>
+                  <div class="filtertype">Tool Type</div>
                   <div class="filters">
                     <input type="radio" id="lubricant" name="constype" value="Lubricants">
-                    <label for="lubricant">Lubricants</label>
+                    <label for="lubricant">Hand Tools</label>
                   </div>
                   <div class="filters">
                     <input type="radio" id="grease" name="constype" value="Grease">
-                    <label for="grease">Grease</label>
+                    <label for="grease">Power Tools</label>
                   </div>
                   <div class="filters">
                     <input type="radio" id="gandl" name="constype" value="All" checked>
@@ -78,35 +85,35 @@
                 </li>
 
                 <li>
-                  <div class="filtertype">Status</div>
+                  <div class="filtertype">Current Status</div>
                   <div class="filters">
                     <input type="radio" id="available" name="stockstate" value="Available">
-                    <label for="available">Available</label>
+                    <label for="available">Normal</label>
                   </div>
                   <div class="filters">
                     <input type="radio" id="lowst" name="stockstate" value="Low">
-                    <label for="lowst">Low in stock</label>
+                    <label for="lowst">Need Attention</label>
                   </div>
                   <div class="filters">
                     <input type="radio" id="stockall" name="stockstate" value="All" checked>
                     <label for="gandl">All</label>
                   </div>
-                  <div class="filters filter-btn margin-top-5">
+                  <!-- <div class="filters filter-btn margin-top-5">
                     <div><button type="submit" id="filtering" name="submit" class="filter-button">Search</button></div>
-                  </div>
+                  </div> -->
                 </li>
               </ul>
             </form>
 
           </div>
-          
+
         </div>
       </div>
 
 
 
       <!-- THIS IS THE POP UP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
-      <div class="background-blurer display-none" id="popupWindow2">
+      <div class="background-blurer display-none" id="toolUpdatePopUp">
         <div class="consumable-detail-popup position-fixed">
 
           <div class="popup-left">
@@ -139,8 +146,6 @@
                 <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
                 <label class="form-label blue">Current stock update <?php echo (NULL == NULL) ? '(Litres)' : '(Kgs)'; ?></label>
 
-                <!-- <?php //echo ($item['weight'] == NULL) ? 'L' : 'Kg' ;
-                      ?> -->
 
               </div>
             </div>
@@ -151,7 +156,7 @@
             </form>
             <form method="POST">
               <div class="display-flex-row justify-content-center marginy-3">
-                <div><button type="submit" class="delete-button consume-update">Remove item</button></div>
+                <div><button onclick="toolDelConfirm()" class="delete-button consume-update">Remove item</button></div>
               </div>
             </form>
             <div class="display-flex-row justify-content-center margin-top-2">
@@ -165,7 +170,7 @@
 
 
       <!-- DELETE CONFIRMATION POPUP BOX -->
-      <div class="delete-conf-blur horizontal-centralizer" id="popupWindow">
+      <div class="delete-conf-blur horizontal-centralizer" id="toolDelConf">
         <div class="vertical-centralizer">
 
           <div class="del-confirm-box">
@@ -176,7 +181,7 @@
                   <button type="submit" class="delete-button-2">Remove</button>
                 </div>
                 <div class="del-conf-button-box">
-                  <button onclick="closePopup()" class="edit-button-2">Cancel</button>
+                  <button onclick="closeToolDelConfBox()" class="edit-button-2">Cancel</button>
                 </div>
               </div>
             </div>
@@ -186,17 +191,19 @@
       </div>
 
 
-
-      <!-- ADD NEW CONSUMABLE POPUP BOX -->
-      <div class="delete-conf-blur horizontal-centralizer" id="tooladdpopupWindow">
+        <!-- ADD NEW CONSUMABLE POPUP BOX -->
+        <!-- <div class="delete-conf-blur horizontal-centralizer" id="tooladdpopupWindow">
           <div class="vertical-centralizer">
 
             <form>
               <div class="add-new-con-box">
                 <div class="add-new-con-box-content">
                   <div class="img-grid TB">
-                    <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="Consumable" id="img-preview" />
-                    <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
+                    <img src="<?php //echo URL_ROOT; 
+                              ?>public/images/profile/<?php //echo $data['userDetails']->Image; 
+                                                      ?>" class="border-radius-11 width-rem-12p5" alt="Consumable" id="img-preview" />
+                    <img src="<?php //echo URL_ROOT; 
+                              ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
                   </div>
                   <div class="img-remover-box">
                     <a class="img-remover">Remove image</a>
@@ -205,20 +212,20 @@
                     <label for="conName" class="display-none">Name: </label>
                     <input name="toolName" type="text" placeholder="Enter tool name" class="new-con-name" required>
                   </div>
-                  <div class="new-con-type-box">
+                  <div class="new-con-type-box"> -->
                     <!-- <label for="conType" class="display-none">Type: </label>
                     <input name="conType" type="text" placeholder="Type" class="new-con-type" required> -->
-                    <select name="toolStatus" id="consume-type" class="con-type-select">
+                    <!-- <select name="toolStatus" id="consume-type" class="con-type-select">
                       <option class="" disabled selected value>- Select tool status -</option>
                       <option value="Normal">Normal</option>
                       <option value="NA">Need an attention</option>
                     </select>
-                  </div>
+                  </div> -->
                   <!-- <div class="new-con-status-box">
                     <label for="conStatus" class="display-none">Stock status: </label>
                     <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" required>
                   </div> -->
-                  <div class="new-con-add-btn-box">
+                  <!-- <div class="new-con-add-btn-box">
                     <div><button class="green-btn width-50px">Add</button></div>
                     <div><button onclick="closeAddNewToolPopup()" class="red-btn width-50px">Cancel</button></div>
                   </div>
@@ -227,15 +234,14 @@
             </form>
 
           </div>
-        </div>
+        </div> -->
+
 
 
 
     </div>
   </div>
-  </div>
 
-  </div>
 </section>
 
 

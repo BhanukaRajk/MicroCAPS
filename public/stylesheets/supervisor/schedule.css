@@ -46,10 +46,12 @@
 }
 
 .task-schedule-control-box {
-    position:sticky;
-    width: 100%;
+    position: sticky;
+    /* width: 100%; */
     /* width: calc(100% - 80px); */
-    height: 75px;
+    /* height: 75px; */
+    width: calc(100%-2rem);
+    padding: 1rem;
 
     margin-top: 10px;
 

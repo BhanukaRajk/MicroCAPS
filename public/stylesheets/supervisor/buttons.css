@@ -138,3 +138,36 @@
     background-color: #000000;
     transition: 0.25s;
 }
+
+
+.adding-button {
+    color: #017EFA;
+    text-decoration: none;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+
+    border: 0.1rem solid #017EFA;
+    background-color: none;
+
+    border-radius: 1rem;
+    padding-inline: 1rem;
+    padding-block: 0.36rem;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* .edit-button:hover {
+    color: #5fc1f5;
+    border: 0.1rem solid #5fc1f5;
+    background-color: #ebf8ff;
+} */
+.adding-button:hover {
+    color: #FFFFFF;
+    background-color: #017EFA;
+}

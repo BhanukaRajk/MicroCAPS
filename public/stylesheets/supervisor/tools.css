@@ -1,7 +1,3 @@
-/*body {*/
-/*    background: #F2F2F6;*/
-/*}*/
-
 .content {
     left: 16.5rem;
     right: 0;
@@ -10,52 +6,44 @@
 }
 
 .toolset-margin {
-    margin: 30px 40px;
+    margin: 0 40px 30px 40px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+
+.toolset-head {
     display: flex;
     flex-direction: row;
-}
+    align-items: center;
+    justify-content: space-between;
 
+    position: sticky;
+    background-color: #F2F2F7;
+    /* border: 1px solid black; */
 
+    width: 100%;
+    top: 4rem;
 
+    padding-block: 1rem;
+    padding-inline: 2rem;
 
-carpic {
-    border: 1px solid black;
-}
-
-.listsection {
-    position: absolute;
-    /*width: 473.8px;*/
-    /*height: 50px;*/
-    left: 300px;
-    top: 90px;
-}
-
-/* .pagehead {
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 33px;
-    display: flex;
-    align-items: center;
-    // justify-content: space-between;
-
     color: #1C1F37;
 }
 
-.databoard {
-    display: flex;
-    flex-direction: column;
-} */
-
-.vehicle-detail-board {
-    display: flex;
-    flex-direction: row;
-
-    padding-top: 25px;
+.toolset-body {
+    margin-top: 1rem;
 }
 
-.vehicle-data-board {
+.toolset-toolview {
     display: flex;
     flex-direction: row;
 
@@ -64,16 +52,11 @@ carpic {
 }
 
 .toolcard {
-    /*position: absolute;*/
     width: 221px;
     height: 200px;
-    /*left: 272px;*/
-    /*top: 25px;*/
     padding: 23px;
 
     background: #FFFFFF;
-    /* Shadow/light */
-
     box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
     border-radius: 24px;
 
@@ -83,67 +66,6 @@ carpic {
     justify-content: space-between;
 }
 
-.toolname {
-    /*position: absolute;
-    width: 83px;*/
-    height: 15px;
-    left: 0px;
-    top: 0px;
-
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 15px;
-    /* identical to box height */
-
-
-    color: #000000;
-}
-
-.chassisno {
-    /*position: absolute;
-    width: 82px;*/
-    height: 12px;
-    left: 0px;
-    top: 15px;
-
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 12px;
-    /* identical to box height */
-
-
-    /* Grey/500 */
-
-    color: #A6AFBA;
-}
-
-.carstatuscolor {
-    display: flex;
-    justify-content: right;
-}
-
-.carstatus {
-    height: 18px;
-
-    /* Title 3/Regular */
-
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 18px;
-    /* identical to box height */
-
-
-    /* Grey/500 */
-
-    color: #A6AFBA;
-}
-
 .cardhead {
     display: flex;
     flex-direction: row;
@@ -151,20 +73,118 @@ carpic {
     justify-content: space-between;
 }
 
-.carpicbox {
+.toolname {
+    height: 15px;
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+
+    color: #000000;
+}
+
+.tool-quantity {
+    margin-top: 0.25rem;
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+
+    color: #A6AFBA;
+}
+
+.toolstatuscolor {
+    display: flex;
+    justify-content: right;
+}
+
+.status-circle {
+    width: 15px;
+    height: 15px;
+    /*margin: auto 1rem auto 0.5rem;*/
+    border-radius: 50%;
+}
+
+/* GRAPH OPTION 1 */
+.status-green-circle {
+    background-color: #17B978;
+}
+
+/* GRAPH OPTION 2 */
+.status-orange-circle {
+    background-color: #FD5F00;
+}
+
+.toolpicbox {
     text-align: center;
 }
 
-.carpic {
+.toolpic {
     height: 113px;
 }
 
-.filterbox {
+
+
+.tool-card-down {
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-updater {
+    /* font-family: 'Proxima Nova'; */
+    /* font-size: 18px; */
+    font-style: normal;
+    font-weight: 500;
+    line-height: 33px;
+}
+
+.available {
+    color: #17B978;
+}
+
+.lower {
+    color: #FD5F00;
+}
+
+.toolupdate {
+    height: 18px;
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+
+    color: #A6AFBA;
+}
+
+.last-update {
+    font-size: small;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.toolset-filterbox {
     position: fixed;
     width: 212px;
-    height: 520px;
+    /* height: 520px; */
     right: 20px;
-    /*top: 165px;*/
+    top: 165px;
     /*padding: 23px;*/
     /*margin-inline: 20px;*/
 
@@ -180,13 +200,17 @@ carpic {
     /*justify-content: space-between;*/
 }
 
-.filterin {
-    margin: 22px 26px 22px 26px;
+.toolfilter {
+    margin: 22px 0;
     font-family: 'Proxima Nova';
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 20px;
+}
+
+.filter-head {
+    margin: 0.5rem 1.2rem;
 }
 
 .filtertype {
@@ -216,40 +240,17 @@ carpic {
     /* Grey/500 */
 
     color: #A6AFBA;
-    margin-block: 15px;
+    /* margin-block: 15px; */
     /*border: black solid 1px;*/
 }
 
-a {
+/* a {
     text-decoration: none;
-}
+} */
 
-.status-circle {
-    width: 15px;
-    height: 15px;
-    /*margin: auto 1rem auto 0.5rem;*/
-    border-radius: 50%;
-}
 
-/* GRAPH OPTION 1 */
-.status-green-circle {
-    background-color: #17B978;
-}
 
-/* GRAPH OPTION 2 */
-.status-orange-circle {
-    background-color: #FD5F00;
-}
-
-.available {
-    color: #17B978;
-}
-
-.lower {
-    color: #FD5F00;
-}
-
-ul {
+.toolfilter ul {
     display: block;
     list-style-type: disc;
     margin-top: 1em;
@@ -344,9 +345,7 @@ ul {
 }
 
 
-.last-update {
-    font-size: small;
-}
+
 
 .popup-box-heading1 {
     font-size: 28px;

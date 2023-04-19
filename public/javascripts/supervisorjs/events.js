@@ -14,3 +14,7 @@ consumeTypeSelect.addEventListener('change', (event) => {
       conStatusInput.placeholder = 'Stock quantity';
   }
 });
+
+function navbartoggle(x) {
+  x.classList.toggle("change");
+}

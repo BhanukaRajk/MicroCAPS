@@ -7,12 +7,15 @@
 
 
 <section class="listsection">
+
   <div class="datawall">
     <div class="databoard">
+
       <div class="pagehead display-flex-row justify-content-between">
         <div>Consumables</div>
         <div class="margin-right-4"><button onclick="showConsumeAddingPopup()" class="edit-button">Add new</button></div>
       </div>
+      
       <div class="vehicle-detail-board">
         <div class="vehicle-data-board">
 
