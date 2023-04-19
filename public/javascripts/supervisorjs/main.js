@@ -72,6 +72,10 @@ function showAddNewToolPopup() {
     popupDiv.style.display = '';
 }
 
+function closeToolDelConfBox() {
+    var popupDiv = document.getElementById('toolDelConf');
+    popupDiv.style.display = 'none';
+}
 
 
 

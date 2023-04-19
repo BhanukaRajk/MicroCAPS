@@ -232,7 +232,7 @@ a {
     color: #FD5F00;
 }
 
-ul {
+.filterbox ul {
     display: block;
     list-style-type: disc;
     margin-top: 1em;
