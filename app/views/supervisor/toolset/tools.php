@@ -25,7 +25,7 @@
 
           <?php
           foreach ($data['toolset'] as $tool) {
-            echo '<div class="toolcard" onclick="expandConsumable()">
+            echo '<div class="toolcard" onclick="expandTool(this)">
                     <div class="cardhead">
                       <div class="cardid">
                         <div class="toolname">' . $tool->ToolName . '</div>
@@ -118,30 +118,42 @@
 
           <div class="popup-left">
             <div class="horizontal-centralizer cs-popup-csname">
-              <div>MOTUL 3000 4T Plus</div>
+              <div class="form-toolname">MOTUL 3000 4T Plus</div>
             </div>
             <div class="horizontal-centralizer">
               <div class="">
-                <img class="consumable-popup-img" src="<?php echo URL_ROOT; ?>public/images/consumables/image1.png" class="carpic" alt="Consumable">
+                <img class="consumable-popup-img" src="<?php echo URL_ROOT; ?>public/images/consumables/image1.png" class="carpic" alt="Consumable" id="formToolImg">
               </div>
             </div>
             <div class="horizontal-centralizer">
-              <div>Current Stock: 5 Liters</div>
+              <div class="form-tool-quantity">Quentity: 5</div>
             </div>
           </div>
 
           <div class="border-div"></div>
           <div class="popup-right">
             <div class="horizontal-centralizer">
-              <div class="popup-box-heading1 margin-top-4">Update stock</div>
+              <div class="popup-box-heading1 margin-top-4">Update Tool Status</div>
             </div>
 
             <div class="horizontal-centralizer last-update margin-top-3">
-              <div>Last update: 10 February 2023 at 12.25 PM</div>
+              <div class="form-tool-lastupdate">Last update: 10 February 2023 at 12.25 PM</div>
             </div>
 
             <div class="horizontal-centralizer margin-top-4">
               <div>
+
+                <select name="status" id="formToolStatus" class="form-tool-status">
+                  <?php
+                    if(TRUE) {
+                      echo '<option value="Normal">Normal</option>
+                            <option value="Need an attention">Need an attention</option>';
+                    } else {
+                      echo '<option value="Need an attention">Need an attention</option>
+                            <option value="Normal">Normal</option>';
+                    }
+                    ?>
+                </select>
 
                 <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
                 <label class="form-label blue">Current stock update <?php echo (NULL == NULL) ? '(Litres)' : '(Kgs)'; ?></label>
@@ -151,16 +163,16 @@
             </div>
             <form method="POST">
               <div class="display-flex-row justify-content-center margin-top-2">
-                <div><button type="submit" class="edit-button consume-update">Update</button></div>
+                <div><button type="button" class="edit-button consume-update">Update</button></div>
               </div>
             </form>
             <form method="POST">
               <div class="display-flex-row justify-content-center marginy-3">
-                <div><button onclick="toolDelConfirm()" class="delete-button consume-update">Remove item</button></div>
+                <div><button onclick="showToolDelConfBox()" class="delete-button consume-update">Remove item</button></div>
               </div>
             </form>
             <div class="display-flex-row justify-content-center margin-top-2">
-              <div><a onclick="closePopup()" class="mouse-pointer">Close</a></div>
+              <div><a onclick="closeToolUpdatePopup()" class="mouse-pointer">Close</a></div>
             </div>
           </div>
         </div>
@@ -170,7 +182,7 @@
 
 
       <!-- DELETE CONFIRMATION POPUP BOX -->
-      <div class="delete-conf-blur horizontal-centralizer" id="toolDelConf">
+      <div class="delete-conf-blur horizontal-centralizer display-none" id="toolDelConfirm">
         <div class="vertical-centralizer">
 
           <div class="del-confirm-box">
@@ -178,7 +190,7 @@
               <div class="del-confirm-msg-box">Are you sure?</div>
               <div class="del-conf-button-set">
                 <div class="del-conf-button-box">
-                  <button type="submit" class="delete-button-2">Remove</button>
+                  <button type="button" class="delete-button-2">Remove</button>
                 </div>
                 <div class="del-conf-button-box">
                   <button onclick="closeToolDelConfBox()" class="edit-button-2">Cancel</button>
@@ -191,7 +203,7 @@
       </div>
 
 
-        <!-- ADD NEW CONSUMABLE POPUP BOX -->
+        <!-- ADD NEW TOOL POPUP BOX -->
         <!-- <div class="delete-conf-blur horizontal-centralizer" id="tooladdpopupWindow">
           <div class="vertical-centralizer">
 
