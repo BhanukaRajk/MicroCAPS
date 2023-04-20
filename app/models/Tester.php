@@ -54,6 +54,37 @@ class Tester {
 
     // }
 
+    public function vehicleCount(){
+        $counts = array();
+
+        $this->db->query(
+            'SELECT COUNT(`ChassisNo`) AS inLine
+            FROM `vehicle`
+            WHERE `vehicle`.`CurrentStatus` = "PDI";'
+        );
+        $counts[] = $this->db->single();
+
+        $this->db->query(
+            'SELECT COUNT(`ChassisNo`) AS dispatched
+            FROM `vehicle`
+            WHERE `vehicle`.`PDIStatus` = "CM";'
+        );
+        $counts[] = $this->db->single();
+
+        $this->db->query(
+            'SELECT COUNT(`ChassisNo`) AS onHold
+            FROM `vehicle`
+            WHERE `vehicle`.`CurrentStatus` = "Hold";'
+        );
+        $counts[] = $this->db->single();
+
+        if ($counts) {
+            return $counts;
+        } else {
+            return false;
+        }
+    }
+
     public function findDefectExists($DefectNo, $ChassisNo) {
 
         $this->db->query('SELECT * FROM `pdi-defect` WHERE `pdi-defect`.`DefectNo` = :DefectNo AND `pdi-defect`.`ChassisNo` = :ChassisNo');

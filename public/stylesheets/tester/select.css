@@ -1,98 +1,109 @@
-.sv-data-board {
+.select-page {
+    position: absolute;
+    left: 16.25rem;
+    right: 0rem;
+    top: 4rem;
+    bottom: 0rem;
+    background-color: rgb(242, 243, 247);
+  }
+  
+  .select-board-2 {
+    margin-inline: 45px;
+    margin-block: 10px;
+  }
+  
+  .select-section {
+    height: 97px;
+  }
+  
+  .select-data-board {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+  
     flex-wrap: wrap;
+    gap: 110px;
   }
   
-  .sv-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 1rem 2rem;
-    column-gap: 2rem;
-    top: 16rem;
-    position: fixed;
-  }
-  
-  .sv-item {
+  .sp-detailed-content {
+    position: absolute;
     display: flex;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    gap: 1rem;
-    flex-direction: column;
-    min-height: 180px;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    width: 15rem;
-  }
+    flex-direction: row;
+    top: 1rem;
   
-  #select_vehicle {
     width: 100%;
     height: 100%;
     overflow: hidden;
     margin: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
-    /* background: #D2DAFF; */
-    font-family: "Montserrat", sans-serif;
+    font-family: "Open Sans Condensed", sans-serif;
+    background-color: #f2f2f7;
   }
   
-  div[class*=box_sv] {
-    height: 10%;
+  .pending-tasks {
+    max-height: 13rem;
+    padding-bottom: 1rem;
+  }
+  
+  .box {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
   }
   
-  
-  .btn_sv {
-    line-height: 150px;
-    height: 150px;
+  .btn-s {
+    height: 17rem;
     text-align: center;
-    font-family: 'Noto Sans';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    width: 30%;
+    width: 16rem;
     cursor: pointer;
+    margin: 2rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    top: -2rem
   }
   
-  .btn_sv-three {
-    color: #1B2B65;
+  .select-btn {
+    color: #1b2b65;
     transition: all 0.5s;
     position: relative;
   }
-
-  .btn_sv-three:hover {
-    color: #1266F1;
+  
+  .btn-caption {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 2rem;
   }
   
-  .btn_sv-three::before {
-    content: '';
+  .select-btn:hover {
+    color: #1266f1;
+  }
+  
+  .select-btn::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
     transition: all 0.3s;
-    border: 1px solid rgba(18, 102, 241, 0.3);
+    border: 2px solid rgba(18, 102, 241, 0.3);
     border-radius: 0.5rem;
   }
   
-  .btn_sv-three:hover::before {
+  .select-btn:hover::before {
     opacity: 0;
     transform: scale(0.5, 0.5);
   }
   
-  .btn_sv-three::after {
-    content: '';
+  .select-btn::after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -101,21 +112,20 @@
     z-index: 1;
     opacity: 0;
     transition: all 0.3s;
-    border: 1px solid rgba(27, 43, 101, 1);
+    border: 2px solid rgba(27, 43, 101, 1);
     transform: scale(1.2, 1.2);
-    border-radius: 0.5rem
+    border-radius: 0.5rem;
   }
   
-  .btn_sv-three:hover::after {
+  .select-btn:hover::after {
     opacity: 1;
     transform: scale(1, 1);
   }
   
-  .head_sv {
-    font-size: 30px;
-    font-weight: bold;
-    color: #1B2B65;
-    margin-bottom: 30px;
-    margin-left: 15%;
-    text-align: center;
+  .fa-regular {
+    font-size: 6rem;
   }
+  
+  .fa-light {
+    font-size: 6rem;
+  }  

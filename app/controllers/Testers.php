@@ -17,6 +17,7 @@ class Testers extends controller {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $data['vehicles'] = $this->testerModel->selectVehicle();
+            $data['counts'] = $this->testerModel->vehicleCount();
             $this->view('tester/dashboard', $data);
         }
     }
@@ -37,19 +38,6 @@ class Testers extends controller {
         }
     }
 
-    public function select_vehicle() {
-
-        if(!isLoggedIn()){
-            redirect('testers/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['vehicles'] = $this->testerModel->selectVehicle();
-            $this->view('tester/select_vehicle', $data);
-        }
-    }
-
     public function select_view($id) {
 
         if(!isLoggedIn()){
@@ -63,19 +51,6 @@ class Testers extends controller {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $this->view('tester/select_view', $data);
-        }
-    }
-
-    public function select_vehicle_2() {
-
-        if(!isLoggedIn()){
-            redirect('testers/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['vehicles'] = $this->testerModel->selectVehicle();
-            $this->view('tester/select_vehicle_2', $data);
         }
     }
 
@@ -157,6 +132,7 @@ class Testers extends controller {
                 'user_err' => ''
             ];
             $data['url'] = getUrl();
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($ChassisNo);
 
             if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
@@ -187,6 +163,7 @@ class Testers extends controller {
                 'ReCorrection' => $defect->ReCorrection
             ];
             $data['url'] = getUrl();
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($ChassisNo);
 
             $this->view('tester/edit_defect', $data);
         }
@@ -208,19 +185,19 @@ class Testers extends controller {
         }
     }
 
-    public function pdiReseults() {
+    // public function pdiReseults() {
 
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
+    //     if(!isLoggedIn()){
+    //         redirect('users/login');
+    //     }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
-            $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
-            $data['pdiCheckList'] = $this->testerModel->pdiCheckList($data['onPDIVehicles'][0]->ChassisNo);
-            $this->view('tester/pdiresults',$data);
-        }
-    }
+    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //         $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
+    //         $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
+    //         $data['pdiCheckList'] = $this->testerModel->pdiCheckList($data['onPDIVehicles'][0]->ChassisNo);
+    //         $this->view('tester/pdiresults',$data);
+    //     }
+    // }
 
     public function pdi($id) {
 

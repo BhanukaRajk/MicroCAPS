@@ -12,7 +12,6 @@
                     <div class="form-data-board">
                         <div class="add-form-container">
                             <div class="add-form-title">Edit Defect Form</div>
-
                             <form id="defect-form" action="<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $data['ChassisNo']; ?>/<?php echo $data['DefectNo']; ?>" method="POST">
                                 <div class="add-form-field">
                                     <span class="add-form-error">
