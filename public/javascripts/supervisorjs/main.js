@@ -27,7 +27,7 @@ window.onclick = function (event) {
 }
 
 
-function myFunction() {
+function notifyMe() {
     var msg = document.getElementById("messagebox");
     // message.className = "show";
     msg.className = msg.className.replace("hideme", "shows showme");
@@ -55,13 +55,15 @@ function closePopup() {
 
 
 function closeConsumeAddingPopup() {
-    var popupDiv = document.getElementById('popupWindow3');
-    popupDiv.style.display = 'none';
+    //// var popupDiv = document.getElementById('addNewConBox');
+    //// popupDiv.style.display = 'none';
+    document.getElementById("addNewConBox").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
 }
 
 function showConsumeAddingPopup() {
-    var popupDiv = document.getElementById('popupWindow3');
-    popupDiv.style.display = '';
+    //// var popupDiv = document.getElementById('addNewConBox');
+    //// popupDiv.style.display = '';
+    document.getElementById("addNewConBox").setAttribute("class", "delete-conf-blur horizontal-centralizer");
 }
 
 
@@ -87,42 +89,24 @@ function showAddNewToolPopup() {
     popupDiv.style.display = '';
 }
 
-function closeToolUpdatePopup() {
-    // var popupDiv = document.getElementById('toolUpdatePopUp');
-    // popupDiv.style.display = 'none';  
-    document.getElementById("toolUpdatePopUp").setAttribute("class", "background-blurer display-none");
-}
 
 
 function showToolDelConfBox() {
-    // var popupDiv = document.getElementById('toolUpdatePopUp');
-    // popupDiv.style.display = 'none';  
+    //// var popupDiv = document.getElementById('toolUpdatePopUp');
+    //// popupDiv.style.display = 'none';  
     document.getElementById("toolDelConfirm").setAttribute("class", "delete-conf-blur horizontal-centralizer");
 }
 
 function closeToolDelConfBox() {
-    // var popupDiv = document.getElementById('toolDelConf');
-    // popupDiv.style.display = 'none';
+    //// var popupDiv = document.getElementById('toolDelConf');
+    //// popupDiv.style.display = 'none';
     document.getElementById("toolDelConfirm").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
-
 }
 
 
 
 
 
-// window.onscroll = function() {topFixer()};
-
-// var header = document.getElementById("myHeader");
-// var sticky = header.offsetTop;
-
-// function topFixer() {
-//   if (window.pageYOffset > sticky) {
-//     header.classList.add("sticky");
-//   } else {
-//     header.classList.remove("sticky");
-//   }
-// }
 
 
 
@@ -130,67 +114,95 @@ function closeToolDelConfBox() {
 
 
 
+function expandTool(Tool) {
 
-
-
-
-function expandTool(tool) {
-    // Get the values from the tool card
-    var toolName = tool.querySelector('.toolname').innerText;
-
-    var quantity = tool.querySelector('.tool-quantity').innerText;
-    //// var quantity = document.querySelector('.tool-quantity').innerText.split(':')[1].trim();
-
-    var toolpic = tool.querySelector('.toolpic');
+    // GET THE VALUES FROM THE TOOL CARD
+    var toolName = Tool.querySelector('.toolname').innerText;
+    var quantity = Tool.querySelector('.tool-quantity').innerText;
+    var toolpic = Tool.querySelector('.toolpic');
     var toolImg = toolpic.getAttribute('src');
+    var lastupdate = Tool.querySelector('.last-update').innerText;
 
-    // var toolstatus = document.querySelector('.tool-updater').innerText;
-    var lastupdate = document.querySelector('.last-update').innerText;
-
-
-
-    // Fill the input fields in the form
+    // FILL THE INPUT FIELDS IN THE FORM
     document.querySelector('.form-toolname').innerText = toolName;
     document.querySelector('.form-tool-quantity').innerText = quantity;
     document.querySelector('.form-tool-lastupdate').innerText = lastupdate;
-    // document.getElementById("quantity").value = quantity;
-    //// document.getElementById("formToolImg").value = toolImg;
-    //// toolpic.getAttribute('href').value = toolImg;
-    document.getElementById("formToolImg").setAttribute("src", toolImg)
-    // document.getElementById("toolstatus").value = toolstatus;
+    document.getElementById("formToolImg").setAttribute("src", toolImg);
 
-    // Show the popup form
-    //// document.getElementById("update-form").style.display = "block";
+    // SHOW THE POPUP FORM
     document.getElementById("toolUpdatePopUp").setAttribute("class", "background-blurer");
+    // document.getElementsByClassName("toolset-toolview").classList.add("noscroll");
 }
+
+
+function closeToolUpdatePopup() {
+
+    // CLOSE THE POPUP FORM
+    document.getElementById("toolUpdatePopUp").setAttribute("class", "background-blurer display-none");
+    // document.getElementsByClassName("toolset-toolview").classList.remove("noscroll");
+}
+
+
 
 
 function expandConsumable(Consume) {
-    // Get the values from the tool card
-    var toolName = tool.querySelector('.toolname').innerText;
 
-    var quantity = tool.querySelector('.tool-quantity').innerText;
-    //// var quantity = document.querySelector('.tool-quantity').innerText.split(':')[1].trim();
+    // GET THE VALUES FROM THE TOOL CARD
+    var consumeId = Consume.querySelector('.con-id').innerText;
+    var consumeName = Consume.querySelector('.carmodel').innerText;
+    var quantity = Consume.querySelector('.consumable-quantity').innerText;
+    var consumepic = Consume.querySelector('.carpic');
+    var consumeImg = consumepic.getAttribute('src');
+    var lastupdate = Consume.querySelector('.con-last-update').innerText;
 
-    var toolpic = tool.querySelector('.toolpic');
-    var toolImg = toolpic.getAttribute('src');
+    // FILL THE INPUT FIELDS IN THE FORM
+    document.querySelector('.form-conname').innerText = consumeName;
+    document.querySelector('.form-con-quantity').innerText = "Current Stock: " + quantity;
+    document.querySelector('.form-con-lastupdate').innerText = lastupdate;
+    document.getElementById("formConsImg").setAttribute("src", consumeImg);
+    document.getElementById("formConId").setAttribute("value", consumeId);
+    document.getElementById("stock").setAttribute("value", quantity.split(' ')[0].trim());
+    document.querySelector('.form-con-stock-label').innerText = "Current Stock update (" + quantity.split(' ')[1].trim() + ")";
 
-    // var toolstatus = document.querySelector('.tool-updater').innerText;
-    var lastupdate = document.querySelector('.last-update').innerText;
-
-
-
-    // Fill the input fields in the form
-    document.querySelector('.form-toolname').innerText = toolName;
-    document.querySelector('.form-tool-quantity').innerText = quantity;
-    document.querySelector('.form-tool-lastupdate').innerText = lastupdate;
-    // document.getElementById("quantity").value = quantity;
-    //// document.getElementById("formToolImg").value = toolImg;
-    //// toolpic.getAttribute('href').value = toolImg;
-    document.getElementById("formToolImg").setAttribute("src", toolImg)
-    // document.getElementById("toolstatus").value = toolstatus;
-
-    // Show the popup form
-    //// document.getElementById("update-form").style.display = "block";
-    document.getElementById("toolUpdatePopUp").setAttribute("class", "background-blurer");
+    // SHOW THE POPUP FORM
+    document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-blurer");
+    document.getElementsByClassName("vehicle-data-board").classList.toggle("noscroll");
 }
+
+
+function closeDetailedConsumable() {
+
+    // CLOSE THE POPUP FORM
+    document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-blurer display-none");
+    document.getElementsByClassName("vehicle-data-board").classList.remove("noscroll");
+}
+
+
+
+function leaveDeleteConfirmation(Leave) {
+    // GET THE VALUES FROM THE LEAVE TABLE
+
+    // FILL THE INPUT FIELDS IN THE FORM
+    document.getElementById("form-leave-id").setAttribute("value", Leave);
+
+    // SHOW THE POPUP FORM
+    document.getElementById("popupWindow").classList.remove("display-none");
+}
+
+
+function closeleaveDeleteConfirmation() {
+
+    // CLOSE THE POPUP FORM
+    document.getElementById("popupWindow").classList.toggle("display-none");
+    // document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
+    // document.getElementsByClassName("databoard").classList.remove("noscroll");
+}
+
+
+
+
+// POPUP FORM CLOSING METHOD TEMPLATE
+//// function closeThisPopup() {
+////     var popupDiv = document.getElementById('thePopUp');
+////     popupDiv.style.display = 'none';
+//// }

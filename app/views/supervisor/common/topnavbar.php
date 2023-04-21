@@ -7,7 +7,7 @@
             <img src="<?php echo URL_ROOT; ?>public/images/profile/default.png" class="width-rem-2p5 profileImg" alt="profilepic" />
             <div class="profilemenu">
                 <button onclick="profiledropdown()" class="arrowbtn">
-                    <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="width-rem-0p75" alt="drop">
+                    <img src="<?php echo URL_ROOT; ?>public/images/drop.png" class="width-rem-0p75" alt="drop" onclick="profiledropdown()">
                 </button>
                 <div id="profileDropdown" class="profilemenu-content">
                     <a href="<?php echo URL_ROOT; ?>Users/logout">Log out</a>

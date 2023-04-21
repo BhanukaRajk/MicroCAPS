@@ -53,7 +53,8 @@
 }
 
 .submit-button:hover {
-    background-color: #017EFA22;
+    background-color: #017EFA;
+    color: #FFFFFF;
 }
 
 .reset-button {
@@ -68,11 +69,15 @@
     border-radius: 0.5rem;
     height: 2.5rem;
     cursor: pointer;
-    transition: 5sec;
+    transition: 0.25sec;
 }
 
 .reset-button:hover {
-    background-color: #FD5F0022;
+    background-color: #FD5F00;
+    color: #FFFFFF;
+
+    transition: 0.25sec;
+
 }
 
 .form-input {

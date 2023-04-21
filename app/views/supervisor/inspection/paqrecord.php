@@ -7,8 +7,8 @@
 
 
 <section>
-    <div class="paq-form-screen">
-        <div class="paq-form-area">
+    <div class="content">
+        <div class="paq-form-margin">
 
 
             <div class="paq-form-header-box">

@@ -947,7 +947,7 @@ input:not(:placeholder-shown)~label.form-label {
 }
 
 input:not(:focus)~label.form-label {
-    color: #ced4da;
+    color: #718394;
 }
 
 input.red:focus {
@@ -1497,10 +1497,42 @@ p.grey-indicator {
 }
 
 
+.no-data {
+    width: 880px;
+    height: 520px;
 
+    background-color: #FFFFFF;
+
+    /* box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2); */
+    border-radius: 24px;
+
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 30px !important;
+    line-height: 30px !important;
+    text-align: center;
+
+}
+
+.no-data-icon {
+    width: auto;
+    height: 15rem;
+
+    margin: 2rem;
+}
 
 
 
 .mouse-pointer {
     cursor: pointer;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+.TT {
+    border: 1px solid #000;
 }

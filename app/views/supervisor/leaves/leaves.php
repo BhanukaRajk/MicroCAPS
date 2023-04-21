@@ -7,18 +7,26 @@
 
 <section id="main" class="sup-leave-list-page">
 
-<?php
-    $messege = $_SESSION['return_message'];
-    $_SESSION['return_message'] = '';    
-?>
+    <?php
+        // $messege = $_SESSION['return_message'];
 
-    <div id="messagebox" class="hideme"><?php echo $messege;?></div>
+        $success_message = $_SESSION['success_message'];
+        $error_message = $_SESSION['error_message'];
 
-<?php  
-    echo ($messege == '') ? '<div class="sup-leave-list-content">' : '<div class="sup-leave-list-content">
-    <script type="text/javascript">myFunction();</script>
-     ';
-?>
+        $_SESSION['success_message'] = '';
+        $_SESSION['error_message'] = '';
+    ?>
+
+    <?php
+        echo ($error_message == '') ? '<div id="messagebox" class="hideme success-msg"><div><strong>SUCCESS!</strong></div><div>'. $success_message .'</div></div>' : 
+        '<div id="messagebox" class="hideme error-msg"><div><strong>ERROR!</strong></div><div>'. $error_message .'</div></div>';
+    ?>
+
+    <?php  
+        echo ($error_message == '' and $success_message == '') ? '<div class="sup-leave-list-content">' : '<div class="sup-leave-list-content">
+        <script type="text/javascript">notifyMe();</script>
+        ';
+    ?>
 
     <!-- TAKE 2REM MARGIN FROM LEFT AND RIGHT -->
 
@@ -49,6 +57,7 @@
                 foreach ($data['LeaveDetails'] as $value) {
                     echo '<div class="div-ender"></div>
                             <div class="sup-leave-list-non-edit">
+                                <div class="display-none leave-identifier">' . $value->LeaveId . '</div>
                                 <div class="leave-value">' . $value->EmployeeId . '</div>
                                 <div class="leave-value">' . $value->Firstname . '</div>
                                 <div class="leave-value">' . $value->Lastname . '</div>
@@ -63,12 +72,13 @@
                                     </div>
                                 </form>
     
-                                <form method="POST" action="'.URL_ROOT.'Supervisors/removeleave">
+                                <!-- <form method="POST" action="'.URL_ROOT.'Supervisors/removeleave"> -->
                                 <div class="leave-edit-info">
-                                    <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
-                                    <input type="submit" name="remove" class="delete-button" value="Remove">
+                                    <!-- <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
+                                    <input type="submit" name="remove" class="delete-button" value="Remove"> -->
+                                    <button onclick="leaveDeleteConfirmation('. $value->LeaveId .')" class="delete-button">Remove</button>
                                     </div>
-                                </form>
+                                <!-- </form> -->
                                 
                             </div>';
                 }
@@ -89,22 +99,26 @@
 </section>
 
     <!-- DELETE CONFIRMATION POPUP BOX -->
-    <div class="delete-conf-blur horizontal-centralizer" id="popupWindow">
+    <div class="delete-conf-blur horizontal-centralizer display-none" id="popupWindow">
         <div class="vertical-centralizer">
 
-            <div class="del-confirm-box">
-                <div class="del-confirm-box-content">
-                    <div class="del-confirm-msg-box">Are you sure?</div>
-                    <div class="del-conf-button-set">
-                        <div class="del-conf-button-box">
-                            <button onclick="confirmDeletion()" class="delete-button-2">Remove</button>
-                        </div>
-                        <div class="del-conf-button-box">
-                            <button onclick="closePopup()" class="edit-button-2">Cancel</button>
+                <div class="del-confirm-box">
+                    <div class="del-confirm-box-content">
+                        <div class="del-confirm-msg-box">Are you sure?</div>
+                        <div class="del-conf-button-set">
+                            <div class="del-conf-button-box">
+                                <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/removeleave">
+                                    <input type="hidden" name="leave_id" id="form-leave-id">
+                                    <button type="submit" class="delete-button-2">Remove</button>
+                                    <!-- <button onclick="confirmDeletion()" class="delete-button-2">Remove</button> -->
+                                </form>
+                            </div>
+                            <div class="del-conf-button-box">
+                                <button onclick="closeleaveDeleteConfirmation()" class="edit-button-2">Cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
         </div>
     </div>

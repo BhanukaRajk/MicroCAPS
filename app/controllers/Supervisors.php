@@ -292,7 +292,7 @@ class Supervisors extends controller
 
                 if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
 
-                    $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
+                    $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
                     $data['url'] = getUrl();
                     $this->view('supervisor/leaves/addleave', $data);
                 } else {
@@ -302,7 +302,7 @@ class Supervisors extends controller
 
                     if ($diff <= 1) {
 
-                        $_SESSION['return_message'] = 'Please enter a valid date! ';
+                        $_SESSION['error_message'] = 'Please enter a valid date! ';
 
                         $data['url'] = getUrl();
                         $this->view('supervisor/leaves/addleave', $data);
@@ -310,9 +310,9 @@ class Supervisors extends controller
 
 
                         if ($this->supervisorModel->addleave($data['employeeId'], $data['leavedate'], $data['reason'])) {
-                            $_SESSION['return_message'] = 'Success! New record saved';
+                            $_SESSION['success_message'] = 'Success! New record saved';
                         } else {
-                            $_SESSION['return_message'] = 'Error! record saving failed!';
+                            $_SESSION['error_message'] = 'Error! record saving failed!';
                         }
 
                         redirect('Supervisors/leaves');
@@ -321,7 +321,7 @@ class Supervisors extends controller
             } else {
 
 
-                $_SESSION['return_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
+                $_SESSION['error_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
 
                 $data['url'] = getUrl();
                 $this->view('supervisor/leaves/addleave', $data);
@@ -383,7 +383,7 @@ class Supervisors extends controller
                     if (($data['employeeId'] == $data['EditorDetails']->EmployeeId) && 
                         ($data['leavedate'] == $data['EditorDetails']->LeaveDate)) {
 
-                        $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
+                        $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
                         $data['url'] = getUrl();
                         $this->view('supervisor/leaves/editleave', $data);
 
@@ -396,16 +396,16 @@ class Supervisors extends controller
 
                 if ($diff <= 1) {
 
-                    $_SESSION['return_message'] = 'Please enter a valid date! ';
+                    $_SESSION['error_message'] = 'Please enter a valid date! ';
                     $data['url'] = getUrl();
                     $this->view('supervisor/leaves/editleave', $data);
 
                 } else {
 
                     if ($this->supervisorModel->EditLeave($data['employeeId'], $data['leavedate'], $data['reason'], $data['leaveId'])) {
-                        $_SESSION['return_message'] = 'Changes saved!';
+                        $_SESSION['success_message'] = 'Changes saved!';
                     } else {
-                        $_SESSION['return_message'] = 'Error! Could not save changes..';
+                        $_SESSION['error_message'] = 'Error! Could not save changes..';
                     }
 
                     redirect('Supervisors/leaves');
@@ -414,7 +414,7 @@ class Supervisors extends controller
                     
             } else {
 
-                $_SESSION['return_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
+                $_SESSION['error_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
                 $data['url'] = getUrl();
                 $this->view('supervisor/leaves/editleave', $data);
 
@@ -422,7 +422,7 @@ class Supervisors extends controller
 
         } else {
 
-                $_SESSION['return_message'] = 'Request failed! :(';
+                $_SESSION['error_message'] = 'Request failed! :(';
                 $data['url'] = getUrl();
                 $this->view('supervisor/leaves/editleave', $data);
 
@@ -499,7 +499,7 @@ class Supervisors extends controller
 
                 if (($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) && ($leave_id != $data['leaveId'])) {
 
-                    $_SESSION['return_message'] = 'Current employee already requested a leave on this date!';
+                    $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
                     $data['url'] = getUrl();
                     // $this->view('supervisor/leaves/editleave', $data);
 
@@ -510,7 +510,7 @@ class Supervisors extends controller
 
                     if ($diff <= 1) {
 
-                        $_SESSION['return_message'] = 'Please enter a valid date! ';
+                        $_SESSION['error_message'] = 'Please enter a valid date! ';
 
                         $data['url'] = getUrl();
                         // $this->view('supervisor/leaves/editleave', $data);
@@ -518,9 +518,9 @@ class Supervisors extends controller
                     } else {
 
                         if ($this->supervisorModel->EditLeave($data['employeeId'], $data['leavedate'], $data['reason'], $data['leaveId'])) {
-                            $_SESSION['return_message'] = 'Changes saved!';
+                            $_SESSION['success_message'] = 'Changes saved!';
                         } else {
-                            $_SESSION['return_message'] = 'Error! Could not save changes..';
+                            $_SESSION['error_message'] = 'Error! Could not save changes..';
                         }
 
                         // redirect('Supervisors/leaves');
@@ -528,7 +528,7 @@ class Supervisors extends controller
                 }
             } else {
 
-                $_SESSION['return_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
+                $_SESSION['error_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
                 $data['url'] = getUrl();
                 // $this->view('supervisor/leaves/editleave', $data);
 
@@ -566,19 +566,19 @@ class Supervisors extends controller
             if ($this->supervisorModel->getLeaveByID($data['LeaveID'])) {
 
                 if ($this->supervisorModel->removeleave($data['LeaveID'])) {
-                    $_SESSION['return_message'] = 'Record deletion Success!';
-                    // $_SESSION['success_msg'] = 'New record saved!';
+                    // $_SESSION['return_message'] = 'Record deletion Success!';
+                    $_SESSION['success_message'] = 'Record deletion Success!';
                 } else {
-                    $_SESSION['return_message'] = 'Error! record deletion failed!';
-                    // $_SESSION['err_msg'] = 'Error! record saving failed!';
+                    // $_SESSION['return_message'] = 'Error! record deletion failed!';
+                    $_SESSION['error_message'] = 'Error! record deletion failed!';
                 }
                 redirect('Supervisors/leaves');
                 // $this->view('supervisor/leaves/leaves', $data);
 
             } else {
 
-                $_SESSION['return_message'] = 'Record has been already deleted!';
-                // $_SESSION['err_msg'] = 'Record has been already deleted!';
+                // $_SESSION['return_message'] = 'Record has been already deleted!';
+                $_SESSION['error_message'] = 'Record has been already deleted!';
 
                 // $data['url'] = getUrl();
                 // $this->view('supervisor/leaves/leaves', $data);
@@ -586,8 +586,8 @@ class Supervisors extends controller
             }
         } else {
 
-            $_SESSION['return_message'] = 'Request failed!';
-            // $_SESSION['err_msg'] = 'Request failed!';
+            // $_SESSION['return_message'] = 'Request failed!';
+            $_SESSION['error_message'] = 'Request failed!';
 
             redirect('Supervisors/leaves');
 

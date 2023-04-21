@@ -9,16 +9,14 @@
 #messagebox {
     min-width: 250px;
     margin-left: -125px;
-    background-color: #081a51;
-    color: #ffffff;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 16px;
 
     box-shadow: 0px 5px 10px rgb(76 92 107 / 15%), 0px 18px 36px rgb(166 175 186 / 20%);
     word-wrap: normal;
 
-    text-align: center;
-    font-size: 17px;
+    font-family: 'Proxima Nova';
+    font-size: 15px;
 
     position: fixed;
     z-index: 10;
@@ -26,17 +24,24 @@
     bottom: 3rem;
   }
 
-.success-message {
+.success-msg {
     background-color: #dffde4;
-    border: 1.5px solid #2c8a3c;
-    color: #2c8a3c;
+    border: 1.5px solid #3cae4f;
+    color: #3cae4f;
 }
 
-.error-message {
+.error-msg {
 
     background-color: #fddfe4;
-    border: 1.5px solid #8a2c3c;
-    color: #8a2c3c;
+    border: 1.5px solid #c82727;
+    color: #c82727;
+}
+
+.success-msg,
+.error-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
   
   #messagebox.shows {

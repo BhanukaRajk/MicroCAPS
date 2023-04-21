@@ -12,9 +12,18 @@ carpic {
     /*height: 50px;*/
     left: 300px;
     top: 90px;
+
+    /* left: 16.25rem;
+    top: 4rem; */
 }
 
 .pagehead {
+    position: sticky;
+    top: 4rem;
+
+    padding-block: 1rem;
+    background-color: #F2F2F7;
+
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
@@ -57,6 +66,7 @@ carpic {
     padding: 23px;
 
     background: #FFFFFF;
+    cursor: pointer;
     /* Shadow/light */
 
     box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
@@ -147,7 +157,7 @@ carpic {
 .filterbox {
     position: fixed;
     width: 212px;
-    height: 520px;
+    /* height: 520px; */
     right: 20px;
     /*top: 165px;*/
     /*padding: 23px;*/
@@ -244,7 +254,7 @@ a {
     padding-inline: 30px;
 }
 
-.no-data {
+/* .no-data {
     width: 880px;
     height: 520px;
 
@@ -260,7 +270,7 @@ a {
     font-size: 24px !important;
     line-height: 30px !important;
 
-}
+} */
 
 
 .background-blurer {
