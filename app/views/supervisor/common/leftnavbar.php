@@ -50,11 +50,11 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Test run
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "toolsView") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/toolsView">
+            <a class="<?php echo ($data['url'][1] == "viewTools") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/viewTools">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon10.png" class="width-rem-1p25" alt="icon7" />Tools
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "consumableview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/consumableview">
+            <a class="<?php echo ($data['url'][1] == "viewConsumables") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/viewConsumables">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon9.png" class="width-rem-1p25" alt="icon7" />Consumables
             </a>
         </li>

@@ -46,6 +46,8 @@
     display: flex;
     flex-direction: row;
 
+    cursor: default;
+
     padding: 1rem;
 }
 
@@ -103,3 +105,14 @@
 
     color: #1c1f37a0;
 }
+
+.active, .sup-leave-list-non-edit:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+  }

@@ -80,6 +80,9 @@
                                     </div>
                                 <!-- </form> -->
                                 
+                            </div>
+                            <div class="panel">
+                                <p>' . $value->Reason . '</p>
                             </div>';
                 }
 

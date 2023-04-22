@@ -5,23 +5,22 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
+<?php $test_data = $data['preTestData']; ?>
 
 <section>
     <div class="content">
         <div class="paq-form-margin">
 
 
-            <div class="paq-form-header-box">
+            <div class="paq-form-head">
                 <div class="paq-form-heading">
-                    <div class="paq-title">Quality Inspection - CB619256612L</div>
-                    <div class="paq-back-button-box">
-                        <button type="button" class="paq-back-button">Go back</button>
-                    </div>
+                    <div class="form-title">Quality Inspection - <?php echo $test_data->ChassisNo; ?></div>
+                    <div class="vehicle-model">Vehicle model : <?php echo $test_data->Model; ?></div>
+                    <div class="chassis-no">Chassis No : <?php echo $test_data->ChassisNo; ?></div>
+                    <div class="engine-no">Engine No : <?php echo $test_data->EngineNo; ?></div>    
                 </div>
-                <div>
-                    <div class="paq-vehicle-model">Vehicle model : CR345298D4</div>
-                    <div class="chassis-no">Chassis No : CR345298D4</div>
-                    <div class="engine-no">Engine No : EN562VD59J5N37</div>
+                <div class="paq-back-button-box">
+                    <button type="button" class="back-button">Go back</button>
                 </div>
             </div>
 
@@ -38,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class=""></div>
+                    <div> </div>
 
                     <div class="">
                         <div class="paq-label">
@@ -60,7 +59,7 @@
                         </div>
                     </div>
 
-                    <div class=""> </div>
+                    <div> </div>
 
                     <div class="display-flex-column">
                         <div class="paq-label">
