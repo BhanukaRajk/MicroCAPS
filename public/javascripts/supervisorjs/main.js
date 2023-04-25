@@ -118,6 +118,7 @@ function expandTool(Tool) {
 
     // GET THE VALUES FROM THE TOOL CARD
     var toolName = Tool.querySelector('.toolname').innerText;
+    var status = Tool.querySelector('.tool-status').innerText;
     var quantity = Tool.querySelector('.tool-quantity').innerText;
     var toolpic = Tool.querySelector('.toolpic');
     var toolImg = toolpic.getAttribute('src');
@@ -125,6 +126,19 @@ function expandTool(Tool) {
 
     // FILL THE INPUT FIELDS IN THE FORM
     document.querySelector('.form-toolname').innerText = toolName;
+
+    if(status === "Normal") {
+        document.querySelector('#status-opt1').innerText = status;
+        document.getElementById("status-opt1").setAttribute("value", status);
+        document.querySelector('#status-opt2').innerText = "Need an attention";
+        document.getElementById("status-opt2").setAttribute("value", "Need an attention");
+    } else {
+        document.querySelector('#status-opt1').innerText = status;
+        document.getElementById("status-opt1").setAttribute("value", status);
+        document.querySelector('#status-opt2').innerText = "Normal";
+        document.getElementById("status-opt2").setAttribute("value", "Normal");
+    }
+
     document.querySelector('.form-tool-quantity').innerText = quantity;
     document.querySelector('.form-tool-lastupdate').innerText = lastupdate;
     document.getElementById("formToolImg").setAttribute("src", toolImg);
@@ -175,6 +189,27 @@ function closeDetailedConsumable() {
     // CLOSE THE POPUP FORM
     document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-blurer display-none");
     document.getElementsByClassName("vehicle-data-board").classList.remove("noscroll");
+}
+
+
+function consumeDeleteConfirmation() {
+    // GET THE VALUES FROM THE LEAVE TABLE
+
+    // FILL THE INPUT FIELDS IN THE FORM
+    const ConsumableId = document.querySelector('.form-conid').getAttribute('value');
+    document.getElementById("del-form-con-id").setAttribute("value", ConsumableId);
+
+    // SHOW THE POPUP FORM
+    document.getElementById("popupWindow").classList.remove("display-none");
+}
+
+
+function closeConsumeDeleteConfirmation() {
+
+    // CLOSE THE POPUP FORM
+    document.getElementById("popupWindow").classList.toggle("display-none");
+    // document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
+    // document.getElementsByClassName("databoard").classList.remove("noscroll");
 }
 
 

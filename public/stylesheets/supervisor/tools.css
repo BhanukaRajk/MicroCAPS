@@ -315,6 +315,18 @@
     margin-block: 20px;
 }
 
+#toolUpdatePopUp #formToolStatus {
+    width: 18rem;
+    padding: 0.75rem;
+
+    margin-block-end: 2rem;
+
+    font-size: initial;
+    border: 1px solid grey;
+    color: grey;
+    border-radius: 0.5rem;
+}
+
 
 .border-div {
     border-right: #bbbbbb solid 1px;

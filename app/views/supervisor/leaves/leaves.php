@@ -3,31 +3,10 @@
 
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/notification.php'; ?>
 
 
 <section id="main" class="sup-leave-list-page">
-
-    <?php
-        // $messege = $_SESSION['return_message'];
-
-        $success_message = $_SESSION['success_message'];
-        $error_message = $_SESSION['error_message'];
-
-        $_SESSION['success_message'] = '';
-        $_SESSION['error_message'] = '';
-    ?>
-
-    <?php
-        echo ($error_message == '') ? '<div id="messagebox" class="hideme success-msg"><div><strong>SUCCESS!</strong></div><div>'. $success_message .'</div></div>' : 
-        '<div id="messagebox" class="hideme error-msg"><div><strong>ERROR!</strong></div><div>'. $error_message .'</div></div>';
-    ?>
-
-    <?php  
-        echo ($error_message == '' and $success_message == '') ? '<div class="sup-leave-list-content">' : '<div class="sup-leave-list-content">
-        <script type="text/javascript">notifyMe();</script>
-        ';
-    ?>
-
     <!-- TAKE 2REM MARGIN FROM LEFT AND RIGHT -->
 
         <!-- CONTENT WINDOW -->
@@ -74,9 +53,9 @@
     
                                 <!-- <form method="POST" action="'.URL_ROOT.'Supervisors/removeleave"> -->
                                 <div class="leave-edit-info">
-                                    <!-- <input type="hidden" name="leave_id" value="'. $value->LeaveId .'">
+                                    <!-- <input type="hidden" name="leave_id" value="', $value->LeaveId ,'">
                                     <input type="submit" name="remove" class="delete-button" value="Remove"> -->
-                                    <button onclick="leaveDeleteConfirmation('. $value->LeaveId .')" class="delete-button">Remove</button>
+                                    <button class="delete-button" onclick="leaveDeleteConfirmation(\''.$value->LeaveId. '\')">Remove</button>
                                     </div>
                                 <!-- </form> -->
                                 

@@ -356,7 +356,13 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT * FROM `consumable`;'
+//            'SELECT * FROM `consumable`;'
+            'SELECT `ConsumableId`, `ConsumableName`, 
+                        `Volume`, `Weight`, 
+                        DATE(`LastUpdate`) AS `UDate`,
+                        TIME(`LastUpdate`) AS `UTime`, 
+                        `LastUpdateBy`, `Image` FROM `consumable`;'
+
         );
 
         $consumables = $this->db->resultSet();

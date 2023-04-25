@@ -28,10 +28,11 @@
             echo '<div class="toolcard" onclick="expandTool(this)">
                     <div class="cardhead">
                       <div class="cardid">
-                        <div class="toolname">' . $tool->ToolName . '</div>
-                        <div class="tool-quantity">Quantity: ' . $tool->quantity . '</div>
+                        <div class="toolname">'. $tool->ToolName .'</div>
+                        <div class="tool-quantity">Quantity: '. $tool->quantity .'</div>
                       </div>
                       <div class="toolstatuscolor">
+                        <div class="tool-status display-none">'. $tool->Status .'</div>
                         <div class="status-circle ' . (($tool->Status == "Normal") ? 'status-green-circle' : 'status-orange-circle') . ' "></div>
                       </div>
                     </div>
@@ -140,37 +141,29 @@
               <div class="form-tool-lastupdate">Last update: 10 February 2023 at 12.25 PM</div>
             </div>
 
-            <div class="horizontal-centralizer margin-top-4">
-              <div>
 
-                <select name="status" id="formToolStatus" class="form-tool-status">
-                  <?php
-                    if(TRUE) {
-                      echo '<option value="Normal">Normal</option>
-                            <option value="Need an attention">Need an attention</option>';
-                    } else {
-                      echo '<option value="Need an attention">Need an attention</option>
-                            <option value="Normal">Normal</option>';
-                    }
-                    ?>
-                </select>
+            <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/updateThisTool">
+              <div class="horizontal-centralizer margin-top-4">
+                <div>
 
-                <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
-                <label class="form-label blue">Current stock update <?php echo (NULL == NULL) ? '(Litres)' : '(Kgs)'; ?></label>
+                  <select name="tool-status" id="formToolStatus" class="form-tool-status">
+                    <option id="status-opt1" value="Need an attention">Need an attention</option>
+                    <option id="status-opt2" value="Normal">Normal</option>
+                  </select>
 
+  <!--                <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />-->
+  <!--                <label class="form-label blue">Current stock update</label>-->
 
+                </div>
               </div>
-            </div>
-            <form method="POST">
               <div class="display-flex-row justify-content-center margin-top-2">
-                <div><button type="button" class="edit-button consume-update">Update</button></div>
+                <input type="hidden" name="tool_id_status" id="status-form-tool-id">
+                <div><button type="submit" class="edit-button consume-update">Update</button></div>
               </div>
             </form>
-            <form method="POST">
               <div class="display-flex-row justify-content-center marginy-3">
                 <div><button onclick="showToolDelConfBox()" class="delete-button consume-update">Remove item</button></div>
               </div>
-            </form>
             <div class="display-flex-row justify-content-center margin-top-2">
               <div><a onclick="closeToolUpdatePopup()" class="mouse-pointer">Close</a></div>
             </div>

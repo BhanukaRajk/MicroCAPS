@@ -70,10 +70,10 @@
     <!-- LEFT NAVIGATION BAR MENU LIST END -->
     </ul>
 
-    <div class="navigationtoggle" onclick="navbartoggle(this)">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-    </div>
+<!--    <div class="navigationtoggle" onclick="navbartoggle(this)">-->
+<!--        <div class="bar1"></div>-->
+<!--        <div class="bar2"></div>-->
+<!--        <div class="bar3"></div>-->
+<!--    </div>-->
 
 </header>

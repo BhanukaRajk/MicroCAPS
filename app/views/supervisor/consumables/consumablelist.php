@@ -37,7 +37,7 @@
                       <img src="' . URL_ROOT . 'public/images/consumables/' , $item->Image , '" class="carpic" alt="'. $item->ConsumableName .'">
                     </div>
                     <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'available' : 'lower') : (($item->Volume >= 60) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'Available' : 'Low in stock') : (($item->Volume >= 60) ? 'Available' : 'Low in stock'), '</div>
-                    <div class="chassisno con-last-update">Last update: ', $item->LastUpdate, '</div>
+                    <div class="chassisno con-last-update">Last update: ', $item->UDate ,' at ', substr($item->UTime, 0, 5) ,' </div>
                   </div>';
           }
 
@@ -112,14 +112,14 @@
 
 
 
-        <!-- THIS IS THE POP UP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
+        <!-- THIS IS THE POPUP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
         <div class="background-blurer display-none" id="consumeUpdatePopUp">
           <div class="consumable-detail-popup position-fixed">
 
             <div class="popup-left">
               <div class="horizontal-centralizer cs-popup-csname">
-                <input class="form-conid display-none" id="formConId"></input>
-                <div class="form-conname">MOTUL 3000 4T Plus</div>
+                <input class="form-conid display-none" id="formConId">
+                <div class="form-conname">Consumable Name</div>
               </div>
               <div class="horizontal-centralizer">
                 <div class="">
@@ -127,7 +127,7 @@
                 </div>
               </div>
               <div class="horizontal-centralizer">
-                <div class="form-con-quantity">Current Stock: 5 Liters</div>
+                <div class="form-con-quantity">Current Stock</div>
               </div>
             </div>
 
@@ -138,30 +138,24 @@
               </div>
 
               <div class="horizontal-centralizer last-update margin-top-3">
-                <div class="form-con-lastupdate">Last update: 10 February 2023 at 12.25 PM</div>
+                <div class="form-con-lastupdate">Last update date and time</div>
               </div>
 
               <div class="horizontal-centralizer margin-top-4">
                 <div>
-
                   <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
-                  <label class="form-label blue form-con-stock-label">Current stock update <?php echo (NULL == NULL) ? '(Litres)' : '(Kgs)'; ?></label>
-
-                  <!-- <?php //echo ($item['weight'] == NULL) ? 'L' : 'Kg' ;
-                        ?> -->
-
+                  <label class="form-label blue form-con-stock-label">Current stock update</label>
                 </div>
               </div>
+
               <form method="POST">
                 <div class="display-flex-row justify-content-center margin-top-2">
                   <div><button type="submit" class="edit-button consume-update">Update</button></div>
                 </div>
               </form>
-              <form method="POST">
                 <div class="display-flex-row justify-content-center marginy-3">
-                  <div><button type="submit" class="delete-button consume-update">Remove item</button></div>
+                  <div><button onclick="consumeDeleteConfirmation()" class="delete-button consume-update">Remove item</button></div>
                 </div>
-              </form>
               <div class="display-flex-row justify-content-center margin-top-2">
                 <div><a onclick="closeDetailedConsumable()" class="mouse-pointer">Close</a></div>
               </div>
@@ -181,10 +175,13 @@
                 <div class="del-confirm-msg-box">Are you sure?</div>
                 <div class="del-conf-button-set">
                   <div class="del-conf-button-box">
-                    <button type="submit" class="delete-button-2">Remove</button>
+                    <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/remove#leave">
+                      <input type="hidden" name="consumable_id" id="del-form-con-id">
+                      <button type="submit" class="delete-button-2">Remove</button>
+                    </form>
                   </div>
                   <div class="del-conf-button-box">
-                    <button onclick="closePopup()" class="edit-button-2">Cancel</button>
+                    <button onclick="closeConsumeDeleteConfirmation()" class="edit-button-2">Cancel</button>
                   </div>
                 </div>
               </div>
