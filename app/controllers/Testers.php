@@ -185,20 +185,6 @@ class Testers extends controller {
         }
     }
 
-    // public function pdiReseults() {
-
-    //     if(!isLoggedIn()){
-    //         redirect('users/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //         $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
-    //         $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
-    //         $data['pdiCheckList'] = $this->testerModel->pdiCheckList($data['onPDIVehicles'][0]->ChassisNo);
-    //         $this->view('tester/pdiresults',$data);
-    //     }
-    // }
-
     public function pdi($id) {
 
         if(!isLoggedIn()){
@@ -310,6 +296,27 @@ class Testers extends controller {
         } else {
             $data['userDetails'] = $this->testerModel->userDetails($_SESSION['_id']);
             $this->view('tester/settings',$data);
+        }
+    }
+
+    public function assembly() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->view('tester/assembly');
+        }
+    }
+
+    public function assemblystage($stage) {
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $this->view('tester/'.$stage);
         }
     }
 
