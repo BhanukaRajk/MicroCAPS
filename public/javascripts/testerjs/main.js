@@ -1,3 +1,8 @@
+import select from './select.js';
+
+/* Common */
+// Logout Dropdown
+
 const drop = document.getElementById("drop");
 const logout = document.getElementById("logout");
 

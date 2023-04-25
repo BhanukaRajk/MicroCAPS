@@ -13,6 +13,7 @@
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
             <a class="<?php echo ($data['url'][1] == "defect_sheet") ? 'active' : '' ; ?>" href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Defect Sheet</a>
+            <a class="<?php echo ($data['url'][1] == "assembly") || ($data['url'][1] == "assemblystage") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/assembly"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
             <a class="<?php echo ($data['url'][1] == "add_defect") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/add_defect"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Record Defect</a>
             <a class="<?php echo ($data['url'][1] == "pdi_results") || ($data['url'][1] == "pdi") ? 'active' : '' ; ?>" href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />PDI Check list</a>
         </li>
