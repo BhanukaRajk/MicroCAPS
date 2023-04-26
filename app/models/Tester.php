@@ -401,4 +401,47 @@ class Tester {
             return false;
         }
     }
+
+    public function getComponentStatus($chassisNo, $status = '%', $stage = '%') {
+        $this->db->query(
+            'SELECT `stage-vehicle-process`.Status, component.PartName, component.StageNo, component.Weight
+                    FROM `stage-vehicle-process`
+                    INNER JOIN component
+                    ON `stage-vehicle-process`.PartNo = component.PartNo
+                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND component.StageNo LIKE :stage;'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':stage', $stage);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
+
+    public function assemblyDetails($order = 'DESC')
+    {
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4")
+                ORDER BY `vehicle`.ChassisNo '.$order.';'
+        );
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
 }
+
