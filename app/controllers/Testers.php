@@ -382,7 +382,7 @@ class Testers extends controller {
                 $stage = 'S4';
 
             $data['stageSum'] = [
-                'pending' => json_encode($this->Sum($this->testerModel->getComponentStatus($chassisNo, 'Pending', $stage), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage), "Weight")),
+                'pending' => json_encode($this->Sum($this->testerModel->getComponentStatus($chassisNo, 'Pending', $stage), "Weight") + $this->Sum($this->testerModel->getComponentStatus($chassisNo, 'OnHold', $stage), "Weight")),
                 'connected' => json_encode($this->Sum($this->testerModel->getComponentStatus($chassisNo, 'Connected', $stage), "Weight"))
             ];
             $data['stageDetails'] = [
