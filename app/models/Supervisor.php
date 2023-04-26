@@ -114,10 +114,10 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT CONCAT(`Firstname`," ",`Lastname`) AS `empName`, `lastLog` 
+            'SELECT CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime` 
             FROM `employee-logs`,`employee` 
             WHERE `employee-logs`.`EmployeeId` = `employee`.`EmployeeId` 
-            ORDER BY `lastLog` LIMIT 6;'
+            ORDER BY `employee-logs`.`lastLog` DESC LIMIT 6;'
         );
 
         $lastLogs = $this->db->resultSet();
@@ -506,6 +506,23 @@ class Supervisor
     }
 
 
+    public function viewDamagedParts()
+    {
+        $this->db->query(
+            'SELECT * FROM `component-damage` LIMIT 4;'
+        );
+
+        $damaged_parts = $this->db->resultSet();
+
+        if($damaged_parts) {
+            return $damaged_parts;
+        } else {
+            return FALSE;
+        }
+    }
+
+
+
     public function viewAssemblyLineVehicleNos()
     {
 
@@ -561,5 +578,55 @@ class Supervisor
             return false;
         }
     }
+
+
+    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
+    public function checkConsumeById($consume_id): bool
+    {
+
+        $this->db->query(
+            'SELECT `ConsumableId` FROM `consumable` WHERE `ConsumableId` = :consumable;'
+        );
+
+        $this->db->bind(':consumable', $consume_id);
+        $row = $this->db->single();
+
+        // if ($this->db->rowCount()) {
+        if ($row != NULL) {
+            return true;
+        } else {
+            return false;
+        }
+    
+    }
+
+
+    public function updateConsumableQuantity($consume_id, $quantity, $con_type): bool
+    {
+        if($con_type == 'Lubricant') {
+            $this->db->query(
+                'UPDATE `consumable` SET `Volume` = :quantity 
+                WHERE `ConsumableId` = :consumable;'
+            );
+        } else {
+            $this->db->query(
+                'UPDATE `consumable` SET `Weight` = :quantity 
+                WHERE `ConsumableId` = :consumable;'
+            );
+        }
+        
+
+        $this->db->bind(':consumable', $consume_id);
+        $this->db->bind(':quantity', $quantity);
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 }

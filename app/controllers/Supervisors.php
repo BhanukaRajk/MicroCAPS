@@ -78,7 +78,7 @@ class Supervisors extends controller
             $data['counts'] = $this->supervisorModel->statusCounters();
             $data['assemblyLine'] = $this->supervisorModel->viewAssemblyLineVehicleNos();
             $data['activities'] = $this->supervisorModel->activityLogs();
-            // $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
+            $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
 
             $this->view('supervisor/landing/dashboard', $data);
         }
@@ -621,7 +621,55 @@ class Supervisors extends controller
     }
     public function updateThisConsumable()
     {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ConsumeId' => trim($_POST['form-conid']),
+                'ConsumeType' => trim($_POST['con_type']),
+                'Stock' => trim($_POST['stock'])
+            ];
+
+
+            // if ($this->supervisorModel->checkEmployee($data['employeeId'])) {
+            if ($this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
+
+                if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'])) {
+                    $_SESSION['success_message'] = 'Consumable quantity updated!';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not update information..';
+                }
+
+                // redirect('Supervisors/viewConsumables');
+
+                    
+            } else {
+
+                $_SESSION['error_message'] = 'Oops! The consumable you are trying to update could not be found.';
+                //// $data['url'] = getUrl();
+                //redirect('Supervisors/viewConsumables');
+                //// $this->view('supervisor/consumables/consumablelist', $data);
+
+            }
+
+            redirect('Supervisors/viewConsumables');
+
+        } else {
+
+                $_SESSION['error_message'] = 'Request failed! :(';
+                // $data['url'] = getUrl();
+                redirect('Supervisors/viewConsumables');
+                // $this->view('supervisor/consumables/consumablelist', $data);
+
+        }
     }
+
     public function removeThisConsumable()
     {
     }  

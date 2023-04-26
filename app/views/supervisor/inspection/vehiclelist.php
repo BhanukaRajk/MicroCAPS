@@ -232,54 +232,63 @@
 
                 </div>
 
-                <div class="thisfilter">
-                    <div class="filterbox">
-                        <div class="filterin">Filter by</div>
-                        <div class="">
-                            <hr>
-                        </div>
-                        <div class="">
-                            <ul id="consume_filter">
 
-                                <li>
-                                    <div class="filtertype">Vehicle Type</div>
-                                    <div class="filters">
-                                        <input type="checkbox" id="enoil" name="enoil" checked>
-                                        <label for="enoil">Micro Panda</label>
-                                    </div>
-                                    <div class="filters">
-                                        <input type="checkbox" id="coolant" name="coolant">
-                                        <label for="coolant">Panda Cross</label>
-                                    </div>
-                                    <div class="filters">
-                                        <input type="checkbox" id="grease" name="grease">
-                                        <label for="mg">MG ZH SUV</label>
-                                    </div>
-                                </li>
 
-                                <li>
-                                    <div class="filtertype">Timeline</div>
-                                    <div class="filters">
-                                        <input type="checkbox" id="all" name="all">
-                                        <label for="all">All</label>
-                                    </div>
-                                    <div class="filters">
-                                        <input type="checkbox" id="current" name="current">
-                                        <label for="current">Current</label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="filtertype">Status</div>
-                                    <div class="filters">
-                                        <input type="checkbox" id="available" name="available">
-                                        <label for="available">Accepted</label>
-                                    </div>
-                                    <div class="filters">
-                                        <input type="checkbox" id="lowst" name="lowst">
-                                        <label for="lowst">Not accepted</label>
-                                    </div>
-                                </li>
-                            </ul>
+                <!-- THIS IS THE FILTER BOX -->
+                <div class="toolset-filterbox">
+                    <div class="toolfilter">
+                        <div class="filter-head">Filter by</div>
+                        <div class="line"></div>
+                        <div class="filters">
+
+                            <form method="POST" action="">
+                                <ul id="consume_filter">
+
+                                    <li>
+                                        <div class="filtertype">Vehicle Type</div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="micro-panda" name="micro-panda" checked>
+                                            <label for="micro-panda">Micro Panda</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="panda-cross" name="panda-cross">
+                                            <label for="panda-cross">Panda Cross</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="mg" name="mg">
+                                            <label for="mg">MG ZH SUV</label>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="filtertype">Timeline</div>
+                                        <div class="filters">
+                                            <input type="radio" id="current" name="current" value="Current" checked>
+                                            <label for="current">Current</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="radio" id="all-time" name="all-time" value="All">
+                                            <label for="all-time">All</label>
+                                        </div>
+
+                                    </li>
+                                    <li>
+                                        <div class="filtertype">Status</div>
+                                        <div class="filters">
+                                            <input type="radio" id="acceptance" name="acceptance" value="Accepted">
+                                            <label for="acceptance">Accepted</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="radio" id="non-acceptance" name="non-acceptance" value="Not accepted">
+                                            <label for="non-acceptance">Not accepted</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="radio" id="all-tested" name="all-tested" value="All" checked>
+                                            <label for="all-tested">All</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </form>
                         </div>
                     </div>
                 </div>

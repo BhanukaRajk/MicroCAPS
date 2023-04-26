@@ -219,7 +219,9 @@ dash-section
     justify-content: space-between;
 }
 
-
+.medfont {
+    font-size: small;
+}
 
 
 

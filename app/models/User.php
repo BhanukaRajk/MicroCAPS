@@ -79,4 +79,22 @@ private $db;
         }
     }
 
+
+    public function markActivity($user_id): bool {
+
+        $this->db->query(
+            'UPDATE `employee-logs`
+                SET lastLog = CURRENT_TIMESTAMP
+                WHERE EmployeeId = :user_id'
+        );
+
+        $this->db->bind(':user_id', $user_id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

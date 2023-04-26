@@ -86,6 +86,8 @@
             $_SESSION['_position'] = $user->Position;
             $_SESSION['_profile'] = $user->Image;
 
+            $this->userModel->markActivity($_SESSION['_id']);
+
             redirect($_SESSION['_position'].'s/dashboard');
         }
 

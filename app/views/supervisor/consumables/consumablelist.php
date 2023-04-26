@@ -61,43 +61,45 @@
 
 
         <!-- THIS IS THE FILTER BOX -->
-        <div class="thisfilter">
-          <div class="filterbox">
-            <div class="filterin">Filter by</div>
+        <div class="toolset-filterbox">
+          <div class="toolfilter">
+
+            <div class="filter-head">Filter by</div>
             <div class="line"></div>
-            <div class="">
+            <div class="filters">
+
               <form method="POST" action="">
                 <ul id="consume_filter">
 
                   <li>
                     <div class="filtertype">Consumable Type</div>
                     <div class="filters">
-                      <input type="radio" id="lubricant" name="constype" value="Lubricants">
-                      <label for="lubricant">Lubricants</label>
+                      <input type="radio" id="lubricants" name="cons-type" value="Lubricants">
+                      <label for="lubricants">Lubricants</label>
                     </div>
                     <div class="filters">
-                      <input type="radio" id="grease" name="constype" value="Grease">
+                      <input type="radio" id="grease" name="cons-type" value="Grease">
                       <label for="grease">Grease</label>
                     </div>
                     <div class="filters">
-                      <input type="radio" id="gandl" name="constype" value="All" checked>
-                      <label for="gandl">All</label>
+                      <input type="radio" id="all-cons" name="cons-type" value="All" checked>
+                      <label for="all-cons">All</label>
                     </div>
                   </li>
 
                   <li>
-                    <div class="filtertype">Status</div>
+                    <div class="filtertype">Current Status</div>
                     <div class="filters">
-                      <input type="radio" id="available" name="stockstate" value="Available">
+                      <input type="radio" id="available" name="stock-state" value="Available">
                       <label for="available">Available</label>
                     </div>
                     <div class="filters">
-                      <input type="radio" id="lowst" name="stockstate" value="Low">
+                      <input type="radio" id="lowst" name="stock-state" value="Low">
                       <label for="lowst">Low in stock</label>
                     </div>
                     <div class="filters">
-                      <input type="radio" id="stockall" name="stockstate" value="All" checked>
-                      <label for="gandl">All</label>
+                      <input type="radio" id="any-state" name="stock-state" value="All" checked>
+                      <label for="any-state">All</label>
                     </div>
                     <!-- <div class="filters filter-btn margin-top-5">
                       <div><button type="submit" id="filtering" name="submit" class="filter-button">Search</button></div>
@@ -118,7 +120,6 @@
 
             <div class="popup-left">
               <div class="horizontal-centralizer cs-popup-csname">
-                <input class="form-conid display-none" id="formConId">
                 <div class="form-conname">Consumable Name</div>
               </div>
               <div class="horizontal-centralizer">
@@ -141,6 +142,8 @@
                 <div class="form-con-lastupdate">Last update date and time</div>
               </div>
 
+              <form method="POST" target="">
+
               <div class="horizontal-centralizer margin-top-4">
                 <div>
                   <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
@@ -148,14 +151,17 @@
                 </div>
               </div>
 
-              <form method="POST">
                 <div class="display-flex-row justify-content-center margin-top-2">
+                  <div class="display-none"><input class="form-conid display-none" id="formConId" name="formConId"></div>
+                  <div class="display-none"><input class="form-con-type display-none" id="formConType" name="formConType"></div>
                   <div><button type="submit" class="edit-button consume-update">Update</button></div>
                 </div>
+
               </form>
-                <div class="display-flex-row justify-content-center marginy-3">
+                
+              <div class="display-flex-row justify-content-center marginy-3">
                   <div><button onclick="consumeDeleteConfirmation()" class="delete-button consume-update">Remove item</button></div>
-                </div>
+              </div>
               <div class="display-flex-row justify-content-center margin-top-2">
                 <div><a onclick="closeDetailedConsumable()" class="mouse-pointer">Close</a></div>
               </div>
@@ -224,7 +230,7 @@
                     <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" required>
                   </div>
                   <div class="new-con-add-btn-box">
-                    <div><button class="green-btn width-50px">Add</button></div>
+                    <div><button type="submit" class="green-btn width-50px">Add</button></div>
                     <div><button onclick="closeConsumeAddingPopup()" class="red-btn width-50px">Cancel</button></div>
                   </div>
                 </div>

@@ -69,35 +69,36 @@
 
             <form method="POST" action="">
               <ul id="consume_filter">
+
                 <li>
                   <div class="filtertype">Tool Type</div>
                   <div class="filters">
-                    <input type="radio" id="lubricant" name="constype" value="Lubricants">
-                    <label for="lubricant">Hand Tools</label>
+                    <input type="radio" id="hand-tools" name="tool-type" value="Hand Tools">
+                    <label for="hand-tools">Hand Tools</label>
                   </div>
                   <div class="filters">
-                    <input type="radio" id="grease" name="constype" value="Grease">
-                    <label for="grease">Power Tools</label>
+                    <input type="radio" id="power-tools" name="tool-type" value="Power Tools">
+                    <label for="power-tools">Power Tools</label>
                   </div>
                   <div class="filters">
-                    <input type="radio" id="gandl" name="constype" value="All" checked>
-                    <label for="gandl">All</label>
+                    <input type="radio" id="all-tools" name="tool-type" value="All Tools" checked>
+                    <label for="all-tools">All</label>
                   </div>
                 </li>
 
                 <li>
                   <div class="filtertype">Current Status</div>
                   <div class="filters">
-                    <input type="radio" id="available" name="stockstate" value="Available">
-                    <label for="available">Normal</label>
+                    <input type="radio" id="normal-state" name="tool-state" value="Normal">
+                    <label for="normal-state">Normal</label>
                   </div>
                   <div class="filters">
-                    <input type="radio" id="lowst" name="stockstate" value="Low">
-                    <label for="lowst">Need Attention</label>
+                    <input type="radio" id="na-state" name="tool-state" value="NA">
+                    <label for="na-state">Need Attention</label>
                   </div>
                   <div class="filters">
-                    <input type="radio" id="stockall" name="stockstate" value="All" checked>
-                    <label for="gandl">All</label>
+                    <input type="radio" id="any-state" name="tool-state" value="All" checked>
+                    <label for="any-state">All</label>
                   </div>
                   <!-- <div class="filters filter-btn margin-top-5">
                     <div><button type="submit" id="filtering" name="submit" class="filter-button">Search</button></div>
@@ -113,7 +114,7 @@
 
 
 
-      <!-- THIS IS THE POP UP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
+      <!-- THIS IS THE POPUP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
       <div class="background-blurer display-none" id="toolUpdatePopUp">
         <div class="consumable-detail-popup position-fixed">
 
