@@ -24,7 +24,7 @@
                         <div class="pdi-card">
                             <div class="pdi-card-head">
                                 <div class="pdi-card-main">'.$value->Title.'</div>
-                                
+                                <div class="pdi-card-sub">'.$value->SubTitle.'</div>
 
                                 <div class="pdiresultbox paddingy-3">
                     ';

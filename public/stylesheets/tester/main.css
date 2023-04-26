@@ -5,6 +5,9 @@
 @import 'dashboard.css';
 @import 'vehiclelist.css';
 @import 'chart.css';
+@import 'grid.css';
+@import 'flex.css';
+@import 'padding.css';
 
 body {
     margin: 0;
@@ -538,7 +541,7 @@ h3 {
 /* Display */
 .display-flex-row {
     display: flex !important;
-    flex-direction: row;
+    flex-direction: row !important;
 }
 
 .display-flex-column {
@@ -1369,7 +1372,7 @@ li a:hover:not(.active) {
 
 .page-content {
     left: 20rem;
-    top: 8rem;
+    top: 6rem;
     right: 3rem;
 }
 
@@ -1564,4 +1567,14 @@ select:focus-visible {
 
 .border-radius-1 {
     border-radius:1rem!important;
+}
+
+.next,
+.prev {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--blue);
+    cursor: pointer;
 }
