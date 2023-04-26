@@ -27,7 +27,7 @@ var ctx5 = document.getElementById('stage04').getContext('2d');
 
 var chart2, chart3, chart4, chart5;
 
-let arr = [[chart2,[ctx2, 100]], [chart3,[ctx3, 100]], [chart4,[ctx4, 55]], [chart5,[ctx5, 0]]];
+let arr = [[chart2,[ctx2, 10]], [chart3,[ctx3, 100]], [chart4,[ctx4, 55]], [chart5,[ctx5, 0]]];
 
 arr.forEach(element => {
     element[0] = renderChart(element[1]);

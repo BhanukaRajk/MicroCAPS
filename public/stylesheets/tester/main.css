@@ -1627,3 +1627,7 @@ select:focus-visible {
     color: var(--blue);
     cursor: pointer;
 }
+
+a {
+    text-decoration: none;
+}

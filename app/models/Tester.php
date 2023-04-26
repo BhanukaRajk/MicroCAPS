@@ -67,14 +67,14 @@ class Tester {
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS dispatched
             FROM `vehicle`
-            WHERE `vehicle`.`PDIStatus` = "CM";'
+            WHERE `vehicle`.`CurrentStatus` = "D";'
         );
         $counts[] = $this->db->single();
 
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS onHold
             FROM `vehicle`
-            WHERE `vehicle`.`CurrentStatus` = "Hold";'
+            WHERE `vehicle`.`CurrentStatus` LIKE "S%";'
         );
         $counts[] = $this->db->single();
 

@@ -43,7 +43,7 @@
                         <div class="section-heading font-weight"> Stage 01 </div>
                         <div class="chart-grid-stage">
                             <canvas id="stage01"></canvas>
-                            <label class="chart-grid-stage-add chart-percentage-stage width-rem-3" for="assemblyOverall">100%</label>
+                            <label class="chart-grid-stage-add chart-percentage-stage width-rem-3" for="assemblyOverall">10%</label>
                         </div> 
                     </div>
                 </a>
