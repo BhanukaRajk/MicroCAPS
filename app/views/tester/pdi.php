@@ -67,10 +67,10 @@
     <section class="display-flex-column">
 
         <div id="alert" class="hideme" role="alert"></div>
+</section>
 
-    </section>
-
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>
 
 
 </body>

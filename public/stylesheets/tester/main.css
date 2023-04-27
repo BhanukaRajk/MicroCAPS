@@ -1,5 +1,5 @@
 @import 'flash.css';
-@import 'select.css';
+@import 'selectoption.css';
 @import 'form.css';
 @import 'defect_sheet.css';
 @import 'dashboard.css';
@@ -8,6 +8,10 @@
 @import 'grid.css';
 @import 'flex.css';
 @import 'padding.css';
+@import 'height.css';
+@import 'width.css';
+@import 'display.css';
+@import 'select.css';
 
 body {
     margin: 0;
@@ -1577,4 +1581,11 @@ select:focus-visible {
     line-height: 12px;
     color: var(--blue);
     cursor: pointer;
+}
+
+.result-text {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--white);
 }
