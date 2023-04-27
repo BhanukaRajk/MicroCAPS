@@ -7,7 +7,7 @@
             Employees
         </div>
         <div>
-            <a href="<?php echo URL_ROOT; ?>admins\addEmployee">
+            <a href="<?php echo URL_ROOT; ?>admins\employees\add">
                 <div class="next">
                     <button type="button" class="btn btn-primary btn-noback">Add New Employees</button>
                 </div>
@@ -26,7 +26,7 @@
                                 <div style="background-image:url('. URL_ROOT .'public/images/profile/'.$value->Image.')" class="width-rem-8p5 height-rem-8p5 background-image border-radius-11"></div>
                             </div>
                             <div class="display-flex-row gap-0p5">
-                                <i class="fa-solid fa-pen-to-square edit"></i>
+                                <i class="fa-solid fa-pen-to-square edit" onclick="edit(\'' . $value->EmployeeId . '\')"></i>
                                 <i class="fa-solid fa-trash-can delete" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
                             </div>
                         </div>

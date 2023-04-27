@@ -1,5 +1,5 @@
-<?php require_once APP_ROOT . '/views/admin/includes/header.php'; ?>
-<?php require_once APP_ROOT . '/views/admin/navbar.php'; ?>
+<?php require_once APP_ROOT . '\views\admin\includes\header.php'; ?>
+<?php require_once APP_ROOT . '\views\admin\includes\navbar.php'; ?>
 
 <div class="container2">
     <h3>Edit</h3>

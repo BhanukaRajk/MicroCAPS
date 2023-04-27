@@ -6,6 +6,23 @@ class Admin {
         $this->db = new Database;
     }
 
+    public function assemblyCount()
+    {
+        $this->db->query(
+            'SELECT COUNT(*) as Count
+                FROM `vehicle`
+                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4");'
+        );
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+    
     public function getLastId() {
         $this->db->query('SELECT MAX(EmployeeId) AS id FROM Employee');
 
@@ -20,6 +37,20 @@ class Admin {
 
     public function employeeDetails($position) {
         $this->db->query('SELECT * FROM Employee WHERE Position = :position');
+
+        $this->db->bind(':position', $position);
+
+        $row = $this->db->resultSet();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+    public function employeeCount($position) {
+        $this->db->query('SELECT COUNT(*) as Count FROM Employee WHERE Position = :position');
 
         $this->db->bind(':position', $position);
 
@@ -72,7 +103,8 @@ class Admin {
         }
     }
 
-    public function userDelete($id): bool {
+    public function deleteUser($id): bool {
+
         $this->db->query('DELETE FROM Employee WHERE EmployeeId = :id');
 
         $this->db->bind(':id', $id);
@@ -163,6 +195,26 @@ class Admin {
         }
     }
 
+    public function assemblyDetails($order = 'DESC')
+    {
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4")
+                ORDER BY `vehicle`.ChassisNo '.$order.';'
+        );
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
     public function userDetails($id) {
         $this->db->query(
             'SELECT *
@@ -217,5 +269,6 @@ class Admin {
             return false;
         }
     }
+
 
 }

@@ -14,19 +14,19 @@
                     <div class="admin-dash-emp-count-head">Employees</div>
                     <div class="admin-dash-emp-count-content">
                         <div class="admin-dash-count-box">
-                            <div class="admin-dash-count-box-value">1</div>
+                            <div class="admin-dash-count-box-value"><?php echo $data['managerCount'][0]->Count ?></div>
                             <div class="admin-dash-count-box-category">Manager</div>
                         </div>
                         <div class="admin-dash-count-box">
-                            <div class="admin-dash-count-box-value">4</div>
+                            <div class="admin-dash-count-box-value"><?php echo $data['supervisorCount'][0]->Count ?></div>
                             <div class="admin-dash-count-box-category">Supervisors</div>
                         </div>
                         <div class="admin-dash-count-box">
-                            <div class="admin-dash-count-box-value">10</div>
+                            <div class="admin-dash-count-box-value"><?php echo $data['assemblerCount'][0]->Count ?></div>
                             <div class="admin-dash-count-box-category">Assemblers</div>
                         </div>
                         <div class="admin-dash-count-box">
-                            <div class="admin-dash-count-box-value">5</div>
+                            <div class="admin-dash-count-box-value"><?php echo $data['testerCount'][0]->Count ?></div>
                             <div class="admin-dash-count-box-category">Testers</div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="admin-dash-car-count">
                     <div class="admin-dash-car-count-head">On Assembly Line</div>
                     <div class="admin-dash-car-count-content">
-                        <div class="admin-dash-count-box-value">5</div>
+                        <div class="admin-dash-count-box-value"><?php echo $data['assemblyCount'][0]->Count ?></div>
                         <div class="admin-dash-count-box-category">Vehicles</div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
 
 </section>
 
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/dashboard.js"></script>
 
 

@@ -18,7 +18,7 @@ function addEmployee() {
     let formData = new FormData(form);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MicroCAPS/admins/addEmployee',
+        url: 'http://localhost/MicroCAPS/admins/employees/add',
         data: formData,
         processData: false,
         contentType: false,
@@ -55,7 +55,7 @@ function deleteEmployee($id) {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Admins/employees", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/admins/employees/delete", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("id="+$id);
 }

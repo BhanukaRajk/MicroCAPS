@@ -29,3 +29,13 @@ function addSelect(type,name) {
 function next(id) {
     location.replace(id);
 }
+
+// Redirect
+let assemblyVehicles = document.getElementById("assemblyVehicles");
+
+assemblyVehicles?.addEventListener("change", () => {
+    let selectedValue = assemblyVehicles.value;
+    if (selectedValue) {
+        window.location.href = selectedValue;
+}
+});

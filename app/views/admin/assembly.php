@@ -4,85 +4,54 @@
 <body>
 
     <section class="position-absolute page-content">
-        <div class="display-flex-row margin-bottom-3 align-items-center justify-content-between margin-right-6 margin-bottom-4">
-            <div class="page-heading font-weight">
-                On Going Assembly
-            </div>
-            <div class="custom-select">
-                <select name="vehicles" class="background-none" id="vehicles">
-                    <option value="">Select vehicle</option>
-                    <option value="CN1294B0934">CN1294B0934</option>
-                    <option value="CN1294G0836">CN1294G0836</option>
-                    <option value="CN1294L9302">CN1294L9302</option>
-                </select>
-            </div>
+        <div class="page-heading font-weight  margin-bottom-4">
+            On Assembly Vehicles
         </div>
-        
 
-        <div class="display-flex-row justify-content-around gap-2">
-            <div class="display-flex-column align-items-center justify-content-center border-radius-1 background-white paddingy-5 paddingx-7 gap-1">
-                <div class="section-heading font-weight"> Overall Progress </div>
-                <div class="chart-grid">
-                    <canvas id="assemblyOverall"></canvas>
-                    <label class="chart-grid-add chart-percentage-ao " for="assemblyOverall">60%</label>
-                </div>
-                <div class="display-flex-row justify-content-center gap-0p5">
-                    <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
-                        <div class="dash-graph-color-circle dash-darkblue-circle "></div>
-                        <div>Done</div>
-                    </div>
-                    <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
-                        <div class="dash-graph-color-circle dash-lightblue-circle "></div>
-                        <div>On-going</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row background-none gap-2">
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/stageone">
-                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                        <div class="section-heading font-weight"> Stage 01 </div>
-                        <div class="chart-grid-stage">
-                            <canvas id="stage01"></canvas>
-                            <label class="chart-grid-stage-add chart-percentage-stage width-rem-3" for="assemblyOverall">100%</label>
-                        </div> 
-                    </div>
-                </a>
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/stagetwo">
-                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                        <div class="section-heading font-weight"> Stage 02 </div>
-                        <div class="chart-grid-stage">
-                            <canvas id="stage02"></canvas>
-                            <label class="chart-grid-stage-add chart-percentage-stage width-rem-3" for="assemblyOverall">100%</label>
-                        </div> 
-                    </div>
-                </a>
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/stagethree">
-                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                        <div class="section-heading font-weight"> Stage 03 </div>
-                        <div class="chart-grid-stage">
-                            <canvas id="stage03"></canvas>
-                            <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">55%</label>
-                        </div> 
-                    </div>
-                </a>
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/stagefour">
-                    <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
-                        <div class="section-heading font-weight"> Stage 04 </div>
-                        <div class="chart-grid-stage">
-                            <canvas id="stage04"></canvas>
-                            <label class="chart-grid-stage-add chart-percentage-stage" for="assemblyOverall">&nbsp;0%</label>
-                        </div> 
-                    </div>
-                </a>
-                
-            </div>
-            
-        </div>
+        <!-- <div class="display-flex-column align-items-start margin-top-3"> -->
+        <?php
+        if ($data['assemblyDetails'] == false) {
+            echo '
+                        <div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                                <div class="font-weight">No Details</div>
+                            </div>
+                        ';
+        } else {
+            echo '<div class="vehicle-detail-board  margin-bottom-4">
+                        <div class="vehicle-data-board justify-content-evenly">';
+            foreach ($data['assemblyDetails'] as $value) {
+
+                if ($value->CurrentStatus == 'S1') {
+                    $CurrentStatus = 'Stage 01';
+                } else if ($value->CurrentStatus == 'S2') {
+                    $CurrentStatus = 'Stage 02';
+                } else if ($value->CurrentStatus == 'S3') {
+                    $CurrentStatus = 'Stage 03';
+                } else if ($value->CurrentStatus == 'S4') {
+                    $CurrentStatus = 'Stage 04';
+                } 
+
+                echo '<a href="' . URL_ROOT . 'admins/progress/' . $value->ChassisNo . '">
+                            <div class="carcard">
+                                <div class="cardhead">
+                                    <div class="cardid">
+                                        <div class="carmodel">' . $value->ModelName . '</div>
+                                        <div class="chassisno">' . $value->ChassisNo . '</div>
+                                    </div>
+                                </div>
+                                <div class="carpicbox">
+                                    <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
+                                </div>
+                                <div class="carstatus green"> On Assembly </div>
+                                <div class="arrivaldate">Stage: ', $CurrentStatus, '</div>
+                            </div>';
+            }
+
+            echo '  </div>
+                    </div>';
+        }
+        ?>
+
     </section>
 
-    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/assemblyCharts.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/cors.js"></script>
-
-    
-</body>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>

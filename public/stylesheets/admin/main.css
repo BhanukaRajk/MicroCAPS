@@ -3,6 +3,16 @@
 @import 'flash.css';
 @import 'pdi.css';
 @import 'vehiclelist.css';
+@import 'grid.css';
+@import 'chart.css';
+@import 'flex.css';
+@import 'height.css';
+@import 'padding.css';
+@import 'select.css';
+@import 'width.css';
+@import 'display.css';
+@import 'text.css';
+@import 'popup.css';
 /* @import 'addEmployee.css'; */
 
 body {
@@ -784,7 +794,7 @@ h3 {
     background-color: var(--white);
     position: absolute;
     right: 0;
-    height: 5.625rem;
+    height: 4rem;
     left: 16.25rem;
     padding-inline: 2rem;
 }
@@ -1639,6 +1649,13 @@ select:focus-visible {
     line-height: 12px;
     color: var(--blue);
     cursor: pointer;
+}
+
+.result-text {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    color:var(--white);
 }
 
 .edit {
