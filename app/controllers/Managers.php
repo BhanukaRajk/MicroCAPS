@@ -211,11 +211,52 @@ class Managers extends Controller {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+            $array1 = array();
+            $array2 = array();
+            $array3 = array();
+            $type = '';
+
+            foreach ($_POST as $key => $value) {
+                if(strpos($key, 'type') !== false) {
+                    if ($value === 'M0001') {
+                        $array1[] = new stdClass();
+                        $array1[count($array1)-1]->ModelNo = $value;
+                        $type = 'M0001';
+                    } else if ($value === 'M0002') {
+                        $array2[] = new stdClass();
+                        $array2[count($array2)-1]->ModelNo = $value;
+                        $type = 'M0002';
+                    } else if ($value === 'M0003') {
+                        $array3[] = new stdClass();
+                        $array3[count($array3)-1]->ModelNo = $value;
+                        $type = 'M0003';
+                    }
+                }
+                if(strpos($key, 'color') !== false) {
+                    if ($type === 'M0001') {
+                        $array1[count($array1)-1]->Color = $value;
+                    } else if ($type === 'M0002') {
+                        $array2[count($array2)-1]->Color = $value;
+                    } else if ($type === 'M0003') {
+                        $array3[count($array3)-1]->Color = $value;
+                    }
+                }
+                if(strpos($key, 'qty') !== false) {
+                    if ($type === 'M0001') {
+                        $array1[count($array1)-1]->Qty = $value;
+                    } else if ($type === 'M0002') {
+                        $array2[count($array2)-1]->Qty = $value;
+                    } else if ($type === 'M0003') {
+                        $array3[count($array3)-1]->Qty = $value;
+                    }
+                }
+            }
+
             $data = [
                 'componentRequestDetails' => [
-                    'M0001' => $this->vehicleModel->getComponentRequest('M0001'),
-                    //'M0002' => $this->vehicleModel->getComponentRequest('M0002'),
-                    //'M0003' => $this->vehicleModel->getComponentRequest('M0003')
+                    'M0001' => $array1,
+                    'M0002' => $array2,
+                    'M0003' => $array3
                 ],
                 'components' => [
                     'M0001' => $this->vehicleModel->getComponentDetails('M0001'),
@@ -224,6 +265,10 @@ class Managers extends Controller {
                 ]
             ];
 
+//            print_r($data);
+
+//            print_r($_POST);//, $data['componentRequestDetails']['M0001']);
+//
             $white = '-';
             $black = '-';
             $red = '-';

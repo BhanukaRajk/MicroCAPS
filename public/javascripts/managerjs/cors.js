@@ -265,26 +265,81 @@ function createList() {
         return;
     }
 
+    let id = [];
+    let string = "";
+    let cnt = 1;
+
+    let parentNode = document.getElementById("fields");
+    let children = parentNode.querySelectorAll("*");
+
+    children.forEach(element => {
+        if (element.id && !element.id.search("field")) {
+            id.push(element.id);
+        }
+    });
+
+    id.forEach(element => {
+        let type = document.getElementById(`type${element[element.length - 1]}`).value;
+        let color = document.getElementById(`color${element[element.length - 1]}`).value;
+        let qty = document.getElementById(`qty${element[element.length - 1]}`).value;
+        string = string + `&type${cnt}=${type}&color${cnt}=${color}&qty${cnt}=${qty}`;
+        cnt++;
+    });
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
+            // console.log(response);
             if (response == "Successful") {
 
+                // // Define the HTML file to be converted to PDF
+                // const htmlFile = 'http://localhost/MicroCAPS/public/documents/mrf/mrfCreated.html';
+
+                // // Create a new jsPDF instance with A4 size
+                // const doc = new jsPDF('p', 'mm', 'a4');
+
+                // // Use html2pdf to convert the HTML file to PDF
+                // html2pdf().set({
+                //     margin: 1,
+                //     filename: 'test.pdf',
+                //     image: { type: 'png', quality: 0.98 },
+                //     html2canvas: { dpi: 192, letterRendering: true },
+                //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                // }).from(htmlFile).save();
+
+                // html2pdf().from(htmlFile).set({
+                //     margin: 1,
+                //     filename: 'test.pdf',
+                //     image: { type: 'png', quality: 0.98 },
+                //     html2canvas: { dpi: 192, letterRendering: true },
+                //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                // }).toPdf().get('pdf').then(function(pdf) {
+
+                //     // Add the PDF document to the jsPDF instance
+                //     doc.addPage();
+                //     doc.addImage(pdf, 'PDF', 0, 0, 210, 297);
+                //     console.log("hi");
+                //     // Save the PDF document
+                //     doc.save('test.pdf');
+
+                // });
+
+
                 location.reload();
-                setLocalStorageFlash("Successful","Email Sent Successfully");
+                // setLocalStoragePDF();
 
             } else {
-                location.reload();
-                setLocalStorageFlash("Error","Error Sending Email");
+                // location.reload();
+                // setLocalStorageFlash("Error","Error Sending Email");
             }
 
         }
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/component", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send();
+    xhttp.send(string);
 
     // alertSuccess("PDF Created Successfully Hutto");
 }
@@ -375,6 +430,10 @@ function alertFaliure(message) {
 }
 
 //Local Storage
+function setLocalStoragePDF() {
+    localStorage.setItem("PDFState","Set");
+}
+
 function setLocalStorageFlash(FlashState,FlashMessage) {
     localStorage.setItem("FlashState",FlashState);
     localStorage.setItem("FlashMessage",FlashMessage);
@@ -387,6 +446,10 @@ function setLocalStorageOption(OptionName) {
 
 function getItem(key) {
     return localStorage.getItem(key);
+}
+
+function removeLocalStoragePDF() {
+    localStorage.removeItem("PDFState");
 }
 
 function removeLocalStorageFlash() {

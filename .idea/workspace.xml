@@ -4,14 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
-    <list default="true" id="76c2c45b-b93c-4820-9fa5-b498512ff370" name="Changes" comment="" />
-=======
-    <list default="true" id="9cefd45b-8252-47e2-943f-a3bc5f270d51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/app/helpers/EmailHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/EmailHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
+    <list default="true" id="9aa61d7b-9353-481b-9319-b661b76dc24a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Managers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Managers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/manager/component.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/manager/component.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/manager/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/manager/includes/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/templates/mrfCreated.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/templates/mrfCreated.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/managerjs/component.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/managerjs/component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/managerjs/cors.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/managerjs/cors.js" afterDir="false" />
     </list>
->>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,26 +33,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-<<<<<<< Updated upstream
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "node.js.selected.package.tslint": "(autodetect)"
-  }
-}]]></component>
-  <component name="TaskManager">
-    <servers />
-  </component>
-=======
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2LK9yFAcWfnCdY3pYnSfPWdNYaA" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2OzifW1INVRcXuYGMKzPImhQUFG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -52,6 +46,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
@@ -59,28 +56,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9cefd45b-8252-47e2-943f-a3bc5f270d51" name="Changes" comment="" />
-      <created>1675609166609</created>
+      <changelist id="9aa61d7b-9353-481b-9319-b661b76dc24a" name="Changes" comment="" />
+      <created>1682569921724</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1675609166609</updated>
-      <workItem from="1675609174325" duration="34000" />
+      <updated>1682569921724</updated>
+      <workItem from="1682569926185" duration="4303000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
->>>>>>> Stashed changes
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

@@ -112,6 +112,16 @@
 
     </section>
 
+    <!-- <script>
+        window.onload = function() {
+            if (getItem("PDFState") === "Set") {
+                
+            }
+
+            removeLocalStorage();
+        }
+    </script> -->
+    
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/component.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
