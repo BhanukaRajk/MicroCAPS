@@ -13,7 +13,7 @@
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
             <a class="<?php echo ($data['url'][1] == "bodyshell") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/bodyshell"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Body Shell</a>
-            <a href="#"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon3" />Components</a>
+            <a class="<?php echo ($data['url'][1] == "component") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/component"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon3" />Components</a>
             <a class="<?php echo ($data['url'][1] == "assembly") || ($data['url'][1] == "assemblystage") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/assembly"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
             <a class="<?php echo ($data['url'][1] == "pdi") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/pdi"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />PDI Results</a>
             <a class="<?php echo ($data['url'][1] == "dispatch") ? 'active' : ''; ?>" href="<?php echo URL_ROOT; ?>managers/dispatch"><img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon4" />Dispatch</a>

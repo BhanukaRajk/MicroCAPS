@@ -33,13 +33,14 @@
                 <div id="fields">
                     <div class="display-flex-row align-items-start gap-1" id="field1">
                         <div>
-                            <div class="custom-select">
+                            <div class="custom-select-type1">
                                 <select name="type1" class="form-control form-control-blue text-blue" id="type1">
                                     <option value="">Select Chassis Type</option>
                                     <option value="Micro Panda">Micro Panda</option>
                                     <option value="Micro Panda Cross">Micro Panda Cross</option>
                                     <option value="MG ZS SUV">MG ZS SUV</option>
                                 </select>
+                                <label class="type1-label text-blue display-none" id="type1-label">Chassis Type</label>
                             </div>
                         </div>
                         <div>
@@ -98,7 +99,6 @@
                             </select>
                             <label class="chassis-label display-none" id="chassis-label">Chassis Type</label>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="display-flex-row align-items-center gap-2p1">

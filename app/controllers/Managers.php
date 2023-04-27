@@ -123,8 +123,11 @@ class Managers extends Controller {
                     }
                 }
 
-                echo 'Successful';
-
+                if ($this->vehicleModel->addComponentRequest($data['chassisType'], $data['color'])) {
+                    echo 'Successful';
+                } else {
+                    echo 'Error';
+                }
             } else {
                 echo 'Error';
             }
@@ -195,6 +198,106 @@ class Managers extends Controller {
             } else {
                 echo "Error Completing Job";
             }
+        }
+    }
+
+    public function component() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'componentRequestDetails' => [
+                    'M0001' => $this->vehicleModel->getComponentRequest('M0001'),
+                    //'M0002' => $this->vehicleModel->getComponentRequest('M0002'),
+                    //'M0003' => $this->vehicleModel->getComponentRequest('M0003')
+                ],
+                'components' => [
+                    'M0001' => $this->vehicleModel->getComponentDetails('M0001'),
+                    //'M0002' => $this->vehicleModel->getComponentDetails('M0002'),
+                    //'M0003' => $this->vehicleModel->getComponentDetails('M0003')
+                ]
+            ];
+
+            $white = '-';
+            $black = '-';
+            $red = '-';
+            $green = '-';
+            $blue = '-';
+            $yellow = '-';
+            $none = 0;
+
+            foreach ($data['componentRequestDetails']['M0001'] as $value) {
+                switch ($value->Color) {
+                    case 'White':
+                        $white = $value->Qty;
+                        break;
+                    case 'Black':
+                        $black = $value->Qty;
+                        break;
+                    case 'Red':
+                        $red = $value->Qty;
+                        break;
+                    case 'Green':
+                        $green = $value->Qty;
+                        break;
+                    case 'Blue':
+                        $blue = $value->Qty;
+                        break;
+                    case 'Yellow':
+                        $yellow = $value->Qty;
+                        break;
+                }
+                $none = $none + $value->Qty;
+            }
+
+            $body = '';
+            foreach ($data['components']['M0001'] as $value) {
+                $body .= '<tr>';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">1000</td>
+                          <td valign="bottom" class="td col-right txt txt-nowrap bold">'.$value->PartName.'</td>';
+                $qty = $value->Color != 'None' ? $white : '-';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$qty.'</td>';
+                $qty = $value->Color != 'None' ? $black : '-';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$qty.'</td>';
+                $qty = $value->Color != 'None' ? $red : '-';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$qty.'</td>';
+                $qty = $value->Color != 'None' ? $green : '-';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$qty.'</td>';
+                $qty = $value->Color != 'None' ? $blue : '-';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$qty.'</td>';
+                $qty = $value->Color != 'None' ? $yellow : '-';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$qty.'</td>';
+                $qty = $value->Color == 'None' ? $none : '-';
+                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$qty.'</td>';
+                $body .= '</tr>';
+            }
+
+            $file = file_get_contents(APP_ROOT . '\views\templates\mrf.html');
+            $position = strpos($file, '<!-- Date -->');
+            if ($position !== false) {
+                $file = substr_replace($file, date('Y-m-d'), $position, 0);
+            }
+            $position = strpos($file, '<!-- Model -->');
+            if ($position !== false) {
+                $file = substr_replace($file, 'Micro Panda', $position, 0);
+            }
+            $position = strpos($file, '<!-- Insert Point -->');
+            if ($position !== false) {
+                $file = substr_replace($file, $body, $position, 0);
+            }
+            file_put_contents(APP_ROOT . '\views\templates\mrfCreated.html', $file);
+
+            echo 'Successful';
+
+        } else {
+            $data['componentRequestDetails'] = $this->vehicleModel->getComponentRequest();
+            $this->view('manager/component', $data);
         }
     }
 

@@ -18,6 +18,7 @@ $(document).ready(() => {
 })
 
 // C.O.R.S
+// Dashboard Page
 function dashboardChart() {
 
     let chassisNo = document.getElementById("dashboardChart").value;
@@ -43,6 +44,7 @@ function dashboardChart() {
 
 }
 
+// Body Shell Page
 function requestShell() {
 
     if (!validaterequestShell()) {
@@ -105,6 +107,7 @@ function addShell() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
+
 
             if (response == "Successful") {
 
@@ -254,6 +257,39 @@ function jobDone(id,job) {
 
 }
 
+// Components Page
+function createList() {
+
+    if (!validaterequestShell()) {
+        alertFaliure("Please Fill All The Fields");
+        return;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response == "Successful") {
+
+                location.reload();
+                setLocalStorageFlash("Successful","Email Sent Successfully");
+
+            } else {
+                location.reload();
+                setLocalStorageFlash("Error","Error Sending Email");
+            }
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/component", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+
+    // alertSuccess("PDF Created Successfully Hutto");
+}
+
+// Settings Page
 function saveChanges(id, position) {
     let formdata = new FormData();
     formdata.append("id", id);
@@ -650,6 +686,8 @@ function popUpInnerhtml (values) {
 
                     return innerhtml;
 }
+
+// Charts
 
 function updateChart(ctx, ltx, data, cutout = 50) {
 

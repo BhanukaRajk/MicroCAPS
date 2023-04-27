@@ -14,17 +14,21 @@ select:focus-visible {
     outline: none;
 }
 
-.custom-select, 
+.custom-select,
+.custom-select-type1, 
 .custom-select-model,
-.custom-select-color {
+.custom-select-color,
+.custom-select-color1 {
     position: relative;
     display: inline-block;
     font-size: 14px;
 }
 
-.custom-select .selector-options, 
+.custom-select .selector-options,
+.custom-select-type1 .selector-options, 
 .custom-select-model .selector-options,
-.custom-select-color .selector-options {
+.custom-select-color .selector-options,
+.custom-select-color1 .selector-options {
     list-style: none;
     color: #017EFA;
     border: 1px solid;
@@ -36,8 +40,10 @@ select:focus-visible {
 }
 
 .custom-select .selector-options li,
+.custom-select-type1 .selector-options li,
 .custom-select-model .selector-options li,
-.custom-select-color .selector-options  li {
+.custom-select-color .selector-options  li,
+.custom-select-color1 .selector-options  li {
     padding: 0.5rem;
     display: flex;
     align-items: center;
@@ -47,14 +53,18 @@ select:focus-visible {
 }
 
 .custom-select .selector-options li:hover,
+.custom-select-type1 .selector-options li:hover,
 .custom-select-model .selector-options li:hover,
-.custom-select-color .selector-options  li:hover {
+.custom-select-color .selector-options  li:hover,
+.custom-select-color1 .selector-options  li:hover {
     background: #017EFA;
     color: white
 }
 
 .chassis-label,
-.color-label {
+.type1-label,
+.color-label,
+.color1-label {
     position: relative;
     bottom: 3.9em;
     left: 1.5em;

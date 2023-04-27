@@ -139,6 +139,43 @@ class Vehicle {
         }
     }
 
+    public function updateComponentStatus($chassisNo, $status): bool {
+        $this->db->query(
+            'UPDATE `stage-vehicle-process`
+            SET `stage-vehicle-process`.Status = :status
+            WHERE `stage-vehicle-process`.ChassisNo = :chassisNo'
+        );
+
+        $this->db->bind(':status', $status);
+        $this->db->bind(':chassisNo', $chassisNo);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getComponentDetails($ModelNo) {
+        $this->db->query(
+            'SELECT component.PartName, component.Color
+                    FROM component
+                    WHERE component.ModelNo = :model AND (component.Color = :color1 OR component.Color = :color2);'
+        );
+
+        $this->db->bind(':model', $ModelNo);
+        $this->db->bind(':color1', 'Black');
+        $this->db->bind(':color2', 'None');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
+
     public function getComponentStatus($chassisNo, $status = '%', $stage = '%') {
         $this->db->query(
             'SELECT `stage-vehicle-process`.Status, component.PartName, component.StageNo, component.Weight
@@ -182,4 +219,43 @@ class Vehicle {
         }
     }
 
+    public function addComponentRequest($modelNo, $color): bool {
+        $this->db->query(
+            'INSERT INTO `component-request`(ModelNo, Color) VALUES (:modelNo, :color)'
+        );
+
+        $this->db->bind(':modelNo', $modelNo);
+        $this->db->bind(':color', $color);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getComponentRequest($Model = '%', $Color = '%') {
+        $this->db->query(
+            '
+            SELECT `vehicle-model`.ModelName, `component-request`.ModelNo, `component-request`.Color, COUNT(*) AS Qty 
+            FROM `component-request` 
+            INNER  JOIN `vehicle-model` 
+            ON `component-request`.ModelNo = `vehicle-model`.ModelNo 
+            WHERE Status = :status AND `component-request`.ModelNo LIKE :model AND `component-request`.Color LIKE :color
+            GROUP BY `component-request`.ModelNo,`component-request`.Color
+            '
+        );
+
+        $this->db->bind(':status', 'Pending');
+        $this->db->bind(':model', $Model);
+        $this->db->bind(':color', $Color);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
 }

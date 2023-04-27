@@ -17,7 +17,7 @@ $("#fields").on("click", (event) => {
 
         let btn = "";
 
-        if (type === 3) {
+        if (type === 5) {
             btn = ``;
         } else {
             btn = `
@@ -35,11 +35,19 @@ $("#fields").on("click", (event) => {
             <div class="custom-select-type`+type+`">
                 <select name="type`+type+`" class="form-control form-control-blue text-blue" id="type`+type+`">
                     <option value="">Select Chassis Type</option>
-                    <option value="Micro Panda">Micro Panda</option>
-                    <option value="Micro Panda Cross">Micro Panda Cross</option>
-                    <option value="MG ZS SUV">MG ZS SUV</option>
+                    <option value="M0001">Micro Panda</option>
+                    <option value="M0002">Micro Panda Cross</option>
+                    <option value="M0003">MG ZS SUV</option>
                 </select>
                 <label class="type`+type+`-label text-blue display-none" id="type`+type+`-label">Chassis Type</label>
+            </div>
+        </div>
+        <div>
+            <div class="custom-select-color`+type+`">
+                <select name="color`+type+`" class="form-control form-control-blue text-blue chassisColor" id="color`+type+`">
+                    <option value="">Select Color</option>
+                </select>
+                <label class="color`+type+`-label text-blue display-none" id="color`+type+`-label">Color</label>
             </div>
         </div>
         <div>
@@ -63,7 +71,12 @@ $("#fields").on("click", (event) => {
         addBtn = document.getElementById("addBtn");
         addBtnContainer = document.getElementById("addBtnContainer");
         addSelect('type'+type, '.custom-select-type'+type);
+        addSelect('color'+type, '.custom-select-color'+type);
         addStyles(type);
+        //add element to type array
+        typeArray.push('type'+type);
+        colorArray.push('color'+type);
+        updateColorOptions();
     }
     else if (event.target.id === "minusBtn") {
 
@@ -84,6 +97,10 @@ $("#fields").on("click", (event) => {
         lastChild.appendChild(addfield);
         addBtn = document.getElementById("addBtn");
         addBtnContainer = document.getElementById("addBtnContainer");
+        //remove element from type array
+        typeArray.pop();
+        colorArray.pop();
+        updateColorOptions();
     }
 
 });
@@ -99,9 +116,48 @@ function addSelect(type,name) {
 function addStyles(type) {
     const link = document.querySelector('link[href="http://localhost/MicroCAPS/public/stylesheets/manager/javascript.css"]');
     const styleSheet = link.sheet;
-    styleSheet.insertRule(".custom-select-type"+type+" { position: relative; display: inline-block; font-size: 14px; }", styleSheet.cssRules.length);
-    styleSheet.insertRule(".custom-select-type"+type+ " .selector-options { list-style: none; color: #017EFA; border: 1px solid; height: auto; width: 100%; position: absolute; z-index: 1; background-color: #fff; }", styleSheet.cssRules.length);
-    styleSheet.insertRule(".custom-select-type"+type+ " .selector-options li { padding: 0.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s ease; }", styleSheet.cssRules.length);
-    styleSheet.insertRule(".custom-select-type"+type+ " .selector-options li:hover { background: #017EFA; color: white; }", styleSheet.cssRules.length); 
-    styleSheet.insertRule(".type"+type+"-label, .color-label {  position: relative; bottom: 3.9em; left: 1.5em; background-color: white; padding: 0 0.5em; opacity: 1; color: var(--gray); }", styleSheet.cssRules.length);        
+    styleSheet.insertRule(".custom-select-type"+type+", .custom-select-color"+type+" { position: relative; display: inline-block; font-size: 14px; }", styleSheet.cssRules.length);
+    styleSheet.insertRule(".custom-select-type"+type+ " .selector-options, .custom-select-color"+type+ " .selector-options { list-style: none; color: #017EFA; border: 1px solid; height: auto; width: 100%; position: absolute; z-index: 1; background-color: #fff; }", styleSheet.cssRules.length);
+    styleSheet.insertRule(".custom-select-type"+type+ " .selector-options li, .custom-select-color"+type+ " .selector-options li { padding: 0.5rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.3s ease; }", styleSheet.cssRules.length);
+    styleSheet.insertRule(".custom-select-type"+type+ " .selector-options li:hover, .custom-select-color"+type+ " .selector-options li:hover { background: #017EFA; color: white; }", styleSheet.cssRules.length); 
+    styleSheet.insertRule(".type"+type+"-label, .color"+type+"-label {  position: relative; bottom: 3.9em; left: 1.5em; background-color: white; padding: 0 0.5em; opacity: 1; color: var(--gray); }", styleSheet.cssRules.length);        
 }
+
+let typeArray = ["type1"];
+let colorArray = ["color1"];
+
+function updateColorOptions() {  
+    typeArray.forEach((type) => {
+  
+      const chassis = document.getElementById(type);
+      const color = document.getElementById(colorArray[typeArray.indexOf(type)]);
+  
+      chassis?.addEventListener("change", () => {
+        chassis.classList.remove("form-control-red");
+  
+        let Colors = []
+  
+        if (chassis.value === "M0001") {
+          Colors = ["White", "Black", "Red", "Green", "Blue", "Yellow"];
+        } else if (chassis.value === "M0002" || chassis.value === "M0003") {
+          Colors = ["Black", "Red", "Green", "Blue"];
+        } 
+  
+        color.innerHTML = '<option value="">Select Color</option>';
+  
+        Colors.forEach(element => {
+          const option = document.createElement("option");
+          option.value = element;
+          option.innerHTML = element;
+          color.appendChild(option);
+        });
+  
+      });
+  
+      color?.addEventListener("change", () => {
+        color.classList.remove("form-control-red");
+      });
+    });
+  }
+
+  updateColorOptions();

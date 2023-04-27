@@ -50,7 +50,7 @@ class Vehicles extends Controller {
             $components = $this->vehicleModel->getComponents($details->Color, $details->ModelNo);
 
             foreach ($components as $component) {
-                $status = $component->Qty > 0 ? 'Pending' : 'On-Hold';
+                $status = 'Not Requested';
                 $this->vehicleModel->addVehicleComponent($data['chassisNo'], $component->PartNo, $status);
             }
 

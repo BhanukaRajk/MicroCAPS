@@ -10,20 +10,25 @@ drop?.addEventListener("click", () => {
 });
 
 // Select
-let dashboard = new select(document.querySelectorAll('.custom-select'));
-dashboard.create();
-
-let color = new select(document.querySelectorAll('.custom-select-color'));
-color.create("color");
-
-let model = new select(document.querySelectorAll('.custom-select-model'));
-model.create("chassis");
-
 let selectArray = [];
-function addSelect(type,name) {
+function addSelect(type,name,label=false,add=false) {
     selectArray[type] = new select(document.querySelectorAll(name));
-    selectArray[type].create();
+    if (label) {
+        if (add) {
+            selectArray[type].create(type,true);
+        } else {
+            selectArray[type].create(type);
+        }
+    } else {
+        selectArray[type].create();
+    }
 }
+
+addSelect("normal",'.custom-select')
+addSelect("type1",'.custom-select-type1',true,true)
+addSelect("color1",'.custom-select-color1',true,true)
+addSelect("color",'.custom-select-color',true)
+addSelect("chassis",'.custom-select-model',true)
 
 // Next Button
 function next(id) {

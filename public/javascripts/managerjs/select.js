@@ -4,7 +4,7 @@ export default class select {
         this.select = select;
     }
 
-    create(classname) {
+    create(classname, type=false) {
         
         this.select.forEach(selector => {
 
@@ -25,7 +25,11 @@ export default class select {
                         select.value = option.value;
                         selector.value = option.value;
                         if (classname != null) {
-                            this.addFormStyle(select.value, classname);
+                            if (type) {
+                                this.addFieldStyle(select.value, classname);
+                            } else {
+                                this.addFormStyle(select.value, classname);
+                            }
                         }
                         select.dispatchEvent(new Event('change'));
                         selector.dispatchEvent(new Event('change'));
@@ -62,6 +66,14 @@ export default class select {
             document.getElementById(classname).classList.remove("text-gray");
             document.getElementById(classname+"-label").classList.remove("display-none");
             document.getElementById("repairD").classList.remove("margin-top-4");
+        }
+    }
+
+    addFieldStyle(value, classname) {
+        if (value === "") {
+            document.getElementById(classname+"-label").classList.add("display-none");
+        } else {
+            document.getElementById(classname+"-label").classList.remove("display-none");
         }
     }
 

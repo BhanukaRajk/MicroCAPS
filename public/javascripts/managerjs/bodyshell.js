@@ -33,8 +33,6 @@ const color = document.getElementById("color");
 chassis?.addEventListener("change", () => {
     chassis.classList.remove("form-control-red");
 
-    console.log(color);
-
     let Colors = []
     
     if (chassis.value === "M0001") {
