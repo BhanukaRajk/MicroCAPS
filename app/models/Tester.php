@@ -284,10 +284,34 @@ class Tester {
         }
     }
 
+    // public function onPDIVehicles() {
+    //     $this->db->query(
+    //         'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo
+    //             FROM `vehicle`
+    //             WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi
+    //             ORDER BY `vehicle`.ChassisNo DESC
+    //             LIMIT 10;'
+    //     );
+
+    //     $this->db->bind(':status', 'PDI');
+    //     $this->db->bind(':pdi', 'NC');
+
+    //     $results = $this->db->resultSet();
+
+    //     if ( $results ) {
+    //         return $results;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     public function onPDIVehicles() {
+
         $this->db->query(
-            'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo
-                FROM `vehicle`
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo 
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
                 WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi
                 ORDER BY `vehicle`.ChassisNo DESC
                 LIMIT 10;'
@@ -436,6 +460,27 @@ class Tester {
         );
 
         $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function shellDetail($chassisNo)
+    {
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.ArrivalDate, `vehicle`.EngineNo, `vehicle`.ModelNo, `vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.ChassisNo = :chassisNo'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+
+        $results = $this->db->single();
 
         if ( $results ) {
             return $results;

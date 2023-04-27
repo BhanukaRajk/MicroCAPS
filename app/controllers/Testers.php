@@ -395,4 +395,46 @@ class Testers extends controller {
         }
     }
 
+    // public function selectpdi($chassisNo) {
+
+    //     if(!isLoggedIn()){
+    //         redirect('users/login');
+    //     }
+
+    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //         $data['ChassisNo'] = $chassisNo;
+    //         $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
+    //         $data['onPDIVehicle'] = $this->testerModel->shellDetail($chassisNo);
+    //         $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
+    //         $data['pdiCheckList'] = $this->testerModel->pdiCheckList($chassisNo);
+    //         $this->view('manager/pdidetails',$data);
+    //     }
+    // }
+
+    public function selectpdi()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
+            $this->view('tester/selectpdi', $data);
+        }
+    }
+
+    public function selectdefect()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
+            $this->view('tester/selectdefect', $data);
+        }
+    }
+
 }
