@@ -17,6 +17,12 @@
 
               <form id="defect-form" action="<?php echo URL_ROOT; ?>testers/add_defect" method="POST">
                 <div class="add-form-field">
+                <span class="add-form-error">
+                    <?php
+                    echo !empty($data['chassis_err']) ? $data['chassis_err'] : '';
+                    ?>
+                  </span>
+                  <label class="add-form-label" for="ChassisNo">Chassis Number:</label>
                   <input type="text" name="ChassisNo" value="<?php echo $data['ChassisNo']; ?>" id="ChassisNo" placeholder="Chassis Number" class="add-form-input" required />
                 </div>
 
@@ -27,6 +33,7 @@
                     echo !empty($data['defect_err']) ? $data['defect_err'] : '';
                     ?>
                   </span>
+                  <label class="add-form-label" for="DefectNo">Defect Number:</label>
                   <input type="text" id="DefectNo" name="DefectNo" value="<?php echo $data['DefectNo']; ?>" placeholder="Defect Number" class="add-form-input" required />
                 </div>
 
@@ -41,14 +48,17 @@
                     echo !empty($data['user_err']) ? $data['user_err'] : '';
                     ?>
                   </span>
+                  <label class="add-form-label" for="EmployeeID">Employee ID:</label>
                   <input type="text" id="EmployeeID" name="EmployeeID" value="<?php echo $_SESSION['_id']; ?>" placeholder="Employee ID" class="add-form-input" required />
                 </div>
 
                 <div class="add-form-field">
+                <label class="add-form-label" for="RepairDescription">Repair Description:</label>
                   <input type="text" id="RepairDescription" name="RepairDescription" value="<?php echo $data['RepairDescription']; ?>" placeholder="Repair Description" class="add-form-input" />
                 </div>
 
                 <div class="add-form-field">
+                <label class="add-form-label" for="ReCorrection">Recorrection:</label>
                   <input type="text" id="ReCorrection" name="ReCorrection" value="<?php echo $data['ReCorrection']; ?>" placeholder="Recorrection" class="add-form-input" />
                 </div>
 

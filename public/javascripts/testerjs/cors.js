@@ -1,4 +1,22 @@
 // Flash Message
+// $(document).ready(() => {
+
+//     if (getItem("FlashState") === "Successful") {
+//         alertSuccess(getItem("FlashMessage"));
+//     } else if (getItem("FlashState") === "Error") {
+//         alertFaliure(getItem("FlashMessage"));
+//     }
+
+//     removeLocalStorageFlash();
+
+//     if (getItem("OptionState") === "Set") {
+//         document.getElementById(getItem("OptionName")).click();
+//     }
+
+//     removeLocalStorageOption();
+
+// })
+
 $(document).ready(() => {
 
     if (getItem("FlashState") === "Successful") {
@@ -7,15 +25,34 @@ $(document).ready(() => {
         alertFaliure(getItem("FlashMessage"));
     }
 
-    removeLocalStorageFlash();
-
-    if (getItem("OptionState") === "Set") {
-        document.getElementById(getItem("OptionName")).click();
-    }
-
-    removeLocalStorageOption();
+    removeLocalStorage()
 
 })
+
+// function addPDI(ChassisNo,CheckId, Status) {
+    
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function() {
+//         if (this.readyState == 4 && this.status == 200) {
+//             var response = this.responseText;
+
+//             if (response == "Successful") {
+
+//                 location.reload();
+//                 setLocalStorage("Successful",ChassisNo + " - " + CheckId + " Status Changed");
+
+//             } else {
+
+//                 location.reload();
+//                 setLocalStorage("Error","Error Completing Job");
+
+//             }
+//         }
+//     };
+//     xhttp.open("POST", "http://localhost/MicroCAPS/Testers/addPDI", true);
+//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Status="+Status);
+// }
 
 function addPDI(ChassisNo,CheckId, Status) {
     
@@ -27,7 +64,8 @@ function addPDI(ChassisNo,CheckId, Status) {
             if (response == "Successful") {
 
                 location.reload();
-                setLocalStorage("Successful",ChassisNo + " - " + CheckId + " Status Changed");
+                // setLocalStorage("Successful",ChassisNo + " - " + CheckId + " Status Changed");
+                setLocalStorage("Successful","Status Changed Successfully");
 
             } else {
 
@@ -105,26 +143,40 @@ function alertFaliure(message) {
 }
 
 //Local Storage
-function setLocalStorageFlash(FlashState,FlashMessage) {
+// function setLocalStorageFlash(FlashState,FlashMessage) {
+//     localStorage.setItem("FlashState",FlashState);
+//     localStorage.setItem("FlashMessage",FlashMessage);
+// }
+
+// function setLocalStorageOption(OptionName) {
+//     localStorage.setItem("OptionState","Set");
+//     localStorage.setItem("OptionName",OptionName);
+// }
+
+// function getItem(key) {
+//     return localStorage.getItem(key);
+// }
+
+// function removeLocalStorageFlash() {
+//     localStorage.removeItem("FlashState");
+//     localStorage.removeItem("FlashMessage");
+// }
+
+// function removeLocalStorageOption() {
+//     localStorage.removeItem("OptionState");
+//     localStorage.removeItem("OptionName");
+// }
+
+function setLocalStorage(FlashState,FlashMessage) {
     localStorage.setItem("FlashState",FlashState);
     localStorage.setItem("FlashMessage",FlashMessage);
-}
-
-function setLocalStorageOption(OptionName) {
-    localStorage.setItem("OptionState","Set");
-    localStorage.setItem("OptionName",OptionName);
 }
 
 function getItem(key) {
     return localStorage.getItem(key);
 }
 
-function removeLocalStorageFlash() {
+function removeLocalStorage() {
     localStorage.removeItem("FlashState");
     localStorage.removeItem("FlashMessage");
-}
-
-function removeLocalStorageOption() {
-    localStorage.removeItem("OptionState");
-    localStorage.removeItem("OptionName");
 }

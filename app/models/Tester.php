@@ -38,6 +38,27 @@ class Tester {
 
     }
 
+    public function findPDIvehicles($ChassisNo) {
+
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo 
+                FROM `vehicle` 
+                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi AND `vehicle`.ChassisNo = :ChassisNo'
+        );
+
+        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':pdi', 'NC');
+        $this->db->bind(':ChassisNo', $ChassisNo);
+
+        $results = $this->db->resultSet();
+
+        if ( $this->db->rowCount() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // public function findDefectByID($DefectNo) {
 
     //     $this->db->query('SELECT * FROM `defects`  WHERE `defects`.`DefectNo` = :DefectNo');

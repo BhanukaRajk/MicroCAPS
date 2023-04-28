@@ -97,8 +97,11 @@ class Testers extends controller {
             else if($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
                 $data['defect_err'] = 'Defect Already Recorded';
             }
+            else if(!$this->testerModel->findPDIvehicles($data['ChassisNo'])) {
+                $data['chassis_err'] = 'Invalid Chassis Number';
+            }
 
-            if(empty($data['user_err']) && empty($data['defect_err'])){
+            if(empty($data['user_err']) && empty($data['defect_err']) && empty($data['chassis_err'])){
                 if($this->testerModel->addDefect($data)){
                     redirect('testers/defect_sheet/'. $data['ChassisNo']);
                 } else {
@@ -139,7 +142,7 @@ class Testers extends controller {
                 'EmployeeID' => trim($_POST['EmployeeID']),
                 'ReCorrection' => trim($_POST['ReCorrection']),
                 'defect_err' => '',
-                'defect_id_err' => '',
+                'chassis_err' => '',
                 'user_err' => ''
             ];
             $data['url'] = getUrl();
