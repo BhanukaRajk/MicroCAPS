@@ -62,6 +62,8 @@
             $_SESSION['_position'] = $user->Position;
             $_SESSION['_profile'] = $user->Image;
 
+            $this->userModel->markActivity($_SESSION['_id']);
+
             redirect($_SESSION['_position'].'s/dashboard');
         }
 
@@ -212,11 +214,15 @@
 
 
         public function logout(){
+
+            $this->userModel->markActivity($_SESSION['_id'],0);
+
             unset($_SESSION['_id']);
             unset($_SESSION['_email']);
             unset($_SESSION['_name']);
             unset($_SESSION['_position']);
             unset($_SESSION['_profile']);
+
             session_destroy();
             redirect('users/login');
         }

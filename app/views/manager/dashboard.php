@@ -49,20 +49,28 @@
                         </div>
                         <div class="display-flex-column gap-1 overflow">
                             <?php 
-                                foreach ($data['onHoldComponents'] as $value) {
-                                    echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20">
-                                            <div class="display-flex-column padding-bottom-3">
-                                                <div class="font-size">'.$value->PartName.'</div>
-                                                <div class="display-flex-row gap-1">
-                                                    <div class="qty">Quantity : ' , $value->Qty, '</div>
-                                                    <div class="qty">Color : ' , $value->Color, '</div>
+                                if ($data['onHoldComponents'] == false) {
+                                    echo '
+                                                <div class="display-flex-row justify-content-center align-items-center width-100 paddingy-6">
+                                                        <div class="font-weight">No Damaged Components</div>
+                                                    </div>
+                                                ';
+                                } else {
+                                    foreach ($data['onHoldComponents'] as $value) {
+                                        echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20">
+                                                <div class="display-flex-column padding-bottom-3">
+                                                    <div class="font-size">'.$value->PartName.'</div>
+                                                    <div class="display-flex-row gap-1">
+                                                        <div class="qty">Quantity : ' , $value->Qty, '</div>
+                                                        <div class="qty">Color : ' , $value->Color, '</div>
+                                                    </div>
+                                                </div>
+                                                <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
+                                                    <div class="result-text">On Hold</div>
                                                 </div>
                                             </div>
-                                            <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
-                                                <div class="result-text">On Hold</div>
-                                            </div>
-                                        </div>
-                                        ';
+                                            ';
+                                    }
                                 }
                             ?>
                         </div>
@@ -93,7 +101,16 @@
 
                 <div class="dash-card-logs ">
                     <div class="dash-card-right-datalines dash-card-headings ">Activity Log</div>
-                    <div class="dash-card-right-datalines "></div>
+                    <div class="display-flex-row justify-content-center">
+                        <table>
+                            <?php 
+                                foreach ($data['activityLogs'] as $activityLog) {
+                                    echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal">' . $activityLog->empName . '</td>
+                                            <td class="font-size width-rem-8p5 word-wrap-normal">' . $activityLog->logDate . ' at ' . substr($activityLog->logTime, 0, 5) . '</td></tr>';
+                                }
+                            ?>
+                        </table>
+                    </div>
                 </div>
                 <div class="dash-card-quickaccess ">
                     <div class="dash-card-right-datalines dash-card-headings ">Quick Access</div>

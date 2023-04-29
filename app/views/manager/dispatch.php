@@ -4,8 +4,20 @@
 <body>
 
     <section class="position-absolute page-content">
-        <div class="page-heading font-weight  margin-bottom-4">
-            Dispatched Vehicles
+        <div class="display-flex-row justify-content-between align-items-start">
+            <div class="page-heading font-weight  margin-bottom-4">
+                Dispatched Vehicles
+            </div>
+            <div class="search-container">
+                <form action="" class="search" id="search-bar">
+                    <input type="text" placeholder="Search" class="search-input" oninput="searchByChassis('dispatch')" id="searchId">
+
+                    <div class="search-button" id="search-button">
+                        <i class="ri-search-2-line search-icon"></i>
+                        <i class="ri-close-line search-close"></i>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- <div class="display-flex-column align-items-start margin-top-3"> -->

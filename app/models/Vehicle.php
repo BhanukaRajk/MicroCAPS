@@ -102,16 +102,14 @@ class Vehicle {
         }
     }
 
-    public function getComponents($color, $model) {
+    public function getComponents($model) {
         $this->db->query(
             'SELECT `component`.PartNo, `component`.Qty
             FROM `component`
-            WHERE `component`.ModelNo = :model AND (`component`.Color = :color OR `component`.Color = :none)'
+            WHERE `component`.ModelNo = :model'
         );
 
         $this->db->bind(':model', $model);
-        $this->db->bind(':color', $color);
-        $this->db->bind(':none', 'None');
 
         $results = $this->db->resultSet();
 
@@ -122,14 +120,49 @@ class Vehicle {
         }
     }
 
-    public function addVehicleComponent($chassisNo, $partNo, $status): bool {
+    public function getProcesses($model) {
         $this->db->query(
-            'INSERT INTO `stage-vehicle-process`
+            'SELECT `stage-process`.ProcessId
+            FROM `stage-process`
+            WHERE `stage-process`.ModelNo = :model'
+        );
+
+        $this->db->bind(':model', $model);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function initComponent($chassisNo, $partNo, $status): bool {
+        $this->db->query(
+            'INSERT INTO `component-release`
             VALUE (:chassisNo, :partNo, :status)'
         );
 
         $this->db->bind(':chassisNo', $chassisNo);
         $this->db->bind(':partNo', $partNo);
+        $this->db->bind(':status', $status);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function initProcess($chassisNo, $processId, $status): bool {
+        $this->db->query(
+            'INSERT INTO `stage-vehicle-process`
+            VALUE (:chassisNo, :processId, :status)'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':processId', $processId);
         $this->db->bind(':status', $status);
 
         if ( $this->db->execute() ) {
@@ -176,13 +209,13 @@ class Vehicle {
         }
     }
 
-    public function getComponentStatus($chassisNo, $status = '%', $stage = '%') {
+    public function getProcessStatus($chassisNo, $status = '%', $stage = '%') {
         $this->db->query(
-            'SELECT `stage-vehicle-process`.Status, component.PartName, component.StageNo, component.Weight
+            'SELECT `stage-vehicle-process`.Status, `stage-process`.ProcessName, `stage-process`.StageNo, `stage-process`.Weight
                     FROM `stage-vehicle-process`
-                    INNER JOIN component
-                    ON `stage-vehicle-process`.PartNo = component.PartNo
-                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND component.StageNo LIKE :stage;'
+                    INNER JOIN `stage-process`
+                    ON `stage-vehicle-process`.ProcessId = `stage-process`.ProcessId
+                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND `stage-process`.StageNo LIKE :stage;'
         );
 
         $this->db->bind(':chassisNo', $chassisNo);
@@ -201,10 +234,10 @@ class Vehicle {
     public function componentQty($status) {
         $this->db->query(
             'SELECT component.PartName, COUNT(component.PartName) AS Qty, component.Color  
-                    FROM `stage-vehicle-process`
+                    FROM `component-release`
                     INNER JOIN component
-                    ON `stage-vehicle-process`.PartNo = component.PartNo
-                    WHERE `stage-vehicle-process`.Status = :status
+                    ON `component-release`.PartNo = component.PartNo
+                    WHERE `component-release`.Status = :status
                     GROUP BY component.PartNo;'
         );
 
@@ -219,43 +252,4 @@ class Vehicle {
         }
     }
 
-    public function addComponentRequest($modelNo, $color): bool {
-        $this->db->query(
-            'INSERT INTO `component-request`(ModelNo, Color) VALUES (:modelNo, :color)'
-        );
-
-        $this->db->bind(':modelNo', $modelNo);
-        $this->db->bind(':color', $color);
-
-        if ( $this->db->execute() ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function getComponentRequest($Model = '%', $Color = '%') {
-        $this->db->query(
-            '
-            SELECT `vehicle-model`.ModelName, `component-request`.ModelNo, `component-request`.Color, COUNT(*) AS Qty 
-            FROM `component-request` 
-            INNER  JOIN `vehicle-model` 
-            ON `component-request`.ModelNo = `vehicle-model`.ModelNo 
-            WHERE Status = :status AND `component-request`.ModelNo LIKE :model AND `component-request`.Color LIKE :color
-            GROUP BY `component-request`.ModelNo,`component-request`.Color
-            '
-        );
-
-        $this->db->bind(':status', 'Pending');
-        $this->db->bind(':model', $Model);
-        $this->db->bind(':color', $Color);
-
-        $results = $this->db->resultSet();
-
-        if ( $results ) {
-            return $results;
-        } else {
-            return [];
-        }
-    }
 }

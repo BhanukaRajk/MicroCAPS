@@ -102,3 +102,7 @@ label.description {
 .lette-spacing-5 {
     letter-spacing: 5px;
 }
+
+.word-wrap-normal {
+    word-wrap: normal;
+}

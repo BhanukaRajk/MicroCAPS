@@ -19,6 +19,20 @@
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+.form-control-search {
+    --input-border-color: none;
+    background-color: unset;
+    border-bottom: 1px var(--gray) solid;
+    border-radius: unset;
+}
+
+.form-control-search:focus {
+    --input-border-color: none !important;
+    border-bottom: 1px var(--blue) solid;
+    outline: 0;
+    box-shadow: none;
+}
+
 .form-label {
     margin-bottom: .5rem
 }

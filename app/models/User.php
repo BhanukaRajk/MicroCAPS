@@ -126,4 +126,25 @@ private $db;
         }
     }
 
+    public function markActivity($userId, $logged = 1): bool {
+
+        $this->db->query(
+            'UPDATE `employee-logs`
+                SET lastLog = CURRENT_TIMESTAMP, loggedIn = :logged
+                WHERE EmployeeId = :userId'
+        );
+
+        $this->db->bind(':userId', $userId);
+        $this->db->bind(':logged', $logged);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
 }

@@ -89,7 +89,7 @@ function requestShell() {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/shellRequest", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/shellRequest", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(string);
 }
@@ -125,7 +125,7 @@ function addShell() {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/addShell", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/addShell", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("chassisNo="+data["chassisNo"]+"&color="+data["color"]+"&chassisType="+data["chassis"]+"&repair="+data["repair"]+"&paint="+data["paint"]+"&repairDescription="+data["repairDescription"]);
 }
@@ -180,6 +180,7 @@ function startAssembly(chassisNo) {
 
                 location.reload();
                 setLocalStorageFlash("Error",response);
+                // console.log(response);
 
             }
 
@@ -221,7 +222,7 @@ function sendRequest(id,job) {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/RequestJobs", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/requestJobs", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("id="+id+"&job="+job+"&chassisNo="+chassisNo+"&previous="+previous+"&repairDescription="+repairDescription);
 
@@ -251,7 +252,7 @@ function jobDone(id,job) {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/jobDone", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/jobDone", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("id="+id+"&job="+job);
 
@@ -393,6 +394,75 @@ function updatePassword() {
             }
         }
     });
+}
+
+// Search
+function searchByChassis(type) {
+
+    let chassisNo = document.getElementById("searchId").value;
+    console.log(chassisNo);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var response = this.responseText;
+
+            response = JSON.parse(response);
+            let innerHTML = ``;
+
+            if (!response['assemblyDetails']) {
+                innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                                <div class="font-weight">No Details</div>
+                            </div>`
+            } else {
+
+                innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
+                <div class="vehicle-data-board justify-content-evenly">`
+
+                response['assemblyDetails'].forEach(value => {
+
+                    if (value.CurrentStatus == 'S1') {
+                        CurrentStatus = 'Stage 01';
+                    } else if (response.CurrentStatus == 'S2') {
+                        CurrentStatus = 'Stage 02';
+                    } else if (response.CurrentStatus == 'S3') {
+                        CurrentStatus = 'Stage 03';
+                    } else if (response.CurrentStatus == 'S4') {
+                        CurrentStatus = 'Stage 04';
+                    } 
+
+                    innerHTML = innerHTML + 
+                    `<a href="http://localhost/MicroCAPS/managers/assembly/${value.ChassisNo}">
+                        <div class="carcard">
+                            <div class="cardhead">
+                                <div class="cardid">
+                                    <div class="carmodel">${value.ModelName}</div>
+                                    <div class="chassisno">${value.ChassisNo}</div>
+                                </div>
+                            </div>
+                            <div class="carpicbox">
+                                <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                            </div>
+                            <div class="carstatus green"> On Assembly </div>
+                            <div class="arrivaldate">Stage: ${CurrentStatus}</div>
+                        </div>
+                        </a>`;  
+                });
+
+                innerHTML = innerHTML + `</div></div>`;
+  
+            }
+
+            const vehicleList = document.getElementById("vehicleList");
+            vehicleList.innerHTML = innerHTML;
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/searchByChassis", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("chassisNo="+chassisNo+"&type="+type);
+
 }
 
 //Alert Success

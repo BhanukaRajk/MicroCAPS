@@ -44,3 +44,11 @@ assemblyVehicles?.addEventListener("change", () => {
         window.location.href = selectedValue;
     }
 });
+
+// Toggle Search
+const searchBar = document.querySelector('#search-bar');
+const searchButton = document.querySelector('#search-button');
+
+searchButton.addEventListener('click', () => {
+    searchBar.classList.toggle('show-search')
+})

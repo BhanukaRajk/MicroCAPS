@@ -11,7 +11,7 @@
             <div class="custom-select">
                 <select name="vehicles" class="background-none" id="assemblyVehicles">
                     <?php 
-                        echo '<option value="' . URL_ROOT . 'managers/progress/' . $data['ChassisNo'] .'">'.$data['ChassisNo'].'</option>';
+                        echo '<option value="' . URL_ROOT . 'managers/assembly/' . $data['ChassisNo'] .'">'.$data['ChassisNo'].'</option>';
                         foreach($data['assemblyDetails'] as $value) {
                             if ($value->ChassisNo == $data['ChassisNo']) {
                                 continue;
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="row background-none gap-2">
-                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stageone">
+                <a href="<?php echo URL_ROOT; ?>managers/assembly/<?php echo $data['ChassisNo']; ?>/stageone">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 01 </div>
                         <div class="chart-grid-stage">
@@ -52,7 +52,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagetwo">
+                <a href="<?php echo URL_ROOT; ?>managers/assembly/<?php echo $data['ChassisNo']; ?>/stagetwo">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 02 </div>
                         <div class="chart-grid-stage">
@@ -61,7 +61,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagethree">
+                <a href="<?php echo URL_ROOT; ?>managers/assembly/<?php echo $data['ChassisNo']; ?>/stagethree">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 03 </div>
                         <div class="chart-grid-stage">
@@ -70,7 +70,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>managers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagefour">
+                <a href="<?php echo URL_ROOT; ?>managers/assembly/<?php echo $data['ChassisNo']; ?>/stagefour">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 04 </div>
                         <div class="chart-grid-stage">

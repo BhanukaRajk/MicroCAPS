@@ -61,6 +61,9 @@
 /* Charts */
 @import "components/chart.css";
 
+/* Search */
+@import "components/search.css";
+
 /* Navigation */
 @import "components/navigation.css";
 

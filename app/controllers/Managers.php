@@ -10,6 +10,7 @@ class Managers extends Controller {
         $this->vehicleModel = $this->model('Vehicle');
     }
 
+    // Page : Dashboard
     public function dashboard() {
 
         if(!isLoggedIn()){
@@ -19,25 +20,27 @@ class Managers extends Controller {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $data = [
-                'assemblyDetails' => $this->managerModel->assemblyDetails('ASC'),
+                'assemblyDetails' => $this->managerModel->assemblyDetails(null,'ASC'),
                 'onAssembly' => $this->vehicleModel->vehicleCount('S1','S2','S3','S4'),
                 'onHold' => $this->vehicleModel->vehicleCount('H'),
                 'dispatched' => $this->vehicleModel->vehicleCount('D'),
+                'activityLogs' => $this->managerModel->activityLogs()
             ];
 
             $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
 
             $data['overall'] = [
-                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold'), "Weight")),
-                'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected'), "Weight"))
+                'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+                'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected'), "Weight"))
             ];
-
-            $data['onHoldComponents'] = $this->vehicleModel->componentQty('OnHold');
+//
+            $data['onHoldComponents'] = $this->vehicleModel->componentQty('Damaged');
             
             $this->view('manager/dashboard', $data);
         }
     }
 
+    // Page : Body Shell
     public function bodyshell() {
 
         if(!isLoggedIn()){
@@ -52,155 +55,7 @@ class Managers extends Controller {
         }
     }
 
-    public function shellRequest() {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $data = [];
-
-            foreach ($_POST as $key => $value) {
-                $data[$key] = $value;
-            }
-
-            $cnt = 0;
-            $body = '';
-            foreach ($data as $value) {
-                if ($cnt == 0) {
-                    $body .= '<tr>';
-                }
-                $body .= '<td valign="bottom" class="td col-right txt txt-nowrap bold">'.$value.'</td>';
-                $cnt++;
-                if ($cnt == 2) {
-                    $body .= '</tr>';
-                    $cnt = 0;
-                }
-            }
-
-            $file = file_get_contents("../app/views/templates/shellRequest.html");
-            $position = strpos($file, '<!-- Insert Point -->');
-            if ($position !== false) {
-                $file = substr_replace($file, $body, $position, 0);
-            }
-
-            if (sendmail($file)) {
-                echo 'Successful';
-            } else {
-                echo 'Failed';
-            }
-        }
-    }
-
-    public function addShell() {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'chassisNo' => trim($_POST['chassisNo']),
-                'color' => trim($_POST['color']),
-                'chassisType' => trim($_POST['chassisType']),
-                'repair' => $_POST['repair'] === 'true' ? 'Yes' : 'No',
-                'paint' => $_POST['paint'] === 'true' ? 'Yes' : 'No',
-                'repairDescription' => trim($_POST['repairDescription'])
-            ];
-
-            if($this->managerModel->addShell($data['chassisNo'], $data['chassisType'], $data['color'])) {
-                if ($data['repair'] === 'Yes') {
-                    $this->managerModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
-                    $this->managerModel->addPaintJob($data['chassisNo']);
-                } else {
-                    if ($data['paint'] === 'Yes') {
-                        $this->managerModel->addPaintJob($data['chassisNo']);
-                    }
-                }
-
-                if ($this->vehicleModel->addComponentRequest($data['chassisType'], $data['color'])) {
-                    echo 'Successful';
-                } else {
-                    echo 'Error';
-                }
-            } else {
-                echo 'Error';
-            }
-        }
-    }
-
-    public function RequestJobs() {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'id' => trim($_POST['id']),
-                'job' => trim($_POST['job']),
-                'chassisNo' => trim($_POST['chassisNo']),
-                'previous' => $_POST['previous'] === 'true' ? 'Yes' : 'No',
-                'repairDescription' => trim($_POST['repairDescription'])
-            ];
-
-            if ($data['previous'] === 'Yes') {
-                $this->managerModel->jobDone($data['id'], $data['job']);
-            }
-
-            if ($data['job'] === 'repair') {
-                $this->managerModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
-                echo 'Successful';
-            } else if ($data['job'] === 'paint') {
-                $this->managerModel->addPaintJob($data['chassisNo']);
-                echo 'Successful';
-            } else {
-                echo 'Error';
-            }
-
-        }
-    }
-
-    public function jobDone() {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'id' => trim($_POST['id']),
-                'job' => trim($_POST['job'])
-            ];
-
-            if ($data['job'] === 'paint') {
-                if ($this->managerModel->findRepairJobByChassis($this->managerModel->getChassisByPaintId($data['id'])->ChassisNo)) {
-                    echo 'Complete The Repair Job First';
-                    return;
-                }
-            }
-
-            $result = $this->managerModel->jobDone($data['id'], $data['job']);
-
-            if($result) {
-                echo 'Successful';
-            } else {
-                echo "Error Completing Job";
-            }
-        }
-    }
-
+    // Page : Component
     public function component() {
 
         if(!isLoggedIn()){
@@ -341,11 +196,114 @@ class Managers extends Controller {
             echo 'Successful';
 
         } else {
-            $data['componentRequestDetails'] = $this->vehicleModel->getComponentRequest();
-            $this->view('manager/component', $data);
+            $this->view('manager/component');
         }
     }
 
+    // Page : Assembly Process
+    public function assembly($chassisNo = null, $stage = null) {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($chassisNo == null) {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $data['assemblyDetails'] = $this->managerModel->assemblyDetails();
+                $this->view('manager/assembly', $data);
+            }
+        } else if ($stage == null) {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+                $data = [
+                    'ChassisNo' => $chassisNo,
+                    'overall' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected'), "Weight"))
+                    ],
+                    'stage01' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S1'), "Weight")),
+                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S1'), "Weight"))
+                    ],
+                    'stage02' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S2'), "Weight")),
+                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S2'), "Weight"))
+                    ],
+                    'stage03' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S3'), "Weight")),
+                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S3'), "Weight"))
+                    ],
+                    'stage04' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S4'), "Weight")),
+                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S4'), "Weight"))
+                    ],
+                    'assemblyDetails' => $this->managerModel->assemblyDetails()
+                ];
+                $this->view('manager/progress',$data);
+            }
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+                $data = [
+                    'ChassisNo' => $chassisNo,
+                    'stage' => $stage
+                ];
+
+                $stageId = '';
+
+                if ($stage == 'stageone')
+                    $stageId = 'S1';
+                else if ($stage == 'stagetwo')
+                    $stageId = 'S2';
+                else if ($stage == 'stagethree')
+                    $stageId = 'S3';
+                else if ($stage == 'stagefour')
+                    $stageId = 'S4';
+
+                $data['stageSum'] = [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', $stageId), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', $stageId), "Weight")),
+                    'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', $stageId), "Weight"))
+                ];
+                $data['stageDetails'] = [
+                    'pending' => $this->vehicleModel->getProcessStatus($chassisNo, 'Pending', $stageId),
+                    'connected' => $this->vehicleModel->getProcessStatus($chassisNo, 'Connected', $stageId),
+                    'hold' => $this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', $stageId)
+                ];
+
+                $this->view('manager/'.$stage, $data);
+            }
+        }
+
+
+
+    }
+
+    // Page : Pre Delivery Inspection Results
+    public function pdi($chassisNo = null) {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($chassisNo == null) {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
+                $this->view('manager/pdi', $data);
+            }
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $data['ChassisNo'] = $chassisNo;
+                $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
+                $data['onPDIVehicle'] = $this->vehicleModel->shellDetail($chassisNo);
+                $data['pdiCheckCategories'] = $this->managerModel->pdiCheckCategories();
+                $data['pdiCheckList'] = $this->managerModel->pdiCheckList($chassisNo);
+                $this->view('manager/pdidetails',$data);
+            }
+        }
+
+    }
+
+    // Page : Dispatch
     public function dispatch() {
 
         if(!isLoggedIn()){
@@ -358,6 +316,7 @@ class Managers extends Controller {
         }
     }
 
+    // Page : Settings
     public function settings() {
 
         if(!isLoggedIn()){
@@ -405,121 +364,5 @@ class Managers extends Controller {
             $this->view('manager/settings',$data);
         }
     }
-
-    public function assembly() {
-
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['assemblyDetails'] = $this->managerModel->assemblyDetails();
-            $this->view('manager/assembly', $data);
-        }
-
-    }
-
-    public function progress($chassisNo) {
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-            $data = [
-                'ChassisNo' => $chassisNo,
-                'overall' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected'), "Weight"))
-                ],
-                'stage01' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S1'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S1'), "Weight"))
-                ],
-                'stage02' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S2'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S2'), "Weight"))
-                ],
-                'stage03' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S3'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S3'), "Weight"))
-                ],
-                'stage04' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S4'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S4'), "Weight"))
-                ],
-                'assemblyDetails' => $this->managerModel->assemblyDetails()
-            ];
-            $this->view('manager/progress',$data);
-        }
-    }
-
-    public function assemblystage($chassisNo) {
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-            $data = [
-                'ChassisNo' => $chassisNo,
-                'stage' => trim($_GET['stage'])
-            ];
-
-            $stage = '';
-
-            if ($data['stage'] == 'stageone')
-                $stage = 'S1';
-            else if ($data['stage'] == 'stagetwo')
-                $stage = 'S2';
-            else if ($data['stage'] == 'stagethree')
-                $stage = 'S3';
-            else if ($data['stage'] == 'stagefour')
-                $stage = 'S4';
-
-            $data['stageSum'] = [
-                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage), "Weight")),
-                'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage), "Weight"))
-            ];
-            $data['stageDetails'] = [
-                'pending' => $this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage),
-                'connected' => $this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage),
-                'hold' => $this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage)
-            ];
-
-            $this->view('manager/'.$data['stage'], $data);
-        }
-    }
-
-    public function pdi()
-    {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
-            $this->view('manager/pdi', $data);
-        }
-    }
-
-    public function pdidetails($chassisNo) {
-
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['ChassisNo'] = $chassisNo;
-            $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
-            $data['onPDIVehicle'] = $this->vehicleModel->shellDetail($chassisNo);
-            $data['pdiCheckCategories'] = $this->managerModel->pdiCheckCategories();
-            $data['pdiCheckList'] = $this->managerModel->pdiCheckList($chassisNo);
-            $this->view('manager/pdidetails',$data);
-        }
-    }
-
-
 
 }
