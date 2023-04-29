@@ -31,7 +31,13 @@ function notifyMe() {
     var msg = document.getElementById("messagebox");
     // message.className = "show";
     msg.className = msg.className.replace("hideme", "shows showme");
-    setTimeout(function () { msg.className = msg.className.replace("shows showme", "hideme"); }, 5000);
+    // setTimeout(function () { if(msg.className == "shows showme") { msg.className = msg.className.replace("shows showme", "hideme"); }}, 10000);
+    setTimeout(function () { msg.className = msg.className.replace("shows showme", "hideme"); }, 10000);
+}
+
+function closeNotify() {
+    var msg = document.getElementById("messagebox");
+    msg.className = msg.className.replace("shows showme", "hideme");
 }
 
 
@@ -117,6 +123,7 @@ function closeToolDelConfBox() {
 function expandTool(Tool) {
 
     // GET THE VALUES FROM THE TOOL CARD
+    var toolId = Tool.querySelector('.tool-id').innerText;
     var toolName = Tool.querySelector('.toolname').innerText;
     var status = Tool.querySelector('.tool-status').innerText;
     var quantity = Tool.querySelector('.tool-quantity').innerText;
@@ -142,6 +149,8 @@ function expandTool(Tool) {
     document.querySelector('.form-tool-quantity').innerText = quantity;
     document.querySelector('.form-tool-lastupdate').innerText = lastupdate;
     document.getElementById("formToolImg").setAttribute("src", toolImg);
+
+    document.getElementById("status-form-tool-id").setAttribute("value", toolId);
 
     // SHOW THE POPUP FORM
     document.getElementById("toolUpdatePopUp").setAttribute("class", "background-blurer");
@@ -175,8 +184,12 @@ function expandConsumable(Consume) {
     document.querySelector('.form-con-lastupdate').innerText = lastupdate;
     document.getElementById("formConsImg").setAttribute("src", consumeImg);
     document.getElementById("formConId").setAttribute("value", consumeId);
+
     document.getElementById("stock").setAttribute("value", quantity.split(' ')[0].trim());
     document.querySelector('.form-con-stock-label').innerText = "Current Stock update (" + quantity.split(' ')[1].trim() + ")";
+
+    document.getElementById("formConType").setAttribute("value", quantity.split(' ')[1].trim());
+
 
     // SHOW THE POPUP FORM
     document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-blurer");

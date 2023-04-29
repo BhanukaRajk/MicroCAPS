@@ -4,6 +4,7 @@
 <!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/notification.php'; ?>
 
 
 <section>
@@ -28,6 +29,7 @@
             echo '<div class="toolcard" onclick="expandTool(this)">
                     <div class="cardhead">
                       <div class="cardid">
+                        <div class="tool-id display-none">'. $tool->ToolId .'</div>
                         <div class="toolname">'. $tool->ToolName .'</div>
                         <div class="tool-quantity">Quantity: '. $tool->quantity .'</div>
                       </div>
@@ -114,7 +116,7 @@
 
 
 
-      <!-- THIS IS THE POPUP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
+      <!-- THIS IS THE POPUP BOX FOR TOOL UPDATES AND DELETIONS -->
       <div class="background-blurer display-none" id="toolUpdatePopUp">
         <div class="consumable-detail-popup position-fixed">
 
@@ -152,8 +154,8 @@
                     <option id="status-opt2" value="Normal">Normal</option>
                   </select>
 
-  <!--                <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />-->
-  <!--                <label class="form-label blue">Current stock update</label>-->
+                  <!-- <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
+                  <label class="form-label blue">Current stock update</label> -->
 
                 </div>
               </div>

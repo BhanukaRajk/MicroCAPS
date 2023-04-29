@@ -4,14 +4,14 @@
     define('APP_ROOT', dirname(dirname(__FILE__)));
 
 
-    /* URL ROOT FOR BHANUKA*/
+    /* URL ROOT FOR BHANUKA */
     const URL_ROOT = 'http://localhost:8080/MicroCAPS/';
 
 
     /* URL ROOT FOR BHANUKA'S WINDOWS PC */
     // const URL_ROOT = 'http://localhost/MicroCAPS/';
 
-    /* URL ROOT FOR SAMINDU*/
+    /* URL ROOT FOR SAMINDU */
     // const URL_ROOT = 'http://localhost/MicroCAPS/';
 
 

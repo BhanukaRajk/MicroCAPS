@@ -80,15 +80,17 @@ private $db;
     }
 
 
-    public function markActivity($user_id): bool {
+    public function markActivity($user_id, $logged = 1): bool {
 
         $this->db->query(
             'UPDATE `employee-logs`
-                SET lastLog = CURRENT_TIMESTAMP
+                SET lastLog = CURRENT_TIMESTAMP,
+                logged_in = :logged
                 WHERE EmployeeId = :user_id'
         );
 
         $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':logged', $logged);
 
         if ($this->db->execute()) {
             return true;

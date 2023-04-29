@@ -298,75 +298,6 @@ class Supervisors extends controller
             $this->view('supervisor/leaves/leaves', $data);
         }
     }
-    // public function editLeave()
-    // {
-
-    //     if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-    //         redirect('Users/login');
-    //     }
-
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-    //         $data = [
-    //             'leaveId' => trim($_POST['leaveId']),
-    //             'employeeId' => trim($_POST['employeeId']),
-    //             'leavedate' => trim($_POST['leavedate']),
-    //             'reason' => trim($_POST['reason'])
-    //         ];
-
-
-    //         if ($this->supervisorModel->checkEmployee($data['employeeId'])) {
-
-    //             $data['EditorDetails'] = $this->supervisorModel->getLeaveByID($data['leaveId']);
-    //             $leave_id = $data['EditorDetails']->LeaveId;
-
-
-    //             if (($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) && ($leave_id != $data['leaveId'])) {
-
-    //                 $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
-    //                 $data['url'] = getUrl();
-    //                 // $this->view('supervisor/leaves/editleave', $data);
-
-    //             } else {
-
-    //                 $ldate = strtotime($data['leavedate']);
-    //                 $diff = ceil(($ldate - time()) / 60 / 60 / 24);
-
-    //                 if ($diff <= 1) {
-
-    //                     $_SESSION['error_message'] = 'Please enter a valid date! ';
-
-    //                     $data['url'] = getUrl();
-    //                     // $this->view('supervisor/leaves/editleave', $data);
-
-    //                 } else {
-
-    //                     if ($this->supervisorModel->EditLeave($data['employeeId'], $data['leavedate'], $data['reason'], $data['leaveId'])) {
-    //                         $_SESSION['success_message'] = 'Changes saved!';
-    //                     } else {
-    //                         $_SESSION['error_message'] = 'Error! Could not save changes..';
-    //                     }
-
-    //                     // redirect('Supervisors/leaves');
-    //                 }
-    //             }
-    //         } else {
-
-    //             $_SESSION['error_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
-    //             $data['url'] = getUrl();
-    //             // $this->view('supervisor/leaves/editleave', $data);
-
-    //         }
-    //     } else {
-
-    //         $data['url'] = getUrl();
-    //         // $this->view('supervisor/leaves/editleave', $data);
-
-    //     }
-    // }
     public function removeleave()
     {
 
@@ -512,18 +443,129 @@ class Supervisors extends controller
             $this->view('supervisor/inspection/vehiclelist', $data);
         }
     }
+
+    // RECORD POST ASSEMBLY QUALITY INSPECTION RESULTS
     public function recordPAQInspectionResults()
     {
+
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['chassis_no']),
+                'BrakeBleed' => trim($_POST['brake_bleed']),
+                'GearOil' => trim($_POST['gear_oil']),
+                'RackEnd' => trim($_POST['rack_end']),
+                'ClutchAdjust' => trim($_POST['clutch_adjust']),
+                'RearAxel' => trim($_POST['rear_axel_check']),
+                'VisualIns' => trim($_POST['visual_inspect']),
+                'FinalResult' => trim($_POST['final_result'])
+            ];
+
+            if ($this->supervisorModel->checkVehicle($data['ChassisNo'])) {
+
+                if (FALSE) {
+                // if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
+
+                //     $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
+                //     $data['url'] = getUrl();
+                //     $this->view('supervisor/leaves/addleave', $data);
+
+                } else {
+
+                    if (($data['BrakeBleed'] == 'NA' OR 
+                        $data['GearOil'] == 'NA' OR 
+                        $data['RackEnd'] == 'NA' OR 
+                        $data['ClutchAdjust'] == 'NA' OR 
+                        $data['RearAxel'] == 'NA') AND 
+                        $data['FinalResult'] == 'Passed')
+                    {
+
+                        $_SESSION['error_message'] = 'All criteria must be passed to complete the assembly line!';
+                        $data['url'] = getUrl();
+                        $this->view('supervisor/inspection/paqrecord', $data);
+
+                    } else {
+
+                        if ($this->supervisorModel->recordPAQ($data['chassis_no'], 
+                                                                $data['BrakeBleed'], 
+                                                                $data['GearOil'], 
+                                                                $data['RackEnd'], 
+                                                                $data['ClutchAdjust'], 
+                                                                $data['RearAxel'], 
+                                                                $data['VisualIns'], 
+                                                                $data['FinalResult']))
+                        {
+                            $_SESSION['success_message'] = 'Success! New record saved';
+                        } else {
+                            $_SESSION['error_message'] = 'Error! record saving failed!';
+                        }
+                        redirect('Supervisors/S4vehicles');
+                    }
+                }
+
+            } else {
+
+
+                $_SESSION['error_message'] = 'Oops! The vehicle could not be found';
+
+                $data['url'] = getUrl();
+                $this->view('supervisor/inspection/paqrecord', $data);
+            }
+        } else {
+
+            $_SESSION['error_message'] = 'Request failed!';
+
+            $data['url'] = getUrl();
+            $this->view('supervisor/inspection/paqrecord', $data);
+
+        }
+    
     }
-    public function PAQrecord()
+
+
+
+    // GET CAR INFO TO POST ASSEMBLY QUALITY INSPECTION FORM
+    public function getCarInfo()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $this->view('supervisor/pdi/defectsheet', $data);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'CarID' => trim($_POST['form-car-id'])
+            ];
+
+            if ($this->supervisorModel->checkToolById($data['CarID'])) {
+
+                if ($this->supervisorModel->updateToolStatus($data['toolId'], $data['toolStatus'])) {
+                    $_SESSION['success_message'] = 'Tool status updated!';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not update information..';
+                }
+                    
+            } else {
+                $_SESSION['error_message'] = 'Oops! The tool you are trying to update could not be found.';
+            }
+
+            redirect('Supervisors/testRunQueue');
+
+        } else {
+
+                $_SESSION['error_message'] = 'Request failed! :(';
+                // $data['url'] = getUrl();
+                redirect('Supervisors/testRunQueue');
+                // $this->view('supervisor/consumables/consumablelist', $data);
+
         }
     }
 
@@ -554,7 +596,8 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $this->view('supervisor/pdi/vehiclelist', $data);
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList('S4');
+            $this->view('supervisor/inspection/vehiclelist', $data);
         }
     }
 
@@ -631,8 +674,8 @@ class Supervisors extends controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'ConsumeId' => trim($_POST['form-conid']),
-                'ConsumeType' => trim($_POST['con_type']),
+                'ConsumeId' => trim($_POST['formConId']),
+                'ConsumeType' => trim($_POST['formConType']),
                 'Stock' => trim($_POST['stock'])
             ];
 
@@ -700,7 +743,6 @@ class Supervisors extends controller
             redirect('Users/login');
         }
 
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -710,61 +752,26 @@ class Supervisors extends controller
                 'toolStatus' => trim($_POST['tool-status'])
             ];
 
+            if ($this->supervisorModel->checkToolById($data['toolId'])) {
 
-            if ($this->supervisorModel->checkEmployee($data['employeeId'])) {
-
-                $data['EditorDetails'] = $this->supervisorModel->getLeaveByID($data['leaveId']);
-                $leave_id = $data['EditorDetails']->LeaveId;
-
-
-                if ($data['leaveId'] != $leave_id) {
-                    // if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
-
-                    if (($data['employeeId'] == $data['EditorDetails']->EmployeeId) &&
-                        ($data['leavedate'] == $data['EditorDetails']->LeaveDate)) {
-
-                        $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
-                        $data['url'] = getUrl();
-                        $this->view('supervisor/leaves/editleave', $data);
-
-                    }
-
-                }
-
-                $ldate = strtotime($data['leavedate']);
-                $diff = ceil(($ldate - time()) / 60 / 60 / 24);
-
-                if ($diff <= 1) {
-
-                    $_SESSION['error_message'] = 'Please enter a valid date! ';
-                    $data['url'] = getUrl();
-                    $this->view('supervisor/leaves/editleave', $data);
-
+                if ($this->supervisorModel->updateToolStatus($data['toolId'], $data['toolStatus'])) {
+                    $_SESSION['success_message'] = 'Tool status updated!';
                 } else {
-
-                    if ($this->supervisorModel->EditLeave($data['employeeId'], $data['leavedate'], $data['reason'], $data['leaveId'])) {
-                        $_SESSION['success_message'] = 'Changes saved!';
-                    } else {
-                        $_SESSION['error_message'] = 'Error! Could not save changes..';
-                    }
-
-                    redirect('Supervisors/leaves');
-
+                    $_SESSION['error_message'] = 'Error! Could not update information..';
                 }
-
+                    
             } else {
-
-                $_SESSION['error_message'] = 'Oops! An employee with employee Id ' . $data["employeeId"] . ' could not be found';
-                $data['url'] = getUrl();
-                $this->view('supervisor/leaves/editleave', $data);
-
+                $_SESSION['error_message'] = 'Oops! The tool you are trying to update could not be found.';
             }
+
+            redirect('Supervisors/viewTools');
 
         } else {
 
-            $_SESSION['error_message'] = 'Request failed! :(';
-            $data['url'] = getUrl();
-            $this->view('supervisor/leaves/editleave', $data);
+                $_SESSION['error_message'] = 'Request failed! :(';
+                // $data['url'] = getUrl();
+                redirect('Supervisors/viewTools');
+                // $this->view('supervisor/consumables/consumablelist', $data);
 
         }
     }

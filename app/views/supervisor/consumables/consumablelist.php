@@ -4,6 +4,7 @@
 <!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR ON DASHBOARD PAGE -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
+<?php require_once APP_ROOT . '/views/supervisor/common/notification.php'; ?>
 
 
 <section class="listsection">
@@ -13,7 +14,7 @@
 
       <div class="pagehead display-flex-row justify-content-between">
         <div>Consumables</div>
-        <div class="margin-right-4"><button onclick="showConsumeAddingPopup()" class="edit-button">Add new</button></div>
+        <div class="margin-right-4"><button onclick="showConsumeAddingPopup()" class="adding-button">Add new</button></div>
       </div>
 
       <div class="vehicle-detail-board">
@@ -142,19 +143,23 @@
                 <div class="form-con-lastupdate">Last update date and time</div>
               </div>
 
-              <form method="POST" target="">
+              <form action="<?php echo URL_ROOT; ?>Supervisors/updateThisConsumable" method="POST">
 
-              <div class="horizontal-centralizer margin-top-4">
-                <div>
-                  <input type="number" id="stock" name="stock" onChange="" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
-                  <label class="form-label blue form-con-stock-label">Current stock update</label>
+                <div class="horizontal-centralizer margin-top-4">
+                  <div>
+                    <input type="number" id="stock" name="stock" class="form-control form-control-blue text-fontgray width-rem-15" placeholder="Current stock update" />
+                    <label for="stock" class="form-label blue form-con-stock-label">Current stock update</label>
+                  </div>
                 </div>
-              </div>
 
                 <div class="display-flex-row justify-content-center margin-top-2">
-                  <div class="display-none"><input class="form-conid display-none" id="formConId" name="formConId"></div>
-                  <div class="display-none"><input class="form-con-type display-none" id="formConType" name="formConType"></div>
-                  <div><button type="submit" class="edit-button consume-update">Update</button></div>
+                  <div class="display-none">
+                    <input class="form-conid" id="formConId" name="formConId">
+                    <input class="form-con-type" id="formConType" name="formConType">
+                  </div>
+                  <div>
+                    <button type="submit" class="edit-button consume-update">Update</button>
+                  </div>
                 </div>
 
               </form>

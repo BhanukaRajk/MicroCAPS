@@ -4,7 +4,7 @@
 <!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR ON DASHBOARD PAGE -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
-
+<?php require_once APP_ROOT . '/views/supervisor/common/notification.php'; ?>
 
 <section class="listsection">
     <div class="datawall">
