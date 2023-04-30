@@ -5,7 +5,7 @@
 
     <section class="position-absolute page-content">
         <div class="page-heading font-weight  margin-bottom-4">
-            Defect Sheet
+            Defect Sheets
         </div>
 
         <?php
