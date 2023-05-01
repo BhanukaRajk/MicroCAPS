@@ -1,66 +1,123 @@
 <?php require_once APP_ROOT . '\views\tester\includes\header.php'; ?>
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; ?>
 
-<section>
-    <div class="form-page">
-        <!-- <div class=""> -->
-            <div class="form-section">
-                <div class="form-main">
-                    <div class="form-page-heading">Defect Sheet</div>
-                </div>
-                <div class="form-section-2">
-                    <div class="form-data-board">
-                        <div class="add-form-container">
-                            <div class="add-form-title">Edit Defect Form</div>
-                            <form id="defect-form" action="<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $data['ChassisNo']; ?>/<?php echo $data['DefectNo']; ?>" method="POST">
-                                <div class="add-form-field">
-                                    <span class="add-form-error">
-                                        <?php
-                                        echo !empty($data['defect_id_err']) ? $data['defect_id_err'] : '';
-                                        echo !empty($data['defect_err']) ? $data['defect_err'] : '';
-                                        ?>
-                                    </span>
-                                    <label class="add-form-label" for="ChassisNo">Chassis Number:</label>
-                                    <input type="text" name="ChassisNo" value="<?php echo $data['ChassisNo']; ?>" id="ChassisNo" placeholder="Chassis Number" class="add-form-input" readonly />
-                                </div>
+<section class = "position-absolute page-content" >
 
-                                <div class="add-form-field">
-                                    <label class="add-form-label" for="DefectNo">Defect Number:</label>
-                                    <input type="text" id="DefectNo" name="DefectNo" value="<?php echo $data['DefectNo']; ?>" placeholder="Defect Number" class="add-form-input" required />
-                                </div>
+<div class="display-flex-row align-items-center justify-content-center">
+    <section>
+        <div class="row align-items-center border-gray padding-4  width-rem-25 justify-content-center">
 
-                                <div class="add-form-field">
-                                    <label class="add-form-label" for="InspectionDate">Inspection Date:</label>
-                                    <input type="date" id="InspectionDate" name="InspectionDate" value="<?php echo $data['InspectionDate']; ?>" class="add-form-input" required />
-                                </div>
-
-                                <div class="add-form-field">
-                                    <span class="add-form-error">
-                                        <?php
-                                        echo !empty($data['user_err']) ? $data['user_err'] : '';
-                                        ?>
-                                    </span>
-                                    <label class="add-form-label" for="EmployeeID">Employee ID:</label>
-                                    <input type="text" id="EmployeeID" name="EmployeeID" value="<?php echo $data['EmployeeID']; ?>" placeholder="Employee ID" class="add-form-input" required />
-                                </div>
-
-                                <div class="add-form-field">
-                                    <label class="add-form-label" for="RepairDescription">Repair Description:</label>
-                                    <input type="text" id="RepairDescription" name="RepairDescription" value="<?php echo $data['RepairDescription']; ?>" placeholder="Repair Description" class="add-form-input" />
-                                </div>
-
-                                <div class="add-form-field">
-                                    <label class="add-form-label" for="ReCorrection">Recorrection:</label>
-                                    <input type="text" id="ReCorrection" name="ReCorrection" value="<?php echo $data['ReCorrection']; ?>" placeholder="Recorrection" class="add-form-input" />
-                                </div>
-
-                                <div class="add-form-field">
-                                    <button name="submit" type="submit" class="add-form-update-button">Edit Defect</button>
-                                </div>
-                            </form>
-                        <!-- </div> -->
-                    </div>
-                </div>
+            <div class="text-center">
+                <h3 class="margin-top-1">Edit Defect</h3>
             </div>
+
+            <form action="<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $data['ChassisNo']; ?>/<?php echo $data['DefectNo']; ?>" method="POST">
+
+            <div>
+                    <input type="text"
+                        id="ChassisNo"
+                        name="ChassisNo"
+                        onChange=""
+                        value="<?php echo $data['ChassisNo']; ?>"
+                        class="form-control"
+                        placeholder="Chassis Number"
+                        autocomplete="off"
+                        readonly />
+                    <label class="form-label">Chassis Number</label>
+                    <span></span>
+
+                </div>
+
+                <div>
+                    <input type="text"
+                        id="DefectNo"
+                        name="DefectNo"
+                        onChange=""
+                        value="<?php echo $data['DefectNo']; ?>"
+                        class="form-control"
+                        placeholder="Defect Number"
+                        autocomplete="off"
+                        required />
+                    <label class="form-label">Defect Number</label>
+                    <span></span>
+
+                </div>
+
+                <div>
+                    <input type="date"
+                        id="InspectionDate"
+                        name="InspectionDate"
+                        onChange=""
+                        value="<?php echo $data['InspectionDate']; ?>"
+                        class="form-control"
+                        placeholder="Inspection Date"
+                        autocomplete="off"
+                        required />
+                    <label class="form-label">Inspection Date</label>
+                    <span></span>
+
+                </div>
+
+                <div>
+                    <input type="text"
+                        id="EmployeeID"
+                        name="EmployeeID"
+                        onChange=""
+                        value="<?php echo $data['EmployeeID']; ?>"
+                        class="form-control"
+                        placeholder="Employee ID"
+                        autocomplete="off"
+                        required />
+                    <label class="form-label">Employee ID</label>
+                    <span></span>
+
+                </div>
+
+                <div>
+                    <input type="text"
+                        id="RepairDescription"
+                        name="RepairDescription"
+                        onChange=""
+                        value="<?php echo $data['RepairDescription']; ?>"
+                        class="form-control"
+                        placeholder="Repair Description"
+                        autocomplete="off"
+                        required />
+                    <label class="form-label">Repair Description</label>
+                    <span></span>
+
+                </div>
+
+                <div>
+                    <input type="text"
+                        id="ReCorrection"
+                        name="ReCorrection"
+                        onChange=""
+                        value="<?php echo $data['ReCorrection']; ?>"
+                        class="form-control"
+                        placeholder="Recorrection"
+                        autocomplete="off"
+                        required />
+                    <label class="form-label">Recorrection</label>
+                    <span></span>
+
+                </div>
+
+                <div class="text-center margin-top-3">
+                    <button class="btn btn-primary" type="submit" id="" onclick="">
+                        Update Defect
+                    </button>
+                </div>
+
+                <div class="text-center text-blue font-size margin-top-3 pointer" id="cancel" onclick="history.back()">Cancel</div>
+
+            </form>
         </div>
+    </section>
+</div>
+
+<section class="display-flex-column">
+
+    <div id="alert" class="hideme" role="alert"></div>
+
 </section>
