@@ -7,7 +7,9 @@
 
 
 <section>
-    <div class="paq-form-screen">
+    <!-- THIS IS THE CONTENT DISPLAYING AREA -->
+    <div class="content">
+        <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
         <div class="paq-form-area">
 
             <div class="paq-form-header-box">
@@ -115,4 +117,5 @@
 </section>
 
 
+<!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -1,11 +1,15 @@
+<!-- ADD COMMON HEADER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
-
+<!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
+
 <section>
+    <!-- THIS IS THE CONTENT DISPLAYING AREA -->
     <div class="content">
+        <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
         <div class="task-schedule-margin">
 
             <div class="task-schedule-header">
@@ -488,4 +492,5 @@
 </section>
 
 
+<!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

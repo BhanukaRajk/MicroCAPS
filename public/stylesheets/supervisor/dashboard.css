@@ -218,9 +218,27 @@ dash-section
     flex-direction: column;
     justify-content: space-between;
 }
+.result-text-req,
+.result-text-not-req {
+    color: #ffffff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.result-text-req {
+    background-color: #FEC400;
+}
+
+ .result-text-not-req {
+     background-color: #b10202;
+ }
+
+ .part-name {
+     font-weight: 1000;
+ }
 
 .medfont {
-    font-size: small;
+    font-size: 0.66rem;
 }
 
 
@@ -322,6 +340,11 @@ dash-section
     font-size: 12px;
     width: 130px;
     word-wrap: normal;
+}
+
+.online-user {
+    color: green;
+    font-weight: bold;
 }
 
 

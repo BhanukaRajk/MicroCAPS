@@ -899,7 +899,7 @@ h3 {
     --input-border-radius: 1rem;
     display: block;
     width: 16.75rem;
-    padding: .6rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -1531,6 +1531,16 @@ p.grey-indicator {
 
 .noscroll {
     overflow: hidden;
+}
+
+/* THIS IS THE CONTENT AREA OF EACH PAGE WHICH HAS TOP NAVIGATION BAR AND SIDE NAVIGATION BAR */
+.content {
+    position: absolute;
+
+    left: 16.5rem;
+    right: 0;
+    top: 4rem;
+    bottom: 0;
 }
 
 .TT {

@@ -72,11 +72,13 @@ class Supervisors extends controller
             redirect('Users/login');
         }
 
+        echo "Hello";
+
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
 
             $data['counts'] = $this->supervisorModel->statusCounters();
-            $data['assemblyLine'] = $this->supervisorModel->viewAssemblyLineVehicleNos();
+            $data['assemblyLine'] = $this->supervisorModel->ViewS4Finishers();
             $data['activities'] = $this->supervisorModel->activityLogs();
             $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
 
@@ -545,28 +547,26 @@ class Supervisors extends controller
                 'CarID' => trim($_POST['form-car-id'])
             ];
 
-            if ($this->supervisorModel->checkToolById($data['CarID'])) {
+            if ($this->supervisorModel->checkCarById($data['CarID'], "S4")) {
 
-                if ($this->supervisorModel->updateToolStatus($data['toolId'], $data['toolStatus'])) {
-                    $_SESSION['success_message'] = 'Tool status updated!';
+                if ($this->supervisorModel->createPAQForm($data['CarID'])) {
+                    $data['FormCarData'] = $this->supervisorModel->createPAQForm($data['CarID']);
+                    $this->view('supervisor/inspection/paq-record', $data);
                 } else {
-                    $_SESSION['error_message'] = 'Error! Could not update information..';
+                    $_SESSION['error_message'] = 'Error! Could not get information..';
                 }
                     
             } else {
-                $_SESSION['error_message'] = 'Oops! The tool you are trying to update could not be found.';
+                $_SESSION['error_message'] = 'Oops! The car you are searching could not be found.';
             }
 
-            redirect('Supervisors/testRunQueue');
-
         } else {
-
                 $_SESSION['error_message'] = 'Request failed! :(';
                 // $data['url'] = getUrl();
-                redirect('Supervisors/testRunQueue');
-                // $this->view('supervisor/consumables/consumablelist', $data);
-
         }
+
+        redirect('Supervisors/testRunQueue');
+
     }
 
 
@@ -588,6 +588,7 @@ class Supervisors extends controller
             $this->view('supervisor/pdi/pdiresults', $data);
         }
     }
+
     public function testRunQueue()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {

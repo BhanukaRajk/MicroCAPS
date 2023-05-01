@@ -41,3 +41,10 @@ for (number = 0; number < acc.length; number++) {
     }
   });
 }
+
+
+
+function GoBack() {
+  // GO BACK TO THE PREVIOUS PAGE
+  window.history.back();
+}

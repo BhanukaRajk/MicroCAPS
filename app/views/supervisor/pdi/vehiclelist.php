@@ -1,13 +1,15 @@
-<!-- ADD COMMON HEADER FILE FOR DASHBOARD PAGE -->
+<!-- ADD COMMON HEADER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
-<!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR ON DASHBOARD PAGE -->
+<!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
-<section class="listsection">
-    <div class="datawall">
+<section>
+    <!-- THIS IS THE CONTENT DISPLAYING AREA -->
+    <div class="content">
+        <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
         <div class="databoard">
             <div class="pagehead">Testing process</div>
             <div class="vehicle-detail-board">
@@ -297,5 +299,5 @@
 </section>
 
 
-<!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
+<!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

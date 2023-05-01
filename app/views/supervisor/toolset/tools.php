@@ -8,8 +8,9 @@
 
 
 <section>
-
+  <!-- THIS IS THE CONTENT DISPLAYING AREA -->
   <div class="content">
+    <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
     <div class="toolset-margin">
 
       <!-- THIS SHOULD BE A FIXED CONTENT -->
@@ -253,5 +254,5 @@
 </section>
 
 
-<!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
+<!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

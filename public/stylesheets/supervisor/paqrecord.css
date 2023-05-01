@@ -11,8 +11,8 @@
     display: flex;
     flex-direction: column;
 
-    margin-inline: 38px;
-    margin-block: 20px;
+    margin-inline: 2.2rem;
+    margin-block: 1.2rem;
 }
 
 
@@ -37,8 +37,8 @@
 }
 
 .paq-form-heading .form-title {
-    width: 50%;
-    padding-block: 0.75rem;
+    /*width: 50%;*/
+    /*padding-block: 0.75rem;*/
 
     font-weight: 700;
     font-size: 24px;
@@ -50,8 +50,8 @@
 .paq-form-heading .vehicle-model,
 .paq-form-heading .chassis-no,
 .paq-form-heading .engine-no {
-    width: 50%;
-    padding-block: 0.5rem;
+    /*width: 50%;*/
+    padding-block: 0.2rem;
 
     font-weight: 400;
     font-size: 14px;
@@ -95,7 +95,8 @@
     width: 100%;
 
     background: #FFFFFF;
-    border-radius: 22px;
+    border-radius: 1rem;
+    margin-top: 1rem;
 }
 
 .paq-input-set-1,
@@ -115,7 +116,7 @@
 }
 
 .paq-input-set-1,
-.paq-input-set-2
+.paq-input-set-2,
 .paq-input-set-6 {
     display: flex;
     flex-direction: row;

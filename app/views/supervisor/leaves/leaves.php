@@ -6,10 +6,10 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/notification.php'; ?>
 
 
-<section id="main" class="sup-leave-list-page">
-    <!-- TAKE 2REM MARGIN FROM LEFT AND RIGHT -->
-
-        <!-- CONTENT WINDOW -->
+<section>
+    <!-- THIS IS THE CONTENT DISPLAYING AREA -->
+    <div class="content">
+        <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
         <div class="sup-leave-list-databox">
 
             <div class="sup-leave-list-headbox">
@@ -77,12 +77,9 @@
             </div>
 
         </div>
-    </div>
-</section>
-
-    <!-- DELETE CONFIRMATION POPUP BOX -->
-    <div class="delete-conf-blur horizontal-centralizer display-none" id="popupWindow">
-        <div class="vertical-centralizer">
+        <!-- DELETE CONFIRMATION POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
+        <div class="delete-conf-blur horizontal-centralizer display-none" id="popupWindow">
+            <div class="vertical-centralizer">
 
                 <div class="del-confirm-box">
                     <div class="del-confirm-box-content">
@@ -102,8 +99,11 @@
                     </div>
                 </div>
 
+            </div>
         </div>
     </div>
+</section>
 
 
+<!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

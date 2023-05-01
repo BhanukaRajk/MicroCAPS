@@ -5,22 +5,26 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
-<?php $test_data = $data['preTestData']; ?>
+
+<!-- GET DATA FROM CONTROLLER -->
+<?php $test_data = $data['FormCarData']; ?>
 
 <section>
+    <!-- THIS IS THE CONTENT DISPLAYING AREA -->
     <div class="content">
+        <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
         <div class="paq-form-margin">
 
 
             <div class="paq-form-head">
                 <div class="paq-form-heading">
                     <div class="form-title">Quality Inspection - <?php echo $test_data->ChassisNo; ?></div>
-                    <div class="vehicle-model">Vehicle model : <?php echo $test_data->Model; ?></div>
+                    <div class="vehicle-model">Vehicle model : <?php echo $test_data->ModelName; ?></div>
                     <div class="chassis-no">Chassis No : <?php echo $test_data->ChassisNo; ?></div>
                     <div class="engine-no">Engine No : <?php echo $test_data->EngineNo; ?></div>    
                 </div>
                 <div class="paq-back-button-box">
-                    <button type="button" class="back-button">Go back</button>
+                    <button onclick="GoBack()" type="button" class="back-button">Go back</button>
                 </div>
             </div>
 
@@ -50,7 +54,7 @@
                 </div>
 
                 <div class="paq-input-set-2">
-                    <div class="">
+                    <div class="paq-input-area">
                         <div class="paq-label">
                             <label for="rack_end">RACK END (ADJUSTMENT CHECKING)</label>
                         </div>
@@ -119,4 +123,5 @@
 </section>
 
 
+<!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -91,7 +91,7 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime`, `logged_in` 
+            'SELECT `employee`.`EmployeeId`, CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime`, `logged_in` 
             FROM `employee-logs`,`employee` 
             WHERE `employee-logs`.`EmployeeId` = `employee`.`EmployeeId` 
             ORDER BY `employee-logs`.`lastLog` DESC LIMIT 6;'
@@ -372,13 +372,12 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT * FROM `vehicles`;'
+            'SELECT `ChassisNo` FROM `vehicle`;'
         );
 
         $S4FVehicles = $this->db->resultSet();
-        //print_r($S4FVehicles);
 
-        if ($S4FVehicles) {
+        if ($S4FVehicles != NULL) {
             return $S4FVehicles;
         } else {
             return false;
@@ -443,7 +442,7 @@ class Supervisor
         }
     }
 
-    // TIHIS IS NOT THE WORKING FUNCTION
+    // THIS IS NOT THE WORKING FUNCTION
     public function ViewTools()
     {
 
@@ -481,50 +480,6 @@ class Supervisor
             return false;
         }
     }
-
-
-    // public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final) {
-
-
-
-    //     for ($record = 1; $record <= 7; $record++) {
-
-    //         // Insert the value
-    //         $this->db->query(
-    //             'INSERT INTO `operation-vehicle` (`ChassisNo`, `OpId`, `Status`, `SupervisorId`, `Date`)
-    //             VALUES (:chassisNo, :operation_id, :operation_id, :supervisor, CURRENT_TIMESTAMP);'
-    //         );
-        
-    //         // Bind the parameters
-    //         $this->db->bind(':record_id', $recordId);
-    //         $this->db->bind(':chassis_no', $chassisNo);
-    //         $this->db->bind(':' . $i, $$i);
-        
-    //         // Execute the query
-    //         $this->db->execute();
-        
-    //         // Get the next available record ID
-    //         $recordId++;
-    //     }
-
-
-    //     $this->db->bind(':chassisNo', $ChassisNo);
-    //     $this->db->bind(':brake', $BrakeBleeding);
-    //     $this->db->bind(':gearOil', $GearOilLevel);
-    //     $this->db->bind(':adjustment', $Adjustment);
-    //     $this->db->bind(':clutch', $Clutch);
-    //     $this->db->bind(':rap', $RAP);
-    //     $this->db->bind(':visual', $Visual);
-    //     $this->db->bind(':final', $Final);
-    //     $this->db->bind(':supervisor', $_SESSION['_name']);
-
-    //     if ($this->db->execute()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-
-    // }
 
 
     public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final) {
@@ -576,11 +531,11 @@ class Supervisor
         $this->db->query(
             'SELECT `component-damage`.`SerialNo`, 
                     `component-damage`.`RequestStatus`, 
-                    `component`.`Qty`, 
+                    `component`.`Color`, 
                     `component`.`PartName` 
                     FROM `component-damage`, `component` 
-                    ORDER BY `component-damage`.`record_date` 
-                    DESC LIMIT 4;'
+                    ORDER BY `component-damage`.`RequestStatus` 
+                    ASC LIMIT 5;'
         );
 
         $damaged_parts = $this->db->resultSet();
@@ -612,24 +567,6 @@ class Supervisor
             return false;
         }
     }
-
-    // public function viewAssemblyLineVehicleNos()
-    // {
-
-    //     $this->db->query(
-    //         'SELECT `ChassisNo`
-    //                 FROM `vehicle` 
-    //                 WHERE `CurrentStatus` = "PA";'
-    //     );
-
-    //     $vehicles = $this->db->resultSet();
-
-    //     if ($vehicles) {
-    //         return $vehicles;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
 
     public function ViewPDIresults()
@@ -691,6 +628,45 @@ class Supervisor
     }
 
 
+    public function createPAQForm($car_id)
+    {
+        $this->db->query(
+            'SELECT `vehicle`.`ChassisNo`, 
+                        `vehicle`.`EngineNo`, 
+                        `vehicle-model`.`ModelName` 
+                        FROM `vehicle`, `vehicle-model` 
+                        WHERE `ChassisNo` = :car AND `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo`;'
+        );
+        $this->db->bind(':car', $car_id);
+        $car_data = $this->db->single();
+
+        if ($car_data != NULL) {
+            return $car_data ;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkCarById($car_id, $state): bool
+    {
+
+        $this->db->query(
+            'SELECT `ChassisNo` FROM `vehicle` WHERE `ChassisNo` = :car AND `CurrentStatus` = :cstate;'
+        );
+
+        $this->db->bind(':car', $car_id);
+        $this->db->bind(':cstate', $state);
+        $row = $this->db->single();
+
+        if ($row != NULL) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
     public function checkConsumeById($consume_id): bool
     {
@@ -712,7 +688,7 @@ class Supervisor
     }
 
 
-    public function updateConsumableQuantity($consume_id, $quantity, $con_type)
+    public function updateConsumableQuantity($consume_id, $quantity, $con_type): bool
     {
         if($con_type == "Liters") {
             $this->db->query(
@@ -730,7 +706,7 @@ class Supervisor
         $this->db->bind(':consume', $consume_id);
         $this->db->bind(':quantity', $quantity);
 
-        print_r($con_type);
+        // print_r($con_type);
 
 
         if ($this->db->execute()) {

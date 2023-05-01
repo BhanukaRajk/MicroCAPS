@@ -1,11 +1,15 @@
+<!-- ADD COMMON HEADER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/header.php'; ?>
 
-
+<!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
+
 <section>
-    <div class="ds-view">
+    <!-- THIS IS THE CONTENT DISPLAYING AREA -->
+    <div class="content">
+        <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
         <div class="ds-view-inner">
 
             <div class="ds-top-section">
@@ -94,4 +98,6 @@
     </div>
 </section>
 
+
+<!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>
