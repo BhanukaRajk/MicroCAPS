@@ -1,20 +1,5 @@
-body {
-    background: #F2F2F6;
-}
-
 carpic {
     border: 1px solid black;
-}
-
-.listsection {
-    position: absolute;
-    /*width: 473.8px;*/
-    /*height: 50px;*/
-    left: 300px;
-    top: 90px;
-
-    /* left: 16.25rem;
-    top: 4rem; */
 }
 
 .pagehead {

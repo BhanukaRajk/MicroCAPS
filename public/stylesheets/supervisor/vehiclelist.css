@@ -6,14 +6,6 @@ carpic {
     border: 1px solid black;
 }
 
-section {
-    position: absolute;
-    /*width: 473.8px;*/
-    /*height: 50px;*/
-    left: 300px;
-    top: 90px;
-}
-
 #middler {
     position: fixed !important;
     left: 70rem !important;

@@ -42,7 +42,9 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "testRunQueue") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/testRunQueue">
+            <a class="<?php echo ($data['url'][1] == "testRunQueue" ||
+                                  $data['url'][1] == "getCarInfo"
+            ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/testRunQueue">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Pre-Inspection
             </a>
 

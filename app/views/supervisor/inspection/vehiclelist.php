@@ -11,7 +11,7 @@
     <!-- THIS IS THE CONTENT DISPLAYING AREA -->
     <div class="content">
         <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
-        <div class="datawall">
+        <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead">Assembly completed vehicles</div>
                 <div class="vehicle-detail-board">

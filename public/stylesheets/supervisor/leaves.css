@@ -6,12 +6,6 @@
     font-family: "Open Sans";
 }
 
-.sup-leave-list-page {
-    position: absolute;
-    left: 16.25rem;
-    top: 4rem;
-}
-
 .sup-leave-list-content {
     display: flex;
     justify-content: flex-start;

@@ -547,6 +547,24 @@ class Supervisor
         }
     }
 
+    public function viewCarComponents($car) {
+        $this->db->query(
+            'SELECT `component`.`PartName`, `component-release`.`CurrentStatus`
+                    FROM `component-release`, `component` 
+                    WHERE `component-release`.`PartNo` = `component`.`PartNo` 
+                      AND `component-release`.`ChassisNo` = :THIS_CAR;'
+        );
+
+        $this->db->bind(':THIS_CAR', $car);
+
+        $parts = $this->db->resultSet();
+
+        if ($parts) {
+            return $parts;
+        } else {
+            return false;
+        }
+    }
     
     public function viewVehicleList($stage)
     {

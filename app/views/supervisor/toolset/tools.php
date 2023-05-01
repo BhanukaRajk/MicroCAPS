@@ -26,7 +26,7 @@
         <div class="toolset-toolview">
 
           <?php
-          foreach ($data['toolset'] as $tool) {
+          foreach ($data['toolset'] AS $tool) {
             echo '<div class="toolcard" onclick="expandTool(this)">
                     <div class="cardhead">
                       <div class="cardid">

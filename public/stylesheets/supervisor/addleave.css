@@ -5,10 +5,6 @@
     /* margin-block: 2.5rem; */
     margin-block: 38px;
 
-    left: 16.5rem;
-    right: 0rem;
-    top: 4rem;
-    bottom: 0rem;
 }
 
 .form-headings{
@@ -115,4 +111,23 @@
     --input-border-color: #ee0b0b;
     outline: 0;
     box-shadow: none;
+}
+
+
+#reason {
+    resize: none;
+    margin-bottom: 1em;
+    width: 550px;
+    height: 250px;
+}
+
+#reason::placeholder {
+    opacity: 40%;
+}
+
+
+.grey-up {
+    font-size:small;
+    color: #ababab;
+    font-family:Arial, Helvetica, sans-serif;
 }

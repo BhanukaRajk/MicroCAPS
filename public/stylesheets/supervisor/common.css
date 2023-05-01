@@ -1,0 +1,246 @@
+/*MICROCAPS LOGO*/
+.logo {
+    height: 4rem;
+}
+
+.mouse-pointer {
+    cursor: pointer;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+.no-data-icon {
+    width: auto;
+    height: 15rem;
+
+    margin: 2rem;
+}
+
+.no-data {
+    width: 880px;
+    height: 520px;
+
+    background-color: #FFFFFF;
+
+    /* box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2); */
+    border-radius: 24px;
+
+
+    font-family: 'Proxima Nova', sans-serif;
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 30px !important;
+    line-height: 30px !important;
+    text-align: center;
+
+}
+
+/* THIS IS THE CONTENT AREA OF EACH PAGE WHICH HAS TOP NAVIGATION BAR AND SIDE NAVIGATION BAR */
+.content {
+    position: absolute;
+
+    left: 16.5rem;
+    right: 0;
+    top: 4rem;
+    bottom: 0;
+
+    background-color: rgb(242, 243, 247);
+}
+
+.vertical-centralizer {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+.horizontal-centralizer {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+
+.list-view-side-margins {
+    /*margin-left: 2rem;*/
+    /*margin-right: 2rem;*/
+    margin-inline: 2rem;
+}
+
+.TT {
+    border: 1px solid #000000;
+}
+
+/* FOR VEHICLE SELECTION MENU STYLES */
+#vehicles {
+    border: none;
+    color: #017EFA;
+}
+
+
+
+/*--------------------------------------------------------------*/
+/*                        Navigation Menu                       */
+/*--------------------------------------------------------------*/
+
+#topbar {
+    z-index: 3;
+}
+
+#navbar {
+    z-index: 100;
+}
+
+#main {
+    z-index: 1;
+}
+
+.navigationtoggle {
+    /* display: inline-block; */
+    position: fixed;
+
+    left: 16rem;
+    top: 0.5rem;
+    cursor: pointer;
+    background-color: #0A194E;
+    padding:0.5rem 1rem 0.5rem 0.5rem;
+    /*border-radius: 0 25% 25% 0;*/
+    border-radius: 0 50% 50% 0;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 20px;
+    height: 2px;
+    background-color: #FFF;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    transform: translate(0, 8px) rotate(-45deg);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: translate(0, -8px) rotate(45deg);
+}
+
+.navigation-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    width: 16.25rem;
+    left: 0px;
+    top: 0px;
+    background: #081A51;
+    border-radius: 0 10px 10px 0;
+}
+
+li a {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem 0 0 0.75rem;
+    color: #fff;
+    height: 1rem;
+    /* height: 1.25rem; */
+    margin-left: 1rem;
+    padding: 1rem 0rem 1rem 0.875rem;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: var(--darkblue);
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: var(--darkblue);
+    color: white;
+}
+
+.nav_logo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* margin-left: 1.875rem; */
+    margin-top: 0.5rem;
+}
+
+.nav_section_headings {
+    color: var(--lightblue);
+    font-size: 12px;
+    margin-left: 1.875rem;
+    margin-top:2rem;
+    margin-bottom: 0.5rem;
+}
+
+
+.logout {
+    background: var(--white);
+    top: 2rem;
+    right: 6rem;
+    padding: 0.5rem 1rem;
+}
+
+.page-content {
+    left: 16.25rem;
+    top: 4rem;
+}
+
+.page-heading {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-size: 32px;
+    color: var(--fontblue);
+}
+
+.arrowbtn {
+    background-color: white;
+    padding-block: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+
+.profilemenu {
+    position: relative;
+    display: inline-block;
+}
+
+.profilemenu-content {
+    display: none;
+    position: absolute;
+    right: 0.25rem;
+    top: 4rem;
+    width: 6.25rem;
+    border: 1px solid #081A51;
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: auto;
+}
+
+.profilemenu-content a {
+    color: #081A51;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.profilemenu a:hover {
+    background-color: #dce2f6;
+}
+
+.show {
+    display: block;
+}

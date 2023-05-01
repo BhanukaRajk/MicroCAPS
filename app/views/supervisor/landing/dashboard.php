@@ -22,7 +22,6 @@
                             <div class="dash-graph-top test1">
                                 <div class="dash-frame-headings test1">Ongoing Assembly</div>
                                 <div>
-                                    <!--                                 <label for="vehicles" class="small">Select Vehicle</label>-->
                                     <select name="vehicles" id="vehicles">
                                         <option value="NULL">Select vehicle</option>
 

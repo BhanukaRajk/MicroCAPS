@@ -1,14 +1,3 @@
-
-.paq-result-screen {
-    position: absolute;
-    /*width: 473.8px;*/
-    /*height: 50px;*/
-    left: 16.25rem;
-    right: 0rem;
-    top: 4rem;
-    bottom: 0rem;
-}
-
 .paq-result-area {
     display: flex;
     flex-direction: column;

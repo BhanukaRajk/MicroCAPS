@@ -106,6 +106,48 @@
                                 </div>
                                 <div class="bottom-border"></div>
 
+                                <?php foreach ($data['components'] AS $component) {
+                                    echo '<div class="parts-table-row">
+                                            <div class="parts-col-01 ">$component->PartName</div>
+                                            <div class="parts-col-02">$component->CurrentStatus</div>
+                                            <div class="parts-col-03">
+                                                <div class="round">
+                                                    <input type="checkbox" id="dcheckbox1" '. (($component->CurrentStatus == "DAMAGED") ? 'checked' : '' ) .' />
+                                                    <label for="dcheckbox1"></label>
+                                                </div>
+                                            </div>
+                                            <div class="parts-col-04">
+                                                <div class="round">
+                                                    <input type="checkbox" id="icheckbox1" '. (($component->CurrentStatus == "ISSUED") ? 'checked' : '' ) .' />
+                                                    <label for="icheckbox1"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-border"></div>';
+                                }
+
+                                if($component == NULL) {
+                                    echo '';
+                                }
+                                ?>
+                                <div class="parts-table-row">
+                                    <div class="parts-col-01 ">Front bumper</div>
+                                    <div class="parts-col-02">DAMAGED</div>
+                                    <div class="parts-col-03">
+                                        <div class="round">
+                                            <input type="checkbox" id="dcheckbox1" />
+                                            <label for="dcheckbox1"></label>
+                                        </div>
+                                    </div>
+                                    <div class="parts-col-04">
+                                        <div class="round">
+                                            <input type="checkbox" id="icheckbox1" />
+                                            <label for="icheckbox1"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bottom-border"></div>
+
                             </div>
 
                         </div>

@@ -388,8 +388,16 @@ class Supervisors extends controller
             redirect('Users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['chassis_no'])
+            ];
+
             $data['url'] = getUrl();
+            $data['components'] = $this->supervisorModel->viewCarComponents($data['ChassisNo']);
             $this->view('supervisor/parts/vehicleparts', $data);
         }
     }
