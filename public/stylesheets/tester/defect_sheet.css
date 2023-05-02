@@ -161,12 +161,12 @@
 .ds-table tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background-color: #ebf3f9;
+  /* background-color: #ebf3f9; */
 }
 
-.ds-table tr:nth-child(odd):not(:first-child) {
+/* .ds-table tr:nth-child(odd):not(:first-child) {
   background-color: #ebf3f9;
-}
+} */
 
 .ds-table th {
   display: none;

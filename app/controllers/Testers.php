@@ -91,9 +91,6 @@ class Testers extends controller {
             if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
             }
-            // else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
-            //     $data['defect_id_err'] = 'Incorrect Defect Number';
-            // }
             else if($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
                 $data['defect_err'] = 'Defect Already Recorded';
             }
@@ -210,6 +207,8 @@ class Testers extends controller {
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
             $this->view('tester/pdi',$data);
         }
+
+        
     }
 
     public function pdi_results($id) {
@@ -222,8 +221,12 @@ class Testers extends controller {
             $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
             $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
+            $data['id'] = $id;
+            $data['defects'] = $this->testerModel->viewDefectSheets($id);
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
             $this->view('tester/pdi_results',$data);
         }
+
     }
 
     public function addPDI() {

@@ -10,10 +10,15 @@
             </div>
         </div>
 
+        <div class="display-flex-row justify-content-between">
         <div>
             <div class="paddingy-2 font-weight">VIN : <?php echo $data['pdiVehicle']->ChassisNo ?></div>
             <div class="paddingy-2 font-weight">Engine : <?php echo $data['pdiVehicle']->EngineNo ?></div>
-        <!-- </div> -->
+        </div>
+        <div>
+            <button class="btn btn-primary" id="chg-pass">Add Defect</button>
+        </div>
+        </div>
 
 
         <div class="display-flex-row justify-content-start gap-2 margin-top-3 flex-wrap">
@@ -69,8 +74,81 @@
         <div id="alert" class="hideme" role="alert"></div>
 </section>
 
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+<div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
+    <section id="pop-con">
+        <div class="row align-items-center border-gray padding-5  width-rem-25 justify-content-center">
+
+            <div class="text-center">
+                <img src="<?php echo URL_ROOT;?>public/images/logo.png" class="text-center width-50" alt="logo"/>
+            </div>
+
+            <div class="text-center">
+                <h3 class="margin-top-4">Change Password</h3>
+            </div>
+
+            <form autocomplete="off">
+
+            <div>
+                    <input type="password"
+                        id="currentpassword"
+                        name="currentPassword"
+                        onChange=""
+                        value=""
+                        class="form-control"
+                        placeholder="Current Password"
+                        autocomplete="off"
+                        required />
+                    <label id="current-label" class="form-label">Current Password</label>
+                    <span id="out"></span>
+
+                </div>
+
+                <div>
+                    <input type="password"
+                        id="newpassword"
+                        name="newPassword"
+                        onChange=""
+                        value=""
+                        class="form-control"
+                        placeholder="New Password"
+                        autocomplete="off"
+                        required />
+                    <label class="form-label">New Password</label>
+                    <span></span>
+
+                </div>
+
+                <div>
+                    <input type="password"
+                        id="confirmpassword"
+                        name="confirmPassword"
+                        onChange=""
+                        value=""
+                        class="form-control"
+                        placeholder="Confirm Password"
+                        autocomplete="off"
+                        required />
+                    <label id="confirm-label" class="form-label">Confirm Password</label>
+                    <span id="out"></span>
+
+                </div>
+
+                <div class="text-center margin-top-3">
+                    <button class="btn btn-primary" type="button" id="update-btn" disabled="true" onclick="updatePassword()">
+                        Update Password
+                    </button>
+                </div>
+
+                <div class="text-center text-blue font-size margin-top-3 pointer" id="cancel">Cancel</div>
+
+            </form>
+        </div>
+    </section>
+    </div>
+
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT;?>public/javascripts/testerjs/settings.js"></script>
 
 
 </body>
