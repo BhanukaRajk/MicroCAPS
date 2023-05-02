@@ -101,8 +101,8 @@
                                 <td><?php echo $values->InspectionDate; ?></td>
                                 <td><?php echo $values->EmployeeID; ?></td>
                                 <td><?php echo $values->ReCorrection; ?></td>
-                                <td><button class='ds-edit-button' onClick="location.href='<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $values->ChassisNo; ?>/<?php echo $values->DefectNo; ?>'">Edit</button></td>
-                                <td><button class='ds-delete-button' onClick="deleteDefect('<?php echo $values->ChassisNo; ?>', '<?php echo $values->DefectNo; ?>')">Delete</button></td>
+                                <td><i class="fa-solid fa-pen-to-square edit" onclick="location.href='<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $values->ChassisNo; ?>/<?php echo $values->DefectNo; ?>'"></i></td>
+                                <td><i class="fa-solid fa-trash-can delete" onclick="deleteDefect('<?php echo $values->ChassisNo; ?>', '<?php echo $values->DefectNo; ?>')"></i></td>
                             </tr>
 
                         <?php endforeach; ?>
