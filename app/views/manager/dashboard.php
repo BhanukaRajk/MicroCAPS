@@ -30,11 +30,11 @@
                         <div class="dash-graph-bottom ">
                             <div class="dash-graph-menu ">
                                 <div class="dash-graph-color-circle dash-darkblue-circle "></div>
-                                <div>Done</div>
+                                <div>Completed</div>
                             </div>
                             <div class="dash-graph-menu ">
                                 <div class="dash-graph-color-circle dash-lightblue-circle "></div>
-                                <div>On-going</div>
+                                <div>Pending</div>
                             </div>
                         </div>
 
@@ -57,12 +57,19 @@
                                                 ';
                                 } else {
                                     foreach ($data['onHoldComponents'] as $value) {
+
+                                        if ($value->Color == 0) {
+                                            $color = 'None';
+                                        } else {
+                                            $color = $value->VehicleColor;
+                                        }
+
                                         echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20">
                                                 <div class="display-flex-column padding-bottom-3">
                                                     <div class="font-size">'.$value->PartName.'</div>
                                                     <div class="display-flex-row gap-1">
-                                                        <div class="qty">Quantity : ' , $value->Qty, '</div>
-                                                        <div class="qty">Color : ' , $value->Color, '</div>
+                                                        <div class="qty">Quantity : ' . $value->Qty . '</div>
+                                                        <div class="qty">Color : ' . $color . '</div>
                                                     </div>
                                                 </div>
                                                 <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
@@ -199,7 +206,7 @@
 
 <script>
 
-    let ao = {complete: <?php echo $data['overall']['connected']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
+    let ao = {complete: <?php echo $data['overall']['completed']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
 
     var ctx = document.getElementById('myChart').getContext('2d');
 

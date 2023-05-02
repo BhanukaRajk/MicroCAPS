@@ -5,9 +5,12 @@ class Vehicles extends Controller {
     private $vehicleModel;
     private $managerModel;
 
+    private $pdiModel;
+
     public function __construct(){
         $this->vehicleModel = $this->model('Vehicle');
         $this->managerModel = $this->model('Manager');
+        $this->pdiModel = $this->model('PDI');
     }
 
     // Shell Related
@@ -72,13 +75,13 @@ class Vehicles extends Controller {
                 'repairDescription' => trim($_POST['repairDescription'])
             ];
 
-            if($this->managerModel->addShell($data['chassisNo'], $data['chassisType'], $data['color'])) {
+            if($this->vehicleModel->addShell($data['chassisNo'], $data['chassisType'], $data['color'])) {
                 if ($data['repair'] === 'Yes') {
-                    $this->managerModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
-                    $this->managerModel->addPaintJob($data['chassisNo']);
+                    $this->vehicleModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
+                    $this->vehicleModel->addPaintJob($data['chassisNo']);
                 } else {
                     if ($data['paint'] === 'Yes') {
-                        $this->managerModel->addPaintJob($data['chassisNo']);
+                        $this->vehicleModel->addPaintJob($data['chassisNo']);
                     }
                 }
                 echo 'Successful';
@@ -235,7 +238,7 @@ class Vehicles extends Controller {
 
             $data['overall'] = [
                 'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold'), "Weight")),
-                'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Connected'), "Weight"))
+                'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed'), "Weight"))
             ];
 
             if ($data['overall']) {
@@ -246,8 +249,9 @@ class Vehicles extends Controller {
 
     }
 
+
     // Search Related
-    public function searchByChassis() {
+    public function searchByKey() {
         if (!isLoggedIn()) {
             redirect('users/login');
         }
@@ -257,13 +261,30 @@ class Vehicles extends Controller {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'chassisNo' => trim($_POST['chassisNo']),
+                'keyword' => trim($_POST['keyword']),
+                'searchType' => trim($_POST['searchType']),
                 'type' => trim($_POST['type'])
             ];
 
             if ($data['type'] == 'assembly') {
 
-                $data['assemblyDetails'] = $this->managerModel->assemblyDetails($data['chassisNo']);
+                if ($data['searchType'] == 'chassisNo') {
+                    $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails($data['keyword']);
+                } else if ($data['searchType'] == 'model') {
+                    $data['assemblyDetails'] = $this->vehicleModel->assemblyDetailsByModel($data['keyword']);
+                }
+
+                echo json_encode($data);
+
+            } else if ($data['type'] == 'pdi') {
+
+                if ($data['searchType'] == 'chassisNo') {
+                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['chassisNo' => $data['keyword']]);
+                } else if ($data['searchType'] == 'model') {
+                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['ModelName' => $data['keyword']]);
+                } else if ($data['searchType'] == 'tester') {
+                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['Tester' => $data['keyword']]);
+                }
 
                 echo json_encode($data);
 

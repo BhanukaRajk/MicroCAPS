@@ -4,10 +4,12 @@ class Managers extends Controller {
 
     private $managerModel;
     private $vehicleModel;
+    private $pdiModel;
 
     public function __construct(){
         $this->managerModel = $this->model('Manager');
         $this->vehicleModel = $this->model('Vehicle');
+        $this->pdiModel = $this->model('PDI');
     }
 
     // Page : Dashboard
@@ -20,19 +22,24 @@ class Managers extends Controller {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $data = [
-                'assemblyDetails' => $this->managerModel->assemblyDetails(null,'ASC'),
+                'assemblyDetails' => $this->vehicleModel->assemblyDetails(null,'ASC'),
                 'onAssembly' => $this->vehicleModel->vehicleCount('S1','S2','S3','S4'),
-                'onHold' => $this->vehicleModel->vehicleCount('H'),
+                'onHold' => $this->vehicleModel->vehicleCount('%H'),
                 'dispatched' => $this->vehicleModel->vehicleCount('D'),
                 'activityLogs' => $this->managerModel->activityLogs()
             ];
 
-            $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
+            if ($data['assemblyDetails'] !== false) {
+                $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
+                $data['overall'] = [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
+                ];
+            } else {
+                $data['overall'] = null;
+            }
 
-            $data['overall'] = [
-                'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
-                'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected'), "Weight"))
-            ];
+
 //
             $data['onHoldComponents'] = $this->vehicleModel->componentQty('Damaged');
             
@@ -48,9 +55,9 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['shellDetails'] = $this->managerModel->shellDetails();
-            $data['repairDetails'] = $this->managerModel->repairDetails();
-            $data['paintDetails'] = $this->managerModel->paintDetails();
+            $data['shellDetails'] = $this->vehicleModel->shellDetails();
+            $data['repairDetails'] = $this->vehicleModel->repairDetails();
+            $data['paintDetails'] = $this->vehicleModel->paintDetails();
             $this->view('manager/bodyshell', $data);
         }
     }
@@ -209,7 +216,7 @@ class Managers extends Controller {
 
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $data['assemblyDetails'] = $this->managerModel->assemblyDetails();
+                $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails();
                 $this->view('manager/assembly', $data);
             }
         } else if ($stage == null) {
@@ -219,25 +226,25 @@ class Managers extends Controller {
                     'ChassisNo' => $chassisNo,
                     'overall' => [
                         'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
-                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected'), "Weight"))
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
                     ],
                     'stage01' => [
                         'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S1'), "Weight")),
-                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S1'), "Weight"))
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S1'), "Weight"))
                     ],
                     'stage02' => [
                         'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S2'), "Weight")),
-                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S2'), "Weight"))
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S2'), "Weight"))
                     ],
                     'stage03' => [
                         'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S3'), "Weight")),
-                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S3'), "Weight"))
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S3'), "Weight"))
                     ],
                     'stage04' => [
                         'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S4'), "Weight")),
-                        'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', 'S4'), "Weight"))
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S4'), "Weight"))
                     ],
-                    'assemblyDetails' => $this->managerModel->assemblyDetails()
+                    'assemblyDetails' => $this->vehicleModel->assemblyDetails()
                 ];
                 $this->view('manager/progress',$data);
             }
@@ -262,11 +269,11 @@ class Managers extends Controller {
 
                 $data['stageSum'] = [
                     'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', $stageId), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', $stageId), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Connected', $stageId), "Weight"))
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', $stageId), "Weight"))
                 ];
                 $data['stageDetails'] = [
                     'pending' => $this->vehicleModel->getProcessStatus($chassisNo, 'Pending', $stageId),
-                    'connected' => $this->vehicleModel->getProcessStatus($chassisNo, 'Connected', $stageId),
+                    'completed' => $this->vehicleModel->getProcessStatus($chassisNo, 'completed', $stageId),
                     'hold' => $this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', $stageId)
                 ];
 
@@ -287,16 +294,16 @@ class Managers extends Controller {
 
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
+                $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
                 $this->view('manager/pdi', $data);
             }
         } else {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['ChassisNo'] = $chassisNo;
-                $data['onPDIVehicles'] = $this->managerModel->onPDIVehicles();
-                $data['onPDIVehicle'] = $this->vehicleModel->shellDetail($chassisNo);
-                $data['pdiCheckCategories'] = $this->managerModel->pdiCheckCategories();
-                $data['pdiCheckList'] = $this->managerModel->pdiCheckList($chassisNo);
+                $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
+                $data['onPDIVehicle'] = $this->pdiModel->onPDIVehicles(['chassisNo' => $chassisNo], false);
+                $data['pdiCheckCategories'] = $this->pdiModel->pdiCheckCategories();
+                $data['pdiCheckList'] = $this->pdiModel->pdiCheckList($chassisNo);
                 $this->view('manager/pdidetails',$data);
             }
         }
@@ -311,7 +318,8 @@ class Managers extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['dispatchDetails'] = $this->managerModel->dispatchDetails();
+            $data['toBeDispatched'] = $this->vehicleModel->getVehiclesByStatus('PDI', 'C');
+            $data['dispatchDetails'] = $this->vehicleModel->dispatchDetails();
             $this->view('manager/dispatch', $data);
         }
     }

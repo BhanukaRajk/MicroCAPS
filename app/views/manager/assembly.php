@@ -10,7 +10,21 @@
             </div>
             <div class="search-container">
                 <form action="" class="search" id="search-bar">
-                    <input type="text" placeholder="Search" class="search-input" oninput="searchByChassis('assembly')" id="searchId">
+                    
+                    <div class="display-flex-row height-100 align-items-center padding-left-3">
+                        
+                        <div class="custom-select search-select">
+                            <select name="search-type" id="search-type" class="width-100">
+                                <option value="chassisNo">Chassis No</option>
+                                <option value="model">Model</option>
+                            </select>
+                        </div>
+
+                        <div class="text-gray padding-left-3 search-line"> | </div>
+
+                        <input type="text" placeholder="Search" class="search-input" oninput="searchByKey('assembly')" id="searchId">
+                        
+                    </div>
 
                     <div class="search-button" id="search-button">
                         <i class="ri-search-2-line search-icon"></i>
@@ -34,15 +48,26 @@
                             <div class="vehicle-data-board justify-content-evenly">';
                 foreach ($data['assemblyDetails'] as $value) {
 
-                    if ($value->CurrentStatus == 'S1') {
-                        $CurrentStatus = 'Stage 01';
-                    } else if ($value->CurrentStatus == 'S2') {
-                        $CurrentStatus = 'Stage 02';
-                    } else if ($value->CurrentStatus == 'S3') {
-                        $CurrentStatus = 'Stage 03';
-                    } else if ($value->CurrentStatus == 'S4') {
-                        $CurrentStatus = 'Stage 04';
-                    } 
+                    $word = 'On Assembly';
+                    $css = 'green';
+
+                    $CurrentStatus = explode("-", $value->CurrentStatus);
+
+                    if ($CurrentStatus[0] == 'S1') {
+                        $CurrentStatus[0] = 'Stage 01';
+                    } else if ($CurrentStatus[0] == 'S2') {
+                        $CurrentStatus[0] = 'Stage 02';
+                    } else if ($CurrentStatus[0] == 'S3') {
+                        $CurrentStatus[0] = 'Stage 03';
+                    } else if ($CurrentStatus[0] == 'S4') {
+                        $CurrentStatus[0] = 'Stage 04';
+                    }
+
+                    
+                    if (isset($CurrentStatus[1])) {
+                        $word = 'On Hold';
+                        $css = 'red';
+                    }  
 
                     echo '<a href="' . URL_ROOT . 'managers/assembly/' . $value->ChassisNo . '">
                                 <div class="carcard">
@@ -51,12 +76,15 @@
                                             <div class="carmodel">' . $value->ModelName . '</div>
                                             <div class="chassisno">' . $value->ChassisNo . '</div>
                                         </div>
+                                        <div class="toolstatuscolor">
+                                            <div class="status-circle status-' . $css . '-circle"></div>
+                                        </div>
                                     </div>
                                     <div class="carpicbox">
                                         <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
                                     </div>
-                                    <div class="carstatus green"> On Assembly </div>
-                                    <div class="arrivaldate">Stage: '. $CurrentStatus . '</div>
+                                    <div class="carstatus '.$css.'"> '.$word.' </div>
+                                    <div class="arrivaldate">Stage: '. $CurrentStatus[0] . '</div>
                                 </div></a>';
                 }
 

@@ -29,6 +29,7 @@ addSelect("type1",'.custom-select-type1',true,true)
 addSelect("color1",'.custom-select-color1',true,true)
 addSelect("color",'.custom-select-color',true)
 addSelect("chassis",'.custom-select-model',true)
+addSelect("chassisNo",'.custom-select-chassis',true,true)
 
 // Next Button
 function next(id) {
@@ -49,6 +50,6 @@ assemblyVehicles?.addEventListener("change", () => {
 const searchBar = document.querySelector('#search-bar');
 const searchButton = document.querySelector('#search-button');
 
-searchButton.addEventListener('click', () => {
+searchButton?.addEventListener('click', () => {
     searchBar.classList.toggle('show-search')
 })

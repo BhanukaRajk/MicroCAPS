@@ -397,10 +397,10 @@ function updatePassword() {
 }
 
 // Search
-function searchByChassis(type) {
+function searchByKey(type) {
 
-    let chassisNo = document.getElementById("searchId").value;
-    console.log(chassisNo);
+    let keyword = document.getElementById("searchId").value;
+    let searchType = document.getElementById("search-type").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -409,59 +409,25 @@ function searchByChassis(type) {
             var response = this.responseText;
 
             response = JSON.parse(response);
-            let innerHTML = ``;
-
-            if (!response['assemblyDetails']) {
-                innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
-                                <div class="font-weight">No Details</div>
-                            </div>`
-            } else {
-
-                innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
-                <div class="vehicle-data-board justify-content-evenly">`
-
-                response['assemblyDetails'].forEach(value => {
-
-                    if (value.CurrentStatus == 'S1') {
-                        CurrentStatus = 'Stage 01';
-                    } else if (response.CurrentStatus == 'S2') {
-                        CurrentStatus = 'Stage 02';
-                    } else if (response.CurrentStatus == 'S3') {
-                        CurrentStatus = 'Stage 03';
-                    } else if (response.CurrentStatus == 'S4') {
-                        CurrentStatus = 'Stage 04';
-                    } 
-
-                    innerHTML = innerHTML + 
-                    `<a href="http://localhost/MicroCAPS/managers/assembly/${value.ChassisNo}">
-                        <div class="carcard">
-                            <div class="cardhead">
-                                <div class="cardid">
-                                    <div class="carmodel">${value.ModelName}</div>
-                                    <div class="chassisno">${value.ChassisNo}</div>
-                                </div>
-                            </div>
-                            <div class="carpicbox">
-                                <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
-                            </div>
-                            <div class="carstatus green"> On Assembly </div>
-                            <div class="arrivaldate">Stage: ${CurrentStatus}</div>
-                        </div>
-                        </a>`;  
-                });
-
-                innerHTML = innerHTML + `</div></div>`;
-  
+            let innerHTML = "";
+            
+            switch (type) {
+                case 'assembly':
+                    innerHTML = assemblylist(response);
+                    break;
+                case 'pdi':
+                    innerHTML = pdilist(response);
+                    break;
             }
-
+            
             const vehicleList = document.getElementById("vehicleList");
             vehicleList.innerHTML = innerHTML;
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/searchByChassis", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/searchByKey", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("chassisNo="+chassisNo+"&type="+type);
+    xhttp.send("keyword="+keyword+"&searchType="+searchType+"&type="+type);
 
 }
 
@@ -824,15 +790,10 @@ function popUpInnerhtml (values) {
 
 function updateChart(ctx, ltx, data, cutout = 50) {
 
-    console.log(data);
-    
-    let done = data['overall'].connected/(parseInt(data['overall'].connected) + parseInt(data['overall'].pending))*100;
-    let ongoing = data['overall'].pending/(parseInt(data['overall'].connected) + parseInt(data['overall'].pending))*100;
+    let done = data['overall'].completed/(parseInt(data['overall'].completed) + parseInt(data['overall'].pending))*100;
+    let ongoing = data['overall'].pending/(parseInt(data['overall'].completed) + parseInt(data['overall'].pending))*100;
 
     let chartGrid = cutout == 50 ? 'chart-grid-stage-add' : 'chart-grid-add';
-
-    console.log(data['overall'].connected);
-    console.log(data['overall'].connected + data['overall'].pending);
 
     if (done == 0) {
         ltx.innerHTML = '0%';
@@ -873,4 +834,122 @@ function destroyChart(ctx) {
 
     chart.destroy();
 
+}
+
+//searchGenerates
+function assemblylist(response) {
+
+    let innerHTML = '';
+
+    if (!response['assemblyDetails']) {
+        innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                        <div class="font-weight">No Details</div>
+                    </div>`
+    } else {
+
+        innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
+        <div class="vehicle-data-board justify-content-evenly">`
+
+        response['assemblyDetails'].forEach(value => {
+
+            let word = 'On Assembly';
+            let css = 'green';
+
+            let CurrentStatus = value.CurrentStatus.split("-");
+
+            if (CurrentStatus[0] == 'S1') {
+                CurrentStatus[0] = 'Stage 01';
+            } else if (CurrentStatus[0] == 'S2') {
+                CurrentStatus[0] = 'Stage 02';
+            } else if (CurrentStatus[0] == 'S3') {
+                CurrentStatus[0] = 'Stage 03';
+            } else if (CurrentStatus[0] == 'S4') {
+                CurrentStatus[0] = 'Stage 04';
+            } 
+            
+            if (CurrentStatus.length === 2) {
+                word = 'On Hold';
+                css = 'red';
+            }
+
+            innerHTML = innerHTML + 
+            `<a href="http://localhost/MicroCAPS/managers/assembly/${value.ChassisNo}">
+                <div class="carcard">
+                    <div class="cardhead">
+                        <div class="cardid">
+                            <div class="carmodel">${value.ModelName}</div>
+                            <div class="chassisno">${value.ChassisNo}</div>
+                        </div>
+                        <div class="toolstatuscolor">
+                            <div class="status-circle status-${css}-circle"></div>
+                        </div>
+                    </div>
+                    <div class="carpicbox">
+                        <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                    </div>
+                    <div class="carstatus ${css}">${word}</div>
+                    <div class="arrivaldate">Stage: ${CurrentStatus[0]}</div>
+                </div>
+            </a>`;  
+        });
+
+        innerHTML = innerHTML + `</div></div>`;
+    }
+
+    return innerHTML;
+}
+
+function pdilist(response) {
+    let innerHTML = '';
+
+    if (!response['onPDIVehicles']) {
+        innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                        <div class="font-weight">No Details</div>
+                    </div>`
+    } else {
+
+        innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
+        <div class="vehicle-data-board justify-content-evenly">`
+
+        response['onPDIVehicles'].forEach(value => {
+
+            if (value.TesterId == 'NA') {
+                word = 'Not Started';
+                css = 'red';
+            } else {
+                if (value.PDIStatus == 'NC') {
+                    word = 'In Progress';
+                    css = 'orange';
+                } else {
+                    word = 'Completed';
+                    css = 'green';
+                }
+            }
+
+            innerHTML = innerHTML +
+            `<a href="' . URL_ROOT . 'managers/pdi/${value.ChassisNo}">
+                <div class="carcard">
+                    <div class="cardhead">
+                        <div class="cardid">
+                            <div class="carmodel">${value.ModelName}</div>
+                            <div class="chassisno">${value.ChassisNo}</div>
+                        </div>
+                        <div class="toolstatuscolor">
+                            <div class="status-circle status-${css}-circle"></div>
+                        </div>
+                    </div>
+                    <div class="carpicbox">
+                        <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                    </div>
+                    <div class="carstatus ${css}">${word}</div>
+                    <div class="arrivaldate">Stage: ${value.CurrentStatus}</div>
+                </div>
+            </a>`;
+ 
+        });
+
+        innerHTML = innerHTML + `</div></div>`;
+    }
+
+    return innerHTML;
 }
