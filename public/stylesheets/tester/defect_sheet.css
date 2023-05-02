@@ -154,14 +154,14 @@
 
 .ds-table tr:first-child {
   border-top: none;
-  background: #428bca;
+  background: #418CFD;
   color: #fff;
 }
 
 .ds-table tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  background-color: #f5f9fc;
+  background-color: #ebf3f9;
 }
 
 .ds-table tr:nth-child(odd):not(:first-child) {
@@ -220,7 +220,7 @@
 
 @media screen and (min-width: 600px) {
   .ds-table tr:hover:not(:first-child) {
-    background-color: #d8e7f3;
+    background-color: #fff;
   }
 
   .ds-table td:before {
@@ -248,22 +248,3 @@
     padding: 1em !important;
   }
 }
-
-/* .container {
-    margin-top: 150px;
-  display: block;
-  text-align: center;
-} */
-
-/* @-webkit-keyframes leftRight {
-  0%    { -webkit-transform: translateX(0)}
-  25%   { -webkit-transform: translateX(-10px)}
-  75%   { -webkit-transform: translateX(10px)}
-  100%  { -webkit-transform: translateX(0)}
-}
-@keyframes leftRight {
-  0%    { transform: translateX(0)}
-  25%   { transform: translateX(-10px)}
-  75%   { transform: translateX(10px)}
-  100%  { transform: translateX(0)}
-} */

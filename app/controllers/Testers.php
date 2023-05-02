@@ -151,15 +151,14 @@ class Testers extends controller {
             if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
             }
-            // else if(!$this->testerModel->findDefectByID($data['DefectNo'])) {
-            //     $data['defect_id_err'] = 'Incorrect Defect Number';
-            // }
 
             if(empty($data['user_err'])){
                 if($this->testerModel->editDefect($data)){
-                    redirect('testers/defect_sheet/'.$data['ChassisNo']);
+                    // redirect('testers/defect_sheet/'.$data['ChassisNo']);
+                    echo 'Successful';
                 } else {
-                    die("Something went wrong");
+                    // die("Something went wrong");
+                    echo 'Error';
                 }
             } else {
                 $this->view('tester/edit_defect', $data);
@@ -188,14 +187,14 @@ class Testers extends controller {
             redirect('testers/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+        if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
             if($this->testerModel->deleteDefect($ChassisNo, $DefectNo)){
-                redirect('testers/defect_sheet/'. $ChassisNo);
+                echo 'Successful';
             } else {
-                die("Something went wrong");
+                echo 'Error';
             }
         } else {
-            redirect('testers/defect_sheet/'. $ChassisNo);
+            echo 'Error';
         }
     }
 
@@ -224,18 +223,6 @@ class Testers extends controller {
             $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
             $this->view('tester/pdi_results',$data);
-        }
-    }
-
-    public function record_pdi($id){
-        if(!isLoggedIn()){
-            redirect('testers/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['pdi_tests'] = $this->testerModel->viewPDI($id);
-            $this->view('tester/record_pdi', $data);
         }
     }
 
@@ -397,22 +384,6 @@ class Testers extends controller {
             $this->view('tester/'.$data['stage'], $data);
         }
     }
-
-    // public function selectpdi($chassisNo) {
-
-    //     if(!isLoggedIn()){
-    //         redirect('users/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //         $data['ChassisNo'] = $chassisNo;
-    //         $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
-    //         $data['onPDIVehicle'] = $this->testerModel->shellDetail($chassisNo);
-    //         $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
-    //         $data['pdiCheckList'] = $this->testerModel->pdiCheckList($chassisNo);
-    //         $this->view('manager/pdidetails',$data);
-    //     }
-    // }
 
     public function selectpdi()
     {

@@ -11,7 +11,8 @@
                 <h3 class="margin-top-1">Edit Defect</h3>
             </div>
 
-            <form action="<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $data['ChassisNo']; ?>/<?php echo $data['DefectNo']; ?>" method="POST">
+            <!-- <form action="<?php //echo URL_ROOT; ?>testers/edit_defect/<?php //echo $data['ChassisNo']; ?>/<?php //echo $data['DefectNo']; ?>" method="POST"> -->
+            <form>
 
             <div>
                     <input type="text"
@@ -37,7 +38,7 @@
                         class="form-control"
                         placeholder="Defect Number"
                         autocomplete="off"
-                        required />
+                        readonly />
                     <label class="form-label">Defect Number</label>
                     <span></span>
 
@@ -104,7 +105,7 @@
                 </div>
 
                 <div class="text-center margin-top-3">
-                    <button class="btn btn-primary" type="submit" id="" onclick="">
+                    <button class="btn btn-primary" type="submit" id="" onclick="editDefect('<?php echo $data['ChassisNo']; ?>', '<?php echo $data['DefectNo']; ?>')">
                         Update Defect
                     </button>
                 </div>
@@ -121,3 +122,6 @@
     <div id="alert" class="hideme" role="alert"></div>
 
 </section>
+
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>

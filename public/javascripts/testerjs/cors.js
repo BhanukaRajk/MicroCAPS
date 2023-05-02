@@ -1,21 +1,4 @@
 // Flash Message
-// $(document).ready(() => {
-
-//     if (getItem("FlashState") === "Successful") {
-//         alertSuccess(getItem("FlashMessage"));
-//     } else if (getItem("FlashState") === "Error") {
-//         alertFaliure(getItem("FlashMessage"));
-//     }
-
-//     removeLocalStorageFlash();
-
-//     if (getItem("OptionState") === "Set") {
-//         document.getElementById(getItem("OptionName")).click();
-//     }
-
-//     removeLocalStorageOption();
-
-// })
 
 $(document).ready(() => {
 
@@ -29,30 +12,8 @@ $(document).ready(() => {
 
 })
 
-// function addPDI(ChassisNo,CheckId, Status) {
-    
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             var response = this.responseText;
 
-//             if (response == "Successful") {
-
-//                 location.reload();
-//                 setLocalStorage("Successful",ChassisNo + " - " + CheckId + " Status Changed");
-
-//             } else {
-
-//                 location.reload();
-//                 setLocalStorage("Error","Error Completing Job");
-
-//             }
-//         }
-//     };
-//     xhttp.open("POST", "http://localhost/MicroCAPS/Testers/addPDI", true);
-//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Status="+Status);
-// }
+// Change PDI Status
 
 function addPDI(ChassisNo,CheckId, Status) {
     
@@ -62,24 +23,22 @@ function addPDI(ChassisNo,CheckId, Status) {
             var response = this.responseText;
 
             if (response == "Successful") {
-
                 location.reload();
                 // setLocalStorage("Successful",ChassisNo + " - " + CheckId + " Status Changed");
                 setLocalStorage("Successful","Status Changed Successfully");
-
             } else {
-
                 location.reload();
                 setLocalStorage("Error","Error Completing Job");
-
             }
-
         }
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Testers/addPDI", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Status="+Status);
 }
+
+
+// Edit Profile Details
 
 function saveChanges(id, position) {
     let formdata = new FormData();
@@ -108,6 +67,61 @@ function saveChanges(id, position) {
     });
 }
 
+// Delete Defect
+
+  function deleteDefect(chassisno, defectno) {
+    var xhr = new XMLHttpRequest();
+  
+    xhr.open("DELETE", "http://localhost/MicroCAPS/Testers/delete_defect/" + chassisno + "/" + defectno, true);
+  
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  
+    xhr.send("ChassisNo=" + chassisno + "&DefectNo=" + defectno);
+  
+    xhr.onload = function() {
+      if (this.readyState == 4 && xhr.status == 200) {
+        var response = xhr.responseText;
+        if (response == "Successful") {
+          location.reload();
+          setLocalStorage("Successful", "Defect Deleted Successfully");
+        } else {
+          location.reload();
+          setLocalStorage("Error", "Error Deleting Defect");
+        }
+      } else {
+        alert("Error deleting PDI.");
+      }
+    };
+  }
+  
+
+function editDefect(chassisno, defectno) {
+    let formdata = new FormData();
+    formdata.append("ChassisNo", document.getElementById("ChassisNo").value);
+    formdata.append("DefectNo", document.getElementById("DefectNo").value);
+    formdata.append("InspectionDate", document.getElementById("InspectionDate").value);
+    formdata.append("EmployeeID", document.getElementById("EmployeeID").value);
+    formdata.append("RepairDescription", document.getElementById("RepairDescription").value);
+    formdata.append("ReCorrection", document.getElementById("ReCorrection").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/Testers/edit_defect/'+chassisno+'/'+defectno,
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response == "Successful") {
+                // location.reload(true);
+                window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
+                setLocalStorage("Successful","Saved Changes");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Saving Changes");
+            }
+        }
+    });
+}
+
 //Alert Success
 function alertSuccess(message) {
     let alert = document.getElementById("alert");
@@ -125,6 +139,7 @@ function alertSuccess(message) {
     }, 5000);
 }
 
+
 //Alert Faliure
 function alertFaliure(message) {
     let alert = document.getElementById("alert");
@@ -141,31 +156,6 @@ function alertFaliure(message) {
         alert.classList.remove("alert-failure");
     }, 5000);
 }
-
-//Local Storage
-// function setLocalStorageFlash(FlashState,FlashMessage) {
-//     localStorage.setItem("FlashState",FlashState);
-//     localStorage.setItem("FlashMessage",FlashMessage);
-// }
-
-// function setLocalStorageOption(OptionName) {
-//     localStorage.setItem("OptionState","Set");
-//     localStorage.setItem("OptionName",OptionName);
-// }
-
-// function getItem(key) {
-//     return localStorage.getItem(key);
-// }
-
-// function removeLocalStorageFlash() {
-//     localStorage.removeItem("FlashState");
-//     localStorage.removeItem("FlashMessage");
-// }
-
-// function removeLocalStorageOption() {
-//     localStorage.removeItem("OptionState");
-//     localStorage.removeItem("OptionName");
-// }
 
 function setLocalStorage(FlashState,FlashMessage) {
     localStorage.setItem("FlashState",FlashState);
