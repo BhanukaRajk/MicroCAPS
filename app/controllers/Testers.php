@@ -100,9 +100,11 @@ class Testers extends controller {
 
             if(empty($data['user_err']) && empty($data['defect_err']) && empty($data['chassis_err'])){
                 if($this->testerModel->addDefect($data)){
-                    redirect('testers/defect_sheet/'. $data['ChassisNo']);
+                    // redirect('testers/defect_sheet/'. $data['ChassisNo']);
+                    echo 'Successful';
                 } else {
-                    die("Something went wrong");
+                    // die("Something went wrong");
+                    echo 'Error';
                 }
             } else {
                 $this->view('tester/add_defect', $data);
@@ -205,6 +207,8 @@ class Testers extends controller {
             $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
             $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
+            $data['id'] = $id;
+            $data['defects'] = $this->testerModel->viewDefectSheets($id);
             $this->view('tester/pdi',$data);
         }
 
@@ -223,7 +227,6 @@ class Testers extends controller {
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
             $data['id'] = $id;
             $data['defects'] = $this->testerModel->viewDefectSheets($id);
-            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
             $this->view('tester/pdi_results',$data);
         }
 

@@ -84,6 +84,9 @@ function saveChanges(id, position) {
         if (response == "Successful") {
           location.reload();
           setLocalStorage("Successful", "Defect Deleted Successfully");
+          window.onload = function() {
+            document.getElementById("chg-pass").click();
+          };
         } else {
           location.reload();
           setLocalStorage("Error", "Error Deleting Defect");
@@ -93,7 +96,38 @@ function saveChanges(id, position) {
       }
     };
   }
-  
+
+// Add Defect
+
+function addDefect() {
+    let formdata = new FormData();
+    var chassisno = document.getElementById("ChassisNo").value;
+
+    formdata.append("ChassisNo", document.getElementById("ChassisNo").value);
+    formdata.append("DefectNo", document.getElementById("DefectNo").value);
+    formdata.append("InspectionDate", document.getElementById("InspectionDate").value);
+    formdata.append("EmployeeID", document.getElementById("EmployeeID").value);
+    formdata.append("RepairDescription", document.getElementById("RepairDescription").value);
+    formdata.append("ReCorrection", document.getElementById("ReCorrection").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/Testers/add_defect/',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response == "Successful") {
+                window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
+                setLocalStorage("Successful","Defect Added Successfully");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Adding Defect");
+            }
+        }
+    });
+}
+
+// Edit Defect
 
 function editDefect(chassisno, defectno) {
     let formdata = new FormData();
@@ -111,7 +145,6 @@ function editDefect(chassisno, defectno) {
         contentType: false,
         success: (response) => {
             if (response == "Successful") {
-                // location.reload(true);
                 window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
                 setLocalStorage("Successful","Saved Changes");
             } else {

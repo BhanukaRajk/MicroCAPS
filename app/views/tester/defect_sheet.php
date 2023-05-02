@@ -19,6 +19,7 @@
                 <div class="ds-section-2">
                     <div class="ds-data-board">
                         <div class="ds-container">
+                        <div class="column align-items-center border-gray padding-5 justify-content-center">
                             <table class="ds-table">
                                 <tbody>
                                     <tr>
@@ -43,8 +44,8 @@
                                         <td><?php echo $values->InspectionDate; ?></td>
                                         <td><?php echo $values->EmployeeID; ?></td>
                                         <td><?php echo $values->ReCorrection; ?></td>
-                                        <td><button class='ds-edit-button' onClick="location.href='<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $values->ChassisNo; ?>/<?php echo $values->DefectNo; ?>'">Edit</button></td>
-                                        <td><button class='ds-delete-button' onClick="deleteDefect('<?php echo $values->ChassisNo; ?>', '<?php echo $values->DefectNo; ?>')">Delete</button></td>
+                                        <td><i class="fa-solid fa-pen-to-square edit" onclick="location.href='<?php echo URL_ROOT; ?>testers/edit_defect/<?php echo $values->ChassisNo; ?>/<?php echo $values->DefectNo; ?>'"></i></td>
+                                        <td><i class="fa-solid fa-trash-can delete" onclick="deleteDefect('<?php echo $values->ChassisNo; ?>', '<?php echo $values->DefectNo; ?>')"></i></td>
                                     </tr>
 
                                     <?php endforeach; ?>
@@ -53,8 +54,9 @@
                                 </tbody>
                             </table>
                             <div>
-                                <button class="ds-button" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect/<?php echo $data['id']; ?>'">Add Defect</button>
+                                <button class="btn btn-primary margin-top-4" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect/<?php echo $data['id']; ?>'">Add Defect</button>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

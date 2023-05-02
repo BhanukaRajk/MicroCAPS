@@ -13,7 +13,8 @@
                 <h3 class="margin-top-1">Add Defect</h3>
             </div>
 
-            <form action="<?php echo URL_ROOT; ?>testers/add_defect" method="POST">
+            <!-- <form action="<?php echo URL_ROOT; ?>testers/add_defect" method="POST"> -->
+            <form>
 
             <div>
                     <input type="text"
@@ -106,7 +107,7 @@
                 </div>
 
                 <div class="text-center margin-top-3">
-                    <button class="btn btn-primary" type="submit" id="" onclick="">
+                    <button class="btn btn-primary" type="submit" id="" onclick="addDefect()">
                         Add Defect
                     </button>
                 </div>
@@ -123,3 +124,6 @@
     <div id="alert" class="hideme" role="alert"></div>
 
 </section>
+
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>
