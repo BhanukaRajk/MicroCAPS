@@ -352,8 +352,13 @@ class Tester {
 
     public function pdiCheckCategories() {
         $this->db->query(
-            'SELECT *
-                FROM `pdi-check-category`'
+            'SELECT `pdi-check-category`.`CategoryId`, `pdi-check-category`.`Title`, `pdi-check-category`.`SubTitle`,
+            COUNT(*) AS count
+            FROM `pdi-check-category`
+            INNER JOIN `pdi-check`
+            ON `pdi-check-category`.`CategoryId` = `pdi-check`.`CategoryId`
+            GROUP BY `pdi-check-category`.`CategoryId`
+            ORDER BY count ASC'
         );
 
         $results = $this->db->resultSet();
