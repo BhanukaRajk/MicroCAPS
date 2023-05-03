@@ -18,9 +18,9 @@
             <div>
                 <button class="btn btn-primary" id="chg-pass">Add Defect</button>
             </div>
-            <div>
+            <!-- <div>
             <button id="cccc" onclick="this.style.backgroundColor='red'">Click me!</button>
-            </div>
+            </div> -->
         </div>
 
 

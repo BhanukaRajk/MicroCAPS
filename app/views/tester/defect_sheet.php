@@ -3,23 +3,17 @@
 <?php require_once APP_ROOT . '\views\tester\navbar.php'; 
 ?>
 
-<link rel="stylesheet" href="defect_sheet.css">
-
-<script type="text/javascript" src="<?php echo URL_ROOT;  ?>public/javascripts/testerjs/main.js"></script>
-
 <section>
     <div class="ds-page">
         <div class="ds-board-2">
             <div class="ds-section">
-                <div class="ds-main">
-                    <div class="ds-page-heading-large">Defect Sheet</div>
-                    <div class="ds-page-heading-small">Chassis No : <?php echo $data['pdiVehicle']->ChassisNo ?></div>
-                    <div class="ds-page-heading-small">Engine : <?php echo $data['pdiVehicle']->EngineNo ?></div>
-                </div>
                 <div class="ds-section-2">
                     <div class="ds-data-board">
                         <div class="ds-container">
-                        <div class="column align-items-center border-gray padding-5 justify-content-center">
+                        <div class="column align-items-center border-gray padding-5 justify-content-center margin-bottom-4">
+                            <div class="page-heading font-weight  margin-bottom-4">
+                                Defect Sheet
+                            </div>
                             <table class="ds-table">
                                 <tbody>
                                     <tr>
@@ -54,8 +48,14 @@
                                 </tbody>
                             </table>
                             <div>
-                                <button class="btn btn-primary margin-top-4" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect/<?php echo $data['id']; ?>'">Add Defect</button>
+                                <!-- <button class="btn btn-primary margin-top-4" onClick="location.href='<?php //echo URL_ROOT; ?>testers/add_defect/<?php //echo $data['id']; ?>'">Add Defect</button> -->
+                                <button id="view-defect" class="btn btn-primary margin-top-4">Add Defect</button>
                             </div>
+
+                            <div class="text-center text-blue font-size margin-top-3 pointer" onclick="history.back()">
+                                <i class="icon fa-angle-left"></i> Back
+                            </div>
+
                         </div>
                         </div>
                     </div>
@@ -63,6 +63,120 @@
             </div>
         </div>
 </section>
+
+<div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
+    <section id="pop-con">
+    <div class="row align-items-center border-gray padding-4  width-rem-25 justify-content-center">
+
+        <div class="text-center">
+            <h3 class="margin-top-1">Add Defect</h3>
+        </div>
+
+        <!-- <form action="<?php //echo URL_ROOT; ?>testers/add_defect" method="POST"> -->
+        <form>
+
+        <div>
+                <input type="text"
+                    id="ChassisNo"
+                    name="ChassisNo"
+                    onChange=""
+                    value="<?php echo $data['pdiVehicle']->ChassisNo ?>"
+                    class="form-control"
+                    placeholder="Chassis Number"
+                    autocomplete="off"
+                    required />
+                <label class="form-label">Chassis Number</label>
+                <span></span>
+
+            </div>
+
+            <div>
+                <input type="text"
+                    id="DefectNo"
+                    name="DefectNo"
+                    onChange=""
+                    value="<?php echo $data['DefectNo']; ?>"
+                    class="form-control"
+                    placeholder="Defect Number"
+                    autocomplete="off"
+                    required />
+                <label class="form-label">Defect Number</label>
+                <span></span>
+
+            </div>
+
+            <div>
+                <input type="date"
+                    id="InspectionDate"
+                    name="InspectionDate"
+                    onChange=""
+                    value="<?php echo $data['InspectionDate']; ?>"
+                    class="form-control"
+                    placeholder="Inspection Date"
+                    autocomplete="off"
+                    required />
+                <label class="form-label">Inspection Date</label>
+                <span></span>
+
+            </div>
+
+            <div>
+                <input type="text"
+                    id="EmployeeID"
+                    name="EmployeeID"
+                    onChange=""
+                    value="<?php echo $_SESSION['_id']; ?>"
+                    class="form-control"
+                    placeholder="Employee ID"
+                    autocomplete="off"
+                    required />
+                <label class="form-label">Employee ID</label>
+                <span></span>
+
+            </div>
+
+            <div>
+                <input type="text"
+                    id="RepairDescription"
+                    name="RepairDescription"
+                    onChange=""
+                    value="<?php echo $data['RepairDescription']; ?>"
+                    class="form-control"
+                    placeholder="Repair Description"
+                    autocomplete="off"
+                    required />
+                <label class="form-label">Repair Description</label>
+                <span></span>
+
+            </div>
+
+            <div>
+                <input type="text"
+                    id="ReCorrection"
+                    name="ReCorrection"
+                    onChange=""
+                    value="<?php echo $data['ReCorrection']; ?>"
+                    class="form-control"
+                    placeholder="Recorrection"
+                    autocomplete="off"
+                    required />
+                <label class="form-label">Recorrection</label>
+                <span></span>
+
+            </div>
+
+            <div class="text-center margin-top-3">
+                <button class="btn btn-primary" type="submit" id="" onclick="addDefect()">
+                    Add Defect
+                </button>
+            </div>
+
+            <div class="text-center text-blue font-size margin-top-3 pointer" id="cancel">Cancel</div>
+
+        </form>
+        </div>
+    </section>
+</div>
 
 <section class="display-flex-column">
 
@@ -72,3 +186,4 @@
 
 <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/pdi.js"></script>

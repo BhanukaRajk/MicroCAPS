@@ -1,14 +1,17 @@
 <?php
 
-class Testers extends controller {
+class Testers extends controller
+{
 
     private $testerModel;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->testerModel = $this->model('Tester');
     }
 
-    public function Sum($data, $str) : int {
+    public function Sum($data, $str): int
+    {
         $sum = 0;
         if (empty($data)) {
             return $sum;
@@ -19,9 +22,10 @@ class Testers extends controller {
         return $sum;
     }
 
-    public function dashboard() {
+    public function dashboard()
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('testers/login');
         }
 
@@ -33,9 +37,10 @@ class Testers extends controller {
         }
     }
 
-    public function defect_sheet($id) {
+    public function defect_sheet($id)
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('testers/login');
         }
 
@@ -45,13 +50,59 @@ class Testers extends controller {
             $data['defects'] = $this->testerModel->viewDefectSheets($id);
             $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
 
+            $data['DefectNo'] = '';
+            $data['RepairDescription'] = '';
+            $data['InspectionDate'] = '';
+            $data['ChassisNo'] = '';
+            $data['EmployeeID'] = '';
+            $data['ReCorrection'] = '';
+
+            $data['url'] = getUrl();
+
             $this->view('tester/defect_sheet', $data);
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'DefectNo' => trim($_POST['DefectNo']),
+                'RepairDescription' => trim($_POST['RepairDescription']),
+                'InspectionDate' => trim($_POST['InspectionDate']),
+                'ChassisNo' => trim($_POST['ChassisNo']),
+                'EmployeeID' => trim($_POST['EmployeeID']),
+                'ReCorrection' => trim($_POST['ReCorrection']),
+                'defect_err' => '',
+                'defect_id_err' => '',
+                'user_err' => '',
+            ];
+            $data['url'] = getUrl();
+
+
+            if (!$this->testerModel->findUserByID($data['EmployeeID'])) {
+                $data['user_err'] = 'Incorrect Employee ID';
+            } else if ($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
+                $data['defect_err'] = 'Defect Already Recorded';
+            } else if (!$this->testerModel->findPDIvehicles($data['ChassisNo'])) {
+                $data['chassis_err'] = 'Invalid Chassis Number';
+            }
+
+            if (empty($data['user_err']) && empty($data['defect_err']) && empty($data['chassis_err'])) {
+                if ($this->testerModel->addDefect($data)) {
+                    echo 'Successful';
+                } else {
+                    echo 'Error';
+                }
+            } else {
+                $this->view('tester/add_defect', $data);
+            }
         }
     }
 
-    public function select_view($id) {
+    public function select_view($id)
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('testers/login');
         }
 
@@ -65,15 +116,16 @@ class Testers extends controller {
         }
     }
 
-    public function add_defect() {
+    public function add_defect()
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('testers/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+
             $data = [
                 'DefectNo' => trim($_POST['DefectNo']),
                 'RepairDescription' => trim($_POST['RepairDescription']),
@@ -86,24 +138,20 @@ class Testers extends controller {
                 'user_err' => '',
             ];
             $data['url'] = getUrl();
-            
 
-            if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
+
+            if (!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
-            }
-            else if($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
+            } else if ($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
                 $data['defect_err'] = 'Defect Already Recorded';
-            }
-            else if(!$this->testerModel->findPDIvehicles($data['ChassisNo'])) {
+            } else if (!$this->testerModel->findPDIvehicles($data['ChassisNo'])) {
                 $data['chassis_err'] = 'Invalid Chassis Number';
             }
 
-            if(empty($data['user_err']) && empty($data['defect_err']) && empty($data['chassis_err'])){
-                if($this->testerModel->addDefect($data)){
-                    // redirect('testers/defect_sheet/'. $data['ChassisNo']);
+            if (empty($data['user_err']) && empty($data['defect_err']) && empty($data['chassis_err'])) {
+                if ($this->testerModel->addDefect($data)) {
                     echo 'Successful';
                 } else {
-                    // die("Something went wrong");
                     echo 'Error';
                 }
             } else {
@@ -124,9 +172,10 @@ class Testers extends controller {
         }
     }
 
-    public function edit_defect($ChassisNo, $DefectNo) {
+    public function edit_defect($ChassisNo, $DefectNo)
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('testers/login');
         }
 
@@ -147,23 +196,21 @@ class Testers extends controller {
             $data['url'] = getUrl();
             $data['pdiVehicle'] = $this->testerModel->pdiVehicle($ChassisNo);
 
-            if(!$this->testerModel->findUserByID($data['EmployeeID'])) {
+            if (!$this->testerModel->findUserByID($data['EmployeeID'])) {
                 $data['user_err'] = 'Incorrect Employee ID';
             }
 
-            if(empty($data['user_err'])){
-                if($this->testerModel->editDefect($data)){
-                    // redirect('testers/defect_sheet/'.$data['ChassisNo']);
+            if (empty($data['user_err'])) {
+                if ($this->testerModel->editDefect($data)) {
                     echo 'Successful';
                 } else {
-                    // die("Something went wrong");
                     echo 'Error';
                 }
             } else {
                 $this->view('tester/edit_defect', $data);
             }
         } else {
-            
+
             $defect = $this->testerModel->getDefect($ChassisNo, $DefectNo);
 
             $data = [
@@ -181,13 +228,14 @@ class Testers extends controller {
         }
     }
 
-    public function delete_defect($ChassisNo, $DefectNo){
-        if(!isLoggedIn()){
+    public function delete_defect($ChassisNo, $DefectNo)
+    {
+        if (!isLoggedIn()) {
             redirect('testers/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'DELETE'){
-            if($this->testerModel->deleteDefect($ChassisNo, $DefectNo)){
+        if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+            if ($this->testerModel->deleteDefect($ChassisNo, $DefectNo)) {
                 echo 'Successful';
             } else {
                 echo 'Error';
@@ -197,9 +245,10 @@ class Testers extends controller {
         }
     }
 
-    public function pdi($id) {
+    public function pdi($id)
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
 
@@ -209,15 +258,14 @@ class Testers extends controller {
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
             $data['id'] = $id;
             $data['defects'] = $this->testerModel->viewDefectSheets($id);
-            $this->view('tester/pdi',$data);
+            $this->view('tester/pdi', $data);
         }
-
-        
     }
 
-    public function pdi_results($id) {
+    public function pdi_results($id)
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
 
@@ -227,12 +275,12 @@ class Testers extends controller {
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
             $data['id'] = $id;
             $data['defects'] = $this->testerModel->viewDefectSheets($id);
-            $this->view('tester/pdi_results',$data);
+            $this->view('tester/pdi_results', $data);
         }
-
     }
 
-    public function addPDI() {
+    public function addPDI()
+    {
 
         if (!isLoggedIn()) {
             redirect('users/login');
@@ -250,7 +298,7 @@ class Testers extends controller {
 
             $result = $this->testerModel->addPDI($data['ChassisNo'], $data['CheckId'], $data['Status']);
 
-            if($result) {
+            if ($result) {
                 echo 'Successful';
             } else {
                 echo 'Error';
@@ -258,9 +306,10 @@ class Testers extends controller {
         }
     }
 
-    public function settings() {
+    public function settings()
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
 
@@ -292,23 +341,22 @@ class Testers extends controller {
                 } else {
                     echo 'Error';
                 }
-
             } else {
                 if ($this->testerModel->updateProfileValues($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic']))
                     echo 'Successful';
                 else
                     echo 'Error';
             }
-
         } else {
             $data['userDetails'] = $this->testerModel->userDetails($_SESSION['_id']);
-            $this->view('tester/settings',$data);
+            $this->view('tester/settings', $data);
         }
     }
 
-    public function assembly() {
+    public function assembly()
+    {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
 
@@ -316,11 +364,11 @@ class Testers extends controller {
             $data['assemblyDetails'] = $this->testerModel->assemblyDetails();
             $this->view('tester/assembly', $data);
         }
-
     }
 
-    public function progress($chassisNo) {
-        if(!isLoggedIn()){
+    public function progress($chassisNo)
+    {
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
 
@@ -350,12 +398,13 @@ class Testers extends controller {
                 ],
                 'assemblyDetails' => $this->testerModel->assemblyDetails()
             ];
-            $this->view('tester/progress',$data);
+            $this->view('tester/progress', $data);
         }
     }
 
-    public function assemblystage($chassisNo) {
-        if(!isLoggedIn()){
+    public function assemblystage($chassisNo)
+    {
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
 
@@ -387,7 +436,7 @@ class Testers extends controller {
                 'hold' => $this->testerModel->getComponentStatus($chassisNo, 'OnHold', $stage)
             ];
 
-            $this->view('tester/'.$data['stage'], $data);
+            $this->view('tester/' . $data['stage'], $data);
         }
     }
 
@@ -416,5 +465,4 @@ class Testers extends controller {
             $this->view('tester/selectdefect', $data);
         }
     }
-
 }

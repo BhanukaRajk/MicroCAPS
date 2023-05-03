@@ -16,7 +16,7 @@
                 <div class="paddingy-2 font-weight">Engine : <?php echo $data['pdiVehicle']->EngineNo ?></div>
             </div>
             <div>
-                <button class="btn btn-primary" id="chg-pass">View Defect Sheet</button>
+                <button class="btn btn-primary" id="view-defect">View Defect Sheet</button>
             </div>
         </div>
 
@@ -115,7 +115,7 @@
 
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/settings.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/pdi.js"></script>
 
 
 

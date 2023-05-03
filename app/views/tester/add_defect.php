@@ -112,7 +112,7 @@
                     </button>
                 </div>
 
-                <div class="text-center text-blue font-size margin-top-3 pointer" id="cancel" onclick="history.back()">Cancel</div>
+                <div class="text-center text-blue font-size margin-top-3 pointer" onclick="history.back()">Cancel</div>
 
             </form>
         </div>
