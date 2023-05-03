@@ -35,6 +35,12 @@
                                 <div class="pdi-card-sub">' . $value->SubTitle . '</div>
 
                                 <div class="pdiresultbox paddingy-3">
+                                <div class="paddingx-4 paddingy-2">
+                                    <div class="pdi-checklist">
+                                    <div class="padding-bottom-3 font-size"></div>
+                                    <div class="padding-bottom-1 font-size"><pre class="margin-0 font-family">OK    SA</pre></div>
+                                </div>
+                                </div>
                     ';
 
                 foreach ($data['pdiCheckList'] as $value2) {
@@ -46,14 +52,16 @@
                                     <div class="pdi-checklist">
                                         <div class="padding-bottom-3 font-size">' . $value2->CheckName . '</div>
                                         <div>
-                                        <input type="radio" name="' . $value2->CheckId . '" 
-                                        value="OK" 
-                                        class="round-checkbox-green" 
-                                        onChange="addPDI(\'' . $value2->ChassisNo . '\',\'' . $value2->CheckId . '\',\'OK\')" ' . $check1 . '>
-                                <input type="radio" name="' . $value2->CheckId . '" 
-                                        value="SA" 
-                                        class="round-checkbox-red" 
-                                        onChange="addPDI(\'' . $value2->ChassisNo . '\',\'' . $value2->CheckId . '\',\'SA\')" ' . $check2 . '>
+                                            <input type="radio" 
+                                                        name="' . $value2->CheckId . '" 
+                                                        value="OK" 
+                                                        class="round-checkbox-green" 
+                                                        onChange="addPDI(\'' . $value2->ChassisNo . '\',\'' . $value2->CheckId . '\',\'OK\')" ' . $check1 . '>
+                                            <input type="radio" 
+                                                        name="' . $value2->CheckId . '" 
+                                                        value="SA" 
+                                                        class="round-checkbox-red" 
+                                                        onChange="addPDI(\'' . $value2->ChassisNo . '\',\'' . $value2->CheckId . '\',\'SA\')" ' . $check2 . '>
                                         </div>
                                     </div>
                                 </div>
@@ -70,6 +78,7 @@
             ?>
 
         </div>
+        <div class="margin-bottom-3"></div>
     </section>
 
     <section class="display-flex-column">

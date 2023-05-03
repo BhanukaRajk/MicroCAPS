@@ -927,6 +927,10 @@ h3 {
     cursor: pointer;
 }
 
+.font-family {
+    font-family: "Montserrat", sans-serif !important;
+}
+
 /* Card */
 .card {
     --card-spacer-y: 1rem;
