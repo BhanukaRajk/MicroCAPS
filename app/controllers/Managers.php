@@ -311,16 +311,22 @@ class Managers extends Controller {
     }
 
     // Page : Dispatch
-    public function dispatch() {
+    public function dispatch($chassisNo = null) {
 
         if(!isLoggedIn()){
             redirect('users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['toBeDispatched'] = $this->vehicleModel->getVehiclesByStatus('PDI', 'C');
-            $data['dispatchDetails'] = $this->vehicleModel->dispatchDetails();
-            $this->view('manager/dispatch', $data);
+        if ($chassisNo == null) {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $data['toBeDispatched'] = $this->vehicleModel->getVehiclesByStatus('PDI', 'C');
+                $data['dispatchDetails'] = $this->vehicleModel->dispatchDetails();
+                $this->view('manager/dispatch', $data);
+            }
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $this->view('manager/dispatchdetails');
+            }
         }
     }
 

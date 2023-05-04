@@ -345,6 +345,43 @@ function createList() {
     // alertSuccess("PDF Created Successfully Hutto");
 }
 
+// Dispatch Page
+function dispatch() {
+
+    let data = validateDispatch();
+
+    if (!data["flag"]) {
+        alertFaliure("Please Fill All The Fields");
+        return;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+
+            if (response == "Successful") {
+
+                location.reload();
+                setLocalStorageFlash("Successful","Vehicle Dispatched");
+
+            } else {
+                
+                location.reload();
+                setLocalStorageFlash("Error","Error Dispatching Vehicle");
+
+            }
+
+            setLocalStorageOption("option-two");
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/dispatch", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("chassisNo="+data["chassisNo"]+"&showroom="+data["showroom"]);
+}
+
 // Settings Page
 function saveChanges(id, position) {
     let formdata = new FormData();
@@ -417,6 +454,9 @@ function searchByKey(type) {
                     break;
                 case 'pdi':
                     innerHTML = pdilist(response);
+                    break;
+                case 'dispatch':
+                    innerHTML = dispatchlist(response);
                     break;
             }
             
@@ -543,6 +583,8 @@ function validateAddShell() {
     let repair = document.getElementById("repair").checked;
     let paint = document.getElementById("paint").checked;
     let repairDescription = document.getElementById("repairDescription");
+    let repairDescriptionLabel = document.getElementById("repairDescription-label");
+
 
     const regex = /^CN\d{9}[A-Z]$/;
 
@@ -562,15 +604,53 @@ function validateAddShell() {
 
     if (color.value === "") {
         color.classList.add("form-control-red");
+        color.classList.add("text-red");
+        color.classList.remove("text-gray");
         flag = false;
     }
 
     if (chassis.value === "") {
         chassis.classList.add("form-control-red");
+        chassis.classList.add("text-red");
+        chassis.classList.remove("text-gray");
         flag = false;
     }
 
+    if (repair) {
+        if (repairDescription.value === "") {
+            repairDescription.classList.add("form-control-red");
+            repairDescriptionLabel.classList.add("red");
+            flag = false;
+        }
+    }
+
     return {"flag":flag, "chassisNo":chassisNo.value,"color":color.value,"chassis":chassis.value,"repair":repair,"paint":paint,"repairDescription":repairDescription.value};
+
+}
+
+function validateDispatch() {
+
+    let flag = true;
+
+    const chassisNo = document.getElementById("chassisNo");
+    const showroom = document.getElementById("showroom");
+
+    if (showroom.value === "") {
+        showroom.classList.add("form-control-red");
+        showroom.classList.remove("text-gray");
+        showroom.classList.add("text-red");
+        flag = false;
+    }
+
+    if (chassisNo.value === "") {
+        chassisNo.classList.remove("form-control-blue");
+        chassisNo.classList.add("form-control-red");
+        chassisNo.classList.remove("text-blue");
+        chassisNo.classList.add("text-red");
+        flag = false;
+    }
+
+    return {"flag":flag, "chassisNo":chassisNo.value,"showroom":showroom.value};
 
 }
 
@@ -847,8 +927,7 @@ function assemblylist(response) {
                     </div>`
     } else {
 
-        innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
-        <div class="vehicle-data-board justify-content-evenly">`
+        innerHTML = `<div class="display-flex-row flex-wrap justify-content-between">`
 
         response['assemblyDetails'].forEach(value => {
 
@@ -893,7 +972,7 @@ function assemblylist(response) {
             </a>`;  
         });
 
-        innerHTML = innerHTML + `</div></div>`;
+        innerHTML = innerHTML + `</div>`;
     }
 
     return innerHTML;
@@ -908,8 +987,7 @@ function pdilist(response) {
                     </div>`
     } else {
 
-        innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
-        <div class="vehicle-data-board justify-content-evenly">`
+        innerHTML = `<div class="display-flex-row flex-wrap justify-content-between">`
 
         response['onPDIVehicles'].forEach(value => {
 
@@ -927,7 +1005,7 @@ function pdilist(response) {
             }
 
             innerHTML = innerHTML +
-            `<a href="' . URL_ROOT . 'managers/pdi/${value.ChassisNo}">
+            `<a href="http://localhost/MicroCAPS/managers/pdi/${value.ChassisNo}">
                 <div class="carcard">
                     <div class="cardhead">
                         <div class="cardid">
@@ -948,7 +1026,45 @@ function pdilist(response) {
  
         });
 
-        innerHTML = innerHTML + `</div></div>`;
+        innerHTML = innerHTML + `</div>`;
+    }
+
+    return innerHTML;
+}
+
+function dispatchlist(response) {
+    let innerHTML = '';
+
+    if (!response['dispatchDetails']) {
+        innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                        <div class="font-weight">No Details</div>
+                    </div>`
+    } else {
+
+        innerHTML = `<div class="display-flex-row flex-wrap justify-content-between">`
+
+        response['dispatchDetails'].forEach(value => {
+
+            innerHTML = innerHTML +
+            `<a href="http://localhost/MicroCAPS/managers/dispatch/${value.ChassisNo}">
+                <div class="carcard">
+                    <div class="cardhead">
+                        <div class="cardid">
+                            <div class="carmodel">${value.ModelName}</div>
+                            <div class="chassisno">${value.ChassisNo}</div>
+                        </div>
+                    </div>
+                    <div class="carpicbox">
+                        <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                    </div>
+                    <div class="carstatus green">Show Room:${value.ReleaseDate}</div>
+                    <div class="arrivaldate">Stage: ${value.ReleaseDate}</div>
+                </div>
+            </a>`;
+ 
+        });
+
+        innerHTML = innerHTML + `</div>`;
     }
 
     return innerHTML;

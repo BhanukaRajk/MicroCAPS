@@ -443,19 +443,39 @@ class Vehicle {
 
     }
 
-    public function dispatchDetails()
-    {
+    public function dispatchDetails($parameters = null) {
+
+        $condition = '';
+        $array = [];
+
+        if ( $parameters != null) {
+            foreach ($parameters as $key => $value) {
+                switch ($key) {
+                    case 'ModelName':
+                        $condition .= 'AND `vehicle-model`.'.$key.' LIKE :'.$key.' ';
+                        break;
+                    default:
+                        $condition .= 'AND `vehicle`.'.$key.' LIKE :'.$key.' ';
+                        break;
+                }
+                $array[] = [ 'key' => ':'.$key, 'parameter' => $value ];
+            }
+        }
+
         $this->db->query(
             'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.ReleaseDate, `vehicle`.ShowRoomName, `vehicle-model`.ModelName
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus = :released
+                WHERE `vehicle`.CurrentStatus = :released '.$condition.'
                 ORDER BY `vehicle`.ChassisNo DESC
                 LIMIT 10;'
         );
 
         $this->db->bind(':released', 'D');
+        foreach ($array as $item) {
+            $this->db->bind($item['key'], '%'.$item['parameter'].'%');
+        }
 
         $results = $this->db->resultSet();
 
@@ -477,7 +497,7 @@ class Vehicle {
                 ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
 
-        $this->db->bind(':chassisNo', $chassisNo . '%');
+        $this->db->bind(':chassisNo', '%'.$chassisNo . '%');
         $this->db->bind(':status', '%H');
 
         $results = $this->db->resultSet();
@@ -530,6 +550,25 @@ class Vehicle {
 
         if ( $results ) {
             return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function dispatch($chassisNo, $showroom) : bool {
+        $this->db->query(
+            'UPDATE `vehicle`
+            SET CurrentStatus = :status, ShowRoomName = :showroom, ReleaseDate = :date
+            WHERE ChassisNo = :chassisNo'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':status', 'D');
+        $this->db->bind(':showroom', $showroom);
+        $this->db->bind(':date', date("Y-m-d"));
+
+        if ( $this->db->execute() ) {
+            return true;
         } else {
             return false;
         }

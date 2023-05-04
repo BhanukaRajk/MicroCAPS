@@ -30,6 +30,7 @@ addSelect("color1",'.custom-select-color1',true,true)
 addSelect("color",'.custom-select-color',true)
 addSelect("chassis",'.custom-select-model',true)
 addSelect("chassisNo",'.custom-select-chassis',true,true)
+addSelect("showroom",'.custom-select-showroom',true,true)
 
 // Next Button
 function next(id) {

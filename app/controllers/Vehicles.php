@@ -279,7 +279,7 @@ class Vehicles extends Controller {
             } else if ($data['type'] == 'pdi') {
 
                 if ($data['searchType'] == 'chassisNo') {
-                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['chassisNo' => $data['keyword']]);
+                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['ChassisNo' => $data['keyword']]);
                 } else if ($data['searchType'] == 'model') {
                     $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['ModelName' => $data['keyword']]);
                 } else if ($data['searchType'] == 'tester') {
@@ -288,8 +288,43 @@ class Vehicles extends Controller {
 
                 echo json_encode($data);
 
+            } else if ($data['type'] == 'dispatch') {
+
+                if ($data['searchType'] == 'chassisNo') {
+                    $data['dispatchDetails'] = $this->vehicleModel->dispatchDetails(['ChassisNo' => $data['keyword']]);
+                } else if ($data['searchType'] == 'model') {
+                    $data['dispatchDetails'] = $this->vehicleModel->dispatchDetails(['ModelName' => $data['keyword']]);
+                } else if ($data['searchType'] == 'showroom') {
+                    $data['dispatchDetails'] = $this->vehicleModel->dispatchDetails(['showRoomName' => $data['keyword']]);
+                }
+
+                echo json_encode($data);
+
             }
 
+        }
+    }
+
+    public function dispatch() {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'chassisNo' => trim($_POST['chassisNo']),
+                'showroom' => trim($_POST['showroom'])
+            ];
+
+            if($this->vehicleModel->dispatch($data['chassisNo'], $data['showroom'])) {
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
         }
     }
 

@@ -17,12 +17,13 @@
                             <select name="search-type" id="search-type" class="width-100">
                                 <option value="chassisNo">Chassis No</option>
                                 <option value="model">Model</option>
+                                <option value="showroom">Show Room</option>
                             </select>
                         </div>
 
                         <div class="text-gray padding-left-3 search-line"> | </div>
 
-                        <input type="text" placeholder="Search" class="search-input" oninput="searchByKey('pdi')" id="searchId">
+                        <input type="text" placeholder="Search" class="search-input" oninput="searchByKey('dispatch')" id="searchId">
                         
                     </div>
 
@@ -35,69 +36,90 @@
         </div>
 
         
-        <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
-            <div class="section-heading font-weight"> Dispatch a Vehicle </div>
-            <form id="add-shell">
-                <div class="display-flex-row align-items-start gap-2">
-                    <div>
-                        <div class="custom-select-chassis">
-                            <select name="chassisNo" class="form-control form-control-blue text-blue width-rem-20" id="chassisNo">
-                                <?php
-                                echo '<option value="">Select Chassis Number</option>';
-                                if ($data['toBeDispatched'] !== false) {
-                                    foreach ($data['toBeDispatched'] as $value) {
-                                        echo '<option value="' . $value->ChassisNo . '">' . $value->ChassisNo . '</option>';
+
+        <div class="display-flex-column gap-1">
+            <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
+                <div class="section-heading font-weight"> Dispatch a Vehicle </div>
+                <form id="add-shell">
+                    <div class="display-flex-row align-items-start gap-2">
+                        <div>
+                            <div class="custom-select-chassis">
+                                <select name="chassisNo" class="form-control form-control-blue text-blue width-rem-20" id="chassisNo">
+                                    <?php
+                                    echo '<option value="">Select Chassis Number</option>';
+                                    if ($data['toBeDispatched'] !== false) {
+                                        foreach ($data['toBeDispatched'] as $value) {
+                                            echo '<option value="' . $value->ChassisNo . '">' . $value->ChassisNo . '</option>';
+                                        }
                                     }
-                                }
-                                ?>
-                            </select>
-                            <label class="chassisNo-label text-blue display-none" id="chassisNo-label">Chassis Type</label>
+                                    ?>
+                                </select>
+                                <label class="chassisNo-label text-blue display-none" id="chassisNo-label">Chassis Type</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="custom-select-showroom">
+                                <select name="showroom" class="form-control text-gray width-rem-20" id="showroom">
+                                    <option value="">Showroom</option>
+                                    <option value="Colombo">Colombo</option>
+                                    <option value="Gampha">Gampha</option>
+                                    <option value="Kaluthara">Kaluthara</option>
+                                </select>
+                                <label class="showroom-label text-gray display-none" id="showroom-label">Showroom</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="text-center margin-top-3">
-                    <button class="btn btn-primary" type="button" onclick="addShell()">
-                        Dispatch
-                    </button>
-                </div>
+                    <div class="text-center margin-top-3">
+                        <button class="btn btn-primary" type="button" onclick="dispatch()">
+                            Dispatch
+                        </button>
+                    </div>
 
-            </form>
-        </div>
+                </form>
+            </div>
+            <div  id="vehicleList">                                
+            <?php
+            if ($data['dispatchDetails'] == false) {
+                echo '
+                            <div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                                    <div class="font-weight">No Details</div>
+                                </div>
+                            ';
+            } else {
+                echo '<div class="display-flex-row flex-wrap justify-content-between">';
+                foreach ($data['dispatchDetails'] as $value) {
+                    echo '<a href="' . URL_ROOT . 'managers/dispatch/' . $value->ChassisNo . '">
+                        <div class="carcard">
+                                <div class="cardhead">
+                                    <div class="cardid">
+                                        <div class="carmodel">' . $value->ModelName . '</div>
+                                        <div class="chassisno">' . $value->ChassisNo . '</div>
+                                    </div>
+                                </div>
+                                <div class="carpicbox">
+                                    <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
+                                </div>
+                                <div class="carstatus green">Show Room: '.$value->ShowRoomName.'</div>
+                                <div class="arrivaldate">Release Date: '. $value->ReleaseDate. '</div>
+                            </div>
+                            </a>';
+                }
 
-        <?php
-        if ($data['dispatchDetails'] == false) {
-            echo '
-                        <div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
-                                <div class="font-weight">No Details</div>
-                            </div>
-                        ';
-        } else {
-            echo '<div class="vehicle-detail-board  margin-bottom-4">
-                        <div class="vehicle-data-board justify-content-evenly">';
-            foreach ($data['dispatchDetails'] as $value) {
-                echo '<div class="carcard">
-                            <div class="cardhead">
-                                <div class="cardid">
-                                    <div class="carmodel">' . $value->ModelName . '</div>
-                                    <div class="chassisno">' . $value->ChassisNo . '</div>
-                                </div>
-                                <div class="toolstatuscolor">
-                                    <div class="status-circle status-red-circle"></div>
-                                </div>
-                            </div>
-                            <div class="carpicbox">
-                                <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
-                            </div>
-                            <div class="carstatus green">Show Room: '.$value->ShowRoomName.'</div>
-                            <div class="arrivaldate">Arrival Date: ', $value->ReleaseDate, '</div>
-                        </div>';
+                echo '  </div>';
             }
+            ?>
+            </div>
+        </div>
+        
 
-            echo '  </div>
-                    </div>';
-        }
-        ?>
+    </section>
+
+    <section class="display-flex-column">
+
+        <div id="alert" class="hideme" role="alert"></div>
 
     </section>
 
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/dispatch.js"></script>

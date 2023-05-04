@@ -32,6 +32,8 @@ const color = document.getElementById("color");
 
 chassis?.addEventListener("change", () => {
     chassis.classList.remove("form-control-red");
+    chassis.classList.remove("text-red");
+    chassis.classList.add("text-gray");
 
     let Colors = []
     
@@ -54,6 +56,8 @@ chassis?.addEventListener("change", () => {
 
 color?.addEventListener("change", () => {
     color.classList.remove("form-control-red");
+    color.classList.remove("text-red");
+    color.classList.add("text-gray");
 });
 
 // Body Shell - Re Request Repair - Paint
@@ -141,6 +145,7 @@ const repair = document.getElementById("repair");
 const paint = document.getElementById("paint");
 const repairD = document.getElementById("repairD");
 const repairDescription = document.getElementById("repairDescription");
+const repairDescriptionLabel = document.getElementById("repairDescription-label");
 
 repair?.addEventListener("change", () => {
     if (repair.checked) {
@@ -152,4 +157,9 @@ repair?.addEventListener("change", () => {
         repairD.classList.toggle("display-none");
         repairDescription.required = false;
     }
+});
+
+repairDescription?.addEventListener("input", () => {
+    repairDescription.classList.remove("form-control-red");
+    repairDescriptionLabel.classList.remove("red");
 });

@@ -141,7 +141,7 @@
                             class="form-control width-rem-38p75"
                             placeholder="Repair Description"
                             autocomplete="off" />
-                        <label class="form-label">Repair Description</label>
+                        <label class="form-label" id="repairDescription-label">Repair Description</label>
                     </div>
                 </div>
                 <div class="text-center margin-top-3">
@@ -163,8 +163,7 @@
                             </div>
                         ';
             } else {
-                echo '<div class="vehicle-detail-board  margin-bottom-4">
-                        <div class="vehicle-data-board justify-content-evenly">';
+                echo '<div class="display-flex-row flex-wrap justify-content-between">';
                 foreach($data['shellDetails'] as $value) {
 
                     $chassis = "'".$value->ChassisNo."'";
@@ -201,8 +200,7 @@
                         </div>';
                 }
 
-                echo '  </div>
-                    </div>';
+                echo '</div>';
                 
             }
         ?>

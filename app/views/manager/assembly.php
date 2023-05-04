@@ -44,8 +44,7 @@
                                 </div>
                             ';
             } else {
-                echo '<div class="vehicle-detail-board  margin-bottom-4">
-                            <div class="vehicle-data-board justify-content-evenly">';
+                echo '<div class="display-flex-row flex-wrap justify-content-between">';
                 foreach ($data['assemblyDetails'] as $value) {
 
                     $word = 'On Assembly';
@@ -88,8 +87,7 @@
                                 </div></a>';
                 }
 
-                echo '  </div>
-                        </div>';
+                echo '</div>';
             }
             ?>
         </div>
