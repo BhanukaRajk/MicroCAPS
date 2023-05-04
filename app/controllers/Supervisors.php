@@ -393,7 +393,7 @@ class Supervisors extends controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'ChassisNo' => trim($_POST['chassis_no'])
+                'ChassisNo' => trim($_POST['form-car-id'])
             ];
 
             $data['url'] = getUrl();
@@ -401,7 +401,7 @@ class Supervisors extends controller
             $this->view('supervisor/parts/vehicleparts', $data);
         }
     }
-    public function viewComponents()
+    public function viewCarComponent()
     {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -410,7 +410,8 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $this->view('Supervisor/parts/componentlist', $data);
+            $data['CarComp'] = $this->supervisorModel->viewVehicleList("S2");
+            $this->view('supervisor/parts/com_vehicle_list', $data);
         }
     }
 
@@ -431,6 +432,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
+            $data['taskList'] = $this->supervisorModel->ViewTaskSchedule();
             $this->view('supervisor/scheduler/scheduletasks', $data);
         }
     }
@@ -607,6 +609,7 @@ class Supervisors extends controller
             $data['url'] = getUrl();
             $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList('S4');
             $this->view('supervisor/inspection/vehiclelist', $data);
+            // print_r($data);
         }
     }
 

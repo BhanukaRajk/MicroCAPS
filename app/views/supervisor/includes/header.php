@@ -20,6 +20,7 @@
 
 
     <title>MicroCAPS</title>
+    <link rel="icon" href="<?php echo URL_ROOT; ?>public/images/icons/assembly.png">
 </head>
 
 <body>

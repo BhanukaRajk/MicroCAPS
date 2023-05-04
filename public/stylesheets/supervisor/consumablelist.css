@@ -1,7 +1,3 @@
-carpic {
-    border: 1px solid black;
-}
-
 .pagehead {
     position: sticky;
     top: 4rem;
@@ -9,7 +5,7 @@ carpic {
     padding-block: 1rem;
     background-color: #F2F2F7;
 
-    font-family: 'Noto Sans';
+    font-family: 'Noto Sans', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -21,10 +17,6 @@ carpic {
     color: #1C1F37;
 }
 
-.databoard {
-    display: flex;
-    flex-direction: column;
-}
 
 .vehicle-detail-board {
     display: flex;
@@ -38,16 +30,18 @@ carpic {
     flex-direction: row;
 
     flex-wrap: wrap;
-    gap: 27px;
-    margin-inline-end: 250px;
+    /* gap: 27px; */
+    /* margin-inline-end: 250px; */
+    margin-inline-end: 190px;
 }
 
 .carcard {
     /*position: absolute;*/
     width: 221px;
     height: 200px;
-    /*left: 272px;*/
-    /*top: 25px;*/
+
+    margin-inline-end: 27px;
+    margin-block-end: 27px;
     padding: 23px;
 
     background: #FFFFFF;
@@ -64,13 +58,11 @@ carpic {
 }
 
 .carmodel {
-    /*position: absolute;
-    width: 83px;*/
     height: 15px;
     left: 0px;
     top: 0px;
 
-    font-family: 'Proxima Nova';
+    font-family: 'Proxima Nova', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -88,7 +80,7 @@ carpic {
     left: 0px;
     top: 15px;
 
-    font-family: 'Proxima Nova';
+    font-family: 'Proxima Nova', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
@@ -111,7 +103,7 @@ carpic {
 
     /* Title 3/Regular */
 
-    font-family: 'Proxima Nova';
+    font-family: 'Proxima Nova', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -258,7 +250,7 @@ a {
 } */
 
 
-.background-blurer {
+.background-bluer {
     left: 0;
     right: 0;
 

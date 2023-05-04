@@ -23,11 +23,6 @@ carpic {
     color: #1C1F37;
 }
 
-.databoard {
-    display: flex;
-    flex-direction: column;
-}
-
 .vehicle-detail-board {
     display: flex;
     flex-direction: row;
@@ -40,7 +35,7 @@ carpic {
     flex-direction: row;
 
     flex-wrap: wrap;
-    gap: 27px;
+    /* gap: 27px; */
 }
 
 .carcard {
@@ -137,7 +132,7 @@ carpic {
 .filterbox {
     position: fixed;
     width: 212px;
-    height: 520px;
+    /* height: 520px; */
     right: 20px;
     /*top: 165px;*/
     /*padding: 23px;*/

@@ -68,6 +68,12 @@
     /*margin-left: 2rem;*/
     /*margin-right: 2rem;*/
     margin-inline: 2rem;
+    margin-bottom: 1rem;
+}
+
+.databoard {
+    display: flex;
+    flex-direction: column;
 }
 
 .TT {
@@ -78,6 +84,13 @@
 #vehicles {
     border: none;
     color: #017EFA;
+}
+
+.vehicle-search {
+    width: 10rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #000000;
+    border-radius: 1rem;
 }
 
 

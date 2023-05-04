@@ -42,6 +42,39 @@ for (number = 0; number < acc.length; number++) {
   });
 }
 
+function searchCar() {
+
+  let searchInput; // TO GET THE VALUE FROM SEARCH BAR
+  let carSet; // THIS WILL TAKE THE CONTAINER OF CAR CARDS
+  let cars; // THIS WILL TAKE THE CHASSIS NUMBER FIELDS OF ALL CARS
+  let car; // THIS WILL TAKE THE CHASSIS NUMBER FIELD OF CURRENT VEHICLE
+  let car_cards; // THIS WILL TAKE THE FULL CARDS OF ALL VEHICLES
+  let car_count; // THIS WILL TAKE THE NUMBER OF CARD
+  let car_id; // THIS WILL GET THE CHASSIS NUMBER FROM car VARIABLE
+
+  // value.toUpperCase() WILL CONVERT THE TEXT TO UPPERCASE
+  searchInput = document.getElementById("searchBox").value.toUpperCase();
+  carSet = document.getElementById("carList");
+
+  cars = carSet.getElementsByClassName("chassisno");
+  car_cards = carSet.getElementsByClassName("carcard");
+
+  for (car_count = 0; car_count < cars.length; car_count++) {
+    car = cars[car_count];
+    if (car) {
+      car_id = car.textContent || car.innerText;
+      if ((car_id.toUpperCase()).includes(searchInput)) {
+        // car_cards[i].classList.remove("display-none");
+        car_cards[car_count].style.display = "";
+      } else {
+        // car_cards[i].classList.toggle("display-none");
+        car_cards[car_count].style.display = "none";
+      }
+    } // IF car IS NULL SKIP IT
+  }
+
+}
+
 
 
 function GoBack() {

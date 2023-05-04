@@ -192,8 +192,6 @@ class Supervisor
     }
 
 
-    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     // public function removeleave($ID, $leavedate) {
     public function removeleave($LeaveID): bool
     {
@@ -212,7 +210,6 @@ class Supervisor
             return false;
         }
     }
-    // NO CONFIRMATION INCLUDED ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -269,7 +266,7 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT `employee-leaves`.`LeaveId`, `employee-leaves`.`EmployeeId`, `employee`.`Firstname`, `employee`.`Lastname`, `employee-leaves`.`LeaveDate`, `employee-leaves`.`Reason`
+            'SELECT `employee-leaves`.`LeaveId`, `employee-leaves`.`EmployeeId`, CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Name`, `employee-leaves`.`LeaveDate`, `employee-leaves`.`Reason`
                 FROM `employee-leaves`
                 INNER JOIN `employee`
             ON `employee-leaves`.`EmployeeId` = `employee`.`EmployeeId`
@@ -387,13 +384,20 @@ class Supervisor
 
 
 
-    public function ViewAssignedTasks()
+    public function ViewTaskSchedule()
     {
 
         $this->db->query(
-            'SELECT *
-                FROM tasks 
-                WHERE EmployeeId != NULL; '
+            'SELECT `employee-schedule`.`ChassisNo`, 
+                        `employee-schedule`.`Completeness`, 
+                        `employee-schedule`.`ProcessId`, 
+                        `employee-schedule`.`Date`,
+                        CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Worker`, 
+                        `stage-process`.`ProcessName`
+                FROM `employee-schedule`, `employee`, `stage-process`
+                WHERE `employee-schedule`.`ProcessId` = `stage-process`.`ProcessId` AND 
+                      `employee-schedule`.`EmployeeId` = `employee`.`EmployeeId` AND 
+                      (`employee-schedule`.`Date` < CURRENT_DATE() OR `employee-schedule`.`Completeness` = "0");'
         );
 
         $tasks = $this->db->resultSet();
@@ -467,9 +471,10 @@ class Supervisor
         $this->db->query(
             'SELECT `ChassisNo`,
                     `ModelNo`,
-                    `Color` 
+                    `Color`, 
+                    `CurrentStatus`
                     FROM `vehicle` 
-                    WHERE `CurrentStatus` = "PA";'
+                    WHERE `CurrentStatus` LIKE "S_%";'
         );
 
         $vehicles = $this->db->resultSet();
@@ -549,7 +554,7 @@ class Supervisor
 
     public function viewCarComponents($car) {
         $this->db->query(
-            'SELECT `component`.`PartName`, `component-release`.`CurrentStatus`
+            'SELECT `component`.`PartNo`, `component`.`PartName`, `component-release`.`CurrentStatus`
                     FROM `component-release`, `component` 
                     WHERE `component-release`.`PartNo` = `component`.`PartNo` 
                       AND `component-release`.`ChassisNo` = :THIS_CAR;'
@@ -570,9 +575,12 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT *
-                    FROM `vehicle` 
-                    WHERE `CurrentStatus` = :STAGE;'
+            'SELECT `vehicle`.`ChassisNo`, 
+                        `vehicle`.`EngineNo`, 
+                        `vehicle`.`Color`, 
+                        `vehicle-model`.`ModelName` 
+                    FROM `vehicle`, `vehicle-model` 
+                    WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` AND `vehicle`.`CurrentStatus` = :STAGE;'
         );
 
         $this->db->bind(':STAGE', $stage);

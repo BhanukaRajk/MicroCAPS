@@ -103,10 +103,8 @@
                     <input type="radio" id="any-state" name="tool-state" value="All" checked>
                     <label for="any-state">All</label>
                   </div>
-                  <!-- <div class="filters filter-btn margin-top-5">
-                    <div><button type="submit" id="filtering" name="submit" class="filter-button">Search</button></div>
-                  </div> -->
                 </li>
+
               </ul>
             </form>
 
@@ -118,20 +116,20 @@
 
 
       <!-- THIS IS THE POPUP BOX FOR TOOL UPDATES AND DELETIONS -->
-      <div class="background-blurer display-none" id="toolUpdatePopUp">
+      <div class="background-bluer display-none" id="toolUpdatePopUp">
         <div class="consumable-detail-popup position-fixed">
 
           <div class="popup-left">
             <div class="horizontal-centralizer cs-popup-csname">
-              <div class="form-toolname">MOTUL 3000 4T Plus</div>
+              <div class="form-toolname">TOOL NAME</div>
             </div>
             <div class="horizontal-centralizer">
               <div class="">
-                <img class="consumable-popup-img" src="<?php echo URL_ROOT; ?>public/images/consumables/image1.png" class="carpic" alt="Consumable" id="formToolImg">
+                <img class="consumable-popup-img" src="<?php echo URL_ROOT; ?>public/images/tools/none.png" class="carpic" alt="Consumable" id="formToolImg">
               </div>
             </div>
             <div class="horizontal-centralizer">
-              <div class="form-tool-quantity">Quentity: 5</div>
+              <div class="form-tool-quantity">Quantity: QUANTITY</div>
             </div>
           </div>
 
@@ -142,7 +140,7 @@
             </div>
 
             <div class="horizontal-centralizer last-update margin-top-3">
-              <div class="form-tool-lastupdate">Last update: 10 February 2023 at 12.25 PM</div>
+              <div class="form-tool-lastupdate">Last update: DATE AND TIME</div>
             </div>
 
 

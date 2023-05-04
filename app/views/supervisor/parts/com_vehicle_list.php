@@ -4,7 +4,6 @@
 <!-- ADD LEFT NAVIGATION BAR AND TOP NAVIGATION BAR ON DASHBOARD PAGE -->
 <?php require_once APP_ROOT . '/views/supervisor/common/leftnavbar.php'; ?>
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
-<?php require_once APP_ROOT . '/views/supervisor/common/notification.php'; ?>
 
 
 <section>
@@ -14,7 +13,7 @@
         <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
-                    <div>Current vehicles</div>
+                    <div>Assembly completed vehicles</div>
                     <div>
                         <label for="searchBox" class="display-none"></label>
                         <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-search" placeholder="Search Chassis Number">
@@ -24,30 +23,23 @@
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        foreach ($data['LineCarsSet'] as $car) {
-                            echo '<div class="carcard">
+                        foreach ($data['CarComp'] as $CAR) {
+                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/componentsView"><div onclick="this.closest(\'form\').submit()" class="carcard">
                                 <div class="cardhead">
                                     <div class="cardid">
-                                        <div class="carmodel">'. (($car->ModelNo == "M0001") ? 'Micro Panda ' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross ' : 'MG ZS SUV ')) .'</div>
-                                        <div class="chassisno">'. ($car->ChassisNo) .'</div>
-                                        <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                        <div class="carmodel">'. $CAR->ModelName .'</div>
+                                        <div class="chassisno">'. $CAR->ChassisNo .'</div>
+                                        <input type="hidden" name="form-car-id" value="' .$CAR->ChassisNo. '">
+                                    </div>
+                                    <div class="carstatuscolor">
+                                        <div class="status-circle status-orange-circle"></div>
                                     </div>
                                 </div>
                                 <div class="carpicbox">
-                                    <img src="'. URL_ROOT .'public/images/cars/'. (($car->ModelNo == "M0001") ? 'Micro Panda' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross' : 'MG ZS SUV')) .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                    <img src="' . URL_ROOT . 'public/images/cars/'. $CAR->ModelName .' '. $CAR->Color .'.png" class="carpic" alt="'. $CAR->ModelName .' '. $CAR->Color .'">
                                 </div>
-                                <div class="carstatus">';
-                            if($car->CurrentStatus == "S1") { echo 'At Stage 01'; }
-                            else if($car->CurrentStatus == "S2") { echo 'At Stage 02'; }
-                            else if($car->CurrentStatus == "S3") { echo 'At Stage 03'; }
-                            else { echo 'At Stage 04'; }
-
-                            echo '</div>
-                            </div>';
-                        }
-
-                        if($car == NULL) {
-                            echo '<div id="middler">Nothing to show!</div>';
+                                <div class="carstatus">Not Inspected</div>
+                            </div></form>';
                         }
                         ?>
 

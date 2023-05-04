@@ -24,7 +24,7 @@
 
                         <div class="vehicle-selection-box horizontal-centralizer">
                             <div class="vertical-centralizer">
-                                <button class="full-list-btn blue-hover">Vehicle list</button>
+                                <a href="<?php echo URL_ROOT; ?>Supervisors/viewCarComponent" class="full-list-btn blue-hover">Vehicle list</a>
                             </div>
                             <div>
                                 <label for="vehicles" class="display-none">Select Vehicle</label>
@@ -42,7 +42,7 @@
                 <div class="parts-info-box">
                     <div class="parts-info-box-inner">
 
-                        <div class="parts-info-set-1">
+                        <div onchange="filterStatus()" class="parts-info-set-1">
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">All: 22</button>
                             </div>
@@ -54,6 +54,10 @@
                             </div>
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">Damaged: 2</button>
+                            </div>
+                            <div class="filter-btn-box">
+                                <label for="part-search"></label>
+                                <input class="page-filter-btn" id="[art]-search" placeholder="Search a part">
                             </div>
                         </div>
 
@@ -70,56 +74,20 @@
                                 </div>
                                 <div class="bottom-border"></div>
 
-                                <div class="parts-table-row">
-                                    <div class="parts-col-01 ">Front bumper</div>
-                                    <div class="parts-col-02">DAMAGED</div>
-                                    <div class="parts-col-03">
-                                        <div class="round">
-                                            <input type="checkbox" id="dcheckbox1" />
-                                            <label for="dcheckbox1"></label>
-                                        </div>
-                                    </div>
-                                    <div class="parts-col-04">
-                                        <div class="round">
-                                            <input type="checkbox" id="icheckbox1" />
-                                            <label for="icheckbox1"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bottom-border"></div>
-
-                                <div class="parts-table-row">
-                                    <div class="parts-col-01 ">Seat belts</div>
-                                    <div class="parts-col-02">ISSUED</div>
-                                    <div class="parts-col-03">
-                                        <div class="round">
-                                            <input type="checkbox" id="dcheckbox2" />
-                                            <label for="dcheckbox2"></label>
-                                        </div>
-                                    </div>
-                                    <div class="parts-col-04">
-                                        <div class="round">
-                                            <input type="checkbox" id="icheckbox2" />
-                                            <label for="icheckbox2"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bottom-border"></div>
-
                                 <?php foreach ($data['components'] AS $component) {
                                     echo '<div class="parts-table-row">
-                                            <div class="parts-col-01 ">$component->PartName</div>
-                                            <div class="parts-col-02">$component->CurrentStatus</div>
+                                            <div class="parts-col-01 ">'. $component->PartName .'</div>
+                                            <div class="parts-col-02">'. $component->CurrentStatus .'</div>
                                             <div class="parts-col-03">
                                                 <div class="round">
-                                                    <input type="checkbox" id="dcheckbox1" '. (($component->CurrentStatus == "DAMAGED") ? 'checked' : '' ) .' />
-                                                    <label for="dcheckbox1"></label>
+                                                    <input type="checkbox" id="'. $component->PartNo .'D" '. (($component->CurrentStatus == "DAMAGED") ? 'checked' : '' ) .' />
+                                                    <label for="'. $component->PartNo .'D"></label>
                                                 </div>
                                             </div>
                                             <div class="parts-col-04">
                                                 <div class="round">
-                                                    <input type="checkbox" id="icheckbox1" '. (($component->CurrentStatus == "ISSUED") ? 'checked' : '' ) .' />
-                                                    <label for="icheckbox1"></label>
+                                                    <input type="checkbox" id="'. $component->PartNo .'I" '. (($component->CurrentStatus == "ISSUED") ? 'checked' : '' ) .' />
+                                                    <label for="'. $component->PartNo .'I"></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -127,26 +95,13 @@
                                 }
 
                                 if($component == NULL) {
-                                    echo '';
+                                    echo '<div class="horizontal-centralizer">
+                                            <div class="marginy-4">No parts available</div>
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="bottom-border"></div>';
                                 }
                                 ?>
-                                <div class="parts-table-row">
-                                    <div class="parts-col-01 ">Front bumper</div>
-                                    <div class="parts-col-02">DAMAGED</div>
-                                    <div class="parts-col-03">
-                                        <div class="round">
-                                            <input type="checkbox" id="dcheckbox1" />
-                                            <label for="dcheckbox1"></label>
-                                        </div>
-                                    </div>
-                                    <div class="parts-col-04">
-                                        <div class="round">
-                                            <input type="checkbox" id="icheckbox1" />
-                                            <label for="icheckbox1"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bottom-border"></div>
 
                             </div>
 

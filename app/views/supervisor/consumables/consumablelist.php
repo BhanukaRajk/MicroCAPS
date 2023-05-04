@@ -11,16 +11,17 @@
   <!-- THIS IS THE CONTENT DISPLAYING AREA -->
   <div class="content">
     <!-- MARGINS INCLUDED CONTENT DISPLAYING AREA -->
-    <div class="list-view-side-margins">
+<!--    <div class="list-view-side-margins">-->
+      <div class="toolset-margin">
       <div class="databoard">
 
-        <div class="pagehead display-flex-row justify-content-between">
-          <div>Consumables</div>
-          <div class="margin-right-4"><button onclick="showConsumeAddingPopup()" class="adding-button">Add new</button></div>
+        <div class="toolset-head">
+          <div class="toolset-heading">Consumables</div>
+          <div class="toolset-adding"><button onclick="showConsumeAddingPopup()" class="adding-button">Add new</button></div>
         </div>
 
-        <div class="vehicle-detail-board">
-          <div class="vehicle-data-board">
+        <div class="toolset-body">
+          <div class="toolset-toolview">
 
             <?php
             foreach ($data['consumableset'] as $item) {
@@ -118,7 +119,7 @@
 
 
           <!-- THIS IS THE POPUP BOX FOR CONSUMABLE UPDATES AND DELETIONS -->
-          <div class="background-blurer display-none" id="consumeUpdatePopUp">
+          <div class="background-bluer display-none" id="consumeUpdatePopUp">
             <div class="consumable-detail-popup position-fixed">
 
               <div class="popup-left">
@@ -170,7 +171,7 @@
                     <div><button onclick="consumeDeleteConfirmation()" class="delete-button consume-update">Remove item</button></div>
                 </div>
                 <div class="display-flex-row justify-content-center margin-top-2">
-                  <div><a onclick="closeDetailedConsumable()" class="mouse-pointer">Close</a></div>
+                  <div><button onclick="closeDetailedConsumable()" class="cancel-button mouse-pointer">Cancel</button></div>
                 </div>
               </div>
             </div>

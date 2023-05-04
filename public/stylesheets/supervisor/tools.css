@@ -41,13 +41,16 @@
     flex-direction: row;
 
     flex-wrap: wrap;
-    gap: 27px;
+    /* gap: 27px; */
 }
 
 .toolcard {
     width: 221px;
     height: 200px;
     padding: 23px;
+
+    margin-block-end: 27px;
+    margin-inline-end: 27px;
 
     background: #FFFFFF;
     box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
@@ -255,7 +258,7 @@
 }
 
 
-.background-blurer {
+.background-bluer {
     left: 0;
     right: 0;
 

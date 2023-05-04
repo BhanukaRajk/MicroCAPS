@@ -28,6 +28,7 @@
                         <label for="vehicles" class="display-none">Select Vehicle</label>
                         <select name="vehicles" id="vehicles" class="task-vehicle-selection">
                             <option class="bh" disabled selected value>- Select vehicle -</option>
+                            <!-- IN THIS SELECTION, VEHICLES SHOULD BE THE SAME STAGE AS THE SUPERVISOR'S STAGE-->
                             <?php
                             // foreach ($data['AssemblingCars'] as $carOnLine) {
                             //      echo '<option value="' . $carOnLine->ChassisNo . '">' . $carOnLine->ChassisNo . '</option>';
@@ -53,391 +54,45 @@
             <div class="scheduled-list-box">
                 <div class="task-detail-box-inner">
 
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: EFI Tuneup</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Naveen Dilshan</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label for="checkbox1"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a onclick="">Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">CN112910320A</div>
-                                <div class="task-vehicle-date">2023-02-25</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: Adjust Clutch</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: Janith Liyanage</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="checkbox2" />
-                                    <label for="checkbox2"></label>
-                                </div>
-                            </div>
-                            <div class="task-edit vertical-centralizer">
-                                <a>Edit</a>
-                            </div>
-                        </div>
-                    </div>
-
                     <?php
-                        // foreach ($data['TaskList'] as $task) {
-                            // echo '<div class="task-schedule-record">
-                            //         <div class="task-schedule-record-inner">
-                            //             <div class="task-vehicle">
-                            //                 <div class="task-vehicle-id">'. $task->ChassisNo .'</div>
-                            //                 <div class="task-vehicle-date">'. $task->ScheduledDate .'</div>
-                            //             </div>
-                            //             <div class="vline"></div>
-                            //             <div class="task-name vertical-centralizer">
-                            //                 <div>Task: '. $task->TaskName .'</div>
-                            //             </div>
-                            //             <div class="vline"></div>
-                            //             <div class="task-worker vertical-centralizer">
-                            //                 <div>Assembler: '. $task->EmployeeName .'</div>
-                            //             </div>
-                            //             <div class="task-status vertical-centralizer">
-                            //                 <div class="round">
-                            //                     <input type="checkbox" id="checkbox3" '. if($task->Status == Completed) { echo 'checked'; } .'/>
-                            //                     <label for="checkbox3"></label>
-                            //                 </div>
-                            //             </div>
-                            //             <div class="task-edit vertical-centralizer">
-                            //                 <a>Edit</a>
-                            //             </div>
-                            //         </div>
-                            //     </div>';
-                        // }
-
-                        // if($state1 != $state2) {
-                        //     echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
-                        // }
+                    foreach ($data['taskList'] as $Task) {
+                    echo '<div class="task-schedule-record">
+                        <div class="task-schedule-record-inner">
+                            <div class="task-vehicle">
+                                <div class="task-vehicle-id">'. $Task->ChassisNo .'</div>
+                                <div class="task-vehicle-date">'. $Task->Date .'</div>
+                            </div>
+                            <div class="vline"></div>
+                            <div class="task-name vertical-centralizer">
+                                <div>Task: '. $Task->ProcessName .'</div>
+                            </div>
+                            <div class="vline"></div>
+                            <div class="task-worker vertical-centralizer">
+                                <div>Assembler: '. $Task->Worker .'</div>
+                            </div>
+                            <div class="task-status vertical-centralizer">
+                                <div class="round">
+                                    <input type="checkbox" id="'. $Task->ChassisNo .'-'. $Task->ProcessId .'" 
+                                    '. (($Task->Completeness == "0") ? 'checked' : '') .'>
+                                    <label for="'. $Task->ChassisNo .'-'. $Task->ProcessId .'"></label>
+                                </div>
+                            </div>
+                            <div class="task-edit vertical-centralizer">
+                                <!-- <a onclick="">Edit</a> -->
+                                <img src="'. URL_ROOT.'/public/images/icons/edit.png" onclick="" class="mouse-pointer width-rem-1p25" alt="Edit">
+                            </div>
+                        </div>
+                    </div>';
+                    }
                     ?>
-
-                    
 
                 </div>
             </div>
 
-            <!-- <div class="schedule-card">
-                <table>
-                    <?php
-                    // foreach ($data['ScheduledList'] as $Task) {
-                    //      echo '<tr>
-                    //                <td>
-                    //                    <div class="display-flex-column">
-                    //                         <div>'.$Task->ChassisNo.'</div>
-                    //                         <div>'.$Task->ScheduleDate.'</div>
-                    //                    </div>
-                    //                </td>
-                    //                <td>Task: '.$Task->TaskName.'</td>
-                    //                <td>Assembler: '.$Task->EmployeeName.'</td>
-                    //                <td>
-                    //                    <div class="round">
-                    //                        <input type="checkbox" id="checkbox2" />
-                    //                        <label for="checkbox2"></label>
-                    //                    </div>
-                    //                </td>
-                    //                <td>
-                    //                    <div class="">
-                    //                        <input type="checkbox" id="checkbox2" />
-                    //                        <label for="checkbox2"></label>
-                    //                    </div>
-                    //                </td>
-                    //            </tr>';
-                    // }
-                    ?>
-                </table>
-            </div> -->
 
 
-            <!-- THIS IS THE POP UP BOX FOR UPDATES AND DELETIONS -->
-            <div class="background-blurer display-none">
+            <!-- THIS IS THE POPUP BOX FOR UPDATES AND DELETIONS -->
+            <div class="background-bluer display-none">
                 <div class="consumable-popup-window position-fixed">
                     <div class="">
                         <div><button type="">Close</button></div>

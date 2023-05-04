@@ -21,7 +21,5 @@ echo ($error_message == '') ? '<div id="messagebox" class="hideme success-msg">
                                 </div>';
 
 // CHECK IF THERE IS A MESSAGE AVAILABLE, AND RUN THE NOTIFY ME() FUNCTION TO DISPLAY IT
-echo ($error_message == '' and $success_message == '') ? '<div class="sup-leave-list-content">' : '<div class="sup-leave-list-content">
-        <script type="text/javascript">notifyMe();</script>
-        ';
+echo ($error_message == '' and $success_message == '') ? '' : '<script type="text/javascript">notifyMe();</script>';
 ?>

@@ -153,7 +153,7 @@ function expandTool(Tool) {
     document.getElementById("status-form-tool-id").setAttribute("value", toolId);
 
     // SHOW THE POPUP FORM
-    document.getElementById("toolUpdatePopUp").setAttribute("class", "background-blurer");
+    document.getElementById("toolUpdatePopUp").setAttribute("class", "background-bluer");
     // document.getElementsByClassName("toolset-toolview").classList.add("noscroll");
 }
 
@@ -161,7 +161,7 @@ function expandTool(Tool) {
 function closeToolUpdatePopup() {
 
     // CLOSE THE POPUP FORM
-    document.getElementById("toolUpdatePopUp").setAttribute("class", "background-blurer display-none");
+    document.getElementById("toolUpdatePopUp").setAttribute("class", "background-bluer display-none");
     // document.getElementsByClassName("toolset-toolview").classList.remove("noscroll");
 }
 
@@ -192,7 +192,7 @@ function expandConsumable(Consume) {
 
 
     // SHOW THE POPUP FORM
-    document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-blurer");
+    document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-bluer");
     document.getElementsByClassName("vehicle-data-board").classList.toggle("noscroll");
 }
 
@@ -200,7 +200,7 @@ function expandConsumable(Consume) {
 function closeDetailedConsumable() {
 
     // CLOSE THE POPUP FORM
-    document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-blurer display-none");
+    document.getElementById("consumeUpdatePopUp").setAttribute("class", "background-bluer display-none");
     document.getElementsByClassName("vehicle-data-board").classList.remove("noscroll");
 }
 
