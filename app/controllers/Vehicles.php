@@ -165,13 +165,13 @@ class Vehicles extends Controller {
             ];
 
             if ($data['job'] === 'paint') {
-                if ($this->managerModel->findRepairJobByChassis($this->managerModel->getChassisByPaintId($data['id'])->ChassisNo)) {
+                if ($this->vehicleModel->findRepairJobByChassis($this->vehicleModel->getChassisByPaintId($data['id'])->ChassisNo)) {
                     echo 'Complete The Repair Job First';
                     return;
                 }
             }
 
-            $result = $this->managerModel->jobDone($data['id'], $data['job']);
+            $result = $this->vehicleModel->jobDone($data['id'], $data['job']);
 
             if($result) {
                 echo 'Successful';
