@@ -34,6 +34,27 @@ function addEmployee() {
     });
 }
 
+function editEmployee($id) {
+    let form = document.getElementById("edit-employee");
+    let formData = new FormData(form);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/admins/employees/edit/'+$id,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response == "Successful") {
+                location.reload(true);
+                setLocalStorage("Successful","Employee Added Successfully");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Adding Employee");
+            }
+        }
+    });
+}
+
 function deleteEmployee($id) {
 
     var xhttp = new XMLHttpRequest();

@@ -721,7 +721,7 @@ h3 {
     background-clip: content-box;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 0 -0.5rem;
+    background-position: 0 0rem;
 }
 
 /* Text */

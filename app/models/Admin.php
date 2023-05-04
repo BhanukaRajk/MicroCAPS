@@ -48,6 +48,20 @@ class Admin {
             return null;
         }
     }
+    
+    public function employeeDetailsById($id) {
+        $this->db->query('SELECT * FROM Employee WHERE EmployeeId = :id');
+
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
 
     public function employeeCount($position) {
         $this->db->query('SELECT COUNT(*) as Count FROM Employee WHERE Position = :position');
@@ -67,6 +81,34 @@ class Admin {
         $this->db->query(
             'INSERT INTO Employee (EmployeeId, FirstName, LastName, NIC, Email, TelephoneNo, Position)
                 VALUES (:id, :firstname, :lastname, :nic, :email, :telephone, :position)'
+        );
+
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':firstname', $data['firstname']);
+        $this->db->bind(':lastname', $data['lastname']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':telephone', $data['telephone']);
+        $this->db->bind(':position', $data['position']);
+        $this->db->bind(':nic', $data['nic']);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function editEmployee($data): bool {
+        
+        $this->db->query(
+            'UPDATE `employee` 
+            SET `Firstname`=:firstname,
+                `Lastname`=:lastname,
+                `NIC`=:nic,
+                `TelephoneNo`=:telephone,
+                `Email`=:email,
+                `Position`=:position
+            WHERE `EmployeeId`=:id'
         );
 
         $this->db->bind(':id', $data['id']);
@@ -269,6 +311,26 @@ class Admin {
             return false;
         }
     }
+
+    public function test($id) {
+        $this->db->query(
+            'SELECT Firstname,Lastname,NIC,TelephoneNo,Email,Position
+                FROM employee
+                WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->single();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return null;
+        }
+    }
+
+  
 
 
 }

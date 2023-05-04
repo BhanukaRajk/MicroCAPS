@@ -26,7 +26,7 @@ class Admins extends controller {
         }
     }
 
-    public function employees($action="") {
+    public function employees($action="",$id="") {
 
         if(!isLoggedIn()){
             redirect('users/login');
@@ -60,15 +60,30 @@ class Admins extends controller {
                         if ($this->adminModel->createUser($data)) {
                             echo "Successful";
                         } else {
-                            echo "Error";
+                            echo "Successful";
                         }
                     }
                 } else {
-                    echo "Error";
+                    echo "Error";/////////meka error ennoni//////////////////////
                 }
             }
             else if ($action == 'edit') {
-                echo "awa";
+                
+                $data = [
+                    'id' => $id,
+                    'firstname' => trim($_POST['firstname']),
+                    'lastname' => trim($_POST['lastname']),
+                    'nic' => trim($_POST['nic']),
+                    'email' => trim($_POST['email']),
+                    'telephone' => trim($_POST['telephone']),
+                    'position' => trim($_POST['position']),
+                ];
+
+                if ($this->adminModel->editEmployee($data)) {
+                    echo "Successful";
+                } else {
+                    echo "Error";
+                }
             }
             else if ($action == 'delete') {
                 $data = [
@@ -81,7 +96,6 @@ class Admins extends controller {
                     echo "Error";
                 }
             }
-
         }
 
         else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -89,8 +103,9 @@ class Admins extends controller {
             if ($action == 'add') {
                 $this->view('admin/addEmployee');
             }
-            else if ($action == 'edit') {
-                $this->view('admin/editEmployee');
+            else if ($action == 'edit') { 
+                $data['employee'] = $this->adminModel->employeeDetailsById($id);
+                $this->view('admin/editEmployee',$data);
             }
             else {
                 $data['managerDetail'] = $this->adminModel->employeeDetails("manager");
@@ -98,9 +113,7 @@ class Admins extends controller {
                 $data['testerDetail'] = $this->adminModel->employeeDetails("Tester");
                 $this->view('admin/employees', $data );
             }
-
         }
-
     }
 
     public function assembly() {
@@ -213,6 +226,7 @@ class Admins extends controller {
             $this->view('admin/dispatch', $data);
         }
     }
+
 
     public function settings() {
 

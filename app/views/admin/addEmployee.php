@@ -69,7 +69,7 @@
                         <div class="custom-select">
                             <select name="position" class="form-control form-control-blue text-blue" id="position">
                                 <option value="">Select Position</option>
-                                <option value="Admin">Manager</option>
+                                <option value="Manager">Manager</option>
                                 <option value="Supervisor">Supervisor</option>
                                 <option value="Tester">Tester</option>
                                 <option value="Assembler">Assembler</option>
