@@ -49,7 +49,7 @@
                                     <div class="db-qck-sidebox">Quick Access</div>
                                     <div class="db-qck-sidebox db-activity-btn">
                                         <button type="button" class="blue-button" onClick="location.href='<?php echo URL_ROOT; ?>testers/selectpdi'">PDI Results</button>
-                                        <button type="button" class="blue-button" onClick="location.href='<?php echo URL_ROOT; ?>testers/add_defect'">Add Defect</button>
+                                        <button type="button" class="blue-button" ck="location.href='<?php echo URL_ROOT; ?>testers/add_defect'">Add Defect</button>
                                     </div>
                                 </div>
                                 <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">

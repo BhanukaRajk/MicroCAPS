@@ -69,6 +69,7 @@
             ?>
 
         </div>
+        <div class="margin-bottom-3"></div>
     </section>
 
     <div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
