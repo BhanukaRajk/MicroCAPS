@@ -20,7 +20,6 @@ class Supervisors extends controller
     }
     public function settings()
     {
-        // Hello world 
 
         if (!isLoggedIn()) {
             redirect('Users/login');
@@ -72,8 +71,6 @@ class Supervisors extends controller
             redirect('Users/login');
         }
 
-        echo "Hello";
-
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
 
@@ -81,6 +78,16 @@ class Supervisors extends controller
             $data['assemblyLine'] = $this->supervisorModel->ViewS4Finishers();
             $data['activities'] = $this->supervisorModel->activityLogs();
             $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
+
+            // if ($data['assemblyDetails'] !== false) {
+            //     $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
+            //     $data['overall'] = [
+            //         'pending' => json_encode($this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+            //         'completed' => json_encode($this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
+            //     ];
+            // } else {
+            //     $data['overall'] = null;
+            // }
 
             $this->view('supervisor/landing/dashboard', $data);
         }
@@ -789,6 +796,134 @@ class Supervisors extends controller
     }
     public function removeThisTool()
     {
+    }
+
+
+
+
+
+
+
+
+
+    public function pdi($id)
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['pdiVehicle'] = $this->supervisorModel->pdiVehicle($id);
+            $data['pdiCheckCategories'] = $this->supervisorModel->pdiCheckCategories();
+            $data['pdiCheckList'] = $this->supervisorModel->pdiCheckList($id);
+            $data['id'] = $id;
+            $data['defects'] = $this->supervisorModel->viewDefectSheets($id);
+            $this->view('tester/pdi', $data);
+        }
+    }
+
+    public function pdi_results($id)
+    {
+
+        echo $id;
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['pdiVehicle'] = $this->supervisorModel->pdiVehicle($id);
+            $data['pdiCheckCategories'] = $this->supervisorModel->pdiCheckCategories();
+            $data['pdiCheckList'] = $this->supervisorModel->pdiCheckList($id);
+            $data['id'] = $id;
+            //$data['defects'] = $this->supervisorModel->viewDefectSheets($id);
+            $this->view('supervisor/pdi/pdiresults', $data);
+        }
+    }
+
+
+    public function selectpdi($rrr)
+    {
+
+        echo $rrr;
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->supervisorModel->onPDIVehicles();
+            $this->view('supervisor/pdi/pdiresults', $data);
+        }
+    }
+
+    public function pdilinevehicleview()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList("S4");
+            $this->view('supervisor/pdi/vehiclelist', $data);
+        }
+    }
+
+
+
+
+    // CONTROLLER FUNCTION
+    public function findCars()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $vehicleTypes = json_decode($_POST['vehicleTypes']);
+            $completeness = $_POST['completeness'];
+            $acceptance = $_POST['acceptance'];
+
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->filterVehicles($vehicleTypes, $completeness, $acceptance);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['LineCarsSet']);
+
+        } else {
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicles();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+        }
+    }
+
+    public function findConsumables()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $typeOfConsume = $_POST['typeOfConsume'];
+            $stateOfConsume = $_POST['stateOfConsume'];
+
+            $data['url'] = getUrl();
+            $data['consumableset'] = $this->supervisorModel->viewConsumables($typeOfConsume, $stateOfConsume);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['consumableset']);
+
+        } else {
+        
+        // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['consumableset'] = $this->supervisorModel->ViewAllConsumables();
+            $this->view('supervisor/consumables/consumablelist', $data);
+        }
     }
 
 }

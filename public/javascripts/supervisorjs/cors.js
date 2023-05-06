@@ -103,42 +103,30 @@ function jobDone(id,job) {
 
 }
 
-// function saveChanges(id) {
+function dashboardChart() {
 
-//     let image = document.getElementById("image").files[0];
-    
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function() {
-//         if (this.readyState == 4 && this.status == 200) {
-//             var response = this.responseText;
+    let chassisNo = document.getElementById("dashboardChart").value;
 
-//             if (response == "Successful") {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
 
-//                 location.reload();
-//                 setLocalStorage("Successful","Saved Changes");
+            destroyChart(document.getElementById('myChart'));
 
-//             } else {
+            var ctx = document.getElementById('myChart').getContext('2d');
 
-//                 // console.log(image);
-//                 console.log(response);
-//                 // location.reload();
-//                 setLocalStorage("Error","Error Saving Changes");
+            let ltx = document.getElementById('myChart-label');
 
-//             }
+            updateChart(ctx, ltx, JSON.parse(response), 80);
 
-//         }
-//     };
-//     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/settings", true);
-//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     xhttp.send("id="+id+"&image="+image);
-//     // if (image) {
-//     //     console.log("Methanin");
-       
-//     // } else {
-//     //     xhttp.send("id"+id); //,"firstname="+firstname+"&lastname="+lastname+"email="+email+"&mobile="+mobile+"&nic="+nic);
-//     // }
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/assemblyPercentageDetail", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("chassisNo="+chassisNo);
 
-// }
+}
 
 function saveChanges(id) {
     let formdata = new FormData();

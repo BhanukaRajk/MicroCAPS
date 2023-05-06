@@ -248,33 +248,3 @@
     border: 1px solid #017EFA !important;
     border-radius: 6px !important;
 }
-
-
-
-
-
-
-
-.display-none {
-    display: none;
-}
-
-.vertical-centralizer {
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-
-}
-
-.horizontal-centralizer {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: center;
-}
-
-.TB {
-    border: 1px solid black;
-    margin-block: auto;
-}

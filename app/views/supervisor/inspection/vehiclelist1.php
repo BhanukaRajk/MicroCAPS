@@ -26,7 +26,7 @@
 
                         <?php
                         foreach ($data['LineCarsSet'] as $car) {
-                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/pdi_results/'. $car->ChassisNo.'"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
                                 <div class="cardhead">
                                     <div class="cardid">
                                         <div class="carmodel">'. $car->ModelName .'</div>
@@ -48,6 +48,66 @@
 
                     <!-- THIS IS THE FILTER BOX -->
                     <div class="toolset-filterbox">
+                    <div class="toolfilter">
+                        <div class="filter-head">Filter by</div>
+                        <div class="line"></div>
+                        <div class="filters">
+                        <ul id="consume_filter">
+                            <li>
+                            <div class="filtertype">Vehicle Type</div>
+                            <div class="filters">
+                                <input type="checkbox" id="micro-panda" name="car-model" value="M0001" checked>
+                                <label for="micro-panda">Micro Panda</label>
+                            </div>
+                            <div class="filters">
+                                <input type="checkbox" id="panda-cross" name="car-model" value="M0002" checked>
+                                <label for="panda-cross">Panda Cross</label>
+                            </div>
+                            <div class="filters">
+                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
+                                <label for="mg">MG ZH SUV</label>
+                            </div>
+                            </li>
+                            <li>
+                            <div class="filtertype">Inspection</div>
+                            <div class="filters">
+                                <input type="radio" id="current" name="completeness" value="CM" checked>
+                                <label for="current">Completed</label>
+                            </div>
+                            <div class="filters">
+                                <input type="radio" id="all-time" name="completeness" value="NC">
+                                <label for="all-time">Not completed</label>
+                            </div>
+                            <div class="filters">
+                                <input type="radio" id="all-time" name="completeness" value="All">
+                                <label for="all-time">All</label>
+                            </div>
+                            </li>
+                            <li>
+                            <div class="filtertype">Status</div>
+                            <div class="filters">
+                                <input type="radio" id="acceptance" name="acceptance" value="Accepted">
+                                <label for="acceptance">Accepted</label>
+                            </div>
+                            <div class="filters">
+                                <input type="radio" id="non-acceptance" name="acceptance" value="Not accepted">
+                                <label for="non-acceptance">Not accepted</label>
+                            </div>
+                            <div class="filters">
+                                <input type="radio" id="all-tested" name="acceptance" value="All" checked>
+                                <label for="all-tested">All</label>
+                            </div>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <!-- ADD YOUR SCRIPT TAGS HERE -->
+
+
+                    <!-- THIS IS THE FILTER BOX -->
+                    <!-- <div class="toolset-filterbox">
                         <div class="toolfilter">
                             <div class="filter-head">Filter by</div>
                             <div class="line"></div>
@@ -107,7 +167,7 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -117,4 +177,5 @@
 
 
 <!-- ADD COMMON FOOTER FILE -->
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/filter.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

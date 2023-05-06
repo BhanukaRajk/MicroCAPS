@@ -231,41 +231,8 @@ a {
     padding-inline: 30px;
 }
 
-/* .no-data {
-    width: 880px;
-    height: 520px;
-
-    background-color: #FFFFFF;
-
-    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
-    border-radius: 24px;
 
 
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    font-weight: 600 !important;
-    font-size: 24px !important;
-    line-height: 30px !important;
-
-} */
-
-
-.background-bluer {
-    left: 0;
-    right: 0;
-
-    top: 0;
-    bottom: 0;
-
-    background-color: #FFFFFFAA;
-    display: flex;
-    flex-direction: row;
-
-    justify-content: center;
-    position: fixed;
-
-    z-index: 5;
-}
 
 
 

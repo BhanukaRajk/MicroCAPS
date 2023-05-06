@@ -744,4 +744,341 @@ class Supervisor
 
 
 
+
+
+
+
+    
+
+
+    public function onPDIVehicles() {
+
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo 
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':pdi', 'NC');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function pdiCheckCategories() {
+        $this->db->query(
+            'SELECT `pdi-check-category`.`CategoryId`, `pdi-check-category`.`Title`, `pdi-check-category`.`SubTitle`,
+            COUNT(*) AS count
+            FROM `pdi-check-category`
+            INNER JOIN `pdi-check`
+            ON `pdi-check-category`.`CategoryId` = `pdi-check`.`CategoryId`
+            GROUP BY `pdi-check-category`.`CategoryId`
+            ORDER BY count ASC'
+        );
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function pdiCheckList($id) {
+        $this->db->query(
+            'SELECT `pdi-result`.*,`pdi-check`.CategoryId, `pdi-check`.CheckName
+                FROM `pdi-result`
+                INNER JOIN `pdi-check`
+                ON `pdi-result`.CheckId = `pdi-check`.CheckId 
+                WHERE `pdi-result`.ChassisNo = :id;'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function viewPDI($id){
+        $this->db->query(
+            "SELECT `pdi-result`.`ChassisNo`,
+                    `pdi-result`.`CheckId`, 
+                    `pdi-result`.`Status`, 
+                    `pdi-result`.`EmployeeID`, 
+                    `pdi-check`.`CheckName`, 
+                    `pdi-check`.`categoryid` 
+            FROM `pdi-result` 
+            INNER JOIN `pdi-check` 
+            ON `pdi-result`.`CheckId` = `pdi-check`.`CheckId` 
+            WHERE `pdi-result`.`ChassisNo` = :id"
+        );
+
+        $this->db->bind(':id', $id);
+        $row = $this->db->resultSet();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
+    public function pdiVehicle($id){
+        $this->db->query('SELECT ChassisNo, EngineNo FROM `vehicle` WHERE `vehicle`.`ChassisNo` = :id');
+
+        $this->db->bind(':id', $id);
+
+        $result = $this->db->single();
+
+        if ( $result ) {
+            return $result;
+        } else {
+            return null;
+        }
+    }
+
+
+
+
+
+    public function filterVehicles($vehicleType = null, $completeness = null, $acceptance = null)
+    {
+        $sql = 'SELECT `vehicle`.`ChassisNo`, 
+                        `vehicle`.`EngineNo`, 
+                        `vehicle`.`Color`, 
+                        `vehicle-model`.`ModelName` 
+                        FROM `vehicle`, `vehicle-model` 
+                        WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo`';
+
+
+        if (isset($vehicleType)) {
+
+            if (empty($vehicleType)) {
+                // No valid model names selected, return an empty result set
+                return false;
+            }
+
+
+            $quotedVehicles = implode(',', array_map(function($vehicle) {
+                return "'" . addslashes($vehicle) . "'";
+            }, $vehicleType));
+    
+            // $modelNamesString = implode(',', $vehicleType);
+            $sql .= " AND `vehicle`.`ModelNo` IN ($quotedVehicles)";
+        }
+
+        // if (isset($completeness)) {
+        //     if ($completeness == 'CM') {
+        //         $sql .= ' AND `vehicle`.`PDIStatus` LIKE "CM"';
+        //     } elseif ($completeness == 'NC') {
+        //         $sql .= ' AND `vehicle`.`PDIStatus` LIKE "NC"';
+        //     }
+        // }
+
+        if (isset($completeness)) {
+            if ($completeness != 'All') {
+                $sql .= ' AND `vehicle`.`PDIStatus` LIKE :completeness';
+            }
+        }
+
+        if ($acceptance) {
+            if ($acceptance == 'Not accepted') {
+                $sql .= ' AND `vehicle`.`CurrentStatus` IN ("S1", "S2", "S3", "S4")';
+            } elseif ($acceptance == 'Accepted') {
+                $sql .= ' AND `vehicle`.`CurrentStatus` IN ("PA", "CM")';
+            }
+        }
+
+        $sql .= ';';
+
+        // DO NOT SWAP THE ORDER OF QUERY AND BIND
+        $this->db->query($sql);
+
+        $this->db->bind(':completeness', $completeness);
+        // $this->db->bind(':acceptance', $acceptance);
+
+        $vehicles = $this->db->resultSet();
+
+
+        if ($vehicles) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+    public function viewToolz($toolType = null, $toolStatus = null)
+    {
+        $sql = 'SELECT `ToolId`, `ToolName`, 
+                    `Status`, `ToolType`, `quantity`, 
+                    DATE(`LastUpdate`) AS `UDate`, 
+                    TIME(`LastUpdate`) AS `UTime`, 
+                    `LastUpdateBy`, `Image` 
+                    FROM `tool` 
+                    WHERE `ToolId` IS NOT NULL';
+
+
+        if (isset($toolType)) {
+            if ($toolType != 'All') {
+                $sql .= ' AND `ToolType` = :toolType';
+            }
+        }
+
+        if (isset($toolStatus)) {
+            if ($toolStatus == 'Normal') {
+                $sql .= ' AND `Status` == "Normal"';
+            } elseif ($toolStatus == 'NA') {
+                $sql .= ' AND `Status` == "Need an attention"';
+            }
+        }
+
+        $sql .= ';';
+
+        // DO NOT SWAP THE ORDER OF QUERY AND BIND
+        $this->db->query($sql);
+
+        $this->db->bind(':toolType', $toolType);
+
+        $tools = $this->db->resultSet();
+
+
+        if ($tools) {
+            return $tools;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function viewConsumables($consumeType = null, $cstatus = null)
+    {
+        $sql = 'SELECT `ConsumableId`, `ConsumableName`, 
+                    `Volume`, `Weight`, 
+                    DATE(`LastUpdate`) AS `UDate`,
+                    TIME(`LastUpdate`) AS `UTime`, 
+                    `LastUpdateBy`, `Image` 
+                    FROM `consumable`
+                    WHERE `ConsumableId` IS NOT NULL';
+
+
+        if (isset($consumeType)) {
+            if ($consumeType == 'Lubricants') {
+                $sql .= ' AND `Volume` IS NOT NULL';
+            } elseif ($consumeType == 'Grease') {
+                $sql .= ' AND `Weight` IS NOT NULL';
+            }
+        }
+
+        if (isset($cstatus)) {
+            if ($cstatus == 'Available') {
+                $sql .= ' AND (`Volume` >= 60 OR `Weight` >= 60)';
+            } elseif ($cstatus == 'Low') {
+                $sql .= ' AND (`Volume` < 60 OR `Weight` < 60)';
+            }
+        }
+
+        $sql .= ';';
+
+        // DO NOT SWAP THE ORDER OF QUERY AND BIND
+        $this->db->query($sql);
+
+        $consumables = $this->db->resultSet();
+
+
+        if ($consumables) {
+            return $consumables;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getProcessStatus($chassisNo, $status = '%', $stage = '%') {
+        $this->db->query(
+            'SELECT `stage-vehicle-process`.Status, `stage-process`.ProcessName, `stage-process`.StageNo, `stage-process`.Weight
+                    FROM `stage-vehicle-process`
+                    INNER JOIN `stage-process`
+                    ON `stage-vehicle-process`.ProcessId = `stage-process`.ProcessId
+                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND `stage-process`.StageNo LIKE :stage;'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':stage', $stage);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

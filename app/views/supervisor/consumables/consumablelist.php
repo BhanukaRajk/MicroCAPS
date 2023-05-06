@@ -21,7 +21,7 @@
         </div>
 
         <div class="toolset-body">
-          <div class="toolset-toolview">
+          <div class="toolset-toolview" id="consumeBoard">
 
             <?php
             foreach ($data['consumableset'] as $item) {
@@ -72,7 +72,6 @@
               <div class="line"></div>
               <div class="filters">
 
-                <form method="POST" action="">
                   <ul id="consume_filter">
 
                     <li>
@@ -105,12 +104,9 @@
                         <input type="radio" id="any-state" name="stock-state" value="All" checked>
                         <label for="any-state">All</label>
                       </div>
-                      <!-- <div class="filters filter-btn margin-top-5">
-                        <div><button type="submit" id="filtering" name="submit" class="filter-button">Search</button></div>
-                      </div> -->
                     </li>
                   </ul>
-                </form>
+                  
               </div>
             </div>
           </div>
@@ -161,7 +157,7 @@
                       <input class="form-con-type" id="formConType" name="formConType">
                     </div>
                     <div>
-                      <button type="submit" class="edit-button consume-update">Update</button>
+                      <button type="submit" class="action-one-button consume-update">Update</button>
                     </div>
                   </div>
 
@@ -187,6 +183,8 @@
               <div class="del-confirm-box">
                 <div class="del-confirm-box-content">
                   <div class="del-confirm-msg-box">Are you sure?</div>
+<!--                  <div class="del-confirm-msg-box">Delete consumable</div>-->
+<!--                  <div class="">This will remove this consumable from the stock, and you cannot undo this operation.</div>-->
                   <div class="del-conf-button-set">
                     <div class="del-conf-button-box">
                       <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/remove#leave">
@@ -258,4 +256,5 @@
 
 
 <!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -22,24 +22,25 @@
                     </div>
                 </div>
                 <div class="vehicle-detail-board">
+                    <div id="varspace"></div>
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        foreach ($data['LineCarsSet'] as $car) {
-                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
-                                <div class="cardhead">
-                                    <div class="cardid">
-                                        <div class="carmodel">'. $car->ModelName .'</div>
-                                        <div class="chassisno">'. $car->ChassisNo .'</div>
-                                        <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                            foreach ($data['LineCarsSet'] as $car) {
+                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                                    <div class="cardhead">
+                                        <div class="cardid">
+                                            <div class="carmodel">'. $car->ModelName .'</div>
+                                            <div class="chassisno">'. $car->ChassisNo .'</div>
+                                            <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="carpicbox">
-                                    <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
-                                </div>
-                                <div></div>
-                            </div></form>';
-                        }
+                                    <div class="carpicbox">
+                                        <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                    </div>
+                                    <div></div>
+                                </div></form>';
+                            }
                         ?>
 
                     </div>
@@ -53,21 +54,20 @@
                             <div class="line"></div>
                             <div class="filters">
 
-                                <form method="POST" action="">
                                     <ul id="consume_filter">
 
                                         <li>
                                             <div class="filtertype">Vehicle Type</div>
                                             <div class="filters">
-                                                <input type="checkbox" id="micro-panda" name="car-model" checked>
+                                                <input type="checkbox" id="micro-panda" name="car-model" value="M0001" checked>
                                                 <label for="micro-panda">Micro Panda</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="checkbox" id="panda-cross" name="car-model">
+                                                <input type="checkbox" id="panda-cross" name="car-model" value="M0002" checked>
                                                 <label for="panda-cross">Panda Cross</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="checkbox" id="mg" name="car-model">
+                                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
                                                 <label for="mg">MG ZH SUV</label>
                                             </div>
                                         </li>
@@ -75,15 +75,15 @@
                                         <li>
                                             <div class="filtertype">Inspection</div>
                                             <div class="filters">
-                                                <input type="radio" id="current" name="completeness" value="Current" checked>
+                                                <input type="radio" id="current" name="completeness" value="CM">
                                                 <label for="current">Completed</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="radio" id="all-time" name="completeness" value="All">
+                                                <input type="radio" id="all-time" name="completeness" value="NC">
                                                 <label for="all-time">Not completed</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="radio" id="all-time" name="completeness" value="All">
+                                                <input type="radio" id="all-time" name="completeness" value="All" checked>
                                                 <label for="all-time">All</label>
                                             </div>
 
@@ -104,7 +104,6 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -117,4 +116,5 @@
 
 
 <!-- ADD COMMON FOOTER FILE -->
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

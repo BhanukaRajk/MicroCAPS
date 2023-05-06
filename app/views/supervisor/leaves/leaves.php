@@ -85,99 +85,101 @@
         </div>
 
 
-        <div class="background-bluer" id="timeOffUpdatePopUp">
+
+        <!-- UPDATE TIMEOFF POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
+        <div class="background-bluer display-none" id="timeOffUpdatePopUp">
             <div class="vertical-centralizer">
-            <div class="time-off-update-popup display-flex-column">
+                <div class="time-off-update-popup">
 
-                <div>New Time-off</div>
-                <div class="display-flex-row justify-content-between marginy-3">
-                    <div class="display-flex-column">
+                    <div class="timeoff-heading horizontal-centralizer">
+                        <div>NEW TIME-OFF</div>
+                    </div>
+                    <div class="timeoff-unique-fields">
+                        <div class="timeoff-unique-field-01">
+                            <div class="grey-up">
+                                <label for="employeeId">EMPLOYEE ID</label>
+                            </div>
+                            <div>
+                                <input type="text" id="employeeId" name="employeeId" class="timeoff-unique-inputs" value="<?php echo $data['employeeId']; ?>" placeholder="Employee ID" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="timeoff-unique-field-02">
+                            <div class="grey-up">
+                                <label for="leavedate">REQUESTED DATE</label>
+                            </div>
+                            <div>
+                                <input type="date" id="leavedate" name="leavedate" class="timeoff-unique-inputs" value="<?php echo $data['leavedate']; ?>" placeholder="Leave Date" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeoff-unique-field-03">
                         <div class="grey-up">
-                            <label for="employeeId">EMPLOYEE ID</label>
+                            <label for="reason">REASON</label>
                         </div>
                         <div>
-                            <input type="text" id="employeeId" name="employeeId" class="form-input" value="<?php echo $data['employeeId']; ?>" placeholder="Employee Id" autocomplete="off" required>
+                            <textarea id="timeoff-reason" name="reason" class="timeoff-reason-input" placeholder="Maximum 500 characters" required><?php echo $data['reason']; ?></textarea>
                         </div>
                     </div>
-                    <div class="display-flex-column">
+                    
+                    <div class="text-center marginy-2">
+                        <button class="action-one-button width-100per" type="submit" onClick={this.onSubmit}>Submit</button>
+                    </div>
+                    <div class="text-center marginy-2">
+                        <button class="free-action-button width-100per" type="reset">Reset</button>
+                    </div>
+
+                    <div class="popup-close-icon"><img src="<?php echo URL_ROOT; ?>public/images/icons/close.png" class="popup-close-icon" onclick="closeThisPopup('timeOffUpdatePopUp')"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD NEW TIMEOFF POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
+        <div class="background-bluer" id="newTimeOffPopUp">
+            <div class="vertical-centralizer">
+                <div class="time-off-update-popup">
+
+                    <div class="timeoff-heading horizontal-centralizer">
+                        <div>NEW TIME-OFF</div>
+                    </div>
+                    <div class="timeoff-unique-fields">
+                        <div class="timeoff-unique-field-01">
+                            <div class="grey-up">
+                                <label for="employeeId">EMPLOYEE ID</label>
+                            </div>
+                            <div>
+                                <input type="text" id="employeeId" name="employeeId" class="timeoff-unique-inputs" value="<?php echo $data['employeeId']; ?>" placeholder="Employee ID" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="timeoff-unique-field-02">
+                            <div class="grey-up">
+                                <label for="leavedate">REQUESTED DATE</label>
+                            </div>
+                            <div>
+                                <input type="date" id="leavedate" name="leavedate" class="timeoff-unique-inputs" value="<?php echo $data['leavedate']; ?>" placeholder="Leave Date" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeoff-unique-field-03">
                         <div class="grey-up">
-                            <label for="leavedate">REQUESTED DATE</label>
+                            <label for="reason">REASON</label>
                         </div>
                         <div>
-                            <input type="date" id="leavedate" name="leavedate" class="form-input" value="<?php echo $data['leavedate']; ?>" placeholder="Leave Date" required>
+                            <textarea id="timeoff-reason" name="reason" class="timeoff-reason-input" placeholder="Maximum 500 characters" required><?php echo $data['reason']; ?></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="display-flex-column justify-content-between marginy-3">
-                    <div class="grey-up">
-                        <label for="reason">REASON</label>
+                    
+                    <div class="text-center marginy-2">
+                        <button class="action-one-button width-100per" type="submit" onClick={this.onSubmit}>Submit</button>
                     </div>
-                    <div>
-                        <textarea id="reason" name="reason" class="form-input" placeholder="Maximum 500 characters" required><?php echo $data['reason']; ?></textarea>
+                    <div class="text-center marginy-2">
+                        <button class="free-action-button width-100per" type="reset">Reset</button>
                     </div>
+
+                    <div class="popup-close-icon"><img src="<?php echo URL_ROOT; ?>public/images/icons/close.png" class="popup-close-icon" onclick="closeThisPopup('newTimeOffPopUp')"></div>
+
                 </div>
-                <div class="text-center marginy-2">
-                    <button class="reset-button wide" type="reset">Reset</button>
-                </div>
-                <div class="text-center marginy-2">
-                    <button class="submit-button wide" type="submit" onClick={this.onSubmit}>Submit</button>
-                </div>
-
-                <div class="popup-close-icon"></div>
-
-
-
-
-<!--                <div class="popup-left">-->
-<!--                    <div class="horizontal-centralizer cs-popup-csname">-->
-<!--                        <div class="form-toolname">TOOL NAME</div>-->
-<!--                    </div>-->
-<!--                    <div class="horizontal-centralizer">-->
-<!--                        <div class="">-->
-<!--                            <img class="consumable-popup-img" src="--><?php //echo URL_ROOT; ?><!--public/images/consumables/image1.png" class="carpic" alt="Consumable" id="formToolImg">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="horizontal-centralizer">-->
-<!--                        <div class="form-tool-quantity">Quantity: QUANTITY</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="border-div"></div>-->
-<!--                <div class="popup-right">-->
-<!--                    <div class="horizontal-centralizer">-->
-<!--                        <div class="popup-box-heading1 margin-top-4">Update Tool Status</div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="horizontal-centralizer last-update margin-top-3">-->
-<!--                        <div class="form-tool-lastupdate">Last update: DATE AND TIME</div>-->
-<!--                    </div>-->
-<!---->
-<!---->
-<!--                    <form method="POST" action="--><?php //echo URL_ROOT; ?><!--Supervisors/updateThisTool">-->
-<!--                        <div class="horizontal-centralizer margin-top-4">-->
-<!--                            <div>-->
-<!---->
-<!--                                <select name="tool-status" id="formToolStatus" class="form-tool-status">-->
-<!--                                    <option id="status-opt1" value="Need an attention">Need an attention</option>-->
-<!--                                    <option id="status-opt2" value="Normal">Normal</option>-->
-<!--                                </select>-->
-<!---->
-<!---->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="display-flex-row justify-content-center margin-top-2">-->
-<!--                            <input type="hidden" name="tool_id_status" id="status-form-tool-id">-->
-<!--                            <div><button type="submit" class="edit-button consume-update">Update</button></div>-->
-<!--                        </div>-->
-<!--                    </form>-->
-<!--                    <div class="display-flex-row justify-content-center marginy-3">-->
-<!--                        <div><button onclick="showToolDelConfBox()" class="delete-button consume-update">Remove item</button></div>-->
-<!--                    </div>-->
-<!--                    <div class="display-flex-row justify-content-center margin-top-2">-->
-<!--                        <div><a onclick="closeToolUpdatePopup()" class="mouse-pointer">Close</a></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div></div>
+            </div>
         </div>
 
 

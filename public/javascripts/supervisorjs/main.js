@@ -58,6 +58,11 @@ function closePopup() {
     popupDiv.style.display = 'none';
 }
 
+function closeThisPopup(ID) {
+    var popupDiv = document.getElementById(ID);
+    popupDiv.style.display = 'none';
+}
+
 
 
 function closeConsumeAddingPopup() {

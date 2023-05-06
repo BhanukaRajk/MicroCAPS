@@ -196,32 +196,3 @@
 .ds-bold {
     font-weight: bold;
 }
-
-
-
-
-
-
-.display-none {
-    display: none;
-}
-
-.vertical-centralizer {
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-
-}
-
-.horizontal-centralizer {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: center;
-}
-
-.TB {
-    border: 1px solid black;
-    margin-block: auto;
-}

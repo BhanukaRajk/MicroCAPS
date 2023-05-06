@@ -22,15 +22,12 @@
                             <div class="dash-graph-top test1">
                                 <div class="dash-frame-headings test1">Ongoing Assembly</div>
                                 <div>
-                                    <select name="vehicles" id="vehicles">
-                                        <option value="NULL">Select vehicle</option>
-
+                                    <select name="vehicles" id="dashboardChart" onchange="dashboardChart()">
                                         <?php
-                                        foreach ($data['assemblyLine'] as $lineCar) {
-                                            echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
+                                        foreach($data['assemblyDetails'] as $value) {
+                                            echo '<option value="' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
                                         }
-                                        ?>
-
+                                        ?>>
                                     </select>
                                 </div>
                             </div>

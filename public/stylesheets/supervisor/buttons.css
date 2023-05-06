@@ -194,3 +194,58 @@
 .adding-button:hover {
     background-color: #000080;
 }
+
+
+
+
+.action-one-button {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    color: #FFFFFF;
+    background-color: #017EFA;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    
+    border: none;
+    border-radius: 0.5rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.action-one-button:hover {
+    background-color: #000080;
+}
+
+.free-action-button {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    color: #000000;
+    background-color: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+    border: 1px solid #DDDDDD;
+    border-radius: 0.5rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.free-action-button:hover {
+    background-color: #DDDDDD;
+}
