@@ -15,7 +15,7 @@ $(document).ready(() => {
 
 // Change PDI Status
 
-function addPDI(ChassisNo,CheckId, Status) {
+function addPDI(ChassisNo,CheckId, Result) {
     
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -24,7 +24,6 @@ function addPDI(ChassisNo,CheckId, Status) {
 
             if (response == "Successful") {
                 location.reload();
-                // setLocalStorage("Successful",ChassisNo + " - " + CheckId + " Status Changed");
                 setLocalStorage("Successful","Status Changed Successfully");
             } else {
                 location.reload();
@@ -34,7 +33,54 @@ function addPDI(ChassisNo,CheckId, Status) {
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Testers/addPDI", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Status="+Status);
+    xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Result="+Result);
+}
+
+// Add a Vehicle to My Tasks
+
+function addTask(ChassisNo, TesterId) {
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response == "Successful") {
+                location.reload();
+                setLocalStorage("Successful","Vehicle Added Successfully");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Adding Vehicle");
+            }
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/addTask", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("ChassisNo="+ChassisNo+"&TesterId="+TesterId);
+}
+
+
+// Remove a Vehicle from My Tasks
+
+function removeTask(ChassisNo) {
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response == "Successful") {
+                location.reload();
+                setLocalStorage("Successful","Vehicle Removed Successfully");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Removing Vehicle");
+            }
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/removeTask", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("ChassisNo="+ChassisNo);
 }
 
 

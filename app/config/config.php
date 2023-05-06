@@ -25,7 +25,7 @@
     const DB_HOST = 'localhost';
     const DB_USER = 'root';
     const DB_PASS = '';
-    const DB_NAME = 'microcaps';
+    const DB_NAME = 'newdb';
 
     /* DATABASE CONNECTION FOR CLOUD SERVER */
     // const DB_HOST = 'microcaps-db.co36o1syoru0.ap-northeast-1.rds.amazonaws.com';

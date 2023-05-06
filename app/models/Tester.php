@@ -38,6 +38,20 @@ class Tester {
 
     }
 
+    public function getTesterNames(){
+        $this->db->query('SELECT `employee`.`EmployeeId`, `employee`.`Firstname`, `employee`.`Lastname` 
+                                    FROM `employee`
+                                    WHERE `employee`.`Position`= "Tester";');
+        
+        $results = $this->db->resultSet();
+
+        if ($results) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
     public function findPDIvehicles($ChassisNo) {
 
         $this->db->query(
@@ -150,7 +164,7 @@ class Tester {
     }
 
     public function selectVehicle(){
-        $this->db->query('SELECT ChassisNo FROM `vehicle` WHERE `vehicle`.`CurrentStatus` = "PDI"');
+        $this->db->query('SELECT ChassisNo FROM `vehicle` WHERE `vehicle`.`PDIStatus` = "NC"');
 
         $row = $this->db->resultSet();
 
@@ -252,13 +266,13 @@ class Tester {
     public function addPDI($v1,$v2,$v3) {
         $this->db->query(
             "UPDATE `pdi-result` 
-            SET `Status` = :Status
+            SET `Result` = :Result
             WHERE `pdi-result`.`CheckId` = :CheckId AND `pdi-result`.`ChassisNo` = :ChassisNo"
         );
 
         $this->db->bind(':ChassisNo', $v1);
         $this->db->bind(':CheckId', $v2);
-        $this->db->bind(':Status', $v3);
+        $this->db->bind(':Result', $v3);
 
         if ( $this->db->execute() ) {
             return true;
@@ -329,7 +343,7 @@ class Tester {
     public function onPDIVehicles() {
 
         $this->db->query(
-            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo 
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo, `vehicle`.TesterId  
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
@@ -345,6 +359,65 @@ class Tester {
 
         if ( $results ) {
             return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function PDIVehiclesByTester($id) {
+
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo 
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi AND `vehicle`.TesterId = :id
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':pdi', 'NC');
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function addTask($chassisno,$testerid) {
+        $this->db->query(
+            "UPDATE `vehicle` 
+            SET `TesterId` = :TesterId
+            WHERE `vehicle`.`ChassisNo` = :ChassisNo"
+        );
+
+        $this->db->bind(':ChassisNo', $chassisno);
+        $this->db->bind(':TesterId', $testerid);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function removeTask($chassisno) {
+        $this->db->query(
+            "UPDATE `vehicle` 
+            SET `TesterId` = :TesterId
+            WHERE `vehicle`.`ChassisNo` = :ChassisNo"
+        );
+
+        $this->db->bind(':ChassisNo', $chassisno);
+        $this->db->bind(':TesterId', NULL);
+
+        if ( $this->db->execute() ) {
+            return true;
         } else {
             return false;
         }

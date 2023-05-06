@@ -165,3 +165,13 @@ a {
 .lower {
     color: #FD5F00;
 }
+
+.mytasks{
+    color: #000000;
+    font-weight: 700;
+}
+
+.mytasks-checkbox {
+    width: 14px;
+    height: 14px;
+}

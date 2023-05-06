@@ -39,9 +39,9 @@
                 foreach ($data['pdiCheckList'] as $value2) {
                     if ($value2->CategoryId == $value->CategoryId) {
 
-                        if ($value2->Status == 'OK') {
+                        if ($value2->Result == 'OK') {
                             $color = 'green-box';
-                        } else if ($value2->Status == 'SA') {
+                        } else if ($value2->Result == 'SA') {
                             $color = 'red-box';
                         } else {
                             $color = 'yellow-box';
@@ -52,7 +52,7 @@
                                     <div class="pdi-checklist">
                                         <div class="padding-bottom-3 font-size">' . $value2->CheckName . '</div>
                                         <div class="pdi-checking-result ' . $color . '">
-                                            <div class="pdi-checking-result-text">' . $value2->Status . '</div>
+                                            <div class="pdi-checking-result-text">' . $value2->Result . '</div>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
     </section>
 
     <div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
-        <section id="pop-con">
+        <section id="pop-con" class="overflow-defects border-gray">
         <div class="column align-items-center border-gray padding-5 justify-content-center">
         <div class="page-heading font-weight  margin-bottom-4">
             Defect Sheet

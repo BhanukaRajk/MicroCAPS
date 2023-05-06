@@ -293,10 +293,10 @@ class Testers extends controller
             $data = [
                 'ChassisNo' => trim($_POST['ChassisNo']),
                 'CheckId' => trim($_POST['CheckId']),
-                'Status' => trim($_POST['Status'])
+                'Result' => trim($_POST['Result'])
             ];
 
-            $result = $this->testerModel->addPDI($data['ChassisNo'], $data['CheckId'], $data['Status']);
+            $result = $this->testerModel->addPDI($data['ChassisNo'], $data['CheckId'], $data['Result']);
 
             if ($result) {
                 echo 'Successful';
@@ -453,7 +453,20 @@ class Testers extends controller
         }
     }
 
-    public function selectdefect()
+    public function mytasks($id)
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->testerModel->PDIVehiclesByTester($id);
+            $this->view('tester/mytasks', $data);
+        }
+    }
+
+    public function taskmanager()
     {
 
         if (!isLoggedIn()) {
@@ -462,7 +475,57 @@ class Testers extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
-            $this->view('tester/selectdefect', $data);
+            $data['testers'] = $this->testerModel->getTesterNames();
+            $this->view('tester/taskmanager', $data);
+        }
+    }
+
+    public function addTask()
+    {
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['ChassisNo']),
+                'TesterId' => trim($_POST['TesterId'])
+            ];
+
+            $result = $this->testerModel->addTask($data['ChassisNo'], $data['TesterId']);
+
+            if ($result) {
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
+        }
+    }
+
+    public function removeTask()
+    {
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['ChassisNo'])
+            ];
+
+            $result = $this->testerModel->removeTask($data['ChassisNo']);
+
+            if ($result) {
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
         }
     }
 }

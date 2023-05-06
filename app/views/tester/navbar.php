@@ -12,8 +12,8 @@
         </li>
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
-            <a class="<?php echo ($data['url'][1] == "defect_sheet") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/selectdefect"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Defect Sheets</a>
-            <a class="<?php echo ($data['url'][1] == "add_defect") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/add_defect"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />Record Defect</a>
+            <a class="<?php echo ($data['url'][1] == "taskmanager") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/taskmanager"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Task Manager</a>
+            <a class="<?php echo ($data['url'][1] == "mytasks") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/mytasks/<?php echo $_SESSION['_id']; ?>"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />My Tasks</a>
             <a class="<?php echo ($data['url'][1] == "assembly") || ($data['url'][1] == "assemblystage") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/assembly"><img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process</a>
             <a class="<?php echo ($data['url'][1] == "pdi_results") || ($data['url'][1] == "pdi") || ($data['url'][1] == "selectpdi") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>testers/selectpdi"><img src="<?php echo URL_ROOT; ?>public/images/icon2.png" class="width-rem-1p25" alt="icon2" />PDI Results</a>
         </li>

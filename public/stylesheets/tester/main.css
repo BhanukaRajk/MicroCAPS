@@ -994,6 +994,8 @@ h3 {
 
 .btn:hover {
     background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    border: 1px solid var(--btn-hover-border-color);
 }
 
 .btn:focus {
@@ -1028,6 +1030,17 @@ h3 {
     --btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--btn-focus-shadow-rgb), .5);
 }
 
+.btn-blue {
+    --btn-bg: var(--blue);
+    --btn-color: var(--white);
+    --btn-border-color: none;
+    --btn-hover-bg: var(--white);
+    --btn-hover-color: var(--blue);
+    --btn-hover-border-color: var(--blue);
+    --btn-width: 7.5rem;
+    --btn-font-size: 0.7rem;
+}
+
 .btn-green {
     --btn-color: var(--green);
     --btn-border-color: var(--green);
@@ -1036,11 +1049,12 @@ h3 {
     --btn-hover-border-color: var(--green);
 }
 
-.btn-noback {
-    --btn-height: 2rem;
-    --btn-width: 15rem;
-    --btn-bg: none;
-    --btn-padding-y: 0.1rem;
+.btn-red {
+    --btn-color: var(--red);
+    --btn-border-color: var(--red);
+    --btn-hover-color: var(--red);
+    --btn-hover-bg: #ee0b0b14;
+    --btn-hover-border-color: var(--red);
 }
 
 /* Form */
@@ -1619,4 +1633,9 @@ select:focus-visible {
 .delete:hover {
     color: var(--red);
     background: var(--gray);
+}
+
+.overflow-defects {
+    max-height: 80vh;
+    overflow: auto;
 }

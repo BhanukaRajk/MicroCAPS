@@ -18,9 +18,6 @@
             <div>
                 <button class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $data['pdiVehicle']->ChassisNo ?>'">Edit Defect Sheet</button>
             </div>
-            <!-- <div>
-            <button id="cccc" onclick="this.style.backgroundColor='red'">Click me!</button>
-            </div> -->
         </div>
 
 
@@ -45,8 +42,8 @@
 
                 foreach ($data['pdiCheckList'] as $value2) {
                     if ($value2->CategoryId == $value->CategoryId) {
-                        $check1 = $value2->Status == 'OK' ? "checked" : "";
-                        $check2 = $value2->Status == 'SA' ? "checked" : "";
+                        $check1 = $value2->Result == 'OK' ? "checked" : "";
+                        $check2 = $value2->Result == 'SA' ? "checked" : "";
                         echo '
                                 <div class="paddingx-4 paddingy-2">
                                     <div class="pdi-checklist">
@@ -79,6 +76,12 @@
 
         </div>
         <div class="margin-bottom-3"></div>
+    </section>
+
+    <section class="display-flex-column">
+
+        <div id="alert" class="hideme" role="alert"></div>
+
     </section>
 
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
