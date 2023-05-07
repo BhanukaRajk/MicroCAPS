@@ -11,7 +11,6 @@
                 <h3 class="margin-top-1">Edit Defect</h3>
             </div>
 
-            <!-- <form action="<?php //echo URL_ROOT; ?>testers/edit_defect/<?php //echo $data['ChassisNo']; ?>/<?php //echo $data['DefectNo']; ?>" method="POST"> -->
             <form>
 
             <div>
@@ -68,7 +67,7 @@
                         class="form-control"
                         placeholder="Employee ID"
                         autocomplete="off"
-                        required />
+                        readonly />
                     <label class="form-label">Employee ID</label>
                     <span></span>
 

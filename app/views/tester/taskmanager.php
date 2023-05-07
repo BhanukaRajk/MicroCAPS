@@ -28,7 +28,7 @@
                 
                 
                 if($check_2 == NULL){
-                    $check_2 = "None";
+                    $testername = "None";
                 } else {
                     foreach ($data['testers'] as $value_2){
                         if($value_2->EmployeeId == $check_2){

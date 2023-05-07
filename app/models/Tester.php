@@ -73,22 +73,6 @@ class Tester {
         }
     }
 
-    // public function findDefectByID($DefectNo) {
-
-    //     $this->db->query('SELECT * FROM `defects`  WHERE `defects`.`DefectNo` = :DefectNo');
-
-    //     $this->db->bind(':DefectNo', $DefectNo);
-
-    //     $row = $this->db->single();
-
-    //     if ($this->db->rowCount()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-
-    // }
-
     public function vehicleCount(){
         $counts = array();
 

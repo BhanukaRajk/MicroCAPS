@@ -157,7 +157,7 @@ function addDefect() {
     formdata.append("ReCorrection", document.getElementById("ReCorrection").value);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MicroCAPS/Testers/add_defect/',
+        url: 'http://localhost/MicroCAPS/Testers/defect_sheet/'+chassisno,
         data: formdata,
         processData: false,
         contentType: false,

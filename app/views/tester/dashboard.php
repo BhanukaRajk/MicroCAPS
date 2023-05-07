@@ -11,16 +11,21 @@
                     <div class="db-data-board">
                         <div class="db-detailed-content">
                             <div class="db-left">
-                                <div class="db-heading bold">Tester - Dashboard</div>
+                                <div class="page-heading font-weight margin-top-4 margin-bottom-4">Tester - Dashboard</div>
                                 <div class="indetail">
                                     <div class="dash-cap">Pending Tasks</div>
                                     <div class="pending-tasks">
 
-                                        <?php // foreach ($data['vehicles'] as $values) : ?>
+                                        <?php foreach ($data['vehicles'] as $values) : 
+                                                if($values->TesterId == $_SESSION['_id']){ ?>
+                                                        <div 
+                                                                class="blue-button-long"  
+                                                                onClick="location.href='<?php echo URL_ROOT; ?>testers/pdi/<?php  echo $values->ChassisNo; ?>'"
+                                                        >
+                                                                <?php echo $values->ChassisNo; ?>
+                                                        </div>
 
-                                        <!-- <div class="blue-button-long"  onClick="location.href='<?php // echo URL_ROOT; ?>testers/select_view/<?php // echo $values->ChassisNo; ?>'"><?php // echo $values->ChassisNo; ?></div> -->
-
-                                        <?php // endforeach; ?>
+                                        <?php } endforeach; ?>
 
                                     </div>
                                 </div>
@@ -28,7 +33,6 @@
                                     <div class="db-countbox">
                                         <div class="db-number"><?php echo $data['counts'][0]->inLine; ?></div>
                                         <div>Pending Tasks</div>
-                                        <?php //var_dump($data['counts'][0]->inLine); ?> 
                                     </div>
                                     <div class="db-countbox">
                                         <div class="db-number"><?php echo $data['counts'][1]->dispatched; ?></div>
@@ -49,7 +53,7 @@
                                     <div class="db-qck-sidebox">Quick Access</div>
                                     <div class="db-qck-sidebox db-activity-btn">
                                         <button type="button" class="btn btn-primary btn-blue " onClick="location.href='<?php echo URL_ROOT; ?>testers/selectpdi'">PDI Results</button>
-                                        <button type="button" class="btn btn-primary btn-blue" ck="location.href='<?php echo URL_ROOT; ?>testers/add_defect'">Add Defect</button>
+                                        <button type="button" class="btn btn-primary btn-blue" onClick="location.href='<?php echo URL_ROOT; ?>testers/mytasks/<?php echo $_SESSION['_id']; ?>'">My Tasks</button>
                                     </div>
                                 </div>
                                 <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">

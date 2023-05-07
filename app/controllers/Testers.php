@@ -31,7 +31,7 @@ class Testers extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['vehicles'] = $this->testerModel->selectVehicle();
+            $data['vehicles'] = $this->testerModel->onPDIVehicles();
             $data['counts'] = $this->testerModel->vehicleCount();
             $this->view('tester/dashboard', $data);
         }
@@ -93,26 +93,7 @@ class Testers extends controller
                 } else {
                     echo 'Error';
                 }
-            } else {
-                $this->view('tester/add_defect', $data);
             }
-        }
-    }
-
-    public function select_view($id)
-    {
-
-        if (!isLoggedIn()) {
-            redirect('testers/login');
-        }
-
-        $data = [
-            'ChassisNo' => $id
-        ];
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $this->view('tester/select_view', $data);
         }
     }
 

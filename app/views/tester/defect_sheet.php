@@ -48,7 +48,6 @@
                                 </tbody>
                             </table>
                             <div>
-                                <!-- <button class="btn btn-primary margin-top-4" onClick="location.href='<?php //echo URL_ROOT; ?>testers/add_defect/<?php //echo $data['id']; ?>'">Add Defect</button> -->
                                 <button id="view-defect" class="btn btn-primary margin-top-4">Add Defect</button>
                             </div>
 
@@ -72,7 +71,6 @@
             <h3 class="margin-top-1">Add Defect</h3>
         </div>
 
-        <!-- <form action="<?php //echo URL_ROOT; ?>testers/add_defect" method="POST"> -->
         <form>
 
         <div>
