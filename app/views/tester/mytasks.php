@@ -12,7 +12,7 @@
         if ($data['onPDIVehicles'] == false) {
             echo '
                         <div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
-                                <div class="font-weight">No Details</div>
+                                <div class="font-weight">No Vehicles in Your List</div>
                             </div>
                         ';
         } else {

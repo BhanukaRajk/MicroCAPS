@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="carstatus green"> On Assembly </div>
                                 <div class="arrivaldate margin-top-1">Stage: '.$value->CurrentStatus.'</div>
-                                <div class="arrivaldate">Assigned to: '.$testername.'</div>
+                                <div class="arrivaldate margin-top-1">Assigned to: '.$testername.'</div>
                                 <div class="mytasks font-size display-flex-row align-items-center margin-top-2 margin-bottom-0 marginx-0">
                                     <input class="mytasks-checkbox"
                                                 type="checkbox" 

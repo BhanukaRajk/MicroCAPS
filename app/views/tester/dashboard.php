@@ -13,7 +13,7 @@
                             <div class="db-left">
                                 <div class="page-heading font-weight margin-top-4 margin-bottom-4">Tester - Dashboard</div>
                                 <div class="indetail">
-                                    <div class="dash-cap">Pending Tasks</div>
+                                    <div class="dash-cap">Your Tasks</div>
                                     <div class="pending-tasks">
 
                                         <?php foreach ($data['vehicles'] as $values) : 
@@ -32,7 +32,7 @@
                                 <div class="db-count">
                                     <div class="db-countbox">
                                         <div class="db-number"><?php echo $data['counts'][0]->inLine; ?></div>
-                                        <div>Pending Tasks</div>
+                                        <div>Pending</div>
                                     </div>
                                     <div class="db-countbox">
                                         <div class="db-number"><?php echo $data['counts'][1]->dispatched; ?></div>
