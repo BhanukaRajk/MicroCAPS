@@ -388,26 +388,75 @@ class Supervisors extends controller
     }
     public function recordComponentDefects()
     {
-    }    
+    }
+
+
+
     public function componentsView()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['selectedValue'])) {
+
+            // $selectedValue = $_POST['selectedValue'];
+            $data['chassis_no'] = $_POST['selectedValue'];
+
+            $data['url'] = getUrl();
+            $data['components'] = $this->supervisorModel->viewCarComponents($data['chassis_no']);
+            $data['car_selection'] = $this->supervisorModel->viewCarList(['S1','S2','S3','S4']);
+
+            header('Content-Type: application/json');
+            // echo json_encode($data['components']);
+            echo json_encode(array('carz' => $data['car_selection'], 'componentz' => $data['components'], 'search' => $data['chassis_no']));
+
+
+        } elseif($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'ChassisNo' => trim($_POST['form-car-id'])
+                'chassis_no' => trim($_POST['form-car-id'])
             ];
 
             $data['url'] = getUrl();
-            $data['components'] = $this->supervisorModel->viewCarComponents($data['ChassisNo']);
+            $data['components'] = $this->supervisorModel->viewCarComponents($data['chassis_no']);
+            $data['car_selection'] = $this->supervisorModel->viewCarList(['S1','S2','S3','S4']);
             $this->view('supervisor/parts/vehicleparts', $data);
+
+            
         }
     }
+
+
+    // public function componentsView()
+    // {
+    //     if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+    //         redirect('Users/login');
+    //     }
+
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+    //         $data = [
+    //             'chassis_no' => trim($_POST['form-car-id'])
+    //         ];
+
+
+    //         $selectedValue = $_POST['selectedValue'];
+
+    //         $data['url'] = getUrl();
+    //         $data['components'] = $this->supervisorModel->viewCarComponents($data['chassis_no']);
+    //         $data['car_selection'] = $this->supervisorModel->viewCarList(['S1','S2','S3','S4']);
+    //         $this->view('supervisor/parts/vehicleparts', $data);
+    //     }
+    // }
+
+
+
+
     public function viewCarComponent()
     {
 
@@ -843,18 +892,16 @@ class Supervisors extends controller
     }
 
 
-    public function selectpdi($rrr)
+    public function getOverallProgress($chassis_no = null)
     {
-
-        echo $rrr;
-
         if (!isLoggedIn()) {
             redirect('users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
             $data['onPDIVehicles'] = $this->supervisorModel->onPDIVehicles();
-            $this->view('supervisor/pdi/pdiresults', $data);
+            $this->view('supervisor/assembling/overall', $data);
         }
     }
 
@@ -899,8 +946,8 @@ class Supervisors extends controller
                 $data['url'] = getUrl();
                 $data['FormCarData'] = $this->supervisorModel->getProcessData($data['chassisNo'], $data['stage']);
 
-                // print_r($data['FormCarData']);
-
+                
+                // USED TO DIRECT THE VEHICLES CURRENT ASSEMBLING STAGE
                 if($data['stage'] == 'S1') {
                     $this->view('supervisor/assembling/stage-one', $data);
                 } elseif($data['stage'] == 'S2') {

@@ -6,8 +6,7 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
-<!-- GET DATA FROM CONTROLLER -->
-<?php //$testing_car = $data['chassisno']; ?>
+
 
 <section>
     <!-- THIS IS THE CONTENT DISPLAYING AREA -->
@@ -16,8 +15,10 @@
         <div class="single-stage-margin">
 
             <div class="single-stage-head">
+                <!-- GET DATA FROM CONTROLLER AND FILLING THE HEADING-->
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
                 <div class="stage-switch">
+                    <!-- BUTTON TO JUMP TO THE OVERALL PROGRESS -->
                     <button class="back-button">Overall</button>
                 </div>
             </div>
@@ -29,8 +30,8 @@
                         <div>Stage 02</div>
                     </div>
                     <div class="chart-box">
-                        <canvas id="myChart" class="S2-bigChart"></canvas>
-                        <label class="chart-percentage S2-bigstate" for="myChart">60%</label>
+                        <canvas id="myChart" class="SX-bigChart"></canvas>
+                        <label class="chart-percentage SX-bigstate" for="myChart">100%</label>
                     </div>
                     <div class="chart-legend">
                         <div class="dash-graph-menu">
@@ -53,6 +54,8 @@
                         </div>
 
                         <div id="pagination-container">
+
+                            <!-- DISPLAY THE PROCESSES OF THIS STAGE ONE BY ONE WITH COMPLETENESS AND HOLDING OPTIONS -->
                             <?php
                             foreach ($data['FormCarData'] as $process) {
                                 echo '
@@ -61,24 +64,30 @@
                                     <div class="row-data display-none">' . $process->Status . '</div>
                                     <form>
                                         <div class="row-data">
+
+                                            <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
+                                            THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
+
                                             <div><input type="checkbox" id="connectivity-cb" name="connectivity" value="Connected"></div>
                                             <div><input type="checkbox" id="holding-cb" name="holding" value="Hold"></div>
                                         </div>
                                     </form>
                                 </div>';
                             }
+
+                            // WHEN THERE IS NO DATA TO SHOW, THAT MEANS THIS CAR IS NOT READY FOR THIS STAGE
                             if ($process == NULL) {
                                 echo '<div class="horizontal-centralizer no-leave-data">
                                 <div class="vertical-centralizer">
-                                <div>Nothing to show</div>
+                                <div>- Not Ready for this stage -</div>
                                 </div>
                                 </div>';
                             }
                             ?>
                         </div>
-
                     </div>
 
+                    <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
                     <div class="page-button-set">
                         <button onclick="showPage(1)">1</button>
                         <button onclick="showPage(2)">2</button>

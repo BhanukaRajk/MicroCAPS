@@ -924,7 +924,35 @@ class Supervisor
 
 
 
+    public function viewCarList($Stages = null) {
+        if (isset($Stages)) {
 
+            if (empty($Stages)) {
+                return [];
+            }
+
+
+            $quotedStages = implode(',', array_map(function($stage) {
+                return "'" . addslashes($stage) . "'";
+            }, $Stages));
+    
+            // $modelNamesString = implode(',', $vehicleType);
+            $sql = "SELECT `ChassisNo` FROM `vehicle` WHERE `CurrentStatus` IN ($quotedStages)";
+            $this->db->query($sql);
+
+            $Cars = $this->db->resultSet();
+
+            // print_r($Cars);
+
+        }
+
+        if ($Cars) {
+            return $Cars;
+        } else {
+            return [];
+        }
+
+    }
 
 
 
@@ -950,17 +978,8 @@ class Supervisor
                 return "'" . addslashes($vehicle) . "'";
             }, $vehicleType));
     
-            // $modelNamesString = implode(',', $vehicleType);
             $sql .= " AND `vehicle`.`ModelNo` IN ($quotedVehicles)";
         }
-
-        // if (isset($completeness)) {
-        //     if ($completeness == 'CM') {
-        //         $sql .= ' AND `vehicle`.`PDIStatus` LIKE "CM"';
-        //     } elseif ($completeness == 'NC') {
-        //         $sql .= ' AND `vehicle`.`PDIStatus` LIKE "NC"';
-        //     }
-        // }
 
         if (isset($completeness)) {
             if ($completeness != 'All') {
@@ -982,7 +1001,6 @@ class Supervisor
         $this->db->query($sql);
 
         $this->db->bind(':completeness', $completeness);
-        // $this->db->bind(':acceptance', $acceptance);
 
         $vehicles = $this->db->resultSet();
 

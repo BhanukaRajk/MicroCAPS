@@ -16,7 +16,7 @@
                     <div>Assembly completed vehicles</div>
                     <div>
                         <label for="searchBox" class="display-none"></label>
-                        <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-search" placeholder="Search Chassis Number">
+                        <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-searchbox" placeholder="Search Chassis No">
                     </div>
                 </div>
                 <div class="vehicle-detail-board">

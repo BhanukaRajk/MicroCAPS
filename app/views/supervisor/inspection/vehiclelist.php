@@ -21,7 +21,6 @@
                     </div>
                 </div>
                 <div class="vehicle-detail-board">
-                    <div id="varspace"></div>
                     <div class="vehicle-data-board" id="carList">
 
                         <?php

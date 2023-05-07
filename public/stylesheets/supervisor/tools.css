@@ -24,7 +24,7 @@
     padding-block: 1rem;
     padding-inline: 2rem;
 
-    font-family: 'Noto Sans';
+    font-family: 'Noto Sans', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -34,6 +34,7 @@
 
 .toolset-body {
     margin-top: 1rem;
+    width: 100%;
 }
 
 .toolset-toolview {

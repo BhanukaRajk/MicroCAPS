@@ -14,13 +14,12 @@
         <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
-                    <div>Assembly completed vehicles</div>
+                    <div>Test run queue</div>
 
 
                     <div>
                         <label for="searchBox" class="display-none"></label>
                         <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-searchbox" placeholder="Enter Chassis No">
-<!--                        <img src="--><?php //echo URL_ROOT; ?><!--public/images/icons/search.png" class="width-rem-1p25" alt="search">-->
                     </div>
 
 
@@ -80,7 +79,7 @@
                                         <li>
                                             <div class="filtertype">Inspection</div>
                                             <div class="filters">
-                                                <input type="radio" id="current" name="completeness" value="CM" checked>
+                                                <input type="radio" id="current" name="completeness" value="CM">
                                                 <label for="current">Completed</label>
                                             </div>
                                             <div class="filters">
@@ -88,7 +87,7 @@
                                                 <label for="all-time">Not completed</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="radio" id="all-time" name="completeness" value="All">
+                                                <input type="radio" id="all-time" name="completeness" value="All" checked>
                                                 <label for="all-time">All</label>
                                             </div>
 

@@ -253,9 +253,18 @@
 
 
 
-
 .vehicle-searchbox {
     width: 212px;
+}
+
+.part-searchbox {
+    width: 180px;
+}
+
+
+
+.part-searchbox,
+.vehicle-searchbox {
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 30px;
@@ -270,6 +279,7 @@
     transition: width 0.4s ease-in-out;
 }
 
+.part-searchbox:focus,
 .vehicle-searchbox:focus {
     border: 2px solid #017EFA;
 }
