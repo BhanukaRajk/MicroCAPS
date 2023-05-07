@@ -873,8 +873,81 @@ class Supervisors extends controller
 
 
 
+    // CONTROLLER FUNCTION TO VIEW CARS + FILTERS (WORKING)
+    public function getProgress()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
 
-    // CONTROLLER FUNCTION
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+            $data = [
+                'chassisNo' => trim($_POST['form-car-id']),
+                'stage' => trim($_POST['form-car-stage'])
+            ];
+
+            // $vehicleTypes = json_decode($_POST['vehicleTypes']);
+            // $completeness = $_POST['completeness'];
+            // $acceptance = $_POST['acceptance'];
+
+            
+
+            if ($this->supervisorModel->checkCarById($data['chassisNo'], $data['stage'])) {
+
+                $data['url'] = getUrl();
+                $data['FormCarData'] = $this->supervisorModel->getProcessData($data['chassisNo'], $data['stage']);
+
+                // print_r($data['FormCarData']);
+
+                if($data['stage'] == 'S1') {
+                    $this->view('supervisor/assembling/stage-one', $data);
+                } elseif($data['stage'] == 'S2') {
+                    $this->view('supervisor/assembling/stage-two', $data);
+                } elseif($data['stage'] == 'S3') {
+                    $this->view('supervisor/assembling/stage-three', $data);
+                } elseif($data['stage'] == 'S4') {
+                    $this->view('supervisor/assembling/stage-four', $data);
+                }
+                    
+            } else {
+                $_SESSION['error_message'] = 'Oops! The car you are searching could not be found.';
+            }
+
+        } else {
+                $_SESSION['error_message'] = 'Request failed! :(';
+                // $data['url'] = getUrl();
+        }
+
+            // print_r($data['url']);
+            // echo 'Data = '.$data['stage'];
+            redirect('Supervisors/linevehicleview');
+
+
+
+            // header('Content-Type: application/json');
+            // echo json_encode($data['LineCarsSet']);
+
+        
+        // else {
+        //     $data['url'] = getUrl();
+        //     $data['LineCarsSet'] = $this->supervisorModel->viewCars();
+        //     $this->view('supervisor/assembling/vehiclelist', $data);
+        // }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    // CONTROLLER FUNCTION TO VIEW CARS + FILTERS (WORKING)
     public function findCars()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -888,18 +961,19 @@ class Supervisors extends controller
             $acceptance = $_POST['acceptance'];
 
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->filterVehicles($vehicleTypes, $completeness, $acceptance);
+            $data['LineCarsSet'] = $this->supervisorModel->viewCars($vehicleTypes, $completeness, $acceptance);
 
             header('Content-Type: application/json');
             echo json_encode($data['LineCarsSet']);
 
         } else {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewVehicles();
+            $data['LineCarsSet'] = $this->supervisorModel->viewCars();
             $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
 
+    // CONTROLLER FUNCTION TO VIEW CONSUMABLES + FILTERS (WORKING)
     public function findConsumables()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -921,7 +995,34 @@ class Supervisors extends controller
         
         // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['consumableset'] = $this->supervisorModel->ViewAllConsumables();
+            $data['consumableset'] = $this->supervisorModel->viewConsumables();
+            $this->view('supervisor/consumables/consumablelist', $data);
+        }
+    }
+
+    // CONTROLLER FUNCTION TO VIEW TOOLS + FILTERS (WORKING)
+    public function findToolz()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $typeOfTool = $_POST['typeOfTool'];
+            $stateOfTool = $_POST['stateOfTool'];
+
+            $data['url'] = getUrl();
+            $data['toolset'] = $this->supervisorModel->viewToolz($typeOfTool, $stateOfTool);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['toolset']);
+
+        } else {
+        
+        // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['toolset'] = $this->supervisorModel->viewToolz();
             $this->view('supervisor/consumables/consumablelist', $data);
         }
     }

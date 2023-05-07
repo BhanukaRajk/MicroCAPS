@@ -23,7 +23,7 @@
 
 
       <div class="toolset-body">
-        <div class="toolset-toolview">
+        <div class="toolset-toolview" id="toolBoard">
 
           <?php
           foreach ($data['toolset'] AS $tool) {
@@ -70,21 +70,20 @@
           <div class="line"></div>
           <div class="filters">
 
-            <form method="POST" action="">
               <ul id="consume_filter">
 
                 <li>
                   <div class="filtertype">Tool Type</div>
                   <div class="filters">
-                    <input type="radio" id="hand-tools" name="tool-type" value="Hand Tools">
+                    <input type="radio" id="hand-tools" name="tool-type" value="Hand Tool">
                     <label for="hand-tools">Hand Tools</label>
                   </div>
                   <div class="filters">
-                    <input type="radio" id="power-tools" name="tool-type" value="Power Tools">
+                    <input type="radio" id="power-tools" name="tool-type" value="Power Tool">
                     <label for="power-tools">Power Tools</label>
                   </div>
                   <div class="filters">
-                    <input type="radio" id="all-tools" name="tool-type" value="All Tools" checked>
+                    <input type="radio" id="all-tools" name="tool-type" value="All" checked>
                     <label for="all-tools">All</label>
                   </div>
                 </li>
@@ -106,7 +105,6 @@
                 </li>
 
               </ul>
-            </form>
 
           </div>
 
@@ -253,4 +251,5 @@
 
 
 <!-- ADD COMMON FOOTER FILE -->
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

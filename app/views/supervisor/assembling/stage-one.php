@@ -6,6 +6,9 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
+<!-- GET DATA FROM CONTROLLER -->
+<?php //$testing_car = $data['FormCarData']; ?>
+
 <section>
     <!-- THIS IS THE CONTENT DISPLAYING AREA -->
     <div class="content">
@@ -13,7 +16,7 @@
         <div class="single-stage-margin">
 
             <div class="single-stage-head">
-                <div class="heading">On Going Assembly - CH065BD3X00</div>
+                <div class="heading">On Going Assembly - <?php echo $data['chassisno']; ?></div>
                 <div class="stage-switch">
                     <button>Overall</button>
                 </div>
@@ -23,7 +26,7 @@
 
                 <div class="single-stage-chart">
                     <div class="chart-heading">
-                        <div>Stage 03</div>
+                        <div>Stage 01</div>
                     </div>
                     <div class="chart-box">
                         <canvas id="myChart"></canvas>
@@ -41,11 +44,11 @@
                     </div>
                 </div>
 
-                // THIS IS THE AREA FOR CONTROL BUTTONS AND THGE LIST OF ASSEMBLY COMPONENTS
+                <!-- THIS IS THE AREA FOR CONTROL BUTTONS AND THE LIST OF ASSEMBLY COMPONENTS-->
                 <div class="stage-controls">
 
                     <?php
-                    foreach ($data['processDetails'] as $process) {
+                    foreach ($data['FormCarData'] as $process) {
                         echo '<div class=""></div>
                             <div class="">
                                 <div class="">' . $process->ProcessName . '</div>
@@ -60,7 +63,7 @@
                             </div>';
                     }
 
-                    if ($value == NULL) {
+                    if ($process == NULL) {
                         echo '<div class="horizontal-centralizer no-leave-data">
                             <div class="vertical-centralizer">
                                 <div>Nothing to show</div>

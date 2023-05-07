@@ -1,6 +1,16 @@
 #myChart {
-    width: 300px !important;
+    width: 300px ;
+    height: 250px ;
+}
+
+.S2-bigChart {
+    width: 500px !important;
     height: 250px !important;
+}
+
+.S2-bigstate {
+    top: 21.75rem !important;
+    left: 18.25rem;
 }
 
 #stage01,

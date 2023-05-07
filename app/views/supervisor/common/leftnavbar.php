@@ -25,32 +25,36 @@
         <li>
             <div class="nav_section_headings">WORKSPACE</div>
 
-            <a class="<?php echo ($data['url'][1] == "linevehicleview") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/linevehicleview">
+            <a class="<?php echo ($data['url'][1] == "linevehicleview" || 
+                                    $data['url'][1] == "getProgress"
+            ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/linevehicleview">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process
             </a>
 
             <a class="<?php echo ($data['url'][1] == "viewCarComponent" ||
-                                  $data['url'][1] == "componentsView"
+                                    $data['url'][1] == "componentsView"
             ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/viewCarComponent">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon5.png" class="width-rem-1p25" alt="icon2" />Manage Parts
             </a>
 
             <a class="<?php echo ($data['url'][1] == "taskSchedule" ||
-                                  $data['url'][1] == "leaves" ||
-                                  $data['url'][1] == "addleave" ||
-                                  $data['url'][1] == "editleave" ||
-                                  $data['url'][1] == "getEditingData"
+                                    $data['url'][1] == "leaves" ||
+                                    $data['url'][1] == "addleave" ||
+                                    $data['url'][1] == "editleave" ||
+                                    $data['url'][1] == "getEditingData"
             ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/taskSchedule">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon4.png" class="width-rem-1p25" alt="icon6" />Schedule Tasks
             </a>
 
             <a class="<?php echo ($data['url'][1] == "testRunQueue" ||
-                                  $data['url'][1] == "getCarInfo"
+                                    $data['url'][1] == "getCarInfo"
             ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/testRunQueue">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon7.png" class="width-rem-1p25" alt="icon7" />Pre-Inspection
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "pdiresults") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdilinevehicleview">
+            <a class="<?php echo ($data['url'][1] == "pdiresults" ||
+                                    $data['url'][1] == "pdilinevehicleview"
+            ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/pdilinevehicleview">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon8.png" class="width-rem-1p25" alt="icon7" />Test run
             </a>
 

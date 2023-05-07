@@ -25,25 +25,27 @@
 
                         <?php
                         foreach ($data['LineCarsSet'] as $car) {
-                            echo '<div class="carcard">
-                                <div class="cardhead">
-                                    <div class="cardid">
-                                        <div class="carmodel">'. (($car->ModelNo == "M0001") ? 'Micro Panda ' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross ' : 'MG ZS SUV ')) .'</div>
-                                        <div class="chassisno">'. ($car->ChassisNo) .'</div>
-                                        <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProgress">
+                                <div class="carcard" onClick="this.closest(\'form\').submit()">
+                                    <div class="cardhead">
+                                        <div class="cardid">
+                                            <div class="carmodel">'. (($car->ModelNo == "M0001") ? 'Micro Panda ' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross ' : 'MG ZS SUV ')) .'</div>
+                                            <div class="chassisno">'. ($car->ChassisNo) .'</div>
+                                            <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                        </div>
+                                    </div>
+                                    <div class="carpicbox">
+                                        <img src="'. URL_ROOT .'public/images/cars/'. (($car->ModelNo == "M0001") ? 'Micro Panda' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross' : 'MG ZS SUV')) .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                    </div>
+                                    <div class="carstatus">';
+                                        if($car->CurrentStatus == "S1") { echo 'At Stage 01'; }
+                                        else if($car->CurrentStatus == "S2") { echo 'At Stage 02'; }
+                                        else if($car->CurrentStatus == "S3") { echo 'At Stage 03'; }
+                                        else { echo 'At Stage 04'; }
+                                        echo '<input type="hidden" name="form-car-stage" value="' .$car->CurrentStatus. '">
                                     </div>
                                 </div>
-                                <div class="carpicbox">
-                                    <img src="'. URL_ROOT .'public/images/cars/'. (($car->ModelNo == "M0001") ? 'Micro Panda' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross' : 'MG ZS SUV')) .' '. $car->Color .'.png" class="carpic" alt="Car image">
-                                </div>
-                                <div class="carstatus">';
-                            if($car->CurrentStatus == "S1") { echo 'At Stage 01'; }
-                            else if($car->CurrentStatus == "S2") { echo 'At Stage 02'; }
-                            else if($car->CurrentStatus == "S3") { echo 'At Stage 03'; }
-                            else { echo 'At Stage 04'; }
-
-                            echo '</div>
-                            </div>';
+                            </form>';
                         }
 
                         if($car == NULL) {

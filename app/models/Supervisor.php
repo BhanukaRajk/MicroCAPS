@@ -396,8 +396,8 @@ class Supervisor
                         `stage-process`.`ProcessName`
                 FROM `employee-schedule`, `employee`, `stage-process`
                 WHERE `employee-schedule`.`ProcessId` = `stage-process`.`ProcessId` AND 
-                      `employee-schedule`.`EmployeeId` = `employee`.`EmployeeId` AND 
-                      (`employee-schedule`.`Date` < CURRENT_DATE() OR `employee-schedule`.`Completeness` = "0");'
+                        `employee-schedule`.`EmployeeId` = `employee`.`EmployeeId` AND 
+                        (`employee-schedule`.`Date` < CURRENT_DATE() OR `employee-schedule`.`Completeness` = "0");'
         );
 
         $tasks = $this->db->resultSet();
@@ -557,7 +557,7 @@ class Supervisor
             'SELECT `component`.`PartNo`, `component`.`PartName`, `component-release`.`CurrentStatus`
                     FROM `component-release`, `component` 
                     WHERE `component-release`.`PartNo` = `component`.`PartNo` 
-                      AND `component-release`.`ChassisNo` = :THIS_CAR;'
+                    AND `component-release`.`ChassisNo` = :THIS_CAR;'
         );
 
         $this->db->bind(':THIS_CAR', $car);
@@ -859,7 +859,76 @@ class Supervisor
 
 
 
-    public function filterVehicles($vehicleType = null, $completeness = null, $acceptance = null)
+
+
+
+
+
+
+
+
+
+
+
+
+    public function getProcessData($chassisNo = null, $stage = null) {
+        
+        $this->db->query(
+            'SELECT `stage-process`.`ProcessId`, `stage-process`.`ProcessName`, 
+                    `stage-vehicle-process`.`Status`, `stage-vehicle-process`.`ChassisNo`, 
+                    `stage-process`.`Weight` 
+                    FROM `stage-vehicle-process` 
+                    INNER JOIN `stage-process` 
+                    ON `stage-vehicle-process`.ProcessId = `stage-process`.ProcessId 
+                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo 
+                    AND `stage-process`.`StageNo` LIKE :stage;'
+        );
+
+        if($stage == 'S1') {
+            $stage = '001';
+        } else if($stage == 'S2') {
+            $stage = '002';
+        } else if($stage == 'S3') {
+            $stage = '003';
+        } else if($stage == 'S4') {
+            $stage = '004';
+        }
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':stage', $stage);
+
+        $processData = $this->db->resultSet();
+
+        if ( $processData ) {
+            return $processData;
+        } else {
+            return [];
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function viewCars($vehicleType = null, $completeness = null, $acceptance = null)
     {
         $sql = 'SELECT `vehicle`.`ChassisNo`, 
                         `vehicle`.`EngineNo`, 
@@ -926,11 +995,6 @@ class Supervisor
     }
 
 
-
-
-
-
-
     public function viewToolz($toolType = null, $toolStatus = null)
     {
         $sql = 'SELECT `ToolId`, `ToolName`, 
@@ -950,9 +1014,9 @@ class Supervisor
 
         if (isset($toolStatus)) {
             if ($toolStatus == 'Normal') {
-                $sql .= ' AND `Status` == "Normal"';
+                $sql .= ' AND `Status` = "Normal"';
             } elseif ($toolStatus == 'NA') {
-                $sql .= ' AND `Status` == "Need an attention"';
+                $sql .= ' AND `Status` = "Need an attention"';
             }
         }
 
@@ -972,23 +1036,6 @@ class Supervisor
             return false;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function viewConsumables($consumeType = null, $cstatus = null)
@@ -1032,53 +1079,6 @@ class Supervisor
             return false;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function getProcessStatus($chassisNo, $status = '%', $stage = '%') {
-        $this->db->query(
-            'SELECT `stage-vehicle-process`.Status, `stage-process`.ProcessName, `stage-process`.StageNo, `stage-process`.Weight
-                    FROM `stage-vehicle-process`
-                    INNER JOIN `stage-process`
-                    ON `stage-vehicle-process`.ProcessId = `stage-process`.ProcessId
-                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND `stage-process`.StageNo LIKE :stage;'
-        );
-
-        $this->db->bind(':chassisNo', $chassisNo);
-        $this->db->bind(':status', $status);
-        $this->db->bind(':stage', $stage);
-
-        $results = $this->db->resultSet();
-
-        if ( $results ) {
-            return $results;
-        } else {
-            return [];
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

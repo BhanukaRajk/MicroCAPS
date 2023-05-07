@@ -17,8 +17,7 @@
                     <div>Assembly completed vehicles</div>
                     <div>
                         <label for="searchBox" class="display-none"></label>
-                        <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-search" placeholder="Search Chassis Number">
-<!--                        <img src="--><?php //echo URL_ROOT; ?><!--public/images/icons/search.png" class="width-rem-1p25" alt="search">-->
+                        <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-searchbox" placeholder="Enter Chassis No">
                     </div>
                 </div>
                 <div class="vehicle-detail-board">
@@ -27,19 +26,21 @@
 
                         <?php
                             foreach ($data['LineCarsSet'] as $car) {
-                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
-                                    <div class="cardhead">
-                                        <div class="cardid">
-                                            <div class="carmodel">'. $car->ModelName .'</div>
-                                            <div class="chassisno">'. $car->ChassisNo .'</div>
-                                            <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo">
+                                    <div onclick="this.closest(\'form\').submit()" class="carcard">
+                                        <div class="cardhead">
+                                            <div class="cardid">
+                                                <div class="carmodel">'. $car->ModelName .'</div>
+                                                <div class="chassisno">'. $car->ChassisNo .'</div>
+                                                <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                            </div>
                                         </div>
+                                        <div class="carpicbox">
+                                            <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                        </div>
+                                        <div></div>
                                     </div>
-                                    <div class="carpicbox">
-                                        <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
-                                    </div>
-                                    <div></div>
-                                </div></form>';
+                                </form>';
                             }
                         ?>
 

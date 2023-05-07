@@ -15,11 +15,17 @@
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
                     <div>Assembly completed vehicles</div>
+
+
                     <div>
                         <label for="searchBox" class="display-none"></label>
-                        <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-search" placeholder="Search Chassis Number">
+                        <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-searchbox" placeholder="Enter Chassis No">
 <!--                        <img src="--><?php //echo URL_ROOT; ?><!--public/images/icons/search.png" class="width-rem-1p25" alt="search">-->
                     </div>
+
+
+
+
                 </div>
                 <div class="vehicle-detail-board">
                     <div class="vehicle-data-board" id="carList">
@@ -53,21 +59,20 @@
                             <div class="line"></div>
                             <div class="filters">
 
-                                <form method="POST" action="">
                                     <ul id="consume_filter">
 
                                         <li>
                                             <div class="filtertype">Vehicle Type</div>
                                             <div class="filters">
-                                                <input type="checkbox" id="micro-panda" name="car-model" checked>
+                                                <input type="checkbox" id="micro-panda" name="car-model" value="M0001" checked>
                                                 <label for="micro-panda">Micro Panda</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="checkbox" id="panda-cross" name="car-model">
+                                                <input type="checkbox" id="panda-cross" name="car-model" value="M0002" checked>
                                                 <label for="panda-cross">Panda Cross</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="checkbox" id="mg" name="car-model">
+                                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
                                                 <label for="mg">MG ZH SUV</label>
                                             </div>
                                         </li>
@@ -75,11 +80,11 @@
                                         <li>
                                             <div class="filtertype">Inspection</div>
                                             <div class="filters">
-                                                <input type="radio" id="current" name="completeness" value="Current" checked>
+                                                <input type="radio" id="current" name="completeness" value="CM" checked>
                                                 <label for="current">Completed</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="radio" id="all-time" name="completeness" value="All">
+                                                <input type="radio" id="all-time" name="completeness" value="NC">
                                                 <label for="all-time">Not completed</label>
                                             </div>
                                             <div class="filters">
@@ -104,7 +109,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </form>
+
                             </div>
                         </div>
                     </div>
