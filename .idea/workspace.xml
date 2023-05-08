@@ -5,41 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aa61d7b-9353-481b-9319-b661b76dc24a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/composer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/composer.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/autoload.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/ClassLoader.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/InstalledVersions.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/autoload_files.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/autoload_namespaces.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/autoload_real.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/autoload_static.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/installed.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/installed.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/composer/platform_check.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/docraptor/docraptor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/guzzlehttp/guzzle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/guzzlehttp/promises" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/guzzlehttp/psr7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/psr/http-client" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/psr/http-factory" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/psr/http-message" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/ralouphie/getallheaders" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers/Docraptor/vendor/symfony/deprecation-contracts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/helpers/HtmlHelper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/documents/mrf/mrf-M0001-1683576689.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/documents/mrf/mrf-M0002-1683576703.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/documents/mrf/mrf-M0003-1683576712.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/boot.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/boot.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Managers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Managers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers/PDFConverter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/PDFConverter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Vehicle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Vehicle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/templates/mrf.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/templates/mrf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/templates/mrfCreated.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/documents/mrf/mrfCreated.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/javascripts/managerjs/cors.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/managerjs/cors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/manager/features/text.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/manager/features/text.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -71,20 +59,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -105,6 +93,7 @@
       <workItem from="1683230338683" duration="242000" />
       <workItem from="1683343264396" duration="1911000" />
       <workItem from="1683345850166" duration="3710000" />
+      <workItem from="1683570155064" duration="6921000" />
     </task>
     <servers />
   </component>

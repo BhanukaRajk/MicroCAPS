@@ -306,8 +306,6 @@ function createList() {
     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/component", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(string);
-
-    // alertSuccess("PDF Created Successfully Hutto");
 }
 
 // Dispatch Page

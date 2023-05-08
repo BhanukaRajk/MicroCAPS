@@ -191,14 +191,12 @@ class Vehicle {
 
     public function getComponentDetails($ModelNo) {
         $this->db->query(
-            'SELECT component.PartName, component.Color
+            'SELECT *
                     FROM component
-                    WHERE component.ModelNo = :model AND (component.Color = :color1 OR component.Color = :color2);'
+                    WHERE component.ModelNo = :model;'
         );
 
         $this->db->bind(':model', $ModelNo);
-        $this->db->bind(':color1', 'Black');
-        $this->db->bind(':color2', 'None');
 
         $results = $this->db->resultSet();
 
