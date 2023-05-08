@@ -1,0 +1,261 @@
+.display-flex-column {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.align-items-center {
+    align-items: center !important
+}
+
+.padding-3 {
+    padding: 1rem !important
+}
+
+.db-page {
+    position: absolute;
+    left: 16.25rem;
+    right: 0rem;
+    top: 4rem;
+    bottom: 0rem;
+    background-color: rgb(242, 243, 247);
+}
+
+.db-board-2 {
+    margin-inline: 45px;
+    margin-block: 10px;
+}
+
+.db-section {
+    height: 97px;
+}
+
+.db-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-block: 10px;
+}
+
+.db-page-heading {
+    width: 165px;
+    height: 30px;
+    left: 305px;
+    top: 79px;
+
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+
+    color: #1C1F37;
+}
+
+.db-data-board {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    flex-wrap: wrap;
+    gap: 110px;
+}
+
+.position-absolute {
+    position: absolute !important
+}
+
+.db-detailed-content {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 1rem;
+}
+
+.indetail {
+    min-height: 18rem;
+    min-width: 40rem;
+    margin-top: 1rem;
+
+    display: grid;
+    justify-content: space-evenly;
+
+    background-color: white;
+    border-radius: 1.2rem;
+}
+
+.pending-tasks {
+    max-height: 13rem;
+    padding-bottom: 1rem;
+}
+
+.db-number {
+    font-size: 4rem;
+}
+
+.db-count {
+    min-height: 27vh;
+    min-width: 48vw;
+    margin-top: 1rem;
+
+    background-color: white;
+    border-radius: 1.2rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.db-countbox {
+    margin-block: auto;
+    height: 9rem;
+    width: 9rem;
+
+    border: 0.1rem solid #D7D7D7;
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+    font-weight: bolder;
+    color: #418CFD;
+}
+
+.db-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    gap: 1rem;
+}
+
+.db-logs {
+    min-height: 20vh;
+    min-width: 16.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: white;
+    border-radius: 1.2rem;
+}
+
+.db-quick {
+    min-height: 8rem;
+    min-width: 16.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    background-color: white;
+    border-radius: 1.2rem;
+}
+
+.db-heading {
+    margin-top: 1rem;
+    font-family: 'Noto Sans';
+    font-size: 26px;
+}
+
+.db-act-sidebox {
+    margin-inline: 1rem;
+    margin-top: 1.5rem;
+}
+
+.db-qck-sidebox {
+    margin-inline: 1rem;
+}
+
+.db-activity-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.blue-button {
+    min-width: 6rem;
+    min-height: 2rem;
+
+    background-color: dodgerblue;
+    color: white;
+    font-size: small;
+    font-weight: 700;;
+    border: none;
+    border-radius: 12px;
+}
+
+.blue-button-long {
+    min-width: 40rem;
+    min-height: 3rem;
+
+    background-color: dodgerblue;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    display: block;
+    margin: 0.5rem 1.5rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-family: 'Noto Sans';
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.blue-button:hover {
+    background-color: rgb(99, 174, 250);
+    box-shadow: 0 0 0.2rem rgb(144, 144, 255);
+}
+
+.blue-button-long:hover {
+    background-color: rgb(99, 174, 250);
+    box-shadow: 0 0 0.2rem rgb(144, 144, 255);
+}
+
+.dash-cap{
+    font-weight: bold;
+    margin-top: 2rem;
+    font-family: "Noto Sans";
+    font-size: 18px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.small {
+    font-size: 10px;
+}
+
+#calender>.calender-title {
+    word-spacing: 0.5rem;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#calender th, #calender td {
+    font-size: 14px;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+}
+
+#calender .current {
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius:4rem !important;
+}
+
+.background-white {
+    background-color: var(--white);
+}
+
+.border-radius-1 {
+    border-radius:1rem!important;
+}

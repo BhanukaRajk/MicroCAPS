@@ -16,11 +16,12 @@
     <link href="<?php echo URL_ROOT;?>public/assets/css/solid.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/supervisor/styles.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/tester/main.css" rel="stylesheet" />
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/tester/pdi.css" rel="stylesheet" />
 
-    <!-- <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" /> -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://kit.fontawesome.com/4c8b1af502.js" crossorigin="anonymous"></script>
 
     <title>MicroCAPS</title>
 </head>
