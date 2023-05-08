@@ -36,7 +36,7 @@ class Admin {
     }
 
     public function employeeDetails($position) {
-        $this->db->query('SELECT * FROM Employee WHERE (Position = :position && Progress = 1)');
+        $this->db->query('SELECT * FROM Employee WHERE (Position = :position AND Progress = 1)');
 
         $this->db->bind(':position', $position);
 

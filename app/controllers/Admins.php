@@ -4,10 +4,12 @@ class Admins extends controller {
 
     private $adminModel;
     private $vehicleModel;
+    private $pdiModel;
 
     public function __construct(){
         $this->adminModel = $this->model('Admin');
         $this->vehicleModel = $this->model('Vehicle');
+        $this->pdiModel = $this->model('Pdi');
     }
 
     public function dashboard() {
@@ -26,7 +28,6 @@ class Admins extends controller {
             $this->view('admin/dashboard', $data);
         }
     }
-
     public function employees($action="",$id="") {
 
         if(!isLoggedIn()){
@@ -199,18 +200,28 @@ class Admins extends controller {
         }
     }
 
-    public function pdi() {
+    public function pdi($chassisNo = null) {
 
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             redirect('users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['onPDIVehicles'] = $this->adminModel->onPDIVehicles();
-            $data['pdiCheckCategories'] = $this->adminModel->pdiCheckCategories();
-            $data['pdiCheckList'] = $this->adminModel->pdiCheckList($data['onPDIVehicles'][0]->ChassisNo);
-            $this->view('admin/pdi',$data);
+        if ($chassisNo == null) {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
+                $this->view('admin/pdi', $data);
+            }
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $data['ChassisNo'] = $chassisNo;
+                $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
+                $data['onPDIVehicle'] = $this->pdiModel->onPDIVehicles(['chassisNo' => $chassisNo], false);
+                $data['pdiCheckCategories'] = $this->pdiModel->pdiCheckCategories();
+                $data['pdiCheckList'] = $this->pdiModel->pdiCheckList($chassisNo);
+                $this->view('admin/pdidetails',$data);
+            }
         }
+
     }
 
     public function dispatch() {
@@ -224,7 +235,6 @@ class Admins extends controller {
             $this->view('admin/dispatch', $data);
         }
     }
-
 
     public function settings() {
 
