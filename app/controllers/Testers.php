@@ -75,19 +75,26 @@ class Testers extends controller
                 'defect_err' => '',
                 'defect_id_err' => '',
                 'user_err' => '',
+                'date_err' => ''
             ];
             $data['url'] = getUrl();
 
+            $date_1 = date_create($data['InspectionDate']);
+            $date_2 = date_create(date('Y-m-d'));
+            $diff = date_diff($date_1, $date_2);
 
-            if (!$this->testerModel->findUserByID($data['EmployeeID'])) {
-                $data['user_err'] = 'Incorrect Employee ID';
-            } else if ($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
+            $str_diff = $diff->format('%R%a');
+
+
+            if ($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
                 $data['defect_err'] = 'Defect Already Recorded';
-            } else if (!$this->testerModel->findPDIvehicles($data['ChassisNo'])) {
-                $data['chassis_err'] = 'Invalid Chassis Number';
+                echo 'defectexists';
+            } else if (intval($str_diff) < 0 || intval($str_diff) > 7) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'invaliddate';
             }
 
-            if (empty($data['user_err']) && empty($data['defect_err']) && empty($data['chassis_err'])) {
+            if (empty($data['defect_err']) && empty($data['date_err'])) {
                 if ($this->testerModel->addDefect($data)) {
                     echo 'Successful';
                 } else {
@@ -97,61 +104,6 @@ class Testers extends controller
         }
     }
 
-    public function add_defect()
-    {
-
-        if (!isLoggedIn()) {
-            redirect('testers/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'DefectNo' => trim($_POST['DefectNo']),
-                'RepairDescription' => trim($_POST['RepairDescription']),
-                'InspectionDate' => trim($_POST['InspectionDate']),
-                'ChassisNo' => trim($_POST['ChassisNo']),
-                'EmployeeID' => trim($_POST['EmployeeID']),
-                'ReCorrection' => trim($_POST['ReCorrection']),
-                'defect_err' => '',
-                'defect_id_err' => '',
-                'user_err' => '',
-            ];
-            $data['url'] = getUrl();
-
-
-            if (!$this->testerModel->findUserByID($data['EmployeeID'])) {
-                $data['user_err'] = 'Incorrect Employee ID';
-            } else if ($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
-                $data['defect_err'] = 'Defect Already Recorded';
-            } else if (!$this->testerModel->findPDIvehicles($data['ChassisNo'])) {
-                $data['chassis_err'] = 'Invalid Chassis Number';
-            }
-
-            if (empty($data['user_err']) && empty($data['defect_err']) && empty($data['chassis_err'])) {
-                if ($this->testerModel->addDefect($data)) {
-                    echo 'Successful';
-                } else {
-                    echo 'Error';
-                }
-            } else {
-                $this->view('tester/add_defect', $data);
-            }
-        } else {
-            $data = [
-                'DefectNo' => '',
-                'RepairDescription' => '',
-                'InspectionDate' => '',
-                'ChassisNo' => '',
-                'EmployeeID' => '',
-                'ReCorrection' => '',
-            ];
-            $data['url'] = getUrl();
-
-            $this->view('tester/add_defect', $data);
-        }
-    }
 
     public function edit_defect($ChassisNo, $DefectNo)
     {
@@ -177,18 +129,24 @@ class Testers extends controller
             $data['url'] = getUrl();
             $data['pdiVehicle'] = $this->testerModel->pdiVehicle($ChassisNo);
 
-            if (!$this->testerModel->findUserByID($data['EmployeeID'])) {
-                $data['user_err'] = 'Incorrect Employee ID';
+            $date_1 = date_create($data['InspectionDate']);
+            $date_2 = date_create(date('Y-m-d'));
+            $diff = date_diff($date_1, $date_2);
+
+            $str_diff = $diff->format('%R%a');
+
+
+            if (intval($str_diff) < 0 || intval($str_diff) > 7) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'invaliddate';
             }
 
-            if (empty($data['user_err'])) {
+            if (empty($data['date_err'])) {
                 if ($this->testerModel->editDefect($data)) {
                     echo 'Successful';
                 } else {
                     echo 'Error';
                 }
-            } else {
-                $this->view('tester/edit_defect', $data);
             }
         } else {
 

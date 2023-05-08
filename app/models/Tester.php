@@ -177,7 +177,7 @@ class Tester {
                 LIMIT 10;'
         );
 
-        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':status', 'RR');
         $this->db->bind(':pdi', 'NC');
 
         $results = $this->db->resultSet();
@@ -201,7 +201,7 @@ class Tester {
                 LIMIT 10;'
         );
 
-        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':status', 'RR');
         $this->db->bind(':pdi', 'NC');
         $this->db->bind(':id', $id);
 

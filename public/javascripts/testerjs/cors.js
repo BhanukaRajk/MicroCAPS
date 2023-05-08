@@ -128,11 +128,11 @@ function saveChanges(id, position) {
       if (this.readyState == 4 && xhr.status == 200) {
         var response = xhr.responseText;
         if (response == "Successful") {
-          location.reload();
-          setLocalStorage("Successful", "Defect Deleted Successfully");
-          window.onload = function() {
-            document.getElementById("chg-pass").click();
-          };
+            location.reload();
+            setLocalStorage("Successful", "Defect Deleted Successfully");
+            window.onload = function() {
+                document.getElementById("chg-pass").click();
+            };
         } else {
           location.reload();
           setLocalStorage("Error", "Error Deleting Defect");
@@ -163,8 +163,14 @@ function addDefect() {
         contentType: false,
         success: (response) => {
             if (response == "Successful") {
-                window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
+                location.reload();
                 setLocalStorage("Successful","Defect Added Successfully");
+            } else if (response == "defectexists") {
+                location.reload();
+                setLocalStorage("Error","Defect Number Already Exists");
+            } else if (response == "invaliddate") {
+                location.reload();
+                setLocalStorage("Error","Invalid Date");
             } else {
                 location.reload();
                 setLocalStorage("Error","Error Adding Defect");
@@ -193,6 +199,9 @@ function editDefect(chassisno, defectno) {
             if (response == "Successful") {
                 window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
                 setLocalStorage("Successful","Saved Changes");
+            } else if (response == "invaliddate") {
+                location.reload();
+                setLocalStorage("Error","Invalid Date");
             } else {
                 location.reload();
                 setLocalStorage("Error","Error Saving Changes");

@@ -82,7 +82,7 @@
                     class="form-control"
                     placeholder="Chassis Number"
                     autocomplete="off"
-                    required />
+                    readonly />
                 <label class="form-label">Chassis Number</label>
                 <span></span>
 
@@ -127,7 +127,7 @@
                     class="form-control"
                     placeholder="Employee ID"
                     autocomplete="off"
-                    required />
+                    readonly />
                 <label class="form-label">Employee ID</label>
                 <span></span>
 
