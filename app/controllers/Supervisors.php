@@ -398,9 +398,9 @@ class Supervisors extends controller
             redirect('Users/login');
         }
 
+        // FOR FETCHING DATA
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['selectedValue'])) {
 
-            // $selectedValue = $_POST['selectedValue'];
             $data['chassis_no'] = $_POST['selectedValue'];
 
             $data['url'] = getUrl();
@@ -408,10 +408,9 @@ class Supervisors extends controller
             $data['car_selection'] = $this->supervisorModel->viewCarList(['S1','S2','S3','S4']);
 
             header('Content-Type: application/json');
-            // echo json_encode($data['components']);
             echo json_encode(array('carz' => $data['car_selection'], 'componentz' => $data['components'], 'search' => $data['chassis_no']));
 
-
+        // FOR NORMAL POST REQUESTS
         } elseif($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -476,7 +475,7 @@ class Supervisors extends controller
 
 
     // TASK /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
+
     public function addTask()
     {
     }

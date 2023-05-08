@@ -7,7 +7,6 @@
 
 
 
-
 <section>
     <!-- THIS IS THE CONTENT DISPLAYING AREA -->
     <div class="content">

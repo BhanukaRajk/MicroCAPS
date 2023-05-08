@@ -87,12 +87,12 @@
 
 
         <!-- UPDATE TIMEOFF POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
-        <div class="background-bluer display-none" id="timeOffUpdatePopUp">
+        <div class="background-bluer" id="timeOffUpdatePopUp">
             <div class="vertical-centralizer">
                 <div class="time-off-update-popup">
 
                     <div class="timeoff-heading horizontal-centralizer">
-                        <div>NEW TIME-OFF</div>
+                        <div>UPDATE TIME-OFF</div>
                     </div>
                     <div class="timeoff-unique-fields">
                         <div class="timeoff-unique-field-01">
@@ -135,7 +135,7 @@
         </div>
 
         <!-- ADD NEW TIMEOFF POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
-        <div class="background-bluer" id="newTimeOffPopUp">
+        <div class="background-bluer display-none" id="newTimeOffPopUp">
             <div class="vertical-centralizer">
                 <div class="time-off-update-popup">
 

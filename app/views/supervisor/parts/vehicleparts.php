@@ -54,9 +54,9 @@
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">Issued: 45</button>
                             </div>
-                            <div class="filter-btn-box">
+                            <!-- <div class="filter-btn-box">
                                 <button class="page-filter-btn">Pending: 10</button>
-                            </div>
+                            </div> -->
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">Damaged: 2</button>
                             </div>

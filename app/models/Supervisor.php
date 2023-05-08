@@ -923,8 +923,9 @@ class Supervisor
 
 
 
-
-    public function viewCarList($Stages = null) {
+    // THIS FUNCTION IS USED TO GET THE CAR'S CHASSIS NUMBERS FOR SELECT OPTIONS BY PASSING CURRENT STAGE OR STATUS
+    public function viewCarList($Stages = null)
+    {
         if (isset($Stages)) {
 
             if (empty($Stages)) {
@@ -942,8 +943,6 @@ class Supervisor
 
             $Cars = $this->db->resultSet();
 
-            // print_r($Cars);
-
         }
 
         if ($Cars) {
@@ -955,7 +954,7 @@ class Supervisor
     }
 
 
-
+    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN CARD VIEWS
     public function viewCars($vehicleType = null, $completeness = null, $acceptance = null)
     {
         $sql = 'SELECT `vehicle`.`ChassisNo`, 
@@ -1013,6 +1012,7 @@ class Supervisor
     }
 
 
+    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING TOOLS IN CARD VIEWS
     public function viewToolz($toolType = null, $toolStatus = null)
     {
         $sql = 'SELECT `ToolId`, `ToolName`, 
@@ -1056,6 +1056,7 @@ class Supervisor
     }
 
 
+    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING CONSUMABLES IN CARD VIEWS
     public function viewConsumables($consumeType = null, $cstatus = null)
     {
         $sql = 'SELECT `ConsumableId`, `ConsumableName`, 

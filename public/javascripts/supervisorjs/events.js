@@ -22,17 +22,16 @@ function navbartoggle(x) {
 
 
 var acc = document.getElementsByClassName("sup-leave-list-non-edit");
-console.log("HI");
 
 var number;
 
 for (number = 0; number < acc.length; number++) {
   acc[number].addEventListener("click", function () {
-    /* Toggle between adding and removing the "active" class,
-    to highlight the button that controls the panel */
+    /* TOGGLE BETWEEN ADDING AND REMOVING THE "ACTIVE" CLASS,
+    TO HIGHLIGHT THE BUTTON THAT CONTROLS THE PANEL */
     this.classList.toggle("active");
 
-    /* Toggle between hiding and showing the active panel */
+    // TOGGLE BETWEEN HIDING AND SHOWING THE ACTIVE PANEL
     var panel = this.nextElementSibling;
     if (panel.style.display === "block") {
       panel.style.display = "none";
@@ -43,6 +42,9 @@ for (number = 0; number < acc.length; number++) {
 }
 
 
+
+
+// USED FOR SEARCHBOX IN EVERY VEHICLE CARD PAGE
 function searchCar() {
 
   let searchInput;
@@ -79,6 +81,7 @@ function searchCar() {
 }
 
 
+// USED FOR SEARCHBOX IN VEHICLE PARTS PAGE
 function searchPart() {
 
   let searchInput;
@@ -106,7 +109,7 @@ function searchPart() {
 }
 
 
-
+// USED FOR BACK BUTTTON
 function GoBack() {
   // GO BACK TO THE PREVIOUS PAGE
   window.history.back();

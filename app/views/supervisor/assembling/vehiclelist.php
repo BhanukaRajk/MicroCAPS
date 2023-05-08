@@ -68,15 +68,15 @@
                                         <li>
                                             <div class="filtertype">Vehicle Type</div>
                                             <div class="filters">
-                                                <input type="checkbox" id="micro-panda" name="car-model" checked>
+                                                <input type="checkbox" id="micro-panda" name="car-model" value="M0001" checked>
                                                 <label for="micro-panda">Micro Panda</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="checkbox" id="panda-cross" name="car-model">
+                                                <input type="checkbox" id="panda-cross" name="car-model" value="M0002" checked>
                                                 <label for="panda-cross">Panda Cross</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="checkbox" id="mg" name="car-model">
+                                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
                                                 <label for="mg">MG ZH SUV</label>
                                             </div>
                                         </li>
@@ -96,11 +96,11 @@
                                         <li>
                                             <div class="filtertype">Status</div>
                                             <div class="filters">
-                                                <input type="radio" id="acceptance" name="acceptance" value="Accepted">
+                                                <input type="radio" id="acceptance" name="acceptance" value="CM">
                                                 <label for="acceptance">Accepted</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="radio" id="non-acceptance" name="acceptance" value="Not accepted">
+                                                <input type="radio" id="non-acceptance" name="acceptance" value="NC">
                                                 <label for="non-acceptance">Not accepted</label>
                                             </div>
                                             <div class="filters">
@@ -108,6 +108,28 @@
                                                 <label for="all-tested">All</label>
                                             </div>
                                         </li>
+
+                                        <!-- <li>
+                                            <div class="filtertype">Stage</div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="micro-panda" name="car-model" value="M0001" checked>
+                                                <label for="micro-panda">Micro Panda</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="panda-cross" name="car-model" value="M0002" checked>
+                                                <label for="panda-cross">Panda Cross</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
+                                                <label for="mg">MG ZH SUV</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
+                                                <label for="mg">MG ZH SUV</label>
+                                            </div>
+                                        </li> -->
+
+
                                     </ul>
                                 </form>
                             </div>

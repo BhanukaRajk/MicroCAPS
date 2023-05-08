@@ -6,8 +6,6 @@
 <?php require_once APP_ROOT . '/views/supervisor/common/topnavbar.php'; ?>
 
 
-<!-- GET DATA FROM CONTROLLER -->
-<?php //$testing_car = $data['chassisno']; ?>
 
 <section>
     <!-- THIS IS THE CONTENT DISPLAYING AREA -->

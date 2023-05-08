@@ -1,18 +1,20 @@
-// const drop = document.getElementById("drop");
-const logout = document.getElementById("logout");
+//// const drop = document.getElementById("drop");
+//// const logout = document.getElementById("logout");
 
 
-/*drop.addEventListener("click", () => {
-    logout.classList.toggle("display-block");
-});*/
+//// drop.addEventListener("click", () => {
+////     logout.classList.toggle("display-block");
+//// });
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
+
+
+/* WHEN THE USER CLICKS ON THE BUTTON, 
+TOGGLE BETWEEN HIDING AND SHOWING THE DROPDOWN CONTENT */
 function profiledropdown() {
     document.getElementById("profileDropdown").classList.toggle("show");
 }
 
-// Close the dropdown if the user clicks outside of it
+// CLOSE THE DROPDOWN IF THE USER CLICKS OUTSIDE OF IT
 window.onclick = function (event) {
     if (!event.target.matches('.arrowbtn')) {
         var profiledropdowns = document.getElementsByClassName("profilemenu-content");
@@ -29,9 +31,9 @@ window.onclick = function (event) {
 
 function notifyMe() {
     var msg = document.getElementById("messagebox");
-    // message.className = "show";
+    //// message.className = "show";
     msg.className = msg.className.replace("hideme", "shows showme");
-    // setTimeout(function () { if(msg.className == "shows showme") { msg.className = msg.className.replace("shows showme", "hideme"); }}, 10000);
+    //// setTimeout(function () { if(msg.className == "shows showme") { msg.className = msg.className.replace("shows showme", "hideme"); }}, 10000);
     setTimeout(function () { msg.className = msg.className.replace("shows showme", "hideme"); }, 10000);
 }
 
@@ -49,9 +51,9 @@ function next(id) {
 }
 
 
-// function expandConsumable() {
-//     document.getElementById("popupbox").classList.toggle("show");
-// }
+//// function expandConsumable() {
+////     document.getElementById("popupbox").classList.toggle("show");
+//// }
 
 function closePopup() {
     var popupDiv = document.getElementById('popupWindow');
@@ -159,7 +161,7 @@ function expandTool(Tool) {
 
     // SHOW THE POPUP FORM
     document.getElementById("toolUpdatePopUp").setAttribute("class", "background-bluer");
-    // document.getElementsByClassName("toolset-toolview").classList.add("noscroll");
+    //// document.getElementsByClassName("toolset-toolview").classList.add("noscroll");
 }
 
 
@@ -167,7 +169,7 @@ function closeToolUpdatePopup() {
 
     // CLOSE THE POPUP FORM
     document.getElementById("toolUpdatePopUp").setAttribute("class", "background-bluer display-none");
-    // document.getElementsByClassName("toolset-toolview").classList.remove("noscroll");
+    //// document.getElementsByClassName("toolset-toolview").classList.remove("noscroll");
 }
 
 
@@ -226,8 +228,8 @@ function closeConsumeDeleteConfirmation() {
 
     // CLOSE THE POPUP FORM
     document.getElementById("popupWindow").classList.toggle("display-none");
-    // document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
-    // document.getElementsByClassName("databoard").classList.remove("noscroll");
+    //// document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
+    //// document.getElementsByClassName("databoard").classList.remove("noscroll");
 }
 
 
@@ -247,9 +249,21 @@ function closeleaveDeleteConfirmation() {
 
     // CLOSE THE POPUP FORM
     document.getElementById("popupWindow").classList.toggle("display-none");
-    // document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
-    // document.getElementsByClassName("databoard").classList.remove("noscroll");
+    //// document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
+    //// document.getElementsByClassName("databoard").classList.remove("noscroll");
 }
+
+
+
+// window.onclick = function (event) {
+//     if (!event.target.matches('#popupWindow')) {
+//         var popupwindow = document.getElementsByClassName("delete-conf-blur");
+//         console.log(popupwindow.classList);
+//         if (!(popupwindow.classList.contains('display-none'))) {
+//                 popupwindow.classList.toggle('display-none');
+//         }
+//     }
+// }
 
 
 
