@@ -1,0 +1,34 @@
+.border-gray {
+    border: 1px solid var(--gray) !important;
+    border-radius: 1rem;
+}
+
+.border-blue {
+    border: 1px solid var(--blue) !important;
+    border-radius: 1rem;
+}
+
+.border-red {
+    border: 1px solid var(--red) !important;
+    border-radius: 1rem;
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--gray) !important;
+}
+
+.border-radius-0 {
+    border-radius: 0rem;
+}
+
+.border-radius-0p5 {
+    border-radius: 0.5rem;
+}
+
+.border-radius-1 {
+    border-radius: 1rem;
+}
+
+.border-radius-11 {
+    border-radius: 11rem;
+}

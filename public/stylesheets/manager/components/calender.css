@@ -1,0 +1,18 @@
+#calender>.calender-title {
+    word-spacing: 0.5rem;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#calender th, #calender td {
+    font-size: 14px;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+}
+
+#calender .current {
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 4rem;
+}

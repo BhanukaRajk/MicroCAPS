@@ -1,0 +1,5 @@
+{
+    "require": {
+        "docraptor/docraptor": "^4.0"
+    }
+}

@@ -1,0 +1,85 @@
+select {
+    border: none;
+    color: #017EFA;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+}
+
+select.type2 {
+    color: #ced4da;
+}
+
+select:focus-visible {
+    outline: none;
+}
+
+.custom-select,
+.custom-select-type1, 
+.custom-select-model,
+.custom-select-color,
+.custom-select-color1,
+.custom-select-chassis,
+.custom-select-showroom {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.custom-select .selector-options,
+.custom-select-type1 .selector-options, 
+.custom-select-model .selector-options,
+.custom-select-color .selector-options,
+.custom-select-color1 .selector-options,
+.custom-select-chassis .selector-options,
+.custom-select-showroom .selector-options {
+    list-style: none;
+    color: #017EFA;
+    border: 1px solid;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.custom-select .selector-options li,
+.custom-select-type1 .selector-options li,
+.custom-select-model .selector-options li,
+.custom-select-color .selector-options  li,
+.custom-select-color1 .selector-options  li,
+.custom-select-chassis .selector-options  li,
+.custom-select-showroom .selector-options  li {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.custom-select .selector-options li:hover,
+.custom-select-type1 .selector-options li:hover,
+.custom-select-model .selector-options li:hover,
+.custom-select-color .selector-options  li:hover,
+.custom-select-color1 .selector-options  li:hover,
+.custom-select-chassis .selector-options  li:hover,
+.custom-select-showroom .selector-options  li:hover {
+    background: #017EFA;
+    color: white
+}
+
+.chassis-label,
+.type1-label,
+.color-label,
+.color1-label,
+.chassisNo-label,
+.showroom-label {
+    position: relative;
+    bottom: 3.9em;
+    left: 1.5em;
+    background-color: white;
+    padding: 0 0.5em;
+    opacity: 1;
+    color: var(--gray);
+}
