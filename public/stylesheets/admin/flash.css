@@ -1,0 +1,67 @@
+.hideme {
+    visibility: hidden;
+}
+
+.showme {
+    visibility: visible;
+}
+
+#alert {
+    min-width: 250px;
+    margin-left: -125px;
+    color: var(--alert-color);
+    background-color: var(--alert-bg);
+    border: var(--alert-border);
+    border-radius: 5px;
+    padding: 16px;
+    text-align: center;
+    font-size: 17px;
+    position: fixed;
+    z-index: 10;
+    right: 2rem;
+    bottom: 3rem;
+    text-transform: capitalize;
+}
+
+#alert.shows {
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+    animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {right: 0; opacity: 0;} 
+    to {right: 2rem; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {right: 2rem; opacity: 1;} 
+    to {right: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {right: 2rem; opacity: 1;}
+    to {right: 0; opacity: 0;}
+}
+
+.alert-success {
+    --alert-color: #0d6832;
+    --alert-bg: #d0eddb;
+    --alert-border-color: #b9e4ca;
+}
+
+.alert-failure {
+    --alert-color: #af233a;
+    --alert-bg: #f8dbe0;
+    --alert-border-color: #f5c9d1;
+}
+
+.icon {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-style: normal;
+}

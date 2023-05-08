@@ -1,3 +1,4 @@
+<<<<<<< HEAD:public/stylesheets/tester/main.css
 @import 'flash.css';
 @import 'selectoption.css';
 @import 'form.css';
@@ -13,6 +14,24 @@
 @import 'display.css';
 @import 'select.css';
 @import 'popup.css';
+=======
+@import 'dashboard.css';
+@import 'employee.css';
+@import 'flash.css';
+@import 'pdi.css';
+@import 'vehiclelist.css';
+@import 'grid.css';
+@import 'chart.css';
+@import 'flex.css';
+@import 'height.css';
+@import 'padding.css';
+@import 'select.css';
+@import 'width.css';
+@import 'display.css';
+@import 'text.css';
+@import 'popup.css';
+/* @import 'addEmployee.css'; */
+>>>>>>> dddilmi:public/stylesheets/admin/main.css
 
 body {
     margin: 0;
@@ -1028,6 +1047,7 @@ h3 {
     --btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
     --btn-disabled-opacity: 0.65;
     --btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--btn-focus-shadow-rgb), .5);
+<<<<<<< HEAD:public/stylesheets/tester/main.css
 }
 
 .btn-blue {
@@ -1039,6 +1059,8 @@ h3 {
     --btn-hover-border-color: var(--blue);
     --btn-width: 7.5rem;
     --btn-font-size: 0.7rem;
+=======
+>>>>>>> dddilmi:public/stylesheets/admin/main.css
 }
 
 .btn-green {
@@ -1049,12 +1071,20 @@ h3 {
     --btn-hover-border-color: var(--green);
 }
 
+<<<<<<< HEAD:public/stylesheets/tester/main.css
 .btn-red {
     --btn-color: var(--red);
     --btn-border-color: var(--red);
     --btn-hover-color: var(--red);
     --btn-hover-bg: #ee0b0b14;
     --btn-hover-border-color: var(--red);
+=======
+.btn-noback {
+    --btn-height: 2rem;
+    --btn-width: 15rem;
+    --btn-bg: none;
+    --btn-padding-y: 0.1rem;
+>>>>>>> dddilmi:public/stylesheets/admin/main.css
 }
 
 /* Form */
@@ -1395,7 +1425,11 @@ li a:hover:not(.active) {
 
 .page-content {
     left: 20rem;
+<<<<<<< HEAD:public/stylesheets/tester/main.css
     top: 6rem;
+=======
+    top: 8rem;
+>>>>>>> dddilmi:public/stylesheets/admin/main.css
     right: 3rem;
 }
 
@@ -1644,6 +1678,61 @@ select:focus-visible {
     word-wrap: normal;
 }
 
+<<<<<<< HEAD:public/stylesheets/tester/main.css
 .text-green {
     color: var(--green);
+=======
+.dash-lightblue-circle {
+    background-color: #3ba5fb;
+}
+
+.dash-graph-color-circle {
+    height: 0.5rem;
+    width: 0.5rem;
+    margin: auto 0.5rem auto 0rem;
+    border-radius: 50%;
+}
+
+.next,
+.prev {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--blue);
+    cursor: pointer;
+}
+
+.result-text {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    color:var(--white);
+}
+
+.edit {
+    background: var(--blue);
+    height: 1rem;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 2rem;
+}
+
+.delete {
+    background: var(--red);
+    height: 1rem;
+    padding: 0.5rem;
+    color: white;
+    border-radius: 2rem;
+}
+
+.edit:hover {
+    color: var(--blue);
+    background: var(--gray);
+}
+
+.delete:hover {
+    color: var(--red);
+    background: var(--gray);
+>>>>>>> dddilmi:public/stylesheets/admin/main.css
 }

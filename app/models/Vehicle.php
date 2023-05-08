@@ -12,7 +12,11 @@ class Vehicle {
         $this->db->query(
             'SELECT count(`vehicle`.ChassisNo) AS Count
                 FROM `vehicle` 
+<<<<<<< HEAD
                 WHERE `vehicle`.CurrentStatus LIKE :status'
+=======
+                WHERE `vehicle`.CurrentStatus = :status'
+>>>>>>> dddilmi
         );
 
         $this->db->bind(':status', $status);
@@ -102,6 +106,7 @@ class Vehicle {
         }
     }
 
+<<<<<<< HEAD
     public function getComponents($model) {
         $this->db->query(
             'SELECT `component`.PartNo, `component`.Qty
@@ -110,6 +115,18 @@ class Vehicle {
         );
 
         $this->db->bind(':model', $model);
+=======
+    public function getComponents($color, $model) {
+        $this->db->query(
+            'SELECT `component`.PartNo, `component`.Qty
+            FROM `component`
+            WHERE `component`.ModelNo = :model AND (`component`.Color = :color OR `component`.Color = :none)'
+        );
+
+        $this->db->bind(':model', $model);
+        $this->db->bind(':color', $color);
+        $this->db->bind(':none', 'None');
+>>>>>>> dddilmi
 
         $results = $this->db->resultSet();
 
@@ -120,6 +137,7 @@ class Vehicle {
         }
     }
 
+<<<<<<< HEAD
     public function getProcesses($model) {
         $this->db->query(
             'SELECT `stage-process`.ProcessId
@@ -141,6 +159,11 @@ class Vehicle {
     public function initComponent($chassisNo, $partNo, $status): bool {
         $this->db->query(
             'INSERT INTO `component-release`
+=======
+    public function addVehicleComponent($chassisNo, $partNo, $status): bool {
+        $this->db->query(
+            'INSERT INTO `stage-vehicle-process`
+>>>>>>> dddilmi
             VALUE (:chassisNo, :partNo, :status)'
         );
 
@@ -155,6 +178,7 @@ class Vehicle {
         }
     }
 
+<<<<<<< HEAD
     public function initProcess($chassisNo, $processId, $status): bool {
         $this->db->query(
             'INSERT INTO `stage-vehicle-process`
@@ -216,6 +240,15 @@ class Vehicle {
                     INNER JOIN `stage-process`
                     ON `stage-vehicle-process`.ProcessId = `stage-process`.ProcessId
                     WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND `stage-process`.StageNo LIKE :stage;'
+=======
+    public function getComponentStatus($chassisNo, $status = '%', $stage = '%') {
+        $this->db->query(
+            'SELECT `stage-vehicle-process`.Status, component.PartName, component.StageNo, component.Weight
+                    FROM `stage-vehicle-process`
+                    INNER JOIN component
+                    ON `stage-vehicle-process`.PartNo = component.PartNo
+                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND component.StageNo LIKE :stage;'
+>>>>>>> dddilmi
         );
 
         $this->db->bind(':chassisNo', $chassisNo);
@@ -233,6 +266,7 @@ class Vehicle {
 
     public function componentQty($status) {
         $this->db->query(
+<<<<<<< HEAD
             'SELECT component.PartName, COUNT(component.PartName) AS Qty, component.Color , vehicle.Color AS VehicleColor 
                     FROM `component-release`
                     INNER JOIN component
@@ -240,6 +274,13 @@ class Vehicle {
                     INNER JOIN `vehicle`
                     ON `component-release`.ChassisNo = vehicle.ChassisNo
                     WHERE `component-release`.Status = :status
+=======
+            'SELECT component.PartName, COUNT(component.PartName) AS Qty, component.Color  
+                    FROM `stage-vehicle-process`
+                    INNER JOIN component
+                    ON `stage-vehicle-process`.PartNo = component.PartNo
+                    WHERE `stage-vehicle-process`.Status = :status
+>>>>>>> dddilmi
                     GROUP BY component.PartNo;'
         );
 
@@ -254,6 +295,7 @@ class Vehicle {
         }
     }
 
+<<<<<<< HEAD
     public function addShell($chassisNo, $chassisType, $color): bool
     {
         $this->db->query(
@@ -574,4 +616,6 @@ class Vehicle {
         }
     }
 
+=======
+>>>>>>> dddilmi
 }

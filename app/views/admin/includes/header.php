@@ -6,7 +6,7 @@
     <link rel="icon" href="<?php echo URL_ROOT;?>public/images/favicon-32.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="MicroCAPS Polgahawela" />
+    <meta name="description" content="We always care and cure" />
     <link rel="apple-touch-icon" href="" />
 
     <!-- Font Awesome -->
@@ -16,15 +16,10 @@
     <link href="<?php echo URL_ROOT;?>public/assets/css/solid.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-<<<<<<< HEAD:app/views/user/includes/header.php
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/supervisor/styles.css" rel="stylesheet" />
-=======
     <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/main.css" rel="stylesheet" />
->>>>>>> dddilmi:app/views/includes/header.php
 
-    <!-- <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" /> -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 
     <title>MicroCAPS</title>
 </head>
