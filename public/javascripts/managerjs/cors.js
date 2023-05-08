@@ -292,48 +292,13 @@ function createList() {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            // console.log(response);
             if (response == "Successful") {
-
-                // // Define the HTML file to be converted to PDF
-                // const htmlFile = 'http://localhost/MicroCAPS/public/documents/mrf/mrfCreated.html';
-
-                // // Create a new jsPDF instance with A4 size
-                // const doc = new jsPDF('p', 'mm', 'a4');
-
-                // // Use html2pdf to convert the HTML file to PDF
-                // html2pdf().set({
-                //     margin: 1,
-                //     filename: 'test.pdf',
-                //     image: { type: 'png', quality: 0.98 },
-                //     html2canvas: { dpi: 192, letterRendering: true },
-                //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                // }).from(htmlFile).save();
-
-                // html2pdf().from(htmlFile).set({
-                //     margin: 1,
-                //     filename: 'test.pdf',
-                //     image: { type: 'png', quality: 0.98 },
-                //     html2canvas: { dpi: 192, letterRendering: true },
-                //     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                // }).toPdf().get('pdf').then(function(pdf) {
-
-                //     // Add the PDF document to the jsPDF instance
-                //     doc.addPage();
-                //     doc.addImage(pdf, 'PDF', 0, 0, 210, 297);
-                //     console.log("hi");
-                //     // Save the PDF document
-                //     doc.save('test.pdf');
-
-                // });
-
-
                 location.reload();
-                // setLocalStoragePDF();
+                setLocalStorageFlash("Successful","Sent Material Request Form");
 
             } else {
-                // location.reload();
-                // setLocalStorageFlash("Error","Error Sending Email");
+                location.reload();
+                setLocalStorageFlash("Error","Error Sending Email");
             }
 
         }
