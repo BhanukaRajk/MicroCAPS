@@ -531,6 +531,62 @@ class Supervisor
 
 
 
+
+
+
+
+
+
+    public function viewDamages() {
+        
+        $sql = 'SELECT `ConsumableId`, `ConsumableName`, 
+                    `Volume`, `Weight`, 
+                    DATE(`LastUpdate`) AS `UDate`,
+                    TIME(`LastUpdate`) AS `UTime`, 
+                    `LastUpdateBy`, `Image` 
+                    FROM `consumable`
+                    WHERE `ConsumableId` IS NOT NULL';
+
+
+        if (isset($consumeType)) {
+            if ($consumeType == 'Lubricants') {
+                $sql .= ' AND `Volume` IS NOT NULL';
+            } elseif ($consumeType == 'Grease') {
+                $sql .= ' AND `Weight` IS NOT NULL';
+            }
+        }
+
+        if (isset($cstatus)) {
+            if ($cstatus == 'Available') {
+                $sql .= ' AND (`Volume` >= 60 OR `Weight` >= 60)';
+            } elseif ($cstatus == 'Low') {
+                $sql .= ' AND (`Volume` < 60 OR `Weight` < 60)';
+            }
+        }
+
+        $sql .= ';';
+
+        // DO NOT SWAP THE ORDER OF QUERY AND BIND
+        $this->db->query($sql);
+
+        $consumables = $this->db->resultSet();
+
+
+        if ($consumables) {
+            return $consumables;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
     public function viewDamagedParts()
     {
         $this->db->query(
@@ -551,6 +607,10 @@ class Supervisor
             return FALSE;
         }
     }
+
+
+
+
 
     public function viewCarComponents($car) {
         $this->db->query(

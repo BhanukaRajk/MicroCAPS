@@ -383,12 +383,7 @@ class Supervisors extends controller
 
     
     // COMPONENT /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function recordIssuedComponents()
-    {
-    }
-    public function recordComponentDefects()
-    {
-    }
+
 
 
 
@@ -983,7 +978,35 @@ class Supervisors extends controller
         // }
     }
 
+    public function recordIssuedComponents()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // $vehicleTypes = json_decode($_POST['vehicleTypes']);
+            $completeness = $_POST['completeness'];
+            $acceptance = $_POST['acceptance'];
+
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewDamages($completeness, $acceptance);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['LineCarsSet']);
+
+        } else {
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewCars();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+        }
+    }
+
+    
+    public function recordComponentDefects()
+    {
+    }
 
 
 
