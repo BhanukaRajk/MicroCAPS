@@ -19,6 +19,11 @@
             echo '<div class="vehicle-detail-board  margin-bottom-4">
                         <div class="vehicle-data-board justify-content-evenly">';
             foreach ($data['onPDIVehicles'] as $value) {
+
+                $val = '';
+                if($value->CurrentStatus == 'RR'){
+                    $val = 'Ready to Test';
+                }
                 echo '<a href="' . URL_ROOT . 'testers/pdi/' . $value->ChassisNo . '">
                             <div class="carcard">
                                 <div class="cardhead">
@@ -31,7 +36,7 @@
                                     <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
                                 </div>
                                 <div class="carstatus green"> On Assembly </div>
-                                <div class="arrivaldate">Stage: '.$value->CurrentStatus.'</div>
+                                <div class="arrivaldate">Stage: '.$val.'</div>
                             </div>';
             }
 
