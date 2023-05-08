@@ -17,7 +17,7 @@
 
 
     <div class="profile-detail-board  margin-bottom-4">
-        <div class="profile-data-board justify-content-evenly">
+        <div class="profile-data-board">
             <?php foreach($data['managerDetail'] as $value) {
 
                 echo '<div class="profile-card">
@@ -45,7 +45,7 @@
     </div>
 
     <div class="profile-detail-board  margin-bottom-4">
-        <div class="profile-data-board justify-content-evenly">
+        <div class="profile-data-board">
             <?php foreach($data['supervisorDetail'] as $value) {
 
                 echo '<div class="profile-card">
@@ -73,7 +73,35 @@
     </div>
 
     <div class="profile-detail-board  margin-bottom-4">
-        <div class="profile-data-board justify-content-evenly">
+        <div class="profile-data-board">
+            <?php foreach($data['assemblerDetail'] as $value) {
+
+                echo '<div class="profile-card">
+                        <div class="display-flex-row justify-content-between">
+                            <div class="profile-img">
+                                <div style="background-image:url('. URL_ROOT .'public/images/profile/'.$value->Image.')" class="width-rem-8p5 height-rem-8p5 background-image border-radius-11"></div>
+                            </div>
+                            <div class="display-flex-row gap-0p5">
+                            <a href="'.URL_ROOT.'admins/employees/edit/'.$value->EmployeeId.'"> <i class="fa-solid fa-pen-to-square edit"></i></a>
+                                <i class="fa-solid fa-trash-can delete" onclick="deleteEmployee(\'' . $value->EmployeeId . '\')"></i>
+                            </div>
+                        </div>
+                        <div class="cardhead">
+                            <div>
+                                <div class="profile-name">'. $value->Firstname . ' ' . $value->Lastname .'</div>                                            
+                                <div class="position">'.$value->Position.'</div>
+                            </div>
+                        </div>
+                    </div>';
+            }
+
+            ?>
+
+        </div>
+    </div>
+
+    <div class="profile-detail-board  margin-bottom-4">
+        <div class="profile-data-board">
             <?php foreach($data['testerDetail'] as $value) {
 
                 echo '<div class="profile-card">

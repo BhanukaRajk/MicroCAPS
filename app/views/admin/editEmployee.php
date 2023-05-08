@@ -99,7 +99,7 @@
     </section>
 
 
-<script src="<?php echo URL_ROOT;?>public/javascripts/main.js"></script>
+<script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/cors.js"></script>
 </body>
 </html>

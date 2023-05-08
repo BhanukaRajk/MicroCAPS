@@ -1,6 +1,5 @@
 <?php require_once APP_ROOT . '\views\admin\includes\header.php'; ?>
 <?php require_once APP_ROOT . '\views\admin\includes\navbar.php'; ?>
-
 <body>
 
     <section class="position-absolute page-content">
@@ -54,4 +53,5 @@
 
     </section>
 
-    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/main.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/adminjs/cors.js"></script>

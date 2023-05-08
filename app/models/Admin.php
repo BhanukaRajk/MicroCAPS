@@ -36,7 +36,7 @@ class Admin {
     }
 
     public function employeeDetails($position) {
-        $this->db->query('SELECT * FROM Employee WHERE Position = :position');
+        $this->db->query('SELECT * FROM Employee WHERE (Position = :position && Progress = 1)');
 
         $this->db->bind(':position', $position);
 
@@ -147,7 +147,8 @@ class Admin {
 
     public function deleteUser($id): bool {
 
-        $this->db->query('DELETE FROM Employee WHERE EmployeeId = :id');
+        $this->db->query('UPDATE Employee SET Progress= 0 WHERE EmployeeId = :id');
+       
 
         $this->db->bind(':id', $id);
 

@@ -107,9 +107,17 @@ class Admins extends controller {
                 $data['employee'] = $this->adminModel->employeeDetailsById($id);
                 $this->view('admin/editEmployee',$data);
             }
+            /*else if($action == 'delete'){
+                $data['managerDetail'] = $this->adminModel->employeeDetails("manager");
+                $data['supervisorDetail'] = $this->adminModel->employeeDetails("Supervisor");
+                $data['assemblerDetail'] = $this->adminModel->employeeDetails("Assembler");
+                $this->view('admin/employees', $data );
+
+            }*/
             else {
                 $data['managerDetail'] = $this->adminModel->employeeDetails("manager");
                 $data['supervisorDetail'] = $this->adminModel->employeeDetails("Supervisor");
+                $data['assemblerDetail'] = $this->adminModel->employeeDetails("Assembler");
                 $data['testerDetail'] = $this->adminModel->employeeDetails("Tester");
                 $this->view('admin/employees', $data );
             }
