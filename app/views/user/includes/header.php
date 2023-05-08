@@ -16,11 +16,7 @@
     <link href="<?php echo URL_ROOT;?>public/assets/css/solid.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-<<<<<<< HEAD:app/views/user/includes/header.php
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/supervisor/styles.css" rel="stylesheet" />
-=======
-    <link href="<?php echo URL_ROOT;?>public/stylesheets/admin/main.css" rel="stylesheet" />
->>>>>>> dddilmi:app/views/includes/header.php
+    <link href="<?php echo URL_ROOT;?>public/stylesheets/manager/main.css" rel="stylesheet" />
 
     <!-- <link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" /> -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
