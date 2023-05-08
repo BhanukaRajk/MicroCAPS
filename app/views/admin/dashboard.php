@@ -42,9 +42,32 @@
         </div>
 
         <div class="admin-dash-right-content">
-            <div class="admin-dash-activity-logs">
+            <div class="dash-card-logs">
                 <div class="dash-card-right-datalines dash-card-headings ">Activity Log</div>
-                <div class="dash-card-right-datalines "></div>
+                <div class="display-flex-row justify-content-center">
+                    <table>
+                        <?php 
+
+                            echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal"><b>You</b></td>';
+                            echo '<td class="font-size width-rem-8p5 word-wrap-normal"><span class="text-green"><b>Online</b></span></td></tr>';
+
+                            foreach ($data['activityLogs'] as $activityLog) {
+
+                                if ($activityLog->EmployeeId != $_SESSION['_id']) {
+                                    echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal">' . $activityLog->empName . '</td>';
+                                
+                                
+                                    if($activityLog->LoggedIn == 1) {
+                                        echo '<td class="font-size width-rem-8p5 word-wrap-normal"><span class="text-green"><b>Online</b></span></td></tr>';
+                                    } else {
+                                        echo '<td class="font-size width-rem-8p5 word-wrap-normal">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
+                                    }
+                                }
+                                
+                            }
+                        ?>
+                    </table>
+                </div>
             </div>
             <div class="admin-dash-quick-access">
                 <div class="dash-card-right-datalines dash-card-headings ">Quick Access</div>

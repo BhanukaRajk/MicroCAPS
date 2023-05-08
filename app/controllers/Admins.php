@@ -22,6 +22,7 @@ class Admins extends controller {
             $data['testerCount'] = $this->adminModel->employeeCount("Tester");
             $data['assemblerCount'] = $this->adminModel->employeeCount("Assembler");
             $data['assemblyCount'] = $this->adminModel->assemblyCount();
+            $data['activityLogs'] = $this->adminModel->activityLogs();
             $this->view('admin/dashboard', $data);
         }
     }
@@ -124,88 +125,77 @@ class Admins extends controller {
         }
     }
 
-    public function assembly() {
+    public function assembly($chassisNo = null, $stage = null) {
 
         if(!isLoggedIn()){
             redirect('users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['assemblyDetails'] = $this->adminModel->assemblyDetails();
-            $this->view('admin/assembly', $data);
-        }
+        if ($chassisNo == null) {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails();
+                $this->view('admin/assembly', $data);
+            }
+        } else if ($stage == null) {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    }
+                $data = [
+                    'ChassisNo' => $chassisNo,
+                    'overall' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
+                    ],
+                    'stage01' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S1'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S1'), "Weight"))
+                    ],
+                    'stage02' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S2'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S2'), "Weight"))
+                    ],
+                    'stage03' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S3'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S3'), "Weight"))
+                    ],
+                    'stage04' => [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S4'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S4'), "Weight"))
+                    ],
+                    'assemblyDetails' => $this->vehicleModel->assemblyDetails()
+                ];
+                $this->view('admin/progress',$data);
+            }
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    public function progress($chassisNo) {
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
+                $data = [
+                    'ChassisNo' => $chassisNo,
+                    'stage' => $stage
+                ];
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $stageId = '';
 
-            $data = [
-                'ChassisNo' => $chassisNo,
-                'overall' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected'), "Weight"))
-                ],
-                'stage01' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S1'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S1'), "Weight"))
-                ],
-                'stage02' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S2'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S2'), "Weight"))
-                ],
-                'stage03' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S3'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S3'), "Weight"))
-                ],
-                'stage04' => [
-                    'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', 'S4'), "Weight")),
-                    'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', 'S4'), "Weight"))
-                ],
-                'assemblyDetails' => $this->adminModel->assemblyDetails()
-            ];
-            $this->view('admin/progress',$data);
-        }
-    }
+                if ($stage == 'stageone')
+                    $stageId = 'S1';
+                else if ($stage == 'stagetwo')
+                    $stageId = 'S2';
+                else if ($stage == 'stagethree')
+                    $stageId = 'S3';
+                else if ($stage == 'stagefour')
+                    $stageId = 'S4';
 
-    public function assemblystage($chassisNo) {
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
+                $data['stageSum'] = [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', $stageId), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', $stageId), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', $stageId), "Weight"))
+                ];
+                $data['stageDetails'] = [
+                    'pending' => $this->vehicleModel->getProcessStatus($chassisNo, 'Pending', $stageId),
+                    'completed' => $this->vehicleModel->getProcessStatus($chassisNo, 'completed', $stageId),
+                    'hold' => $this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', $stageId)
+                ];
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-            $data = [
-                'ChassisNo' => $chassisNo,
-                'stage' => trim($_GET['stage'])
-            ];
-
-            $stage = '';
-
-            if ($data['stage'] == 'stageone')
-                $stage = 'S1';
-            else if ($data['stage'] == 'stagetwo')
-                $stage = 'S2';
-            else if ($data['stage'] == 'stagethree')
-                $stage = 'S3';
-            else if ($data['stage'] == 'stagefour')
-                $stage = 'S4';
-
-            $data['stageSum'] = [
-                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage), "Weight")),
-                'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage), "Weight"))
-            ];
-            $data['stageDetails'] = [
-                'pending' => $this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage),
-                'connected' => $this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage),
-                'hold' => $this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage)
-            ];
-
-            $this->view('admin/'.$data['stage'], $data);
+                $this->view('admin/'.$stage, $data);
+            }
         }
     }
 

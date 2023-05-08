@@ -11,12 +11,12 @@
             <div class="custom-select">
                 <select name="vehicles" class="background-none" id="assemblyVehicles">
                     <?php 
-                        echo '<option value="' . URL_ROOT . 'admins/progress/' . $data['ChassisNo'] .'">'.$data['ChassisNo'].'</option>';
+                        echo '<option value="' . URL_ROOT . 'admins/assembly/' . $data['ChassisNo'] .'">'.$data['ChassisNo'].'</option>';
                         foreach($data['assemblyDetails'] as $value) {
                             if ($value->ChassisNo == $data['ChassisNo']) {
                                 continue;
                             }
-                            echo '<option value="' . URL_ROOT . 'admins/progress/' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
+                            echo '<option value="' . URL_ROOT . 'admins/assembly/' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
                         }
                     ?>
                 </select>
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="row background-none gap-2">
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stageone">
+                <a href="<?php echo URL_ROOT; ?>admins/assembly/<?php echo $data['ChassisNo']; ?>/stageone">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 01 </div>
                         <div class="chart-grid-stage">
@@ -52,7 +52,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagetwo">
+                <a href="<?php echo URL_ROOT; ?>admins/assembly/<?php echo $data['ChassisNo']; ?>/stagetwo">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 02 </div>
                         <div class="chart-grid-stage">
@@ -61,7 +61,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagethree">
+                <a href="<?php echo URL_ROOT; ?>admins/assembly/<?php echo $data['ChassisNo']; ?>/stagethree">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 03 </div>
                         <div class="chart-grid-stage">
@@ -70,7 +70,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagefour">
+                <a href="<?php echo URL_ROOT; ?>admins/assembly/<?php echo $data['ChassisNo']; ?>/stagefour">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 04 </div>
                         <div class="chart-grid-stage">
@@ -91,11 +91,11 @@
 
     <script>
 
-        let all = {complete: <?php echo $data['overall']['connected']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
-        let s1 = {complete: <?php echo $data['stage01']['connected']; ?>, pending: <?php echo $data['stage01']['pending']; ?>}
-        let s2 = {complete: <?php echo $data['stage02']['connected']; ?>, pending: <?php echo $data['stage02']['pending']; ?>}
-        let s3 = {complete: <?php echo $data['stage03']['connected']; ?>, pending: <?php echo $data['stage03']['pending']; ?>}
-        let s4 = {complete: <?php echo $data['stage04']['connected']; ?>, pending: <?php echo $data['stage04']['pending']; ?>}
+        let all = {complete: <?php echo $data['overall']['completed']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
+        let s1 = {complete: <?php echo $data['stage01']['completed']; ?>, pending: <?php echo $data['stage01']['pending']; ?>}
+        let s2 = {complete: <?php echo $data['stage02']['completed']; ?>, pending: <?php echo $data['stage02']['pending']; ?>}
+        let s3 = {complete: <?php echo $data['stage03']['completed']; ?>, pending: <?php echo $data['stage03']['pending']; ?>}
+        let s4 = {complete: <?php echo $data['stage04']['completed']; ?>, pending: <?php echo $data['stage04']['pending']; ?>}
 
         var ctx = document.getElementById('assemblyOverall').getContext('2d');
         var ctx1 = document.getElementById('stage01').getContext('2d');

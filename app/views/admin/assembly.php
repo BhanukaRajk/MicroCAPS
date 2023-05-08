@@ -30,7 +30,7 @@
                     $CurrentStatus = 'Stage 04';
                 } 
 
-                echo '<a href="' . URL_ROOT . 'admins/progress/' . $value->ChassisNo . '">
+                echo '<a href="' . URL_ROOT . 'admins/assembly/' . $value->ChassisNo . '">
                             <div class="carcard">
                                 <div class="cardhead">
                                     <div class="cardid">

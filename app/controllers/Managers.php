@@ -282,9 +282,6 @@ class Managers extends Controller {
                 $this->view('manager/'.$stage, $data);
             }
         }
-
-
-
     }
 
     // Page : Pre Delivery Inspection Results

@@ -9,13 +9,13 @@
                 On Going Assembly
             </div>
             <div class="display-flex-row gap-1">
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagetwo">
+                <a href="<?php echo URL_ROOT; ?>admins/assembly/<?php echo $data['ChassisNo']; ?>/stagetwo">
                     <div class="next">
                         <i class='icon fa-angle-left'></i>
                         Previous
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>admins/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagefour">
+                <a href="<?php echo URL_ROOT; ?>admins/assembly/<?php echo $data['ChassisNo']; ?>/stagefour">
                     <div class="next">
                         Next
                         <i class='icon fa-angle-right'></i>
@@ -65,7 +65,7 @@
                             } else {
                                 foreach ($data['stageDetails']['connected'] as $value) {
                                     echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20 margin-right-3">
-                                            <div class="padding-bottom-3 font-size">'.$value->PartName.'</div>
+                                            <div class="padding-bottom-3 font-size">'.$value->ProcessName.'</div>
                                             <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 green-box">
                                                 <div class="result-text">Connected</div>
                                             </div>
@@ -83,7 +83,7 @@
                             } else {
                                 foreach ($data['stageDetails']['hold'] as $value) {
                                     echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20 margin-right-3">
-                                            <div class="padding-bottom-3 font-size">'.$value->PartName.'</div>
+                                            <div class="padding-bottom-3 font-size">'.$value->ProcessName.'</div>
                                             <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
                                                 <div class="result-text">On Hold</div>
                                             </div>
@@ -101,7 +101,7 @@
                             } else {
                                 foreach ($data['stageDetails']['pending'] as $value) {
                                     echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20 margin-right-3">
-                                            <div class="padding-bottom-3 font-size">'.$value->PartName.'</div>
+                                            <div class="padding-bottom-3 font-size">'.$value->ProcessName.'</div>
                                             <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 yellow-box">
                                                 <div class="result-text">Pending</div>
                                             </div>
@@ -124,7 +124,7 @@
 
     <script>
 
-        let s2 = {complete: <?php echo $data['stageSum']['connected']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
+        let s2 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
 
         var ctx = document.getElementById('Lstage03').getContext('2d');
 

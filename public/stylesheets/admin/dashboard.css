@@ -202,3 +202,29 @@
     background-color: #75abfb;
     cursor: pointer;
 }
+
+
+.dash-card-logs {
+    min-height: 10rem;
+    min-width: 19rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 1.2rem;
+    padding-block: 1rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
+}
+
+.dash-card-right-datalines {
+    margin-inline: 1rem;
+}
+
+.dash-card-headings {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.text-green {
+    color: var(--green);
+}
