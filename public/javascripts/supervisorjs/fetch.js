@@ -153,16 +153,16 @@ compVehicleSelector.addEventListener('change', function() {
                 (data.componentz).forEach((component) => {
                     partSet += `<div class="parts-table-row bottom-border">
                                             <div class="parts-col-01">${component.PartName}</div>
-                                            <div class="parts-col-02">${component.CurrentStatus}</div>
+                                            <div class="parts-col-02">${component.Status}</div>
                                             <div class="parts-col-03">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}D" ${component.CurrentStatus == "DAMAGED" ? "checked" : "" } />
+                                                    <input type="checkbox" id="${component.PartNo}D" ${component.Status == "DAMAGED" ? "checked" : "" } />
                                                     <label for="${component.PartNo}D"></label>
                                                 </div>
                                             </div>
                                             <div class="parts-col-04">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}I" ${component.CurrentStatus == "ISSUED" ? "checked" : "" } />
+                                                    <input type="checkbox" id="${component.PartNo}I" ${component.Status == "ISSUED" ? "checked" : "" } />
                                                     <label for="${component.PartNo}I"></label>
                                                 </div>
                                             </div>
