@@ -82,6 +82,26 @@
                                         </li>
 
                                         <li>
+                                            <div class="filtertype">Stage</div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="stage-1" name="car-stage" value="S1" checked>
+                                                <label for="micro-panda">At Stage 01</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="stage-2" name="car-stage" value="S2" checked>
+                                                <label for="panda-cross">At Stage 02</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="stage-3" name="car-stage" value="S3" checked>
+                                                <label for="mg">At Stage 03</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="stage-4" name="car-stage" value="S4" checked>
+                                                <label for="mg">At Stage 04</label>
+                                            </div>
+                                        </li>
+
+                                        <li>
                                             <div class="filtertype">Timeline</div>
                                             <div class="filters">
                                                 <input type="radio" id="current" name="timeline" value="Current" checked>
@@ -93,7 +113,8 @@
                                             </div>
 
                                         </li>
-                                        <li>
+                                        
+                                        <!-- <li>
                                             <div class="filtertype">Status</div>
                                             <div class="filters">
                                                 <input type="radio" id="acceptance" name="acceptance" value="CM">
@@ -106,26 +127,6 @@
                                             <div class="filters">
                                                 <input type="radio" id="all-tested" name="acceptance" value="All" checked>
                                                 <label for="all-tested">All</label>
-                                            </div>
-                                        </li>
-
-                                        <!-- <li>
-                                            <div class="filtertype">Stage</div>
-                                            <div class="filters">
-                                                <input type="checkbox" id="micro-panda" name="car-model" value="M0001" checked>
-                                                <label for="micro-panda">Micro Panda</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="checkbox" id="panda-cross" name="car-model" value="M0002" checked>
-                                                <label for="panda-cross">Panda Cross</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
-                                                <label for="mg">MG ZH SUV</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
-                                                <label for="mg">MG ZH SUV</label>
                                             </div>
                                         </li> -->
 
