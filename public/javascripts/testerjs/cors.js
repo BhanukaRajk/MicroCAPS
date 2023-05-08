@@ -84,6 +84,36 @@ function removeTask(ChassisNo) {
 }
 
 
+// Mark Task as Completed
+
+function completeTask(ChassisNo) {
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response == "Successful") {
+                location.reload();
+                setLocalStorage("Successful","Task Completed Successfully");
+            } else if (response == "pdinotcompleted") {
+                location.reload();
+                setLocalStorage("Error","Check PDI List Again");
+            } else if (response == "defectnotcompleted") {
+                location.reload();
+                setLocalStorage("Error","Correct All defects first.");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Task Unsuccessful");
+            }
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/completeTask", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("ChassisNo="+ChassisNo);
+}
+
+
 // Edit Profile Details
 
 function saveChanges(id, position) {

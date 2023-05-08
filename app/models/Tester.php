@@ -172,13 +172,13 @@ class Tester {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi
+                WHERE `vehicle`.CurrentStatus = :status
                 ORDER BY `vehicle`.ChassisNo DESC
                 LIMIT 10;'
         );
 
         $this->db->bind(':status', 'RR');
-        $this->db->bind(':pdi', 'NC');
+        // $this->db->bind(':pdi', 'NC');
 
         $results = $this->db->resultSet();
 
@@ -196,13 +196,12 @@ class Tester {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi AND `vehicle`.TesterId = :id
+                WHERE `vehicle`.PDIStatus = :pdi AND `vehicle`.TesterId = :id
                 ORDER BY `vehicle`.ChassisNo DESC
                 LIMIT 10;'
         );
 
-        $this->db->bind(':status', 'RR');
-        $this->db->bind(':pdi', 'NC');
+        $this->db->bind(':pdi', 'P');
         $this->db->bind(':id', $id);
 
         $results = $this->db->resultSet();
@@ -368,6 +367,23 @@ class Tester {
         }
     }
 
+    public function notCompletedDefect($chassisno){
+        $this->db->query('SELECT `pdi-defect`.* 
+                                    FROM `pdi-defect` 
+                                    WHERE `pdi-defect`.`ChassisNo` = :chassisno AND `pdi-defect`.`ReCorrection` != :recorrection');
+
+        $this->db->bind(':chassisno', $chassisno);
+        $this->db->bind(':recorrection', 'Yes');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     // PDI DETAILS
 
@@ -467,16 +483,36 @@ class Tester {
     }
 
 
+    public function notCompletedPDI($chassisno){
+        $this->db->query('SELECT `pdi-result`.* 
+                                    FROM `pdi-result` 
+                                    WHERE `pdi-result`.`ChassisNo` = :chassisno AND `pdi-result`.`Result` = :result');
+
+        $this->db->bind(':chassisno', $chassisno);
+        $this->db->bind(':result', 'SA');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     // TASK DETAILS
 
     public function addTask($chassisno,$testerid) {
         $this->db->query(
             "UPDATE `vehicle` 
-            SET `TesterId` = :TesterId
+            SET `TesterId` = :TesterId,
+            `vehicle`.PDIStatus = :PDIStatus
             WHERE `vehicle`.`ChassisNo` = :ChassisNo"
         );
 
         $this->db->bind(':ChassisNo', $chassisno);
+        $this->db->bind(':PDIStatus', 'P');
         $this->db->bind(':TesterId', $testerid);
 
         if ( $this->db->execute() ) {
@@ -489,12 +525,31 @@ class Tester {
     public function removeTask($chassisno) {
         $this->db->query(
             "UPDATE `vehicle` 
-            SET `TesterId` = :TesterId
+            SET `TesterId` = :TesterId,
+            `vehicle`.PDIStatus = :PDIStatus
             WHERE `vehicle`.`ChassisNo` = :ChassisNo"
         );
 
         $this->db->bind(':ChassisNo', $chassisno);
+        $this->db->bind(':PDIStatus', 'NC');
         $this->db->bind(':TesterId', NULL);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function completeTask($chassisno) {
+        $this->db->query(
+            "UPDATE `vehicle` 
+            SET `vehicle`.PDIStatus = :PDIStatus
+            WHERE `vehicle`.`ChassisNo` = :ChassisNo"
+        );
+
+        $this->db->bind(':ChassisNo', $chassisno);
+        $this->db->bind(':PDIStatus', 'CM');
 
         if ( $this->db->execute() ) {
             return true;

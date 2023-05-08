@@ -467,4 +467,39 @@ class Testers extends controller
             }
         }
     }
+
+    public function completeTask()
+    {
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['ChassisNo']),
+                'pdi_err' => '',
+                'defect_err' => ''
+            ];
+
+            if ($this->testerModel->notCompletedPDI($data['ChassisNo'])) {
+                $data['pdi_err'] = 'PDI not completed';
+                echo 'pdinotcompleted';
+            } else if ($this->testerModel->notCompletedDefect($data['ChassisNo'])) {
+                $data['defect_err'] = 'Defects not completed';
+                echo 'defectnotcompleted';
+            }
+            
+
+            if (empty($data['defect_err']) && empty($data['pdi_err'])) {
+                if ($this->testerModel->completeTask($data['ChassisNo'])) {
+                    echo 'Successful';
+                } else {
+                    echo 'Error';
+                }
+            }
+        }
+    }
 }

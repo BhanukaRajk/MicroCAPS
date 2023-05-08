@@ -17,6 +17,7 @@
             </div>
             <div>
                 <button class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $data['pdiVehicle']->ChassisNo ?>'">Edit Defect Sheet</button>
+                <button class="btn btn-primary btn-green" onClick="completeTask('<?php echo $data['pdiVehicle']->ChassisNo ?>')">Mark As Completed</button>
             </div>
         </div>
 
