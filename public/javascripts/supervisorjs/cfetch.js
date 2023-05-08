@@ -39,7 +39,7 @@ function consumeFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findConsumables", {
+    fetch("http://localhost/MicroCAPS/Supervisors/findConsumables", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -72,7 +72,7 @@ function consumeFilter() {
                                         </div>
                                     </div>
                                     <div class="carpicbox">
-                                        <img src="http://localhost:8080/MicroCAPS/public/images/consumables/${consume.Image}" class="carpic" alt="${consume.ConsumableName}">
+                                        <img src="http://localhost/MicroCAPS/public/images/consumables/${consume.Image}" class="carpic" alt="${consume.ConsumableName}">
                                     </div>
                                     <div class="carstatus ${consume.Volume == null ? (consume.Weight >= 60 ? 'available' : 'lower') : (consume.Volume >= 60 ? 'available' : 'lower')}">${consume.Volume == null ? (consume.Weight >= 60 ? 'Available' : 'Low in stock') : (consume.Volume >= 60 ? 'Available' : 'Low in stock')}</div>
                                     <div class="chassisno con-last-update">Last update: ${consume.UDate} at ${consume.UTime.substring(0, 5)} </div>
@@ -87,7 +87,7 @@ function consumeFilter() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="http://localhost/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -144,7 +144,7 @@ function toolFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findToolz", {
+    fetch("http://localhost/MicroCAPS/Supervisors/findToolz", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -177,7 +177,7 @@ function toolFilter() {
                                     </div>
                                     </div>
                                     <div class="toolpicbox">
-                                    <img src="http://localhost:8080/MicroCAPS/public/images/tools/${tool.Image != null ? tool.Image : 'none.jpeg'}" class="toolpic" alt="${tool.ToolName}">
+                                    <img src="http://localhost/MicroCAPS/public/images/tools/${tool.Image != null ? tool.Image : 'none.jpeg'}" class="toolpic" alt="${tool.ToolName}">
                                     </div>
                                     <div class="tool-card-down">
                                     <div class="tool-updater ${tool.Status == "Normal" ? 'available' : 'lower'}">${tool.Status == "Normal" ? 'Normal' : 'Need an attention'}</div>
@@ -195,7 +195,7 @@ function toolFilter() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="http://localhost/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;

@@ -36,6 +36,11 @@
     color: var(--red) !important
 }
 
+.text-green {
+    color: var(--green) !important
+
+}
+
 .text-darkblue {
     color: var(--darkblue) !important
 }

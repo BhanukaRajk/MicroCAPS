@@ -465,7 +465,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['CarComp'] = $this->supervisorModel->viewVehicleList("S2");
+            $data['CarComp'] = $this->supervisorModel->viewVehicleList(['S1','S2','S3','S4']);
             $this->view('supervisor/parts/com_vehicle_list', $data);
         }
     }
@@ -612,7 +612,7 @@ class Supervisors extends controller
                 'CarID' => trim($_POST['form-car-id'])
             ];
 
-            if ($this->supervisorModel->checkCarById($data['CarID'], "S4")) {
+            if ($this->supervisorModel->checkCarById($data['CarID'], "AC")) {
 
                 if ($this->supervisorModel->createPAQForm($data['CarID'])) {
                     $data['FormCarData'] = $this->supervisorModel->createPAQForm($data['CarID']);
@@ -662,7 +662,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList('S4');
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['AC','PA']);
             $this->view('supervisor/inspection/vehiclelist', $data);
             // print_r($data);
         }
@@ -912,7 +912,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList("S4");
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['RR']);
             $this->view('supervisor/pdi/vehiclelist', $data);
         }
     }

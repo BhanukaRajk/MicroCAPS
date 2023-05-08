@@ -111,9 +111,23 @@
                     <div class="display-flex-row justify-content-center">
                         <table>
                             <?php 
+
+                                echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal"><b>You</b></td>';
+                                echo '<td class="font-size width-rem-8p5 word-wrap-normal"><span class="text-green"><b>Online</b></span></td></tr>';
+
                                 foreach ($data['activityLogs'] as $activityLog) {
-                                    echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal">' . $activityLog->empName . '</td>
-                                            <td class="font-size width-rem-8p5 word-wrap-normal">' . $activityLog->logDate . ' at ' . substr($activityLog->logTime, 0, 5) . '</td></tr>';
+
+                                    if ($activityLog->EmployeeId != $_SESSION['_id']) {
+                                        echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal">' . $activityLog->empName . '</td>';
+                                    
+                                    
+                                        if($activityLog->LoggedIn == 1) {
+                                            echo '<td class="font-size width-rem-8p5 word-wrap-normal"><span class="text-green"><b>Online</b></span></td></tr>';
+                                        } else {
+                                            echo '<td class="font-size width-rem-8p5 word-wrap-normal">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
+                                        }
+                                    }
+                                    
                                 }
                             ?>
                         </table>

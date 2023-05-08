@@ -45,7 +45,7 @@ function updateFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findCars", {
+    fetch("http://localhost/MicroCAPS/Supervisors/findCars", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -65,7 +65,7 @@ function updateFilter() {
                 let carSet = '';
 
                 data.forEach((car) => {
-                    carSet += `<form method="POST" action="http://localhost:8080/MicroCAPS/Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                    carSet += `<form method="POST" action="http://localhost/MicroCAPS/Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
                                 <div class="cardhead">
                                     <div class="cardid">
                                         <div class="carmodel">${car.ModelName}</div>
@@ -74,7 +74,7 @@ function updateFilter() {
                                     </div>
                                 </div>
                                 <div class="carpicbox">
-                                    <img src="http://localhost:8080/MicroCAPS/public/images/cars/${car.ModelName} ${car.Color}.png" class="carpic" alt="Car image" />
+                                    <img src="http://localhost/MicroCAPS/public/images/cars/${car.ModelName} ${car.Color}.png" class="carpic" alt="Car image" />
                                 </div>
                                 <div></div>
                             </div></form>`;
@@ -88,7 +88,7 @@ function updateFilter() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="http://localhost/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -121,7 +121,7 @@ compVehicleSelector.addEventListener('change', function() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/componentsView", {
+    fetch("http://localhost/MicroCAPS/Supervisors/componentsView", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -153,16 +153,16 @@ compVehicleSelector.addEventListener('change', function() {
                 (data.componentz).forEach((component) => {
                     partSet += `<div class="parts-table-row bottom-border">
                                             <div class="parts-col-01">${component.PartName}</div>
-                                            <div class="parts-col-02">${component.CurrentStatus}</div>
+                                            <div class="parts-col-02">${component.Status}</div>
                                             <div class="parts-col-03">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}D" ${component.CurrentStatus == "DAMAGED" ? "checked" : "" } />
+                                                    <input type="checkbox" id="${component.PartNo}D" ${component.Status == "DAMAGED" ? "checked" : "" } />
                                                     <label for="${component.PartNo}D"></label>
                                                 </div>
                                             </div>
                                             <div class="parts-col-04">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}I" ${component.CurrentStatus == "ISSUED" ? "checked" : "" } />
+                                                    <input type="checkbox" id="${component.PartNo}I" ${component.Status == "ISSUED" ? "checked" : "" } />
                                                     <label for="${component.PartNo}I"></label>
                                                 </div>
                                             </div>

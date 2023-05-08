@@ -49,7 +49,7 @@ function updateFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findCars", {
+    fetch("http://localhost/MicroCAPS/Supervisors/findCars", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -69,7 +69,7 @@ function updateFilter() {
                 let carSet = '';
 
                 data.forEach((car) => {
-                    carSet += `<form method="POST" action="http://localhost:8080/MicroCAPS/Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                    carSet += `<form method="POST" action="http://localhost/MicroCAPS/Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
                                 <div class="cardhead">
                                     <div class="cardid">
                                         <div class="carmodel">${car.ModelName}</div>
@@ -78,7 +78,7 @@ function updateFilter() {
                                     </div>
                                 </div>
                                 <div class="carpicbox">
-                                    <img src="http://localhost:8080/MicroCAPS/public/images/cars/${car.ModelName} ${car.Color}.png" class="carpic" alt="Car image" />
+                                    <img src="http://localhost/MicroCAPS/public/images/cars/${car.ModelName} ${car.Color}.png" class="carpic" alt="Car image" />
                                 </div>
                                 <div></div>
                             </div></form>`;
@@ -92,7 +92,7 @@ function updateFilter() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="http://localhost/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;

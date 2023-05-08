@@ -91,7 +91,7 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT `employee`.`EmployeeId`, CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime`, `logged_in` 
+            'SELECT `employee`.`EmployeeId`, CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime`, `LoggedIn` 
             FROM `employee-logs`,`employee` 
             WHERE `employee-logs`.`EmployeeId` = `employee`.`EmployeeId` 
             ORDER BY `employee-logs`.`lastLog` DESC LIMIT 6;'
@@ -554,7 +554,7 @@ class Supervisor
 
     public function viewCarComponents($car) {
         $this->db->query(
-            'SELECT `component`.`PartNo`, `component`.`PartName`, `component-release`.`CurrentStatus`
+            'SELECT `component`.`PartNo`, `component`.`PartName`, `component-release`.`Status`
                     FROM `component-release`, `component` 
                     WHERE `component-release`.`PartNo` = `component`.`PartNo` 
                     AND `component-release`.`ChassisNo` = :THIS_CAR;'
@@ -574,16 +574,18 @@ class Supervisor
     public function viewVehicleList($stage)
     {
 
-        $this->db->query(
-            'SELECT `vehicle`.`ChassisNo`, 
+        $quotedStages = implode(',', array_map(function($stage) {
+            return "'" . addslashes($stage) . "'";
+        }, $stage));
+
+        $sql = "SELECT `vehicle`.`ChassisNo`, 
                         `vehicle`.`EngineNo`, 
                         `vehicle`.`Color`, 
                         `vehicle-model`.`ModelName` 
                     FROM `vehicle`, `vehicle-model` 
-                    WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` AND `vehicle`.`CurrentStatus` = :STAGE;'
-        );
+                    WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` AND `vehicle`.`CurrentStatus` IN ($quotedStages)";
 
-        $this->db->bind(':STAGE', $stage);
+            $this->db->query($sql);
 
         $vehicles = $this->db->resultSet();
 
@@ -884,15 +886,15 @@ class Supervisor
                     AND `stage-process`.`StageNo` LIKE :stage;'
         );
 
-        if($stage == 'S1') {
-            $stage = '001';
-        } else if($stage == 'S2') {
-            $stage = '002';
-        } else if($stage == 'S3') {
-            $stage = '003';
-        } else if($stage == 'S4') {
-            $stage = '004';
-        }
+//        if($stage == 'S1') {
+//            $stage = '001';
+//        } else if($stage == 'S2') {
+//            $stage = '002';
+//        } else if($stage == 'S3') {
+//            $stage = '003';
+//        } else if($stage == 'S4') {
+//            $stage = '004';
+//        }
 
         $this->db->bind(':chassisNo', $chassisNo);
         $this->db->bind(':stage', $stage);

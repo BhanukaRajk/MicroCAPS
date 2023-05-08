@@ -57,20 +57,30 @@
                             </div>
                             <div class="display-flex-column gap-1 overflow">
                                 <?php
-                                foreach ($data['damagedParts'] as $part) {
-                                    echo '<div class="medfont display-flex-row justify-content-between border-bottom width-rem-20">
-                                            <div class="display-flex-column padding-bottom-3">
-                                                <div class="part-name">'.$part->PartName.'</div>
-                                                <div class="display-flex-row gap-1">
-                                                    <div class="">Serial No: '. $part->SerialNo .'</div>
-                                                    <div class="">Color: '. $part->Color .'</div>
+                                if (!$data['damagedParts']) {
+
+                                    echo '<div class="horizontal-centralizer">
+                                                        <div class="marginy-4">No Damaged Parts Available</div>
+                                                        <div class=""></div>
+                                                    </div>
+                                                    <div class="bottom-border"></div>';
+        
+                                } else {
+                                    foreach ($data['damagedParts'] as $part) {
+                                        echo '<div class="medfont display-flex-row justify-content-between border-bottom width-rem-20">
+                                                <div class="display-flex-column padding-bottom-3">
+                                                    <div class="part-name">'.$part->PartName.'</div>
+                                                    <div class="display-flex-row gap-1">
+                                                        <div class="">Serial No: '. $part->SerialNo .'</div>
+                                                        <div class="">Color: '. $part->Color .'</div>
+                                                    </div>
+                                                </div>
+                                                <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
+                                                    <div class="'. (($part->RequestStatus == "Requested") ? 'result-text-req' : 'result-text-not-req' ) .'">'. $part->RequestStatus .'</div>
                                                 </div>
                                             </div>
-                                            <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
-                                                <div class="'. (($part->RequestStatus == "Requested") ? 'result-text-req' : 'result-text-not-req' ) .'">'. $part->RequestStatus .'</div>
-                                            </div>
-                                        </div>
-                                        ';
+                                            ';
+                                    }
                                 }
                                 ?>
                             </div>
@@ -101,14 +111,22 @@
                     <div class="dash-card-logs">
                         <div class="dash-card-right-datalines dash-card-headings test1">Activity Log</div>
                         <div class="horizontal-centralizer"><table><?php
-                                foreach ($data['activities'] as $activityLog) {
-                                    echo '<tr><td class="log-data">' . (($activityLog->EmployeeId != $_SESSION['_id']) ? $activityLog->empName : '<b>You</b>') . '</td>';
-                                    if($activityLog->logged_in == 1) {
+
+                            echo '<tr><td class="log-data"><b>You</b></td>';
+                            echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
+
+                            foreach ($data['activities'] as $activityLog) {
+
+                                if ($activityLog->EmployeeId != $_SESSION['_id']) {
+                                    echo '<tr><td class="log-data">' . $activityLog->empName  . '</td>';
+                                    if($activityLog->LoggedIn == 1) {
                                         echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
                                     } else {
                                         echo '<td class="log-data">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
                                     }
                                 }
+                                
+                            }
                                 ?></table></div>
 
                     </div>

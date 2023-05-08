@@ -55,34 +55,46 @@
                 <div class="task-detail-box-inner">
 
                     <?php
-                    foreach ($data['taskList'] as $Task) {
-                    echo '<div class="task-schedule-record">
-                        <div class="task-schedule-record-inner">
-                            <div class="task-vehicle">
-                                <div class="task-vehicle-id">'. $Task->ChassisNo .'</div>
-                                <div class="task-vehicle-date">'. $Task->Date .'</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-name vertical-centralizer">
-                                <div>Task: '. $Task->ProcessName .'</div>
-                            </div>
-                            <div class="vline"></div>
-                            <div class="task-worker vertical-centralizer">
-                                <div>Assembler: '. $Task->Worker .'</div>
-                            </div>
-                            <div class="task-status vertical-centralizer">
-                                <div class="round">
-                                    <input type="checkbox" id="'. $Task->ChassisNo .'-'. $Task->ProcessId .'" 
-                                    '. (($Task->Completeness == "0") ? 'checked' : '') .'>
-                                    <label for="'. $Task->ChassisNo .'-'. $Task->ProcessId .'"></label>
+
+                    if (!$data['taskList']) {
+
+                        echo '<div class="horizontal-centralizer">
+                                            <div class="marginy-4">No Schedules Available</div>
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="bottom-border"></div>';
+
+                    } else {
+
+                        foreach ($data['taskList'] as $Task) {
+                        echo '<div class="task-schedule-record">
+                            <div class="task-schedule-record-inner">
+                                <div class="task-vehicle">
+                                    <div class="task-vehicle-id">'. $Task->ChassisNo .'</div>
+                                    <div class="task-vehicle-date">'. $Task->Date .'</div>
+                                </div>
+                                <div class="vline"></div>
+                                <div class="task-name vertical-centralizer">
+                                    <div>Task: '. $Task->ProcessName .'</div>
+                                </div>
+                                <div class="vline"></div>
+                                <div class="task-worker vertical-centralizer">
+                                    <div>Assembler: '. $Task->Worker .'</div>
+                                </div>
+                                <div class="task-status vertical-centralizer">
+                                    <div class="round">
+                                        <input type="checkbox" id="'. $Task->ChassisNo .'-'. $Task->ProcessId .'" 
+                                        '. (($Task->Completeness == "0") ? 'checked' : '') .'>
+                                        <label for="'. $Task->ChassisNo .'-'. $Task->ProcessId .'"></label>
+                                    </div>
+                                </div>
+                                <div class="task-edit vertical-centralizer">
+                                    <!-- <a onclick="">Edit</a> -->
+                                    <img src="'. URL_ROOT.'/public/images/icons/edit.png" onclick="" class="mouse-pointer width-rem-1p25" alt="Edit">
                                 </div>
                             </div>
-                            <div class="task-edit vertical-centralizer">
-                                <!-- <a onclick="">Edit</a> -->
-                                <img src="'. URL_ROOT.'/public/images/icons/edit.png" onclick="" class="mouse-pointer width-rem-1p25" alt="Edit">
-                            </div>
-                        </div>
-                    </div>';
+                        </div>';
+                        }
                     }
                     ?>
 

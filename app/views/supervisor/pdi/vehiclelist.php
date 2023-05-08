@@ -30,20 +30,30 @@
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        foreach ($data['LineCarsSet'] as $car) {
-                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/pdi_results/'. $car->ChassisNo.'"><div onclick="this.closest(\'form\').submit()" class="carcard">
-                                <div class="cardhead">
-                                    <div class="cardid">
-                                        <div class="carmodel">'. $car->ModelName .'</div>
-                                        <div class="chassisno">'. $car->ChassisNo .'</div>
-                                        <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                        if (!$data['LineCarsSet']) {
+
+                            echo '<div class="horizontal-centralizer">
+                                                <div class="marginy-4">No PDI Available</div>
+                                                <div class=""></div>
+                                            </div>
+                                            <div class="bottom-border"></div>';
+
+                        } else { 
+                            foreach ($data['LineCarsSet'] as $car) {
+                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/pdi_results/'. $car->ChassisNo.'"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                                    <div class="cardhead">
+                                        <div class="cardid">
+                                            <div class="carmodel">'. $car->ModelName .'</div>
+                                            <div class="chassisno">'. $car->ChassisNo .'</div>
+                                            <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="carpicbox">
-                                    <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
-                                </div>
-                                <div></div>
-                            </div></form>';
+                                    <div class="carpicbox">
+                                        <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                    </div>
+                                    <div></div>
+                                </div></form>';
+                            }
                         }
                         ?>
 
