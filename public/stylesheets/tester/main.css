@@ -1639,3 +1639,11 @@ select:focus-visible {
     max-height: 80vh;
     overflow: auto;
 }
+
+.word-wrap-normal {
+    word-wrap: normal;
+}
+
+.text-green {
+    color: var(--green);
+}

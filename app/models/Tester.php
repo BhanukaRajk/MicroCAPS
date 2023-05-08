@@ -621,5 +621,24 @@ class Tester {
             return false;
         }
     }
+
+    public function activityLogs() {
+
+        $this->db->query(
+            'SELECT `employee-logs`.`EmployeeId`, `employee-logs`.`LoggedIn` ,CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime` 
+            FROM `employee-logs`,`employee` 
+            WHERE `employee-logs`.`EmployeeId` = `employee`.`EmployeeId` 
+            ORDER BY `employee-logs`.`lastLog` DESC LIMIT 6;'
+        );
+
+        $lastLogs = $this->db->resultSet();
+
+        if ($lastLogs) {
+            return $lastLogs;
+        } else {
+            return false;
+        }
+    }
+
 }
 

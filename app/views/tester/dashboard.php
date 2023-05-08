@@ -16,16 +16,25 @@
                                     <div class="dash-cap">Your Tasks</div>
                                     <div class="pending-tasks">
 
-                                        <?php foreach ($data['vehicles'] as $values) : 
-                                                if($values->TesterId == $_SESSION['_id']){ ?>
-                                                        <div 
-                                                                class="blue-button-long"  
-                                                                onClick="location.href='<?php echo URL_ROOT; ?>testers/pdi/<?php  echo $values->ChassisNo; ?>'"
-                                                        >
-                                                                <?php echo $values->ChassisNo; ?>
-                                                        </div>
+                                        <?php 
 
-                                        <?php } endforeach; ?>
+                                        if (!$data['vehicles']) {
+                                            echo '
+                                            <div class="display-flex-row justify-content-center align-items-center width-100 paddingy-6">
+                                                    <div class="font-weight">No PDI Vehicles</div>
+                                                </div>
+                                            ';
+                                        } else {                                         
+                                            foreach ($data['vehicles'] as $values) : 
+                                                    if($values->TesterId == $_SESSION['_id']){ ?>
+                                                            <div 
+                                                                    class="blue-button-long"  
+                                                                    onClick="location.href='<?php echo URL_ROOT; ?>testers/pdi/<?php  echo $values->ChassisNo; ?>'"
+                                                            >
+                                                                    <?php echo $values->ChassisNo; ?>
+                                                            </div>
+
+                                            <?php } endforeach; } ?>
 
                                     </div>
                                 </div>
@@ -45,9 +54,32 @@
                                 </div>
                             </div>
                             <div class="db-right">
-                                <div class="db-logs bold">
-                                    <div class="db-act-sidebox">Activity Logs</div>
-                                    <div class="db-act-sidebox"></div>
+                                <div class="db-logs">
+                                    <div class="db-act-sidebox bold">Activity Logs</div>
+                                    <div class="display-flex-row justify-content-center">
+                                        <table>
+                                            <?php 
+
+                                                echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal"><b>You</b></td>';
+                                                echo '<td class="font-size width-rem-8p5 word-wrap-normal"><span class="text-green"><b>Online</b></span></td></tr>';
+
+                                                foreach ($data['activityLogs'] as $activityLog) {
+
+                                                    if ($activityLog->EmployeeId != $_SESSION['_id']) {
+                                                        echo '<tr><td class="font-size width-rem-8p5 word-wrap-normal">' . $activityLog->empName . '</td>';
+                                                    
+                                                    
+                                                        if($activityLog->LoggedIn == 1) {
+                                                            echo '<td class="font-size width-rem-8p5 word-wrap-normal"><span class="text-green"><b>Online</b></span></td></tr>';
+                                                        } else {
+                                                            echo '<td class="font-size width-rem-8p5 word-wrap-normal">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                            ?>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="db-quick bold">
                                     <div class="db-qck-sidebox">Quick Access</div>

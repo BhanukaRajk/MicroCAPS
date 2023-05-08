@@ -33,6 +33,7 @@ class Testers extends controller
             $data['url'] = getUrl();
             $data['vehicles'] = $this->testerModel->onPDIVehicles();
             $data['counts'] = $this->testerModel->vehicleCount();
+            $data['activityLogs'] = $this->testerModel->activityLogs();
             $this->view('tester/dashboard', $data);
         }
     }

@@ -132,7 +132,16 @@
 }
 
 .db-logs {
-    min-height: 20vh;
+    min-height: 10rem;
+    min-width: 19rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 1.2rem;
+    padding-block: 1rem;
+    box-shadow: 0px 0px 10px 2px #8ba2fc10;
+    gap: 1rem 0;
+    /* min-height: 20vh;
     min-width: 16.5rem;
 
     display: flex;
@@ -140,7 +149,7 @@
     justify-content: space-between;
 
     background-color: white;
-    border-radius: 1.2rem;
+    border-radius: 1.2rem; */
 }
 
 .db-quick {
@@ -163,7 +172,7 @@
 
 .db-act-sidebox {
     margin-inline: 1rem;
-    margin-top: 1.5rem;
+    /* margin-top: 1.5rem; */
 }
 
 .db-qck-sidebox {
@@ -221,7 +230,7 @@
 .dash-cap{
     font-weight: bold;
     margin-top: 2rem;
-    font-family: "Noto Sans";
+    /* font-family: "Noto Sans"; */
     font-size: 18px;
 }
 
