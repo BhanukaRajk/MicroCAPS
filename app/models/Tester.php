@@ -172,13 +172,13 @@ class Tester {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus = :status
+                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus != :pdi
                 ORDER BY `vehicle`.ChassisNo DESC
                 LIMIT 10;'
         );
 
         $this->db->bind(':status', 'RR');
-        // $this->db->bind(':pdi', 'NC');
+        $this->db->bind(':pdi', 'CM');
 
         $results = $this->db->resultSet();
 
