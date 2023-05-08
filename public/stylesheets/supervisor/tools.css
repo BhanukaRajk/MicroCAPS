@@ -1,0 +1,367 @@
+.toolset-margin {
+    margin: 0 40px 30px 40px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+
+.toolset-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    position: sticky;
+    background-color: #F2F2F7;
+    /* border: 1px solid black; */
+
+    width: 100%;
+    top: 4rem;
+
+    padding-block: 1rem;
+    padding-inline: 2rem;
+
+    font-family: 'Noto Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: #1C1F37;
+}
+
+.toolset-body {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.toolset-toolview {
+    display: flex;
+    flex-direction: row;
+
+    flex-wrap: wrap;
+    /* gap: 27px; */
+}
+
+.toolcard {
+    width: 221px;
+    height: 200px;
+    padding: 23px;
+
+    margin-block-end: 27px;
+    margin-inline-end: 27px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.cardhead {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.toolname {
+    height: 15px;
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+
+    color: #000000;
+}
+
+.tool-quantity {
+    margin-top: 0.25rem;
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+
+    color: #A6AFBA;
+}
+
+.toolstatuscolor {
+    display: flex;
+    justify-content: right;
+}
+
+.status-circle {
+    width: 15px;
+    height: 15px;
+    /*margin: auto 1rem auto 0.5rem;*/
+    border-radius: 50%;
+}
+
+/* GRAPH OPTION 1 */
+.status-green-circle {
+    background-color: #17B978;
+}
+
+/* GRAPH OPTION 2 */
+.status-orange-circle {
+    background-color: #FD5F00;
+}
+
+.toolpicbox {
+    text-align: center;
+}
+
+.toolpic {
+    height: 113px;
+}
+
+
+
+.tool-card-down {
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-updater {
+    /* font-family: 'Proxima Nova'; */
+    /* font-size: 18px; */
+    font-style: normal;
+    font-weight: 500;
+    line-height: 33px;
+}
+
+.available {
+    color: #17B978;
+}
+
+.lower {
+    color: #FD5F00;
+}
+
+.toolupdate {
+    height: 18px;
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+
+    color: #A6AFBA;
+}
+
+.last-update {
+    font-size: small;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.toolset-filterbox {
+    position: fixed;
+    width: 212px;
+    /* height: 520px; */
+    right: 20px;
+    top: 165px;
+    /*padding: 23px;*/
+    /*margin-inline: 20px;*/
+
+    background: #FFFFFF;
+    /* Shadow/light */
+
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    /*justify-content: space-between;*/
+}
+
+.toolfilter {
+    margin: 22px 0;
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.filter-head {
+    margin: 0.5rem 1.2rem;
+}
+
+.filtertype {
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    line-height: 14px !important;
+    /* identical to box height */
+
+
+    /* Grey/700 */
+
+    color: #4C5C6B;
+}
+
+.filters {
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height */
+
+
+    /* Grey/500 */
+
+    color: #A6AFBA;
+    /* margin-block: 15px; */
+    /*border: black solid 1px;*/
+}
+
+/* a {
+    text-decoration: none;
+} */
+
+
+
+.toolfilter ul {
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1 em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-inline: 30px;
+}
+
+
+
+
+
+
+.consumable-detail-popup {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    position: fixed;
+
+    width: 700px;
+    height: 360px;
+    left: 507px;
+    top:160px;
+
+    padding: 40px 30px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 8px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+    gap: 15px 0;
+
+    z-index: 1;
+}
+
+.popup-left,
+.popup-right {
+    width: 325px;
+}
+
+.cs-popup-csname {
+    font-size: 24px;
+    margin-block: 20px;
+}
+
+#toolUpdatePopUp #formToolStatus {
+    width: 18rem;
+    padding: 0.75rem;
+
+    margin-block-end: 2rem;
+
+    font-size: initial;
+    border: 1px solid grey;
+    color: grey;
+    border-radius: 0.5rem;
+}
+
+
+.border-div {
+    border-right: #bbbbbb solid 1px;
+}
+
+
+.consume-update {
+    width: 18rem !important;
+    height: 2.4rem !important;
+    font-size: 16px !important;
+}
+
+
+
+
+.popup-box-heading1 {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.consumable-popup-img {
+    height: 200px;
+    margin-block: 30px;
+}
+
+
+
+
+
+.filter-btn {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+
+.filter-button {
+    width: 100px;
+    height: 30px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #017EFA;
+    color: #FFFFFF;
+}
+
+.filter-button:hover {
+    background-color: #017dfabb;
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+}
+
+
+.line {
+    border-top:1px solid #4C5C6B;
+}

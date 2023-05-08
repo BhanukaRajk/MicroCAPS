@@ -1,0 +1,48 @@
+#myChart {
+    width: 300px ;
+    height: 250px ;
+}
+
+.SX-bigChart {
+    width: 500px !important;
+    height: 250px !important;
+}
+
+.SX-bigstate {
+    top: 21.75rem !important;
+    left: 18.25rem;
+}
+
+#stage01,
+#stage02,
+#stage03,
+#stage04 {
+    width: 10rem !important;
+    height: 10rem !important;
+}
+
+.chart-percentage {
+    position: absolute;
+    top: 15.3rem;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 600;
+    color: #071aa9 !important;
+}
+
+.chart-percentage-ao {
+    font-size: 4rem;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: #1C1F37;
+
+}
+
+.chart-percentage-stage{
+    font-size: 2rem;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: #1C1F37;
+    height: 2rem;
+    width: 2rem;
+}
