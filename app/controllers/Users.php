@@ -207,11 +207,14 @@
                 if ($vOld) {
                     $update = $this->userModel->updatePassword($_SESSION['_id'], $data['newPassword']);
                     if ($update) {
+                        $_SESSION['success_message'] = 'Success! Password Updated';
                         echo 'Successful';
                     } else {
+                        $_SESSION['error_message'] = 'Error! Password Not Updated';
                         echo 'Password Not Updated';
                     }
                 } else {
+                    $_SESSION['error_message'] = 'Error! Incorrect Current Password';
                     echo 'Incorrect Current Password';
                 }
 

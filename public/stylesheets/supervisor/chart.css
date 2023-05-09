@@ -1,16 +1,6 @@
 #myChart {
-    width: 300px ;
-    height: 250px ;
-}
-
-.SX-bigChart {
-    width: 500px !important;
-    height: 250px !important;
-}
-
-.SX-bigstate {
-    top: 21.75rem !important;
-    left: 18.25rem;
+    width: 300px !important;
+    height: 230px !important;
 }
 
 #stage01,
@@ -27,22 +17,38 @@
     transform: translate(-50%, -50%);
     font-size: 3rem;
     font-weight: 600;
-    color: #071aa9 !important;
+    color: var(--fontgray);
 }
 
 .chart-percentage-ao {
     font-size: 4rem;
     transform: translate(-50%, -50%);
     font-weight: 600;
-    color: #1C1F37;
-
+    color: var(--fontgray);
+    justify-self: center;
+    align-self: center;
 }
 
 .chart-percentage-stage{
     font-size: 2rem;
     transform: translate(-50%, -50%);
     font-weight: 600;
-    color: #1C1F37;
+    color: var(--fontgray);
     height: 2rem;
-    width: 2rem;
+    width: 3rem;
+}
+
+.dash-darkblue-circle {
+    background-color: #0853dd;
+}
+
+.dash-lightblue-circle {
+    background-color: #3ba5fb;
+}
+
+.dash-graph-color-circle {
+    height: 0.5rem;
+    width: 0.5rem;
+    margin: auto 0.5rem auto 0rem;
+    border-radius: 50%;
 }

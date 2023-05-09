@@ -5,7 +5,6 @@ const preview = document.getElementById("img-preview");
 const chgPass = document.getElementById("chg-pass");
 const cancel = document.getElementById("cancel");
 
-
 edit?.addEventListener("click", () => {
 
     $("#details :input").prop("disabled", false);

@@ -1,107 +1,5 @@
 
-// Flash Message
-$(document).ready(() => {
-
-    if (getItem("FlashState") === "Successful") {
-        alertSuccess(getItem("FlashMessage"));
-    } else if (getItem("FlashState") === "Error") {
-        alertFaliure(getItem("FlashMessage"));
-    }
-
-    removeLocalStorage()
-
-})
-
 // C.O.R.S
-function requestShell() {
-
-    let Chassis01 = document.getElementById("Chassis01").value;
-    let chasis02 = document.getElementById("chasis02").value;
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = this.responseText;
-
-            if (response == "Successful") {
-
-                location.reload();
-                setLocalStorage("Successful","Email Sent Successfully");
-
-            } else {
-
-                location.reload();
-                setLocalStorage("Error","Error Sending Email");
-
-            }
-
-        }
-    };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/shellRequest", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("suvQty="+Chassis01+"&normalQty="+chasis02);
-}
-
-function addShell() {
-
-    let chassisNo = document.getElementById("chassisNo").value;
-    let color = document.getElementById("color").value;
-    let chassis = document.getElementById("chassis").value;
-    let repair = document.getElementById("repair").checked;
-    let paint = document.getElementById("paint").checked;
-    let repairDescription = document.getElementById("repairDescription").value
-
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = this.responseText;
-
-            if (response == "Successful") {
-
-                location.reload();
-                setLocalStorage("Successful","Shell Added Successfully");
-
-            } else {
-
-                location.reload();
-                setLocalStorage("Error","Shell Adding Failed");
-
-            }
-
-        }
-    };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/addShell", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("chassisNo="+chassisNo+"&color="+color+"&chassisType="+chassis+"&repair="+repair+"&paint="+paint+"&repairDescription="+repairDescription);
-}
-
-function jobDone(id,job) {
-    
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = this.responseText;
-
-            if (response == "Successful") {
-
-                location.reload();
-                setLocalStorage("Successful",id + " - " + job + " " + " Job is Completed");
-
-            } else {
-
-                location.reload();
-                // setLocalStorage("Error","Failed");
-
-            }
-
-        }
-    };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Managers/jobDone", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("id="+id+"&job="+job);
-
-}
 
 function dashboardChart() {
 
@@ -128,7 +26,8 @@ function dashboardChart() {
 
 }
 
-function saveChanges(id) {
+
+function saveChanges(id, position) {
     let formdata = new FormData();
     formdata.append("id", id);
     formdata.append("image", document.getElementById("image").files[0]);
@@ -139,59 +38,96 @@ function saveChanges(id) {
     formdata.append("nic", document.getElementById("nic").value);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MicroCAPS/Managers/settings',
+        url:  'http://localhost/MicroCAPS/'+position+'s/settings',
         data: formdata,
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
-                location.reload();
-                setLocalStorage("Successful","Saved Changes");
-            } else {
-                location.reload();
-                setLocalStorage("Error","Error Saving Changes");
-            }
+            location.reload(true);
         }
     });
 }
 
-//Alert Success
-function alertSuccess(message) {
-    let alert = document.getElementById("alert-success");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
-    alert.innerHTML = "<i class='icon fa-check-circle margin-right-3'></i>"+message;
-
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
-    }, 5000);
+function updatePassword() {
+    let formdata = new FormData();
+    formdata.append("currentPassword", document.getElementById("currentpassword").value);
+    formdata.append("newPassword", document.getElementById("newpassword").value);
+    formdata.append("confirmPassword", document.getElementById("confirmpassword").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/Users/updatePassword',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            location.reload(true);
+        }
+    });
 }
 
-//Alert Faliure
-function alertFaliure(message) {
-    let alert = document.getElementById("alert-faliure");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
-    alert.innerHTML = "<i class='icon fa-times-circle margin-right-3'></i>"+message;
-
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
-    }, 5000);
+function addConsumables() {
+    let formdata = new FormData();
+    formdata.append("image", document.getElementById("imagec").files[0]);
+    formdata.append("name", document.getElementById("conName").value);
+    formdata.append("type", document.getElementById("consume-type").value);
+    formdata.append("status", document.getElementById("status").value);
+    $.ajax({
+        type: 'POST',
+        url:  'http://localhost/MicroCAPS/Supervisors/addNewConsumables',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            // console.log(response);
+            location.reload(true);
+        }
+    });
 }
 
-//Local Storage
-function setLocalStorage(FlashState,FlashMessage) {
-    localStorage.setItem("FlashState",FlashState);
-    localStorage.setItem("FlashMessage",FlashMessage);
+function updateChart(ctx, ltx, data, cutout = 50) {
+
+    let done = data['overall'].completed/(parseInt(data['overall'].completed) + parseInt(data['overall'].pending))*100;
+    let ongoing = data['overall'].pending/(parseInt(data['overall'].completed) + parseInt(data['overall'].pending))*100;
+
+    let chartGrid = cutout == 50 ? 'chart-grid-stage-add' : 'chart-grid-add';
+
+    if (done == 0) {
+        ltx.innerHTML = '0%';
+        ltx.classList.add(chartGrid + '-1');
+    } else if (done == 100) {
+        ltx.innerHTML = '100%';
+        ltx.classList.add(chartGrid + '-3');
+    } else {
+        ltx.innerHTML = Math.floor(done) + '%';
+        ltx.classList.add(chartGrid + '-2');
+    }
+
+    var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Done', 'Ongoing'],
+            datasets: [{
+                data: [done, ongoing],
+                backgroundColor: ['#017EFA', '#51CBFF']
+            }]
+        },
+        options: {
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: cutout
+    }
+    });
 }
 
-function getItem(key) {
-    return localStorage.getItem(key);
-}
+function destroyChart(ctx) {
 
-function removeLocalStorage() {
-    localStorage.removeItem("FlashState");
-    localStorage.removeItem("FlashMessage");
+    var chart = Chart.getChart(ctx);
+
+    chart.destroy();
+
 }

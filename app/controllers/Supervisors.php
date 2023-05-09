@@ -5,10 +5,15 @@ class Supervisors extends controller
 
     private $supervisorModel;
 
+    private $consumableModel;
+
+    private $vehicleModel;
 
     public function __construct()
     {
         $this->supervisorModel = $this->model('Supervisor');
+        $this->consumableModel = $this->model('Consumable');
+        $this->vehicleModel = $this->model('Vehicle');
     }
 
 
@@ -47,18 +52,19 @@ class Supervisors extends controller
 
                 if (move_uploaded_file($from, $to)) {
                     if ($this->supervisorModel->updateProfile($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic'], $profile))
-                        echo 'Successful';
+                        $_SESSION['success_message'] = 'Success! Saved Changes';
                     else
-                        echo 'Error';
+                        $_SESSION['error_message'] = 'Error! Could not save changes';
                 } else {
-                    echo 'Error';
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
                 }
             } else {
                 if ($this->supervisorModel->updateProfileValues($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic']))
-                    echo 'Successful';
+                    $_SESSION['success_message'] = 'Success! Saved Changes';
                 else
-                    echo 'Error';
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
             }
+
         } else {
             $data['userDetails'] = $this->supervisorModel->userDetails($_SESSION['_id']);
             $this->view('supervisor/profile/editprofile', $data);
@@ -74,20 +80,21 @@ class Supervisors extends controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
 
+            $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails(null,'ASC');
             $data['counts'] = $this->supervisorModel->statusCounters();
             $data['assemblyLine'] = $this->supervisorModel->ViewS4Finishers();
             $data['activities'] = $this->supervisorModel->activityLogs();
             $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
 
-            // if ($data['assemblyDetails'] !== false) {
-            //     $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
-            //     $data['overall'] = [
-            //         'pending' => json_encode($this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
-            //         'completed' => json_encode($this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
-            //     ];
-            // } else {
-            //     $data['overall'] = null;
-            // }
+            if ($data['assemblyDetails'] !== false) {
+                $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
+                $data['overall'] = [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
+                ];
+            } else {
+                $data['overall'] = null;
+            }
 
             $this->view('supervisor/landing/dashboard', $data);
         }
@@ -389,9 +396,6 @@ class Supervisors extends controller
     public function recordComponentDefects()
     {
     }
-
-
-
     public function componentsView()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -714,8 +718,44 @@ class Supervisors extends controller
 
 
     // CONSUMABLE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function insertConsumablee()
-    {
+    public function addNewConsumables() {
+
+        if (!isLoggedIn()) {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'type' => trim($_POST['type']),
+                'status' => trim($_POST['status'])
+            ];
+
+            if (isset($_FILES['image'])) {
+
+                $profile = strval($data['name']) . '.jpg';
+                $to = '../public/images/consumables/' . $profile;
+
+                $from = $_FILES['image']['tmp_name'];
+
+                if (move_uploaded_file($from, $to)) {
+                    if ($this->consumableModel->addConsumable($data['name'], $data['type'], $data['status'], $profile))
+                        $_SESSION['success_message'] = 'Success! Saved Changes';
+                    else
+                        $_SESSION['error_message'] = 'Error! Could not save changes';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
+                }
+            } else {
+                $_SESSION['error_message'] = 'Error! Upload an image';
+            }
+
+        }
+
+
     }
     public function viewConsumables()
     {

@@ -6,9 +6,7 @@
         <!-- LOGO ON TOP -->
         <li>
             <div class="nav_logo">
-                <div>
-                    <img src="<?php echo URL_ROOT; ?>public/images/logo.png" class="text-center width-rem-10" alt="logo" />
-                </div>
+                <img src="<?php echo URL_ROOT; ?>public/images/nav_logo.png" class="logo-style" alt="logo" />
             </div>
         </li>
 

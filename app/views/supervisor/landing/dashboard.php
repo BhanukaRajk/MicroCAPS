@@ -18,31 +18,31 @@
             <div class="dash-section-cardsframe test1">
                 <div class="dash-cardsframe-left test1">
                     <div class="dash-card-left-top test1">
-                        <div class="dash-graph-frame test1">
-                            <div class="dash-graph-top test1">
-                                <div class="dash-frame-headings test1">Ongoing Assembly</div>
-                                <div>
+                        <div class="dash-graph-frame ">
+                            <div class="dash-graph-top ">
+                                <div class="dash-frame-headings ">Ongoing Assembly</div>
+                                <div class="custom-select">
                                     <select name="vehicles" id="dashboardChart" onchange="dashboardChart()">
-                                        <?php
-                                        foreach($data['assemblyDetails'] as $value) {
-                                            echo '<option value="' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
-                                        }
+                                        <?php 
+                                            foreach($data['assemblyDetails'] as $value) {
+                                                echo '<option value="' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
+                                            }
                                         ?>>
                                     </select>
                                 </div>
                             </div>
-                            <div class="dash-graph-view">
+                            <div class="dash-graph-view ">
                                 <canvas id="myChart"></canvas>
-                                <label class="chart-percentage" for="myChart">60%</label>
+                                <label class="chart-percentage" for="myChart" id="myChart-label"></label>
                             </div>
-                            <div class="dash-graph-bottom test1">
-                                <div class="dash-graph-menu test1">
-                                    <div class="dash-graph-color-circle dash-darkblue-circle test1"></div>
-                                    <div>Done</div>
+                            <div class="dash-graph-bottom ">
+                                <div class="dash-graph-menu ">
+                                    <div class="dash-graph-color-circle dash-darkblue-circle "></div>
+                                    <div>Completed</div>
                                 </div>
-                                <div class="dash-graph-menu test1">
-                                    <div class="dash-graph-color-circle dash-lightblue-circle test1"></div>
-                                    <div>On-going</div>
+                                <div class="dash-graph-menu ">
+                                    <div class="dash-graph-color-circle dash-lightblue-circle "></div>
+                                    <div>Pending</div>
                                 </div>
                             </div>
 
@@ -211,6 +211,22 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
+
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
+
+<script>
+
+    let ao = {complete: <?php echo $data['overall']['completed']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    let ltx = document.getElementById('myChart-label');
+
+    renderChart(ctx, ltx, ao, 80);
+
+</script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

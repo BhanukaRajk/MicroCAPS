@@ -303,7 +303,7 @@ class Supervisor
         }
     }
 
-    public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image): bool {
+    public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image) {
         $this->db->query(
             'UPDATE employee
             SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic, image = :image
@@ -325,6 +325,26 @@ class Supervisor
         }
     }
 
+    public function updateProfileValues($id, $firstname, $lastname, $email, $mobile, $nic) {
+        $this->db->query(
+            'UPDATE employee
+            SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic
+            WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':firstname', $firstname);
+        $this->db->bind(':lastname', $lastname);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':mobile', $mobile);
+        $this->db->bind(':nic', $nic);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     public function ViewAllConsumables()
     {
