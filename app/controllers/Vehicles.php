@@ -202,7 +202,7 @@ class Vehicles extends Controller {
             $components = $this->vehicleModel->getComponents($details->ModelNo);
 
             foreach ($components as $component) {
-                $status = 'NotReceived';
+                $status = 'NR';
                 $this->vehicleModel->initComponent($data['chassisNo'], $component->PartNo, $status);
             }
 

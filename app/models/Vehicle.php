@@ -572,4 +572,44 @@ class Vehicle {
         }
     }
 
-}
+    public function componentsReceived($chassisNo) {
+        $this->db->query(
+            'SELECT `component`.PartName, `component-release`.Status
+                FROM `component` 
+                INNER JOIN `component-release`
+                ON `component`.PartNo = `component-release`.PartNo
+                WHERE `component-release`.ChassisNo = :chassisNo'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function componentChassis() {
+
+        $this->db->query(
+            'SELECT `component-release`.ChassisNo, `component-release`.Status
+                    FROM `component-release`
+                    GROUP BY `component-release`.ChassisNo, `component-release`.Status
+                    HAVING `component-release`.Status = :status'
+        );
+
+        $this->db->bind(':status', 'NR');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+ }

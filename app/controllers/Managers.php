@@ -88,7 +88,11 @@ class Managers extends Controller {
             }
 
         } else {
-            $this->view('manager/component');
+
+            $data['chassis'] = $this->vehicleModel->componentChassis();
+            $data['components'] = $this->vehicleModel->componentsReceived($data['chassis'][0]->ChassisNo);
+
+            $this->view('manager/component',$data);
         }
 
     }

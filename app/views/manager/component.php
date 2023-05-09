@@ -75,84 +75,22 @@
 
     <section class="shell-forms position-absolute" id="two">
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
-            <div class="section-heading font-weight"> New Body Shell </div>
-            <form id="add-shell">
-                <div class="display-flex-row align-items-start gap-2">
-                    <div>
-                        <input type="text"
-                            id="chassisNo"
-                            name="chassisNo"
-                            onChange=""
-                            value=""
-                            class="form-control"
-                            placeholder="Chassis Number"
-                            autocomplete="off"
-                            title="Eg: CN112215014A"
-                            required />
-                        <label class="form-label" id="chassisNo-label">Chassis Number</label>
-                    </div>
-                    <div>
-                        <div class="custom-select-model">
-                            <select name="chassis" class="form-control text-gray width-rem-20" id="chassis">
-                                <option value="">Select Chassis Type</option>
-                                <option value="M0001">Micro Panda</option>
-                                <option value="M0002">Micro Panda Cross</option>
-                                <option value="M0003">MG ZS SUV</option>
-                            </select>
-                            <label class="chassis-label display-none" id="chassis-label">Chassis Type</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="display-flex-row align-items-center gap-2p1">
-                    <div>
-                        <div class="custom-select-color">
-                            <select name="color" class="form-control text-gray width-rem-20" id="color">
-                                <option value="">Select Color</option>
-                            </select>
-                            <label class="color-label display-none" id="color-label">Color</label>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="form-control-checkbox">
-                            Repair
-                            <input type="checkbox"
-                                    id="repair"
-                                    name="repair"
-                                    value="Yes">
-                            <div class="checkmark"></div>
-                        </label>
-                    </div>
-                    <div>
-                        <label class="form-control-checkbox">
-                            Paint Work
-                            <input type="checkbox"
-                                    id="paint"
-                                    name="paint"
-                                    value="Yes">
-                            <div class="checkmark"></div>
-                        </label>
-                    </div>
-                </div>
-                <div class="display-none display-flex-row align-items-center justify-content-center gap-2 margin-top-4" id="repairD">
-                    <div class="margin-top-3">
-                        <input type="text"
-                            id="repairDescription"
-                            name="repairDescription"
-                            onChange=""
-                            value=""
-                            class="form-control width-rem-38p75"
-                            placeholder="Repair Description"
-                            autocomplete="off" />
-                        <label class="form-label" id="repairDescription-label">Repair Description</label>
-                    </div>
-                </div>
-                <div class="text-center margin-top-3">
-                    <button class="btn btn-primary" type="button" onclick="addShell()">
-                        Submit
-                    </button>
-                </div>
+            <div class="section-heading font-weight"> Received Components </div>
 
-            </form>
+            <?php 
+            
+                foreach ($data['components'] as $value) {
+
+                    echo '<div>
+                            <div class="pdi-checklist">
+                                <div class="padding-bottom-3 font-size">'.$value->PartName.'</div>
+                            </div>
+                        </div>';
+
+                }
+            
+            ?>
+            
         </div>
     </section>
 

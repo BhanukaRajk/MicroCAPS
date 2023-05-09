@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9aa61d7b-9353-481b-9319-b661b76dc24a" name="Changes" comment="" />
+    <list default="true" id="9aa61d7b-9353-481b-9319-b661b76dc24a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Managers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Managers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Vehicles.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Vehicles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/Vehicle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Vehicle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/manager/component.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/manager/component.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +84,7 @@
       <workItem from="1683345850166" duration="3710000" />
       <workItem from="1683570155064" duration="6921000" />
       <workItem from="1683603000443" duration="14398000" />
+      <workItem from="1683642943036" duration="3593000" />
     </task>
     <servers />
   </component>
