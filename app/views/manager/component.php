@@ -5,12 +5,24 @@
 
     <section class="position-absolute page-content">
         <div class="page-heading font-weight">
-            Request Components
+            Components
+        </div>
+
+        <div class="display-flex-column align-items-start margin-top-3">
+            <div class="display-flex-row align-items-start align-self-start width-fill-available gap-1 border-radius-1 background-white paddingx-5 paddingy-3 ">
+                <div onclick="rounds(event, 'one')" class="shell-btn active display-flex-column align-items-center justify-content-center border-radius-1">
+                    <div class="padding-3 font-weight">Request Components</div>
+                </div>
+                <div onclick="rounds(event, 'two')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1" id = "option-two">
+                    <div class="padding-3 font-weight">Add Components</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="shell-forms top-10 position-absolute display-block" id="one">
+    <section class="shell-forms position-absolute display-block" id="one">
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
+            <div class="section-heading font-weight"> Send a Request </div>
             <form id="request-shell">
                 <div id="fields">
                     <div class="display-flex-row align-items-start gap-1 "  id="field1">
@@ -61,50 +73,90 @@
         </div>
     </section>
 
-    <!-- <section class="shell-forms top-10 position-absolute display-block" id="one">
+    <section class="shell-forms position-absolute" id="two">
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
-            <div class="display-flex-column gap-1 padding-4">
-                <table role="presentation" aria-hidden="true" width="100%" class="" cellpadding="0" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th valign="bottom" class="text-darkblue font-weight font-size-16 width-rem-12 padding-bottom-2 border-bottom">
-                                MODEL
-                            </th>
-                            <th valign="bottom" class="text-darkblue font-weight font-size-16 width-rem-12 padding-bottom-2 border-bottom">
-                                COLOR
-                            </th>
-                            <th valign="bottom" class="text-darkblue font-weight font-size-16 width-rem-12 padding-bottom-2 border-bottom">
-                                QUANTITY
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        foreach($data['componentRequestDetails'] as $request){
-                            echo ' <tr>
-                                <th valign="bottom" class="detail font-size-16 width-rem-12 padding-3">
-                                    '.$request->ModelName.'
-                                </th>
-                                <th valign="bottom" class="detail font-size-16 width-rem-12 padding-3">
-                                    '.$request->Color.'
-                                </th>
-                                <th valign="bottom" class="detail font-size-16 width-rem-12 padding-3">
-                                    '.$request->Qty.'
-                                </th>
-                            </tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-
+            <div class="section-heading font-weight"> New Body Shell </div>
+            <form id="add-shell">
+                <div class="display-flex-row align-items-start gap-2">
+                    <div>
+                        <input type="text"
+                            id="chassisNo"
+                            name="chassisNo"
+                            onChange=""
+                            value=""
+                            class="form-control"
+                            placeholder="Chassis Number"
+                            autocomplete="off"
+                            title="Eg: CN112215014A"
+                            required />
+                        <label class="form-label" id="chassisNo-label">Chassis Number</label>
+                    </div>
+                    <div>
+                        <div class="custom-select-model">
+                            <select name="chassis" class="form-control text-gray width-rem-20" id="chassis">
+                                <option value="">Select Chassis Type</option>
+                                <option value="M0001">Micro Panda</option>
+                                <option value="M0002">Micro Panda Cross</option>
+                                <option value="M0003">MG ZS SUV</option>
+                            </select>
+                            <label class="chassis-label display-none" id="chassis-label">Chassis Type</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="display-flex-row align-items-center gap-2p1">
+                    <div>
+                        <div class="custom-select-color">
+                            <select name="color" class="form-control text-gray width-rem-20" id="color">
+                                <option value="">Select Color</option>
+                            </select>
+                            <label class="color-label display-none" id="color-label">Color</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-control-checkbox">
+                            Repair
+                            <input type="checkbox"
+                                    id="repair"
+                                    name="repair"
+                                    value="Yes">
+                            <div class="checkmark"></div>
+                        </label>
+                    </div>
+                    <div>
+                        <label class="form-control-checkbox">
+                            Paint Work
+                            <input type="checkbox"
+                                    id="paint"
+                                    name="paint"
+                                    value="Yes">
+                            <div class="checkmark"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="display-none display-flex-row align-items-center justify-content-center gap-2 margin-top-4" id="repairD">
+                    <div class="margin-top-3">
+                        <input type="text"
+                            id="repairDescription"
+                            name="repairDescription"
+                            onChange=""
+                            value=""
+                            class="form-control width-rem-38p75"
+                            placeholder="Repair Description"
+                            autocomplete="off" />
+                        <label class="form-label" id="repairDescription-label">Repair Description</label>
+                    </div>
+                </div>
                 <div class="text-center margin-top-3">
-                    <button class="btn btn-primary" type="button"  onclick="createList()">
-                        Create Component List
+                    <button class="btn btn-primary" type="button" onclick="addShell()">
+                        Submit
                     </button>
                 </div>
-            </div>
+
+            </form>
         </div>
-    </section> -->
+    </section>
+
+    
 
     <section class="display-flex-column">
 
@@ -123,7 +175,8 @@
     </script> -->
     
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
-    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/component.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/addFieldsComponent.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/components.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
 
 </body>
