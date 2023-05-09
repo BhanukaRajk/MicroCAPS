@@ -300,7 +300,7 @@ class Testers extends controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
+            $data['onPDIVehicles'] = $this->testerModel->vehiclesReadyToTest();
             $this->view('tester/selectpdi', $data);
         }
     }
