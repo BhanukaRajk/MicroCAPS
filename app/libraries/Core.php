@@ -38,10 +38,10 @@
                 // Check to see if method exists in controller
                 if( method_exists( $this->currentController , $url[1] ) ) {
 
-                  $this->currentMethod = $url[1];
+                    $this->currentMethod = $url[1];
 
-                  // Unset 1 index
-                  unset($url[1]);
+                    // Unset 1 index
+                    unset($url[1]);
 
                 }
             }
@@ -67,5 +67,3 @@
         }
 
     }
-  
-  

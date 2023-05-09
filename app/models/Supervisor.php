@@ -10,6 +10,7 @@ class Supervisor
     }
 
 
+
     public function findUserByUsername($username): bool
     {
         $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.Username = :username');
@@ -65,7 +66,6 @@ class Supervisor
     }
 
 
-
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
     public function checkEmployee($empid): bool
     {
@@ -77,14 +77,14 @@ class Supervisor
         $this->db->bind(':employee', $empid);
         $row = $this->db->single();
 
-        // if ($this->db->rowCount()) {
-        if ($row != NULL) {
+        if (isset($row)) {
             return true;
         } else {
             return false;
         }
     
     }
+
 
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
     public function activityLogs()
@@ -108,108 +108,33 @@ class Supervisor
     }
 
 
-    // CHECK THIS EMPLOYEE REQUESTED ANOTHER LEAVE ON THIS DATE
-    public function checkLeaves($empid, $reqdate): bool
-    {
-
-        $this->db->query(
-            'SELECT COUNT(`LeaveId`) AS `LeaveCount` FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date;'
-        );
-
-        $this->db->bind(':employee', $empid);
-        $this->db->bind(':req_date', $reqdate);
-
-        $row = $this->db->single();
-        // print_r($row->LeaveCount);
-
-        // if ($this->db->rowCount()) {
-        if ($row->LeaveCount > 0) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
+    
 
 
-    public function getLeaveByID($LeaveID)
-    {
-
-        $this->db->query(
-            'SELECT * FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
-        );
-
-        $this->db->bind(':Leave', $LeaveID);
-
-        $current_leave = $this->db->single();
-
-        if ($current_leave) {
-            return $current_leave;
-        } else {
-            return false;
-        }
-    }
 
 
-    public function addleave($EmpId, $leavedate, $reason): bool
-    {
-        $this->db->query(
-            'INSERT INTO `employee-leaves`(EmployeeId, LeaveDate, Reason) 
-            VALUES (:empid,:leavedate,:reason);'
-        );
-
-        $this->db->bind(':empid', $EmpId);
-        $this->db->bind(':leavedate', $leavedate);
-        $this->db->bind(':reason', $reason);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
-    public function EditLeave($EmpId, $leavedate, $reason, $id): bool
-    {
-        $this->db->query(
-            'UPDATE `employee-leaves`
-            SET EmployeeId = :empid, LeaveDate = :leavedate, Reason = :reason
-            WHERE LeaveId = :id;'
-        );
-
-        $this->db->bind(':empid', $EmpId);
-        $this->db->bind(':leavedate', $leavedate);
-        $this->db->bind(':reason', $reason);
-
-        $this->db->bind(':id', $id);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
-    // public function removeleave($ID, $leavedate) {
-    public function removeleave($LeaveID): bool
-    {
-        $this->db->query(
-            'DELETE FROM `employee-leaves` WHERE LeaveId = :leave_id;'
-            // 'DELETE FROM leaves WHERE EmployeeId = :Empid AND LeaveDate = :LDate;'
-        );
 
-        $this->db->bind(':leave_id', $LeaveID);
-        // $this->db->bind(':Empid', $ID);
-        // $this->db->bind(':LDate', $leavedate);
 
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -262,29 +187,6 @@ class Supervisor
     }
 
 
-    public function ViewLeaves()
-    {
-
-        $this->db->query(
-            'SELECT `employee-leaves`.`LeaveId`, `employee-leaves`.`EmployeeId`, CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Name`, `employee-leaves`.`LeaveDate`, `employee-leaves`.`Reason`
-                FROM `employee-leaves`
-                INNER JOIN `employee`
-            ON `employee-leaves`.`EmployeeId` = `employee`.`EmployeeId`
-            -- WHERE LeaveDate > GETDATE()
-            ORDER BY `LeaveDate` ASC;'
-        );
-
-        $leaves = $this->db->resultSet();
-        // print_r($leaves);
-
-        if ($leaves) {
-            return $leaves;
-        } else {
-            return false;
-        }
-    }
-
-
     public function userDetails($id) {
         $this->db->query(
             'SELECT *
@@ -303,6 +205,7 @@ class Supervisor
         }
     }
 
+
     public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image): bool {
         $this->db->query(
             'UPDATE employee
@@ -320,45 +223,6 @@ class Supervisor
 
         if ( $this->db->execute() ) {
             return true;
-        } else {
-            return false;
-        }
-    }
-
-    
-    public function ViewAllConsumables()
-    {
-
-        $this->db->query(
-//            'SELECT * FROM `consumable`;'
-            'SELECT `ConsumableId`, `ConsumableName`, 
-                        `Volume`, `Weight`, 
-                        DATE(`LastUpdate`) AS `UDate`,
-                        TIME(`LastUpdate`) AS `UTime`, 
-                        `LastUpdateBy`, `Image` FROM `consumable`;'
-
-        );
-
-        $consumables = $this->db->resultSet();
-
-        if ($consumables) {
-            return $consumables;
-        } else {
-            return false;
-        }
-    }
-
-    public function ViewAllTools()
-    {
-
-        $this->db->query(
-            'SELECT * FROM `tool`;'
-        );
-
-        $tools = $this->db->resultSet();
-
-        if ($tools) {
-            return $tools;
         } else {
             return false;
         }
@@ -410,6 +274,8 @@ class Supervisor
     }
 
 
+
+
     public function ViewReturnDefectSheet()
     {
 
@@ -429,40 +295,7 @@ class Supervisor
     }
 
 
-    public function updateToolStatus($toolId, $newStatus): bool
-    {
-        $this->db->query(
-            'UPDATE `tool` SET `Status` = :tool_status 
-            WHERE `ToolId` = :tool_id;'
-        );
 
-        $this->db->bind(':tool_id', $toolId);
-        $this->db->bind(':tool_status', $newStatus);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // THIS IS NOT THE WORKING FUNCTION
-    public function ViewTools()
-    {
-
-        $this->db->query(
-            'SELECT *
-                FROM toolset;'
-        );
-
-        $tools = $this->db->resultSet();
-
-        if ($tools) {
-            return $tools;
-        } else {
-            return false;
-        }
-    }
 
 
     public function viewAssemblyLineVehicles()
@@ -487,9 +320,8 @@ class Supervisor
     }
 
 
-    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final) {
-
-
+    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final)
+    {
 
         for ($record = 1; $record <= 7; $record++) {
 
@@ -537,7 +369,8 @@ class Supervisor
 
 
 
-    public function viewDamages() {
+    public function viewDamages()
+    {
         
         $sql = 'SELECT `ConsumableId`, `ConsumableName`, 
                     `Volume`, `Weight`, 
@@ -604,7 +437,7 @@ class Supervisor
         if($damaged_parts) {
             return $damaged_parts;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -612,7 +445,8 @@ class Supervisor
 
 
 
-    public function viewCarComponents($car) {
+    public function viewCarComponents($car)
+    {
         $this->db->query(
             'SELECT `component`.`PartNo`, `component`.`PartName`, `component-release`.`Status`
                     FROM `component-release`, `component` 
@@ -693,25 +527,6 @@ class Supervisor
     }
 
 
-    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
-    public function checkToolById($tool_id): bool
-    {
-
-        $this->db->query(
-            'SELECT `ToolId` FROM `tool` WHERE `ToolId` = :singletool;'
-        );
-
-        $this->db->bind(':singletool', $tool_id);
-
-        $row = $this->db->single();
-
-        if ($row != NULL) {
-            return true;
-        } else {
-            return false;
-        }
-    
-    }
 
 
     public function createPAQForm($car_id)
@@ -753,54 +568,10 @@ class Supervisor
     }
 
 
-    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
-    public function checkConsumeById($consume_id): bool
-    {
-
-        $this->db->query(
-            'SELECT `ConsumableId` FROM `consumable` WHERE `ConsumableId` = :consumable;'
-        );
-
-        $this->db->bind(':consumable', $consume_id);
-        $row = $this->db->single();
-
-        // if ($this->db->rowCount()) {
-        if ($row != NULL) {
-            return true;
-        } else {
-            return false;
-        }
-    
-    }
 
 
-    public function updateConsumableQuantity($consume_id, $quantity, $con_type): bool
-    {
-        if($con_type == "Liters") {
-            $this->db->query(
-                'UPDATE `consumable` SET `Volume` = :quantity, `LastUpdate` = CURRENT_TIMESTAMP
-                WHERE `ConsumableId` = :consume;'
-            );
-        } else {
-            $this->db->query(
-                'UPDATE `consumable` SET `Weight` = :quantity, `LastUpdate` = CURRENT_TIMESTAMP
-                WHERE `ConsumableId` = :consume;'
-            );
-        }
-        
-
-        $this->db->bind(':consume', $consume_id);
-        $this->db->bind(':quantity', $quantity);
-
-        // print_r($con_type);
 
 
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 
@@ -897,9 +668,11 @@ class Supervisor
         if ( $row ) {
             return $row;
         } else {
-            return null;
+            return false;
         }
     }
+
+
 
     public function pdiVehicle($id){
         $this->db->query('SELECT ChassisNo, EngineNo FROM `vehicle` WHERE `vehicle`.`ChassisNo` = :id');
@@ -911,7 +684,7 @@ class Supervisor
         if ( $result ) {
             return $result;
         } else {
-            return null;
+            return false;
         }
     }
 
@@ -944,15 +717,6 @@ class Supervisor
                     AND `stage-process`.`StageNo` LIKE :stage;'
         );
 
-        // if($stage == 'S1') {
-        //     $stage = '001';
-        // } else if($stage == 'S2') {
-        //     $stage = '002';
-        // } else if($stage == 'S3') {
-        //     $stage = '003';
-        // } else if($stage == 'S4') {
-        //     $stage = '004';
-        // }
 
         $this->db->bind(':chassisNo', $chassisNo);
         $this->db->bind(':stage', $stage);
@@ -962,9 +726,218 @@ class Supervisor
         if ( $processData ) {
             return $processData;
         } else {
-            return [];
+            return false;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function ViewLeaves()
+    {
+
+        $this->db->query(
+            'SELECT `employee-leaves`.`LeaveId`, `employee-leaves`.`EmployeeId`, CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Name`, `employee-leaves`.`LeaveDate`, `employee-leaves`.`Reason`
+                FROM `employee-leaves`
+                INNER JOIN `employee`
+            ON `employee-leaves`.`EmployeeId` = `employee`.`EmployeeId`
+            -- WHERE LeaveDate > CURDATE() 
+            ORDER BY `LeaveDate` ASC;'
+        );
+
+        $leaves = $this->db->resultSet();
+
+        if ($leaves) {
+            return $leaves;
+        } else {
+            return false;
+        }
+    }
+
+
+    // CHECK THIS EMPLOYEE REQUESTED ANOTHER LEAVE ON THIS DATE
+    public function checkLeaves($empid, $reqdate): bool
+    {
+
+        $this->db->query(
+            'SELECT `LeaveId` FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date;'
+        );
+
+        $this->db->bind(':employee', $empid);
+        $this->db->bind(':req_date', $reqdate);
+
+        $rows = $this->db->resultSet();
+
+        if(!isset($rows)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    public function getLeaveByID($LeaveID)
+    {
+
+        $this->db->query(
+            'SELECT * FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
+        );
+
+        $this->db->bind(':Leave', $LeaveID);
+
+        $current_leave = $this->db->single();
+
+        if ($current_leave) {
+            return $current_leave;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function addleave($EmpId, $leavedate, $reason): bool
+    {
+        $this->db->query(
+            'INSERT INTO `employee-leaves`(EmployeeId, LeaveDate, Reason) 
+            VALUES (:empid,:leavedate,:reason);'
+        );
+
+        $this->db->bind(':empid', $EmpId);
+        $this->db->bind(':leavedate', $leavedate);
+        $this->db->bind(':reason', $reason);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function EditLeave($EmpId, $leavedate, $reason, $id): bool
+    {
+        $this->db->query(
+            'UPDATE `employee-leaves`
+            SET EmployeeId = :empid, LeaveDate = :leavedate, Reason = :reason
+            WHERE LeaveId = :id;'
+        );
+
+        $this->db->bind(':empid', $EmpId);
+        $this->db->bind(':leavedate', $leavedate);
+        $this->db->bind(':reason', $reason);
+
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // public function removeleave($ID, $leavedate) {
+    public function removeleave($LeaveID): bool
+    {
+        $this->db->query(
+            'DELETE FROM `employee-leaves` WHERE LeaveId = :leave_id;'
+            // 'DELETE FROM leaves WHERE EmployeeId = :Empid AND LeaveDate = :LDate;'
+        );
+
+        $this->db->bind(':leave_id', $LeaveID);
+        // $this->db->bind(':Empid', $ID);
+        // $this->db->bind(':LDate', $leavedate);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1072,29 +1045,98 @@ class Supervisor
     }
 
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function ViewAllTools()
+    {
+
+        $this->db->query(
+            'SELECT * FROM `tool`;'
+        );
+
+        $tools = $this->db->resultSet();
+
+        if ($tools) {
+            return $tools;
+        } else {
+            return false;
+        }
+    }
+
+
     // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING TOOLS IN CARD VIEWS
     public function viewToolz($toolType = null, $toolStatus = null)
     {
-        $sql = 'SELECT `ToolId`, `ToolName`, 
-                    `Status`, `ToolType`, `quantity`, 
-                    DATE(`LastUpdate`) AS `UDate`, 
-                    TIME(`LastUpdate`) AS `UTime`, 
-                    `LastUpdateBy`, `Image` 
-                    FROM `tool` 
-                    WHERE `ToolId` IS NOT NULL';
+        $sql = 'SELECT `tool`.`ToolId`, 
+                `tool`.`ToolName`, 
+                `tool`.`Status`, 
+                `tool`.`ToolType`, 
+                `tool`.`quantity`, 
+                DATE(`tool`.`LastUpdate`) AS `UDate`,
+                TIME(`tool`.`LastUpdate`) AS `UTime`, 
+                `tool`.`Image`, 
+                CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater`, 
+                FROM `tool`, `employee`
+                WHERE `tool`.`LastUpdateBy` = `employee`.`EmployeeId`';
 
 
         if (isset($toolType)) {
             if ($toolType != 'All') {
-                $sql .= ' AND `ToolType` = :toolType';
+                $sql .= ' AND `tool`.`ToolType` = :toolType';
             }
         }
 
         if (isset($toolStatus)) {
             if ($toolStatus == 'Normal') {
-                $sql .= ' AND `Status` = "Normal"';
+                $sql .= ' AND `tool`.`Status` = "Normal"';
             } elseif ($toolStatus == 'NA') {
-                $sql .= ' AND `Status` = "Need an attention"';
+                $sql .= ' AND `tool`.`Status` = "Need an attention"';
             }
         }
 
@@ -1116,31 +1158,169 @@ class Supervisor
     }
 
 
+    public function updateToolStatus($toolId, $newStatus, $user): bool
+    {
+        $this->db->query(
+            'UPDATE `tool` SET `Status` = :tool_status, 
+                    ``
+            WHERE `ToolId` = :tool_id;'
+        );
+
+        $this->db->bind(':tool_id', $toolId);
+        $this->db->bind(':tool_status', $newStatus);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // // CHECK THIS CONSUMABLE USING IN FACTORY
+    // public function checkToolById($tool_id): bool
+    // {
+    //     $this->db->query(
+    //         'SELECT `ToolId` FROM `tool` WHERE `ToolId` = :tool;'
+    //     );
+
+    //     $this->db->bind(':tool', $tool_id);
+
+    //     $row = $this->db->resultSet();
+
+    //     if (!isset($row)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    
+    // }
+
+    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
+    public function checkToolById($tool_id): bool
+    {
+
+        $this->db->query(
+            'SELECT `ToolId` FROM `tool` WHERE `ToolId` = :singletool;'
+        );
+
+        $this->db->bind(':singletool', $tool_id);
+
+        $row = $this->db->single();
+
+        if (!isset($row)) {
+            return true;
+        } else {
+            return false;
+        }
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function ViewAllConsumables()
+    {
+
+        $this->db->query(
+            'SELECT `consumable`.`ConsumableId`, 
+                    `consumable`.`ConsumableName`, 
+                    `consumable`.`Volume`, 
+                    `consumable`.`Weight`, 
+                    DATE(`consumable`.`LastUpdate`) AS `UDate`,
+                    TIME(`consumable`.`LastUpdate`) AS `UTime`, 
+                    `consumable`.`Image`, 
+                    CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater`, 
+            FROM `consumable`, `employee`
+            WHERE `consumable`.`LastUpdateBy` = `employee`.`EmployeeId`;'
+
+        );
+
+        $consumables = $this->db->resultSet();
+
+        if ($consumables) {
+            return $consumables;
+        } else {
+            return false;
+        }
+    }
+
+
     // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING CONSUMABLES IN CARD VIEWS
     public function viewConsumables($consumeType = null, $cstatus = null)
     {
-        $sql = 'SELECT `ConsumableId`, `ConsumableName`, 
-                    `Volume`, `Weight`, 
-                    DATE(`LastUpdate`) AS `UDate`,
-                    TIME(`LastUpdate`) AS `UTime`, 
-                    `LastUpdateBy`, `Image` 
-                    FROM `consumable`
-                    WHERE `ConsumableId` IS NOT NULL';
+        $sql = 'SELECT `consumable`.`ConsumableId`, 
+                    `consumable`.`ConsumableName`, 
+                    `consumable`.`Volume`, 
+                    `consumable`.`Weight`, 
+                    DATE(`consumable`.`LastUpdate`) AS `UDate`,
+                    TIME(`consumable`.`LastUpdate`) AS `UTime`, 
+                    `consumable`.`Image`, 
+                    CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater`, 
+                FROM `consumable`, `employee`
+                WHERE `consumable`.`LastUpdateBy` = `employee`.`EmployeeId`';
 
 
         if (isset($consumeType)) {
             if ($consumeType == 'Lubricants') {
-                $sql .= ' AND `Volume` IS NOT NULL';
+                $sql .= ' AND `consumable`.`Volume` IS NOT NULL';
             } elseif ($consumeType == 'Grease') {
-                $sql .= ' AND `Weight` IS NOT NULL';
+                $sql .= ' AND `consumable`.`Weight` IS NOT NULL';
             }
         }
 
         if (isset($cstatus)) {
             if ($cstatus == 'Available') {
-                $sql .= ' AND (`Volume` >= 60 OR `Weight` >= 60)';
+                $sql .= ' AND (`consumable`.`Volume` >= 60 OR `consumable`.`Weight` >= 60)';
             } elseif ($cstatus == 'Low') {
-                $sql .= ' AND (`Volume` < 60 OR `Weight` < 60)';
+                $sql .= ' AND (`consumable`.`Volume` < 60 OR `consumable`.`Weight` < 60)';
             }
         }
 
@@ -1157,6 +1337,58 @@ class Supervisor
         } else {
             return false;
         }
+    }
+
+
+    public function updateConsumableQuantity($consume_id, $quantity, $consume_type, $user): bool
+    {
+        if($consume_type == "Liters") {
+            $this->db->query(
+                'UPDATE `consumable` SET `Volume` = :quantity, 
+                        `LastUpdate` = CURRENT_TIMESTAMP, 
+                        `LastUpdateBy` = :user 
+                WHERE `ConsumableId` = :consume;'
+            );
+        } else {
+            $this->db->query(
+                'UPDATE `consumable` SET `Weight` = :quantity, 
+                        `LastUpdate` = CURRENT_TIMESTAMP, 
+                        `LastUpdateBy` = :user 
+                WHERE `ConsumableId` = :consume;'
+            );
+        }
+        
+
+        $this->db->bind(':consume', $consume_id);
+        $this->db->bind(':quantity', $quantity);
+        $this->db->bind(':user', $user);
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // CHECK THIS CONSUMABLE USING IN FACTORY
+    public function checkConsumeById($consume_id): bool
+    {
+        $this->db->query(
+            'SELECT `ConsumableId` FROM `consumable` WHERE `ConsumableId` = :consumable;'
+        );
+
+        $this->db->bind(':consumable', $consume_id);
+
+        $row = $this->db->resultSet();
+
+        if (!isset($row)) {
+            return true;
+        } else {
+            return false;
+        }
+    
     }
 
 

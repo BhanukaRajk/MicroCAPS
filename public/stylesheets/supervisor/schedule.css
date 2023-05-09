@@ -277,6 +277,68 @@
     flex-grow: 0;
 }
 
+
+.low-content-blurer {
+    position: fixed;
+    left: 16.25rem;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    background-color: #FFFFFFCC;
+    z-index: 75;
+}
+
+
+.add-task-box {
+    width: 36rem;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1.5rem;
+
+    background-color: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    padding: 1rem 2rem 3rem 2rem;
+    border-radius: 1rem;
+}
+
+.add-task-box .box-heading {
+    font-family: 'Noto Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+}
+
+.assembler-assign {
+    display: block;
+    width: 25rem;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid grey;
+    appearance: none;
+    border-radius: 10px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.assembler-assign-popup-window {
+    width: 30rem;
+    height: auto;
+    background-color: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    padding: 2rem;
+}
+
+
 /* .display-none {
     display: none;
 } */
