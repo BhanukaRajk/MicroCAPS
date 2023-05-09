@@ -13,6 +13,7 @@
 @import 'display.css';
 @import 'select.css';
 @import 'popup.css';
+@import 'search.css';
 
 body {
     margin: 0;
@@ -917,6 +918,10 @@ h3 {
 .font-size {
     font-size: 12px !important;
     ;
+}
+
+.font-size-13 {
+    font-size: 13px !important;
 }
 
 .font-size-24 {

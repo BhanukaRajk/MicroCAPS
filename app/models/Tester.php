@@ -165,30 +165,6 @@ class Tester {
         }
     }
 
-    public function onPDIVehicles() {
-
-        $this->db->query(
-            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo, `vehicle`.TesterId  
-                FROM `vehicle` 
-                INNER JOIN `vehicle-model`
-                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus != :pdi
-                ORDER BY `vehicle`.ChassisNo DESC
-                LIMIT 10;'
-        );
-
-        $this->db->bind(':status', 'RR');
-        $this->db->bind(':pdi', 'CM');
-
-        $results = $this->db->resultSet();
-
-        if ( $results ) {
-            return $results;
-        } else {
-            return false;
-        }
-    }
-
     public function PDIVehiclesByTester($id) {
 
         $this->db->query(
@@ -581,16 +557,19 @@ class Tester {
         }
     }
 
-    public function assemblyDetails($order = 'DESC')
+    public function assemblyDetails($chassisNo = "%", $order = 'DESC')
     {
         $this->db->query(
             'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4")
+                WHERE (`vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H") OR `vehicle`.CurrentStatus LIKE :status) AND `vehicle`.ChassisNo LIKE :chassisNo
                 ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
+
+        $this->db->bind(':chassisNo', '%'.$chassisNo . '%');
+        $this->db->bind(':status', '%H');
 
         $results = $this->db->resultSet();
 
@@ -600,6 +579,146 @@ class Tester {
             return false;
         }
     }
+
+    public function getProcessStatus($chassisNo, $status = '%', $stage = '%') {
+        $this->db->query(
+            'SELECT `stage-vehicle-process`.Status, `stage-process`.ProcessName, `stage-process`.StageNo, `stage-process`.Weight
+                    FROM `stage-vehicle-process`
+                    INNER JOIN `stage-process`
+                    ON `stage-vehicle-process`.ProcessId = `stage-process`.ProcessId
+                    WHERE `stage-vehicle-process`.ChassisNo = :chassisNo AND `stage-vehicle-process`.Status = :status AND `stage-process`.StageNo LIKE :stage;'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':stage', $stage);
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
+
+    public function onPDIVehicles($parameters = null, $arr = true ) {
+
+        $condition = '';
+        $array = [];
+
+        if ( $parameters != null) {
+            foreach ($parameters as $key => $value) {
+                switch ($key) {
+                    case 'ModelName':
+                        $condition .= 'AND `vehicle-model`.'.$key.' LIKE :'.$key.' ';
+                        break;
+                    case 'Tester':
+                        $condition .= 'AND CONCAT(`employee`.Firstname," ",`employee`.Lastname) LIKE :'.$key.' ';
+                        break;
+                    default:
+                        $condition .= 'AND `vehicle`.'.$key.' LIKE :'.$key.' ';
+                        break;
+                }
+                $array[] = [ 'key' => ':'.$key, 'parameter' => $value ];
+            }
+        }
+
+        $this->db->query(
+            'SELECT `vehicle`.*, CONCAT(`employee`.Firstname," ",`employee`.Lastname) AS Tester,`vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                INNER JOIN `employee`
+                ON `vehicle`.TesterId = `employee`.EmployeeId
+                WHERE `vehicle`.CurrentStatus = :status '.$condition.'
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':status', 'PDI');
+        foreach ($array as $item) {
+            $this->db->bind($item['key'], $item['parameter'].'%');
+        }
+
+        if ( $arr ) {
+            $results = $this->db->resultSet();
+        } else {
+            $results = $this->db->single();
+        }
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function assemblyDetailsByModel($model, $order = 'DESC')
+    {
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H") AND `vehicle-model`.ModelName LIKE :ModelNo
+                ORDER BY `vehicle`.ChassisNo '.$order.';'
+        );
+
+        $this->db->bind(':ModelNo', $model . '%');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function dispatchDetails($parameters = null) {
+
+        $condition = '';
+        $array = [];
+
+        if ( $parameters != null) {
+            foreach ($parameters as $key => $value) {
+                switch ($key) {
+                    case 'ModelName':
+                        $condition .= 'AND `vehicle-model`.'.$key.' LIKE :'.$key.' ';
+                        break;
+                    default:
+                        $condition .= 'AND `vehicle`.'.$key.' LIKE :'.$key.' ';
+                        break;
+                }
+                $array[] = [ 'key' => ':'.$key, 'parameter' => $value ];
+            }
+        }
+
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.ReleaseDate, `vehicle`.ShowRoomName, `vehicle-model`.ModelName
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus = :released '.$condition.'
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':released', 'D');
+        foreach ($array as $item) {
+            $this->db->bind($item['key'], '%'.$item['parameter'].'%');
+        }
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
 
     public function shellDetail($chassisNo)
     {

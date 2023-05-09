@@ -17,7 +17,7 @@
                                     <div class="pending-tasks">
 
                                         <?php foreach ($data['vehicles'] as $values) : 
-                                                if($values->TesterId == $_SESSION['_id']){ ?>
+                                                if($values->TesterId == $_SESSION['_id'] && $values->PDIStatus == 'P'){ ?>
                                                         <div 
                                                                 class="blue-button-long"  
                                                                 onClick="location.href='<?php echo URL_ROOT; ?>testers/pdi/<?php  echo $values->ChassisNo; ?>'"

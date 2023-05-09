@@ -11,12 +11,12 @@
             <div class="custom-select">
                 <select name="vehicles" class="background-none" id="assemblyVehicles">
                     <?php 
-                        echo '<option value="' . URL_ROOT . 'testers/progress/' . $data['ChassisNo'] .'">'.$data['ChassisNo'].'</option>';
+                        echo '<option value="' . URL_ROOT . 'testers/assembly/' . $data['ChassisNo'] .'">'.$data['ChassisNo'].'</option>';
                         foreach($data['assemblyDetails'] as $value) {
                             if ($value->ChassisNo == $data['ChassisNo']) {
                                 continue;
                             }
-                            echo '<option value="' . URL_ROOT . 'testers/progress/' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
+                            echo '<option value="' . URL_ROOT . 'testers/assembly/' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
                         }
                     ?>
                 </select>
@@ -34,16 +34,16 @@
                 <div class="display-flex-row justify-content-center gap-0p5">
                     <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
                         <div class="dash-graph-color-circle dash-darkblue-circle "></div>
-                        <div>Done</div>
+                        <div>Completed</div>
                     </div>
                     <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
                         <div class="dash-graph-color-circle dash-lightblue-circle "></div>
-                        <div>On-going</div>
+                        <div>Pending</div>
                     </div>
                 </div>
             </div>
             <div class="row background-none gap-2">
-                <a href="<?php echo URL_ROOT; ?>testers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stageone">
+                <a href="<?php echo URL_ROOT; ?>testers/assembly/<?php echo $data['ChassisNo']; ?>/stageone">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 01 </div>
                         <div class="chart-grid-stage">
@@ -52,7 +52,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>testers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagetwo">
+                <a href="<?php echo URL_ROOT; ?>testers/assembly/<?php echo $data['ChassisNo']; ?>/stagetwo">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 02 </div>
                         <div class="chart-grid-stage">
@@ -61,7 +61,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>testers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagethree">
+                <a href="<?php echo URL_ROOT; ?>testers/assembly/<?php echo $data['ChassisNo']; ?>/stagethree">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 03 </div>
                         <div class="chart-grid-stage">
@@ -70,7 +70,7 @@
                         </div> 
                     </div>
                 </a>
-                <a href="<?php echo URL_ROOT; ?>testers/assemblystage/<?php echo $data['ChassisNo']; ?>?stage=stagefour">
+                <a href="<?php echo URL_ROOT; ?>testers/assembly/<?php echo $data['ChassisNo']; ?>/stagefour">
                     <div class="display-flex-column align-items-center border-radius-1 background-white padding-4 gap-1">
                         <div class="section-heading font-weight"> Stage 04 </div>
                         <div class="chart-grid-stage">
@@ -91,11 +91,11 @@
 
     <script>
 
-        let all = {complete: <?php echo $data['overall']['connected']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
-        let s1 = {complete: <?php echo $data['stage01']['connected']; ?>, pending: <?php echo $data['stage01']['pending']; ?>}
-        let s2 = {complete: <?php echo $data['stage02']['connected']; ?>, pending: <?php echo $data['stage02']['pending']; ?>}
-        let s3 = {complete: <?php echo $data['stage03']['connected']; ?>, pending: <?php echo $data['stage03']['pending']; ?>}
-        let s4 = {complete: <?php echo $data['stage04']['connected']; ?>, pending: <?php echo $data['stage04']['pending']; ?>}
+        let all = {complete: <?php echo $data['overall']['completed']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
+        let s1 = {complete: <?php echo $data['stage01']['completed']; ?>, pending: <?php echo $data['stage01']['pending']; ?>}
+        let s2 = {complete: <?php echo $data['stage02']['completed']; ?>, pending: <?php echo $data['stage02']['pending']; ?>}
+        let s3 = {complete: <?php echo $data['stage03']['completed']; ?>, pending: <?php echo $data['stage03']['pending']; ?>}
+        let s4 = {complete: <?php echo $data['stage04']['completed']; ?>, pending: <?php echo $data['stage04']['pending']; ?>}
 
         var ctx = document.getElementById('assemblyOverall').getContext('2d');
         var ctx1 = document.getElementById('stage01').getContext('2d');
