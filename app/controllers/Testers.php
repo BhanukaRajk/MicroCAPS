@@ -31,7 +31,7 @@ class Testers extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['vehicles'] = $this->testerModel->onPDIVehicles();
+            $data['vehicles'] = $this->testerModel->vehiclesReadyToTest();
             $data['counts'] = $this->testerModel->vehicleCount();
             $this->view('tester/dashboard', $data);
         }
@@ -326,7 +326,7 @@ class Testers extends controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['onPDIVehicles'] = $this->testerModel->onPDIVehicles();
+            $data['onPDIVehicles'] = $this->testerModel->vehiclesReadyToTest();
             $data['testers'] = $this->testerModel->getTesterNames();
             $this->view('tester/taskmanager', $data);
         }

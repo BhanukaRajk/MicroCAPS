@@ -220,6 +220,30 @@ class Tester {
         }
     }
 
+    public function vehiclesReadyToTest() {
+
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus,`vehicle`.PDIStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo, `vehicle`.TesterId  
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus != :pdi
+                ORDER BY `vehicle`.ChassisNo DESC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':status', 'RR');
+        $this->db->bind(':pdi', 'CM');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
 
 
     // DEFECT DETAILS
