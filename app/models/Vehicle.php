@@ -172,7 +172,7 @@ class Vehicle {
         }
     }
 
-    public function updateComponentStatus($chassisNo, $status): bool {
+    public function updateProcessStatus($chassisNo, $status): bool {
         $this->db->query(
             'UPDATE `stage-vehicle-process`
             SET `stage-vehicle-process`.Status = :status
@@ -574,7 +574,7 @@ class Vehicle {
 
     public function componentsReceived($chassisNo) {
         $this->db->query(
-            'SELECT `component`.PartName, `component-release`.Status
+            'SELECT `component`.PartNo, `component`.PartName, `component-release`.Status
                 FROM `component` 
                 INNER JOIN `component-release`
                 ON `component`.PartNo = `component-release`.PartNo
@@ -595,10 +595,12 @@ class Vehicle {
     public function componentChassis() {
 
         $this->db->query(
-            'SELECT `component-release`.ChassisNo, `component-release`.Status
-                    FROM `component-release`
-                    GROUP BY `component-release`.ChassisNo, `component-release`.Status
-                    HAVING `component-release`.Status = :status'
+            'SELECT `component-release`.ChassisNo, `component-release`.Status, `vehicle`.Color
+                FROM `component-release`
+                INNER JOIN `vehicle`
+                ON `component-release`.ChassisNo = `vehicle`.ChassisNo
+                GROUP BY `component-release`.ChassisNo, `component-release`.Status
+                HAVING `component-release`.Status = :status'
         );
 
         $this->db->bind(':status', 'NR');
@@ -607,6 +609,25 @@ class Vehicle {
 
         if ( $results ) {
             return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateComponentStatus($chassisNo, $partNo): bool
+    {
+        $this->db->query(
+            'UPDATE `component-release`
+            SET Status = :status
+            WHERE ChassisNo = :chassisNo AND PartNo = :partNo'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':partNo', $partNo);
+        $this->db->bind(':status', 'R');
+
+        if ( $this->db->execute() ) {
+            return true;
         } else {
             return false;
         }

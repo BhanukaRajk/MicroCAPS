@@ -16,3 +16,12 @@ function rounds(evt, option) {
     document.getElementById(option).classList.add("display-block");
     evt.currentTarget.classList.add("active");
 }
+
+const selectAll = document.getElementById("select-all");
+
+selectAll.addEventListener("change", function () {
+    const checkboxes = document.querySelectorAll("#componentStatus");
+    checkboxes.forEach(function (checkbox) {
+        checkbox.checked = selectAll.checked;
+    });
+});

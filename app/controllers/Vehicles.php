@@ -181,6 +181,38 @@ class Vehicles extends Controller {
         }
     }
 
+    // Component Related
+
+    public function changeComponentStatus() {
+
+            if (!isLoggedIn()) {
+                redirect('users/login');
+            }
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $data = [
+                    'status' => $_POST['status'],
+                    'chassisNo' => trim($_POST['chassisNo']),
+                ];
+
+                $data['status'] = str_replace('&#34;', '', $data['status']);
+
+                $data['status'] = $this->strtoarray($data['status']);
+
+                foreach ($data['status'] as $key => $value) {
+                    if ($value) {
+                        $this->vehicleModel->updateComponentStatus($data['chassisNo'], $key);
+                    }
+                }
+
+                echo 'Successful';
+
+            }
+    }
+
 
     // Assembly Line Related
     public function startAssembly() {

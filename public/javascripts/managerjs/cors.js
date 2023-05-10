@@ -308,6 +308,46 @@ function createList() {
     xhttp.send(string);
 }
 
+function changeComponentStatus(chassisNo) {
+
+    let array = {};
+
+    const checkboxes = document.querySelectorAll("#componentStatus");
+    checkboxes.forEach(function (checkbox) {
+        array[checkbox.value] = checkbox.checked;
+    });
+
+    array = JSON.stringify(array);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            // console.log(response);
+
+            if (response == "Successful") {
+
+                location.reload();
+                setLocalStorageFlash("Successful","Status Updated");
+                
+
+            } else {
+
+                location.reload();
+                setLocalStorageFlash("Error","Status Not Updated");
+
+            }
+
+            // setLocalStorageOption("option-two");
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/changeComponentStatus", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("status="+array+"&chassisNo="+chassisNo);
+}
+
 // Dispatch Page
 function dispatch() {
 

@@ -40,4 +40,31 @@
             return $sum;
         }
 
+        public function strtoarray($string): array {
+
+            $string = trim($string, '{}');
+
+            $pair_strings = explode(',', $string);
+
+            // Initialize an empty array to store the key-value pairs
+            $array = array();
+
+            // Loop through each pair and add it to the array
+            foreach ($pair_strings as $pair_string) {
+                // Split the pair string into key and value
+                list($key, $value) = explode(':', $pair_string);
+
+                // Remove any quotes or spaces from the key
+                $key = trim($key, '\'" ');
+
+                // Convert the value to a boolean
+                $value = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+
+                // Add the key-value pair to the array
+                $array[$key] = $value;
+            }
+
+            return $array;
+        }
+
     }

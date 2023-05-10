@@ -77,19 +77,71 @@
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
             <div class="section-heading font-weight"> Received Components </div>
 
+            <div class="display-flex-row justify-content-between align-items-center width-80">
+                <div class="display-flex-column">
+                    <div class="paddingy-2 font-weight">Chassis No : <?php echo $data['chassis'][0]->ChassisNo ?></div>
+                    <div class="paddingy-2 font-weight">Color : <?php echo $data['chassis'][0]->Color ?></div>
+                </div>
+                <label class="form-control-checkbox">
+                    Select All
+                    <input type="checkbox"
+                            id="select-all"
+                            name="select-all"
+                            value="Yes">
+                    <div class="checkmark"></div>
+                </label>
+            </div>
+
             <?php 
-            
+
+                echo '<div class="display-flex-row gap-5 margin-top-3">';
+
+                $count = 1;
+
                 foreach ($data['components'] as $value) {
 
-                    echo '<div>
-                            <div class="pdi-checklist">
+                    if ($count == 1) {
+                        echo '<div class="display-flex-column gap-1">';
+                    }
+
+                    if ($value->Status == 'R') {
+                        $checked = 'checked';
+                    } else {
+                        $checked = '';
+                    }
+
+                    echo '<div class="display-flex-row justify-content-between border-bottom width-rem-12">
                                 <div class="padding-bottom-3 font-size">'.$value->PartName.'</div>
-                            </div>
-                        </div>';
+                                <label class="form-control-checkbox" id="checkbox">
+                                    <input type="checkbox"
+                                            id="componentStatus"
+                                            name="status"
+                                            value="'.$value->PartNo.'" 
+                                            '. $checked .'>
+                                    <div class="checkmark-small-blue"></div>
+                                </label>
+                            </div>';
+                    
+                    $count++;
+
+                    if ($count == 51) {
+                        echo '</div>';
+                        $count = 1;
+                    }
 
                 }
+
+                echo '</div>';
             
             ?>
+
+                <div class="text-center margin-top-3">
+                    <button class="btn btn-primary" type="button"  onclick="changeComponentStatus('<?php echo $data['chassis'][0]->ChassisNo ?>')">
+                        Mark as Received
+                    </button>
+                </div>
+
+                </form
             
         </div>
     </section>
