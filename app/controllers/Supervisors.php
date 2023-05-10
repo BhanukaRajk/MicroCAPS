@@ -15,9 +15,6 @@ class Supervisors extends controller
 
     // SUPERVISOR /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function recordSpecialTaskList()
-    {
-    }
     public function settings()
     {
 
@@ -117,6 +114,19 @@ class Supervisors extends controller
             $this->view('supervisor/editprofile', $data);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -361,10 +371,53 @@ class Supervisors extends controller
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // SCHEDULE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function scheduleFutureTasks()
+    
+    public function recordScheduleStatus()
     {
-    }     
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $car_id = $_POST['car_id'];
+            $process_id = $_POST['process_id'];
+            $status = $_POST['status'];
+
+            // check before update
+            $data['success'] = $this->supervisorModel->recordTaskStatus($car_id, $process_id, $status);
+            // echo $data['success'];
+            // header('Content-Type: application/json');
+            echo json_encode($data['success']);
+
+        } else {
+            $_SESSION['error_message'] = 'Request failed! :(';
+            $data['url'] = getUrl();
+            $data['taskList'] = $this->supervisorModel->ViewTaskSchedule();
+            $this->view('supervisor/scheduler/scheduletasks', $data);
+        }
+    }
+
+
     public function scheduletasks()
     {
 
@@ -375,6 +428,53 @@ class Supervisors extends controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $this->view('supervisor/scheduletasks', $data);
+        }
+    }
+
+
+    public function updateThisTask() {
+        
+    }
+
+
+    public function removeThisTask()
+    {
+
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'chassis_no' => trim($_POST['vehicle_id']),
+                'process_no' => trim($_POST['process_id'])
+            ];
+
+            if ($this->supervisorModel->checkTaskById($data['chassis_no'], $data['process_no'])) {
+
+                if ($this->supervisorModel->removeTask($data['chassis_no'], $data['process_no'])) {
+                    // $_SESSION['return_message'] = 'Record deletion Success!';
+                    $_SESSION['success_message'] = 'Record deletion Success!';
+                } else {
+                    // $_SESSION['return_message'] = 'Error! record deletion failed!';
+                    $_SESSION['error_message'] = 'Error! record deletion failed!';
+                }
+                redirect('Supervisors/taskSchedule');
+                // $this->view('supervisor/leaves/leaves', $data);
+
+            } else {
+
+                // $_SESSION['return_message'] = 'Record has been already deleted!';
+                $_SESSION['error_message'] = 'Record couldn\'t found!';
+
+                // $data['url'] = getUrl();
+                // $this->view('supervisor/leaves/leaves', $data);
+                redirect('Supervisors/taskSchedule');
+            }
+
         }
     }
 
@@ -1095,5 +1195,34 @@ class Supervisors extends controller
             $this->view('supervisor/consumables/consumablelist', $data);
         }
     }
+
+
+    // CONTROLLER FUNCTION TO VIEW CARS + FILTERS (WORKING)
+    public function searchProcesses()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // $vehicleTypes = json_decode($_POST['vehicleTypes']);
+            $search_process = $_POST['searchingTask'];
+            $car_no = $_POST['selectedCar'];
+
+            $data['url'] = getUrl();
+            $data['CaughtProcesses'] = $this->supervisorModel->findProcessByName($search_process, $car_no);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['CaughtProcesses']);
+
+        }
+        // else {
+        //     $data['url'] = getUrl();
+        //     $data['LineCarsSet'] = $this->supervisorModel->viewCars();
+        //     $this->view('supervisor/assembling/vehiclelist', $data);
+        // }
+    }
+
 
 }

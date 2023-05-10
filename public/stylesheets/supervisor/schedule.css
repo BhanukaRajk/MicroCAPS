@@ -125,6 +125,7 @@
 .task-schedule-record-inner {
     display: flex;
     flex-direction: row;
+    gap: 2rem;
 
     justify-content: space-around;
     flex-wrap: wrap;
@@ -224,10 +225,14 @@
 }
 
 
+.task-vehicle {
+    width: 150px;
+    overflow-wrap: normal;
+}
 
 .task-name,
 .task-worker,
-.task-vehicle {
+.task-vehicl {
     width: 200px;
     overflow-wrap: normal;
 }
@@ -242,7 +247,7 @@
 }
 
 .task-status {
-    width: 50px;
+    width: 60px;
 }
 
 .task-add-button {
@@ -275,6 +280,12 @@
     flex: none;
     order: 2;
     flex-grow: 0;
+}
+
+.task-add-button:disabled {
+    border: 1px solid #2773FF88;
+    color: #2773FF88;
+    cursor: default;
 }
 
 
@@ -314,6 +325,7 @@
     line-height: 44px;
 }
 
+
 .assembler-assign {
     display: block;
     width: 25rem;
@@ -333,12 +345,22 @@
 .assembler-assign-popup-window {
     width: 30rem;
     height: auto;
+
     background-color: #FFFFFF;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
 }
 
-
+.add-task-box .popup-close-icon {
+    position: relative;
+    top: -0.15rem;
+    right: -18.3rem;
+}
 /* .display-none {
     display: none;
 } */

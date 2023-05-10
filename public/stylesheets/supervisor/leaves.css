@@ -172,15 +172,10 @@
     padding: 1rem;
 }
 
-.popup-close-icon {
+.time-off-update-popup .popup-close-icon {
     position: relative;
     top: -16.25rem;
     right: -15rem;
-}
-
-.popup-close-icon {
-    width: 1.25rem;
-    cursor: pointer;
 }
 
 .width-100per {

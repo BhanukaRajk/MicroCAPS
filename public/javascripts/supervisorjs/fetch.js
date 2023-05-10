@@ -107,86 +107,217 @@ function updateFilter() {
 // THE ONLY SELECT TAG HAS ID. IT HAS BEEN CALLED USING ITS ID
 const compVehicleSelector = document.querySelector('#vehicle_list');
 
-compVehicleSelector.addEventListener('change', function() {
+if(compVehicleSelector != null) {
 
-    // VALUE OF THIS SELECT TAG'S SELECTED DATA
-    const selectedValue = this.value;
+    compVehicleSelector.addEventListener('change', function() {
 
-    const formData = new FormData();
-    formData.append("selectedValue", selectedValue);
+        // VALUE OF THIS SELECT TAG'S SELECTED DATA
+        const selectedValue = this.value;
 
-    if (!formData) {
-        console.error("FormData not supported");
-        return;
-    }
-    
+        const formData = new FormData();
+        formData.append("selectedValue", selectedValue);
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/componentsView", {
-        method: "POST",
-        // headers: {
-        //     'Content-type': 'multipart/form-data'
-        //     'Content-type': 'application/json'
-        // },
-        body: formData,
-    })
-        .then((response) => response.json())
-        .then((data) => {
+        if (!formData) {
+            console.error("FormData not supported");
+            return;
+        }
+        
 
-            // PAGE'S CHANGING POINTS CATCHER
-            const partDataBoard = document.querySelector('#partsTable');
-            const partPageID = document.querySelector('#partPageId');
-
-            // PARTS TABLE HEADING WRITER
-            let partSet = `<div class="parts-table-row">
-                                <div class="parts-col-01 parts-bold">PART NAME</div>
-                                <div class="parts-col-02 parts-bold">STATUS</div>
-                                <div class="parts-col-03 parts-bold">DAMAGES</div>
-                                <div class="parts-col-04 parts-bold">ISSUED</div>
-                            </div>
-                            <div class="bottom-border"></div>`;
-
-
-            // CHECKING IF THERE ARE PARTS AVAILABLE FOR SELECTED VEHICLE
-            if(data.componentz) {
-
-                // DISPLAY ALL THE PARTS AVAILABLE
-                (data.componentz).forEach((component) => {
-                    partSet += `<div class="parts-table-row bottom-border">
-                                            <div class="parts-col-01">${component.PartName}</div>
-                                            <div class="parts-col-02">${component.Status}</div>
-                                            <div class="parts-col-03">
-                                                <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}D" ${component.Status == "DAMAGED" ? "checked" : "" } />
-                                                    <label for="${component.PartNo}D"></label>
-                                                </div>
-                                            </div>
-                                            <div class="parts-col-04">
-                                                <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}I" ${component.Status == "ISSUED" ? "checked" : "" } />
-                                                    <label for="${component.PartNo}I"></label>
-                                                </div>
-                                            </div>
-                                        </div>`;
-                });
-
-            // IF THERE ARE NO ANY PARTS, DISPLAY THE NOTHING MESSAGE
-            } else {
-                partSet += `<div class="horizontal-centralizer">
-                                                <div class="marginy-4">No parts available</div>
-                                                <div class=""></div>
-                                            </div>
-                                            <div class="bottom-border"></div>`;
-            }
-
-            // PARTS TABLE DATA CHANGER
-            partDataBoard.innerHTML = partSet;
-
-
-            // PAGE HEADING CHASSIS NUMBER CHANGER
-            if(data.search) {
-                partPageID.innerHTML = `Part details - ${data.search}`;
-            }
-
+        fetch("http://localhost:8080/MicroCAPS/Supervisors/componentsView", {
+            method: "POST",
+            // headers: {
+            //     'Content-type': 'multipart/form-data'
+            //     'Content-type': 'application/json'
+            // },
+            body: formData,
         })
-        .catch((error) => console.error(error));
-});
+            .then((response) => response.json())
+            .then((data) => {
+
+                // PAGE'S CHANGING POINTS CATCHER
+                const partDataBoard = document.querySelector('#partsTable');
+                const partPageID = document.querySelector('#partPageId');
+
+                // PARTS TABLE HEADING WRITER
+                let partSet = `<div class="parts-table-row">
+                                    <div class="parts-col-01 parts-bold">PART NAME</div>
+                                    <div class="parts-col-02 parts-bold">STATUS</div>
+                                    <div class="parts-col-03 parts-bold">DAMAGES</div>
+                                    <div class="parts-col-04 parts-bold">ISSUED</div>
+                                </div>
+                                <div class="bottom-border"></div>`;
+
+
+                // CHECKING IF THERE ARE PARTS AVAILABLE FOR SELECTED VEHICLE
+                if(data.componentz) {
+
+                    // DISPLAY ALL THE PARTS AVAILABLE
+                    (data.componentz).forEach((component) => {
+                        partSet += `<div class="parts-table-row bottom-border">
+                                                <div class="parts-col-01">${component.PartName}</div>
+                                                <div class="parts-col-02">${component.Status}</div>
+                                                <div class="parts-col-03">
+                                                    <div class="round">
+                                                        <input type="checkbox" id="${component.PartNo}D" ${component.Status == "DAMAGED" ? "checked" : "" } />
+                                                        <label for="${component.PartNo}D"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="parts-col-04">
+                                                    <div class="round">
+                                                        <input type="checkbox" id="${component.PartNo}I" ${component.Status == "ISSUED" ? "checked" : "" } />
+                                                        <label for="${component.PartNo}I"></label>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+                    });
+
+                // IF THERE ARE NO ANY PARTS, DISPLAY THE NOTHING MESSAGE
+                } else {
+                    partSet += `<div class="horizontal-centralizer">
+                                                    <div class="marginy-4">No parts available</div>
+                                                    <div class=""></div>
+                                                </div>
+                                                <div class="bottom-border"></div>`;
+                }
+
+                // PARTS TABLE DATA CHANGER
+                partDataBoard.innerHTML = partSet;
+
+
+                // PAGE HEADING CHASSIS NUMBER CHANGER
+                if(data.search) {
+                    partPageID.innerHTML = `Part details - ${data.search}`;
+                }
+
+            })
+            .catch((error) => console.error(error));
+    });
+}
+
+
+
+
+
+
+const taskstateboxes = document.querySelectorAll("input[type=checkbox][name=schedule-task-status]");
+
+for (let task of taskstateboxes) {
+
+    task.addEventListener('change', function() {
+
+        const selectedTask = this.id;
+        let selectedTaskStatus;
+
+        if(this.checked) {
+            selectedTaskStatus = 1;
+        } else {
+            selectedTaskStatus = 0;
+        }
+
+        const TaskData = selectedTask.split("-");
+        console.log(TaskData[0]);
+
+
+        const formData = new FormData();
+        formData.append("car_id", TaskData[0]);
+        formData.append("process_id", TaskData[1]);
+        formData.append("status", selectedTaskStatus);
+
+        if (!formData) {
+            console.error("FormData not supported");
+            return;
+        }
+        
+
+        fetch("http://localhost:8080/MicroCAPS/Supervisors/recordScheduleStatus", {
+            method: "POST",
+            // headers: {
+            //     'Content-type': 'multipart/form-data'
+            //     // 'Content-type': 'application/json'
+            // },
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => { 
+                const taskRecord = document.querySelector('#'+selectedTask);
+                console.log(taskRecord);
+
+                if(taskRecord.checked == true) {
+                    taskRecord.checked = false;
+                } else {
+                    taskRecord.checked = true;
+                }
+
+                // notifyMe();
+
+                console.error(error);
+            });
+    })
+};
+
+
+
+
+
+
+const processstateboxes = document.querySelectorAll("input[type=checkbox][name=schedule-task-status]");
+
+for (let task of taskstaeboxes) {
+
+    task.addEventListener('change', function() {
+
+        const selectedTask = this.id;
+        let selectedTaskStatus;
+
+        if(this.checked) {
+            selectedTaskStatus = 1;
+        } else {
+            selectedTaskStatus = 0;
+        }
+
+        const TaskData = selectedTask.split("-");
+        console.log(TaskData[0]);
+
+
+        const formData = new FormData();
+        formData.append("car_id", TaskData[0]);
+        formData.append("process_id", TaskData[1]);
+        formData.append("status", selectedTaskStatus);
+
+        if (!formData) {
+            console.error("FormData not supported");
+            return;
+        }
+        
+
+        fetch("http://localhost:8080/MicroCAPS/Supervisors/recordScheduleStatus", {
+            method: "POST",
+            // headers: {
+            //     'Content-type': 'multipart/form-data'
+            //     // 'Content-type': 'application/json'
+            // },
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => { 
+                const taskRecord = document.querySelector('#'+selectedTask);
+                console.log(taskRecord);
+
+                if(taskRecord.checked == true) {
+                    taskRecord.checked = false;
+                } else {
+                    taskRecord.checked = true;
+                }
+
+                // notifyMe();
+
+                console.error(error);
+            });
+    })
+};

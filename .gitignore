@@ -5,4 +5,6 @@
 /app/views/includes/header.php
 
 .idea/
-app/controllers/.DS_Store
+
+app/views/PAGE_STRUCTURE.txt
+.idea/php.xml

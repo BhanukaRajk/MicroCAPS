@@ -145,22 +145,7 @@ class Supervisor
 
 
 
-    public function addNewTask($chassis_no, $task_name): bool
-    {
-        $this->db->query(
-            'INSERT INTO tasks(ChassisNo, taskName) 
-            VALUES (:chassis_number, :task)'
-        );
 
-        $this->db->bind(':chassis_number', $chassis_no);
-        $this->db->bind(':task', $task_name);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
     public function viewPAQresults($ChassisNo)
@@ -248,6 +233,85 @@ class Supervisor
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function findProcessByName($process_name, $car)
+    {
+        $this->db->query(
+            'SELECT `stage-process`.`ProcessId`, 
+                        `stage-process`.`ProcessName`
+                FROM `vehicle`, `stage-process`
+                WHERE `stage-process`.`ModelNo` = `vehicle`.`ModelNo` AND 
+                        `vehicle`.`ChassisNo` = :car AND 
+                        `stage-process`.`ProcessName` LIKE :process
+                        -- `stage-process`.`ProcessName` LIKE `%ea%`
+                        ;'
+        );
+
+        $this->db->bind(':process', $process_name);
+        $this->db->bind(':car', $car);
+
+        $taskset = $this->db->resultSet();
+
+        if ($taskset) {
+            return $taskset;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function addNewTask($chassis_no, $process_name, $assembler = null): bool
+    {
+        $this->db->query(
+            'INSERT INTO `employee-schedule`(`ChassisNo`, `ProcessId`, `Date`, `EmployeeId`) 
+            VALUES (:chassis_number, :process, DATE_ADD(CURDATE(), INTERVAL 1 DAY), :assembler)'
+        );
+
+        $this->db->bind(':chassis_number', $chassis_no);
+        $this->db->bind(':process', $process_name);
+        $this->db->bind(':assembler', $assembler);
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // THIS WILL GIVE THE TASKS IN EMPLOYEE SCHEDULE TABLE
     public function ViewTaskSchedule()
     {
 
@@ -272,6 +336,100 @@ class Supervisor
             return false;
         }
     }
+
+
+    // THIS FUNCTION WILL UPDATE THE DATABASE WHEN USER MARKS AS THE TASK IS COMPLETED OR NOT (REALTIME)
+    public function recordTaskStatus($car_id, $process_id, $status): bool {
+        $this->db->query(
+            'UPDATE `employee-schedule`
+            SET `Completeness` = :CStatus 
+            WHERE `ChassisNo` = :Car AND `ProcessId` = :Process'
+        );
+
+        $this->db->bind(':Car', $car_id);
+        $this->db->bind(':Process', $process_id);
+        $this->db->bind(':CStatus', $status);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // CHECK THIS REQUESTED TASK IS AVAILABLE?
+    public function checkTaskById($car_id, $process_id): bool
+    {
+
+        $this->db->query(
+            'SELECT `ChassisNo` FROM `employee-schedule` WHERE `ChassisNo` = :car AND `ProcessId` = :process;'
+        );
+
+        $this->db->bind(':car', $car_id);
+        $this->db->bind(':process', $process_id);
+
+        $row = $this->db->resultSet();
+
+        if (isset($row)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    // REMOVING TASK BY USING CAR ID AND PROCESS ID
+    public function removeTask($car_id, $process_id): bool
+    {
+
+        $this->db->query(
+            'DELETE FROM `employee-schedule` WHERE `ChassisNo` = :car AND `ProcessId` = :process;'
+        );
+
+        $this->db->bind(':car', $car_id);
+        $this->db->bind(':process', $process_id);
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -474,7 +632,7 @@ class Supervisor
                         `vehicle`.`Color`, 
                         `vehicle-model`.`ModelName` 
                     FROM `vehicle`, `vehicle-model` 
-                    WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` AND `vehicle`.`Status` = :STAGE;'
+                    WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` AND `vehicle`.`CurrentStatus` = :STAGE;'
         );
 
         $this->db->bind(':STAGE', $stage);
@@ -1277,7 +1435,7 @@ class Supervisor
                     DATE(`consumable`.`LastUpdate`) AS `UDate`,
                     TIME(`consumable`.`LastUpdate`) AS `UTime`, 
                     `consumable`.`Image`, 
-                    CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater`, 
+                    CONCAT(`employee`.`Firstname`," ",`employee`.`Lastname`) AS `Updater`, 
             FROM `consumable`, `employee`
             WHERE `consumable`.`LastUpdateBy` = `employee`.`EmployeeId`;'
 

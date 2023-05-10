@@ -60,9 +60,21 @@ function closePopup() {
     popupDiv.style.display = 'none';
 }
 
+function showThisPopup(ID) {
+    var popupDiv = document.getElementById(ID);
+    //// popupDiv.style.display = 'block';
+    // popupDiv.classList.remove("hideme");
+    // popupDiv.classList.toggle("showme");
+    popupDiv.classList.remove("display-none");
+}
+
 function closeThisPopup(ID) {
     var popupDiv = document.getElementById(ID);
-    popupDiv.style.display = 'none';
+    //// popupDiv.style.display = 'none';
+    // popupDiv.classList.remove("showme");
+    // popupDiv.classList.toggle("hideme");
+    popupDiv.classList.toggle("display-none");
+
 }
 
 
@@ -242,6 +254,17 @@ function leaveDeleteConfirmation(Leave) {
 
     // SHOW THE POPUP FORM
     document.getElementById("popupWindow").classList.remove("display-none");
+}
+
+function taskDeleteConfirmation(Car, Process) {
+    // GET THE VALUES FROM THE LEAVE TABLE
+
+    // FILL THE INPUT FIELDS IN THE FORM
+    document.getElementById("del-task-car-id").setAttribute("value", Car);
+    document.getElementById("del-task-process-id").setAttribute("value", Process);
+
+    // SHOW THE POPUP FORM
+    document.getElementById("taskdelpopupWindow").classList.remove("display-none");
 }
 
 
