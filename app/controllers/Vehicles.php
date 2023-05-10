@@ -213,6 +213,28 @@ class Vehicles extends Controller {
             }
     }
 
+    public function componentsByChassis() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'chassisNo' => trim($_POST['chassisNo'])
+            ];
+
+            $data['vehicles'] = $this->vehicleModel->shellDetail($data['chassisNo']);
+            $data['components'] = $this->vehicleModel->componentsReceived($data['chassisNo']);
+
+            echo json_encode($data);
+        }
+
+    }
+
 
     // Assembly Line Related
     public function startAssembly() {

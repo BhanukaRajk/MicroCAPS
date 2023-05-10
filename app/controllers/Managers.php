@@ -210,7 +210,7 @@ class Managers extends Controller {
 
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $data['toBeDispatched'] = $this->vehicleModel->getVehiclesByStatus('PDI', 'C');
+                $data['toBeDispatched'] = $this->vehicleModel->getVehiclesByStatus('RR', 'C');
                 $data['dispatchDetails'] = $this->vehicleModel->dispatchDetails();
                 $this->view('manager/dispatch', $data);
             }

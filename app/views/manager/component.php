@@ -78,7 +78,7 @@
             <div class="display-flex-row justify-content-between align-items-center width-100"> 
                 <div class="section-heading font-weight">Received Components</div>
                 <div class="custom-select">
-                    <select name="vehicles" id="components" onchange="dashboardChart()">
+                    <select name="vehicles" id="components" onchange="component()">
                         <?php 
                             foreach($data['chassis'] as $value) {
                                 echo '<option value="' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
@@ -100,8 +100,8 @@
 
                 echo '<div class="display-flex-row justify-content-between align-items-center width-80">
                     <div class="display-flex-column">
-                        <div class="paddingy-2 font-weight">Chassis No : '.$data['chassis'][0]->ChassisNo.'</div>
-                        <div class="paddingy-2 font-weight">Color : '.$data['chassis'][0]->Color.'</div>
+                        <div class="paddingy-2 font-weight" id="chassiNoC">Chassis No : '.$data['chassis'][0]->ChassisNo.'</div>
+                        <div class="paddingy-2 font-weight" id="colorC">Color : '.$data['chassis'][0]->Color.'</div>
                     </div>
                     <label class="form-control-checkbox">
                         Select All
@@ -113,7 +113,7 @@
                     </label>
                 </div>';
 
-                echo '<div class="display-flex-row gap-5 margin-top-3">';
+                echo '<div id="selected" class="margin-top-3"><div class="display-flex-row gap-5">';
 
                 $count = 1;
 
@@ -158,9 +158,7 @@
                         <button class="btn btn-primary" type="button"  onclick="changeComponentStatus(\''.$data['chassis'][0]->ChassisNo.'\')">
                             Mark as Received
                         </button>
-                    </div>
-
-                </form>';
+                    </div></div>';
             }
                 
             
