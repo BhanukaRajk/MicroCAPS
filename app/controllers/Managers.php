@@ -90,7 +90,8 @@ class Managers extends Controller {
         } else {
 
             $data['chassis'] = $this->vehicleModel->componentChassis();
-            $data['components'] = $this->vehicleModel->componentsReceived($data['chassis'][0]->ChassisNo);
+            if ($data['chassis'] !== false)
+                $data['components'] = $this->vehicleModel->componentsReceived($data['chassis'][0]->ChassisNo);
 
             $this->view('manager/component',$data);
         }

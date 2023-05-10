@@ -19,7 +19,7 @@ function rounds(evt, option) {
 
 const selectAll = document.getElementById("select-all");
 
-selectAll.addEventListener("change", function () {
+selectAll?.addEventListener("change", function () {
     const checkboxes = document.querySelectorAll("#componentStatus");
     checkboxes.forEach(function (checkbox) {
         checkbox.checked = selectAll.checked;

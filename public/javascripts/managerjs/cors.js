@@ -77,7 +77,7 @@ function requestShell() {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful","Email Sent Successfully");
@@ -109,7 +109,7 @@ function addShell() {
             var response = this.responseText;
 
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful","Shell Added Successfully");
@@ -159,7 +159,7 @@ function startAssembly(chassisNo) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 document.getElementById("startAssembly").disabled = true;
                 location.reload();
@@ -205,7 +205,7 @@ function sendRequest(id,job) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful", "Successfully Re-Requested "+ job +" for " + chassisNo);
@@ -235,7 +235,7 @@ function jobDone(id,job) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful",id + " - " + job + " " + " Job is Completed");
@@ -292,14 +292,16 @@ function createList() {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
-                location.reload();
+            if (response.trim() == "Successful") {
+                location.reload(true);
                 setLocalStorageFlash("Successful","Sent Material Request Form");
 
             } else {
-                location.reload();
+                location.reload(true);
                 setLocalStorageFlash("Error","Error Sending Email");
             }
+
+            console.log(response);
 
         }
     };
@@ -324,9 +326,7 @@ function changeComponentStatus(chassisNo) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            // console.log(response);
-
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful","Status Updated");
@@ -339,7 +339,7 @@ function changeComponentStatus(chassisNo) {
 
             }
 
-            // setLocalStorageOption("option-two");
+            setLocalStorageOption("option-two");
 
         }
     };
@@ -364,7 +364,7 @@ function dispatch() {
             var response = this.responseText;
 
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful","Vehicle Dispatched");
@@ -402,7 +402,7 @@ function saveChanges(id, position) {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorageFlash("Successful","Saved Changes");
             } else {
@@ -425,7 +425,7 @@ function updatePassword() {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorageFlash("Successful","Password Updated");
             } else {

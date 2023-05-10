@@ -1,6 +1,6 @@
 <?php
 
-function generateMRF($post, $vehicleModel): bool {
+function generateMRF($post, $vehicleModel): array|string {
 
     $array1 = array();
     $array2 = array();
@@ -57,25 +57,41 @@ function generateMRF($post, $vehicleModel): bool {
         ]
     ];
 
-
+    $array = array();
+    $check = [true, true, true];
 
     if ($data['componentRequestDetails']['M0001'] != null) {
         $html = createHtml($data,'M0001');
         $flag[0] = convert('M0001',$html);
+
+        $check[0] = $flag[0][0];
+
+        if ($flag[0][1])
+            $array[] = $flag[0][1];
     }
 
     if ($data['componentRequestDetails']['M0002'] != null) {
         $html = createHtml($data,'M0002');
         $flag[1] = convert('M0002',$html);
+
+        $check[1] = $flag[1][0];
+
+        if ($flag[1][1])
+            $array[] = $flag[1][1];
     }
 
     if ($data['componentRequestDetails']['M0003'] != null) {
         $html = createHtml($data,'M0003');
         $flag[2] = convert('M0003',$html);
+
+        $check[2] = $flag[2][0];
+
+        if ($flag[2][1])
+            $array[] = $flag[2][1];
     }
 
-    if ($flag[0] && $flag[1] && $flag[2]) {
-        return true;
+    if ($check[0] && $check[1] && $check[2]) {
+        return warehouseEmail($array);
     } else {
         return false;
     }
