@@ -16,8 +16,8 @@
                 <div class="paddingy-2 font-weight">Engine : <?php echo $data['pdiVehicle']->EngineNo ?></div>
             </div>
             <div>
-                <button class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $data['pdiVehicle']->ChassisNo ?>'">Edit Defect Sheet</button>
-                <button class="btn btn-primary btn-green" onClick="completeTask('<?php echo $data['pdiVehicle']->ChassisNo ?>', '<?php echo $_SESSION['_id'] ?>')">Mark As Completed</button>
+                <button class="btn btn-primary btn-blue width-rem-12" onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $data['pdiVehicle']->ChassisNo ?>'">Edit Defect Sheet</button>
+                <button class="btn btn-primary btn-green width-rem-12" onClick="completeTask('<?php echo $data['pdiVehicle']->ChassisNo ?>', '<?php echo $_SESSION['_id'] ?>')">Mark As Completed</button>
             </div>
         </div>
 

@@ -60,6 +60,8 @@
                         $CurrentStatus[0] = 'Stage 03';
                     } else if ($CurrentStatus[0] == 'S4') {
                         $CurrentStatus[0] = 'Stage 04';
+                    } else if ($CurrentStatus[0] == 'H') {
+                        $CurrentStatus[0] = 'Hold';
                     }
 
                     

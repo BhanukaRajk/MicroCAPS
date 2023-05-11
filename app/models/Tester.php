@@ -6,7 +6,10 @@ class Tester {
         $this->db = new Database;
     }
 
-    // USER DETAILS
+    // ____________________USER DETAILS_____________________
+
+
+    // FINDS USER BY USERNAME
 
     public function findUserByUsername($username) {
 
@@ -24,6 +27,9 @@ class Tester {
 
     }
 
+
+    // FINDS USER BY ID
+
     public function findUserByID($EmployeeID) {
 
         $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.`EmployeeID` = :EmployeeID');
@@ -39,6 +45,9 @@ class Tester {
         }
 
     }
+
+
+    // GET ALL USER DETAILS BY ID
 
     public function userDetails($id) {
         $this->db->query(
@@ -57,6 +66,9 @@ class Tester {
             return null;
         }
     }
+
+
+    // UPDATE USER DETAILS
 
     public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image): bool {
         $this->db->query(
@@ -101,6 +113,9 @@ class Tester {
         }
     }
 
+
+    // GET TESTER NAMES
+
     public function getTesterNames(){
         $this->db->query('SELECT `employee`.`EmployeeId`, `employee`.`Firstname`, `employee`.`Lastname` 
                                     FROM `employee`
@@ -116,40 +131,47 @@ class Tester {
     }
 
 
-    // VEHICLE DETAILS
+    // __________________VEHICLE DETAILS____________________
 
-    public function selectVehicle(){
-        $this->db->query('SELECT ChassisNo FROM `vehicle` WHERE `vehicle`.`PDIStatus` = "NC"');
 
-        $row = $this->db->resultSet();
+    
 
-        if ( $row ) {
-            return $row;
-        } else {
-            return null;
-        }
-    }
+    // public function selectVehicle(){
+    //     $this->db->query('SELECT ChassisNo FROM `vehicle` WHERE `vehicle`.`PDIStatus` = "NC"');
 
-    public function findPDIvehicles($ChassisNo) {
+    //     $row = $this->db->resultSet();
 
-        $this->db->query(
-            'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo 
-                FROM `vehicle` 
-                WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi AND `vehicle`.ChassisNo = :ChassisNo'
-        );
+    //     if ( $row ) {
+    //         return $row;
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
-        $this->db->bind(':status', 'PDI');
-        $this->db->bind(':pdi', 'NC');
-        $this->db->bind(':ChassisNo', $ChassisNo);
+    // public function findPDIvehicles($ChassisNo) {
 
-        $results = $this->db->resultSet();
+    //     $this->db->query(
+    //         'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo 
+    //             FROM `vehicle` 
+    //             WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi AND `vehicle`.ChassisNo = :ChassisNo'
+    //     );
 
-        if ( $this->db->rowCount() ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     $this->db->bind(':status', 'PDI');
+    //     $this->db->bind(':pdi', 'NC');
+    //     $this->db->bind(':ChassisNo', $ChassisNo);
+
+    //     $results = $this->db->resultSet();
+
+    //     if ( $this->db->rowCount() ) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+
+
+    // GET VEHICLE DETAILS BY CHASSIS NUMBER
 
     public function pdiVehicle($id){
         $this->db->query('SELECT ChassisNo, EngineNo FROM `vehicle` WHERE `vehicle`.`ChassisNo` = :id');
@@ -164,6 +186,9 @@ class Tester {
             return null;
         }
     }
+
+
+    // GET VEHCILE DETAILS BY ASSIGNED TESTER ID
 
     public function PDIVehiclesByTester($id) {
 
@@ -189,6 +214,9 @@ class Tester {
         }
     }
 
+
+    // GET VEHICLE COUNTS FOR THE DASHBOARD
+
     public function vehicleCount(){
         $counts = array();
 
@@ -209,7 +237,7 @@ class Tester {
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS onHold
             FROM `vehicle`
-            WHERE `vehicle`.`CurrentStatus` LIKE "S%";'
+            WHERE `vehicle`.`CurrentStatus` LIKE "S%" OR `vehicle`.`CurrentStatus` = "H"'
         );
         $counts[] = $this->db->single();
 
@@ -219,6 +247,9 @@ class Tester {
             return false;
         }
     }
+
+
+    // GET VEHICLE DETAILS THAT ARE READY TO TEST
 
     public function vehiclesReadyToTest() {
 
@@ -245,7 +276,10 @@ class Tester {
 
 
 
-    // DEFECT DETAILS
+    // _______________DEFECT DETAILS_________________
+
+
+    // CHECKS IF DEFECT EXISTS 
 
     public function findDefectExists($DefectNo, $ChassisNo) {
 
@@ -265,6 +299,9 @@ class Tester {
 
     }
 
+
+    // GET DEFECT DETAILS BY DEFECT NUMBER & CHASSIS NUMBER, RETURNS DEFECT DETAILS
+
     public function getDefect($ChassisNo, $DefectNo) {
 
         $this->db->query('SELECT * FROM `pdi-defect` WHERE `pdi-defect`.`DefectNo` = :DefectNo AND `pdi-defect`.`ChassisNo` = :ChassisNo');
@@ -277,6 +314,9 @@ class Tester {
         return $row;
 
     }
+
+
+    // GET DEFECT DETAILS BY CHASSIS NUMBER, RETURNS DEFECT DETAILS
 
     public function viewDefectSheets($id) {
         $this->db->query(
@@ -301,6 +341,9 @@ class Tester {
         }
     }
 
+
+    // RECORD A DEFECT
+
     public function addDefect($data) {
         $this->db->query(
             "INSERT INTO `pdi-defect` (`DefectNo`, `ChassisNo`, `EmployeeID`, `InspectionDate`, `RepairDescription`, `ReCorrection`) 
@@ -321,6 +364,9 @@ class Tester {
             return false;
         }
     }
+
+
+    // EDIT DEFECT DETAILS
 
     public function editDefect($data) {
 
@@ -348,6 +394,9 @@ class Tester {
         }
     }
 
+
+    // DELETE DEFECT DETAILS
+
     public function deleteDefect($ChassisNo, $DefectNo) {
 
         $this->db->query(
@@ -365,6 +414,9 @@ class Tester {
             return false;
         }
     }
+
+
+    // CHECKS FOR NOT COMPLETED DEFECTS
 
     public function notCompletedDefect($chassisno){
         $this->db->query('SELECT `pdi-defect`.* 
@@ -384,7 +436,10 @@ class Tester {
     }
 
 
-    // PDI DETAILS
+    // ----------- PDI DETAILS -----------
+
+
+    // GET PDI DETAILS
 
     public function getPDI($ChassisNo, $CheckId) {
 
@@ -397,6 +452,8 @@ class Tester {
 
         return $row;
     }
+
+    // UPDATE PDI RESULTS
 
     public function addPDI($v1,$v2,$v3) {
         $this->db->query(
@@ -415,6 +472,8 @@ class Tester {
             return false;
         }
     }
+
+    // UPDATE PDI ALL RESULTS SAME TIME
 
     public function selectAllPDI($chassisno, $category, $result) {
         $this->db->query(
@@ -447,6 +506,9 @@ class Tester {
         return $flag;
     }
 
+
+    // GET PDI RESULTS
+
     public function viewPDI($id){
         $this->db->query(
             "SELECT `pdi-result`.`ChassisNo`,
@@ -471,6 +533,9 @@ class Tester {
         }
     }
 
+
+    // GET PDI CHECK CATEGORIES
+
     public function pdiCheckCategories() {
         $this->db->query(
             'SELECT `pdi-check-category`.`CategoryId`, `pdi-check-category`.`Title`, `pdi-check-category`.`SubTitle`,
@@ -491,6 +556,9 @@ class Tester {
         }
 
     }
+
+
+    // GET PDI CHECK LIST OF A VECHICLE
 
     public function pdiCheckList($id) {
         $this->db->query(
@@ -513,6 +581,8 @@ class Tester {
     }
 
 
+    // CHECKS FOR NOT COMPLETED PDIs
+
     public function notCompletedPDI($chassisno){
         $this->db->query('SELECT `pdi-result`.* 
                                     FROM `pdi-result` 
@@ -531,7 +601,10 @@ class Tester {
     }
 
 
-    // TASK DETAILS
+    // --------------- TASK DETAILS ----------------
+
+
+    // ADD A TASK
 
     public function addTask($chassisno,$testerid) {
         $this->db->query(
@@ -552,6 +625,9 @@ class Tester {
         }
     }
 
+
+    // REMOVE A TASK
+
     public function removeTask($chassisno) {
         $this->db->query(
             "UPDATE `vehicle` 
@@ -571,6 +647,9 @@ class Tester {
         }
     }
 
+
+    // MARK A TASK AS COMPLETED
+
     public function completeTask($chassisno) {
         $this->db->query(
             "UPDATE `vehicle` 
@@ -587,6 +666,12 @@ class Tester {
             return false;
         }
     }
+
+
+    // ---------------------- OTHER ----------------------
+
+
+    // GET LAST LOGGED IN EMPLOYEES
 
     public function activityLogs() {
 
@@ -606,6 +691,8 @@ class Tester {
         }
     }
 
+
+    // GET COMPONENT DETAILS
 
     public function getComponentStatus($chassisNo, $status = '%', $stage = '%') {
         $this->db->query(
@@ -628,6 +715,9 @@ class Tester {
             return [];
         }
     }
+
+    
+    // GETS ASSERMBLY DETAILS
 
     public function assemblyDetails($chassisNo = "%", $order = 'DESC')
     {
@@ -652,6 +742,9 @@ class Tester {
         }
     }
 
+
+    // GETS PROCESS DETAILS
+
     public function getProcessStatus($chassisNo, $status = '%', $stage = '%') {
         $this->db->query(
             'SELECT `stage-vehicle-process`.Status, `stage-process`.ProcessName, `stage-process`.StageNo, `stage-process`.Weight
@@ -673,6 +766,9 @@ class Tester {
             return [];
         }
     }
+
+
+    // GETS VEHICLE DETAILS FOR ASSEMBLY
 
     public function onPDIVehicles($parameters = null, $arr = true ) {
 
@@ -726,6 +822,9 @@ class Tester {
         }
     }
 
+
+    // GETS VEHICLE DETAILS BY VEHICLE MODEL
+
     public function assemblyDetailsByModel($model, $order = 'DESC')
     {
         $this->db->query(
@@ -747,6 +846,9 @@ class Tester {
             return false;
         }
     }
+
+
+    // GETS DISPATCH DETAILS
 
     public function dispatchDetails($parameters = null) {
 
@@ -791,6 +893,8 @@ class Tester {
         }
     }
 
+
+    // GETS SHELL DETAILS
 
     public function shellDetail($chassisNo)
     {
