@@ -30,7 +30,7 @@
                 <div class="paddingy-2 font-weight">Tester : <?php echo $data['onPDIVehicle']->Tester ?></div>
             </div>
             <div>
-                <button class="btn btn-primary" id="view-defect">View Defect Sheet</button>
+                <button class="btn btn-primary btn-blue width-rem-12" id="view-defect">View Defect Sheet</button>
             </div>
         </div>
 
