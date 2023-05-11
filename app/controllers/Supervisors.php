@@ -988,12 +988,28 @@ class Supervisors extends controller
                 
                 // USED TO DIRECT THE VEHICLES CURRENT ASSEMBLING STAGE
                 if($data['stage'] == 'S1') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S1'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S1'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-one', $data);
                 } elseif($data['stage'] == 'S2') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S2'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S2'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-two', $data);
                 } elseif($data['stage'] == 'S3') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S3'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S3'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-three', $data);
                 } elseif($data['stage'] == 'S4') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S4'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S4'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-four', $data);
                 }
                     

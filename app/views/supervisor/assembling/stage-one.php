@@ -21,23 +21,22 @@
             </div>
 
             <div class="single-stage-body">
-
-                <div class="single-stage-chart">
+                <div class="single-stage-chart align-items-center">
                     <div class="chart-heading">
                         <div>Stage 01</div>
                     </div>
-                    <div class="chart-box">
-                        <canvas id="myChart" class="SX-bigChart"></canvas>
-                        <label class="chart-percentage SX-bigstate" for="myChart">60%</label>
+                    <div class="chart-grid">
+                        <canvas id="Lstage01"></canvas>
+                        <label class="chart-percentage-ao " for="Lstage01" id="Lstage01-label"></label>
                     </div>
-                    <div class="chart-legend">
-                        <div class="dash-graph-menu">
-                            <div class="dash-graph-color-circle dash-darkblue-circle test1"></div>
-                            <div>Done</div>
+                    <div class="display-flex-row justify-content-center gap-0p5">
+                        <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
+                            <div class="dash-graph-color-circle dash-darkblue-circle "></div>
+                            <div>Completed</div>
                         </div>
-                        <div class="dash-graph-menu">
-                            <div class="dash-graph-color-circle dash-lightblue-circle test1"></div>
-                            <div>On-going</div>
+                        <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
+                            <div class="dash-graph-color-circle dash-lightblue-circle "></div>
+                            <div>Pending</div>
                         </div>
                     </div>
                 </div>
@@ -91,6 +90,21 @@
         </div>
     </div>
 </section>
+
+
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
+
+<script>
+
+    let s1 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
+
+    var ctx = document.getElementById('Lstage01').getContext('2d');
+
+    let ltx = document.getElementById('Lstage01-label');
+
+    renderChart(ctx, ltx, s1, 110);
+
+</script>
 
 
 <!-- ADD COMMON FOOTER FILE -->
