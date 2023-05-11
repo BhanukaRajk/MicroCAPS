@@ -1048,6 +1048,14 @@ h3 {
 }
 
 .btn-green {
+    --btn-color: var(--green);
+    --btn-border-color: var(--green);
+    --btn-hover-color: var(--green);
+    --btn-hover-bg: #e8f5e973;
+    --btn-hover-border-color:var(--green);
+}
+
+.btn-grn {
     --btn-bg: var(--green);
     --btn-color: var(--white);
     --btn-border-color: none;

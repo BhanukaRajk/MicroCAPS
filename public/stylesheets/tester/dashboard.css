@@ -230,7 +230,7 @@
 .dash-cap{
     font-weight: bold;
     margin-top: 2rem;
-    font-family: "Noto Sans";
+    /* font-family: "Noto Sans"; */
     font-size: 18px;
 }
 
