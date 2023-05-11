@@ -33,6 +33,7 @@ class Testers extends controller
             $data['url'] = getUrl();
             $data['vehicles'] = $this->testerModel->vehiclesReadyToTest();
             $data['counts'] = $this->testerModel->vehicleCount();
+            $data['activityLogs'] = $this->testerModel->activityLogs();
             $this->view('tester/dashboard', $data);
         }
     }
@@ -236,6 +237,33 @@ class Testers extends controller
             ];
 
             $result = $this->testerModel->addPDI($data['ChassisNo'], $data['CheckId'], $data['Result']);
+
+            if ($result) {
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
+        }
+    }
+
+    public function selectAllPDI()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['ChassisNo']),
+                'CategoryId' => trim($_POST['CategoryId']),
+                'Result' => trim($_POST['Result'])
+            ];
+
+            $result = $this->testerModel->selectAllPDI($data['ChassisNo'], $data['CategoryId'], $data['Result']);
 
             if ($result) {
                 echo 'Successful';

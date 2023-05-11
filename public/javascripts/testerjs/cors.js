@@ -36,6 +36,29 @@ function addPDI(ChassisNo,CheckId, Result) {
     xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Result="+Result);
 }
 
+// Change All PDI Statuses
+
+function selectAllPDI(ChassisNo, CategoryId, Result) {
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response == "Successful") {
+                location.reload();
+                setLocalStorage("Successful","Status Changed Successfully");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Completing Job");
+            }
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/selectAllPDI", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("ChassisNo="+ChassisNo+"&CategoryId="+CategoryId+"&Result="+Result);
+}
+
 // Add a Vehicle to My Tasks
 
 function addTask(ChassisNo, TesterId) {
@@ -86,7 +109,7 @@ function removeTask(ChassisNo) {
 
 // Mark Task as Completed
 
-function completeTask(ChassisNo) {
+function completeTask(ChassisNo, TesterId) {
     
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -94,7 +117,7 @@ function completeTask(ChassisNo) {
             var response = this.responseText;
 
             if (response == "Successful") {
-                location.reload();
+                window.location.replace("http://localhost/MicroCAPS/Testers/mytasks/"+TesterId);
                 setLocalStorage("Successful","Task Completed Successfully");
             } else if (response == "pdinotcompleted") {
                 location.reload();

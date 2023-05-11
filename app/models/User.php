@@ -79,4 +79,70 @@ private $db;
         }
     }
 
+    public function validateOldPassword($id,$password): bool {
+        $this->db->query(
+            'SELECT `employee-credentials`.Password
+                FROM `employee-credentials`
+                INNER JOIN employee
+                ON `employee-credentials`.Username = employee.Email
+                WHERE `employee`.EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return password_verify($password, $row->Password);
+    }
+
+    public function updatePassword($id,$password): bool {
+
+        $this->db->query(
+            'SELECT `employee-credentials`.Username
+                FROM `employee-credentials`
+                INNER JOIN employee
+                ON `employee-credentials`.Username = employee.Email
+                WHERE `employee`.EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        $this->db->query('UPDATE `employee-credentials`
+                SET `employee-credentials`.Password = :password
+                WHERE `employee-credentials`.Username = :username'
+        );
+
+        $password = password_hash($password,PASSWORD_DEFAULT,['cost' => 12]);
+
+        $this->db->bind(':username', $row->Username);
+        $this->db->bind(':password', $password);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function markActivity($userId, $logged = 1): bool {
+
+        $this->db->query(
+            'UPDATE `employee-logs`
+                SET lastLog = CURRENT_TIMESTAMP, loggedIn = :logged
+                WHERE EmployeeId = :userId'
+        );
+
+        $this->db->bind(':userId', $userId);
+        $this->db->bind(':logged', $logged);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }

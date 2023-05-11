@@ -37,7 +37,8 @@
                                 </div>
                                 <div class="carstatus green"> On Assembly </div>
                                 <div class="arrivaldate">Stage: '.$val.'</div>
-                            </div>';
+                            </div>
+                            </a>';
             }
 
             echo '  </div>
@@ -47,4 +48,11 @@
 
     </section>
 
+    <section class="display-flex-column">
+
+        <div id="alert" class="hideme" role="alert"></div>
+
+    </section>
+
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>

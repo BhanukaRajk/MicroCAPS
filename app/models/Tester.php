@@ -173,7 +173,7 @@ class Tester {
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
                 WHERE `vehicle`.PDIStatus = :pdi AND `vehicle`.TesterId = :id
-                ORDER BY `vehicle`.ChassisNo DESC
+                ORDER BY `vehicle`.`ArrivalDate` ASC
                 LIMIT 10;'
         );
 
@@ -195,7 +195,7 @@ class Tester {
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS inLine
             FROM `vehicle`
-            WHERE `vehicle`.`CurrentStatus` = "PDI";'
+            WHERE `vehicle`.CurrentStatus = "RR" AND `vehicle`.PDIStatus != "CM"'
         );
         $counts[] = $this->db->single();
 
@@ -228,8 +228,7 @@ class Tester {
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
                 WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus != :pdi
-                ORDER BY `vehicle`.ChassisNo DESC
-                LIMIT 10;'
+                ORDER BY `vehicle`.`ArrivalDate` ASC;'
         );
 
         $this->db->bind(':status', 'RR');
@@ -417,6 +416,37 @@ class Tester {
         }
     }
 
+    public function selectAllPDI($chassisno, $category, $result) {
+        $this->db->query(
+            "SELECT `pdi-check`.`CheckId` 
+            FROM `pdi-check` WHERE `pdi-check`.`CategoryId` = :CategoryId"
+        );
+
+        $this->db->bind(':CategoryId', $category);
+
+        $data['id'] = $this->db->resultSet();
+
+        $flag = true;
+
+        foreach($data['id'] as $value) {
+            $this->db->query(
+                "UPDATE `pdi-result` 
+                SET `Result` = :Result 
+                WHERE `pdi-result`.`ChassisNo` = :ChassisNo AND `pdi-result`.`CheckId` = :CheckId"
+            );
+
+            $this->db->bind(':ChassisNo', $chassisno);
+            $this->db->bind(':CheckId', $value->CheckId);
+            $this->db->bind(':Result', $result);
+
+           if (!$this->db->execute()){
+                $flag = false;
+           }
+        } 
+
+        return $flag;
+    }
+
     public function viewPDI($id){
         $this->db->query(
             "SELECT `pdi-result`.`ChassisNo`,
@@ -553,6 +583,24 @@ class Tester {
 
         if ( $this->db->execute() ) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function activityLogs() {
+
+        $this->db->query(
+            'SELECT `employee-logs`.`EmployeeId`, `employee-logs`.`LoggedIn` ,CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime` 
+            FROM `employee-logs`,`employee` 
+            WHERE `employee-logs`.`EmployeeId` = `employee`.`EmployeeId` 
+            ORDER BY `employee-logs`.`lastLog` DESC LIMIT 6;'
+        );
+
+        $lastLogs = $this->db->resultSet();
+
+        if ($lastLogs) {
+            return $lastLogs;
         } else {
             return false;
         }

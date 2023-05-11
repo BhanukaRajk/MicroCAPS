@@ -17,7 +17,7 @@
             </div>
             <div>
                 <button class="btn btn-primary" onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $data['pdiVehicle']->ChassisNo ?>'">Edit Defect Sheet</button>
-                <button class="btn btn-primary btn-green" onClick="completeTask('<?php echo $data['pdiVehicle']->ChassisNo ?>')">Mark As Completed</button>
+                <button class="btn btn-primary btn-green" onClick="completeTask('<?php echo $data['pdiVehicle']->ChassisNo ?>', '<?php echo $_SESSION['_id'] ?>')">Mark As Completed</button>
             </div>
         </div>
 
@@ -33,12 +33,29 @@
                                 <div class="pdi-card-sub">' . $value->SubTitle . '</div>
 
                                 <div class="pdiresultbox paddingy-3">
-                                <div class="paddingx-4 paddingy-2">
-                                    <div class="pdi-checklist">
-                                    <div class="padding-bottom-3 font-size"></div>
-                                    <div class="padding-bottom-1 font-size"><pre class="margin-0 font-family">OK    SA</pre></div>
-                                </div>
-                                </div>
+                                    <div class="paddingx-4 paddingy-2">
+                                        <div class="pdi-checklist">
+                                            <div class="padding-bottom-3 font-size"></div>
+                                            <div class="padding-bottom-1 font-size"><pre class="margin-0 font-family">OK    SA</pre></div>
+                                        </div>
+                                    </div>
+                                    <div class="paddingx-4 paddingy-2">
+                                        <div class="pdi-checklist">
+                                            <div class="padding-bottom-3 font-size bold">Select All</div>
+                                            <div>
+                                                <input type="radio" 
+                                                            name="" 
+                                                            value="OK" 
+                                                            class="round-checkbox-green" 
+                                                            onChange="selectAllPDI(\'' . $data['pdiVehicle']->ChassisNo . '\',\'' . $value->CategoryId . '\',\'OK\')">
+                                                <input type="radio" 
+                                                            name="" 
+                                                            value="SA" 
+                                                            class="round-checkbox-red" 
+                                                            onChange="selectAllPDI(\'' . $data['pdiVehicle']->ChassisNo . '\',\'' . $value->CategoryId . '\',\'SA\')">
+                                            </div>
+                                        </div>
+                                    </div>
                     ';
 
                 foreach ($data['pdiCheckList'] as $value2) {
