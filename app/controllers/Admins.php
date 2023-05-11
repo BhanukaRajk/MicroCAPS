@@ -97,6 +97,55 @@ class Admins extends controller {
                 } else {
                     echo "Error";
                 }
+            } else {
+
+                $data = [
+                    'manager' => null,
+                    'supervisor' => null,
+                    'assembler' => null,
+                    'tester' => null
+                ];
+
+                if (isset($_POST["manager"])){
+                    $data["manager"] = trim($_POST["manager"]);
+                }
+                if (isset($_POST["supervisor"])){
+                    $data["supervisor"] = trim($_POST["supervisor"]);
+                }
+                if (isset($_POST["assembler"])){
+                    $data["assembler"] = trim($_POST["assembler"]);
+                }
+                if (isset($_POST["tester"])){
+                    $data["tester"] = trim($_POST["tester"]);
+                }
+                
+
+
+                if($data["manager"] != null) {
+                    $data['managerDetail'] = $this->adminModel->employeeDetails("Manager");
+                } else {
+                    $data['managerDetail'] = null;
+                }
+    
+                if($data["supervisor"] != null) {
+                    $data['supervisorDetail'] = $this->adminModel->employeeDetails("Supervisor");
+                } else {
+                    $data['supervisorDetail'] = null;
+                }
+    
+                if($data["assembler"] != null) {
+                    $data['assemblerDetail'] = $this->adminModel->employeeDetails("Assembler");
+                } else {
+                    $data['assemblerDetail'] = null;
+                }
+    
+                if($data["tester"] != null) {
+                    $data['testerDetail'] = $this->adminModel->employeeDetails("Tester");
+                } else {
+                    $data['testerDetail'] = null;
+                }
+                
+                $this->view('admin/employees', $data );
             }
         }
 
@@ -200,6 +249,43 @@ class Admins extends controller {
         }
     }
 
+    public function assemblystage($chassisNo) {
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $data = [
+                'ChassisNo' => $chassisNo,
+                'stage' => trim($_GET['stage'])
+            ];
+
+            $stage = '';
+
+            if ($data['stage'] == 'stageone')
+                $stage = 'S1';
+            else if ($data['stage'] == 'stagetwo')
+                $stage = 'S2';
+            else if ($data['stage'] == 'stagethree')
+                $stage = 'S3';
+            else if ($data['stage'] == 'stagefour')
+                $stage = 'S4';
+
+            $data['stageSum'] = [
+                'pending' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage), "Weight") + $this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage), "Weight")),
+                'connected' => json_encode($this->Sum($this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage), "Weight"))
+            ];
+            $data['stageDetails'] = [
+                'pending' => $this->vehicleModel->getComponentStatus($chassisNo, 'Pending', $stage),
+                'connected' => $this->vehicleModel->getComponentStatus($chassisNo, 'Connected', $stage),
+                'hold' => $this->vehicleModel->getComponentStatus($chassisNo, 'OnHold', $stage)
+            ];
+
+            $this->view('admin/'.$data['stage'], $data);
+        }
+    }
+
     public function pdi($chassisNo = null) {
 
         if (!isLoggedIn()) {
@@ -278,6 +364,32 @@ class Admins extends controller {
         } else {
             $data['userDetails'] = $this->adminModel->userDetails($_SESSION['_id']);
             $this->view('admin/settings',$data);
+        }
+    }
+
+    // public function viewpdi()
+    // {
+
+    //     if (!isLoggedIn()) {
+    //         redirect('users/login');
+    //     }
+
+    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //         $data['onPDIVehicles'] = $this->adminModel->onPDIVehicles();
+    //         $this->view('admin/viewpdi', $data);
+    //     }
+    // }
+
+    public function viewpdi()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->vehicleModel->vehiclesReadyToTest();
+            $this->view('admin/viewpdi', $data);
         }
     }
 

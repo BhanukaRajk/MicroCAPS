@@ -180,41 +180,7 @@ class  Admin {
         }
     }
 
-    public function pdiCheckCategories() {
-        $this->db->query(
-            'SELECT *
-                FROM `pdi-check-category`'
-        );
 
-        $results = $this->db->resultSet();
-
-        if ( $results ) {
-            return $results;
-        } else {
-            return false;
-        }
-
-    }
-
-    public function pdiCheckList($id) {
-        $this->db->query(
-            'SELECT `pdi-result`.*,`pdi-check`.CategoryId, `pdi-check`.CheckName
-                FROM `pdi-result`
-                INNER JOIN `pdi-check`
-                ON `pdi-result`.CheckId = `pdi-check`.CheckId 
-                WHERE `pdi-result`.ChassisNo = :id;'
-        );
-
-        $this->db->bind(':id', $id);
-
-        $results = $this->db->resultSet();
-
-        if ( $results ) {
-            return $results;
-        } else {
-            return false;
-        }
-    }
 
     public function dispatchDetails() {
         $this->db->query(
@@ -341,6 +307,7 @@ class  Admin {
         );
 
         $lastLogs = $this->db->resultSet();
+     
 
         if ($lastLogs) {
             return $lastLogs;
@@ -348,8 +315,5 @@ class  Admin {
             return false;
         }
     }
-
-  
-
 
 }
