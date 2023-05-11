@@ -1,4 +1,3 @@
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:600,700';
 
 .ds-page {
   position: absolute;
@@ -68,24 +67,6 @@
   flex-wrap: wrap;
   gap: 110px;
 }
-
-/* #ds-body {
-    margin: 0;
-    padding: 0;
-    background-color: #F2F2F7;
-    justify-content: center;
-    display: flex;
-    font-family: "Montserrat", sans-serif;
-} */
-
-/* .ds-container {
-    background-color: white;
-    border-radius: 15px;
-    top: 7rem;
-    position: fixed;
-    padding: 1em;
-    width: 35%;
-} */
 
 .ds-button {
   border: 1px solid #2773FF;
@@ -161,12 +142,7 @@
 .ds-table tr {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  /* background-color: #ebf3f9; */
 }
-
-/* .ds-table tr:nth-child(odd):not(:first-child) {
-  background-color: #ebf3f9;
-} */
 
 .ds-table th {
   display: none;

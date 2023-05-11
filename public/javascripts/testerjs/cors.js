@@ -327,6 +327,71 @@ function updatePassword() {
 }
 
 
+//searchGenerates
+function assemblylist(response) {
+
+    let innerHTML = '';
+
+    if (!response['assemblyDetails']) {
+        innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                        <div class="font-weight">No Details</div>
+                    </div>`
+    } else {
+
+        innerHTML = `<div class="display-flex-row flex-wrap justify-content-between">`
+
+        response['assemblyDetails'].forEach(value => {
+
+            let word = 'On Assembly';
+            let css = 'green';
+
+            let CurrentStatus = value.CurrentStatus.split("-");
+
+            if (CurrentStatus[0] == 'S1') {
+                CurrentStatus[0] = 'Stage 01';
+            } else if (CurrentStatus[0] == 'S2') {
+                CurrentStatus[0] = 'Stage 02';
+            } else if (CurrentStatus[0] == 'S3') {
+                CurrentStatus[0] = 'Stage 03';
+            } else if (CurrentStatus[0] == 'S4') {
+                CurrentStatus[0] = 'Stage 04';
+            } else if (CurrentStatus[0] == 'H') {
+                CurrentStatus[0] = 'Hold';
+            } 
+            
+            if (CurrentStatus.length === 2) {
+                word = 'On Hold';
+                css = 'red';
+            }
+
+            innerHTML = innerHTML + 
+            `<a href="http://localhost/MicroCAPS/managers/assembly/${value.ChassisNo}">
+                <div class="carcard">
+                    <div class="cardhead">
+                        <div class="cardid">
+                            <div class="carmodel">${value.ModelName}</div>
+                            <div class="chassisno">${value.ChassisNo}</div>
+                        </div>
+                        <div class="toolstatuscolor">
+                            <div class="status-circle status-${css}-circle"></div>
+                        </div>
+                    </div>
+                    <div class="carpicbox">
+                        <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                    </div>
+                    <div class="carstatus ${css}">${word}</div>
+                    <div class="arrivaldate">Stage: ${CurrentStatus[0]}</div>
+                </div>
+            </a>`;  
+        });
+
+        innerHTML = innerHTML + `</div>`;
+    }
+
+    return innerHTML;
+}
+
+
 //Alert Success
 function alertSuccess(message) {
     let alert = document.getElementById("alert");

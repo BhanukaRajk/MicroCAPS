@@ -7,10 +7,6 @@
     align-items: center !important
 }
 
-.padding-3 {
-    padding: 1rem !important
-}
-
 .db-page {
     position: absolute;
     left: 16.25rem;
@@ -60,15 +56,10 @@
     gap: 110px;
 }
 
-.position-absolute {
-    position: absolute !important
-}
-
 .db-detailed-content {
     position: absolute;
     display: flex;
     flex-direction: row;
-    /* top: 1rem; */
 }
 
 .indetail {
@@ -127,7 +118,6 @@
     flex-direction: column;
     justify-content: center;
     padding-left: 2rem;
-    /* padding-top: 2rem; */
     gap: 1rem;
 }
 
@@ -141,15 +131,6 @@
     padding-block: 1rem;
     box-shadow: 0px 0px 10px 2px #8ba2fc10;
     gap: 1rem 0;
-    /* min-height: 20vh;
-    min-width: 16.5rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    background-color: white;
-    border-radius: 1.2rem; */
 }
 
 .db-quick {
@@ -172,7 +153,6 @@
 
 .db-act-sidebox {
     margin-inline: 1rem;
-    /* margin-top: 1.5rem; */
 }
 
 .db-qck-sidebox {
@@ -210,7 +190,6 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    /* font-family: 'Noto Sans'; */
     font-weight: 800;
     letter-spacing: 2px;
     font-size: 16px;
@@ -230,7 +209,6 @@
 .dash-cap{
     font-weight: bold;
     margin-top: 2rem;
-    /* font-family: "Noto Sans"; */
     font-size: 18px;
 }
 
