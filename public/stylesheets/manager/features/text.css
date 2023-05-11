@@ -28,6 +28,10 @@
     color: var(--white) !important
 }
 
+.text-green {
+    color: var(--green) !important
+}
+
 .text-blue {
     color: var(--blue) !important
 }

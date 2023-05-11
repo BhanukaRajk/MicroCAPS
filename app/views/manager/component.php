@@ -5,12 +5,24 @@
 
     <section class="position-absolute page-content">
         <div class="page-heading font-weight">
-            Request Components
+            Components
+        </div>
+
+        <div class="display-flex-column align-items-start margin-top-3">
+            <div class="display-flex-row align-items-start align-self-start width-fill-available gap-1 border-radius-1 background-white paddingx-5 paddingy-3 ">
+                <div onclick="rounds(event, 'one')" class="shell-btn active display-flex-column align-items-center justify-content-center border-radius-1">
+                    <div class="padding-3 font-weight">Request Components</div>
+                </div>
+                <div onclick="rounds(event, 'two')" class="shell-btn display-flex-column align-items-center justify-content-center border-radius-1" id = "option-two">
+                    <div class="padding-3 font-weight">Add Components</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="shell-forms top-10 position-absolute display-block" id="one">
+    <section class="shell-forms position-absolute display-block" id="one">
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
+            <div class="section-heading font-weight"> Send a Request </div>
             <form id="request-shell">
                 <div id="fields">
                     <div class="display-flex-row align-items-start gap-1 "  id="field1">
@@ -61,50 +73,103 @@
         </div>
     </section>
 
-    <!-- <section class="shell-forms top-10 position-absolute display-block" id="one">
+    <section class="shell-forms position-absolute" id="two">
         <div class="display-flex-column align-items-center gap-2 border-radius-1 background-white paddingx-5 paddingy-5">
-            <div class="display-flex-column gap-1 padding-4">
-                <table role="presentation" aria-hidden="true" width="100%" class="" cellpadding="0" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th valign="bottom" class="text-darkblue font-weight font-size-16 width-rem-12 padding-bottom-2 border-bottom">
-                                MODEL
-                            </th>
-                            <th valign="bottom" class="text-darkblue font-weight font-size-16 width-rem-12 padding-bottom-2 border-bottom">
-                                COLOR
-                            </th>
-                            <th valign="bottom" class="text-darkblue font-weight font-size-16 width-rem-12 padding-bottom-2 border-bottom">
-                                QUANTITY
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="display-flex-row justify-content-between align-items-center width-100"> 
+                <div class="section-heading font-weight">Received Components</div>
+                <div class="custom-select">
+                    <select name="vehicles" id="components" onchange="component()">
                         <?php 
-                        foreach($data['componentRequestDetails'] as $request){
-                            echo ' <tr>
-                                <th valign="bottom" class="detail font-size-16 width-rem-12 padding-3">
-                                    '.$request->ModelName.'
-                                </th>
-                                <th valign="bottom" class="detail font-size-16 width-rem-12 padding-3">
-                                    '.$request->Color.'
-                                </th>
-                                <th valign="bottom" class="detail font-size-16 width-rem-12 padding-3">
-                                    '.$request->Qty.'
-                                </th>
-                            </tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-
-                <div class="text-center margin-top-3">
-                    <button class="btn btn-primary" type="button"  onclick="createList()">
-                        Create Component List
-                    </button>
+                            foreach($data['chassis'] as $value) {
+                                echo '<option value="' . $value->ChassisNo . '">'.$value->ChassisNo.'</option>';
+                            }
+                        ?>>
+                    </select>
                 </div>
             </div>
+
+            <?php 
+            
+            if ($data['chassis'] == false) {
+                echo '
+                            <div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                                    <div class="font-weight">No Details</div>
+                                </div>
+                            ';
+            } else {
+
+                echo '<div class="display-flex-row justify-content-between align-items-center width-80">
+                    <div class="display-flex-column">
+                        <div class="paddingy-2 font-weight" id="chassiNoC">Chassis No : '.$data['chassis'][0]->ChassisNo.'</div>
+                        <div class="paddingy-2 font-weight" id="colorC">Color : '.$data['chassis'][0]->Color.'</div>
+                    </div>
+                    <label class="form-control-checkbox">
+                        Select All
+                        <input type="checkbox"
+                                id="select-all"
+                                name="select-all"
+                                value="Yes">
+                        <div class="checkmark"></div>
+                    </label>
+                </div>';
+
+                echo '<div id="selected" class="margin-top-3"><div class="display-flex-row gap-5">';
+
+                $count = 1;
+
+                foreach ($data['components'] as $value) {
+
+                    if ($count == 1) {
+                        echo '<div class="display-flex-column gap-1">';
+                    }
+
+                    if ($value->Status == 'R') {
+                        $checked = 'checked';
+                        $disabled = 'disabled';
+                    } else {
+                        $checked = '';
+                        $disabled = '';
+                    }
+
+                    echo '<div class="display-flex-row justify-content-between border-bottom width-rem-12">
+                                <div class="padding-bottom-3 font-size">'.$value->PartName.'</div>
+                                <label class="form-control-checkbox" id="checkbox">
+                                    <input type="checkbox"
+                                            id="componentStatus"
+                                            name="status"
+                                            value="'.$value->PartNo.'" 
+                                            '. $disabled .'
+                                            '. $checked .'>
+                                    <div class="checkmark-small-blue"></div>
+                                </label>
+                            </div>';
+                    
+                    $count++;
+
+                    if ($count == 51) {
+                        echo '</div>';
+                        $count = 1;
+                    }
+
+                }
+
+                echo '</div>
+                    <div class="text-center margin-top-3">
+                        <button class="btn btn-primary" type="button"  onclick="changeComponentStatus(\''.$data['chassis'][0]->ChassisNo.'\')">
+                            Mark as Received
+                        </button>
+                    </div></div>';
+            }
+                
+            
+            ?>
+
+                
+            
         </div>
-    </section> -->
+    </section>
+
+    
 
     <section class="display-flex-column">
 
@@ -123,7 +188,8 @@
     </script> -->
     
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
-    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/component.js"></script>
+    <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/addFieldsComponent.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/components.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
 
 </body>

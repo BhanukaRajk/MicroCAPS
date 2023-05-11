@@ -1,30 +1,36 @@
 <?php
 
 require_once 'Docraptor/vendor/autoload.php';
+require_once APP_ROOT . '/models/Common.php';
 
-function convert() : string {
+function convert($type, $file) : array {
 
+    $timestamp = time();
+    $commonModel = new Common();
+    $key = $commonModel->apiKey()->key;
     $docraptor = new DocRaptor\DocApi();
 
-//    $docraptor->getConfig()->setUsername("_0IKFO-OmL9kY950nHSb");       // samiducooray@gmail.com
-    $docraptor->getConfig()->setUsername("d6TPLczmi8u9G5PI05cU");       // saminducooray@gmail.com
+    $docraptor->getConfig()->setUsername($key);
+
     try {
         $doc = new DocRaptor\Doc();
         $doc->setTest(true); # test documents are free but watermarked
         $doc->setDocumentType("pdf");
-        $file = file_get_contents(APP_ROOT . '\views\templates\mrfCreated.html');
+//        $file = file_get_contents('../public/documents/mrf/mrf-'.$type.'-'.$timestamp.'.html');
         $doc->setDocumentContent($file);
-        $doc->setName("Output.pdf"); # help you find a document later
+        $doc->setName("mrf-".$type."-".$timestamp.".pdf"); # help you find a document later
         $prince_options = new DocRaptor\PrinceOptions();
         $doc->setPrinceOptions($prince_options);
-        $prince_options->setMedia("screen"); # @media 'screen' or 'print' CSS
+        $prince_options->setMedia("screen"); # @media "screen' or 'print' CSS
 
         $response = $docraptor->createDoc($doc);
 
         # createDoc() returns a binary string
-        file_put_contents("Output.pdf", $response);
+        file_put_contents('../public/documents/mrf/mrf-'.$type.'-'.$timestamp.'.pdf', $response);
 
-        return "Successful";
+        $commonModel->apiKeyUpdate($key);
+
+        return [true, "mrf-".$type."-".$timestamp.".pdf"];
 
     } catch (DocRaptor\ApiException $error) {
         echo $error . "\n";
@@ -33,7 +39,7 @@ function convert() : string {
         echo $error->getResponseBody() . "\n";
     }
 
-    return "Error";
+    return [false, false];
 
 }
 

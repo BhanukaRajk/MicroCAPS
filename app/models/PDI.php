@@ -42,7 +42,7 @@ class PDI
                 LIMIT 10;'
         );
 
-        $this->db->bind(':status', 'PDI');
+        $this->db->bind(':status', 'RR');
         foreach ($array as $item) {
             $this->db->bind($item['key'], $item['parameter'].'%');
         }

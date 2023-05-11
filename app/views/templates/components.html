@@ -14,9 +14,13 @@
     <meta name="ie-compatibility" content="IE=edge" http-equiv="X-UA-Compatible">
 
     <style>
+
         body {
             margin: 0; 
-            padding: 0;
+            padding: 0; 
+            background-color: #f0f2f3;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             height: 100vh;
         }
@@ -31,7 +35,7 @@
             border-collapse: collapse;
             border-spacing: 0;
             margin: auto;
-            max-width: 100%;
+            max-width: 600px;
             padding-top: 50px;
             background: white;
         }
@@ -69,7 +73,6 @@
         .event .event-nl-04 .section-1 .section { 
             border-top: 1px solid #D9D9D9;
             border-bottom: 1px solid #D9D9D9;
-            mso-line-height-rule: exactly;
             font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
             color: #000000;
             padding: 25px;
@@ -83,9 +86,26 @@
             mso-table-rspace: 0pt;
         }
 
+        .event .event-nl-04 .section-1 .section .event-nl-feature-module .subtitle {
+            background-color:#fff;
+            color:#444;
+            font-family:'Amazon Ember','Helvetica Neue',Roboto,Arial,sans-serif;
+            font-size:14px;
+            line-height:140%;
+            padding:25px 35px;
+            text-align:center
+        }
+
+        .event .event-nl-04 .section-1 .section .event-nl-feature-module .code {
+            color: #000;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        
+
         .event .event-nl-04 .section-1 .section .event-nl-feature-module .tag-row {
             padding-bottom: 13px;
-            mso-line-height-rule: exactly;
+            
             font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
             color: #000000;
         }
@@ -104,16 +124,14 @@
         .event .event-nl-04 .section-1 .section .event-nl-feature-module .tag-row .txt {
             color: #096ED1;
             font-size: 30px;
-            mso-line-height-rule: exactly;
             font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
-            white-space: nowrap;
+            white-space: wrap;
             font-weight: bold;
             text-align: center;
         }
 
         .event .event-nl-04 .section-1 .section .event-nl-feature-module .copy {
             color: #000000;
-            mso-line-height-rule: exactly;
             font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
             font-size: 16px;
             font-weight: normal;
@@ -208,6 +226,7 @@
             font-family: "Montserrat", sans-serif;
             font-size: 12px;
             color: #fff;
+            width: 50%;
         }
 
         .event .event-nl-04 .section-1 .section .event-nl-feature-module .copy .tag .td {
@@ -217,6 +236,7 @@
             text-transform: uppercase;
             font-family: "Montserrat", sans-serif;
             font-size: 12px;
+            width: 50%;
         }
     
 
@@ -328,19 +348,6 @@
             }
         }
 
-        body {
-            -moz-osx-font-smoothing: always;
-            -webkit-appearance: none;
-            -webkit-font-smoothing: antialiased;
-            margin: 0;
-            padding: 0;
-            -webkit-text-size-adjust: 100%;
-            -moz-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-            width: 100%
-        }
-
         img {
             border: 0;
             display: block
@@ -374,7 +381,7 @@
     <table role="presentation" aria-hidden="true" width="100%" class="bg event" cellpadding="0" cellspacing="0">
         <tr>
             <td valign="top" class="event-nl-04 EMAIL-2238">
-                <table role="presentation" aria-hidden="true" width="100%" class="container full-width" cellpadding="0"
+                <table role="presentation" aria-hidden="true" width="600" class="container full-width" cellpadding="0"
                     cellspacing="0">
                     <tr>
                         <td class="masthead " valign="middle">
@@ -390,64 +397,8 @@
                             <table role="presentation" aria-hidden="true" width="100%"
                                 class="event-nl-feature-module full-width" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td class="tag-row">
-                                        <table role="presentation" aria-hidden="true" class="tag"
-                                            cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <td valign="bottom" class="col-right txt txt-nowrap bold">
-                                                    Material Request Form
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="copy" style="padding: 0;">
-                                        <table role="presentation" aria-hidden="true" class="tag"
-                                            cellpadding="0" cellspacing="0">
-                                            <thead>
-                                            </thead>
-                                            <tbody>
-                                                <td valign="bottom" class="td col-right txt txt-nowrap bold" style="border: none; padding: 0;" align="left"> Date : <!-- Date --> </td>
-                                                <td valign="bottom" class="td col-right txt txt-nowrap bold" style="border: none; padding: 0;" align="right"> MRF No : </td>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="copy" style="padding: 0;">
-                                        <table role="presentation" aria-hidden="true" class="tag"
-                                            cellpadding="0" cellspacing="0">
-                                            <thead>
-                                            </thead>
-                                            <tbody>
-                                                <td valign="bottom" class="td col-right txt txt-nowrap bold" style="border: none; padding: 0;" align="left"> Model : <!-- Model --> </td>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="copy" style="padding-top: 20px;">
-                                        <table role="presentation" aria-hidden="true" class="tag"
-                                            cellpadding="0" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th valign="bottom" class="th col-right txt txt-nowrap bold" width="10%">
-                                                        Part No
-                                                    </th>
-                                                    <th valign="bottom" class="th col-right txt txt-nowrap bold" width="35%">
-                                                        Part Name
-                                                    </th>
-                                                    <!-- Colors -->
-                                                    <th valign="bottom" class="th col-right txt txt-nowrap bold" width="5%">
-                                                        None
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <!-- Insert Point -->
-                                            </tbody>
-                                        </table>
+                                    <td class="subtitle">
+                                        <div class="padding-15">Please Find the Attached MRFs, Kindly review them and Send the Materials to the Factory</div>
                                     </td>
                                 </tr>
                             </table><!-- end of event-nl-feature-module -->
@@ -465,6 +416,23 @@
                                             <br>
                                             Production Manager
                                         </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" class="links">
+                                        <table role="presentation" aria-hidden="true" width="1"
+                                            class="options stacked full-width" cellpadding="0" cellspacing="0">
+                                            <tr class="stacked-row">
+                                                <td valign="top" class="left txt-nowrap stacked-cell">
+                                                    <a href="" class="contact black bold uppercase txt-nowrap"
+                                                        target="_blank" dir="ltr">Contact Manager</a>
+                                                </td>
+                                                <td valign="top" class="right txt-nowrap stacked-cell">
+                                                    <a href="" class="print black bold uppercase txt-nowrap"
+                                                        target="_blank" dir="ltr">Print</a>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>

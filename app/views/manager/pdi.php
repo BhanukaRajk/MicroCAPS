@@ -75,7 +75,7 @@
                                         <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
                                     </div>
                                     <div class="carstatus '.$css.'"> '.$word.' </div>
-                                    <div class="arrivaldate">Stage: '.$value->CurrentStatus.'</div>
+                                    <div class="arrivaldate">Stage: PDI </div>
                                 </div>';
                 }
 

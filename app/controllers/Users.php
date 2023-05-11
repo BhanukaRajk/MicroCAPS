@@ -65,6 +65,7 @@
             $_SESSION['_id'] = $user->EmployeeID;
             $_SESSION['_firstname'] = $user->Firstname;
             $_SESSION['_lastname'] = $user->Lastname;
+            $_SESSION['_email'] = $user->Email;
             $_SESSION['_position'] = $user->Position;
             $_SESSION['_profile'] = $user->Image;
 
@@ -227,7 +228,8 @@
 
             unset($_SESSION['_id']);
             unset($_SESSION['_email']);
-            unset($_SESSION['_name']);
+            unset($_SESSION['_firstname']);
+            unset($_SESSION['_lastname']);
             unset($_SESSION['_position']);
             unset($_SESSION['_profile']);
 

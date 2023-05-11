@@ -77,7 +77,7 @@ function requestShell() {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful","Email Sent Successfully");
@@ -109,7 +109,7 @@ function addShell() {
             var response = this.responseText;
 
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful","Shell Added Successfully");
@@ -159,7 +159,7 @@ function startAssembly(chassisNo) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 document.getElementById("startAssembly").disabled = true;
                 location.reload();
@@ -205,7 +205,7 @@ function sendRequest(id,job) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful", "Successfully Re-Requested "+ job +" for " + chassisNo);
@@ -235,7 +235,7 @@ function jobDone(id,job) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful",id + " - " + job + " " + " Job is Completed");
@@ -292,22 +292,83 @@ function createList() {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
-                location.reload();
+            if (response.trim() == "Successful") {
+                location.reload(true);
                 setLocalStorageFlash("Successful","Sent Material Request Form");
 
             } else {
-                location.reload();
+                location.reload(true);
                 setLocalStorageFlash("Error","Error Sending Email");
             }
+
+            console.log(response);
 
         }
     };
     xhttp.open("POST", "http://localhost/MicroCAPS/Managers/component", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(string);
+}
 
-    // alertSuccess("PDF Created Successfully Hutto");
+function changeComponentStatus(chassisNo) {
+
+    let array = {};
+
+    const checkboxes = document.querySelectorAll("#componentStatus");
+    checkboxes.forEach(function (checkbox) {
+        array[checkbox.value] = checkbox.checked;
+    });
+
+    array = JSON.stringify(array);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response.trim() == "Successful") {
+
+                location.reload();
+                setLocalStorageFlash("Successful","Status Updated");
+                
+
+            } else {
+
+                location.reload();
+                setLocalStorageFlash("Error","Status Not Updated");
+
+            }
+
+            setLocalStorageOption("option-two");
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/changeComponentStatus", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("status="+array+"&chassisNo="+chassisNo);
+}
+
+function component() {
+
+    let chassisNo = document.getElementById("components").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            response = JSON.parse(response);
+            
+            document.getElementById("chassiNoC").innerHTML = `Chassis No : ${response['vehicles'].ChassisNo}`;
+            document.getElementById("colorC").innerHTML = `Color : ${response['vehicles'].Color}`
+            document.getElementById("selected").innerHTML = compList(response);
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/componentsByChassis", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("chassisNo="+chassisNo);
+
 }
 
 // Dispatch Page
@@ -326,7 +387,7 @@ function dispatch() {
             var response = this.responseText;
 
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorageFlash("Successful","Vehicle Dispatched");
@@ -364,7 +425,7 @@ function saveChanges(id, position) {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorageFlash("Successful","Saved Changes");
             } else {
@@ -387,7 +448,7 @@ function updatePassword() {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorageFlash("Successful","Password Updated");
             } else {
@@ -829,6 +890,59 @@ function popUpInnerhtml (values) {
                     </div>`;
 
                     return innerhtml;
+}
+
+// HTML
+function compList(values) {
+
+    let count = 1;
+
+    innerHTML = `<div class="display-flex-row gap-5">`;
+
+    values['components'].forEach(value => {
+
+        if (count === 1) {
+            innerHTML = innerHTML + '<div class="display-flex-column gap-1">';
+        }
+
+        if (value.Status == 'R') {
+            checked = 'checked';
+            disabled = 'disabled';
+        } else {
+            checked = '';
+            disabled = '';
+        }
+
+        innerHTML = innerHTML + `<div class="display-flex-row justify-content-between border-bottom width-rem-12">
+                    <div class="padding-bottom-3 font-size">${value.PartName}</div>
+                    <label class="form-control-checkbox" id="checkbox">
+                        <input type="checkbox"
+                                id="componentStatus"
+                                name="status"
+                                value="${value.PartNo}" 
+                                ${disabled}
+                                ${checked}>
+                        <div class="checkmark-small-blue"></div>
+                    </label>
+                </div>`;
+        
+        count++;
+
+        if (count == 51) {
+            innerHTML = innerHTML + '</div>';
+            count = 1;
+        }
+    });
+
+    innerHTML = innerHTML + `</div>
+        <div class="text-center margin-top-3">
+            <button class="btn btn-primary" type="button"  onclick="changeComponentStatus('${values['vehicles'].ChassisNo}')">
+                Mark as Received
+            </button>
+        </div>`;
+
+    return innerHTML;
+
 }
 
 // Charts
