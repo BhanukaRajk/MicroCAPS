@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .profile-card {
@@ -164,5 +164,72 @@
             color: #000;
         }
 
-
+        .toolset-filterbox {
+            position: fixed;
+            width: 11.5rem;
+            /* height: 520px; */
+            right: 1.75rem;
+            top: 15rem;
+            /*padding: 23px;*/
+            /*margin-inline: 20px;*/
         
+            background: #FFFFFF;
+            /* Shadow/light */
+        
+            box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+            border-radius: 24px;
+        
+            display: flex;
+            flex-direction: column;
+        
+            /*justify-content: space-between;*/
+        }
+        
+        .toolfilter {
+            margin: 1.2rem;
+            font-family: 'Proxima Nova';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 20px;
+        }
+        
+        .filter-head {
+            margin: 0.5rem 1.2rem;
+        }
+        
+        .filtertype {
+            font-family: 'Proxima Nova';
+            font-style: normal;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            line-height: 14px !important;
+            /* identical to box height */
+        
+        
+            /* Grey/700 */
+        
+            color: #4C5C6B;
+        }
+        
+        .filters {
+        
+            font-family: 'Proxima Nova';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 16px;
+            /* identical to box height */
+        
+        
+            /* Grey/500 */
+        
+            color: #A6AFBA;
+            /* margin-block: 15px; */
+            /*border: black solid 1px;*/
+        }
+
+        .page-content-2 {
+            position: absolute;
+            right: 5rem;
+        }
