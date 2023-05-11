@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9aa61d7b-9353-481b-9319-b661b76dc24a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/models/Common.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/documents/mrf/mrf-M0001-1683777999.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/documents/mrf/mrf-M0001-1683778500.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/EmailHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/EmailHelper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers/PDFConverter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/PDFConverter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Managers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Managers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/manager/pdidetails.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/manager/pdidetails.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

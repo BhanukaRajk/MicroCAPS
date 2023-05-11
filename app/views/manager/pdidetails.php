@@ -23,10 +23,15 @@
             </div>
         </div>
 
-        <div>
-            <div class="paddingy-2 font-weight">VIN : <?php echo $data['onPDIVehicle']->ChassisNo ?></div>
-            <div class="paddingy-2 font-weight">Engine : <?php echo $data['onPDIVehicle']->EngineNo ?></div>
-            <div class="paddingy-2 font-weight">Tester : <?php echo $data['onPDIVehicle']->Tester ?></div>
+        <div class="display-flex-row justify-content-between">
+            <div>
+                <div class="paddingy-2 font-weight">VIN : <?php echo $data['onPDIVehicle']->ChassisNo ?></div>
+                <div class="paddingy-2 font-weight">Engine : <?php echo $data['onPDIVehicle']->EngineNo ?></div>
+                <div class="paddingy-2 font-weight">Tester : <?php echo $data['onPDIVehicle']->Tester ?></div>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="view-defect">View Defect Sheet</button>
+            </div>
         </div>
 
 
@@ -78,8 +83,51 @@
         </div>
     </section>
 
+    <div class="overlay display-flex-row align-items-center justify-content-center" id="overlay">
+        <section id="pop-con" class="overflow-defects border-gray">
+        <div class="column align-items-center border-gray padding-5 justify-content-center">
+        <div class="page-heading font-weight  margin-bottom-4">
+            Defect Sheet
+        </div>
+            <table class="ds-table">
+                <tbody>
+                    <tr>
+                        <th>Defect No.</th>
+                        <th>Defect Description</th>
+                        <th>Inspection Date</th>
+                        <th>Employee ID</th>
+                        <th>Recorrection</th>
+                    </tr>
+
+                    <?php
+                    if (empty($data['defects'])) {
+                        echo "<tr><td colspan='7'>No Defects Found</td></tr>";
+                    } else {
+                        foreach ($data['defects'] as $values) :
+                    ?>
+
+                            <tr>
+                                <td><?php echo $values->DefectNo; ?></td>
+                                <td><?php echo $values->RepairDescription; ?></td>
+                                <td><?php echo $values->InspectionDate; ?></td>
+                                <td><?php echo $values->EmployeeID; ?></td>
+                                <td><?php echo $values->ReCorrection; ?></td>
+                            </tr>
+
+                        <?php endforeach; ?>
+                    <?php } ?>
+
+                </tbody>
+            </table>
+
+            <div class="text-center text-blue font-size-14 margin-top-4 pointer" id="cancel">Cancel</div>
+        </div>
+        </section>
+    </div>
+
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/cors.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/pdi.js"></script>
 
 
 </body>
