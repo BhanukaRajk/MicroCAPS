@@ -22,7 +22,7 @@ function addPDI(ChassisNo,CheckId, Result) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload();
                 setLocalStorage("Successful","Status Changed Successfully");
             } else {
@@ -45,7 +45,7 @@ function selectAllPDI(ChassisNo, CategoryId, Result) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload();
                 setLocalStorage("Successful","Status Changed Successfully");
             } else {
@@ -68,7 +68,7 @@ function addTask(ChassisNo, TesterId) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload();
                 setLocalStorage("Successful","Vehicle Added Successfully");
             } else {
@@ -92,7 +92,7 @@ function removeTask(ChassisNo) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload();
                 setLocalStorage("Successful","Vehicle Removed Successfully");
             } else {
@@ -116,13 +116,13 @@ function completeTask(ChassisNo, TesterId) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 window.location.replace("http://localhost/MicroCAPS/Testers/mytasks/"+TesterId);
                 setLocalStorage("Successful","Task Completed Successfully");
-            } else if (response == "pdinotcompleted") {
+            } else if (response.trim() == "pdinotcompleted") {
                 location.reload();
                 setLocalStorage("Error","Check PDI List Again");
-            } else if (response == "defectnotcompleted") {
+            } else if (response.trim() == "defectnotcompleted") {
                 location.reload();
                 setLocalStorage("Error","Correct All defects first.");
             } else {
@@ -155,7 +155,7 @@ function saveChanges(id, position) {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorage("Successful","Saved Changes");
             } else {
@@ -180,7 +180,7 @@ function saveChanges(id, position) {
     xhr.onload = function() {
       if (this.readyState == 4 && xhr.status == 200) {
         var response = xhr.responseText;
-        if (response == "Successful") {
+        if (response.trim() == "Successful") {
             location.reload();
             setLocalStorage("Successful", "Defect Deleted Successfully");
             window.onload = function() {
@@ -215,13 +215,13 @@ function addDefect() {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload();
                 setLocalStorage("Successful","Defect Added Successfully");
-            } else if (response == "defectexists") {
+            } else if (response.trim() == "defectexists") {
                 location.reload();
                 setLocalStorage("Error","Defect Number Already Exists");
-            } else if (response == "invaliddate") {
+            } else if (response.trim() == "invaliddate") {
                 location.reload();
                 setLocalStorage("Error","Invalid Date");
             } else {
@@ -249,10 +249,10 @@ function editDefect(chassisno, defectno) {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
                 setLocalStorage("Successful","Saved Changes");
-            } else if (response == "invaliddate") {
+            } else if (response.trim() == "invaliddate") {
                 location.reload();
                 setLocalStorage("Error","Invalid Date");
             } else {

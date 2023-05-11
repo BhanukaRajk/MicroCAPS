@@ -16,7 +16,7 @@
                 <div class="paddingy-2 font-weight">Engine : <?php echo $data['pdiVehicle']->EngineNo ?></div>
             </div>
             <div>
-                <button class="btn btn-primary" id="view-defect">View Defect Sheet</button>
+                <button class="btn btn-primary btn-blue width-rem-12" id="view-defect">View Defect Sheet</button>
             </div>
         </div>
 
@@ -33,8 +33,6 @@
 
                                 <div class="pdiresultbox paddingy-3">
                     ';
-
-                // 27 -> <div class="pdi-card-sub">'.$value->SubTitle.'</div>
 
                 foreach ($data['pdiCheckList'] as $value2) {
                     if ($value2->CategoryId == $value->CategoryId) {

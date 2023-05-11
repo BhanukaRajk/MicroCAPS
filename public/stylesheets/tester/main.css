@@ -1041,12 +1041,21 @@ h3 {
     --btn-bg: var(--blue);
     --btn-color: var(--white);
     --btn-border-color: none;
-    --btn-hover-bg: var(--white);
+    --btn-hover-bg: none;
     --btn-hover-color: var(--blue);
     --btn-hover-border-color: var(--blue);
     --btn-width: 7.5rem;
     --btn-font-size: 0.7rem;
 
+.btn-green {
+    --btn-bg: var(--green);
+    --btn-color: var(--white);
+    --btn-border-color: none;
+    --btn-hover-bg: none;
+    --btn-hover-color: var(--green);
+    --btn-hover-border-color: var(--green);
+    --btn-width: 7.5rem;
+    --btn-font-size: 0.7rem;
 }
 
 .btn-red {
