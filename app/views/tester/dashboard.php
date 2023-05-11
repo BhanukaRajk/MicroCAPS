@@ -24,9 +24,12 @@
                                                     <div class="font-weight">No PDI Vehicles</div>
                                                 </div>
                                             ';
-                                        } else {                                         
+                                        } else {                       
+                                            $i=1;                  
                                             foreach ($data['vehicles'] as $values) : 
-                                                    if($values->TesterId == $_SESSION['_id']){ ?>
+                                                    if($values->TesterId == $_SESSION['_id'] && $values->PDIStatus == 'P' && $i <= 3){ 
+                                                        $i++;
+                                                        ?>
                                                             <div 
                                                                     class="blue-button-long"  
                                                                     onClick="location.href='<?php echo URL_ROOT; ?>testers/pdi/<?php  echo $values->ChassisNo; ?>'"

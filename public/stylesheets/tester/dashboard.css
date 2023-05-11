@@ -68,7 +68,7 @@
     position: absolute;
     display: flex;
     flex-direction: row;
-    top: 1rem;
+    /* top: 1rem; */
 }
 
 .indetail {
@@ -127,7 +127,7 @@
     flex-direction: column;
     justify-content: center;
     padding-left: 2rem;
-    padding-top: 2rem;
+    /* padding-top: 2rem; */
     gap: 1rem;
 }
 

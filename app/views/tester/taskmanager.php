@@ -54,18 +54,22 @@
                                     <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
                                 </div>
                                 <div class="carstatus green"> On Assembly </div>
-                                <div class="arrivaldate margin-top-1">Stage: '.$value->CurrentStatus.'</div>
                                 <div class="arrivaldate margin-top-1">Assigned to: '.$testername.'</div>
-                                <div class="mytasks font-size display-flex-row align-items-center margin-top-2 margin-bottom-0 marginx-0">
-                                    <input class="mytasks-checkbox"
-                                                type="checkbox" 
-                                                name=""
-                                                onChange="  if (this.checked) { 
+                                <div class="mytasks font-size-13 display-flex-row align-items-center margin-top-2 margin-bottom-0 marginx-0">
+                                    <div>
+                                        <label class="form-control-checkbox">
+                                            <input type="checkbox"
+                                                    id=""
+                                                    name=""
+                                                    onChange="  if (this.checked) { 
                                                         addTask(\'' . $value->ChassisNo . '\',\'' . $_SESSION['_id'] . '\')
-                                                }else{
+                                                    }else{
                                                         removeTask(\'' . $value->ChassisNo . '\')
-                                                }"
-                                                ' . $check_1 . '>
+                                                    }"
+                                                    ' . $check_1 . '>
+                                            <div class="checkmark-small"></div>
+                                        </label>
+                                    </div>
                                     <div class="padding-left-2">Add to My Tasks</div>
                                 </div>
                             </div>';
