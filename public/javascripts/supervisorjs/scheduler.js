@@ -1,17 +1,3 @@
-// GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
-// let task_search = document.querySelectorAll("input[type=text][name=TaskName]");
-// let select_car = document.querySelectorAll("select[name=vehicles]");
-//// const acceptanceRadios = document.querySelectorAll("input[type=radio][name=acceptance]");
-// let searchInput = document.getElementById("TaskName").value.toUpperCase();
-
-
-// ATTACH EVENT LISTENERS TO ALL FILTER INPUTS
-// for (let checkbox of checkboxes) {
-//     checkbox.addEventListener('change', findCarProcesses);
-// }
-
-
-
 function findCarProcesses() {
 
     let searchInput = document.getElementById("TaskName").value.toUpperCase();
@@ -73,18 +59,30 @@ function findCarProcesses() {
 
 
 
+
+
+
+
+
+
+// THE WAY TO INSERT, SELECTED DATA TO THE INPUT BOX
 const input = document.querySelector('#TaskName');
 const listItems = document.querySelectorAll('#taskMenu');
 
 listItems.forEach(item => {
-  item.addEventListener('click', () => {
-    input.value = item.textContent;
-  });
+    item.addEventListener('click', () => {
+        input.value = item.textContent;
+    });
 });
 
 
+
+
+// UPDATING THE TASKS
 function taskUpdateOpen($ChassisNo, $ProcessId, $Assembler) {
 
+
+    const toolDataBoard = document.querySelector('#asm-add-2');
     document.getElementById("asm-add-2").classList.remove("display-none");
 
 }

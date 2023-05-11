@@ -67,8 +67,8 @@
                                             <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
                                             THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
 
-                                            <div><input type="checkbox" id="connectivity-cb" name="connectivity" value="Connected"></div>
-                                            <div><input type="checkbox" id="holding-cb" name="holding" value="Hold"></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="connectivity" value="Connected"></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="holding" value="Hold"></div>
                                         </div>
                                     </form>
                                 </div>';

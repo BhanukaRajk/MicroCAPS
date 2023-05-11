@@ -86,7 +86,7 @@ class Supervisor
     }
 
 
-    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
+    // PROVIDE THE CURRENT ACTIVITY LOGS
     public function activityLogs()
     {
 
@@ -969,7 +969,7 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT `LeaveId` FROM `employee-leaves` WHERE EmployeeId = :employee AND LeaveDate = :req_date;'
+            'SELECT `LeaveId` FROM `employee-leaves` WHERE `EmployeeId` = :employee AND `LeaveDate` = :req_date;'
         );
 
         $this->db->bind(':employee', $empid);
@@ -977,7 +977,7 @@ class Supervisor
 
         $rows = $this->db->resultSet();
 
-        if(!isset($rows)) {
+        if(isset($rows)) {
             return true;
         } else {
             return false;
@@ -1424,31 +1424,31 @@ class Supervisor
 
 
 
-    public function ViewAllConsumables()
-    {
+    // public function ViewAllConsumables()
+    // {
 
-        $this->db->query(
-            'SELECT `consumable`.`ConsumableId`, 
-                    `consumable`.`ConsumableName`, 
-                    `consumable`.`Volume`, 
-                    `consumable`.`Weight`, 
-                    DATE(`consumable`.`LastUpdate`) AS `UDate`,
-                    TIME(`consumable`.`LastUpdate`) AS `UTime`, 
-                    `consumable`.`Image`, 
-                    CONCAT(`employee`.`Firstname`," ",`employee`.`Lastname`) AS `Updater`, 
-            FROM `consumable`, `employee`
-            WHERE `consumable`.`LastUpdateBy` = `employee`.`EmployeeId`;'
+    //     $this->db->query(
+    //         'SELECT `consumable`.`ConsumableId`, 
+    //                 `consumable`.`ConsumableName`, 
+    //                 `consumable`.`Volume`, 
+    //                 `consumable`.`Weight`, 
+    //                 DATE(`consumable`.`LastUpdate`) AS `UDate`,
+    //                 TIME(`consumable`.`LastUpdate`) AS `UTime`, 
+    //                 `consumable`.`Image`, 
+    //                 CONCAT(`employee`.`Firstname`," ",`employee`.`Lastname`) AS `Updater`, 
+    //         FROM `consumable`, `employee`
+    //         WHERE `consumable`.`LastUpdateBy` = `employee`.`EmployeeId`;'
 
-        );
+    //     );
 
-        $consumables = $this->db->resultSet();
+    //     $consumables = $this->db->resultSet();
 
-        if ($consumables) {
-            return $consumables;
-        } else {
-            return false;
-        }
-    }
+    //     if ($consumables) {
+    //         return $consumables;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
 
     // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING CONSUMABLES IN CARD VIEWS
@@ -1461,7 +1461,7 @@ class Supervisor
                     DATE(`consumable`.`LastUpdate`) AS `UDate`,
                     TIME(`consumable`.`LastUpdate`) AS `UTime`, 
                     `consumable`.`Image`, 
-                    CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater`, 
+                    CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater`
                 FROM `consumable`, `employee`
                 WHERE `consumable`.`LastUpdateBy` = `employee`.`EmployeeId`';
 
@@ -1489,6 +1489,7 @@ class Supervisor
 
         $consumables = $this->db->resultSet();
 
+        // print_r($consumables);
 
         if ($consumables) {
             return $consumables;

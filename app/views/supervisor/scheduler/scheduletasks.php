@@ -163,26 +163,26 @@
 
 
 
-            <!-- THIS IS THE POPUP BOX FOR UPDATES AND DELETIONS -->
+            <!-- THIS IS THE POPUP BOX FOR TASK UPDATES -->
             <div class="low-content-blurer vertical-centralizer display-none" id="asm-add-2">
                 <!-- <div class="background-bluer vertical-centralizer"> -->
                 <div class="horizontal-centralizer">
                     <div class="add-task-box">
-                        <div class="">
+                        <div class="update-task-box-closer">
                             <div onclick="closeThisPopup('asm-add-2')" class="close-add-task-box">
                                 <img src="<?php echo URL_ROOT; ?>public/images/icons/close.png" class="popup-close-icon">
                             </div>
                         </div>
-                        <div class="">
-                            <div class="popup-box-heading1">Assign for task</div>
+                        <div class="update-task-box-head">
+                            <div class="popup-box-heading1 update-task-box-heading">Assign for task</div>
                         </div>
 
                         <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/updateThisTask">
-                            <div class="">
+                            <div class="update-task-box-process">
                                 <div>Adjusting clutch</div>
                             </div>
                             <div class="margin-top-2">
-                                <div class="">Vehicle No: CN83JH43HG636</div>
+                                <div class="update-task-box-carno">Vehicle No: CN83JH43HG636</div>
                             </div>
                             <div class="margin-top-3 horizontal-centralizer">
                                 <div>
@@ -219,7 +219,7 @@
 
 
             <!-- DELETE CONFIRMATION POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
-            <div class="delete-conf-blur horizontal-centralizer display-none" id="taskdelpopupWindow">
+            <div class="delete-conf-blur horizontal-centralizer display-none" id="P28_taskdelpopupWindow">
                 <div class="vertical-centralizer">
 
                     <div class="del-confirm-box">
@@ -236,7 +236,7 @@
 
                                 </div>
                                 <div class="del-conf-button-box">
-                                    <button onclick="closeThisPopup('taskdelpopupWindow')" class="edit-button-2">Cancel</button>
+                                    <button onclick="closeThisPopup('P28_taskdelpopupWindow')" class="edit-button-2">Cancel</button>
                                 </div>
                             </div>
                         </div>

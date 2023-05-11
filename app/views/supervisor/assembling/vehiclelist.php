@@ -25,7 +25,7 @@
 
                         <?php
                         foreach ($data['LineCarsSet'] as $car) {
-                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProgress">
+                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProcess">
                                 <div class="carcard" onClick="this.closest(\'form\').submit()">
                                     <div class="cardhead">
                                         <div class="cardid">
