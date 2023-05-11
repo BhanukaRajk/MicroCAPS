@@ -1046,6 +1046,7 @@ h3 {
     --btn-hover-border-color: var(--blue);
     --btn-width: 7.5rem;
     --btn-font-size: 0.7rem;
+}
 
 .btn-green {
     --btn-bg: var(--green);
