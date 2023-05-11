@@ -92,8 +92,13 @@ class PDI
 
     public function pdiCheckCategories() {
         $this->db->query(
-            'SELECT *
-                FROM `pdi-check-category`'
+            'SELECT `pdi-check-category`.*,
+                COUNT(*) AS count
+                FROM `pdi-check-category`
+                INNER JOIN `pdi-check`
+                ON `pdi-check-category`.`CategoryId` = `pdi-check`.`CategoryId`
+                GROUP BY `pdi-check-category`.`CategoryId`
+                ORDER BY count ASC'
         );
 
         $results = $this->db->resultSet();
@@ -123,6 +128,29 @@ class PDI
             return $results;
         } else {
             return false;
+        }
+    }
+
+    public function viewDefectSheets($id) {
+        $this->db->query(
+            "SELECT `pdi-defect`.`DefectNo`, 
+            `pdi-defect`.`RepairDescription`, 
+            `pdi-defect`.`InspectionDate`, 
+            `pdi-defect`.`ChassisNo`,
+            `pdi-defect`.`EmployeeID`, 
+            `pdi-defect`.`ReCorrection` 
+            FROM `pdi-defect`
+            WHERE `pdi-defect`.`ChassisNo` = :id"
+        );
+
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->resultSet();
+
+        if ( $row ) {
+            return $row;
+        } else {
+            return null;
         }
     }
 

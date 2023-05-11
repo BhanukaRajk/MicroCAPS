@@ -192,6 +192,7 @@ class Managers extends Controller {
                 $data['onPDIVehicle'] = $this->pdiModel->onPDIVehicles(['chassisNo' => $chassisNo], false);
                 $data['pdiCheckCategories'] = $this->pdiModel->pdiCheckCategories();
                 $data['pdiCheckList'] = $this->pdiModel->pdiCheckList($chassisNo);
+                $data['defects'] = $this->pdiModel->viewDefectSheets($chassisNo);
                 $this->view('manager/pdidetails',$data);
             }
         }
