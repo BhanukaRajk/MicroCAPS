@@ -43,7 +43,7 @@ private $db;
     public function login($username,$password) {
 
         $this->db->query(
-        'SELECT employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Position, employee.Image
+        'SELECT employee.EmployeeID, employee.Firstname, employee.Lastname, employee.Email, employee.Position, employee.Image
             FROM `employee-credentials`
             INNER JOIN employee
             ON `employee-credentials`.EmployeeID = employee.EmployeeId
