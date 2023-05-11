@@ -301,6 +301,32 @@ function searchByKey(type) {
 
 }
 
+// Settings
+
+function updatePassword() {
+    let formdata = new FormData();
+    formdata.append("currentPassword", document.getElementById("currentpassword").value);
+    formdata.append("newPassword", document.getElementById("newpassword").value);
+    formdata.append("confirmPassword", document.getElementById("confirmpassword").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/Users/updatePassword',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response.trim() == "Successful") {
+                location.reload(true);
+                setLocalStorage("Successful","Password Updated");
+            } else {
+                location.reload();
+                setLocalStorage("Error",response);
+            }
+        }
+    });
+}
+
+
 //Alert Success
 function alertSuccess(message) {
     let alert = document.getElementById("alert");
