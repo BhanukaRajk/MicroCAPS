@@ -1291,13 +1291,13 @@ class Supervisor
                 WHERE `tool`.`LastUpdateBy` = `employee`.`EmployeeId`';
 
 
-        if (isset($toolType)) {
+        if ($toolType != null) {
             if ($toolType != 'All') {
                 $sql .= ' AND `tool`.`ToolType` = :toolType';
             }
         }
 
-        if (isset($toolStatus)) {
+        if ($toolStatus != null) {
             if ($toolStatus == 'Normal') {
                 $sql .= ' AND `tool`.`Status` = "Normal"';
             } elseif ($toolStatus == 'NA') {

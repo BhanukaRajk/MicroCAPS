@@ -211,16 +211,19 @@
               <form>
                 <div class="add-new-con-box">
                   <div class="add-new-con-box-content">
-                    <div class="img-grid TB">
-                      <img src="<?php echo URL_ROOT; ?>public/images/profile/<?php echo $data['userDetails']->Image; ?>" class="border-radius-11 width-rem-12p5" alt="Consumable" id="img-preview" />
-                      <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
+                    <div class="img-grid">
+                        <div style="background-image:url(<?php echo URL_ROOT; ?>public/images/placeholder.jpg)" class="border-radius-11 width-rem-12p5 height-rem-12p5 background-image" title="profilepic" id="img-previewc"></div>
+                        <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5"/>
+                    </div>
+                    <div>
+                        <input type="file" id="imagec" class="display-none" name="profile" accept="image/*" />
                     </div>
                     <div class="img-remover-box">
-                      <a class="img-remover">Remove image</a>
+                      <a class="img-remover" id="removec">Remove image</a>
                     </div>
                     <div class="new-con-name-box">
                       <label for="conName" class="display-none">Name: </label>
-                      <input name="conName" type="text" placeholder="New consumable name" class="new-con-name" required>
+                      <input name="conName" type="text" placeholder="New consumable name" class="new-con-name" id="conName" required>
                     </div>
                     <div class="new-con-type-box">
                       <!-- <label for="conType" class="display-none">Type: </label>
@@ -233,10 +236,10 @@
                     </div>
                     <div class="new-con-status-box">
                       <label for="conStatus" class="display-none">Stock status: </label>
-                      <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" required>
+                      <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" id="status" required>
                     </div>
                     <div class="new-con-add-btn-box">
-                      <div><button type="submit" class="green-btn width-50px">Add</button></div>
+                      <div><button type="button" class="green-btn width-50px" onclick="addConsumables()">Add</button></div>
                       <div><button onclick="closeConsumeAddingPopup()" class="red-btn width-50px">Cancel</button></div>
                     </div>
                   </div>
@@ -256,6 +259,6 @@
 
 
 <!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
-<!-- <script src="<?php //echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script> -->
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/consumable.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

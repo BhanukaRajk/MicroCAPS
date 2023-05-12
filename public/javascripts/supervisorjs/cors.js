@@ -1,20 +1,6 @@
 const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 
-// Flash Message
-$(document).ready(() => {
-
-    if (getItem("FlashState") === "Successful") {
-        alertSuccess(getItem("FlashMessage"));
-    } else if (getItem("FlashState") === "Error") {
-        alertFaliure(getItem("FlashMessage"));
-    }
-
-    removeLocalStorage()
-
-})
-
-
 function dashboardChart() {
 
     let chassisNo = document.getElementById("dashboardChart").value;
@@ -39,7 +25,6 @@ function dashboardChart() {
     xhttp.send("chassisNo="+chassisNo);
 
 }
-
 
 function saveChanges(id, position) {
     let formdata = new FormData();
@@ -92,7 +77,6 @@ function addConsumables() {
         processData: false,
         contentType: false,
         success: (response) => {
-            // console.log(response);
             location.reload(true);
         }
     });
@@ -144,45 +128,4 @@ function destroyChart(ctx) {
 
     chart.destroy();
 
-}
-
-//Alert Success
-function alertSuccess(message) {
-    let alert = document.getElementById("alert-success");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
-    alert.innerHTML = "<i class='icon fa-check-circle margin-right-3'></i>"+message;
-
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
-    }, 5000);
-}
-
-//Alert Faliure
-function alertFaliure(message) {
-    let alert = document.getElementById("alert-faliure");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
-    alert.innerHTML = "<i class='icon fa-times-circle margin-right-3'></i>"+message;
-
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
-    }, 5000);
-}
-
-//Local Storage
-function setLocalStorage(FlashState,FlashMessage) {
-    localStorage.setItem("FlashState",FlashState);
-    localStorage.setItem("FlashMessage",FlashMessage);
-}
-
-function getItem(key) {
-    return localStorage.getItem(key);
-}
-
-function removeLocalStorage() {
-    localStorage.removeItem("FlashState");
-    localStorage.removeItem("FlashMessage");
 }

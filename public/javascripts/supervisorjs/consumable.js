@@ -1,6 +1,6 @@
 // CONSUMABLE FILTERING FUNCTION
 
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
+// const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 const ctypeRadios = document.querySelectorAll("input[type=radio][name=cons-type]");
 const cstateRadios = document.querySelectorAll("input[type=radio][name=stock-state]");
@@ -184,3 +184,33 @@ function closeConsumeDelConfBox() {
     var popupDiv = document.getElementById('consumeDelConf');
     popupDiv.style.display = 'none';
 }
+
+const imagec = document.getElementById("imagec");
+const previewc = document.getElementById("img-previewc");
+const removec = document.getElementById("removec");
+
+previewc?.addEventListener("click", () => {
+    imagec.click();
+});
+
+imagec?.addEventListener("change", () => {
+    getImgData();
+});
+
+function getImgData() {
+    const files = imagec.files[0];
+    if (files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function () {
+            previewc.style.backgroundImage = `url(${this.result})`;
+            // preview.setAttribute('src', this.result);
+        });
+    }
+    
+}
+
+removec?.addEventListener("click", () => {
+        previewc.style.backgroundImage = `url(http://localhost/MicroCAPS/public/images/placeholder.jpg)`;
+        imagec.value = "";
+});

@@ -12,25 +12,7 @@
 
             if (isLoggedIn()) {
 
-                if($_SESSION['_position'] == 'Admin')
-                {
-                    redirect('Admins/dashboard');
-                }
-                
-                else if($_SESSION['_position'] == 'Manager')
-                {
-                    redirect('Managers/dashboard');
-                }
-                
-                else if($_SESSION['_position'] == 'Supervisor')
-                {
-                    redirect('Supervisors/dashboard');
-                }
-                
-                else if($_SESSION['_position'] == 'Tester')
-                {
-                    redirect('Testers/dashboard');
-                }
+                redirect($_SESSION['_position'].'s/dashboard');
                 
             }
 
@@ -83,6 +65,7 @@
             $_SESSION['_id'] = $user->EmployeeID;
             $_SESSION['_firstname'] = $user->Firstname;
             $_SESSION['_lastname'] = $user->Lastname;
+            $_SESSION['_email'] = $user->Email;
             $_SESSION['_position'] = $user->Position;
             $_SESSION['_profile'] = $user->Image;
 
@@ -208,32 +191,52 @@
             }
         }
 
-        public function logout(){
+        public function updatePassword() {
 
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $data = [
+                    'currentPassword' => trim($_POST['currentPassword']),
+                    'newPassword' => trim($_POST['newPassword']),
+                    'password_err' => ''
+                ];
+
+                $vOld = $this->userModel->validateOldPassword($_SESSION['_id'], $data['currentPassword']);
+
+                if ($vOld) {
+                    $update = $this->userModel->updatePassword($_SESSION['_id'], $data['newPassword']);
+                    if ($update) {
+                        $_SESSION['success_message'] = 'Success! Password Updated';
+                        echo 'Successful';
+                    } else {
+                        $_SESSION['error_message'] = 'Error! Password Not Updated';
+                        echo 'Password Not Updated';
+                    }
+                } else {
+                    $_SESSION['error_message'] = 'Error! Incorrect Current Password';
+                    echo 'Incorrect Current Password';
+                }
+
+            }
+        }
+
+
+        public function logout(){
             $this->userModel->markActivity($_SESSION['_id'], 0);
 
             unset($_SESSION['_id']);
             unset($_SESSION['_email']);
-            unset($_SESSION['_name']);
+            unset($_SESSION['_firstname']);
+            unset($_SESSION['_lastname']);
             unset($_SESSION['_position']);
             unset($_SESSION['_profile']);
+
             session_destroy();
 
             redirect('users/login');
         }
 
-        public function viewReturnDefectSheet() {
-
-        }
-
-        public function Progress() {
-
-        }
-
-        public function PDIResult() {
-
-        }
-
 
     }
-    

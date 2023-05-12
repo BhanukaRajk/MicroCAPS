@@ -2147,7 +2147,7 @@ class Supervisors extends controller
         // if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
             $data['toolset'] = $this->supervisorModel->viewToolz();
-            $this->view('supervisor/consumables/consumablelist', $data);
+            $this->view('supervisor/toolset/tools', $data);
         }
     }
 

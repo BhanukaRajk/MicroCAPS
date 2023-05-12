@@ -267,6 +267,10 @@ li a:hover:not(.active) {
     cursor: pointer;
 }
 
+.profileImg {
+    border-radius: 50%;
+}
+
 
 .profilemenu {
     position: relative;
