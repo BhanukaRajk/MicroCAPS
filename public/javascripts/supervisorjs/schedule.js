@@ -1,4 +1,6 @@
 // TASK COMPLETION UPDATING FUNCTION
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
+
 const taskStateCheckboxes = document.querySelectorAll("input[type=checkbox][class=P28_taskrecord]");
 
 for (let task of taskStateCheckboxes) {
@@ -29,7 +31,7 @@ for (let task of taskStateCheckboxes) {
         }
         
 
-        fetch("http://localhost:8080/MicroCAPS/Supervisors/recordScheduleStatus", {
+        fetch(BASE_URL + "Supervisors/recordScheduleStatus", {
             method: "POST",
             // headers: {
             //     'Content-type': 'multipart/form-data'
@@ -93,7 +95,7 @@ for (let task of taskstaeboxes) {
         }
         
 
-        fetch("http://localhost:8080/MicroCAPS/Supervisors/recordScheduleStatus", {
+        fetch(BASE_URL + "Supervisors/recordScheduleStatus", {
             method: "POST",
             // headers: {
             //     'Content-type': 'multipart/form-data'

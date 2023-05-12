@@ -14,33 +14,31 @@
         <div class="single-stage-margin">
 
             <div class="single-stage-head">
-                <!-- GET DATA FROM CONTROLLER AND FILLING THE HEADING-->
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
-                <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div>
+                <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div> 
                 <div class="stage-switch">
-                    <!-- BUTTON TO JUMP TO THE OVERALL PROGRESS -->
                     <button class="back-button">Overall</button>
                 </div>
             </div>
 
             <div class="single-stage-body">
 
-                <div class="single-stage-chart">
+                <div class="single-stage-chart align-items-center">
                     <div class="chart-heading">
                         <div>Stage 02</div>
                     </div>
-                    <div class="chart-box">
-                        <canvas id="myChart" class="SX-bigChart"></canvas>
-                        <label class="chart-percentage SX-bigstate" for="myChart">100%</label>
+                    <div class="chart-grid">
+                        <canvas id="Lstage02"></canvas>
+                        <label class="chart-percentage-ao " for="Lstage02" id="Lstage02-label"></label>
                     </div>
-                    <div class="chart-legend">
-                        <div class="dash-graph-menu">
-                            <div class="dash-graph-color-circle dash-darkblue-circle test1"></div>
-                            <div>Done</div>
+                    <div class="display-flex-row justify-content-center gap-0p5">
+                        <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
+                            <div class="dash-graph-color-circle dash-darkblue-circle "></div>
+                            <div>Completed</div>
                         </div>
-                        <div class="dash-graph-menu">
-                            <div class="dash-graph-color-circle dash-lightblue-circle test1"></div>
-                            <div>On-going</div>
+                        <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
+                            <div class="dash-graph-color-circle dash-lightblue-circle "></div>
+                            <div>Pending</div>
                         </div>
                     </div>
                 </div>
@@ -68,8 +66,8 @@
                                             <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
                                             THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
 
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "CM") ? "checked" : "") .'></div>
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "Hold") ? "checked" : "") .'></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .'></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .'></div>
                                         </div>
                                     </form>
                                 </div>';
@@ -102,6 +100,7 @@
                             </form>
                         </div>
                     </div>
+                        
 
                 </div>
 
@@ -110,7 +109,21 @@
     </div>
 </section>
 
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/staging.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/staging.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
+
+<script>
+
+        let s2 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
+
+        var ctx = document.getElementById('Lstage02').getContext('2d');
+
+        let ltx = document.getElementById('Lstage02-label');
+
+        renderChart(ctx, ltx, s2, 110);
+
+    </script>
+
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -3,6 +3,8 @@ const modelfilters = document.querySelectorAll("input[type=checkbox][name=car-mo
 const stagefilters = document.querySelectorAll("input[type=checkbox][name=car-stage]");
 const timelinefilters = document.querySelectorAll("input[type=radio][name=timeline]");
 
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
+
 
 // Attach event listeners to all filter inputs
 for (let model of modelfilters) {
@@ -50,7 +52,7 @@ function filter_cars() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findAssemblyLineCars", {
+    fetch(BASE_URL + "Supervisors/findAssemblyLineCars", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -70,7 +72,7 @@ function filter_cars() {
                 let carSet = '';
 
                 data.forEach((car) => {
-                    carSet += `<form method="POST" action="http://localhost:8080/MicroCAPS/Supervisors/getProcess">
+                    carSet += `<form method="POST" action="${BASE_URL}Supervisors/getProcess">
                                 <div class="carcard" onClick="this.closest(\'form\').submit()">
                                     <div class="cardhead">
                                         <div class="cardid">
@@ -80,7 +82,7 @@ function filter_cars() {
                                         </div>
                                     </div>
                                     <div class="carpicbox">
-                                        <img src="http://localhost:8080/MicroCAPS/public/images/cars/${car.ModelName + " " + car.Color}.png" class="carpic" alt="Car image">
+                                        <img src="${BASE_URL}public/images/cars/${car.ModelName + " " + car.Color}.png" class="carpic" alt="Car image">
                                     </div>
                                     <div class="carstatus">`;
 
@@ -104,7 +106,7 @@ function filter_cars() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="${BASE_URL}public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;

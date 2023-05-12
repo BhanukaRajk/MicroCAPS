@@ -2,6 +2,8 @@
 const tooltypeRadios = document.querySelectorAll("input[type=radio][name=tool-type]");
 const toolstateRadios = document.querySelectorAll("input[type=radio][name=tool-state]");
 
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
+
 
 // ATTACH EVENT LISTENERS TO ALL FILTER INPUTS
 
@@ -46,7 +48,7 @@ function toolFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findToolz", {
+    fetch(BASE_URL + "Supervisors/findToolz", {
         method: "POST",
         // headers: {
         //     // 'Content-type': 'multipart/form-data'
@@ -81,7 +83,7 @@ function toolFilter() {
                                     </div>
                                     </div>
                                     <div class="toolpicbox">
-                                    <img src="http://localhost:8080/MicroCAPS/public/images/tools/${tool.Image != null ? tool.Image : 'none.jpeg'}" class="toolpic" alt="${tool.ToolName}">
+                                    <img src="${BASE_URL}public/images/tools/${tool.Image != null ? tool.Image : 'none.jpeg'}" class="toolpic" alt="${tool.ToolName}">
                                     </div>
                                     <div class="tool-card-down">
                                     <div class="tool-updater ${tool.Status == "Normal" ? 'available' : 'lower'}">${tool.Status == "Normal" ? 'Normal' : 'Need an attention'}</div>
@@ -99,7 +101,7 @@ function toolFilter() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="${BASE_URL}public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;

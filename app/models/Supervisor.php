@@ -880,13 +880,13 @@ class Supervisor
         $this->db->bind(':processid', $proID);
 
         if($completeness == 1 AND $holding == 0) {
-            $this->db->bind(':pstatus', "CM");
+            $this->db->bind(':pstatus', "completed");
         } else if($completeness == 0 AND $holding == 1) {
-            $this->db->bind(':pstatus', "Hold");
+            $this->db->bind(':pstatus', "OnHold");
         } else if($completeness == 0 AND $holding == 0) {
-            $this->db->bind(':pstatus', "NC");
+            $this->db->bind(':pstatus', "Pending");
         } else {
-            $this->db->bind(':pstatus', "NC");
+            $this->db->bind(':pstatus', "Pending");
         }
 
 

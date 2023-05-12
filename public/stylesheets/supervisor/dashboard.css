@@ -175,7 +175,7 @@ select#dashboardChart {
     min-width: 7rem;
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
 
     font-size: small;

@@ -1,3 +1,6 @@
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
+
+
 function findCarProcesses() {
 
     let searchInput = document.getElementById("TaskName").value.toUpperCase();
@@ -28,7 +31,7 @@ function findCarProcesses() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/searchProcesses", {
+    fetch(BASE_URL + "Supervisors/searchProcesses", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'

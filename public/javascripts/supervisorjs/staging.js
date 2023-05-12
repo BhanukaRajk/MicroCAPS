@@ -1,7 +1,10 @@
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
+
 const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
 const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
 
+
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 
 
@@ -44,40 +47,40 @@ for (let hdcheckbox of holdingcheckboxes) {
 
 
 
-let PROCEED = false;
-let numUnchecked = completenesscheckboxes.length;
+// let PROCEED = false;
+// let numUnchecked = completenesscheckboxes.length;
 
-for (let cmcheckbox of completenesscheckboxes) {
-    if (cmcheckbox.checked) {
-        numUnchecked--;
-        if (numUnchecked === 0) {
-            PROCEED = true;
-        }
-    }
-}
+// for (let cmcheckbox of completenesscheckboxes) {
+//     if (cmcheckbox.checked) {
+//         numUnchecked--;
+//         if (numUnchecked === 0) {
+//             PROCEED = true;
+//         }
+//     }
+// }
 
-function updateNextBtnDisabled() {
-    nextbtn.disabled = !PROCEED;
-}
-updateNextBtnDisabled();
+// function updateNextBtnDisabled() {
+//     nextbtn.disabled = !PROCEED;
+// }
+// updateNextBtnDisabled();
 
 
-for (let cmcheckbox of completenesscheckboxes) {
-    cmcheckbox.addEventListener('change', (event) => {
-        if (event.target.checked) {
-            numUnchecked--;
-            if (numUnchecked === 0) {
-                PROCEED = true;
-            }
-        } else if(!event.target.checked) {
-            numUnchecked++;
-            PROCEED = false;
-        }
-        updateNextBtnDisabled();
-    });
-}
+// for (let cmcheckbox of completenesscheckboxes) {
+//     cmcheckbox?.addEventListener('change', (event) => {
+//         if (event.target.checked) {
+//             numUnchecked--;
+//             if (numUnchecked === 0) {
+//                 PROCEED = true;
+//             }
+//         } else if(!event.target.checked) {
+//             numUnchecked++;
+//             PROCEED = false;
+//         }
+//         updateNextBtnDisabled();
+//     });
+// }
 
-updateNextBtnDisabled();
+// updateNextBtnDisabled();
 
 
 
@@ -134,7 +137,7 @@ function updateProcessStatus() {
     }
 
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/recordUpdateProcess", {
+    fetch(BASE_URL + "Supervisors/recordUpdateProcess", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'

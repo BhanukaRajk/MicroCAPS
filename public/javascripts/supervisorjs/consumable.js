@@ -1,4 +1,7 @@
 // CONSUMABLE FILTERING FUNCTION
+
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
+
 const ctypeRadios = document.querySelectorAll("input[type=radio][name=cons-type]");
 const cstateRadios = document.querySelectorAll("input[type=radio][name=stock-state]");
 
@@ -45,7 +48,7 @@ function consumeFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findConsumables", {
+    fetch(BASE_URL + "Supervisors/findConsumables", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -78,7 +81,7 @@ function consumeFilter() {
                                         </div>
                                     </div>
                                     <div class="carpicbox">
-                                        <img src="http://localhost:8080/MicroCAPS/public/images/consumables/${consume.Image}" class="carpic" alt="${consume.ConsumableName}">
+                                        <img src="${BASE_URL}public/images/consumables/${consume.Image}" class="carpic" alt="${consume.ConsumableName}">
                                     </div>
                                     <div class="carstatus ${consume.Volume == null ? (consume.Weight >= 60 ? 'available' : 'lower') : (consume.Volume >= 60 ? 'available' : 'lower')}">${consume.Volume == null ? (consume.Weight >= 60 ? 'Available' : 'Low in stock') : (consume.Volume >= 60 ? 'Available' : 'Low in stock')}</div>
                                     <div class="chassisno con-last-update">Last update: ${consume.UDate} at ${consume.UTime.substring(0, 5)} </div>
@@ -93,7 +96,7 @@ function consumeFilter() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="${BASE_URL}public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;
