@@ -16,6 +16,7 @@
             <div class="single-stage-head">
                 <!-- GET DATA FROM CONTROLLER AND FILLING THE HEADING-->
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
+                <div class="display-none"><?php echo $data['chassisNo']; ?></div>
                 <div class="stage-switch">
                     <!-- BUTTON TO JUMP TO THE OVERALL PROGRESS -->
                     <button class="back-button">Overall</button>
@@ -67,8 +68,8 @@
                                             <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
                                             THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
 
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="connectivity" value="Connected"></div>
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="holding" value="Hold"></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" value="Connected"></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" value="Hold"></div>
                                         </div>
                                     </form>
                                 </div>';
@@ -88,10 +89,10 @@
 
                     <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
                     <div class="page-button-set">
-                        <button onclick="showPage(1)">1</button>
-                        <button onclick="showPage(2)">2</button>
-                        <button onclick="showPage(3)">3</button>
-                        <button onclick="showPage(4)">4</button>
+                        <button onclick="showPage(1)" class="paginate">1</button>
+                        <button onclick="showPage(2)" class="paginate">2</button>
+                        <button onclick="showPage(3)" class="paginate">3</button>
+                        <button onclick="showPage(4)" class="paginate">4</button>
                     </div>
                         
 
@@ -102,6 +103,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/staging.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

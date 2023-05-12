@@ -1,7 +1,7 @@
 const connectivityCheckbox = document.getElementById('connectivity-cb');
 const holdingCheckbox = document.getElementById('holding-cb');
 
-holdingCheckbox.addEventListener('change', (event) => {
+holdingCheckbox?.addEventListener('change', (event) => {
   if (event.target.checked) {
     connectivityCheckbox.checked = false;
     connectivityCheckbox.disabled = true;

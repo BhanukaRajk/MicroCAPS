@@ -1,6 +1,6 @@
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
-const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][name=connectivity]");
-const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][name=holding]");
+const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
+const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
 
 
 // ATTACH EVENT LISTENERS TO ALL FILTER INPUTS
@@ -16,25 +16,25 @@ for (let hdcheckbox of holdingcheckboxes) {
 
 function updateProcess() {
 
-    const ProcessID = this.value;
+    const ButtonID = this.id;
 
-    const checkboxesset = Array.from(
-        document.querySelectorAll("input[type=checkbox][name=car-model]")
-        ).map((checkbox) => (checkbox.checked ? checkbox.value : ""));
+    const ProcessId = ButtonID.split("-")[0];
+    console.log(ProcessId);
+
 
     const completeness = document.querySelector(
-        "input[type=radio][name=completeness]:checked"
-    ).value;
-    const acceptance = document.querySelector(
-        "input[type=radio][name=acceptance]:checked"
-    ).value;
+        "input[type=checkbox][name="+ProcessId+"-con]:checked"
+    ).map((checkbox) => (checkbox.checked ? "TRUE" : "FALSE"));
+
+    const holding = document.querySelector(
+        "input[type=radio][name="+ProcessId+"-hold]:checked"
+    ).map((checkbox) => (checkbox.checked ? "TRUE" : "FALSE"));
 
     
     // JSON STRINGIFY USED BECAUSE AN ARRAY IS PASSED USING THIS checkboxesset VARIABLE
     const formData = new FormData();
-    formData.append("vehicleTypes", JSON.stringify(checkboxesset));
     formData.append("completeness", completeness);
-    formData.append("acceptance", acceptance);
+    formData.append("holding", holding);
 
 
     if (!formData) {

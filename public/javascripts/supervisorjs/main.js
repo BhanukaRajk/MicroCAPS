@@ -5,7 +5,7 @@
 //// drop.addEventListener("click", () => {
 ////     logout.classList.toggle("display-block");
 //// });
-const URL_ROOT = "http://localhost:8080/MicroCAPS/";
+// const URL_ROOT = "http://localhost:8080/MicroCAPS/";
 
 
 /* WHEN THE USER CLICKS ON THE BUTTON, 
