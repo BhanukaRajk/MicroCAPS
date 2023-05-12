@@ -223,9 +223,13 @@ li a:hover:not(.active) {
 .nav_logo {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    /* margin-left: 1.875rem; */
-    margin-top: 0.5rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+
+.logo-style {
+    width: 80%;
+    text-align: center;
 }
 
 .nav_section_headings {

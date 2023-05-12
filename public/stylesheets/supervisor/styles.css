@@ -36,9 +36,13 @@ body {
     --darkblue: #1B2B65;
     --lightblue: #51CBFF;
     --fontblue: #1C1F37;
+    --fontgray: #7c7a7a;
     --checkblue: #1266F1;
     --btnhover: #D4E3FF76;
     --linkblue: #017EFA;
+    --green: #29CC97;
+    --red: #ee0b0b;
+    --yellow: #FEC400;
 }
 
 
@@ -858,7 +862,9 @@ h3 {
 }
 
 .btn:hover {
-    background-color: var(--btnhover);
+    background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    border: 1px solid var(--btn-hover-border-color);
 }
 
 .btn:focus {
@@ -870,14 +876,13 @@ h3 {
     --btn-bg: white;
     --btn-border-color: var(--blue);
     --btn-hover-color: var(--blue);
-    --btn-hover-bg: #F2F2F2;
+    --btn-hover-bg: #D4E3FF76;
     --btn-hover-border-color: var(--blue);
     --btn-width: 16.75rem;
     --btn-height: 3rem;
-
     --btn-padding-x: 0.75rem;
     --btn-padding-y: 0.375rem;
-    --btn-font-family: none;
+    --btn-font-family: ;
     --btn-font-size: 1rem;
     --btn-font-weight: 400;
     --btn-line-height: 1.5;
@@ -886,14 +891,14 @@ h3 {
     --btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
     --btn-disabled-opacity: 0.65;
     --btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--btn-focus-shadow-rgb), .5);
-    --btn-focus-shadow-rgb: 49, 132, 253;
-    --btn-active-color: #fff;
-    --btn-active-bg: #0a58ca;
-    --btn-active-border-color: #0a53be;
-    --btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --btn-disabled-color: #fff;
-    --btn-disabled-bg: #0d6efd;
-    --btn-disabled-border-color: #0d6efd;
+}
+
+.btn-green {
+    --btn-color: var(--green);
+    --btn-border-color: var(--green);
+    --btn-hover-color: var(--green);
+    --btn-hover-bg: #e8f5e973;
+    --btn-hover-border-color: var(--green);
 }
 
 /* Form */
@@ -1067,3 +1072,122 @@ div.select {
     top: 14rem;
     cursor: pointer;
 } */
+
+/* Settings Image */
+
+.border-radius-11 {
+    border-radius: 11rem;
+}
+
+.height-rem-12p5 {
+    height: 12.5rem !important;
+}
+
+.width-rem-12p5 {
+    width: 12.5rem !important
+}
+
+.background-image {
+    background-clip: content-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.font-size {
+    font-size: 12px !important;
+}
+
+.text-fontgray {
+    color: var(--fontgray) !important
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* Settings Pop Up */
+
+.overlay {
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    left: 16.25rem;
+    right: 0;
+    background: rgb(0 0 0 / 16%);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    text-transform: capitalize;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.pop-container {
+    transition: all 5s ease-in-out;
+}
+
+.pop {
+    animation: pop 0.7s;
+}
+
+.close {
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+    transition: all 200ms;
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #06D85F;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+
+    60% {
+        transform: scale(1.1);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    80% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Top Nav Bar */
+.height-rem-2p5 {
+    height: 2.5rem !important;
+}
+
+.width-rem-2p5 {
+    width: 2.5rem !important
+}
