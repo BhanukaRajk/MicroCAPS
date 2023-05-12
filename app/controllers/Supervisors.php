@@ -951,6 +951,10 @@ class Supervisors extends controller
         }
     }
 
+
+
+
+
     // RECORD POST ASSEMBLY QUALITY INSPECTION RESULTS
     public function recordPAQInspectionResults()
     {
@@ -974,32 +978,14 @@ class Supervisors extends controller
                 'FinalResult' => trim($_POST['final_result'])
             ];
 
-            if ($this->supervisorModel->checkVehicle($data['ChassisNo'])) {
+            if ($this->supervisorModel->checkCarById($data['ChassisNo'], 'AC')) {
 
-                if (FALSE) {
-                // if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
+                $TEMP = $this->supervisorModel->countPAQattempts($data['ChassisNo']);
 
-                //     $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
-                //     $data['url'] = getUrl();
-                //     $this->view('supervisor/leaves/addleave', $data);
-
-                } else {
-
-                    if (($data['BrakeBleed'] == 'NA' OR 
-                        $data['GearOil'] == 'NA' OR 
-                        $data['RackEnd'] == 'NA' OR 
-                        $data['ClutchAdjust'] == 'NA' OR 
-                        $data['RearAxel'] == 'NA') AND 
-                        $data['FinalResult'] == 'Passed')
-                    {
-
-                        $_SESSION['error_message'] = 'All criteria must be passed to complete the assembly line!';
-                        $data['url'] = getUrl();
-                        $this->view('supervisor/inspection/paqrecord', $data);
-
-                    } else {
-
-                        if ($this->supervisorModel->recordPAQ($data['chassis_no'], 
+                if(isset($TEMP)) {
+                    $current_attempt = $TEMP->attempts + 1;
+                    if ($this->supervisorModel->recordPAQresults($data['chassis_no'], 
+                                                                $current_attempt, 
                                                                 $data['BrakeBleed'], 
                                                                 $data['GearOil'], 
                                                                 $data['RackEnd'], 
@@ -1013,12 +999,11 @@ class Supervisors extends controller
                             $_SESSION['error_message'] = 'Error! record saving failed!';
                         }
                         redirect('Supervisors/S4vehicles');
-                    }
                 }
 
+                $_SESSION['error_message'] = 'Oops! An error occurred';
+
             } else {
-
-
                 $_SESSION['error_message'] = 'Oops! The vehicle could not be found';
 
                 $data['url'] = getUrl();
@@ -1036,6 +1021,8 @@ class Supervisors extends controller
     }
 
 
+
+    
 
     // GET CAR INFO TO POST ASSEMBLY QUALITY INSPECTION FORM
     public function getCarInfo()
@@ -1532,15 +1519,6 @@ class Supervisors extends controller
             }
 
         }
-
-    }
-
-    public function viewConsumables()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
 
     }
 
