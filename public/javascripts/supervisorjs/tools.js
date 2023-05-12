@@ -48,10 +48,10 @@ function toolFilter() {
 
     fetch("http://localhost:8080/MicroCAPS/Supervisors/findToolz", {
         method: "POST",
-        //// headers: {
-        ////     'Content-type': 'multipart/form-data'
-        ////     'Content-type': 'application/json'
-        //// },
+        // headers: {
+        //     // 'Content-type': 'multipart/form-data'
+        //     'Content-type': 'application/json'
+        // },
         body: formData,
     })
         .then((response) => response.json())

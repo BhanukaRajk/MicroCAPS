@@ -256,5 +256,6 @@
 
 
 <!-- ADD COMMON FOOTER FILE FOR DASHBOARD PAGE -->
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script>
+<!-- <script src="<?php //echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script> -->
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/consumable.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>
