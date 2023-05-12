@@ -382,4 +382,45 @@ class Vehicles extends Controller {
         }
     }
 
+    public function assemblyStagePercentageDetail() {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'chassisNo' => trim($_POST['chassisNo']),
+                'stage' => trim($_POST['stage'])
+            ];
+
+            $stage = '';
+
+            if ($data['stage'] == 'Lstage01') {
+                $stage = 'S1';
+            } elseif ($data['stage'] == 'Lstage02') {
+                $stage = 'S2';
+            } elseif ($data['stage'] == 'Lstage03') {
+                $stage = 'S3';
+            } elseif ($data['stage'] == 'Lstage04') {
+                $stage = 'S4';
+            }
+
+            $data['overall'] = [
+                'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', $stage), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', $stage), "Weight")),
+                'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', $stage), "Weight"))
+            ];
+
+            if ($data['overall']) {
+                echo json_encode($data);
+            }
+
+        }
+
+    }
+
+
 }

@@ -82,6 +82,80 @@ for (let hdcheckbox of holdingcheckboxes) {
 
 // updateNextBtnDisabled();
 
+function reloadChart() {
+
+    let chassisNo = document.getElementById("vehicle_id").innerHTML;
+    let stage = document.getElementById("stage_id").innerHTML;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            destroyChart(document.getElementById(stage));
+
+            var ctx = document.getElementById(stage).getContext('2d');
+
+            let ltx = document.getElementById(stage+'-label');
+
+            updateChart(ctx, ltx, JSON.parse(response), 110);
+
+        }
+    };
+    xhttp.open("POST", BASE_URL + "Vehicles/assemblyStagePercentageDetail", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("chassisNo="+chassisNo+"&stage="+stage);
+
+}
+
+function updateChart(ctx, ltx, data, cutout = 50) {
+
+    let done = data['overall'].completed/(parseInt(data['overall'].completed) + parseInt(data['overall'].pending))*100;
+    let ongoing = data['overall'].pending/(parseInt(data['overall'].completed) + parseInt(data['overall'].pending))*100;
+
+    let chartGrid = cutout == 50 ? 'chart-grid-stage-add' : 'chart-grid-add';
+
+    if (done == 0) {
+        ltx.innerHTML = '0%';
+        ltx.classList.add(chartGrid + '-1');
+    } else if (done == 100) {
+        ltx.innerHTML = '100%';
+        ltx.classList.add(chartGrid + '-3');
+    } else {
+        ltx.innerHTML = Math.floor(done) + '%';
+        ltx.classList.add(chartGrid + '-2');
+    }
+
+    var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Done', 'Ongoing'],
+            datasets: [{
+                data: [done, ongoing],
+                backgroundColor: ['#017EFA', '#51CBFF']
+            }]
+        },
+        options: {
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: cutout
+    }
+    });
+}
+
+function destroyChart(ctx) {
+
+    var chart = Chart.getChart(ctx);
+
+    chart.destroy();
+
+}
+
 
 
 
@@ -149,6 +223,10 @@ function updateProcessStatus() {
         .then((data) => {
 
             console.log("Data = " + data);
+
+            if (data) {
+                reloadChart();
+            }
 
         })
         .catch((error) => console.error(error));

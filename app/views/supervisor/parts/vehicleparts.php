@@ -23,7 +23,7 @@
 
                         <div class="vehicle-selection-box horizontal-centralizer">
                             <div class="vertical-centralizer">
-                                <button class="full-list-btn blue-hover" onclick="location.href='http://localhost:8080/MicroCAPS/Supervisors/viewCarComponent'">Vehicle list</button>
+                                <button class="full-list-btn blue-hover" onclick="location.href=<?php echo URL_ROOT; ?>Supervisors/viewCarComponent">Vehicle list</button>
                             </div>
                             <div>
                                 <label for="vehicles" class="display-none">Select Vehicle</label>

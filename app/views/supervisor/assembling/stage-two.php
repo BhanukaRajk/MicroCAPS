@@ -26,6 +26,7 @@
                 <div class="single-stage-chart align-items-center">
                     <div class="chart-heading">
                         <div>Stage 02</div>
+                        <div class="display-none" id="stage_id">Lstage02</div>
                     </div>
                     <div class="chart-grid">
                         <canvas id="Lstage02"></canvas>

@@ -1,3 +1,5 @@
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
+
 
 // Flash Message
 $(document).ready(() => {
@@ -32,7 +34,7 @@ function dashboardChart() {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/assemblyPercentageDetail", true);
+    xhttp.open("POST", BASE_URL + "Vehicles/assemblyPercentageDetail", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("chassisNo="+chassisNo);
 
@@ -50,7 +52,7 @@ function saveChanges(id, position) {
     formdata.append("nic", document.getElementById("nic").value);
     $.ajax({
         type: 'POST',
-        url:  'http://localhost/MicroCAPS/'+position+'s/settings',
+        url:  BASE_URL+position+'s/settings',
         data: formdata,
         processData: false,
         contentType: false,
@@ -67,7 +69,7 @@ function updatePassword() {
     formdata.append("confirmPassword", document.getElementById("confirmpassword").value);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MicroCAPS/Users/updatePassword',
+        url: BASE_URL + 'Users/updatePassword',
         data: formdata,
         processData: false,
         contentType: false,
@@ -85,7 +87,7 @@ function addConsumables() {
     formdata.append("status", document.getElementById("status").value);
     $.ajax({
         type: 'POST',
-        url:  'http://localhost/MicroCAPS/Supervisors/addNewConsumables',
+        url:  BASE_URL + 'Supervisors/addNewConsumables',
         data: formdata,
         processData: false,
         contentType: false,
