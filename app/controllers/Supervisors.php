@@ -107,7 +107,7 @@ class Supervisors extends controller
     }
 
 
-
+    // ASSEMBLY LINE VEHICLES
     public function linevehicleview()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -116,7 +116,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewAssemblyLineVehicles();
             $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
@@ -1052,7 +1052,7 @@ class Supervisors extends controller
                 'CarID' => trim($_POST['form-car-id'])
             ];
 
-            if ($this->supervisorModel->checkCarById($data['CarID'], "AC")) {
+            if ($this->supervisorModel->checkCarById($data['CarID'], "S4")) {
 
                 if ($this->supervisorModel->createPAQForm($data['CarID'])) {
                     $data['FormCarData'] = $this->supervisorModel->createPAQForm($data['CarID']);
@@ -1170,7 +1170,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['AC','PA']);
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['S4','PA']);
             $this->view('supervisor/inspection/vehiclelist', $data);
             // print_r($data);
         }
@@ -1373,7 +1373,7 @@ class Supervisors extends controller
 
 
 
-    // UPDATE PROGRESS SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ASSEMBLY LINE AND UPDATE PROGRESS SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function lineVehicles()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -1388,6 +1388,42 @@ class Supervisors extends controller
     }
     public function updateProgress()
     {
+    }
+
+
+
+    // CONTROLLER FUNCTION TO VIEW CARS + FILTERS (WORKING)
+    public function findAssemblyLineCars()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $data['url'] = getUrl();
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+
+        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $Models = json_decode($_POST['model_set']);
+            $Stages = json_decode($_POST['stage_set']);
+            $Timeline = $_POST['time_scale'];
+
+            $data['url'] = getUrl();
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory($Models, $Stages, $Timeline);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['AssemblyLineCars']);
+
+        } else {
+
+            $_SESSION['error_message'] = 'Request failed!';
+            $data['url'] = getUrl();
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+        }
     }
 
 
