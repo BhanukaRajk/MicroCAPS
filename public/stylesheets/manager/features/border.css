@@ -17,6 +17,10 @@
     border-bottom: 1px solid var(--gray) !important;
 }
 
+.border-bottom-green {
+    border-bottom: 1px solid var(--green) !important;
+}
+
 .border-radius-0 {
     border-radius: 0rem;
 }

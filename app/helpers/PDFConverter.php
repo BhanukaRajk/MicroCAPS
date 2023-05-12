@@ -42,4 +42,3 @@ function convert($type, $file) : array {
     return [false, false];
 
 }
-

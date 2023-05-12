@@ -29,7 +29,7 @@ class Vehicle {
     public function shellDetail($chassisNo)
     {
         $this->db->query(
-            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.ArrivalDate, `vehicle`.EngineNo, `vehicle`.ModelNo, `vehicle-model`.ModelName
+            'SELECT `vehicle`.*, `vehicle-model`.ModelName
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo

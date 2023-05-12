@@ -85,3 +85,15 @@
     --btn-hover-bg: #ee0b0b14;
     --btn-hover-border-color: var(--red);
 }
+
+.btn-red-2 {
+    --btn-bg: var(--red);
+    --btn-color: var(--white);
+    --btn-border-color: none;
+    --btn-hover-bg: none;
+    --btn-hover-color: var(--red);
+    --btn-hover-border-color: var(--red);
+    --btn-width: 7rem;
+    --btn-height: 2rem;
+    --btn-font-size: 0.7rem;
+}

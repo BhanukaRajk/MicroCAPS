@@ -67,6 +67,9 @@
 /* Navigation */
 @import "components/navigation.css";
 
+/* Table */ 
+@import "components/table.css";
+
 /* Page */
 @import "pages/common.css";
 

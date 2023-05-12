@@ -169,23 +169,11 @@
         </div>
     </section>
 
-    
-
     <section class="display-flex-column">
 
         <div id="alert" class="hideme" role="alert"></div>
 
     </section>
-
-    <!-- <script>
-        window.onload = function() {
-            if (getItem("PDFState") === "Set") {
-                
-            }
-
-            removeLocalStorage();
-        }
-    </script> -->
     
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/addFieldsComponent.js"></script>
