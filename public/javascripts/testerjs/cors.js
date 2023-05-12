@@ -1,4 +1,4 @@
-// Flash Message
+// FLASH MESSAGE
 
 $(document).ready(() => {
 
@@ -13,7 +13,7 @@ $(document).ready(() => {
 })
 
 
-// Change PDI Status
+// CHANGE PDI STATUS
 
 function addPDI(ChassisNo,CheckId, Result) {
     
@@ -36,7 +36,8 @@ function addPDI(ChassisNo,CheckId, Result) {
     xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Result="+Result);
 }
 
-// Change All PDI Statuses
+
+// CHANGE ALL PDI STATUSES
 
 function selectAllPDI(ChassisNo, CategoryId, Result) {
     
@@ -59,7 +60,8 @@ function selectAllPDI(ChassisNo, CategoryId, Result) {
     xhttp.send("ChassisNo="+ChassisNo+"&CategoryId="+CategoryId+"&Result="+Result);
 }
 
-// Add a Vehicle to My Tasks
+
+// ADD A VEHICLE TO MY TASKS
 
 function addTask(ChassisNo, TesterId) {
     
@@ -83,7 +85,7 @@ function addTask(ChassisNo, TesterId) {
 }
 
 
-// Remove a Vehicle from My Tasks
+// REMOVE A VEHICLE FROM MY TASKS
 
 function removeTask(ChassisNo) {
     
@@ -107,7 +109,7 @@ function removeTask(ChassisNo) {
 }
 
 
-// Mark Task as Completed
+// MARK TASK AS COMPLETED
 
 function completeTask(ChassisNo, TesterId) {
     
@@ -137,7 +139,7 @@ function completeTask(ChassisNo, TesterId) {
 }
 
 
-// Edit Profile Details
+// EDIT PROFILE DETAILS
 
 function saveChanges(id, position) {
     let formdata = new FormData();
@@ -166,7 +168,8 @@ function saveChanges(id, position) {
     });
 }
 
-// Delete Defect
+
+// DELETE DEFECT
 
   function deleteDefect(chassisno, defectno) {
     var xhr = new XMLHttpRequest();
@@ -196,7 +199,8 @@ function saveChanges(id, position) {
     };
   }
 
-// Add Defect
+
+// ADD DEFECT
 
 function addDefect() {
     let formdata = new FormData();
@@ -221,9 +225,21 @@ function addDefect() {
             } else if (response.trim() == "defectexists") {
                 location.reload();
                 setLocalStorage("Error","Defect Number Already Exists");
+            } else if (response.trim() == "olderdate") {
+                location.reload();
+                setLocalStorage("Error","Date must be in last 7 days.");
+            } else if (response.trim() == "futuredate") {
+                location.reload();
+                setLocalStorage("Error","Date cannot be in the future.");
             } else if (response.trim() == "invaliddate") {
                 location.reload();
-                setLocalStorage("Error","Invalid Date");
+                setLocalStorage("Error","Date cannot be empty.");
+            } else if (response.trim() == "emptydefectno") {
+                location.reload();
+                setLocalStorage("Error","Defect number cannot be empty.");
+            } else if (response.trim() == "emptydefectdesc") {
+                location.reload();
+                setLocalStorage("Error","Repair description cannot be empty.");
             } else {
                 location.reload();
                 setLocalStorage("Error","Error Adding Defect");
@@ -232,7 +248,8 @@ function addDefect() {
     });
 }
 
-// Edit Defect
+
+// EDIT DEFECT
 
 function editDefect(chassisno, defectno) {
     let formdata = new FormData();
@@ -251,10 +268,19 @@ function editDefect(chassisno, defectno) {
         success: (response) => {
             if (response.trim() == "Successful") {
                 window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
-                setLocalStorage("Successful","Saved Changes");
+                setLocalStorage("Successful","Saved Changes Successfully");
+            } else if (response.trim() == "olderdate") {
+                location.reload();
+                setLocalStorage("Error","Date must be in last 7 days.");
+            } else if (response.trim() == "futuredate") {
+                location.reload();
+                setLocalStorage("Error","Date cannot be in the future.");
             } else if (response.trim() == "invaliddate") {
                 location.reload();
-                setLocalStorage("Error","Invalid Date");
+                setLocalStorage("Error","Date cannot be empty.");
+            } else if (response.trim() == "emptydefectdesc") {
+                location.reload();
+                setLocalStorage("Error","Defect description cannot be empty.");
             } else {
                 location.reload();
                 setLocalStorage("Error","Error Saving Changes");
@@ -263,7 +289,9 @@ function editDefect(chassisno, defectno) {
     });
 }
 
-// Search
+
+// SEARCH
+
 function searchByKey(type) {
 
     let keyword = document.getElementById("searchId").value;
@@ -301,7 +329,8 @@ function searchByKey(type) {
 
 }
 
-// Settings
+
+// SETTINGS
 
 function updatePassword() {
     let formdata = new FormData();
@@ -327,7 +356,8 @@ function updatePassword() {
 }
 
 
-//searchGenerates
+// SEARCH GENERATES
+
 function assemblylist(response) {
 
     let innerHTML = '';
@@ -393,6 +423,7 @@ function assemblylist(response) {
 
 
 //Alert Success
+
 function alertSuccess(message) {
     let alert = document.getElementById("alert");
     alert.classList.remove("hideme");
@@ -411,6 +442,7 @@ function alertSuccess(message) {
 
 
 //Alert Faliure
+
 function alertFaliure(message) {
     let alert = document.getElementById("alert");
     alert.classList.remove("hideme");

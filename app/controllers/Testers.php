@@ -90,9 +90,27 @@ class Testers extends controller
             if ($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
                 $data['defect_err'] = 'Defect Already Recorded';
                 echo 'defectexists';
-            } else if (intval($str_diff) < 0 || intval($str_diff) > 7) {
+            }
+            
+            if (intval($str_diff) > 7) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'olderdate';
+            } else if (intval($str_diff) < 0) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'futuredate';
+            } else if ($data['InspectionDate'] == "") {
                 $data['date_err'] = 'Invalid Date';
                 echo 'invaliddate';
+            }
+
+            if ($data['DefectNo'] == ""){
+                $data['defect_err'] = 'Defect No. is Required';
+                echo 'emptydefectno';
+            }
+
+            if ($data['RepairDescription'] == ""){
+                $data['defect_err'] = 'Repair Description is Required';
+                echo 'emptydefectdesc';
             }
 
             if (empty($data['defect_err']) && empty($data['date_err'])) {
@@ -137,12 +155,23 @@ class Testers extends controller
             $str_diff = $diff->format('%R%a');
 
 
-            if (intval($str_diff) < 0 || intval($str_diff) > 7) {
+            if (intval($str_diff) > 7) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'olderdate';
+            } else if (intval($str_diff) < 0) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'futuredate';
+            } else if ($data['InspectionDate'] == "") {
                 $data['date_err'] = 'Invalid Date';
                 echo 'invaliddate';
             }
 
-            if (empty($data['date_err'])) {
+            if ($data['RepairDescription'] == ""){
+                $data['defect_err'] = 'Repair Description is Required';
+                echo 'emptydefectdesc';
+            }
+
+            if (empty($data['date_err']) && empty($data['defect_err'])) {
                 if ($this->testerModel->editDefect($data)) {
                     echo 'Successful';
                 } else {
@@ -202,7 +231,7 @@ class Testers extends controller
         }
     }
 
-    public function pdi_results($id)
+    public function pdiresults($id)
     {
 
         if (!isLoggedIn()) {
@@ -215,7 +244,7 @@ class Testers extends controller
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
             $data['id'] = $id;
             $data['defects'] = $this->testerModel->viewDefectSheets($id);
-            $this->view('tester/pdi_results', $data);
+            $this->view('tester/pdiresults', $data);
         }
     }
 
