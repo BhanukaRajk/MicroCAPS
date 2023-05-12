@@ -29,4 +29,15 @@
 
         }
 
+        public function Sum($data, $str) : int {
+            $sum = 0;
+            if (empty($data)) {
+                return $sum;
+            }
+            foreach ($data as $value) {
+                $sum += $value->$str;
+            }
+            return $sum;
+        }
+
     }

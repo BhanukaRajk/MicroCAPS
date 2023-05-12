@@ -581,13 +581,14 @@ class Supervisor
     public function viewDamagedParts()
     {
         $this->db->query(
-            'SELECT `component-damage`.`SerialNo`, 
-                    `component-damage`.`RequestStatus`, 
-                    `component`.`Color`, 
-                    `component`.`PartName` 
-                    FROM `component-damage`, `component` 
-                    ORDER BY `component-damage`.`RequestStatus` 
-                    ASC LIMIT 5;'
+            'SELECT `component-damage`.`SerialNo`,
+                    `component-damage`.`RequestStatus`,
+                    `component`.`Color`,
+                    `component`.`PartName`
+            FROM `component-damage` INNER JOIN `component`
+            ON `component-damage`.`PartNo` = `component`.`PartNo`
+            ORDER BY `component-damage`.`RequestStatus` ASC
+            LIMIT 5;'
         );
 
         $damaged_parts = $this->db->resultSet();

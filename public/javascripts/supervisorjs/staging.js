@@ -1,8 +1,6 @@
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
 const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][name=connectivity]");
 const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][name=holding]");
-// const completenessRadios = document.querySelectorAll("input[type=radio][name=completeness]");
-// const acceptanceRadios = document.querySelectorAll("input[type=radio][name=acceptance]");
 
 
 // ATTACH EVENT LISTENERS TO ALL FILTER INPUTS
@@ -12,12 +10,6 @@ for (let cmcheckbox of completenesscheckboxes) {
 for (let hdcheckbox of holdingcheckboxes) {
     hdcheckbox.addEventListener('change', updateProcess);
 }
-// for (let radio of completenessRadios) {
-//     radio.addEventListener('change', updateFilter);
-// }
-// for (let radio of acceptanceRadios) {
-//     radio.addEventListener('change', updateFilter);
-// }
 
 
 

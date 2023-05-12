@@ -60,7 +60,7 @@
                                 foreach ($data['damagedParts'] as $part) {
                                     echo '<div class="medfont display-flex-row justify-content-between border-bottom width-rem-20">
                                             <div class="display-flex-column padding-bottom-3">
-                                                <div class="part-name">'.$part->PartName.'</div>
+                                                <div class="part-name">'. $part->PartName .'</div>
                                                 <div class="display-flex-row gap-1">
                                                     <div class="">Serial No: '. $part->SerialNo .'</div>
                                                     <div class="">Color: '. $part->Color .'</div>
@@ -100,17 +100,28 @@
 
                     <div class="dash-card-logs">
                         <div class="dash-card-right-datalines dash-card-headings test1">Activity Log</div>
-                        <div class="horizontal-centralizer"><table><?php
-                                foreach ($data['activities'] as $activityLog) {
-                                    echo '<tr><td class="log-data">' . (($activityLog->EmployeeId != $_SESSION['_id']) ? $activityLog->empName : '<b>You</b>') . '</td>';
-                                    if($activityLog->logged_in == 1) {
-                                        echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
-                                    } else {
-                                        echo '<td class="log-data">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
-                                    }
-                                }
-                                ?></table></div>
+                        <div class="horizontal-centralizer">
+                            <table>
+                                <tr>
+                                    <td class="log-data"><b>You</b></td>
+                                    <td class="log-data"><span class="online-user">Online</span></td>
+                                </tr>
+                                <?php
+                                    foreach ($data['activities'] as $activityLog) {
+                                        if($activityLog->EmployeeId != $_SESSION['_id']) {
+                                            echo '<tr><td class="log-data">'. $activityLog->empName .'</td>';
 
+                                            if($activityLog->logged_in == 1) {
+                                                echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
+                                            } else {
+                                                echo '<td class="log-data">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
+                                            }
+
+                                        }
+                                    }
+                                ?>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="dash-card-quickaccess test1">
@@ -193,6 +204,22 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
+
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
+
+<script>
+
+    let ao = {complete: <?php echo $data['overall']['completed']; ?>, pending: <?php echo $data['overall']['pending']; ?>}
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    let ltx = document.getElementById('myChart-label');
+
+    renderChart(ctx, ltx, ao, 80);
+
+</script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

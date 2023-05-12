@@ -138,6 +138,13 @@ dash-section
     justify-content: space-between;
 }
 
+select#dashboardChart {
+    color: #017AEC;
+    border: 1px solid #017AEC;
+    padding: 0.1rem 0.25rem;
+    border-radius: 0.3rem;
+}
+
 /* GRAPH FRAME TOP */
 .dash-graph-top {
     display: flex;
@@ -215,7 +222,8 @@ dash-section
     min-width: 18rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 2rem;
 }
 .result-text-req,
 .result-text-not-req {

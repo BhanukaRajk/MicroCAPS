@@ -118,7 +118,8 @@
                             <div class="vline"></div>
                             <div class="task-status vertical-centralizer">
                                 <div class="round">
-                                    <input type="checkbox" name="schedule-task-status" 
+                                    <input type="checkbox" name="' . $Task->ChassisNo . '-' . $Task->ProcessId . '" 
+                                    class="P28_taskrecord"
                                     value="' . (($Task->Completeness == 1) ? 1 : 0) . '"
                                     id="' . $Task->ChassisNo . '-' . $Task->ProcessId . '" 
                                     ' . (($Task->Completeness == 1) ? 'checked' : '') . '>

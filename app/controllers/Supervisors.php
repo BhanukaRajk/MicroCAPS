@@ -5,10 +5,16 @@ class Supervisors extends controller
 
     private $supervisorModel;
 
+    private $vehicleModel;
+
+    private $consumableModel;
+
 
     public function __construct()
     {
         $this->supervisorModel = $this->model('Supervisor');
+        $this->vehicleModel = $this->model('Vehicle');
+        $this->consumableModel = $this->model('Consumable');
     }
 
 
@@ -79,20 +85,21 @@ class Supervisors extends controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
 
+            $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails(null,'ASC');
             $data['counts'] = $this->supervisorModel->statusCounters();
             $data['assemblyLine'] = $this->supervisorModel->ViewS4Finishers();
             $data['activities'] = $this->supervisorModel->activityLogs();
             $data['damagedParts'] = $this->supervisorModel->viewDamagedParts();
 
-            // if ($data['assemblyDetails'] !== false) {
-            //     $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
-            //     $data['overall'] = [
-            //         'pending' => json_encode($this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
-            //         'completed' => json_encode($this->Sum($this->supervisorModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
-            //     ];
-            // } else {
-            //     $data['overall'] = null;
-            // }
+            if ($data['assemblyDetails'] !== false) {
+                $chassisNo = $data['assemblyDetails'][0]->ChassisNo;
+                $data['overall'] = [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
+                ];
+            } else {
+                $data['overall'] = null;
+            }
 
             $this->view('supervisor/landing/dashboard', $data);
         }
