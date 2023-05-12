@@ -24,7 +24,7 @@
             <div class="nav_section_headings">WORKSPACE</div>
 
             <a class="<?php echo ($data['url'][1] == "linevehicleview" || 
-                                    $data['url'][1] == "getProgress"
+                                    $data['url'][1] == "getProcess"
             ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/linevehicleview">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process
             </a>
@@ -60,7 +60,8 @@
                 <img src="<?php echo URL_ROOT; ?>public/images/icon10.png" class="width-rem-1p25" alt="icon7" />Tools
             </a>
 
-            <a class="<?php echo ($data['url'][1] == "viewConsumables") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/viewConsumables">
+            <!-- <a class="<?php //echo ($data['url'][1] == "viewConsumables") ? 'active' : '' ; ?>" href="<?php //echo URL_ROOT; ?>Supervisors/viewConsumables"> -->
+            <a class="<?php echo ($data['url'][1] == "findConsumables") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/findConsumables">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon9.png" class="width-rem-1p25" alt="icon7" />Consumables
             </a>
         </li>

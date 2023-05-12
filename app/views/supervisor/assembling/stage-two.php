@@ -16,6 +16,7 @@
             <div class="single-stage-head">
                 <!-- GET DATA FROM CONTROLLER AND FILLING THE HEADING-->
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
+                <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div>
                 <div class="stage-switch">
                     <!-- BUTTON TO JUMP TO THE OVERALL PROGRESS -->
                     <button class="back-button">Overall</button>
@@ -23,22 +24,23 @@
             </div>
 
             <div class="single-stage-body">
-                <div class="single-stage-chart align-items-center">
+
+                <div class="single-stage-chart">
                     <div class="chart-heading">
                         <div>Stage 02</div>
                     </div>
-                    <div class="chart-grid">
-                        <canvas id="Lstage02"></canvas>
-                        <label class="chart-percentage-ao " for="Lstage02" id="Lstage02-label"></label>
+                    <div class="chart-box">
+                        <canvas id="myChart" class="SX-bigChart"></canvas>
+                        <label class="chart-percentage SX-bigstate" for="myChart">100%</label>
                     </div>
-                    <div class="display-flex-row justify-content-center gap-0p5">
-                        <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
-                            <div class="dash-graph-color-circle dash-darkblue-circle "></div>
-                            <div>Completed</div>
+                    <div class="chart-legend">
+                        <div class="dash-graph-menu">
+                            <div class="dash-graph-color-circle dash-darkblue-circle test1"></div>
+                            <div>Done</div>
                         </div>
-                        <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
-                            <div class="dash-graph-color-circle dash-lightblue-circle "></div>
-                            <div>Pending</div>
+                        <div class="dash-graph-menu">
+                            <div class="dash-graph-color-circle dash-lightblue-circle test1"></div>
+                            <div>On-going</div>
                         </div>
                     </div>
                 </div>
@@ -66,8 +68,8 @@
                                             <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
                                             THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
 
-                                            <div><input type="checkbox" id="connectivity-cb" name="connectivity" value="Connected"></div>
-                                            <div><input type="checkbox" id="holding-cb" name="holding" value="Hold"></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "CM") ? "checked" : "") .'></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "Hold") ? "checked" : "") .'></div>
                                         </div>
                                     </form>
                                 </div>';
@@ -85,14 +87,21 @@
                         </div>
                     </div>
 
-                    <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
-                    <div class="page-button-set">
-                        <button onclick="showPage(1)">1</button>
-                        <button onclick="showPage(2)">2</button>
-                        <button onclick="showPage(3)">3</button>
-                        <button onclick="showPage(4)">4</button>
+                    <div class="progress-handlers">
+                        <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
+                        <div class="page-button-set">
+                            <button onclick="showPage(1)" class="paginate">1</button>
+                            <button onclick="showPage(2)" class="paginate">2</button>
+                            <button onclick="showPage(3)" class="paginate">3</button>
+                            <button onclick="showPage(4)" class="paginate">4</button>
+                        </div>
+                        <div class="sender">
+                            <form action"">
+                                <input type="hidden" value="<?php echo $data['chassisNo']; ?>">
+                                <button type="Submit" id="stage-passer">Proceed to Next Stage</button>
+                            </form>
+                        </div>
                     </div>
-                        
 
                 </div>
 
@@ -115,6 +124,8 @@
 
 </script>
 
+
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/staging.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

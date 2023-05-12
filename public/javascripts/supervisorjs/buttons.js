@@ -1,30 +1,3 @@
-const connectivityCheckbox = document.getElementById('connectivity-cb');
-const holdingCheckbox = document.getElementById('holding-cb');
-
-holdingCheckbox.addEventListener('change', (event) => {
-  if (event.target.checked) {
-    connectivityCheckbox.checked = false;
-    connectivityCheckbox.disabled = true;
-  } else {
-    connectivityCheckbox.disabled = false;
-  }
-});
-
-// const holdingCheckbox = document.querySelector('input[name="holding"]');
-// const connectivityCheckbox = document.querySelector('input[name="connectivity"]');
-
-// holdingCheckbox.addEventListener('change', function() {
-//   if (this.checked) {
-//     connectivityCheckbox.checked = false;
-//     connectivityCheckbox.disabled = true;
-//   } else {
-//     connectivityCheckbox.disabled = false;
-//   }
-// });
-
-
-
-
 // const itemsPerPage = 8;
 // const items = document.querySelectorAll('.stage-control-row');
 // const numItems = items.length;
@@ -93,9 +66,11 @@ holdingCheckbox.addEventListener('change', (event) => {
 
 
 
+var items = document.getElementsByClassName('pagination-item');
+
 
 showPage(1);
-
+let PageCount = 1;
 
 function showPage(pageNumber) {
   // Get all pagination items

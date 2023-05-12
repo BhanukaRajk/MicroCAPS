@@ -127,5 +127,5 @@
 
 
 <!-- ADD COMMON FOOTER FILE -->
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script>
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/preinspect.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

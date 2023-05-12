@@ -1,5 +1,4 @@
 
-// C.O.R.S
 
 function dashboardChart() {
 
@@ -122,6 +121,50 @@ function updateChart(ctx, ltx, data, cutout = 50) {
         cutout: cutout
     }
     });
+}
+
+function destroyChart(ctx) {
+
+    var chart = Chart.getChart(ctx);
+
+    chart.destroy();
+
+}
+
+//Alert Success
+function alertSuccess(message) {
+    let alert = document.getElementById("alert-success");
+    alert.classList.add("display-block");
+    alert.classList.add("show");
+    alert.innerHTML = "<i class='icon fa-check-circle margin-right-3'></i>"+message;
+
+    setTimeout(() => {
+        alert.classList.remove("display-block");
+        alert.classList.remove("show");
+    }, 5000);
+}
+
+//Alert Faliure
+function alertFaliure(message) {
+    let alert = document.getElementById("alert-faliure");
+    alert.classList.add("display-block");
+    alert.classList.add("show");
+    alert.innerHTML = "<i class='icon fa-times-circle margin-right-3'></i>"+message;
+
+    setTimeout(() => {
+        alert.classList.remove("display-block");
+        alert.classList.remove("show");
+    }, 5000);
+}
+
+//Local Storage
+function setLocalStorage(FlashState,FlashMessage) {
+    localStorage.setItem("FlashState",FlashState);
+    localStorage.setItem("FlashMessage",FlashMessage);
+}
+
+function getItem(key) {
+    return localStorage.getItem(key);
 }
 
 function destroyChart(ctx) {

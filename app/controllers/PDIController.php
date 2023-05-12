@@ -1,6 +1,6 @@
 <?php
 
-class ComponentController extends Controller {
+class PDIController extends Controller {
 
     private $supervisorModel;
     private $vehicleModel;

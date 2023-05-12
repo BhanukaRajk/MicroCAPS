@@ -14,23 +14,20 @@
 
                 <div class="parts-top-section">
                     <div class="parts-top-section-breaker">
+
                         <div class="vertical-centralizer">
                             <div class="parts-title" id="partPageId">Part details - <?php echo $data['chassis_no']; ?></div>
                         </div>
 
-                        <div class="vertical-centralizer">
-
-                        </div>
+                        <!-- <div class="vertical-centralizer"></div> -->
 
                         <div class="vehicle-selection-box horizontal-centralizer">
                             <div class="vertical-centralizer">
                                 <button class="full-list-btn blue-hover" onclick="location.href='http://localhost:8080/MicroCAPS/Supervisors/viewCarComponent'">Vehicle list</button>
-
                             </div>
                             <div>
                                 <label for="vehicles" class="display-none">Select Vehicle</label>
-                                <select name="vehicles" id="vehicle_list" class="vehicle-selection">
-                                    <!-- <option class="bh" disabled selected value>- Select vehicle -</option> -->
+                                <select name="vehicles" id="P23_vehicle_list" class="vehicle-selection">
                                     <?php echo'<option value="'.$data['chassis_no'].'">'.$data['chassis_no'].'</option>';
                                         foreach ($data['car_selection'] AS $car_id) {
                                             if($car_id->ChassisNo != $data['chassis_no']) {
@@ -41,6 +38,7 @@
                                 </select>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -54,9 +52,9 @@
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">Issued: 45</button>
                             </div>
-                            <!-- <div class="filter-btn-box">
+                            <div class="filter-btn-box">
                                 <button class="page-filter-btn">Pending: 10</button>
-                            </div> -->
+                            </div>
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">Damaged: 2</button>
                             </div>

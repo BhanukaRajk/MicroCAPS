@@ -251,5 +251,6 @@
 
 
 <!-- ADD COMMON FOOTER FILE -->
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script>
+<!-- <script src="<?php // echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script> -->
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/tools.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

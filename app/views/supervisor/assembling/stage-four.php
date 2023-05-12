@@ -78,10 +78,10 @@
                     </div>
 
                     <div class="page-button-set">
-                        <button onclick="showPage(1)">1</button>
-                        <button onclick="showPage(2)">2</button>
-                        <button onclick="showPage(3)">3</button>
-                        <button onclick="showPage(4)">4</button>
+                        <button onclick="showPage(1)" class="paginate">1</button>
+                        <button onclick="showPage(2)" class="paginate">2</button>
+                        <button onclick="showPage(3)" class="paginate">3</button>
+                        <button onclick="showPage(4)" class="paginate">4</button>
                     </div>
                         
 

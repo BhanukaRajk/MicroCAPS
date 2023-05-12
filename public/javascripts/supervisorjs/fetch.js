@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
 const checkboxes = document.querySelectorAll("input[type=checkbox][name=car-model]");
 const completenessRadios = document.querySelectorAll("input[type=radio][name=completeness]");
@@ -190,3 +191,5 @@ compVehicleSelector.addEventListener('change', function() {
         })
         .catch((error) => console.error(error));
 });
+=======
+>>>>>>> bhanuka

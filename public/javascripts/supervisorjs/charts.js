@@ -1,4 +1,4 @@
-
+// CHART RENDERING FUNCTION
 function renderChart(ctx, ltx, data, cutout = 50) {
     
     let done = data.complete/(data.complete + data.pending)*100;
@@ -42,6 +42,8 @@ function renderChart(ctx, ltx, data, cutout = 50) {
     });
 }
 
+
+// DESTROY CHART ON CANVAS WHEN PAGE NOT RELOADING TO CHANGE THE CHART DETAILS
 function destroyChart(ctx) {
 
     var chart = Chart.getChart(ctx);

@@ -283,3 +283,12 @@
 .vehicle-searchbox:focus {
     border: 2px solid #017EFA;
 }
+
+
+button.paginate {
+    color: #FFFFFF;
+    background: #2773ff;
+    border: none;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.2rem;
+}

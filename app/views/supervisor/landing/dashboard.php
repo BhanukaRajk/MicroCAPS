@@ -110,25 +110,28 @@
 
                     <div class="dash-card-logs">
                         <div class="dash-card-right-datalines dash-card-headings test1">Activity Log</div>
-                        <div class="horizontal-centralizer"><table><?php
+                        <div class="horizontal-centralizer">
+                            <table>
+                                <tr>
+                                    <td class="log-data"><b>You</b></td>
+                                    <td class="log-data"><span class="online-user">Online</span></td>
+                                </tr>
+                                <?php
+                                    foreach ($data['activities'] as $activityLog) {
+                                        if($activityLog->EmployeeId != $_SESSION['_id']) {
+                                            echo '<tr><td class="log-data">'. $activityLog->empName .'</td>';
 
-                            echo '<tr><td class="log-data"><b>You</b></td>';
-                            echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
+                                            if($activityLog->logged_in == 1) {
+                                                echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
+                                            } else {
+                                                echo '<td class="log-data">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
+                                            }
 
-                            foreach ($data['activities'] as $activityLog) {
-
-                                if ($activityLog->EmployeeId != $_SESSION['_id']) {
-                                    echo '<tr><td class="log-data">' . $activityLog->empName  . '</td>';
-                                    if($activityLog->LoggedIn == 1) {
-                                        echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
-                                    } else {
-                                        echo '<td class="log-data">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';
+                                        }
                                     }
-                                }
-                                
-                            }
-                                ?></table></div>
-
+                                ?>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="dash-card-quickaccess test1">
@@ -212,8 +215,10 @@
     </div>
 </section>
 
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
 
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/calender.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
 
 <script>

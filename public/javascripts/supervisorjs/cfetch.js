@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const ctypeRadios = document.querySelectorAll("input[type=radio][name=cons-type]");
 const cstateRadios = document.querySelectorAll("input[type=radio][name=stock-state]");
 
@@ -205,3 +206,5 @@ function toolFilter() {
         .catch((error) => console.error(error));
 }
 
+=======
+>>>>>>> bhanuka

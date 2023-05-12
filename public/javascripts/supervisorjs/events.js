@@ -1,7 +1,7 @@
 const consumeTypeSelect = document.getElementById('consume-type');
 const conStatusInput = document.querySelector('.new-con-status');
 
-consumeTypeSelect.addEventListener('change', (event) => {
+consumeTypeSelect?.addEventListener('change', (event) => {
   const selectedType = event.target.value;
   switch (selectedType) {
     case 'Lubricant':
