@@ -161,6 +161,40 @@ class Supervisors extends controller
 
 
 
+    public function carStageChager() {
+
+        if (!isLoggedIn()) {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'car' => trim($_POST['name']),
+                'stage' => trim($_POST['type'])
+            ];
+
+            if ($this->supervisorModel->sendToNext($data['car'], $data['stage'])) {
+
+            } else {
+                    $_SESSION['error_message'] = 'Error! Vehicle could not passed to next stage';
+            }
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -373,41 +407,6 @@ class Supervisors extends controller
         
     }
 
-
-    // public function getEditingData()
-    // {
-
-    //     if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-    //         redirect('Users/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-    //         $data = [
-    //             'leaveId' => trim($_POST['leave_id'])
-    //         ];
-
-    //         $data['EditorDetails'] = $this->supervisorModel->getLeaveByID($data['leaveId']);
-
-    //         if ($data['EditorDetails']) {
-
-    //             $data['url'] = getUrl();
-    //             $this->view('supervisor/leaves/editleave', $data);
-    //         } else {
-
-    //             $_SESSION['error_message'] = 'Oops! requested leave details could not be found';
-    //             $data['url'] = getUrl();
-    //             $this->view('supervisor/leaves/leaves', $data);
-    //         }
-    //     } else {
-
-    //         $_SESSION['error_message'] = 'Request failed!';
-    //         $data['url'] = getUrl();
-    //         $this->view('supervisor/leaves/leaves', $data);
-    //     }
-    // }
 
 
     public function removeleave()
@@ -1022,7 +1021,7 @@ class Supervisors extends controller
 
 
 
-    
+
 
     // GET CAR INFO TO POST ASSEMBLY QUALITY INSPECTION FORM
     public function getCarInfo()
