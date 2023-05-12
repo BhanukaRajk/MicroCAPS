@@ -91,7 +91,7 @@ class Supervisor
     {
 
         $this->db->query(
-            'SELECT `employee`.`EmployeeId`, CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime`, `logged_in` 
+            'SELECT `employee`.`EmployeeId`, CONCAT(`Firstname`," ",`Lastname`) AS `empName`, DATE(`lastLog`) AS `logDate`, TIME(`lastLog`) AS `logTime`, `LoggedIn` 
             FROM `employee-logs`,`employee` 
             WHERE `employee-logs`.`EmployeeId` = `employee`.`EmployeeId` 
             ORDER BY `employee-logs`.`lastLog` DESC LIMIT 6;'
@@ -455,7 +455,7 @@ class Supervisor
 
 
 
-
+    // ASSEMBLY LINE VEHICLES
     public function viewAssemblyLineVehicles()
     {
 
@@ -619,29 +619,6 @@ class Supervisor
 
         if ($parts) {
             return $parts;
-        } else {
-            return false;
-        }
-    }
-    
-    public function viewVehicleList($stage)
-    {
-
-        $this->db->query(
-            'SELECT `vehicle`.`ChassisNo`, 
-                        `vehicle`.`EngineNo`, 
-                        `vehicle`.`Color`, 
-                        `vehicle-model`.`ModelName` 
-                    FROM `vehicle`, `vehicle-model` 
-                    WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` AND `vehicle`.`CurrentStatus` = :STAGE;'
-        );
-
-        $this->db->bind(':STAGE', $stage);
-
-        $vehicles = $this->db->resultSet();
-
-        if ($vehicles) {
-            return $vehicles;
         } else {
             return false;
         }
@@ -1616,8 +1593,8 @@ class Supervisor
         }
     }
 
-
-    public function viewVehicleList2($stage)
+    // THIS IS THE FUNCTION CAN GET STAGES AS AN ARRAY AND GIVE DETAILS
+    public function viewVehicleList($stage)
     {
 
         $quotedStages = implode(',', array_map(function($stage) {
@@ -1641,6 +1618,82 @@ class Supervisor
             return false;
         }
     }
+
+
+
+
+        // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN CARD VIEWS
+        public function viewCarsOnFactory($vehicleType = null, $stages = null, $timeline = null)
+        {
+            $sql = 'SELECT `vehicle`.`ChassisNo`, 
+                            `vehicle`.`EngineNo`, 
+                            `vehicle`.`CurrentStatus`, 
+                            `vehicle`.`Color`, 
+                            `vehicle-model`.`ModelName` 
+                            FROM `vehicle`, `vehicle-model` 
+                            WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo`';
+    
+    
+            if ($vehicleType != null) {
+    
+                if (empty($vehicleType)) {
+                    // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
+                    return false;
+                }
+    
+                $vehicleModels = implode(',', array_map(function($vehicle) {
+                    return "'" . addslashes($vehicle) . "'";
+                }, $vehicleType));
+        
+                $sql .= " AND `vehicle`.`ModelNo` IN ($vehicleModels)";
+            }
+
+
+
+            if ($timeline == null) {
+
+                $sql .= " AND `vehicle`.`CurrentStatus` IN ('S1', 'S2', 'S3', 'S4')";
+
+            } else {
+
+                if ($timeline == 'Current') {
+
+                    if (isset($stages)) {
+    
+                        if (empty($stages)) {
+                            // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
+                            return false;
+                        }
+            
+                        $reqstages = implode(',', array_map(function($stage) {
+                            return "'" . addslashes($stage) . "'";
+                        }, $stages));
+                
+                        $sql .= " AND `vehicle`.`CurrentStatus` IN ($reqstages)";
+                    }
+
+                } else if ($timeline == 'All') {
+                    $sql .= "";
+                }
+
+            }
+    
+
+    
+            $sql .= ';';
+    
+            // DO NOT SWAP THE ORDER OF QUERY AND BIND
+            $this->db->query($sql);
+    
+            $vehicles = $this->db->resultSet();
+    
+    
+            if ($vehicles) {
+                return $vehicles;
+            } else {
+                return false;
+            }
+        }
 
 
 

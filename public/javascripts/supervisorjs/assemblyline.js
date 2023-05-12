@@ -1,46 +1,47 @@
-// // Get all filter checkboxes and radio buttons
-const checkboxes = document.querySelectorAll("input[type=checkbox][name=car-model]");
-const completenessRadios = document.querySelectorAll("input[type=radio][name=completeness]");
-const acceptanceRadios = document.querySelectorAll("input[type=radio][name=acceptance]");
+// GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
+const modelfilters = document.querySelectorAll("input[type=checkbox][name=car-model]");
+const stagefilters = document.querySelectorAll("input[type=checkbox][name=car-stage]");
+const timelinefilters = document.querySelectorAll("input[type=radio][name=timeline]");
 
 
 // Attach event listeners to all filter inputs
-for (let checkbox of checkboxes) {
-    checkbox.addEventListener('change', updateFilter);
+for (let model of modelfilters) {
+    model.addEventListener('change', filter_cars);
 }
-for (let radio of completenessRadios) {
-    radio.addEventListener('change', updateFilter);
+for (let stage of stagefilters) {
+    stage.addEventListener('change', filter_cars);
 }
-for (let radio of acceptanceRadios) {
-    radio.addEventListener('change', updateFilter);
+for (let timeline of timelinefilters) {
+    timeline.addEventListener('change', filter_cars);
 }
 
 
 
 
-function updateFilter() {
+function filter_cars() {
 
-    const checkboxesset = Array.from(
+    const modelset = Array.from(
         document.querySelectorAll("input[type=checkbox][name=car-model]")
         ).map((checkbox) => (checkbox.checked ? checkbox.value : ""));
 
-    const completeness = document.querySelector(
-        "input[type=radio][name=completeness]:checked"
+    const stageset = Array.from(
+        document.querySelectorAll("input[type=checkbox][name=car-stage]")
+        ).map((checkbox) => (checkbox.checked ? checkbox.value : ""));
+
+    const timescale = document.querySelector(
+        "input[type=radio][name=timeline]:checked"
     ).value;
-    const acceptance = document.querySelector(
-        "input[type=radio][name=acceptance]:checked"
-    ).value;
 
 
 
-    console.log(JSON.stringify(checkboxesset));
-    console.log(completeness);
-    console.log(acceptance);
+    console.log(JSON.stringify(modelset));
+    console.log(JSON.stringify(stageset));
+    console.log(timescale);
 
     const formData = new FormData();
-    formData.append("vehicleTypes", JSON.stringify(checkboxesset));
-    formData.append("completeness", completeness);
-    formData.append("acceptance", acceptance);
+    formData.append("model_set", JSON.stringify(modelset));
+    formData.append("stage_set", JSON.stringify(stageset));
+    formData.append("time_scale", timescale);
 
 
     if (!formData) {
@@ -49,7 +50,7 @@ function updateFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findCars", {
+    fetch("http://localhost:8080/MicroCAPS/Supervisors/findAssemblyLineCars", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -69,19 +70,30 @@ function updateFilter() {
                 let carSet = '';
 
                 data.forEach((car) => {
-                    carSet += `<form method="POST" action="http://localhost:8080/MicroCAPS/Supervisors/getCarInfo"><div onclick="this.closest(\'form\').submit()" class="carcard">
-                                <div class="cardhead">
-                                    <div class="cardid">
-                                        <div class="carmodel">${car.ModelName}</div>
-                                        <div class="chassisno">${car.ChassisNo}</div>
-                                        <input type="hidden" name="form-car-id" value="${car.ChassisNo}">
+                    carSet += `<form method="POST" action="http://localhost:8080/MicroCAPS/Supervisors/getProcess">
+                                <div class="carcard" onClick="this.closest(\'form\').submit()">
+                                    <div class="cardhead">
+                                        <div class="cardid">
+                                            <div class="carmodel">${car.ModelName}</div>
+                                            <div class="chassisno">${car.ChassisNo}</div>
+                                            <input type="hidden" name="form-car-id" value="${car.ChassisNo}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="carpicbox">
-                                    <img src="http://localhost:8080/MicroCAPS/public/images/cars/${car.ModelName} ${car.Color}.png" class="carpic" alt="Car image" />
-                                </div>
-                                <div></div>
-                            </div></form>`;
+                                    <div class="carpicbox">
+                                        <img src="http://localhost:8080/MicroCAPS/public/images/cars/${car.ModelName + " " + car.Color}.png" class="carpic" alt="Car image">
+                                    </div>
+                                    <div class="carstatus">`;
+
+                    if(car.CurrentStatus == "S1") { carSet += `At Stage 01`; }
+                    else if(car.CurrentStatus == "S2") { carSet += `At Stage 02`; }
+                    else if(car.CurrentStatus == "S3") { carSet += `At Stage 03`; }
+                    else if(car.CurrentStatus == "S4") { carSet += `At Stage 04`; }
+                    else { carSet += `Out of assembly`; }
+
+                    carSet += `<input type="hidden" name="form-car-stage" value="${car.CurrentStatus}">
+                            </div>
+                        </div>
+                    </form>`;
                 });
 
                 carSet += '';

@@ -111,7 +111,7 @@
                                         if($activityLog->EmployeeId != $_SESSION['_id']) {
                                             echo '<tr><td class="log-data">'. $activityLog->empName .'</td>';
 
-                                            if($activityLog->logged_in == 1) {
+                                            if($activityLog->LoggedIn == 1) {
                                                 echo '<td class="log-data"><span class="online-user">Online</span></td></tr>';
                                             } else {
                                                 echo '<td class="log-data">'. $activityLog->logDate .' at '. substr($activityLog->logTime, 0, 5) .'</td></tr>';

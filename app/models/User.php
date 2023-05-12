@@ -85,7 +85,7 @@ private $db;
         $this->db->query(
             'UPDATE `employee-logs`
                 SET lastLog = CURRENT_TIMESTAMP,
-                logged_in = :logged
+                LoggedIn = :logged
                 WHERE EmployeeId = :user_id'
         );
 

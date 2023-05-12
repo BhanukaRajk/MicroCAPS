@@ -52,54 +52,58 @@
                             <div class="line"></div>
                             <div class="filters">
 
-                                <form method="POST" action="">
-                                    <ul id="consume_filter">
+                                <ul id="consume_filter">
 
-                                        <li>
-                                            <div class="filtertype">Vehicle Type</div>
-                                            <div class="filters">
-                                                <input type="checkbox" id="micro-panda" name="car-model" checked>
-                                                <label for="micro-panda">Micro Panda</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="checkbox" id="panda-cross" name="car-model">
-                                                <label for="panda-cross">Panda Cross</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="checkbox" id="mg" name="car-model">
-                                                <label for="mg">MG ZH SUV</label>
-                                            </div>
-                                        </li>
+                                    <li>
+                                        <div class="filtertype">Vehicle Type</div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="micro-panda" name="car-model" value="M0001" checked>
+                                            <label for="micro-panda">Micro Panda</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="panda-cross" name="car-model" value="M0002" checked>
+                                            <label for="panda-cross">Panda Cross</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="mg" name="car-model" value="M0003" checked>
+                                            <label for="mg">MG ZH SUV</label>
+                                        </div>
+                                    </li>
 
-                                        <li>
-                                            <div class="filtertype">Timeline</div>
-                                            <div class="filters">
-                                                <input type="radio" id="current" name="timeline" value="Current" checked>
-                                                <label for="current">Current</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="radio" id="all-time" name="timeline" value="All">
-                                                <label for="all-time">All</label>
-                                            </div>
+                                    <li>
+                                        <div class="filtertype">Stage</div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="stage-1" name="car-stage" value="S1" checked>
+                                            <label for="stage-1">At Stage 01</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="stage-2" name="car-stage" value="S2" checked>
+                                            <label for="stage-2">At Stage 02</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="stage-3" name="car-stage" value="S3" checked>
+                                            <label for="stage-3">At Stage 03</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="checkbox" id="stage-4" name="car-stage" value="S4" checked>
+                                            <label for="stage-4">At Stage 04</label>
+                                        </div>
+                                    </li>
 
-                                        </li>
-                                        <li>
-                                            <div class="filtertype">Status</div>
-                                            <div class="filters">
-                                                <input type="radio" id="acceptance" name="acceptance" value="Accepted">
-                                                <label for="acceptance">Accepted</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="radio" id="non-acceptance" name="acceptance" value="Not accepted">
-                                                <label for="non-acceptance">Not accepted</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="radio" id="all-tested" name="acceptance" value="All" checked>
-                                                <label for="all-tested">All</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </form>
+                                    <li>
+                                        <div class="filtertype">Timeline</div>
+                                        <div class="filters">
+                                            <input type="radio" id="current" name="timeline" value="Current" checked>
+                                            <label for="current">Current</label>
+                                        </div>
+                                        <div class="filters">
+                                            <input type="radio" id="all-time" name="timeline" value="All">
+                                            <label for="all-time">All</label>
+                                        </div>
+
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
                     </div>
