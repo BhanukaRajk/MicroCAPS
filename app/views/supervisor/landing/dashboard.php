@@ -57,20 +57,30 @@
                             </div>
                             <div class="display-flex-column gap-1 overflow">
                                 <?php
-                                foreach ($data['damagedParts'] as $part) {
-                                    echo '<div class="medfont display-flex-row justify-content-between border-bottom width-rem-20">
-                                            <div class="display-flex-column padding-bottom-3">
-                                                <div class="part-name">'. $part->PartName .'</div>
-                                                <div class="display-flex-row gap-1">
-                                                    <div class="">Serial No: '. $part->SerialNo .'</div>
-                                                    <div class="">Color: '. $part->Color .'</div>
+                                if (!$data['damagedParts']) {
+
+                                    echo '<div class="horizontal-centralizer">
+                                                        <div class="marginy-4">No Damaged Parts Available</div>
+                                                        <div class=""></div>
+                                                    </div>
+                                                    <div class="bottom-border"></div>';
+        
+                                } else {
+                                    foreach ($data['damagedParts'] as $part) {
+                                        echo '<div class="medfont display-flex-row justify-content-between border-bottom width-rem-20">
+                                                <div class="display-flex-column padding-bottom-3">
+                                                    <div class="part-name">'.$part->PartName.'</div>
+                                                    <div class="display-flex-row gap-1">
+                                                        <div class="">Serial No: '. $part->SerialNo .'</div>
+                                                        <div class="">Color: '. $part->Color .'</div>
+                                                    </div>
+                                                </div>
+                                                <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
+                                                    <div class="'. (($part->RequestStatus == "Requested") ? 'result-text-req' : 'result-text-not-req' ) .'">'. $part->RequestStatus .'</div>
                                                 </div>
                                             </div>
-                                            <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
-                                                <div class="'. (($part->RequestStatus == "Requested") ? 'result-text-req' : 'result-text-not-req' ) .'">'. $part->RequestStatus .'</div>
-                                            </div>
-                                        </div>
-                                        ';
+                                            ';
+                                    }
                                 }
                                 ?>
                             </div>
