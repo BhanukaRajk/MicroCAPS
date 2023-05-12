@@ -50,18 +50,19 @@ class Supervisors extends controller
 
                 if (move_uploaded_file($from, $to)) {
                     if ($this->supervisorModel->updateProfile($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic'], $profile))
-                        echo 'Successful';
+                        $_SESSION['success_message'] = 'Success! Saved Changes';
                     else
-                        echo 'Error';
+                        $_SESSION['error_message'] = 'Error! Could not save changes';
                 } else {
-                    echo 'Error';
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
                 }
             } else {
                 if ($this->supervisorModel->updateProfileValues($data['id'], $data['firstname'], $data['lastname'], $data['email'], $data['mobile'], $data['nic']))
-                    echo 'Successful';
+                    $_SESSION['success_message'] = 'Success! Saved Changes';
                 else
-                    echo 'Error';
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
             }
+
         } else {
             $data['userDetails'] = $this->supervisorModel->userDetails($_SESSION['_id']);
             $this->view('supervisor/profile/editprofile', $data);
@@ -768,7 +769,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['CarComp'] = $this->supervisorModel->viewVehicleList("S2");
+            $data['CarComp'] = $this->supervisorModel->viewVehicleList(['S1','S2','S3','S4']);
             $this->view('supervisor/parts/com_vehicle_list', $data);
         }
     }
@@ -1051,7 +1052,7 @@ class Supervisors extends controller
                 'CarID' => trim($_POST['form-car-id'])
             ];
 
-            if ($this->supervisorModel->checkCarById($data['CarID'], "S4")) {
+            if ($this->supervisorModel->checkCarById($data['CarID'], "AC")) {
 
                 if ($this->supervisorModel->createPAQForm($data['CarID'])) {
                     $data['FormCarData'] = $this->supervisorModel->createPAQForm($data['CarID']);
@@ -1169,7 +1170,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList('S4');
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['AC','PA']);
             $this->view('supervisor/inspection/vehiclelist', $data);
             // print_r($data);
         }
@@ -1459,8 +1460,50 @@ class Supervisors extends controller
 
 
     // CONSUMABLE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function insertConsumablee()
+    public function addNewConsumables() {
+
+        if (!isLoggedIn()) {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'type' => trim($_POST['type']),
+                'status' => trim($_POST['status'])
+            ];
+
+            if (isset($_FILES['image'])) {
+
+                $profile = strval($data['name']) . '.jpg';
+                $to = '../public/images/consumables/' . $profile;
+
+                $from = $_FILES['image']['tmp_name'];
+
+                if (move_uploaded_file($from, $to)) {
+                    if ($this->consumableModel->addConsumable($data['name'], $data['type'], $data['status'], $profile))
+                        $_SESSION['success_message'] = 'Success! Saved Changes';
+                    else
+                        $_SESSION['error_message'] = 'Error! Could not save changes';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
+                }
+            } else {
+                $_SESSION['error_message'] = 'Error! Upload an image';
+            }
+
+        }
+
+    }
+
+    public function viewConsumables()
     {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
 
 
     }
@@ -1763,7 +1806,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList("S4");
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['RR']);
             $this->view('supervisor/pdi/vehiclelist', $data);
         }
     }
@@ -1799,12 +1842,28 @@ class Supervisors extends controller
                 
                 // USED TO DIRECT THE VEHICLES CURRENT ASSEMBLING STAGE
                 if($data['stage'] == 'S1') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S1'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S1'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-one', $data);
                 } elseif($data['stage'] == 'S2') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S2'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S2'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-two', $data);
                 } elseif($data['stage'] == 'S3') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S3'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S3'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-three', $data);
                 } elseif($data['stage'] == 'S4') {
+                    $data['stageSum'] = [
+                        'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', 'S4'), "Weight")),
+                        'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', 'S4'), "Weight"))
+                    ];
                     $this->view('supervisor/assembling/stage-four', $data);
                 }
                     

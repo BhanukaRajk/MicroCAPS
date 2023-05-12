@@ -1084,12 +1084,9 @@ class Supervisor
     {
         $this->db->query(
             'DELETE FROM `employee-leaves` WHERE LeaveId = :leave_id;'
-            // 'DELETE FROM leaves WHERE EmployeeId = :Empid AND LeaveDate = :LDate;'
         );
 
         $this->db->bind(':leave_id', $LeaveID);
-        // $this->db->bind(':Empid', $ID);
-        // $this->db->bind(':LDate', $leavedate);
 
         if ($this->db->execute()) {
             return true;
@@ -1348,6 +1345,14 @@ class Supervisor
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     public function updateToolStatus($toolId, $newStatus, $user): bool
     {
@@ -1368,24 +1373,7 @@ class Supervisor
     }
 
 
-    // // CHECK THIS CONSUMABLE USING IN FACTORY
-    // public function checkToolById($tool_id): bool
-    // {
-    //     $this->db->query(
-    //         'SELECT `ToolId` FROM `tool` WHERE `ToolId` = :tool;'
-    //     );
 
-    //     $this->db->bind(':tool', $tool_id);
-
-    //     $row = $this->db->resultSet();
-
-    //     if (!isset($row)) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    
-    // }
 
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
     public function checkToolById($tool_id): bool
@@ -1582,6 +1570,78 @@ class Supervisor
         }
     
     }
+
+
+
+
+    public function updateProfileValues($id, $firstname, $lastname, $email, $mobile, $nic) {
+        $this->db->query(
+            'UPDATE employee
+            SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic
+            WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':firstname', $firstname);
+        $this->db->bind(':lastname', $lastname);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':mobile', $mobile);
+        $this->db->bind(':nic', $nic);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function ViewAllConsumables()
+    {
+
+        $this->db->query(
+            'SELECT `ConsumableId`, `ConsumableName`, 
+                        `Volume`, `Weight`, 
+                        DATE(`LastUpdate`) AS `UDate`,
+                        TIME(`LastUpdate`) AS `UTime`, 
+                        `LastUpdateBy`, `Image` FROM `consumable`;'
+
+        );
+
+        $consumables = $this->db->resultSet();
+
+        if ($consumables) {
+            return $consumables;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function viewVehicleList2($stage)
+    {
+
+        $quotedStages = implode(',', array_map(function($stage) {
+            return "'" . addslashes($stage) . "'";
+        }, $stage));
+
+        $sql = "SELECT `vehicle`.`ChassisNo`, 
+                        `vehicle`.`EngineNo`, 
+                        `vehicle`.`Color`, 
+                        `vehicle-model`.`ModelName` 
+                    FROM `vehicle`, `vehicle-model` 
+                    WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` AND `vehicle`.`CurrentStatus` IN ($quotedStages)";
+
+            $this->db->query($sql);
+
+        $vehicles = $this->db->resultSet();
+
+        if ($vehicles) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
+
 
 
 }
