@@ -16,7 +16,7 @@
             <div class="single-stage-head">
                 <!-- GET DATA FROM CONTROLLER AND FILLING THE HEADING-->
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
-                <div class="display-none"><?php echo $data['chassisNo']; ?></div>
+                <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div>
                 <div class="stage-switch">
                     <!-- BUTTON TO JUMP TO THE OVERALL PROGRESS -->
                     <button class="back-button">Overall</button>
@@ -68,8 +68,8 @@
                                             <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
                                             THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
 
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" value="Connected"></div>
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" value="Hold"></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "CM") ? "checked" : "") .'></div>
+                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "Hold") ? "checked" : "") .'></div>
                                         </div>
                                     </form>
                                 </div>';
@@ -87,14 +87,21 @@
                         </div>
                     </div>
 
-                    <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
-                    <div class="page-button-set">
-                        <button onclick="showPage(1)" class="paginate">1</button>
-                        <button onclick="showPage(2)" class="paginate">2</button>
-                        <button onclick="showPage(3)" class="paginate">3</button>
-                        <button onclick="showPage(4)" class="paginate">4</button>
+                    <div class="progress-handlers">
+                        <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
+                        <div class="page-button-set">
+                            <button onclick="showPage(1)" class="paginate">1</button>
+                            <button onclick="showPage(2)" class="paginate">2</button>
+                            <button onclick="showPage(3)" class="paginate">3</button>
+                            <button onclick="showPage(4)" class="paginate">4</button>
+                        </div>
+                        <div class="sender">
+                            <form action"">
+                                <input type="hidden" value="<?php echo $data['chassisNo']; ?>">
+                                <button type="Submit" id="stage-passer">Proceed to Next Stage</button>
+                            </form>
+                        </div>
                     </div>
-                        
 
                 </div>
 

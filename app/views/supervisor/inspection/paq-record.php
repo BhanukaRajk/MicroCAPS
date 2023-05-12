@@ -37,7 +37,12 @@
                             <label for="brake_bleeding">BRAKE BLEEDING</label>
                         </div>
                         <div>
-                            <input type="text" id="brake_bleeding" name="brake_bleed" class="paq-input-field-short" placeholder="Normal" autocomplete="off" required>
+                            <!-- <input type="text" id="brake_bleeding" name="brake_bleed" class="paq-input-field-short" placeholder="Normal" autocomplete="off" required> -->
+                            <select name="brake-bleed-selection" id="brake-bleed-selection" class="paq-input-field-short">
+                                <option class="" disabled selected value>- Select status -</option>
+                                <option value="Normal">Normal</option>
+                                <option value="NA">Need an attention</option>
+                            </select>
                         </div>
                     </div>
 
@@ -48,7 +53,12 @@
                             <label for="gear_oil">GEAR OIL LEVEL CHECKING</label>
                         </div>
                         <div>
-                            <input type="text" id="gear_oil" name="gear_oil" class="paq-input-field-short" placeholder="Normal" autocomplete="off" required>
+                            <!-- <input type="text" id="gear_oil" name="gear_oil" class="paq-input-field-short" placeholder="Normal" autocomplete="off" required> -->
+                            <select name="gear-oil-selection" id="gear-oil-selection" class="paq-input-field-short">
+                                <option class="" disabled selected value>- Select status -</option>
+                                <option value="Normal">Normal</option>
+                                <option value="NA">Need an attention</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -59,7 +69,12 @@
                             <label for="rack_end">RACK END (ADJUSTMENT CHECKING)</label>
                         </div>
                         <div>
-                            <input type="text" id="rack_end" name="rack_end" class="paq-input-field-short" placeholder="Need a special attention" autocomplete="off" required>
+                            <!-- <input type="text" id="rack_end" name="rack_end" class="paq-input-field-short" placeholder="Need a special attention" autocomplete="off" required> -->
+                            <select name="rack-end-selection" id="rack-end-selection" class="paq-input-field-short">
+                                <option class="" disabled selected value>- Select status -</option>
+                                <option value="Normal">Normal</option>
+                                <option value="NA">Need an attention</option>
+                            </select>
                         </div>
                     </div>
 
@@ -70,7 +85,12 @@
                             <label for="clutch">CLUTCH ADJUSTING</label>
                         </div>
                         <div>
-                            <input type="text" id="clutch" name="clutch" class="paq-input-field-short" placeholder="Normal" required>
+                            <!-- <input type="text" id="clutch" name="clutch" class="paq-input-field-short" placeholder="Normal" required> -->
+                            <select name="clutch-selection" id="clutch-selection" class="paq-input-field-short">
+                                <option class="" disabled selected value>- Select status -</option>
+                                <option value="Normal">Normal</option>
+                                <option value="NA">Need an attention</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -80,7 +100,12 @@
                         <label for="axel">REAR AXEL PLATE CHECKING</label>
                     </div>
                     <div>
-                        <input type="text" id="axel" name="axel" class="paq-input-field-long" placeholder="Normal" required>
+                        <!-- <input type="text" id="axel" name="axel" class="paq-input-field-long" placeholder="Normal" required> -->
+                        <select name="axel-selection" id="axel-selection" class="paq-input-field-long">
+                                <option class="" disabled selected value>- Select status -</option>
+                                <option value="Normal">Normal</option>
+                                <option value="NA">Need an attention</option>
+                        </select>
                     </div>
                 </div>
 

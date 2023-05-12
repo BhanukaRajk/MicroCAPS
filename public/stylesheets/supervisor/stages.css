@@ -162,11 +162,15 @@
 
 .stage-control-row input[type="checkbox"] {
     appearance: none;
-    border: 1px solid #ccc;
+    border: 1px solid #AAA;
     cursor: pointer;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
+}
+
+.stage-control-row input[type="checkbox"]:disabled {
+    opacity: 36%;
 }
 
 .stage-control-row input[type="checkbox"]:checked {
@@ -186,6 +190,14 @@
     display: flex;
     flex-direction: row;
     column-gap: 4rem;
+}
+
+.progress-handlers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
 }
 
 .page-button-set {

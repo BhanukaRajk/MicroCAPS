@@ -890,6 +890,38 @@ class Supervisor
     }
 
 
+    // UPDATE ONE BY ONE PROCESS IN A VEHICLE
+    public function updateProgress($vehicleID, $proID, $completeness, $holding) {
+
+        $this->db->query(
+            'UPDATE `stage-vehicle-process` SET `Status` = :pstatus
+                    WHERE `ChassisNo` = :chassisNo 
+                    AND `ProcessId` = :processid;'
+        );
+
+        $this->db->bind(':chassisNo', $vehicleID);
+        $this->db->bind(':processid', $proID);
+
+        if($completeness == 1 AND $holding == 0) {
+            $this->db->bind(':pstatus', "CM");
+        } else if($completeness == 0 AND $holding == 1) {
+            $this->db->bind(':pstatus', "Hold");
+        } else if($completeness == 0 AND $holding == 0) {
+            $this->db->bind(':pstatus', "NC");
+        } else {
+            $this->db->bind(':pstatus', "NC");
+        }
+
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
 
 

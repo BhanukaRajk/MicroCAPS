@@ -1498,8 +1498,6 @@ class Supervisors extends controller
                 'Stock' => trim($_POST['stock'])
             ];
 
-
-            // if ($this->supervisorModel->checkEmployee($data['employeeId'])) {
             if ($this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
 
                 if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'])) {
@@ -1507,16 +1505,10 @@ class Supervisors extends controller
                 } else {
                     $_SESSION['error_message'] = 'Error! Could not update information..';
                 }
-
-                // redirect('Supervisors/viewConsumables');
-
                     
             } else {
 
                 $_SESSION['error_message'] = 'Oops! The consumable you are trying to update could not be found.';
-                //// $data['url'] = getUrl();
-                //redirect('Supervisors/viewConsumables');
-                //// $this->view('supervisor/consumables/consumablelist', $data);
 
             }
 
@@ -1665,6 +1657,45 @@ class Supervisors extends controller
     public function removeThisTool()
     {
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2050,6 +2081,34 @@ class Supervisors extends controller
         //     $data['url'] = getUrl();
         //     $data['LineCarsSet'] = $this->supervisorModel->viewCars();
         //     $this->view('supervisor/assembling/vehiclelist', $data);
+        // }
+    }
+
+
+    public function recordUpdateProcess()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $vehicleID = $_POST['vehicleID'];
+            $proID = $_POST['proID'];
+            $completeness = $_POST['completeness'];
+            $holding = $_POST['holding'];
+
+            $data['url'] = getUrl();
+            $data['proUpdate'] = $this->supervisorModel->updateProgress($vehicleID, $proID, $completeness, $holding);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['proUpdate']);
+
+        } 
+        // else {
+        //     // $data['url'] = getUrl();
+        //     // $data['LineCarsSet'] = $this->supervisorModel->viewCars();
+        //     // $this->view('supervisor/assembling/vehiclelist', $data);
         // }
     }
 
