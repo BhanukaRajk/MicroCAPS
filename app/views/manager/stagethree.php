@@ -124,13 +124,13 @@
 
     <script>
 
-        let s2 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
+        let s3 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
 
         var ctx = document.getElementById('Lstage03').getContext('2d');
 
         let ltx = document.getElementById('Lstage03-label');
 
-        renderChart(ctx, ltx, s2, 110);
+        renderChart(ctx, ltx, s3, 110);
 
     </script>
     

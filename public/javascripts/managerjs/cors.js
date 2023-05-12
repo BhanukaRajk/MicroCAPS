@@ -17,6 +17,7 @@ $(document).ready(() => {
 
 })
 
+
 // C.O.R.S
 // Dashboard Page
 function dashboardChart() {

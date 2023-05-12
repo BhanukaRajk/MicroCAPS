@@ -19,6 +19,10 @@ class Managers extends Controller {
             redirect('users/login');
         }
 
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $data = [
@@ -39,10 +43,8 @@ class Managers extends Controller {
                 $data['overall'] = null;
             }
 
-
-//
             $data['onHoldComponents'] = $this->vehicleModel->componentQty('Damaged');
-            
+
             $this->view('manager/dashboard', $data);
         }
     }
@@ -52,6 +54,10 @@ class Managers extends Controller {
 
         if(!isLoggedIn()){
             redirect('users/login');
+        }
+
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -67,6 +73,10 @@ class Managers extends Controller {
 
         if(!isLoggedIn()){
             redirect('users/login');
+        }
+
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -103,6 +113,10 @@ class Managers extends Controller {
 
         if(!isLoggedIn()){
             redirect('users/login');
+        }
+
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
         }
 
         if ($chassisNo == null) {
@@ -180,6 +194,10 @@ class Managers extends Controller {
             redirect('users/login');
         }
 
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
+        }
+
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
@@ -206,6 +224,10 @@ class Managers extends Controller {
             redirect('users/login');
         }
 
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
+        }
+
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['toBeDispatched'] = $this->vehicleModel->getVehiclesByStatus('RR', 'C');
@@ -214,7 +236,11 @@ class Managers extends Controller {
             }
         } else {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $this->view('manager/dispatchdetails');
+                $data['vehicle'] = $this->vehicleModel->shellDetail($chassisNo);
+                $data['repairDetails'] = $this->vehicleModel->repairDetail($chassisNo);
+                $data['paintDetails'] = $this->vehicleModel->paintDetail($chassisNo);
+                $data['defects'] = $this->pdiModel->viewDefectSheets($chassisNo);
+                $this->view('manager/dispatchdetails',$data);
             }
         }
     }
@@ -224,6 +250,10 @@ class Managers extends Controller {
 
         if(!isLoggedIn()){
             redirect('users/login');
+        }
+
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

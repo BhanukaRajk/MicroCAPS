@@ -89,7 +89,6 @@ class PDI
         }
     }
 
-
     public function pdiCheckCategories() {
         $this->db->query(
             'SELECT `pdi-check-category`.*,
@@ -137,9 +136,12 @@ class PDI
             `pdi-defect`.`RepairDescription`, 
             `pdi-defect`.`InspectionDate`, 
             `pdi-defect`.`ChassisNo`,
-            `pdi-defect`.`EmployeeID`, 
+            `pdi-defect`.`EmployeeID`,
+            CONCAT(`employee`.`Firstname`,' ',`employee`.`Lastname`) AS `EmployeeName`,
             `pdi-defect`.`ReCorrection` 
             FROM `pdi-defect`
+            INNER JOIN `employee`
+            ON `pdi-defect`.`EmployeeID` = `employee`.`EmployeeId`
             WHERE `pdi-defect`.`ChassisNo` = :id"
         );
 
