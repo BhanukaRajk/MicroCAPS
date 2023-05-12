@@ -24,18 +24,18 @@
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        foreach ($data['LineCarsSet'] as $car) {
+                        foreach ($data['AssemblyLineCars'] as $car) {
                             echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProcess">
                                 <div class="carcard" onClick="this.closest(\'form\').submit()">
                                     <div class="cardhead">
                                         <div class="cardid">
-                                            <div class="carmodel">'. (($car->ModelNo == "M0001") ? 'Micro Panda ' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross ' : 'MG ZS SUV ')) .'</div>
+                                            <div class="carmodel">'. $car->ModelName .'</div>
                                             <div class="chassisno">'. ($car->ChassisNo) .'</div>
                                             <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
                                         </div>
                                     </div>
                                     <div class="carpicbox">
-                                        <img src="'. URL_ROOT .'public/images/cars/'. (($car->ModelNo == "M0001") ? 'Micro Panda' : (($car->ModelNo == "M0002") ? 'Micro Panda Cross' : 'MG ZS SUV')) .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                        <img src="'. URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
                                     </div>
                                     <div class="carstatus">';
                                         if($car->CurrentStatus == "S1") { echo 'At Stage 01'; }
@@ -85,19 +85,19 @@
                                             <div class="filtertype">Stage</div>
                                             <div class="filters">
                                                 <input type="checkbox" id="stage-1" name="car-stage" value="S1" checked>
-                                                <label for="micro-panda">At Stage 01</label>
+                                                <label for="stage-1">At Stage 01</label>
                                             </div>
                                             <div class="filters">
                                                 <input type="checkbox" id="stage-2" name="car-stage" value="S2" checked>
-                                                <label for="panda-cross">At Stage 02</label>
+                                                <label for="stage-2">At Stage 02</label>
                                             </div>
                                             <div class="filters">
                                                 <input type="checkbox" id="stage-3" name="car-stage" value="S3" checked>
-                                                <label for="mg">At Stage 03</label>
+                                                <label for="stage-3">At Stage 03</label>
                                             </div>
                                             <div class="filters">
                                                 <input type="checkbox" id="stage-4" name="car-stage" value="S4" checked>
-                                                <label for="mg">At Stage 04</label>
+                                                <label for="stage-4">At Stage 04</label>
                                             </div>
                                         </li>
 
@@ -113,22 +113,6 @@
                                             </div>
 
                                         </li>
-                                        
-                                        <!-- <li>
-                                            <div class="filtertype">Status</div>
-                                            <div class="filters">
-                                                <input type="radio" id="acceptance" name="acceptance" value="CM">
-                                                <label for="acceptance">Accepted</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="radio" id="non-acceptance" name="acceptance" value="NC">
-                                                <label for="non-acceptance">Not accepted</label>
-                                            </div>
-                                            <div class="filters">
-                                                <input type="radio" id="all-tested" name="acceptance" value="All" checked>
-                                                <label for="all-tested">All</label>
-                                            </div>
-                                        </li> -->
 
 
                                     </ul>
@@ -144,5 +128,6 @@
 </section>
 
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/assemblyline.js"></script>
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

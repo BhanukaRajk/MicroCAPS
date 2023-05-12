@@ -1,89 +1,116 @@
-// THE SELECT TAG COLLECTING (SELECT VEHICLE => PARTS VIEW)
-const compVehicleSelector = document.querySelector('#P23_vehicle_list');
-
-if(compVehicleSelector != null) {
-
-    compVehicleSelector.addEventListener('change', function() {
-
-        // VALUE OF THIS SELECT TAG'S SELECTED DATA
-        const selectedValue = this.value;
-
-        const formData = new FormData();
-        formData.append("selectedValue", selectedValue);
-
-        if (!formData) {
-            console.error("FormData not supported");
-            return;
-        }
-        
-
-        fetch("http://localhost:8080/MicroCAPS/Supervisors/componentsView", {
-            method: "POST",
-            // headers: {
-            //     'Content-type': 'multipart/form-data'
-            //     'Content-type': 'application/json'
-            // },
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-
-                // PAGE'S CHANGING POINTS CATCHER
-                const partDataBoard = document.querySelector('#partsTable');
-                const partPageID = document.querySelector('#partPageId');
-
-                // PARTS TABLE HEADING WRITER
-                let partSet = `<div class="parts-table-row">
-                                    <div class="parts-col-01 parts-bold">PART NAME</div>
-                                    <div class="parts-col-02 parts-bold">STATUS</div>
-                                    <div class="parts-col-03 parts-bold">DAMAGES</div>
-                                    <div class="parts-col-04 parts-bold">ISSUED</div>
-                                </div>
-                                <div class="bottom-border"></div>`;
+// GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
+const modelfilters = document.querySelectorAll("input[type=checkbox][name=car-model]");
+const stagefilters = document.querySelectorAll("input[type=checkbox][name=car-stage]");
+const timelinefilters = document.querySelectorAll("input[type=radio][name=timeline]");
 
 
-                // CHECKING IF THERE ARE PARTS AVAILABLE FOR SELECTED VEHICLE
-                if(data.componentz) {
-
-                    // DISPLAY ALL THE PARTS AVAILABLE
-                    (data.componentz).forEach((component) => {
-                        partSet += `<div class="parts-table-row bottom-border">
-                                                <div class="parts-col-01">${component.PartName}</div>
-                                                <div class="parts-col-02">${component.Status}</div>
-                                                <div class="parts-col-03">
-                                                    <div class="round">
-                                                        <input type="checkbox" id="${component.PartNo}-D" ${component.Status == "DAMAGED" ? "checked" : "" } />
-                                                        <label class="display-none" for="${component.PartNo}D"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="parts-col-04">
-                                                    <div class="round">
-                                                        <input type="checkbox" id="${component.PartNo}-I" ${component.Status == "ISSUED" ? "checked" : "" } />
-                                                        <label class="display-none" for="${component.PartNo}I"></label>
-                                                    </div>
-                                                </div>
-                                            </div>`;
-                    });
-
-                // IF THERE ARE NO ANY PARTS, DISPLAY THE NOTHING MESSAGE
-                } else {
-                    partSet += `<div class="horizontal-centralizer">
-                                                    <div class="marginy-4">No parts available</div>
-                                                    <div class=""></div>
-                                                </div>
-                                                <div class="bottom-border"></div>`;
-                }
-
-                // PARTS TABLE DATA CHANGER
-                partDataBoard.innerHTML = partSet;
-
-
-                // PAGE HEADING CHASSIS NUMBER CHANGER
-                if(data.search) {
-                    partPageID.innerHTML = `Part details - ${data.search}`;
-                }
-
-            })
-            .catch((error) => console.error(error));
-    });
+// Attach event listeners to all filter inputs
+for (let model of modelfilters) {
+    model.addEventListener('change', filter_cars);
 }
+for (let stage of stagefilters) {
+    stage.addEventListener('change', filter_cars);
+}
+for (let timeline of timelinefilters) {
+    timeline.addEventListener('change', filter_cars);
+}
+
+
+
+
+function filter_cars() {
+
+    const modelset = Array.from(
+        document.querySelectorAll("input[type=checkbox][name=car-model]")
+        ).map((checkbox) => (checkbox.checked ? checkbox.value : ""));
+
+    const stageset = Array.from(
+        document.querySelectorAll("input[type=checkbox][name=car-stage]")
+        ).map((checkbox) => (checkbox.checked ? checkbox.value : ""));
+
+    const timescale = document.querySelector(
+        "input[type=radio][name=timeline]:checked"
+    ).value;
+
+
+
+    console.log(JSON.stringify(modelset));
+    console.log(JSON.stringify(stageset));
+    console.log(timescale);
+
+    const formData = new FormData();
+    formData.append("model_set", JSON.stringify(modelset));
+    formData.append("stage_set", JSON.stringify(stageset));
+    formData.append("time_scale", timescale);
+
+
+    if (!formData) {
+        console.error("FormData not supported");
+        return;
+    }
+    
+
+    fetch("http://localhost:8080/MicroCAPS/Supervisors/findAssemblyLineCars", {
+        method: "POST",
+        // headers: {
+        //     'Content-type': 'multipart/form-data'
+        //     'Content-type': 'application/json'
+        // },
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+
+            console.log("Data = "+data);
+
+            const vehicleDataBoard = document.querySelector('#carList');
+
+            if(data) {
+
+                let carSet = '';
+
+                data.forEach((car) => {
+                    carSet += `<form method="POST" action="http://localhost:8080/MicroCAPS/Supervisors/getProcess">
+                                <div class="carcard" onClick="this.closest(\'form\').submit()">
+                                    <div class="cardhead">
+                                        <div class="cardid">
+                                            <div class="carmodel">${car.ModelName}</div>
+                                            <div class="chassisno">${car.ChassisNo}</div>
+                                            <input type="hidden" name="form-car-id" value="${car.ChassisNo}">
+                                        </div>
+                                    </div>
+                                    <div class="carpicbox">
+                                        <img src="http://localhost:8080/MicroCAPS/public/images/cars/${car.ModelName + " " + car.Color}.png" class="carpic" alt="Car image">
+                                    </div>
+                                    <div class="carstatus">`;
+
+                    if(car.CurrentStatus == "S1") { carSet += `At Stage 01`; }
+                    else if(car.CurrentStatus == "S2") { carSet += `At Stage 02`; }
+                    else if(car.CurrentStatus == "S3") { carSet += `At Stage 03`; }
+                    else if(car.CurrentStatus == "S4") { carSet += `At Stage 04`; }
+                    else { carSet += `Out of assembly`; }
+
+                    carSet += `<input type="hidden" name="form-car-stage" value="${car.CurrentStatus}">
+                            </div>
+                        </div>
+                    </form>`;
+                });
+
+                carSet += '';
+                vehicleDataBoard.innerHTML = carSet;
+
+            } else {
+                vehicleDataBoard.innerHTML =    `<div class="no-data horizontal-centralizer">
+                                                    <div class="margin-top-5 vertical-centralizer">
+                                                        <div> Nothing to show :( </div>
+                                                        <div>
+                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                        </div>
+                                                    </div>
+                                                </div>`;
+            }
+
+        })
+        .catch((error) => console.error(error));
+}
+
