@@ -41,11 +41,3 @@ function renderChart(ctx, ltx, data, cutout = 50) {
     }
     });
 }
-
-function destroyChart(ctx) {
-
-    var chart = Chart.getChart(ctx);
-
-    chart.destroy();
-
-}
