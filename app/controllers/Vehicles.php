@@ -5,12 +5,12 @@ class Vehicles extends Controller {
     private $vehicleModel;
     // private $managerModel;
 
-//    private $pdiModel;
+    // private $pdiModel;
 
     public function __construct(){
         $this->vehicleModel = $this->model('Vehicle');
         // $this->managerModel = $this->model('Manager');
-    //    $this->pdiModel = $this->model('PDI');
+        // $this->pdiModel = $this->model('PDI');
     }
 
     // Shell Related

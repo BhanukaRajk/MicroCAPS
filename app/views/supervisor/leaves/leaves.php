@@ -31,36 +31,37 @@
                 </div>
 
                 <?php
-                foreach ($data['LeaveDetails'] as $value) {
-                    echo '<div class="div-ender"></div>
-                            <div class="sup-leave-list-non-edit">
-                                <div class="display-none leave-identifier">' . $value->LeaveId . '</div>
-                                <div class="leave-value leave-value-emp">' . $value->EmployeeId . '</div>
-                                <div class="leave-value ">' . $value->Name . '</div>
-                                <div class="leave-value leave-value-date">' . $value->LeaveDate . '</div>
-                                <div class="leave-value padding-right-5 leave-value-reason">' . $value->Reason . '</div>
-
-
-                                <div class="leave-edit-info ppadding-left-2">
-                                    <img src="'. URL_ROOT .'public/images/icons/edit.png" onclick="expandThisLeave(this.parentNode.parentNode)" class="width-rem-1p25 mouse-pointer" alt="edit">
-                                </div>
-    
-                                <div class="leave-edit-info">
-                                    <img src="'. URL_ROOT .'public/images/icons/delete.png" onclick="leaveDeleteConfirmation(\''.$value->LeaveId. '\')" class="width-rem-1p25 mouse-pointer" alt="remove">
-                                </div>
-                                
-                            </div>
-                            <div class="panel">
-                                <p>' . $value->Reason . '</p>
-                            </div>';
-                }
-
-                if($value == NULL) {
+                if($data['LeaveDetails'] == NULL) {
                     echo '<div class="horizontal-centralizer no-leave-data">
                             <div class="vertical-centralizer">
                                 <div>No data available</div>
                             </div>
                         </div>';
+                    
+                } else {
+                    foreach ($data['LeaveDetails'] as $value) {
+                        echo '<div class="div-ender"></div>
+                                <div class="sup-leave-list-non-edit">
+                                    <div class="display-none leave-identifier">' . $value->LeaveId . '</div>
+                                    <div class="leave-value leave-value-emp">' . $value->EmployeeId . '</div>
+                                    <div class="leave-value ">' . $value->Name . '</div>
+                                    <div class="leave-value leave-value-date">' . $value->LeaveDate . '</div>
+                                    <div class="leave-value padding-right-5 leave-value-reason">' . $value->Reason . '</div>
+
+
+                                    <div class="leave-edit-info ppadding-left-2">
+                                        <img src="'. URL_ROOT .'public/images/icons/edit.png" onclick="expandThisLeave(this.parentNode.parentNode)" class="width-rem-1p25 mouse-pointer" alt="edit">
+                                    </div>
+        
+                                    <div class="leave-edit-info">
+                                        <img src="'. URL_ROOT .'public/images/icons/delete.png" onclick="leaveDeleteConfirmation(\''.$value->LeaveId. '\')" class="width-rem-1p25 mouse-pointer" alt="remove">
+                                    </div>
+                                    
+                                </div>
+                                <div class="panel">
+                                    <p>' . $value->Reason . '</p>
+                                </div>';
+                    }
                 }
                 
                 ?>
@@ -71,7 +72,7 @@
 
 
         <!-- UPDATE TIME OFF POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
-        <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/updateThisLeave">
+        <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/updateThisLeave" id="leaveUpdate">
         <div class="background-bluer display-none" id="timeOffUpdatePopUp">
             <div class="vertical-centralizer">
                 <div class="time-off-update-popup">
@@ -124,7 +125,7 @@
 
 
         <!-- ADD NEW TIMEOFF POPUP BOX (THIS IS INCLUDED HERE BECAUSE IT HAS TO BE CENTRALIZED ON CONTENT AREA) -->
-        <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/addleave">
+        <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/addleave" id="newLeave">
             <div class="background-bluer display-none" id="newTimeOffPopUp">
                 <div class="vertical-centralizer">
                     <div class="time-off-update-popup">
@@ -138,7 +139,7 @@
                                     <label for="employeeId">EMPLOYEE ID</label>
                                 </div>
                                 <div>
-                                    <input type="text" id="add-employeeId" name="employeeId" class="timeoff-unique-inputs" value="<?php echo $data['employeeId']; ?>" placeholder="Employee ID" autocomplete="off" required>
+                                    <input type="text" id="add-employeeId" name="employeeId" class="timeoff-unique-inputs" placeholder="Employee ID" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="timeoff-unique-field-02">
@@ -146,7 +147,7 @@
                                     <label for="leavedate">REQUESTED DATE</label>
                                 </div>
                                 <div>
-                                    <input type="date" id="add-leavedate" name="leavedate" class="timeoff-unique-inputs" value="<?php echo $data['leavedate']; ?>" placeholder="Leave Date" required>
+                                    <input type="date" id="add-leavedate" name="leavedate" class="timeoff-unique-inputs" placeholder="Leave Date" required>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +156,7 @@
                                 <label for="reason">REASON</label>
                             </div>
                             <div>
-                                <textarea id="add-timeoff-reason" name="reason" class="timeoff-reason-input" placeholder="Maximum 500 characters" required><?php echo $data['reason']; ?></textarea>
+                                <textarea id="add-timeoff-reason" name="reason" class="timeoff-reason-input" placeholder="Maximum 500 characters" required></textarea></textarea>
                             </div>
                         </div>
                         
@@ -189,7 +190,6 @@
                                 <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/removeleave">
                                     <input type="hidden" name="leave_id" id="form-leave-id">
                                     <button type="submit" class="delete-button-2">Remove</button>
-                                    <!-- <button onclick="confirmDeletion()" class="delete-button-2">Remove</button> -->
                                 </form>
                             </div>
                             <div class="del-conf-button-box">
@@ -204,6 +204,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/leaves.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

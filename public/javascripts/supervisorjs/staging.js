@@ -1,19 +1,14 @@
-// GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
-
-const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
-const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
-
-
+// BASE URL
 const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 
 
 
-// let PROCEED = true;
-const nextbtn = document.querySelector('#stage-passer');
+// BUTTON ENABLING AND DISABLING PROCESS HANDLER /////////////////////////////////////////////////////////////////////////////////
 
-
-
+// GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
+const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
+const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
 
 // DISABLE ALL THE CONNECTION BUTTONS WHEN HOLD BUTTON PRESSED
 for (let hdcheckbox of holdingcheckboxes) {
@@ -46,6 +41,69 @@ for (let hdcheckbox of holdingcheckboxes) {
 
 
 
+var items = document.getElementsByClassName('pagination-item');
+
+
+showPage(1);
+
+// let PageCount = 0;
+
+// if (items.length / 8 == 0) {
+//     PageCount = 1;
+// } else {
+//     PageCount = (items.length) / 8;
+// }
+
+
+let PageCount = 0;
+if (items.length % 8 == 0) {
+    PageCount = items.length / 8;
+} else {
+    PageCount = Math.floor(items.length / 8) + 1;
+}
+
+// SELECT THE PAGE BUTTON SET ELEMENT
+var buttonSet = document.querySelector('.page-button-set');
+
+// CREATE A BUTTON FOR EACH PAGE AND APPEND TO THE BUTTON SET ELEMENT
+for (var i = 1; i <= PageCount; i++) {
+    var button = document.createElement('button');
+    button.classList.add('paginate');
+    button.textContent = i;
+    button.addEventListener('click', function() {
+        showPage(this.textContent);
+    });
+    buttonSet.appendChild(button);
+}
+
+
+
+function showPage(pageNumber) {
+    // GET ALL PAGINATION ITEMS
+    var items = document.getElementsByClassName('pagination-item');
+
+    // CALCULATE START AND END INDICES FOR ITEMS TO SHOW
+    var startIndex = (pageNumber - 1) * 8;
+    var endIndex = startIndex + 8;
+
+    // LOOP THROUGH ALL ITEMS AND HIDE/SHOW BASED ON INDEX
+    for (var i = 0; i < items.length; i++) {
+        if (i >= startIndex && i < endIndex) {
+            items[i].style.display = 'flex';
+        } else {
+            items[i].style.display = 'none';
+        }
+    }
+}
+
+
+
+
+
+// NEXT STAGE PUSHING PROCESS HANDLER ///////////////////////////////////////////////////////////////////////////////////////////
+
+// let PROCEED = true;
+// const nextbtn = document.querySelector('#stage-passer');
 
 // let PROCEED = false;
 // let numUnchecked = completenesscheckboxes.length;
@@ -81,6 +139,12 @@ for (let hdcheckbox of holdingcheckboxes) {
 // }
 
 // updateNextBtnDisabled();
+
+
+
+
+
+// RELOAD CHART WHEN A CHANGE HAPPEND ///////////////////////////////////////////////////////////////////////////////////////////
 
 function reloadChart() {
 
@@ -160,7 +224,7 @@ function destroyChart(ctx) {
 
 
 
-
+// PROCESS STATUS UPDATER ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // EVENT LISTNERS TO UPDATE THE PROCESS
 for (let cmcheckbox of completenesscheckboxes) {

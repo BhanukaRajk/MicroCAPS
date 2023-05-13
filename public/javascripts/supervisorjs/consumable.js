@@ -1,6 +1,6 @@
 // CONSUMABLE FILTERING FUNCTION
 
-// const BASE_URL = "http://localhost:8080/MicroCAPS/";
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 const ctypeRadios = document.querySelectorAll("input[type=radio][name=cons-type]");
 const cstateRadios = document.querySelectorAll("input[type=radio][name=stock-state]");
@@ -211,6 +211,6 @@ function getImgData() {
 }
 
 removec?.addEventListener("click", () => {
-        previewc.style.backgroundImage = `url(http://localhost/MicroCAPS/public/images/placeholder.jpg)`;
+        previewc.style.backgroundImage = `url(${BASE_URL}public/images/placeholder.jpg)`;
         imagec.value = "";
 });

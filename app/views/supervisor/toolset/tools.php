@@ -183,7 +183,10 @@
               <div class="del-confirm-msg-box">Are you sure?</div>
               <div class="del-conf-button-set">
                 <div class="del-conf-button-box">
-                  <button type="button" class="delete-button-2">Remove</button>
+                  <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/removeThisTool">
+                    <input type="hidden" name="tool_id" id="form-tool-id">
+                    <button type="submit" class="delete-button-2">Remove</button>
+                  </form>
                 </div>
                 <div class="del-conf-button-box">
                   <button onclick="closeToolDelConfBox()" class="edit-button-2">Cancel</button>

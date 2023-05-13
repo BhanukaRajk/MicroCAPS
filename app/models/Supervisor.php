@@ -53,7 +53,7 @@ class Supervisor
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS onHold
                 FROM `vehicle`
-                WHERE `CurrentStatus` = "Hold";'
+                WHERE `CurrentStatus` = "H";'
         );
         $counts[] = $this->db->single();
 
@@ -77,7 +77,7 @@ class Supervisor
         $this->db->bind(':employee', $empid);
         $row = $this->db->single();
 
-        if (isset($row)) {
+        if ($row != null) {
             return true;
         } else {
             return false;
@@ -900,6 +900,48 @@ class Supervisor
 
 
 
+    // THIS IS THE FUNCTION USED FOR CHANGE THE CURRENT STATUS OF A VEHICLE
+    public function stageChanger($vehicleID, $new_stage) {
+
+        $this->db->query(
+            'UPDATE `vehicle` SET `CurrentStatus` = :newStage
+                    WHERE `ChassisNo` = :chassisNo;'
+        );
+
+        $this->db->bind(':chassisNo', $vehicleID);
+        $this->db->bind(':newStage', $new_stage);
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    
+    }
+
+
+        // THIS IS THE FUNCTION USED FOR CHECK THE CAR HAS HOLDING PROCESSES
+        public function checkHoldingCars($vehicleID) {
+
+            $this->db->query(
+                'SELECT COUNT(`Status`) AS `holdCounter` FROM `stage-vehicle-process` 
+                    WHERE `ChassisNo` = :chassisNo;'
+            );
+    
+            $this->db->bind(':chassisNo', $vehicleID);
+    
+    
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        
+        }
+    
+
+
 
 
 
@@ -987,7 +1029,7 @@ class Supervisor
 
         $rows = $this->db->resultSet();
 
-        if(isset($rows)) {
+        if($rows != null) {
             return true;
         } else {
             return false;
@@ -1322,25 +1364,18 @@ class Supervisor
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////
 
-    public function updateToolStatus($toolId, $newStatus, $user): bool
+    public function updateToolStatus($toolId, $newStatus): bool
     {
         $this->db->query(
             'UPDATE `tool` SET `Status` = :tool_status, 
-                    ``
+                                    `LastUpdateBy` = :user_id 
             WHERE `ToolId` = :tool_id;'
         );
 
         $this->db->bind(':tool_id', $toolId);
         $this->db->bind(':tool_status', $newStatus);
+        $this->db->bind(':user_id', $_SESSION['_id']);
 
         if ($this->db->execute()) {
             return true;
@@ -1352,7 +1387,7 @@ class Supervisor
 
 
 
-    // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
+    // CHECK THIS TOOL IS CURRENT IN OPARATION
     public function checkToolById($tool_id): bool
     {
 
@@ -1364,7 +1399,7 @@ class Supervisor
 
         $row = $this->db->single();
 
-        if (!isset($row)) {
+        if ($row != null) {
             return true;
         } else {
             return false;

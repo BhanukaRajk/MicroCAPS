@@ -56,43 +56,46 @@
 
                             <!-- DISPLAY THE PROCESSES OF THIS STAGE ONE BY ONE WITH COMPLETENESS AND HOLDING OPTIONS -->
                             <?php
-                            foreach ($data['FormCarData'] as $process) {
-                                echo '
-                                <div class="stage-control-row pagination-item">
-                                    <div class="row-data">' . $process->ProcessName . '</div>
-                                    <div class="row-data display-none">' . $process->Status . '</div>
-                                    <form>
-                                        <div class="row-data">
+                            if ($data['FormCarData'] == NULL) {
 
-                                            <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
-                                            THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
-
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .'></div>
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .'></div>
-                                        </div>
-                                    </form>
-                                </div>';
-                            }
-
-                            // WHEN THERE IS NO DATA TO SHOW, THAT MEANS THIS CAR IS NOT READY FOR THIS STAGE
-                            if ($process == NULL) {
                                 echo '<div class="horizontal-centralizer no-leave-data">
                                 <div class="vertical-centralizer">
                                 <div>- Not Ready for this stage -</div>
                                 </div>
                                 </div>';
+
+                            } else {
+                                
+                                foreach ($data['FormCarData'] as $process) {
+                                    echo '
+                                    <div class="stage-control-row pagination-item">
+                                        <div class="row-data">' . $process->ProcessName . '</div>
+                                        <div class="row-data display-none">' . $process->Status . '</div>
+                                        <form>
+                                            <div class="row-data">
+    
+                                                <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
+                                                THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
+    
+                                                <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .'></div>
+                                                <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .'></div>
+                                            </div>
+                                        </form>
+                                    </div>';
+                                }
                             }
                             ?>
+                            
                         </div>
                     </div>
 
                     <div class="progress-handlers">
                         <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
                         <div class="page-button-set">
-                            <button onclick="showPage(1)" class="paginate">1</button>
+                            <!-- <button onclick="showPage(1)" class="paginate">1</button>
                             <button onclick="showPage(2)" class="paginate">2</button>
                             <button onclick="showPage(3)" class="paginate">3</button>
-                            <button onclick="showPage(4)" class="paginate">4</button>
+                            <button onclick="showPage(4)" class="paginate">4</button> -->
                         </div>
                         <div class="sender">
                             <form action"">

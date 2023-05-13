@@ -1,3 +1,5 @@
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
+
 function expandThisLeave(ThisLeave) {
 
     // GET THE VALUES FROM THE TOOL CARD
@@ -6,15 +8,11 @@ function expandThisLeave(ThisLeave) {
     var leaveDate = ThisLeave.querySelector('.leave-value-date').innerText;
     var leaveReason = ThisLeave.querySelector('.leave-value-reason').innerText;
 
-    // var consumeImg = consumepic.getAttribute('src');
-    // var lastupdate = Consume.querySelector('.con-last-update').innerText;
-
     console.log(ThisLeave);
+
     // FILL THE INPUT FIELDS IN THE FORM
     UpdatePopup = document.querySelector('#timeOffUpdatePopUp');
-    // document.querySelector('.form-con-quantity').innerText = "Current Stock: " + quantity;
-    // document.querySelector('.form-con-lastupdate').innerText = lastupdate;
-    // document.getElementById("formConsImg").setAttribute("src", consumeImg);
+
     console.log(UpdatePopup);
 
     UpdatePopup.querySelector("#updt-timeoffId").setAttribute("value", leaveId);
@@ -23,12 +21,6 @@ function expandThisLeave(ThisLeave) {
     UpdatePopup.querySelector("#updt-timeoff-reason").innerText = leaveReason;
 
     UpdatePopup.classList.remove("display-none");
-
-
-    // document.getElementById("stock").setAttribute("value", quantity.split(' ')[0].trim());
-    // document.querySelector('.form-con-stock-label').innerText = "Current Stock update (" + quantity.split(' ')[1].trim() + ")";
-
-    // document.getElementById("formConType").setAttribute("value", quantity.split(' ')[1].trim());
 
 
     // SHOW THE POPUP FORM
@@ -48,34 +40,39 @@ function leaveDeleteConfirmation(Leave) {
     document.getElementById("popupWindow").classList.remove("display-none");
 }
 
-function closeleaveDeleteConfirmation() {
-
-    // CLOSE THE POPUP FORM
-    document.getElementById("popupWindow").classList.toggle("display-none");
-    //// document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
-    //// document.getElementsByClassName("databoard").classList.remove("noscroll");
-}
-
-
-
-
-
-function taskDeleteConfirmation(Car, Process) {
-    // GET THE VALUES FROM THE LEAVE TABLE
-
-    // FILL THE INPUT FIELDS IN THE FORM
-    document.getElementById("del-task-car-id").setAttribute("value", Car);
-    document.getElementById("del-task-process-id").setAttribute("value", Process);
-
-    // SHOW THE POPUP FORM
-    document.getElementById("P28_taskdelpopupWindow").classList.remove("display-none");
-}
-
 
 function closeleaveDeleteConfirmation() {
-
     // CLOSE THE POPUP FORM
     document.getElementById("popupWindow").classList.toggle("display-none");
-    //// document.getElementById("popupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
-    //// document.getElementsByClassName("databoard").classList.remove("noscroll");
 }
+
+
+
+
+
+
+
+// const form = document.querySelector('#newLeave');
+
+// form.addEventListener('submit', (event) => {
+//     event.preventDefault(); // prevent default form submission behavior
+
+//     const formData = new FormData(form); // get form data
+
+//     fetch(BASE_ROOT + 'Supervisors/addleave', {
+//         method: 'POST',
+//         body: formData
+//     })
+//         .then(response => {
+//             if (response.ok) {
+//                 // handle successful response here
+//                 flashMessageDiv.innerText = "Request successful!";
+//             } else {
+//                 throw new Error('Network response was not ok.');
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//         });
+// });
+

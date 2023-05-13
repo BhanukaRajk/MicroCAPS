@@ -21,25 +21,25 @@ function navbartoggle(x) {
 
 
 
-var acc = document.getElementsByClassName("sup-leave-list-non-edit");
-
-var number;
-
-for (number = 0; number < acc.length; number++) {
-  acc[number].addEventListener("click", function () {
-    /* TOGGLE BETWEEN ADDING AND REMOVING THE "ACTIVE" CLASS,
-    TO HIGHLIGHT THE BUTTON THAT CONTROLS THE PANEL */
-    this.classList.toggle("active");
-
-    // TOGGLE BETWEEN HIDING AND SHOWING THE ACTIVE PANEL
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
+// var acc = document.getElementsByClassName("sup-leave-list-non-edit");
+//
+// var number;
+//
+// for (number = 0; number < acc.length; number++) {
+//   acc[number].addEventListener("click", function () {
+//     /* TOGGLE BETWEEN ADDING AND REMOVING THE "ACTIVE" CLASS,
+//     TO HIGHLIGHT THE BUTTON THAT CONTROLS THE PANEL */
+//     this.classList.toggle("active");
+//
+//     // TOGGLE BETWEEN HIDING AND SHOWING THE ACTIVE PANEL
+//     var panel = this.nextElementSibling;
+//     if (panel.style.display === "block") {
+//       panel.style.display = "none";
+//     } else {
+//       panel.style.display = "block";
+//     }
+//   });
+// }
 
 
 

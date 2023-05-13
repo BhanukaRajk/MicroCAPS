@@ -14,7 +14,7 @@
         <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
-                    <div>Test run queue</div>
+                    <div>Vehicles on Test Run</div>
 
 
                     <div>
@@ -119,6 +119,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/pdinspect.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -165,7 +165,10 @@ function showAddNewToolPopup() {
 
 
 
-function showToolDelConfBox() {
+function showToolDelConfBox(Tool) {
+
+    // FILL THE HIDDEN INPUT FIELDS IN THE FORM
+    document.getElementById("form-tool-id").setAttribute("value", Tool);
     //// var popupDiv = document.getElementById('toolUpdatePopUp');
     //// popupDiv.style.display = 'none';  
     document.getElementById("toolDelConfirm").setAttribute("class", "delete-conf-blur horizontal-centralizer");

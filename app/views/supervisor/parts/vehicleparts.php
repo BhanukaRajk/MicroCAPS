@@ -83,13 +83,13 @@
                                             <div class="parts-col-02">'. $component->Status .'</div>
                                             <div class="parts-col-03">
                                                 <div class="round">
-                                                    <input type="checkbox" id="'. $component->PartNo .'D" '. (($component->Status == "DAMAGED") ? 'checked' : '' ) .' />
+                                                    <input type="checkbox" id="'. $component->PartNo .'-D" class="issue-check" '. (($component->Status == "DAMAGED") ? 'checked' : '' ) .' />
                                                     <label for="'. $component->PartNo .'D"></label>
                                                 </div>
                                             </div>
                                             <div class="parts-col-04">
                                                 <div class="round">
-                                                    <input type="checkbox" id="'. $component->PartNo .'I" '. (($component->Status == "ISSUED") ? 'checked' : '' ) .' />
+                                                    <input type="checkbox" id="'. $component->PartNo .'-I" class="damage-check" '. (($component->Status == "ISSUED") ? 'checked' : '' ) .' />
                                                     <label for="'. $component->PartNo .'I"></label>
                                                 </div>
                                             </div>
@@ -116,7 +116,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/components.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -13,7 +13,7 @@
         <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
-                    <div>Assembly completed vehicles</div>
+                    <div>Assembly line car components</div>
                     <div>
                         <label for="searchBox" class="display-none"></label>
                         <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-searchbox" placeholder="Search Chassis No">
@@ -114,6 +114,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/components.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

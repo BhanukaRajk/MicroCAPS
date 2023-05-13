@@ -66,26 +66,33 @@
 
 
 
-var items = document.getElementsByClassName('pagination-item');
+// var items = document.getElementsByClassName('pagination-item');
 
 
-showPage(1);
-let PageCount = 1;
+// showPage(1);
 
-function showPage(pageNumber) {
-  // Get all pagination items
-  var items = document.getElementsByClassName('pagination-item');
-  
-  // Calculate start and end indices for items to show
-  var startIndex = (pageNumber - 1) * 8;
-  var endIndex = startIndex + 8;
-  
-  // Loop through all items and hide/show based on index
-  for (var i = 0; i < items.length; i++) {
-      if (i >= startIndex && i < endIndex) {
-          items[i].style.display = 'flex';
-      } else {
-          items[i].style.display = 'none';
-      }
-  }
-}
+// let PageCount = 0;
+
+// if (items.length / 8 == 0) {
+//     PageCount = 1;
+// } else {
+//     PageCount = (items.length) / 8;
+// }
+
+// function showPage(pageNumber) {
+//     // Get all pagination items
+//     var items = document.getElementsByClassName('pagination-item');
+
+//     // Calculate start and end indices for items to show
+//     var startIndex = (pageNumber - 1) * 8;
+//     var endIndex = startIndex + 8;
+
+//     // Loop through all items and hide/show based on index
+//     for (var i = 0; i < items.length; i++) {
+//         if (i >= startIndex && i < endIndex) {
+//             items[i].style.display = 'flex';
+//         } else {
+//             items[i].style.display = 'none';
+//         }
+//     }
+// }
