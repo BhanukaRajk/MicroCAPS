@@ -2,10 +2,9 @@
 
 class Vehicles extends Controller {
 
-    private $vehicleModel;
-    private $managerModel;
-
-    private $pdiModel;
+    private mixed $vehicleModel;
+    private mixed $managerModel;
+    private mixed $pdiModel;
 
     public function __construct(){
         $this->vehicleModel = $this->model('Vehicle');
@@ -13,7 +12,10 @@ class Vehicles extends Controller {
         $this->pdiModel = $this->model('PDI');
     }
 
-    // Shell Related
+
+
+    /* Shell Related */
+    // Function to Handle Shell Request
     public function shellRequest() {
 
         if (!isLoggedIn()) {
@@ -56,6 +58,7 @@ class Vehicles extends Controller {
         }
     }
 
+    // Function to Add Shell Details to System
     public function addShell() {
 
         if (!isLoggedIn()) {
@@ -91,6 +94,7 @@ class Vehicles extends Controller {
         }
     }
 
+    // Function to Get Shell Details + Repair Details + Paint Details
     public function shellDetail() {
 
         if (!isLoggedIn()) {
@@ -105,7 +109,7 @@ class Vehicles extends Controller {
                 'chassisNo' => trim($_POST['chassisNo'])
             ];
 
-            $data['shellDetails'] = $this->vehicleModel->shellDetail($data['chassisNo']);
+            $data['shellDetail'] = $this->vehicleModel->shellDetail($data['chassisNo']);
             $data['repairDetails'] = $this->vehicleModel->repairDetail($data['chassisNo']);
             $data['paintDetails'] = $this->vehicleModel->paintDetail($data['chassisNo']);
 
@@ -114,6 +118,7 @@ class Vehicles extends Controller {
         }
     }
 
+    // Function to Record Shell Repairs and Paints
     public function requestJobs() {
 
         if (!isLoggedIn()) {
@@ -149,6 +154,7 @@ class Vehicles extends Controller {
         }
     }
 
+    // Function to Mark Repair Job and Paint Jobs as Complete
     public function jobDone() {
 
         if (!isLoggedIn()) {
@@ -181,8 +187,33 @@ class Vehicles extends Controller {
         }
     }
 
-    // Component Related
 
+
+    /* Component Related */
+    // Function to Get Component Details by Chassis No
+    public function componentsByChassis() {
+
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'chassisNo' => trim($_POST['chassisNo'])
+            ];
+
+            $data['vehicles'] = $this->vehicleModel->shellDetail($data['chassisNo']);
+            $data['components'] = $this->vehicleModel->componentsReceived($data['chassisNo']);
+
+            echo json_encode($data);
+        }
+
+    }
+
+    // Function to Mark Component as Received
     public function changeComponentStatus() {
 
             if (!isLoggedIn()) {
@@ -213,41 +244,7 @@ class Vehicles extends Controller {
             }
     }
 
-    public function changeDamagedComponentStatus() {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
-
-        }
-    }
-
-    public function componentsByChassis() {
-
-        if(!isLoggedIn()){
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'chassisNo' => trim($_POST['chassisNo'])
-            ];
-
-            $data['vehicles'] = $this->vehicleModel->shellDetail($data['chassisNo']);
-            $data['components'] = $this->vehicleModel->componentsReceived($data['chassisNo']);
-
-            echo json_encode($data);
-        }
-
-    }
-
+    // Function to Request Damaged Components
     public function requestDamagedComponents() {
         if(!isLoggedIn()){
             redirect('users/login');
@@ -285,7 +282,10 @@ class Vehicles extends Controller {
     }
 
 
-    // Assembly Line Related
+
+    /* Assembly Line Related */
+
+    // Function to Start Assembly
     public function startAssembly() {
 
         if (!isLoggedIn()) {
@@ -325,6 +325,7 @@ class Vehicles extends Controller {
         }
     }
 
+    // Function to Get Overall Assembly Details by Chassis No
     public function assemblyPercentageDetail() {
 
         if (!isLoggedIn()) {
@@ -353,7 +354,10 @@ class Vehicles extends Controller {
     }
 
 
-    // Search Related
+
+    /* Search Related */
+
+    // Function to Search by a User Selected Type
     public function searchByKey() {
         if (!isLoggedIn()) {
             redirect('users/login');
@@ -414,6 +418,11 @@ class Vehicles extends Controller {
         }
     }
 
+
+
+    /* Search Related */
+
+    // Function to Dispatch a Vehicle
     public function dispatch() {
 
         if (!isLoggedIn()) {

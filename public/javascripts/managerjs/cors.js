@@ -836,7 +836,7 @@ function popUpInnerhtml (values) {
     }
 
     let innerhtml = `<div class="">
-                        <img src="http://localhost/MicroCAPS/public/images/chassis-vertical.jpg" class="width-rem-12p5 paddingy-3 paddingx-5" alt="${values['shellDetails'].ModelName}' ${values['shellDetails'].Color}">
+                        <img src="http://localhost/MicroCAPS/public/images/chassis-vertical.jpg" class="width-rem-12p5 paddingy-3 paddingx-5" alt="${values['shellDetail'].ModelName}' ${values['shellDetail'].Color}">
                     </div>
                     <div class="paddingy-3 padding-right-5">
                         <div class="display-flex-row gap-1">
@@ -845,19 +845,19 @@ function popUpInnerhtml (values) {
                                 <div class="display-flex-column gap-1 border-gray padding-4 width-rem-15p7">
                                     <div>
                                         <div class="text-darkblue font-weight font-size-14">MODEL</div>
-                                        <div class="detail">${values['shellDetails'].ModelName}</div>
+                                        <div class="detail">${values['shellDetail'].ModelName}</div>
                                     </div>
                                     <div>
                                         <div class="text-darkblue font-weight font-size-14">COLOR</div>
-                                        <div class="detail">${values['shellDetails'].Color}</div>
+                                        <div class="detail">${values['shellDetail'].Color}</div>
                                     </div>
                                     <div>
                                         <div class="text-darkblue font-weight font-size-14">CHASSIS NO</div>
-                                        <div class="detail">${values['shellDetails'].ChassisNo}</div>
+                                        <div class="detail">${values['shellDetail'].ChassisNo}</div>
                                     </div>
                                     <div>
                                         <div class="text-darkblue font-weight font-size-14">ARRIVAL DATE</div>
-                                        <div class="detail">${values['shellDetails'].ArrivalDate}</div>
+                                        <div class="detail">${values['shellDetail'].ArrivalDate}</div>
                                     </div>
                                 </div>
                             </div>
@@ -904,7 +904,7 @@ function popUpInnerhtml (values) {
                                             <input type="checkbox"
                                                     id="startAssembly"
                                                     name="assembly"
-                                                    onChange="startAssembly('${values['shellDetails'].ChassisNo}','${values['shellDetails'].Color}')"
+                                                    onChange="startAssembly('${values['shellDetail'].ChassisNo}','${values['shellDetail'].Color}')"
                                                     value="Yes"
                                                     ${disable}>
                                             <div class="checkmark-small"></div>

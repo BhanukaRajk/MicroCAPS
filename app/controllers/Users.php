@@ -2,15 +2,19 @@
 
     class Users extends Controller {
 
-        private $userModel;
+        private mixed $userModel;
 
         public function __construct(){
             $this->userModel = $this->model('User');
         }
 
+
+
+        /* User Authentication and Authorization */
+
+        // Function to load the login page and login the user
         public function login(){
 
-            /* Post */
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -55,6 +59,7 @@
 
         }
 
+        // Creating a session for the user
         public function createUserSession($user){
             $_SESSION['_id'] = $user->EmployeeID;
             $_SESSION['_firstname'] = $user->Firstname;
@@ -68,6 +73,7 @@
             redirect($_SESSION['_position'].'s/dashboard');
         }
 
+        // Forgot Password : Search for the user
         public function search() {
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -105,6 +111,7 @@
             }
         }
 
+        // Forgot Password : Authenticate the user
         public function authUser() {
 
             if(empty($_SESSION['resetPassword'])) {
@@ -148,6 +155,7 @@
 
         }
 
+        // Forgot Password : Reset the password
         public function resetPassword() {
 
             if(empty($_SESSION['resetPassword'])) {
@@ -185,6 +193,7 @@
             }
         }
 
+        // Settings : Update the user's password
         public function updatePassword() {
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -213,7 +222,7 @@
             }
         }
 
-
+        // Logout the user
         public function logout(){
 
             $this->userModel->markActivity($_SESSION['_id'],0);
@@ -227,18 +236,6 @@
 
             session_destroy();
             redirect('users/login');
-        }
-
-        public function viewReturnDefectSheet() {
-
-        }
-
-        public function Progress() {
-
-        }
-
-        public function PDIResult() {
-
         }
 
 

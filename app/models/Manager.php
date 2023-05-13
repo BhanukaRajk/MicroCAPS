@@ -1,11 +1,12 @@
 <?php
 class Manager {
-    private $db;
+    private Database $db;
 
     public function __construct(){
         $this->db = new Database;
     }
 
+    // Retrieve Query : Get employee details according to the user id
     public function userDetails($id) {
         $this->db->query(
             'SELECT *
@@ -24,6 +25,7 @@ class Manager {
         }
     }
 
+    // Update Query : To update the user details with image
     public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image): bool {
         $this->db->query(
             'UPDATE employee
@@ -46,6 +48,7 @@ class Manager {
         }
     }
 
+    // Update Query : To update the user details without image
     public function updateProfileValues($id, $firstname, $lastname, $email, $mobile, $nic): bool {
         $this->db->query(
             'UPDATE employee
@@ -67,6 +70,7 @@ class Manager {
         }
     }
 
+    // Retrieve Query : Get user logs of the users
     public function activityLogs() {
 
         $this->db->query(
