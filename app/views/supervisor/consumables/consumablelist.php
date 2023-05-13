@@ -219,7 +219,7 @@
                         <input type="file" id="imagec" class="display-none" name="profile" accept="image/*" />
                     </div>
                     <div class="img-remover-box">
-                      <a class="img-remover" id="removec">Remove image</a>
+                      <!-- <a class="img-remover" id="removec">Remove image</a> -->
                     </div>
                     <div class="new-con-name-box">
                       <label for="conName" class="display-none">Name: </label>

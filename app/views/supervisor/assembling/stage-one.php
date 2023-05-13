@@ -15,7 +15,7 @@
 
             <div class="single-stage-head">
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
-                <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div> 
+                <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div>
                 <div class="stage-switch">
                     <button class="back-button">Overall</button>
                 </div>
@@ -66,8 +66,10 @@
                                             <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
                                             THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
 
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .'></div>
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .'></div>
+                                            <div><input type="checkbox" id="'. trim($process->ProcessId) .'-con" name="'. trim($process->ProcessId) .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .' onclick="updateProcessStatus(\''.$process->ProcessId.'\',\'con\')"></div>
+                                            <div><input type="checkbox" id="'. trim($process->ProcessId) .'-hold" name="'. trim($process->ProcessId) .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .' onclick="updateProcessStatus(\''.$process->ProcessId.'\',\'hold\')"></div>
+                                            // <div><input type="checkbox" id="' . $process->ProcessId . '-con" name="' . $process->ProcessId . '-con" class="connected-btn" ' . (($process->Status == "completed") ? "checked" : "") . '></div>
+                                            // <div><input type="checkbox" id="' . $process->ProcessId . '-hold" name="' . $process->ProcessId . '-hold" class="holding-btn" ' . (($process->Status == "OnHold") ? "checked" : "") . '></div>
                                         </div>
                                     </form>
                                 </div>';
@@ -85,6 +87,7 @@
                         </div>
                     </div>
 
+                    
                     <div class="progress-handlers">
                         <!-- SET OF BUTTONS USED TO NAVIGATE BETWEEN PROCESS SETS -->
                         <div class="page-button-set">
@@ -94,14 +97,14 @@
                             <button onclick="showPage(4)" class="paginate">4</button> -->
                         </div>
                         <div class="sender">
-                            <form action = "<?php echo URL_ROOT .'Supervisors/proceed'; ?>" method="post">
+                            <form action="<?php echo URL_ROOT . 'Supervisors/proceed'; ?>" method="post">
                                 <input type="hidden" name="form-car-id" value="<?php echo $data['chassisNo']; ?>">
                                 <input type="hidden" name="form-car-stage" value="S2">
                                 <button type="Submit" id="stage-passer">Proceed to Next Stage</button>
                             </form>
                         </div>
                     </div>
-                        
+
 
                 </div>
 
@@ -114,15 +117,16 @@
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
 
 <script>
-
-    let s1 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
+    let s1 = {
+        complete: <?php echo $data['stageSum']['completed']; ?>,
+        pending: <?php echo $data['stageSum']['pending']; ?>
+    }
 
     var ctx = document.getElementById('Lstage01').getContext('2d');
 
     let ltx = document.getElementById('Lstage01-label');
 
     renderChart(ctx, ltx, s1, 110);
-
 </script>
 
 

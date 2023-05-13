@@ -914,7 +914,7 @@ class Supervisors extends controller
             }
 
         } else {
-            
+
                 $_SESSION['error_message'] = 'Request failed! :(';
                 redirect('Supervisors/linevehicleview');
                 // $data['url'] = getUrl();
@@ -1107,8 +1107,44 @@ class Supervisors extends controller
 
     // TOOL ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    public function insertTool()
-    {
+    public function addNewTools() {
+
+        if (!isLoggedIn()) {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'type' => trim($_POST['type']),
+                'quantity' => trim($_POST['quantity']),
+                'status' => trim($_POST['status'])
+            ];
+
+            if (isset($_FILES['image'])) {
+
+                $toolpic = strval($data['name']) . '.jpg';
+                $to = '../public/images/tools/' . $toolpic;
+
+                $from = $_FILES['image']['tmp_name'];
+
+                if (move_uploaded_file($from, $to)) {
+                    if ($this->supervisorModel->addNewTool($data['name'], $data['type'], $data['quantity'], $data['status'], $toolpic))
+                        $_SESSION['success_message'] = 'Success! Saved Changes';
+                    else
+                        $_SESSION['error_message'] = 'Error! Could not save changes';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
+                }
+            } else {
+                $_SESSION['error_message'] = 'Error! Upload an image';
+            }
+
+        }
+
     }
 
     public function viewTools()
@@ -1306,35 +1342,30 @@ class Supervisors extends controller
 
             $vehicleID = $_POST['vehicleID'];
             $proID = $_POST['proID'];
-            $completeness = $_POST['completeness'];
-            $holding = $_POST['holding'];
+            $status = $_POST['status'];
 
             $data['url'] = getUrl();
-            $data['proUpdate'] = $this->supervisorModel->updateProgress($vehicleID, $proID, $completeness, $holding);
+            $data['proUpdate'] = $this->supervisorModel->updateProgress($vehicleID, $proID, $status);
 
-            if($holding == 1) {
-
-                $data['carHold'] = $this->supervisorModel->stageChanger($vehicleID, 'H');
-
-            } else if ($holding == 0) {
-
+            if ($status == 'completed' || $status == 'Pending') {
                 $data['holdingCars'] = $this->supervisorModel->checkHoldingCars($vehicleID);
 
-                // if($data['holdingCars']->holdCounter == 0){
-                if($data['holdingCars']['holdCounter'] == 0){
+                if($data['holdingCars']->holdCounter == 0){
 
                     $HoldedStage = $this->supervisorModel->stageOfThisProcess($proID);
 
-                    if($HoldedStage != null) {
-                        $data['carHold'] = $this->supervisorModel->stageChanger($vehicleID, $HoldedStage);
+                    if($HoldedStage != false) {
+                        $this->supervisorModel->stageChanger($vehicleID, $HoldedStage->StageNo);
                     }
 
                 }
-
+            } elseif ($status == 'OnHold') {
+                $this->supervisorModel->stageChanger($vehicleID, 'H');
             }
 
+
             header('Content-Type: application/json');
-            echo json_encode($data['proUpdate']);
+            echo json_encode(true);
 
         } 
 

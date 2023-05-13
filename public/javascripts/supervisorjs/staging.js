@@ -1,5 +1,6 @@
 // BASE URL
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
+const BASE_URL = "http://localhost/:8080MicroCAPS/";
+
 
 
 
@@ -46,14 +47,6 @@ var items = document.getElementsByClassName('pagination-item');
 
 showPage(1);
 
-// let PageCount = 0;
-
-// if (items.length / 8 == 0) {
-//     PageCount = 1;
-// } else {
-//     PageCount = (items.length) / 8;
-// }
-
 
 let PageCount = 0;
 if (items.length % 8 == 0) {
@@ -95,52 +88,6 @@ function showPage(pageNumber) {
         }
     }
 }
-
-
-
-
-
-// NEXT STAGE PUSHING PROCESS HANDLER ///////////////////////////////////////////////////////////////////////////////////////////
-
-// let PROCEED = true;
-// const nextbtn = document.querySelector('#stage-passer');
-
-// let PROCEED = false;
-// let numUnchecked = completenesscheckboxes.length;
-
-// for (let cmcheckbox of completenesscheckboxes) {
-//     if (cmcheckbox.checked) {
-//         numUnchecked--;
-//         if (numUnchecked === 0) {
-//             PROCEED = true;
-//         }
-//     }
-// }
-
-// function updateNextBtnDisabled() {
-//     nextbtn.disabled = !PROCEED;
-// }
-// updateNextBtnDisabled();
-
-
-// for (let cmcheckbox of completenesscheckboxes) {
-//     cmcheckbox?.addEventListener('change', (event) => {
-//         if (event.target.checked) {
-//             numUnchecked--;
-//             if (numUnchecked === 0) {
-//                 PROCEED = true;
-//             }
-//         } else if(!event.target.checked) {
-//             numUnchecked++;
-//             PROCEED = false;
-//         }
-//         updateNextBtnDisabled();
-//     });
-// }
-
-// updateNextBtnDisabled();
-
-
 
 
 
@@ -227,47 +174,37 @@ function destroyChart(ctx) {
 // PROCESS STATUS UPDATER ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // EVENT LISTNERS TO UPDATE THE PROCESS
-for (let cmcheckbox of completenesscheckboxes) {
-    cmcheckbox.addEventListener('change', updateProcessStatus);
-}
-for (let hdcheckbox of holdingcheckboxes) {
-    hdcheckbox.addEventListener('change', updateProcessStatus);
-}
+// for (let cmcheckbox of completenesscheckboxes) {
+//     cmcheckbox.addEventListener('change', updateProcessStatus);
+// }
+// for (let hdcheckbox of holdingcheckboxes) {
+//     hdcheckbox.addEventListener('change', updateProcessStatus);
+// }
 
 
-function updateProcessStatus() {
-
-    const ButtonID = this.id;
+function updateProcessStatus(ProcessId, btn) {
 
     const VehicleId = document.querySelector('#vehicle_id').innerHTML;
-    const ProcessId = ButtonID.split("-")[0];
 
-    console.log(VehicleId);
-    console.log(ProcessId);
+    const checkbox = document.querySelector("input[type=checkbox][name=" + ProcessId + "-" + btn +"]");
 
-    let completeness, holding;
+    let status = "";
 
-    if (document.querySelector("input[type=checkbox][name=" + ProcessId + "-con]").checked) {
-        completeness = 1;
+    if (checkbox.checked) {
+        if (btn == 'con') {
+            status = 'completed';
+        } else if (btn == 'hold') {
+            status = 'OnHold';
+        }
     } else {
-        completeness = 0;
+        status = 'Pending';
     }
-
-    if (document.querySelector("input[type=checkbox][name=" + ProcessId + "-hold]").checked) {
-        holding = 1;
-    } else {
-        holding = 0;
-    }
-
-
 
     // JSON STRINGIFY USED BECAUSE AN ARRAY IS PASSED USING THIS checkboxesset VARIABLE
     const formData = new FormData();
     formData.append("vehicleID", VehicleId);
     formData.append("proID", ProcessId);
-    formData.append("completeness", completeness);
-    formData.append("holding", holding);
-
+    formData.append("status", status);
 
     if (!formData) {
         console.error("FormData not supported");

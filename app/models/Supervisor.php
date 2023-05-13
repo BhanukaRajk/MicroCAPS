@@ -938,7 +938,7 @@ class Supervisor
     }
 
     // UPDATE ONE BY ONE PROCESS IN A VEHICLE
-    public function updateProgress($vehicleID, $proID, $completeness, $holding) {
+    public function updateProgress($vehicleID, $proID, $status) {
 
         $this->db->query(
             'UPDATE `stage-vehicle-process` SET `Status` = :pstatus
@@ -948,17 +948,7 @@ class Supervisor
 
         $this->db->bind(':chassisNo', $vehicleID);
         $this->db->bind(':processid', $proID);
-
-        if($completeness == 1 AND $holding == 0) {
-            $this->db->bind(':pstatus', "completed");
-        } else if($completeness == 0 AND $holding == 1) {
-            $this->db->bind(':pstatus', "OnHold");
-        } else if($completeness == 0 AND $holding == 0) {
-            $this->db->bind(':pstatus', "Pending");
-        } else {
-            $this->db->bind(':pstatus', "Pending");
-        }
-
+        $this->db->bind(':pstatus', $status);
 
 
         if ($this->db->execute()) {
@@ -989,15 +979,15 @@ class Supervisor
     }
 
     // THIS IS THE FUNCTION USED FOR CHECK THE CAR HAS HOLDING PROCESSES
-    public function checkHoldingCars($vehicleID)
-    {
+    public function checkHoldingCars($vehicleID) {
 
         $this->db->query(
             'SELECT COUNT(`Status`) AS `holdCounter` FROM `stage-vehicle-process` 
-                    WHERE `ChassisNo` = :chassisNo;'
+                    WHERE `ChassisNo` = :chassisNo AND `Status` = :status;'
         );
 
         $this->db->bind(':chassisNo', $vehicleID);
+        $this->db->bind(':status', 'OnHold');
 
         $count = $this->db->single();
 
@@ -1268,8 +1258,6 @@ class Supervisor
     }
 
 
-
-
     // CHECK THIS TOOL IS CURRENT IN OPARATION
     public function checkToolById($tool_id): bool
     {
@@ -1289,6 +1277,32 @@ class Supervisor
         }
     
     }
+
+    // ADDING NEW TOOL
+    public function addNewTool($name, $type, $status, $quantity, $image) {
+
+
+        $this->db->query(
+            'INSERT INTO `tool`(`ToolName`, `Status`, `LastUpdate`, `LastUpdateBy`, `quantity`, `ToolType`, `Image`) 
+                    VALUES (:name, :status, CURRENT_TIMESTAMP, :by, :quantity, :tooltype, :image);'
+        );
+
+
+        // $this->db->bind(':id', str_replace(" ", "", $name));
+        $this->db->bind(':name', $name);
+        $this->db->bind(':status', $status);
+        $this->db->bind(':by', $_SESSION['_id']);
+        $this->db->bind(':quantity', $quantity);
+        $this->db->bind(':tooltype', $type);
+        $this->db->bind(':image', $image);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 
@@ -1315,9 +1329,6 @@ class Supervisor
 
 
     }
-
-
-
 
 
 
@@ -1457,11 +1468,6 @@ class Supervisor
         }
     
     }
-
-
-
-
-
     
     public function ViewAllConsumables()
     {
@@ -1483,6 +1489,12 @@ class Supervisor
             return false;
         }
     }
+
+
+
+
+
+
 
     // THIS IS THE FUNCTION CAN GET STAGES AS AN ARRAY AND GIVE DETAILS
     public function viewVehicleList($stage)
