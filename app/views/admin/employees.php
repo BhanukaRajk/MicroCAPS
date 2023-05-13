@@ -170,7 +170,7 @@
                             <label for="tester">Tester</label>
                         </div>
                         <div class="filters">
-                            <button type="submit">Filter</button>
+                            <button type="submit" class="btn btn-primary btn-blue">Filter</button>
                         </div>
 
                 </div>

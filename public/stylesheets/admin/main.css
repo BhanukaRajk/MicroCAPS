@@ -991,6 +991,7 @@ h3 {
 
 .btn:hover {
     background-color: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
 }
 
 .btn:focus {
@@ -1031,6 +1032,16 @@ h3 {
     --btn-hover-color: var(--green);
     --btn-hover-bg: #e8f5e973;
     --btn-hover-border-color: var(--green);
+}
+
+.btn-blue {
+    --btn-color: var(--white);
+    --btn-bg: var(--blue);
+    --btn-border-color: var(--blue);
+    --btn-hover-color: var(--blue);
+    --btn-hover-bg: var(--white);
+    --btn-hover-border-color: var(--blue);
+    --btn-width: 5rem;
 }
 
 .btn-noback {

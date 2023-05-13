@@ -23,7 +23,7 @@ function addEmployee() {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorage("Successful","Employee Added Successfully");
             } else {
@@ -44,7 +44,7 @@ function editEmployee($id) {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorage("Successful","Employee Added Successfully");
             } else {
@@ -62,7 +62,7 @@ function deleteEmployee($id) {
         if (this.readyState == 4 && this.status == 200) {
             var response = this.responseText;
 
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
 
                 location.reload();
                 setLocalStorage("Successful","Employee Deleted Successfully");
@@ -94,7 +94,7 @@ function saveChanges(id, position) {
         processData: false,
         contentType: false,
         success: (response) => {
-            if (response == "Successful") {
+            if (response.trim() == "Successful") {
                 location.reload(true);
                 setLocalStorage("Successful","Saved Changes");
             } else {
