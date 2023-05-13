@@ -370,26 +370,15 @@ function assemblylist(response) {
 
         innerHTML = `<div class="display-flex-row flex-wrap justify-content-between">`
 
-        response['assemblyDetails'].forEach(value => {
+        response['assemblyDetails'].forEach((value, index) => {
 
             let word = 'On Assembly';
             let css = 'green';
 
-            let CurrentStatus = value.CurrentStatus.split("-");
+            let CurrentStatus = stage(value.CurrentStatus);
 
-            if (CurrentStatus[0] == 'S1') {
-                CurrentStatus[0] = 'Stage 01';
-            } else if (CurrentStatus[0] == 'S2') {
-                CurrentStatus[0] = 'Stage 02';
-            } else if (CurrentStatus[0] == 'S3') {
-                CurrentStatus[0] = 'Stage 03';
-            } else if (CurrentStatus[0] == 'S4') {
-                CurrentStatus[0] = 'Stage 04';
-            } else if (CurrentStatus[0] == 'H') {
-                CurrentStatus[0] = 'Hold';
-            } 
-            
-            if (CurrentStatus.length === 2) {
+            if (!CurrentStatus) {
+                CurrentStatus = stage(response['holdStage'][index].StageNo);
                 word = 'On Hold';
                 css = 'red';
             }
@@ -410,7 +399,7 @@ function assemblylist(response) {
                         <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
                     </div>
                     <div class="carstatus ${css}">${word}</div>
-                    <div class="arrivaldate">Stage: ${CurrentStatus[0]}</div>
+                    <div class="arrivaldate">Stage: ${CurrentStatus}</div>
                 </div>
             </a>`;  
         });
@@ -419,6 +408,22 @@ function assemblylist(response) {
     }
 
     return innerHTML;
+}
+
+function stage(str) {
+
+    if (str == 'S1') {
+        return 'Stage 01';
+    } else if (str == 'S2') {
+        return 'Stage 02';
+    } else if (str == 'S3') {
+        return 'Stage 03';
+    } else if (str == 'S4') {
+        return 'Stage 04';
+    } else {
+        return false;
+    }
+
 }
 
 

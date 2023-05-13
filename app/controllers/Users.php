@@ -219,38 +219,6 @@
             }
         }
 
-        public function updatePassword() {
-
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-                $data = [
-                    'currentPassword' => trim($_POST['currentPassword']),
-                    'newPassword' => trim($_POST['newPassword']),
-                    'password_err' => ''
-                ];
-
-                $vOld = $this->userModel->validateOldPassword($_SESSION['_id'], $data['currentPassword']);
-
-                if ($vOld) {
-                    $update = $this->userModel->updatePassword($_SESSION['_id'], $data['newPassword']);
-                    if ($update) {
-                        $_SESSION['success_message'] = 'Success! Password Updated';
-                        echo 'Successful';
-                    } else {
-                        $_SESSION['error_message'] = 'Error! Password Not Updated';
-                        echo 'Password Not Updated';
-                    }
-                } else {
-                    $_SESSION['error_message'] = 'Error! Incorrect Current Password';
-                    echo 'Incorrect Current Password';
-                }
-
-            }
-        }
-
-
         public function logout(){
             $this->userModel->markActivity($_SESSION['_id'], 0);
 

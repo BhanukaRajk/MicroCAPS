@@ -28,6 +28,7 @@ class Admins extends controller {
             $this->view('admin/dashboard', $data);
         }
     }
+
     public function employees($action="",$id="") {
 
         if(!isLoggedIn()){
@@ -184,6 +185,11 @@ class Admins extends controller {
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails();
+                $data['holdStage'] = array();
+
+                foreach ($data['assemblyDetails'] as $value) {
+                    $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                }
                 $this->view('admin/assembly', $data);
             }
         } else if ($stage == null) {
@@ -367,30 +373,5 @@ class Admins extends controller {
         }
     }
 
-    // public function viewpdi()
-    // {
-
-    //     if (!isLoggedIn()) {
-    //         redirect('users/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //         $data['onPDIVehicles'] = $this->adminModel->onPDIVehicles();
-    //         $this->view('admin/viewpdi', $data);
-    //     }
-    // }
-
-    public function viewpdi()
-    {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['onPDIVehicles'] = $this->vehicleModel->vehiclesReadyToTest();
-            $this->view('admin/viewpdi', $data);
-        }
-    }
 
 }

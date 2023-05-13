@@ -1,6 +1,8 @@
 let componentStatus = document.getElementById("component-status");
 
 componentStatus?.addEventListener("change", () => {
+
+    console.log("componentStatus changed");
     
     let content = document.getElementsByClassName("state");
     for (i = 0; i < content.length; i++) {

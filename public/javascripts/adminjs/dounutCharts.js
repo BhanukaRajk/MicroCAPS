@@ -15,6 +15,9 @@ function renderChart(ctx, ltx, data, cutout = 50) {
     } else {
         ltx.innerHTML = Math.floor(done) + '%';
         ltx.classList.add(chartGrid + '-2');
+        if (cutout == 50){
+            ltx.classList.add('width-rem-2');
+        }
     }
 
     var chart = new Chart(ctx, {
@@ -37,12 +40,4 @@ function renderChart(ctx, ltx, data, cutout = 50) {
         cutout: cutout
     }
     });
-}
-
-function destroyChart(ctx) {
-
-    var chart = Chart.getChart(ctx);
-
-    chart.destroy();
-
 }

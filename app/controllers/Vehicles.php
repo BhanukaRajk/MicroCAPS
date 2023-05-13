@@ -379,8 +379,10 @@ class Vehicles extends Controller {
 
                 $data['holdStage'] = array();
 
-                foreach ($data['assemblyDetails'] as $value) {
-                    $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                if ($data['assemblyDetails']) {
+                    foreach ($data['assemblyDetails'] as $value) {
+                        $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                    }
                 }
 
                 echo json_encode($data);

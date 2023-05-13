@@ -530,12 +530,11 @@ class Vehicle {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE (`vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H") OR `vehicle`.CurrentStatus LIKE :status) AND `vehicle`.ChassisNo LIKE :chassisNo
+                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H") AND `vehicle`.ChassisNo LIKE :chassisNo
                 ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
 
-        $this->db->bind(':chassisNo', '%'.$chassisNo . '%');
-        $this->db->bind(':status', '%H');
+        $this->db->bind(':chassisNo', '%'.$chassisNo.'%');
 
         $results = $this->db->resultSet();
 
@@ -557,7 +556,7 @@ class Vehicle {
                 ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
 
-        $this->db->bind(':ModelNo', $model . '%');
+        $this->db->bind(':ModelNo', '%' . $model . '%');
 
         $results = $this->db->resultSet();
 

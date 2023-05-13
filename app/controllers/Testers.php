@@ -5,9 +5,12 @@ class Testers extends controller
 
     private $testerModel;
 
+    private $vehicleModel;
+
     public function __construct()
     {
         $this->testerModel = $this->model('Tester');
+        $this->vehicleModel = $this->model('Vehicle');
     }
 
     public function Sum($data, $str): int
@@ -529,6 +532,11 @@ class Testers extends controller
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['assemblyDetails'] = $this->testerModel->assemblyDetails();
+                $data['holdStage'] = array();
+
+                foreach ($data['assemblyDetails'] as $value) {
+                    $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                }
                 $this->view('tester/assembly', $data);
             }
         } else if ($stage == null) {
@@ -619,6 +627,14 @@ class Testers extends controller
                     $data['assemblyDetails'] = $this->testerModel->assemblyDetails($data['keyword']);
                 } else if ($data['searchType'] == 'model') {
                     $data['assemblyDetails'] = $this->testerModel->assemblyDetailsByModel($data['keyword']);
+                }
+
+                $data['holdStage'] = array();
+
+                if ($data['assemblyDetails']) {
+                    foreach ($data['assemblyDetails'] as $value) {
+                        $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                    }
                 }
 
                 echo json_encode($data);

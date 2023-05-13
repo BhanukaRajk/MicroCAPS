@@ -151,6 +151,10 @@ a {
     background-color: #FD5F00;
 }
 
+.status-red-circle {
+    background-color: #ee0b0b;
+}
+
 .available {
     color: #17B978;
 }

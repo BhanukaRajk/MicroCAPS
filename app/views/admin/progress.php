@@ -34,11 +34,11 @@
                 <div class="display-flex-row justify-content-center gap-0p5">
                     <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
                         <div class="dash-graph-color-circle dash-darkblue-circle "></div>
-                        <div>Done</div>
+                        <div>Completed</div>
                     </div>
                     <div class="display-flex-row justify-content-center align-items-center border-gray border-radius-0p5 padding-2 font-size">
                         <div class="dash-graph-color-circle dash-lightblue-circle "></div>
-                        <div>On-going</div>
+                        <div>Pending</div>
                     </div>
                 </div>
             </div>

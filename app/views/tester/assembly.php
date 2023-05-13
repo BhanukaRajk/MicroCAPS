@@ -45,30 +45,35 @@
                             ';
             } else {
                 echo '<div class="display-flex-row flex-wrap justify-content-between">';
-                foreach ($data['assemblyDetails'] as $value) {
+                
+                function stage($str) {
+
+                    if ($str == 'S1') {
+                        return 'Stage 01';
+                    } else if ($str == 'S2') {
+                        return 'Stage 02';
+                    } else if ($str == 'S3') {
+                        return 'Stage 03';
+                    } else if ($str == 'S4') {
+                        return 'Stage 04';
+                    } else {
+                        return false;
+                    }
+
+                }
+
+                foreach ($data['assemblyDetails'] as $key => $value) {
 
                     $word = 'On Assembly';
                     $css = 'green';
 
-                    $CurrentStatus = explode("-", $value->CurrentStatus);
+                    $CurrentStatus = stage($value->CurrentStatus);
 
-                    if ($CurrentStatus[0] == 'S1') {
-                        $CurrentStatus[0] = 'Stage 01';
-                    } else if ($CurrentStatus[0] == 'S2') {
-                        $CurrentStatus[0] = 'Stage 02';
-                    } else if ($CurrentStatus[0] == 'S3') {
-                        $CurrentStatus[0] = 'Stage 03';
-                    } else if ($CurrentStatus[0] == 'S4') {
-                        $CurrentStatus[0] = 'Stage 04';
-                    } else if ($CurrentStatus[0] == 'H') {
-                        $CurrentStatus[0] = 'Hold';
-                    }
-
-                    
-                    if (isset($CurrentStatus[1])) {
+                    if ($CurrentStatus == false) {
+                        $CurrentStatus = stage($data['holdStage'][$key]->StageNo);
                         $word = 'On Hold';
                         $css = 'red';
-                    }  
+                    }
 
                     echo '<a href="' . URL_ROOT . 'testers/assembly/' . $value->ChassisNo . '">
                                 <div class="carcard">
@@ -85,7 +90,7 @@
                                         <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
                                     </div>
                                     <div class="carstatus '.$css.'"> '.$word.' </div>
-                                    <div class="arrivaldate">Stage: '. $CurrentStatus[0] . '</div>
+                                    <div class="arrivaldate">Stage: '. $CurrentStatus . '</div>
                                 </div></a>';
                 }
 
