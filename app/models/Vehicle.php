@@ -207,6 +207,25 @@ class Vehicle {
         }
     }
 
+    public function getDamagedComponentDetails($ModelNo) {
+        $this->db->query(
+            'SELECT *
+                FROM `component`
+                WHERE PartNo IN (SELECT PartNo FROM `component-release` WHERE Status = :status) AND component.ModelNo = :model;'
+        );
+
+        $this->db->bind(':model', $ModelNo);
+        $this->db->bind(':status', 'D');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return [];
+        }
+    }
+
     public function getProcessStatus($chassisNo, $status = '%', $stage = '%') {
         $this->db->query(
             'SELECT `stage-vehicle-process`.Status, `stage-process`.ProcessName, `stage-process`.StageNo, `stage-process`.Weight
@@ -231,14 +250,14 @@ class Vehicle {
 
     public function componentQty($status) {
         $this->db->query(
-            'SELECT component.PartName, COUNT(component.PartName) AS Qty, component.Color , vehicle.Color AS VehicleColor 
+            'SELECT component.PartName, COUNT(component.PartName) AS Qty, component.Color, component.ModelNo , vehicle.Color AS VehicleColor 
                     FROM `component-release`
                     INNER JOIN component
                     ON `component-release`.PartNo = component.PartNo
                     INNER JOIN `vehicle`
                     ON `component-release`.ChassisNo = vehicle.ChassisNo
                     WHERE `component-release`.Status = :status
-                    GROUP BY component.PartNo;'
+                    GROUP BY component.PartNo, VehicleColor;'
         );
 
         $this->db->bind(':status', $status);
@@ -484,6 +503,26 @@ class Vehicle {
         }
     }
 
+    public function holdStage($chassisNo) {
+
+        $this->db->query(
+            'SELECT ProcessId, StageNo
+                    FROM `stage-process`
+                    WHERE ProcessId IN (SELECT ProcessId FROM `stage-vehicle-process` WHERE ChassisNo = :chassisNo AND Status = :status);'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':status', 'OnHold');
+
+        $result = $this->db->single();
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
     public function assemblyDetails($chassisNo = "%", $order = 'DESC')
     {
         $this->db->query(
@@ -614,7 +653,7 @@ class Vehicle {
         }
     }
 
-    public function updateComponentStatus($chassisNo, $partNo): bool
+    public function updateComponentStatus($chassisNo, $partNo, $status = 'R'): bool
     {
         $this->db->query(
             'UPDATE `component-release`
@@ -624,10 +663,25 @@ class Vehicle {
 
         $this->db->bind(':chassisNo', $chassisNo);
         $this->db->bind(':partNo', $partNo);
-        $this->db->bind(':status', 'R');
+        $this->db->bind(':status', $status);
 
         if ( $this->db->execute() ) {
             return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function currentDamagedComponents() {
+
+        $this->db->query('SELECT ChassisNo, PartNo FROM `component-release` WHERE Status = :status;');
+
+        $this->db->bind(':status', 'D');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
         } else {
             return false;
         }

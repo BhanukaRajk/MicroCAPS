@@ -213,6 +213,19 @@ class Vehicles extends Controller {
             }
     }
 
+    public function changeDamagedComponentStatus() {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+        }
+    }
+
     public function componentsByChassis() {
 
         if(!isLoggedIn()){
@@ -233,6 +246,42 @@ class Vehicles extends Controller {
             echo json_encode($data);
         }
 
+    }
+
+    public function requestDamagedComponents() {
+        if(!isLoggedIn()){
+            redirect('users/login');
+        }
+
+        if (!checkPosition('Manager')) {
+            redirect($_SESSION['_position'] . 's/dashboard');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'components' => [
+                    'M0001' => $this->vehicleModel->getDamagedComponentDetails('M0001'),
+                    'M0002' => $this->vehicleModel->getDamagedComponentDetails('M0002'),
+                    'M0003' => $this->vehicleModel->getDamagedComponentDetails('M0003')
+                ]
+            ];
+
+            if (generateMRF($_POST, $data['components'])) {
+                $data['damagedComponents'] = $this->vehicleModel->currentDamagedComponents();
+                foreach ($data['damagedComponents'] as $value) {
+                    $this->vehicleModel->updateComponentStatus($value->ChassisNo, $value->PartNo, 'NR');
+                }
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
+
+
+
+        }
     }
 
 
@@ -326,6 +375,12 @@ class Vehicles extends Controller {
                     $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails($data['keyword']);
                 } else if ($data['searchType'] == 'model') {
                     $data['assemblyDetails'] = $this->vehicleModel->assemblyDetailsByModel($data['keyword']);
+                }
+
+                $data['holdStage'] = array();
+
+                foreach ($data['assemblyDetails'] as $value) {
+                    $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
                 }
 
                 echo json_encode($data);
