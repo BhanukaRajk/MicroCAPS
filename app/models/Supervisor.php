@@ -374,7 +374,7 @@ class Supervisor
             // Insert the value
             $this->db->query(
 
-                'UPDATE `operation-vehicle` 
+                'UPDATE `operation` 
                 SET `Status` = :VAL'. $record .',
                 `SupervisorId` = :supervisor,
                 `Date` = CURRENT_TIMESTAMP 
@@ -727,6 +727,29 @@ class Supervisor
 
 
 
+
+    public function retrievePAQdata($car_id)
+    {
+        $this->db->query(
+            'SELECT `opearation`.* , 
+                        `vehicle`.`EngineNo`, 
+                        `vehicle-model`.`ModelName` 
+                        FROM `vehicle`, `vehicle-model`, `opearation`
+                        WHERE `vehicle`.`ChassisNo` = :car 
+                        AND `opearation`.`ChassisNo` = `vehicle`.`ChassiaNo` 
+                        AND `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo`;'
+        );
+
+        $this->db->bind(':car', $car_id);
+
+        $test_data = $this->db->single();
+
+        if ($test_data != NULL) {
+            return $test_data ;
+        } else {
+            return false;
+        }
+    }
 
     public function createPAQForm($car_id)
     {
@@ -1461,7 +1484,7 @@ class Supervisor
 
         $row = $this->db->resultSet();
 
-        if (!isset($row)) {
+        if ($row != NULL) {
             return true;
         } else {
             return false;

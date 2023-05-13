@@ -633,4 +633,37 @@ class Vehicle {
         }
     }
 
+
+    public function getPDIChecklist() 
+    {
+        $this->db->query(
+            'SELECT `CheckId` FROM `pdi-check`;'
+        );
+
+        $checkids = $this->db->resultSet();
+
+        if ($checkids =! null) {
+            return $checkids;
+        } else {
+            return false;
+        }
+    }
+
+    public function sendtoRR($chassisNo, $CheckId) :bool
+    {
+        $this->db->query(
+            'INSERT INTO `pdi-result`(`ChassisNo`, `CheckId`)  VALUES (:chassisNo, :checkid);'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':checkid', $CheckId);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
  }

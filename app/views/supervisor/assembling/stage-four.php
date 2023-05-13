@@ -97,8 +97,8 @@
                         <div class="sender">
                             <form action = "<?php echo URL_ROOT .'Supervisors/proceed'; ?>" method="post">
                                 <input type="hidden" name="form-car-id" value="<?php echo $data['chassisNo']; ?>">
-                                <input type="hidden" name="form-car-stage" value="PAQ">
-                                <button type="Submit" id="stage-passer">Proceed to Next Stage</button>
+                                <input type="hidden" name="form-car-stage" value="AC">
+                                <button type="Submit" id="stage-passer">Proceed to Inspection</button>
                             </form>
                         </div>
                     </div>

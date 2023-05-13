@@ -1,7 +1,8 @@
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
 const checkboxes = document.querySelectorAll("input[type=checkbox][name=car-model]");
 const completenessRadios = document.querySelectorAll("input[type=radio][name=completeness]");
-const acceptanceRadios = document.querySelectorAll("input[type=radio][name=acceptance]");
+// const completenessRadios = document.querySelectorAll("input[type=radio][name=completeness]");
+// const acceptanceRadios = document.querySelectorAll("input[type=radio][name=acceptance]");
 
 
 
@@ -12,9 +13,13 @@ for (let checkbox of checkboxes) {
 for (let radio of completenessRadios) {
     radio.addEventListener('change', vehicleFilter);
 }
-for (let radio of acceptanceRadios) {
-    radio.addEventListener('change', vehicleFilter);
-}
+
+// for (let radio of completenessRadios) {
+//     radio.addEventListener('change', vehicleFilter);
+// }
+// for (let radio of acceptanceRadios) {
+//     radio.addEventListener('change', vehicleFilter);
+// }
 
 
 
@@ -24,20 +29,26 @@ function vehicleFilter() {
     const checkboxesset = Array.from(
         document.querySelectorAll("input[type=checkbox][name=car-model]")
         ).map((checkbox) => (checkbox.checked ? checkbox.value : ""));
-
     const completeness = document.querySelector(
         "input[type=radio][name=completeness]:checked"
     ).value;
-    const acceptance = document.querySelector(
-        "input[type=radio][name=acceptance]:checked"
-    ).value;
+
+    
+    // const completeness = document.querySelector(
+    //     "input[type=radio][name=completeness]:checked"
+    // ).value;
+    // const acceptance = document.querySelector(
+    //     "input[type=radio][name=acceptance]:checked"
+    // ).value;
 
     
     // JSON STRINGIFY USED BECAUSE AN ARRAY IS PASSED USING THIS checkboxesset VARIABLE
     const formData = new FormData();
     formData.append("vehicleTypes", JSON.stringify(checkboxesset));
     formData.append("completeness", completeness);
-    formData.append("acceptance", acceptance);
+
+    // formData.append("completeness", completeness);
+    // formData.append("acceptance", acceptance);
 
 
     if (!formData) {

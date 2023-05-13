@@ -515,7 +515,7 @@ class Supervisors extends controller
     }
 
 
-    public function viewCarComponent() //WORKING (WHEN PRESSED MANAGE PARTS)
+    public function viewCarComponent() // WORKING (WHEN PRESSED MANAGE PARTS)
     {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -561,19 +561,6 @@ class Supervisors extends controller
 
 
     // PAQ RESULT SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function S4vehicles()
-    {
-
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['S4Details'] = $this->supervisorModel->ViewS4Vehicles();
-            $this->view('supervisor/inspection/vehiclelist', $data);
-        }
-    }
 
     // RECORD POST ASSEMBLY QUALITY INSPECTION RESULTS
     public function recordPAQInspectionResults()
@@ -589,76 +576,159 @@ class Supervisors extends controller
 
             $data = [
                 'ChassisNo' => trim($_POST['chassis_no']),
-                'BrakeBleed' => trim($_POST['brake_bleed']),
-                'GearOil' => trim($_POST['gear_oil']),
-                'RackEnd' => trim($_POST['rack_end']),
-                'ClutchAdjust' => trim($_POST['clutch_adjust']),
-                'RearAxel' => trim($_POST['rear_axel_check']),
-                'VisualIns' => trim($_POST['visual_inspect']),
+                'BrakeBleed' => trim($_POST['brake-bleed-selection']),
+                'GearOil' => trim($_POST['gear-oil-selection']),
+                'RackEnd' => trim($_POST['rack-end-selection']),
+                'ClutchAdjust' => trim($_POST['clutch-selection']),
+                'RearAxel' => trim($_POST['axel-selection']),
+                'VisualIns' => trim($_POST['visual']),
                 'FinalResult' => trim($_POST['final_result'])
             ];
 
             if ($this->supervisorModel->checkVehicle($data['ChassisNo'])) {
 
-                if (FALSE) {
-                // if ($this->supervisorModel->checkLeaves($data['employeeId'], $data['leavedate'])) {
+                if ($this->supervisorModel->recordPAQresults($data['ChassisNo'], 
+                                                    $data['BrakeBleed'], 
+                                                    $data['GearOil'], 
+                                                    $data['RackEnd'], 
+                                                    $data['ClutchAdjust'], 
+                                                    $data['RearAxel'], 
+                                                    $data['VisualIns'], 
+                                                    $data['FinalResult'],
+                                                    $_SESSION['_id']))
+                {
+                    if($data['FinalResult'] == "Passed") {
+                        $PDIChecks = $this->vehicleModel->getPDIChecklist();
+                        
+                        foreach ($PDIChecks as $PDIcase) {
+                            $this->vehicleModel->sendtoRR($data['chassis_no'], $PDIcase->CheckId);
+                        }
 
-                //     $_SESSION['error_message'] = 'Current employee already requested a leave on this date!';
-                //     $data['url'] = getUrl();
-                //     $this->view('supervisor/leaves/addleave', $data);
-
-                } else {
-
-                    if (($data['BrakeBleed'] == 'NA' OR 
-                        $data['GearOil'] == 'NA' OR 
-                        $data['RackEnd'] == 'NA' OR 
-                        $data['ClutchAdjust'] == 'NA' OR 
-                        $data['RearAxel'] == 'NA') AND 
-                        $data['FinalResult'] == 'Passed')
-                    {
-
-                        $_SESSION['error_message'] = 'All criteria must be passed to complete the assembly line!';
-                        $data['url'] = getUrl();
-                        $this->view('supervisor/inspection/paqrecord', $data);
+                        if($this->supervisorModel->stageChanger($data['chassis_no'], "RR")) {
+                            $_SESSION['success_message'] = 'Success! Vehicle sent to test run';
+                        }
 
                     } else {
 
-                        if ($this->supervisorModel->recordPAQ($data['chassis_no'], 
-                                                                $data['BrakeBleed'], 
-                                                                $data['GearOil'], 
-                                                                $data['RackEnd'], 
-                                                                $data['ClutchAdjust'], 
-                                                                $data['RearAxel'], 
-                                                                $data['VisualIns'], 
-                                                                $data['FinalResult']))
-                        {
-                            $_SESSION['success_message'] = 'Success! New record saved';
-                        } else {
-                            $_SESSION['error_message'] = 'Error! record saving failed!';
+                        if($this->supervisorModel->stageChanger($data['chassis_no'], "PA")) {
+                            $_SESSION['success_message'] = 'Success! Vehicle has to be rechecked';
                         }
-                        redirect('Supervisors/S4vehicles');
+
                     }
+
+                } else {
+
+                    $_SESSION['error_message'] = 'Error! record saving failed!';
+                    
                 }
+
+                redirect('Supervisors/testRunQueue');
 
             } else {
 
-
                 $_SESSION['error_message'] = 'Oops! The vehicle could not be found';
+                redirect('Supervisors/testRunQueue');
 
-                $data['url'] = getUrl();
-                $this->view('supervisor/inspection/paqrecord', $data);
+                // $data['url'] = getUrl();
+                // $this->view('supervisor/inspection/paqrecord', $data);
+
             }
+
         } else {
 
             $_SESSION['error_message'] = 'Request failed!';
+            redirect('Supervisors/testRunQueue');
 
-            $data['url'] = getUrl();
-            $this->view('supervisor/inspection/paqrecord', $data);
+            // $data['url'] = getUrl();
+            // $this->view('supervisor/inspection/paqrecord', $data);
 
         }
     
     }
 
+    // THIS FUNCTION SENDS UPDATING PAQ DATA TO THE MODEL
+    public function updatePAQInspectionResults()
+    {
+
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['chassis_no']),
+                'BrakeBleed' => trim($_POST['brake-bleed-selection']),
+                'GearOil' => trim($_POST['gear-oil-selection']),
+                'RackEnd' => trim($_POST['rack-end-selection']),
+                'ClutchAdjust' => trim($_POST['clutch-selection']),
+                'RearAxel' => trim($_POST['axel-selection']),
+                'VisualIns' => trim($_POST['visual']),
+                'FinalResult' => trim($_POST['final_result'])
+            ];
+
+            if ($this->supervisorModel->checkVehicle($data['ChassisNo'])) {
+
+                if ($this->supervisorModel->updatePAQresults($data['ChassisNo'], 
+                                                    $data['BrakeBleed'], 
+                                                    $data['GearOil'], 
+                                                    $data['RackEnd'], 
+                                                    $data['ClutchAdjust'], 
+                                                    $data['RearAxel'], 
+                                                    $data['VisualIns'], 
+                                                    $data['FinalResult'],
+                                                    $_SESSION['_id']))
+                {
+                    if($data['FinalResult'] == "Passed") {
+                        $PDIChecks = $this->vehicleModel->getPDIChecklist();
+                        
+                        foreach ($PDIChecks as $PDIcase) {
+                            $this->vehicleModel->sendtoRR($data['chassis_no'], $PDIcase->CheckId);
+                        }
+
+                        if($this->supervisorModel->stageChanger($data['chassis_no'], "RR")) {
+                            $_SESSION['success_message'] = 'Success! Vehicle sent to test run';
+                        }
+
+                    } else {
+
+                        if($this->supervisorModel->stageChanger($data['chassis_no'], "PA")) {
+                            $_SESSION['success_message'] = 'Success! Vehicle has to be rechecked';
+                        }
+
+                    }
+
+                } else {
+
+                    $_SESSION['error_message'] = 'Error! record saving failed!';
+                    
+                }
+
+                redirect('Supervisors/testRunQueue');
+
+            } else {
+
+                $_SESSION['error_message'] = 'Oops! The vehicle could not be found';
+                redirect('Supervisors/testRunQueue');
+
+                // $data['url'] = getUrl();
+                // $this->view('supervisor/inspection/paqrecord', $data);
+
+            }
+
+        } else {
+
+            $_SESSION['error_message'] = 'Request failed!';
+            redirect('Supervisors/testRunQueue');
+
+            // $data['url'] = getUrl();
+            // $this->view('supervisor/inspection/paqrecord', $data);
+
+        }
+    
+    }
 
     // GET CAR INFO TO POST ASSEMBLY QUALITY INSPECTION FORM
     public function getCarInfo()
@@ -675,22 +745,36 @@ class Supervisors extends controller
                 'CarID' => trim($_POST['form-car-id'])
             ];
 
-            if ($this->supervisorModel->checkCarById($data['CarID'], "S4")) {
+            // CHECK THAT THE VEHICLE FAILED THE PAQ
+            if ($this->supervisorModel->checkCarById($data['CarID'], "PA")) {
 
-                if ($this->supervisorModel->createPAQForm($data['CarID'])) {
-                    $data['FormCarData'] = $this->supervisorModel->createPAQForm($data['CarID']);
+                // IF VEHICLE FAILED RETRIEVE OLD DATA FROM DATABASE
+                $data['PAQdata'] = $this->supervisorModel->retrievePAQdata($data['CarID']);
+
+                if ($data['PAQdata'] != null) {
+                    $this->view('supervisor/inspection/paqupdate', $data);
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not get information..';
+                }
+
+            // CHECK THE VEHICLE IS NEW TO PAQ TEST
+            } else if ($this->supervisorModel->checkCarById($data['CarID'], "AC")) {
+                
+                // IF IT IS NEW GET THE REQUIRED DATA TO THE FORM
+                $data['FormCarData'] = $this->supervisorModel->createPAQForm($data['CarID']);
+                
+                if ($data['FormCarData'] != null) {
                     $this->view('supervisor/inspection/paq-record', $data);
                 } else {
                     $_SESSION['error_message'] = 'Error! Could not get information..';
                 }
-                    
+
             } else {
                 $_SESSION['error_message'] = 'Oops! The car you are searching could not be found.';
             }
 
         } else {
                 $_SESSION['error_message'] = 'Request failed! :(';
-                // $data['url'] = getUrl();
         }
 
         redirect('Supervisors/testRunQueue');
@@ -728,7 +812,7 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['S4','PA']);
+            $data['LineCarsSet'] = $this->supervisorModel->viewVehicleList(['AC','PA']);
             $this->view('supervisor/inspection/vehiclelist', $data);
             // print_r($data);
         }
@@ -1070,7 +1154,7 @@ class Supervisors extends controller
                 'Stock' => trim($_POST['stock'])
             ];
 
-            if ($this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
+            if (!$this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
 
                 if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'])) {
                     $_SESSION['success_message'] = 'Consumable quantity updated!';

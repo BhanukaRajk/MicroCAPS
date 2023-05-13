@@ -71,8 +71,24 @@
                                                 <label for="mg">MG ZH SUV</label>
                                             </div>
                                         </li>
-
                                         <li>
+                                            <div class="filtertype">Inspection</div>
+                                            <div class="filters">
+                                                <input type="radio" id="test-pa" name="completeness" value="PA">
+                                                <label for="test-pa">Test Failed</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="radio" id="test-ac" name="completeness" value="AC">
+                                                <label for="test-ac">Not completed</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="radio" id="all-case" name="completeness" value="All" checked>
+                                                <label for="all-case">All</label>
+                                            </div>
+
+                                        </li>
+
+                                        <!-- <li>
                                             <div class="filtertype">Inspection</div>
                                             <div class="filters">
                                                 <input type="radio" id="current" name="completeness" value="CM">
@@ -87,8 +103,8 @@
                                                 <label for="all-time">All</label>
                                             </div>
 
-                                        </li>
-                                        <li>
+                                        </li> -->
+                                        <!-- <li>
                                             <div class="filtertype">Status</div>
                                             <div class="filters">
                                                 <input type="radio" id="acceptance" name="acceptance" value="Accepted">
@@ -102,7 +118,7 @@
                                                 <input type="radio" id="all-tested" name="acceptance" value="All" checked>
                                                 <label for="all-tested">All</label>
                                             </div>
-                                        </li>
+                                        </li> -->
                                     </ul>
                             </div>
                         </div>
