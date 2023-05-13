@@ -15,6 +15,7 @@ class Vehicles extends Controller {
 
 
     /* Shell Related */
+
     // Function to Handle Shell Request
     public function shellRequest() {
 
@@ -190,6 +191,7 @@ class Vehicles extends Controller {
 
 
     /* Component Related */
+
     // Function to Get Component Details by Chassis No
     public function componentsByChassis() {
 
@@ -383,8 +385,10 @@ class Vehicles extends Controller {
 
                 $data['holdStage'] = array();
 
-                foreach ($data['assemblyDetails'] as $value) {
-                    $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                if ($data['assemblyDetails']) {
+                    foreach ($data['assemblyDetails'] as $value) {
+                        $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                    }
                 }
 
                 echo json_encode($data);

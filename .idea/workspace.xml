@@ -9,11 +9,8 @@
       <change beforePath="$PROJECT_DIR$/app/controllers/Managers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Managers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Users.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Vehicles.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Vehicles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Manager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Manager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/PDI.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/PDI.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Vehicle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Vehicle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/managerjs/cors.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/managerjs/cors.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
