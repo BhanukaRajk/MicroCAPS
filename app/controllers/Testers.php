@@ -534,8 +534,10 @@ class Testers extends controller
                 $data['assemblyDetails'] = $this->testerModel->assemblyDetails();
                 $data['holdStage'] = array();
 
-                foreach ($data['assemblyDetails'] as $value) {
-                    $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                if ($data['assemblyDetails']) {
+                    foreach ($data['assemblyDetails'] as $value) {
+                        $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                    }
                 }
                 $this->view('tester/assembly', $data);
             }
