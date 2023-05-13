@@ -1,10 +1,3 @@
-// BASE URL
-const BASE_URL = "http://localhost/:8080MicroCAPS/";
-
-
-
-
-
 // BUTTON ENABLING AND DISABLING PROCESS HANDLER /////////////////////////////////////////////////////////////////////////////////
 
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS

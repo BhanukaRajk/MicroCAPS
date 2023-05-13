@@ -1,7 +1,5 @@
 // CONSUMABLE FILTERING FUNCTION
 
-// const BASE_URL = "http://localhost:8080/MicroCAPS/";
-
 const ctypeRadios = document.querySelectorAll("input[type=radio][name=cons-type]");
 const cstateRadios = document.querySelectorAll("input[type=radio][name=stock-state]");
 

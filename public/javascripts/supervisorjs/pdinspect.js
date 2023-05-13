@@ -3,8 +3,6 @@ const checkboxes = document.querySelectorAll("input[type=checkbox][name=car-mode
 const completenessRadios = document.querySelectorAll("input[type=radio][name=completeness]");
 const acceptanceRadios = document.querySelectorAll("input[type=radio][name=acceptance]");
 
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
-
 
 // ATTACH EVENT LISTENERS TO ALL FILTER INPUTS
 for (let checkbox of checkboxes) {

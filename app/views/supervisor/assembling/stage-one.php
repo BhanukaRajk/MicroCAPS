@@ -68,8 +68,7 @@
 
                                             <div><input type="checkbox" id="'. trim($process->ProcessId) .'-con" name="'. trim($process->ProcessId) .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .' onclick="updateProcessStatus(\''.$process->ProcessId.'\',\'con\')"></div>
                                             <div><input type="checkbox" id="'. trim($process->ProcessId) .'-hold" name="'. trim($process->ProcessId) .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .' onclick="updateProcessStatus(\''.$process->ProcessId.'\',\'hold\')"></div>
-                                            // <div><input type="checkbox" id="' . $process->ProcessId . '-con" name="' . $process->ProcessId . '-con" class="connected-btn" ' . (($process->Status == "completed") ? "checked" : "") . '></div>
-                                            // <div><input type="checkbox" id="' . $process->ProcessId . '-hold" name="' . $process->ProcessId . '-hold" class="holding-btn" ' . (($process->Status == "OnHold") ? "checked" : "") . '></div>
+
                                         </div>
                                     </form>
                                 </div>';

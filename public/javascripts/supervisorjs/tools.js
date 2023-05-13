@@ -2,7 +2,6 @@
 const tooltypeRadios = document.querySelectorAll("input[type=radio][name=tool-type]");
 const toolstateRadios = document.querySelectorAll("input[type=radio][name=tool-state]");
 
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 
 // ATTACH EVENT LISTENERS TO ALL FILTER INPUTS

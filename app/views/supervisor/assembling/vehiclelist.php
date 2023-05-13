@@ -38,10 +38,11 @@
                                         <img src="'. URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
                                     </div>
                                     <div class="carstatus">';
-                                        if($car->CurrentStatus == "S1") { echo 'At Stage 01'; }
-                                        else if($car->CurrentStatus == "S2") { echo 'At Stage 02'; }
-                                        else if($car->CurrentStatus == "S3") { echo 'At Stage 03'; }
-                                        else { echo 'At Stage 04'; }
+                                        if($car->CurrentStatus == "S1") { echo 'on stage 01'; }
+                                        else if($car->CurrentStatus == "S2") { echo 'on stage 02'; }
+                                        else if($car->CurrentStatus == "S3") { echo 'on stage 03'; }
+                                        else if($car->CurrentStatus == "S4") { echo 'on stage 04'; }
+                                        else { echo 'On-Hold'; }
                                         echo '<input type="hidden" name="form-car-stage" value="' .$car->CurrentStatus. '">
                                     </div>
                                 </div>
@@ -102,14 +103,14 @@
                                         </li>
 
                                         <li>
-                                            <div class="filtertype">Timeline</div>
+                                            <div class="filtertype">Progress</div>
                                             <div class="filters">
-                                                <input type="radio" id="current" name="timeline" value="Current" checked>
-                                                <label for="current">Current</label>
+                                                <input type="radio" id="inprogress" name="progress" value="inprogress" checked>
+                                                <label for="inprogress">In progress</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="radio" id="all-time" name="timeline" value="All">
-                                                <label for="all-time">All</label>
+                                                <input type="radio" id="all-cars" name="progress" value="All">
+                                                <label for="all-cars">All</label>
                                             </div>
 
                                         </li>

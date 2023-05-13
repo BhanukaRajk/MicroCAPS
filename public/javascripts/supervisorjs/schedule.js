@@ -1,5 +1,4 @@
 // TASK COMPLETION UPDATING FUNCTION
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 const taskStateCheckboxes = document.querySelectorAll("input[type=checkbox][class=P28_taskrecord]");
 

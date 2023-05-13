@@ -147,6 +147,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/paqrecord.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

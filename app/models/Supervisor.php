@@ -44,7 +44,7 @@ class Supervisor
         $this->db->query(
             'SELECT COUNT(`ChassisNo`) AS dispatched
                 FROM `vehicle`
-                WHERE `PDIStatus` = "CM";'
+                WHERE `CurrentStatus` = "D";'
         );
         $counts[] = $this->db->single();
 
@@ -602,7 +602,7 @@ class Supervisor
                     `Color`, 
                     `CurrentStatus`
                     FROM `vehicle` 
-                    WHERE `CurrentStatus` LIKE "S_%";'
+                    WHERE `CurrentStatus` IN ("S1", "S2", "S3", "S4", "H");'
         );
 
         $vehicles = $this->db->resultSet();
@@ -1506,6 +1506,7 @@ class Supervisor
 
         $sql = "SELECT `vehicle`.`ChassisNo`, 
                         `vehicle`.`EngineNo`, 
+                        `vehicle`.`CurrentStatus`, 
                         `vehicle`.`Color`, 
                         `vehicle-model`.`ModelName` 
                     FROM `vehicle`, `vehicle-model` 
@@ -1523,7 +1524,7 @@ class Supervisor
     }
 
     // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN CARD VIEWS
-    public function viewCarsOnFactory($vehicleType = null, $stages = null, $timeline = null)
+    public function viewCarsOnFactory($vehicleType = null, $stages = null, $progress = null)
     {
         $sql = 'SELECT `vehicle`.`ChassisNo`, 
                             `vehicle`.`EngineNo`, 
@@ -1550,12 +1551,13 @@ class Supervisor
 
 
 
-        if ($timeline == null) {
+        if ($progress == null) {
 
             $sql .= " AND `vehicle`.`CurrentStatus` IN ('S1', 'S2', 'S3', 'S4')";
+
         } else {
 
-            if ($timeline == 'Current') {
+            if ($progress == 'inprogress') {
 
                 if (isset($stages)) {
 
@@ -1570,8 +1572,10 @@ class Supervisor
 
                     $sql .= " AND `vehicle`.`CurrentStatus` IN ($reqstages)";
                 }
-            } else if ($timeline == 'All') {
-                $sql .= "";
+            } else if ($progress == 'All') {
+
+                $sql .= " AND `vehicle`.`CurrentStatus` IN ('S1', 'S2', 'S3', 'S4', 'H')";
+
             }
         }
 

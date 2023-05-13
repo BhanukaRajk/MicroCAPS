@@ -1,5 +1,3 @@
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
-
 function enableTaskFind() {
     let input = document.getElementById("TaskName");
     let vehicle = document.getElementById("vehicles").value;

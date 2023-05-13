@@ -1,6 +1,3 @@
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
-
-
 function dashboardChart() {
 
     let chassisNo = document.getElementById("dashboardChart").value;

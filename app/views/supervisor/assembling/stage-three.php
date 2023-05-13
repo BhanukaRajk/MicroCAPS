@@ -67,8 +67,8 @@
                                             <!-- IF THERE IS SOME PART RELATED TO THE PARTICULAR PROCESS IS DAMAGED,
                                             THAT PROCESS WILL BE AUTOMATICALLY HOLDS AND CANNOT CHANGED UNTIL REQUIRED PART IS RECEIVED -->
 
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-con" name="'. $process->ProcessId .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .'></div>
-                                            <div><input type="checkbox" id="'. $process->ProcessId .'-hold" name="'. $process->ProcessId .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .'></div>
+                                            <div><input type="checkbox" id="'. trim($process->ProcessId) .'-con" name="'. trim($process->ProcessId) .'-con" class="connected-btn" '. (($process->Status == "completed") ? "checked" : "") .' onclick="updateProcessStatus(\''.$process->ProcessId.'\',\'con\')"></div>
+                                            <div><input type="checkbox" id="'. trim($process->ProcessId) .'-hold" name="'. trim($process->ProcessId) .'-hold" class="holding-btn" '. (($process->Status == "OnHold") ? "checked" : "") .' onclick="updateProcessStatus(\''.$process->ProcessId.'\',\'hold\')"></div>
                                         </div>
                                     </form>
                                 </div>';

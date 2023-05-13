@@ -1,5 +1,3 @@
-const BASE_URL = "http://localhost:8080/MicroCAPS/";
-
 function expandThisLeave(ThisLeave) {
 
     // GET THE VALUES FROM THE TOOL CARD

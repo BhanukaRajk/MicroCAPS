@@ -838,10 +838,10 @@ class Supervisors extends controller
 
             $Models = json_decode($_POST['model_set']);
             $Stages = json_decode($_POST['stage_set']);
-            $Timeline = $_POST['time_scale'];
+            $Progress = $_POST['current_progress'];
 
             $data['url'] = getUrl();
-            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory($Models, $Stages, $Timeline);
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory($Models, $Stages, $Progress);
 
             header('Content-Type: application/json');
             echo json_encode($data['AssemblyLineCars']);
