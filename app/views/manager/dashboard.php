@@ -44,8 +44,7 @@
 
                     <div class="dash-damages-frame ">
                         <div>
-                            <div class="dash-frame-headings ">Damaged Parts</div>
-                            <div></div>
+                            <div class="dash-frame-headings ">Damaged Components</div>
                         </div>
                         <div class="display-flex-column gap-1 overflow">
                             <?php 
@@ -56,6 +55,8 @@
                                                     </div>
                                                 ';
                                 } else {
+                                    $cnt = 1;
+                                    $string = '';
                                     foreach ($data['onHoldComponents'] as $value) {
 
                                         if ($value->Color == 0) {
@@ -63,6 +64,9 @@
                                         } else {
                                             $color = $value->VehicleColor;
                                         }
+
+                                        $string = $string .'&type'.$cnt.'='.$value->ModelNo.'&color'.$cnt.'='.$color.'&qty'.$cnt.'='.$value->Qty;
+                                        $cnt++;
 
                                         echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20">
                                                 <div class="display-flex-column padding-bottom-3">
@@ -80,6 +84,9 @@
                                     }
                                 }
                             ?>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary btn-red-2 <?php  echo  ($data['onHoldComponents'] == false) ? 'display-none' : ''; ?>" onclick="damagedComponents('<?php echo $string; ?>')">Request</button>
                         </div>
                     </div>
 
@@ -210,6 +217,12 @@
         </div>
     </div>
     </div>
+</section>
+
+<section class="display-flex-column">
+
+    <div id="alert" class="hideme" role="alert"></div>
+
 </section>
 
 <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/managerjs/main.js"></script>

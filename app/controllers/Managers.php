@@ -43,7 +43,7 @@ class Managers extends Controller {
                 $data['overall'] = null;
             }
 
-            $data['onHoldComponents'] = $this->vehicleModel->componentQty('Damaged');
+            $data['onHoldComponents'] = $this->vehicleModel->componentQty('D');
 
             $this->view('manager/dashboard', $data);
         }
@@ -122,6 +122,12 @@ class Managers extends Controller {
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails();
+                $data['holdStage'] = array();
+
+                foreach ($data['assemblyDetails'] as $value) {
+                    $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                }
+
                 $this->view('manager/assembly', $data);
             }
         } else if ($stage == null) {
