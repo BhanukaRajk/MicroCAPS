@@ -134,42 +134,6 @@ class Tester {
     // __________________VEHICLE DETAILS____________________
 
 
-    
-
-    // public function selectVehicle(){
-    //     $this->db->query('SELECT ChassisNo FROM `vehicle` WHERE `vehicle`.`PDIStatus` = "NC"');
-
-    //     $row = $this->db->resultSet();
-
-    //     if ( $row ) {
-    //         return $row;
-    //     } else {
-    //         return null;
-    //     }
-    // }
-
-    // public function findPDIvehicles($ChassisNo) {
-
-    //     $this->db->query(
-    //         'SELECT `vehicle`.ChassisNo, `vehicle`.EngineNo 
-    //             FROM `vehicle` 
-    //             WHERE `vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus = :pdi AND `vehicle`.ChassisNo = :ChassisNo'
-    //     );
-
-    //     $this->db->bind(':status', 'PDI');
-    //     $this->db->bind(':pdi', 'NC');
-    //     $this->db->bind(':ChassisNo', $ChassisNo);
-
-    //     $results = $this->db->resultSet();
-
-    //     if ( $this->db->rowCount() ) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-
 
     // GET VEHICLE DETAILS BY CHASSIS NUMBER
 

@@ -22,6 +22,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
     <script src="https://kit.fontawesome.com/4c8b1af502.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <title>MicroCAPS</title>
 </head>

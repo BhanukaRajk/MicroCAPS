@@ -1,4 +1,4 @@
-// Flash Message
+// FLASH MESSAGE
 
 $(document).ready(() => {
 
@@ -13,7 +13,7 @@ $(document).ready(() => {
 })
 
 
-// Change PDI Status
+// CHANGE PDI STATUS
 
 function addPDI(ChassisNo,CheckId, Result) {
     
@@ -36,7 +36,8 @@ function addPDI(ChassisNo,CheckId, Result) {
     xhttp.send("ChassisNo="+ChassisNo+"&CheckId="+CheckId+"&Result="+Result);
 }
 
-// Change All PDI Statuses
+
+// CHANGE ALL PDI STATUSES
 
 function selectAllPDI(ChassisNo, CategoryId, Result) {
     
@@ -59,7 +60,8 @@ function selectAllPDI(ChassisNo, CategoryId, Result) {
     xhttp.send("ChassisNo="+ChassisNo+"&CategoryId="+CategoryId+"&Result="+Result);
 }
 
-// Add a Vehicle to My Tasks
+
+// ADD A VEHICLE TO MY TASKS
 
 function addTask(ChassisNo, TesterId) {
     
@@ -83,7 +85,7 @@ function addTask(ChassisNo, TesterId) {
 }
 
 
-// Remove a Vehicle from My Tasks
+// REMOVE A VEHICLE FROM MY TASKS
 
 function removeTask(ChassisNo) {
     
@@ -107,7 +109,7 @@ function removeTask(ChassisNo) {
 }
 
 
-// Mark Task as Completed
+// MARK TASK AS COMPLETED
 
 function completeTask(ChassisNo, TesterId) {
     
@@ -137,7 +139,7 @@ function completeTask(ChassisNo, TesterId) {
 }
 
 
-// Edit Profile Details
+// EDIT PROFILE DETAILS
 
 function saveChanges(id, position) {
     let formdata = new FormData();
@@ -166,7 +168,8 @@ function saveChanges(id, position) {
     });
 }
 
-// Delete Defect
+
+// DELETE DEFECT
 
   function deleteDefect(chassisno, defectno) {
     var xhr = new XMLHttpRequest();
@@ -196,7 +199,8 @@ function saveChanges(id, position) {
     };
   }
 
-// Add Defect
+
+// ADD DEFECT
 
 function addDefect() {
     let formdata = new FormData();
@@ -221,9 +225,21 @@ function addDefect() {
             } else if (response.trim() == "defectexists") {
                 location.reload();
                 setLocalStorage("Error","Defect Number Already Exists");
+            } else if (response.trim() == "olderdate") {
+                location.reload();
+                setLocalStorage("Error","Date must be in last 7 days.");
+            } else if (response.trim() == "futuredate") {
+                location.reload();
+                setLocalStorage("Error","Date cannot be in the future.");
             } else if (response.trim() == "invaliddate") {
                 location.reload();
-                setLocalStorage("Error","Invalid Date");
+                setLocalStorage("Error","Date cannot be empty.");
+            } else if (response.trim() == "emptydefectno") {
+                location.reload();
+                setLocalStorage("Error","Defect number cannot be empty.");
+            } else if (response.trim() == "emptydefectdesc") {
+                location.reload();
+                setLocalStorage("Error","Repair description cannot be empty.");
             } else {
                 location.reload();
                 setLocalStorage("Error","Error Adding Defect");
@@ -232,7 +248,8 @@ function addDefect() {
     });
 }
 
-// Edit Defect
+
+// EDIT DEFECT
 
 function editDefect(chassisno, defectno) {
     let formdata = new FormData();
@@ -251,10 +268,19 @@ function editDefect(chassisno, defectno) {
         success: (response) => {
             if (response.trim() == "Successful") {
                 window.location.replace("http://localhost/MicroCAPS/Testers/defect_sheet/"+chassisno);
-                setLocalStorage("Successful","Saved Changes");
+                setLocalStorage("Successful","Saved Changes Successfully");
+            } else if (response.trim() == "olderdate") {
+                location.reload();
+                setLocalStorage("Error","Date must be in last 7 days.");
+            } else if (response.trim() == "futuredate") {
+                location.reload();
+                setLocalStorage("Error","Date cannot be in the future.");
             } else if (response.trim() == "invaliddate") {
                 location.reload();
-                setLocalStorage("Error","Invalid Date");
+                setLocalStorage("Error","Date cannot be empty.");
+            } else if (response.trim() == "emptydefectdesc") {
+                location.reload();
+                setLocalStorage("Error","Defect description cannot be empty.");
             } else {
                 location.reload();
                 setLocalStorage("Error","Error Saving Changes");
@@ -263,7 +289,9 @@ function editDefect(chassisno, defectno) {
     });
 }
 
-// Search
+
+// SEARCH
+
 function searchByKey(type) {
 
     let keyword = document.getElementById("searchId").value;
@@ -301,7 +329,101 @@ function searchByKey(type) {
 
 }
 
+
+// SETTINGS
+
+function updatePassword() {
+    let formdata = new FormData();
+    formdata.append("currentPassword", document.getElementById("currentpassword").value);
+    formdata.append("newPassword", document.getElementById("newpassword").value);
+    formdata.append("confirmPassword", document.getElementById("confirmpassword").value);
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost/MicroCAPS/Users/updatePassword',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            if (response.trim() == "Successful") {
+                location.reload(true);
+                setLocalStorage("Successful","Password Updated");
+            } else {
+                location.reload();
+                setLocalStorage("Error",response);
+            }
+        }
+    });
+}
+
+
+// SEARCH GENERATES
+
+function assemblylist(response) {
+
+    let innerHTML = '';
+
+    if (!response['assemblyDetails']) {
+        innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                        <div class="font-weight">No Details</div>
+                    </div>`
+    } else {
+
+        innerHTML = `<div class="display-flex-row flex-wrap justify-content-between">`
+
+        response['assemblyDetails'].forEach(value => {
+
+            let word = 'On Assembly';
+            let css = 'green';
+
+            let CurrentStatus = value.CurrentStatus.split("-");
+
+            if (CurrentStatus[0] == 'S1') {
+                CurrentStatus[0] = 'Stage 01';
+            } else if (CurrentStatus[0] == 'S2') {
+                CurrentStatus[0] = 'Stage 02';
+            } else if (CurrentStatus[0] == 'S3') {
+                CurrentStatus[0] = 'Stage 03';
+            } else if (CurrentStatus[0] == 'S4') {
+                CurrentStatus[0] = 'Stage 04';
+            } else if (CurrentStatus[0] == 'H') {
+                CurrentStatus[0] = 'Hold';
+            } 
+            
+            if (CurrentStatus.length === 2) {
+                word = 'On Hold';
+                css = 'red';
+            }
+
+            innerHTML = innerHTML + 
+            `<a href="http://localhost/MicroCAPS/managers/assembly/${value.ChassisNo}">
+                <div class="carcard">
+                    <div class="cardhead">
+                        <div class="cardid">
+                            <div class="carmodel">${value.ModelName}</div>
+                            <div class="chassisno">${value.ChassisNo}</div>
+                        </div>
+                        <div class="toolstatuscolor">
+                            <div class="status-circle status-${css}-circle"></div>
+                        </div>
+                    </div>
+                    <div class="carpicbox">
+                        <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                    </div>
+                    <div class="carstatus ${css}">${word}</div>
+                    <div class="arrivaldate">Stage: ${CurrentStatus[0]}</div>
+                </div>
+            </a>`;  
+        });
+
+        innerHTML = innerHTML + `</div>`;
+    }
+
+    return innerHTML;
+}
+
+
 //Alert Success
+
 function alertSuccess(message) {
     let alert = document.getElementById("alert");
     alert.classList.remove("hideme");
@@ -320,6 +442,7 @@ function alertSuccess(message) {
 
 
 //Alert Faliure
+
 function alertFaliure(message) {
     let alert = document.getElementById("alert");
     alert.classList.remove("hideme");

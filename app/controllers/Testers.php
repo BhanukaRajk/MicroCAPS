@@ -22,6 +22,9 @@ class Testers extends controller
         return $sum;
     }
 
+
+    // FOR DASHBOARD
+
     public function dashboard()
     {
 
@@ -38,7 +41,10 @@ class Testers extends controller
         }
     }
 
-    public function defect_sheet($id)
+
+    // FOR DEFECT SHEET & ADD DEFECT
+
+    public function defect_sheet($chassisno)
     {
 
         if (!isLoggedIn()) {
@@ -47,9 +53,9 @@ class Testers extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['id'] = $id;
-            $data['defects'] = $this->testerModel->viewDefectSheets($id);
-            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
+            $data['id'] = $chassisno;
+            $data['defects'] = $this->testerModel->viewDefectSheets($chassisno);
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($chassisno);
 
             $data['DefectNo'] = '';
             $data['RepairDescription'] = '';
@@ -90,9 +96,27 @@ class Testers extends controller
             if ($this->testerModel->findDefectExists($data['DefectNo'], $data['ChassisNo'])) {
                 $data['defect_err'] = 'Defect Already Recorded';
                 echo 'defectexists';
-            } else if (intval($str_diff) < 0 || intval($str_diff) > 7) {
+            }
+            
+            if (intval($str_diff) > 7) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'olderdate';
+            } else if (intval($str_diff) < 0) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'futuredate';
+            } else if ($data['InspectionDate'] == "") {
                 $data['date_err'] = 'Invalid Date';
                 echo 'invaliddate';
+            }
+
+            if ($data['DefectNo'] == ""){
+                $data['defect_err'] = 'Defect No. is Required';
+                echo 'emptydefectno';
+            }
+
+            if ($data['RepairDescription'] == ""){
+                $data['defect_err'] = 'Repair Description is Required';
+                echo 'emptydefectdesc';
             }
 
             if (empty($data['defect_err']) && empty($data['date_err'])) {
@@ -106,7 +130,9 @@ class Testers extends controller
     }
 
 
-    public function edit_defect($ChassisNo, $DefectNo)
+    // FOR EDIT DEFECT
+
+    public function edit_defect($chassisno, $defectno)
     {
 
         if (!isLoggedIn()) {
@@ -117,10 +143,10 @@ class Testers extends controller
             $_POST  = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'DefectNo' => $DefectNo,
+                'DefectNo' => $defectno,
                 'RepairDescription' => trim($_POST['RepairDescription']),
                 'InspectionDate' => trim($_POST['InspectionDate']),
-                'ChassisNo' => $ChassisNo,
+                'ChassisNo' => $chassisno,
                 'EmployeeID' => trim($_POST['EmployeeID']),
                 'ReCorrection' => trim($_POST['ReCorrection']),
                 'defect_err' => '',
@@ -128,7 +154,7 @@ class Testers extends controller
                 'user_err' => ''
             ];
             $data['url'] = getUrl();
-            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($ChassisNo);
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($chassisno);
 
             $date_1 = date_create($data['InspectionDate']);
             $date_2 = date_create(date('Y-m-d'));
@@ -137,12 +163,23 @@ class Testers extends controller
             $str_diff = $diff->format('%R%a');
 
 
-            if (intval($str_diff) < 0 || intval($str_diff) > 7) {
+            if (intval($str_diff) > 7) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'olderdate';
+            } else if (intval($str_diff) < 0) {
+                $data['date_err'] = 'Invalid Date';
+                echo 'futuredate';
+            } else if ($data['InspectionDate'] == "") {
                 $data['date_err'] = 'Invalid Date';
                 echo 'invaliddate';
             }
 
-            if (empty($data['date_err'])) {
+            if ($data['RepairDescription'] == ""){
+                $data['defect_err'] = 'Repair Description is Required';
+                echo 'emptydefectdesc';
+            }
+
+            if (empty($data['date_err']) && empty($data['defect_err'])) {
                 if ($this->testerModel->editDefect($data)) {
                     echo 'Successful';
                 } else {
@@ -151,31 +188,34 @@ class Testers extends controller
             }
         } else {
 
-            $defect = $this->testerModel->getDefect($ChassisNo, $DefectNo);
+            $defect = $this->testerModel->getDefect($chassisno, $defectno);
 
             $data = [
-                'DefectNo' => $DefectNo,
+                'DefectNo' => $defectno,
                 'RepairDescription' => $defect->RepairDescription,
                 'InspectionDate' => $defect->InspectionDate,
-                'ChassisNo' => $ChassisNo,
+                'ChassisNo' => $chassisno,
                 'EmployeeID' => $defect->EmployeeId,
                 'ReCorrection' => $defect->ReCorrection
             ];
             $data['url'] = getUrl();
-            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($ChassisNo);
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($chassisno);
 
             $this->view('tester/edit_defect', $data);
         }
     }
 
-    public function delete_defect($ChassisNo, $DefectNo)
+
+    // FOR DELETE DEFECT
+
+    public function delete_defect($chassisno, $DefectNo)
     {
         if (!isLoggedIn()) {
             redirect('testers/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-            if ($this->testerModel->deleteDefect($ChassisNo, $DefectNo)) {
+            if ($this->testerModel->deleteDefect($chassisno, $DefectNo)) {
                 echo 'Successful';
             } else {
                 echo 'Error';
@@ -185,7 +225,10 @@ class Testers extends controller
         }
     }
 
-    public function pdi($id)
+
+    // FOR VIEW PDI CHECKLIST
+
+    public function pdi($chassisno)
     {
 
         if (!isLoggedIn()) {
@@ -193,16 +236,19 @@ class Testers extends controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($chassisno);
             $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
-            $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
-            $data['id'] = $id;
-            $data['defects'] = $this->testerModel->viewDefectSheets($id);
+            $data['pdiCheckList'] = $this->testerModel->pdiCheckList($chassisno);
+            $data['id'] = $chassisno;
+            $data['defects'] = $this->testerModel->viewDefectSheets($chassisno);
             $this->view('tester/pdi', $data);
         }
     }
 
-    public function pdi_results($id)
+
+    // FOR VIEW PDI RESULTS
+
+    public function pdiresults($chassisno)
     {
 
         if (!isLoggedIn()) {
@@ -210,14 +256,17 @@ class Testers extends controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($id);
+            $data['pdiVehicle'] = $this->testerModel->pdiVehicle($chassisno);
             $data['pdiCheckCategories'] = $this->testerModel->pdiCheckCategories();
-            $data['pdiCheckList'] = $this->testerModel->pdiCheckList($id);
-            $data['id'] = $id;
-            $data['defects'] = $this->testerModel->viewDefectSheets($id);
-            $this->view('tester/pdi_results', $data);
+            $data['pdiCheckList'] = $this->testerModel->pdiCheckList($chassisno);
+            $data['id'] = $chassisno;
+            $data['defects'] = $this->testerModel->viewDefectSheets($chassisno);
+            $this->view('tester/pdiresults', $data);
         }
     }
+
+
+    // FOR ADD PDI CHECKLIST
 
     public function addPDI()
     {
@@ -246,6 +295,9 @@ class Testers extends controller
         }
     }
 
+
+    // FOR SELECT ALL PDI CHECKLIST
+
     public function selectAllPDI()
     {
 
@@ -272,6 +324,9 @@ class Testers extends controller
             }
         }
     }
+
+
+    // FOR PROFILE SETTINGS
 
     public function settings()
     {
@@ -320,6 +375,9 @@ class Testers extends controller
         }
     }
 
+
+    // FOR FIND PDI VEHICLES
+
     public function selectpdi()
     {
 
@@ -332,6 +390,9 @@ class Testers extends controller
             $this->view('tester/selectpdi', $data);
         }
     }
+
+
+    // FOR VIEW VEHCILES ADDED BY TESTER
 
     public function mytasks($id)
     {
@@ -346,6 +407,9 @@ class Testers extends controller
         }
     }
 
+
+    // FOR ADD A VEHICLE TO TASKS
+
     public function taskmanager()
     {
 
@@ -359,6 +423,9 @@ class Testers extends controller
             $this->view('tester/taskmanager', $data);
         }
     }
+
+
+    // FOR ADD A VEHICLE TO TASKS
 
     public function addTask()
     {
@@ -385,6 +452,9 @@ class Testers extends controller
         }
     }
 
+
+    // FOR REMOVE A VEHICLE FROM TASKS
+
     public function removeTask()
     {
         if (!isLoggedIn()) {
@@ -408,6 +478,9 @@ class Testers extends controller
             }
         }
     }
+
+
+    // FOR MARK A VEHICLE AS COMPLETED
 
     public function completeTask()
     {
@@ -444,6 +517,8 @@ class Testers extends controller
         }
     }
 
+
+    // FOR VIEW VEHCILE ASSEMBLY DETAILS
 
     public function assembly($chassisNo = null, $stage = null) {
 

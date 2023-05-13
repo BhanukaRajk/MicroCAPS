@@ -24,7 +24,7 @@
                 if($value->CurrentStatus == 'RR'){
                     $val = 'Ready to Test';
                 }
-                echo '<a href="' . URL_ROOT . 'testers/pdi_results/' . $value->ChassisNo . '">
+                echo '<a href="' . URL_ROOT . 'testers/pdiresults/' . $value->ChassisNo . '">
                             <div class="carcard">
                                 <div class="cardhead">
                                     <div class="cardid">
