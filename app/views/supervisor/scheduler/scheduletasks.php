@@ -340,7 +340,7 @@
 
 
 
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script>
+<!-- <script src="<?php // echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script> -->
 <script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/scheduler.js"></script>
 
 

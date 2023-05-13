@@ -1,4 +1,4 @@
-// const BASE_URL = "http://localhost/MicroCAPS/";
+const BASE_URL = "http://localhost:8080/MicroCAPS/";
 
 function enableTaskFind() {
     let input = document.getElementById("TaskName");

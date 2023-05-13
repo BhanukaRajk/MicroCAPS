@@ -95,8 +95,9 @@
                             <button onclick="showPage(4)" class="paginate">4</button> -->
                         </div>
                         <div class="sender">
-                            <form action"">
-                                <input type="hidden" value="<?php echo $data['chassisNo']; ?>">
+                            <form action = "<?php echo URL_ROOT .'Supervisors/proceed'; ?>" method="post">
+                                <input type="hidden" name="form-car-id" value="<?php echo $data['chassisNo']; ?>">
+                                <input type="hidden" name="form-car-stage" value="S4">
                                 <button type="Submit" id="stage-passer">Proceed to Next Stage</button>
                             </form>
                         </div>

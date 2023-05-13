@@ -108,6 +108,10 @@ class Supervisor
 
 
 
+
+
+
+
     // SETTINGS PAGE FUNCTIONS //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function updateProfileValues($id, $firstname, $lastname, $email, $mobile, $nic) {
         $this->db->query(
@@ -169,6 +173,8 @@ class Supervisor
             return null;
         }
     }
+
+
 
 
 
@@ -293,36 +299,6 @@ class Supervisor
     }
 
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -356,13 +332,6 @@ class Supervisor
         }
     }
 
-
-
-
-
-
-
-
     public function ViewS4Finishers()
     {
 
@@ -379,6 +348,64 @@ class Supervisor
         }
     }
 
+    public function ViewReturnDefectSheet()
+    {
+
+        $this->db->query(
+            'SELECT *
+                FROM tasks 
+                where EmployeeId != NULL; '
+        );
+
+        $tasks = $this->db->resultSet();
+
+        if ($tasks) {
+            return $tasks;
+        } else {
+            return false;
+        }
+    }
+
+    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final)
+    {
+
+        for ($record = 1; $record <= 7; $record++) {
+
+            // Insert the value
+            $this->db->query(
+
+                'UPDATE `operation-vehicle` 
+                SET `Status` = :VAL'. $record .',
+                `SupervisorId` = :supervisor,
+                `Date` = CURRENT_TIMESTAMP 
+                WHERE `ChassisNo` = :chassisNo AND `OpId` = :ID' . $record . ';'
+
+            );
+        
+            // Bind the parameters
+            $this->db->bind(':ID' . $record, 'OPT000'.$record);
+        
+            // Execute the query
+            $this->db->execute();
+        }
+
+        $this->db->bind(':chassisNo', $ChassisNo);
+        $this->db->bind(':VAL1', $BrakeBleeding);
+        $this->db->bind(':VAL2', $GearOilLevel);
+        $this->db->bind(':VAL3', $Adjustment);
+        $this->db->bind(':VAL4', $Clutch);
+        $this->db->bind(':VAL5', $RAP);
+        $this->db->bind(':VAL6', $Visual);
+        $this->db->bind(':VAL7', $Final);
+        $this->db->bind(':supervisor', $_SESSION['_name']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
 
 
@@ -391,28 +418,7 @@ class Supervisor
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// TASK SCHEDULING PROCESS /////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function findProcessByName($process_name, $car)
     {
@@ -423,11 +429,10 @@ class Supervisor
                 WHERE `stage-process`.`ModelNo` = `vehicle`.`ModelNo` AND 
                         `vehicle`.`ChassisNo` = :car AND 
                         `stage-process`.`ProcessName` LIKE :process
-                        -- `stage-process`.`ProcessName` LIKE `%ea%`
                         ;'
         );
 
-        $this->db->bind(':process', $process_name);
+        $this->db->bind(':process', '%'.$process_name.'%');
         $this->db->bind(':car', $car);
 
         $taskset = $this->db->resultSet();
@@ -587,49 +592,6 @@ class Supervisor
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function ViewReturnDefectSheet()
-    {
-
-        $this->db->query(
-            'SELECT *
-                FROM tasks 
-                where EmployeeId != NULL; '
-        );
-
-        $tasks = $this->db->resultSet();
-
-        if ($tasks) {
-            return $tasks;
-        } else {
-            return false;
-        }
-    }
-
-
-
-
     // ASSEMBLY LINE VEHICLES
     public function viewAssemblyLineVehicles()
     {
@@ -653,46 +615,6 @@ class Supervisor
     }
 
 
-    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final)
-    {
-
-        for ($record = 1; $record <= 7; $record++) {
-
-            // Insert the value
-            $this->db->query(
-
-                'UPDATE `operation-vehicle` 
-                SET `Status` = :VAL'. $record .',
-                `SupervisorId` = :supervisor,
-                `Date` = CURRENT_TIMESTAMP 
-                WHERE `ChassisNo` = :chassisNo AND `OpId` = :ID' . $record . ';'
-
-            );
-        
-            // Bind the parameters
-            $this->db->bind(':ID' . $record, 'OPT000'.$record);
-        
-            // Execute the query
-            $this->db->execute();
-        }
-
-        $this->db->bind(':chassisNo', $ChassisNo);
-        $this->db->bind(':VAL1', $BrakeBleeding);
-        $this->db->bind(':VAL2', $GearOilLevel);
-        $this->db->bind(':VAL3', $Adjustment);
-        $this->db->bind(':VAL4', $Clutch);
-        $this->db->bind(':VAL5', $RAP);
-        $this->db->bind(':VAL6', $Visual);
-        $this->db->bind(':VAL7', $Final);
-        $this->db->bind(':supervisor', $_SESSION['_name']);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 
 
 
@@ -702,7 +624,7 @@ class Supervisor
 
 
 
-    public function viewDamages()
+    public function viewDamages() // UNDEFINED
     {
         
         $sql = 'SELECT `ConsumableId`, `ConsumableName`, 
@@ -800,42 +722,8 @@ class Supervisor
     }
 
 
-    public function ViewPDIresults()
-    {
-
-        $this->db->query(
-            'SELECT *
-                FROM vehicles; ' //pdi results table
-        );
-
-        $vehicles = $this->db->resultSet();
-
-        if ($vehicles) {
-            return $vehicles;
-        } else {
-            return false;
-        }
-    }
 
 
-    public function viewProfile($user)
-    {
-
-        $this->db->query(
-                'SELECT * 
-                FROM employee
-                WHERE EmployeeId = :id;'
-        );
-
-        $this->db->bind(':id', $user);
-        $userdata = $this->db->single();
-
-        if ($userdata) {
-            return $userdata;
-        } else {
-            return false;
-        }
-    }
 
 
 
@@ -887,11 +775,22 @@ class Supervisor
 
 
 
+    public function ViewPDIresults()
+    {
 
+        $this->db->query(
+            'SELECT *
+                FROM vehicles; ' //pdi results table
+        );
 
+        $vehicles = $this->db->resultSet();
 
-    
-
+        if ($vehicles) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
 
     public function onPDIVehicles() {
 
@@ -958,7 +857,6 @@ class Supervisor
         }
     }
 
-
     public function viewPDI($id){
         $this->db->query(
             "SELECT `pdi-result`.`ChassisNo`,
@@ -982,8 +880,6 @@ class Supervisor
             return false;
         }
     }
-
-
 
     public function pdiVehicle($id){
         $this->db->query('SELECT ChassisNo, EngineNo FROM `vehicle` WHERE `vehicle`.`ChassisNo` = :id');
@@ -1041,7 +937,6 @@ class Supervisor
         }
     }
 
-
     // UPDATE ONE BY ONE PROCESS IN A VEHICLE
     public function updateProgress($vehicleID, $proID, $completeness, $holding) {
 
@@ -1073,8 +968,6 @@ class Supervisor
         }
     }
 
-
-
     // THIS IS THE FUNCTION USED FOR CHANGE THE CURRENT STATUS OF A VEHICLE
     public function stageChanger($vehicleID, $new_stage) {
 
@@ -1095,99 +988,74 @@ class Supervisor
     
     }
 
+    // THIS IS THE FUNCTION USED FOR CHECK THE CAR HAS HOLDING PROCESSES
+    public function checkHoldingCars($vehicleID)
+    {
 
-        // THIS IS THE FUNCTION USED FOR CHECK THE CAR HAS HOLDING PROCESSES
-        public function checkHoldingCars($vehicleID) {
-
-            $this->db->query(
-                'SELECT COUNT(`Status`) AS `holdCounter` FROM `stage-vehicle-process` 
+        $this->db->query(
+            'SELECT COUNT(`Status`) AS `holdCounter` FROM `stage-vehicle-process` 
                     WHERE `ChassisNo` = :chassisNo;'
-            );
-    
-            $this->db->bind(':chassisNo', $vehicleID);
-    
-    
-            if ($this->db->execute()) {
-                return true;
-            } else {
-                return false;
-            }
-        
+        );
+
+        $this->db->bind(':chassisNo', $vehicleID);
+
+        $count = $this->db->single();
+
+        if ($count != null) {
+            return $count;
+        } else {
+            return false;
         }
+    }
 
+    public function stageOfThisProcess($process)
+    {
 
-        // COMPONENTS STATUS UPDATING FUNCTION
-        public function recordComponentDetails($car_id, $part_id, $issued, $damaged) {
-            $this->db->query(
-                'UPDATE `component-release` SET `Status` = :current
+        $this->db->query(
+            'SELECT `StageNo` FROM `stage-process` WHERE `ProcessId` = :process;'
+        );
+
+        $this->db->bind(':process', $process);
+
+        $stage = $this->db->single();
+
+        if ($stage != null) {
+            return $stage;
+        } else {
+            return false;
+        }
+    }
+
+    // COMPONENTS STATUS UPDATING FUNCTION
+    public function recordComponentDetails($car_id, $part_id, $issued, $damaged)
+    {
+        $this->db->query(
+            'UPDATE `component-release` SET `Status` = :current
                     WHERE `ChassisNo` = :chassisNo AND `PartNo` = :part;'
-            );
+        );
 
-            if($issued == 1 AND $damaged == 1) {
-                $current = 'ID';
-            } else if($issued == 1 AND $damaged == 0) {
-                $current = 'I';
-            } else if($issued == 0 AND $damaged == 1) {
-                $current = 'D';
-            } else {
-                $current ='R';
-            }
-    
-            $this->db->bind(':chassisNo', $car_id);
-            $this->db->bind(':newStage', $part_id);
-            $this->db->bind(':current', $current);
-    
-    
-            if ($this->db->execute()) {
-                return true;
-            } else {
-                return false;
-            }
+        if ($issued == 1 and $damaged == 1) {
+            $current = 'ID';
+        } else if ($issued == 1 and $damaged == 0) {
+            $current = 'I';
+        } else if ($issued == 0 and $damaged == 1) {
+            $current = 'D';
+        } else {
+            $current = 'R';
         }
+
+        $this->db->bind(':chassisNo', $car_id);
+        $this->db->bind(':newStage', $part_id);
+        $this->db->bind(':current', $current);
+
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1293,31 +1161,6 @@ class Supervisor
 
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1454,30 +1297,24 @@ class Supervisor
 
 
 
+    public function updateStage($chassisNo, $stage)
+    {
+
+        $this->db->query(
+            'UPDATE `vehicle` SET `CurrentStatus` = :stage WHERE `ChassisNo` = :chassisNo;'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':stage', $stage);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 
@@ -1571,7 +1408,6 @@ class Supervisor
         }
     }
 
-
     public function updateConsumableQuantity($consume_id, $quantity, $consume_type, $user): bool
     {
         if($consume_type == "Liters") {
@@ -1602,7 +1438,6 @@ class Supervisor
             return false;
         }
     }
-
 
     // CHECK THIS CONSUMABLE USING IN FACTORY
     public function checkConsumeById($consume_id): bool
@@ -1675,81 +1510,75 @@ class Supervisor
         }
     }
 
-
-
-
-        // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN CARD VIEWS
-        public function viewCarsOnFactory($vehicleType = null, $stages = null, $timeline = null)
-        {
-            $sql = 'SELECT `vehicle`.`ChassisNo`, 
+    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN CARD VIEWS
+    public function viewCarsOnFactory($vehicleType = null, $stages = null, $timeline = null)
+    {
+        $sql = 'SELECT `vehicle`.`ChassisNo`, 
                             `vehicle`.`EngineNo`, 
                             `vehicle`.`CurrentStatus`, 
                             `vehicle`.`Color`, 
                             `vehicle-model`.`ModelName` 
                             FROM `vehicle`, `vehicle-model` 
                             WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo`';
-    
-    
-            if ($vehicleType != null) {
-    
-                if (empty($vehicleType)) {
-                    // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
-                    return false;
-                }
-    
-                $vehicleModels = implode(',', array_map(function($vehicle) {
-                    return "'" . addslashes($vehicle) . "'";
-                }, $vehicleType));
-        
-                $sql .= " AND `vehicle`.`ModelNo` IN ($vehicleModels)";
-            }
 
 
+        if ($vehicleType != null) {
 
-            if ($timeline == null) {
-
-                $sql .= " AND `vehicle`.`CurrentStatus` IN ('S1', 'S2', 'S3', 'S4')";
-
-            } else {
-
-                if ($timeline == 'Current') {
-
-                    if (isset($stages)) {
-    
-                        if (empty($stages)) {
-                            // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
-                            return false;
-                        }
-            
-                        $reqstages = implode(',', array_map(function($stage) {
-                            return "'" . addslashes($stage) . "'";
-                        }, $stages));
-                
-                        $sql .= " AND `vehicle`.`CurrentStatus` IN ($reqstages)";
-                    }
-
-                } else if ($timeline == 'All') {
-                    $sql .= "";
-                }
-
-            }
-    
-
-    
-            $sql .= ';';
-    
-            // DO NOT SWAP THE ORDER OF QUERY AND BIND
-            $this->db->query($sql);
-    
-            $vehicles = $this->db->resultSet();
-    
-    
-            if ($vehicles) {
-                return $vehicles;
-            } else {
+            if (empty($vehicleType)) {
+                // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
                 return false;
             }
+
+            $vehicleModels = implode(',', array_map(function ($vehicle) {
+                return "'" . addslashes($vehicle) . "'";
+            }, $vehicleType));
+
+            $sql .= " AND `vehicle`.`ModelNo` IN ($vehicleModels)";
         }
+
+
+
+        if ($timeline == null) {
+
+            $sql .= " AND `vehicle`.`CurrentStatus` IN ('S1', 'S2', 'S3', 'S4')";
+        } else {
+
+            if ($timeline == 'Current') {
+
+                if (isset($stages)) {
+
+                    if (empty($stages)) {
+                        // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
+                        return false;
+                    }
+
+                    $reqstages = implode(',', array_map(function ($stage) {
+                        return "'" . addslashes($stage) . "'";
+                    }, $stages));
+
+                    $sql .= " AND `vehicle`.`CurrentStatus` IN ($reqstages)";
+                }
+            } else if ($timeline == 'All') {
+                $sql .= "";
+            }
+        }
+
+
+
+        $sql .= ';';
+
+        // DO NOT SWAP THE ORDER OF QUERY AND BIND
+        $this->db->query($sql);
+
+        $vehicles = $this->db->resultSet();
+
+
+        if ($vehicles) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
 
 
 

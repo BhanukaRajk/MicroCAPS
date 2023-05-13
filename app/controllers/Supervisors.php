@@ -116,7 +116,10 @@ class Supervisors extends controller
 
 
 
+
+
     // LEAVE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+    
     public function addleave()
     {
 
@@ -358,12 +361,12 @@ class Supervisors extends controller
         }
     }
 
-    // THIS IS THE FUNCTION USED TO ASSIGN ASSEMBLER TO A TASK
+    // THIS IS THE FUNCTION USED TO ASSIGN ASSEMBLER TO A TASK---------------------------------------------------------------------
     public function updateThisTask()
     {
     }
 
-
+    // TO REMOVE THE REQUESTED TASK
     public function removeThisTask() // WORKING
     {
 
@@ -401,8 +404,9 @@ class Supervisors extends controller
         }
     }
 
-
-    public function addTask() {
+    // TO SCHEDULE NEW TASKS
+    public function addTask() // WORKING
+    {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
@@ -425,6 +429,27 @@ class Supervisors extends controller
 
         }
 
+    }
+
+    // TO FIND AND ASSIGN ASSEMBLER FOR THE TASK
+    public function searchAssembler() // WORKING
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $task = $_POST['task'];
+            $car_no = $_POST['selectedCar'];
+
+            $data['url'] = getUrl();
+            $data['Assembler'] = $this->supervisorModel->assemblerForProcess($car_no, $task);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['Assembler']);
+
+        }
     }
 
 
@@ -503,6 +528,29 @@ class Supervisors extends controller
             $this->view('supervisor/parts/vehiclelist', $data);
         }
     }
+
+
+    public function recordComponentDefects()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $car_id = $_POST['vehicle'];
+            $process_id = $_POST['part'];
+            $issued = $_POST['issued'];
+            $damaged = $_POST['damaged'];
+
+            $data['part_update'] = $this->supervisorModel->recordComponentDetails($car_id, $process_id, $issued, $damaged);
+            echo json_encode($data['part_update']);
+
+        }
+    
+    }
+
+
 
 
 
@@ -612,7 +660,6 @@ class Supervisors extends controller
     }
 
 
-
     // GET CAR INFO TO POST ASSEMBLY QUALITY INSPECTION FORM
     public function getCarInfo()
     {
@@ -655,6 +702,8 @@ class Supervisors extends controller
 
 
 
+
+
     // PDI RESULT SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function pdiresults()
     {
@@ -684,456 +733,6 @@ class Supervisors extends controller
             // print_r($data);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-    // VEHICLE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function vehicleview()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $this->view('supervisor/inspection/vehiclelist', $data);
-        }
-    }    
-
-
-
-
-
-
-
-
-
-    // RETURN DEFECT SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function viewDefectSheet()
-    {
-    }
-
-
-
-
-
-    //ASSEMBLY LINE AND UPDATE PROGRESS SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function lineVehicles()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
-            $this->view('supervisor/assembling/vehiclelist', $data);
-        }
-    }
-    public function updateProgress()
-    {
-    }
-
-
-
-    // CONTROLLER FUNCTION TO VIEW CARS + FILTERS (WORKING)
-    public function findAssemblyLineCars()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
-            $data['url'] = getUrl();
-            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory();
-            $this->view('supervisor/assembling/vehiclelist', $data);
-
-        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $Models = json_decode($_POST['model_set']);
-            $Stages = json_decode($_POST['stage_set']);
-            $Timeline = $_POST['time_scale'];
-
-            $data['url'] = getUrl();
-            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory($Models, $Stages, $Timeline);
-
-            header('Content-Type: application/json');
-            echo json_encode($data['AssemblyLineCars']);
-
-        } else {
-
-            $_SESSION['error_message'] = 'Request failed!';
-            $data['url'] = getUrl();
-            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory();
-            $this->view('supervisor/assembling/vehiclelist', $data);
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // CONSUMABLE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function addNewConsumables() {
-
-        if (!isLoggedIn()) {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'name' => trim($_POST['name']),
-                'type' => trim($_POST['type']),
-                'status' => trim($_POST['status'])
-            ];
-
-            if (isset($_FILES['image'])) {
-
-                $profile = strval($data['name']) . '.jpg';
-                $to = '../public/images/consumables/' . $profile;
-
-                $from = $_FILES['image']['tmp_name'];
-
-                if (move_uploaded_file($from, $to)) {
-                    if ($this->consumableModel->addConsumable($data['name'], $data['type'], $data['status'], $profile))
-                        $_SESSION['success_message'] = 'Success! Saved Changes';
-                    else
-                        $_SESSION['error_message'] = 'Error! Could not save changes';
-                } else {
-                    $_SESSION['error_message'] = 'Error! Could not save changes';
-                }
-            } else {
-                $_SESSION['error_message'] = 'Error! Upload an image';
-            }
-
-        }
-
-    }
-
-    public function viewConsumables()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-
-    }
-
-
-    
-    // public function viewConsumables()
-    // {
-    //     if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-    //         redirect('Users/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //         $data['url'] = getUrl();
-    //         $data['consumableset'] = $this->supervisorModel->ViewAllConsumables();
-    //         $this->view('supervisor/consumables/consumablelist', $data);
-    //     }
-    // }
-
-
-    public function updateThisConsumable()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'ConsumeId' => trim($_POST['formConId']),
-                'ConsumeType' => trim($_POST['formConType']),
-                'Stock' => trim($_POST['stock'])
-            ];
-
-            if ($this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
-
-                if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'])) {
-                    $_SESSION['success_message'] = 'Consumable quantity updated!';
-                } else {
-                    $_SESSION['error_message'] = 'Error! Could not update information..';
-                }
-                    
-            } else {
-
-                $_SESSION['error_message'] = 'Oops! The consumable you are trying to update could not be found.';
-
-            }
-
-            redirect('Supervisors/viewConsumables');
-
-        } else {
-
-                $_SESSION['error_message'] = 'Request failed! :(';
-                // $data['url'] = getUrl();
-                redirect('Supervisors/viewConsumables');
-                // $this->view('supervisor/consumables/consumablelist', $data);
-
-        }
-    }
-
-    public function removeThisConsumable()
-    {
-    }  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // TOOL ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function insertTool()
-    {
-    }
-    public function viewTools()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['toolset'] = $this->supervisorModel->ViewAllTools();
-            $this->view('supervisor/toolset/tools', $data);
-        }
-    }
-    public function updateThisTool()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'toolId' => trim($_POST['tool_id_status']),
-                'toolStatus' => trim($_POST['tool-status'])
-            ];
-
-            if ($this->supervisorModel->checkToolById($data['toolId'])) {
-
-                if ($this->supervisorModel->updateToolStatus($data['toolId'], $data['toolStatus'])) {
-                    $_SESSION['success_message'] = 'Tool status updated!';
-                } else {
-                    $_SESSION['error_message'] = 'Error! Could not update information..';
-                }
-                    
-            } else {
-                $_SESSION['error_message'] = 'Oops! The tool you are trying to update could not be found.';
-            }
-
-        } else {
-
-                $_SESSION['error_message'] = 'Request failed! :(';
-                // $data['url'] = getUrl();
-                // $this->view('supervisor/consumables/consumablelist', $data);
-
-        }
-        redirect('Supervisors/viewTools');
-    }
-
-    public function removeThisTool()
-    {
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function pdi($id)
     {
@@ -1171,8 +770,6 @@ class Supervisors extends controller
         }
     }
 
-
-
     // TEST RUN VEHICLE LIST SHOWS
     public function pdilinevehicleview()
     {
@@ -1189,7 +786,76 @@ class Supervisors extends controller
 
 
 
+    // RETURN DEFECT SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function viewDefectSheet()
+    {
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //ASSEMBLY LINE AND UPDATE PROGRESS SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function lineVehicles()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+        }
+    }
+    
+    public function updateProgress()
+    {
+    }
+
     // CONTROLLER FUNCTION TO VIEW CARS + FILTERS (WORKING)
+    public function findAssemblyLineCars()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $data['url'] = getUrl();
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+
+        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $Models = json_decode($_POST['model_set']);
+            $Stages = json_decode($_POST['stage_set']);
+            $Timeline = $_POST['time_scale'];
+
+            $data['url'] = getUrl();
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory($Models, $Stages, $Timeline);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['AssemblyLineCars']);
+
+        } else {
+
+            $_SESSION['error_message'] = 'Request failed!';
+            $data['url'] = getUrl();
+            $data['AssemblyLineCars'] = $this->supervisorModel->viewCarsOnFactory();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+        }
+    }
+
+    // CONTROLLER FUNCTION TO VIEW CARS + FILTERS ON ASSEMBLY LINE FOR PROCESSES AND COMPONENT DETAILS (WORKING)
     public function getProcess()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -1248,13 +914,14 @@ class Supervisors extends controller
             }
 
         } else {
+            
                 $_SESSION['error_message'] = 'Request failed! :(';
+                redirect('Supervisors/linevehicleview');
                 // $data['url'] = getUrl();
         }
 
             // print_r($data['url']);
             // echo 'Data = '.$data['stage'];
-            redirect('Supervisors/linevehicleview');
 
 
 
@@ -1268,51 +935,196 @@ class Supervisors extends controller
         //     $this->view('supervisor/assembling/vehiclelist', $data);
         // }
     }
+    
+    // public function recordIssuedComponents()
+    // {
+    //     if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+    //         redirect('Users/login');
+    //     }
 
-    public function recordIssuedComponents()
-    {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    //         $completeness = $_POST['completeness'];
+    //         $acceptance = $_POST['acceptance'];
+
+    //         $data['url'] = getUrl();
+    //         $data['LineCarsSet'] = $this->supervisorModel->viewDamages($completeness, $acceptance);
+
+    //         header('Content-Type: application/json');
+    //         echo json_encode($data['LineCarsSet']);
+
+    //     } else {
+    //         $data['url'] = getUrl();
+    //         $data['LineCarsSet'] = $this->supervisorModel->viewCars();
+    //         $this->view('supervisor/assembling/vehiclelist', $data);
+    //     }
+    // }
+
+
+    // TO SEND CAR INTO THE NEXT STAGE
+    public function proceed() {
+
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $completeness = $_POST['completeness'];
-            $acceptance = $_POST['acceptance'];
 
+            $data = [
+                'chassisNo' => trim($_POST['form-car-id']),
+                'stage' => trim($_POST['form-car-stage'])
+            ];
+
+            if ($this->supervisorModel->updateStage($data['chassisNo'], $data['stage'])) {
+                $_SESSION['success_message'] = 'New Stage Started!';
+                redirect('Supervisors/getProcess/'.$data['chassisNo'].'/'.$data['stage']);
+            } else {
+                $_SESSION['error_message'] = 'Oops! Something went wrong.';
+            }
+
+            redirect('Supervisors/findAssemblyLineCars');
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+    // CONSUMABLE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function addNewConsumables() {
+
+        if (!isLoggedIn()) {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'name' => trim($_POST['name']),
+                'type' => trim($_POST['type']),
+                'status' => trim($_POST['status'])
+            ];
+
+            if (isset($_FILES['image'])) {
+
+                $profile = strval($data['name']) . '.jpg';
+                $to = '../public/images/consumables/' . $profile;
+
+                $from = $_FILES['image']['tmp_name'];
+
+                if (move_uploaded_file($from, $to)) {
+                    if ($this->consumableModel->addConsumable($data['name'], $data['type'], $data['status'], $profile))
+                        $_SESSION['success_message'] = 'Success! Saved Changes';
+                    else
+                        $_SESSION['error_message'] = 'Error! Could not save changes';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not save changes';
+                }
+            } else {
+                $_SESSION['error_message'] = 'Error! Upload an image';
+            }
+
+        }
+
+    }
+
+
+    public function viewConsumables()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewDamages($completeness, $acceptance);
+            $data['consumableset'] = $this->supervisorModel->ViewAllConsumables();
+            $this->view('supervisor/consumables/consumablelist', $data);
+        }
+    }
 
-            header('Content-Type: application/json');
-            echo json_encode($data['LineCarsSet']);
+
+    public function updateThisConsumable()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ConsumeId' => trim($_POST['formConId']),
+                'ConsumeType' => trim($_POST['formConType']),
+                'Stock' => trim($_POST['stock'])
+            ];
+
+            if ($this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
+
+                if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'])) {
+                    $_SESSION['success_message'] = 'Consumable quantity updated!';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not update information..';
+                }
+                    
+            } else {
+
+                $_SESSION['error_message'] = 'Oops! The consumable you are trying to update could not be found.';
+
+            }
+
+            redirect('Supervisors/viewConsumables');
 
         } else {
-            $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewCars();
-            $this->view('supervisor/assembling/vehiclelist', $data);
+
+                $_SESSION['error_message'] = 'Request failed! :(';
+                // $data['url'] = getUrl();
+                redirect('Supervisors/viewConsumables');
+                // $this->view('supervisor/consumables/consumablelist', $data);
+
         }
     }
 
+    public function removeThisConsumable()
+    {
+    }  
 
+
+
+
+
+
+    // TOOL ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    public function insertTool()
+    {
+    }
 
+    public function viewTools()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
 
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['toolset'] = $this->supervisorModel->ViewAllTools();
+            $this->view('supervisor/toolset/tools', $data);
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function recordComponentDefects()
+    public function updateThisTool()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
@@ -1320,17 +1132,41 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $car_id = $_POST['vehicle'];
-            $process_id = $_POST['part'];
-            $issued = $_POST['issued'];
-            $damaged = $_POST['damaged'];
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data['part_update'] = $this->supervisorModel->recordComponentDetails($car_id, $process_id, $issued, $damaged);
-            echo json_encode($data['part_update']);
+            $data = [
+                'toolId' => trim($_POST['tool_id_status']),
+                'toolStatus' => trim($_POST['tool-status'])
+            ];
+
+            if ($this->supervisorModel->checkToolById($data['toolId'])) {
+
+                if ($this->supervisorModel->updateToolStatus($data['toolId'], $data['toolStatus'])) {
+                    $_SESSION['success_message'] = 'Tool status updated!';
+                } else {
+                    $_SESSION['error_message'] = 'Error! Could not update information..';
+                }
+                    
+            } else {
+                $_SESSION['error_message'] = 'Oops! The tool you are trying to update could not be found.';
+            }
+
+        } else {
+
+                $_SESSION['error_message'] = 'Request failed! :(';
+                // $data['url'] = getUrl();
+                // $this->view('supervisor/consumables/consumablelist', $data);
 
         }
-    
+        redirect('Supervisors/viewTools');
     }
+
+    public function removeThisTool()
+    {
+    }
+
+
+
 
 
 
@@ -1486,7 +1322,13 @@ class Supervisors extends controller
 
                 // if($data['holdingCars']->holdCounter == 0){
                 if($data['holdingCars']['holdCounter'] == 0){
-                    $data['carHold'] = $this->supervisorModel->stageChanger($vehicleID, $_SESSION['_stage']);
+
+                    $HoldedStage = $this->supervisorModel->stageOfThisProcess($proID);
+
+                    if($HoldedStage != null) {
+                        $data['carHold'] = $this->supervisorModel->stageChanger($vehicleID, $HoldedStage);
+                    }
+
                 }
 
             }
