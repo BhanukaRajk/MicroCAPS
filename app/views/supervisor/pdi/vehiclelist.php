@@ -77,6 +77,22 @@
                                         </li>
 
                                         <li>
+                                            <div class="filtertype">Test Run</div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="rr-cm" name="test-state" value="CM" checked>
+                                                <label for="rr-cm">Completed</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="rr-p" name="test-state" value="P" checked>
+                                                <label for="rr-p">Pending</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="rr-nc" name="test-state" value="NC" checked>
+                                                <label for="rr-nc">Not Completed</label>
+                                            </div>
+                                        </li>
+
+                                        <!-- <li>
                                             <div class="filtertype">Inspection</div>
                                             <div class="filters">
                                                 <input type="radio" id="current" name="completeness" value="CM">
@@ -106,7 +122,7 @@
                                                 <input type="radio" id="all-tested" name="acceptance" value="All" checked>
                                                 <label for="all-tested">All</label>
                                             </div>
-                                        </li>
+                                        </li> -->
                                     </ul>
 
                             </div>

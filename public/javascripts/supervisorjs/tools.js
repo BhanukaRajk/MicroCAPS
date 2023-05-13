@@ -153,14 +153,18 @@ function expandTool(Tool) {
 
 
 function closeAddNewToolPopup() {
-    var popupDiv = document.getElementById('tooladdpopupWindow');
-    popupDiv.style.display = 'none';
+    // var popupDiv = document.getElementById('tooladdpopupWindow');
+    // popupDiv.style.display = 'none';
+    document.getElementById("tooladdpopupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
 }
 
 function showAddNewToolPopup() {
-    var popupDiv = document.getElementById('tooladdpopupWindow');
-    popupDiv.style.display = '';
+    // var popupDiv = document.getElementById('tooladdpopupWindow');
+    // popupDiv.style.display = '';
+    document.getElementById("tooladdpopupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer");
 }
+
+
 
 
 
@@ -186,3 +190,35 @@ function closeToolUpdatePopup() {
     document.getElementById("toolUpdatePopUp").setAttribute("class", "background-bluer display-none");
     //// document.getElementsByClassName("toolset-toolview").classList.remove("noscroll");
 }
+
+
+
+const imagec = document.getElementById("imagec");
+const previewc = document.getElementById("img-previewc");
+const removec = document.getElementById("removec");
+
+previewc?.addEventListener("click", () => {
+    imagec.click();
+});
+
+imagec?.addEventListener("change", () => {
+    getImgData();
+});
+
+function getImgData() {
+    const files = imagec.files[0];
+    if (files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function () {
+            previewc.style.backgroundImage = `url(${this.result})`;
+            // preview.setAttribute('src', this.result);
+        });
+    }
+    
+}
+
+removec?.addEventListener("click", () => {
+        previewc.style.backgroundImage = `url(${BASE_URL}public/images/placeholder.jpg)`;
+        imagec.value = "";
+});

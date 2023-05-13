@@ -1047,18 +1047,18 @@ class Supervisor
                     WHERE `ChassisNo` = :chassisNo AND `PartNo` = :part;'
         );
 
-        if ($issued == 1 and $damaged == 1) {
+        if ($issued == 1 AND $damaged == 1) {
             $current = 'ID';
-        } else if ($issued == 1 and $damaged == 0) {
+        } else if ($issued == 1 AND $damaged == 0) {
             $current = 'I';
-        } else if ($issued == 0 and $damaged == 1) {
+        } else if ($issued == 0 AND $damaged == 1) {
             $current = 'D';
         } else {
             $current = 'R';
         }
 
         $this->db->bind(':chassisNo', $car_id);
-        $this->db->bind(':newStage', $part_id);
+        $this->db->bind(':part', $part_id);
         $this->db->bind(':current', $current);
 
 
@@ -1115,11 +1115,12 @@ class Supervisor
     }
 
 
-    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN CARD VIEWS
-    public function viewCars($vehicleType = null, $completeness = null, $acceptance = null)
+    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN PAQ
+    public function viewCars($vehicleType = null, $completeness = null)
     {
         $sql = 'SELECT `vehicle`.`ChassisNo`, 
                         `vehicle`.`EngineNo`, 
+                        `vehicle`.`CurrentStatus`, 
                         `vehicle`.`Color`, 
                         `vehicle-model`.`ModelName` 
                         FROM `vehicle`, `vehicle-model` 
@@ -1129,7 +1130,7 @@ class Supervisor
         if (isset($vehicleType)) {
 
             if (empty($vehicleType)) {
-                // No valid model names selected, return an empty result set
+                // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
                 return false;
             }
 
@@ -1141,18 +1142,12 @@ class Supervisor
             $sql .= " AND `vehicle`.`ModelNo` IN ($quotedVehicles)";
         }
 
-        if (isset($completeness)) {
-            if ($completeness != 'All') {
-                $sql .= ' AND `vehicle`.`PDIStatus` LIKE :completeness';
-            }
-        }
-
-        if ($acceptance) {
-            if ($acceptance == 'Not accepted') {
-                $sql .= ' AND `vehicle`.`CurrentStatus` IN ("S1", "S2", "S3", "S4")';
-            } elseif ($acceptance == 'Accepted') {
-                $sql .= ' AND `vehicle`.`CurrentStatus` IN ("PA", "CM")';
-            }
+        if ($completeness == "PA") {
+            $sql .= ' AND `vehicle`.`CurrentStatus` = "PA"';
+        } else if ($completeness == "AC") {
+            $sql .= ' AND `vehicle`.`CurrentStatus` = "AC"';
+        } else {
+            $sql .= ' AND `vehicle`.`CurrentStatus` IN ("AC", "PA")';
         }
 
         $sql .= ';';
@@ -1160,7 +1155,66 @@ class Supervisor
         // DO NOT SWAP THE ORDER OF QUERY AND BIND
         $this->db->query($sql);
 
-        $this->db->bind(':completeness', $completeness);
+
+        $vehicles = $this->db->resultSet();
+
+
+        if ($vehicles) {
+            return $vehicles;
+        } else {
+            return false;
+        }
+    }
+
+    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING VEHICLES IN PDI
+    public function viewPDICars($vehicleType = null, $cmstate = null)
+    {
+        $sql = 'SELECT `vehicle`.`ChassisNo`, 
+                        `vehicle`.`EngineNo`, 
+                        `vehicle`.`CurrentStatus`, 
+                        `vehicle`.`Color`, 
+                        `vehicle-model`.`ModelName` 
+                        FROM `vehicle`, `vehicle-model` 
+                        WHERE `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo` 
+                        AND `vehicle`.`CurrentStatus` = "RR"';
+
+
+        if (isset($vehicleType)) {
+
+            if (empty($vehicleType)) {
+                // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
+                return false;
+            }
+
+            $quotedVehicles = implode(',', array_map(function($vehicle) {
+                return "'" . addslashes($vehicle) . "'";
+            }, $vehicleType));
+    
+            $sql .= " AND `vehicle`.`ModelNo` IN ($quotedVehicles)";
+        }
+
+
+        if (isset($cmstate)) {
+
+            if (empty($cmstate)) {
+                // NO VALID MODEL NAMES SELECTED, RETURN AN EMPTY RESULT SET
+                return false;
+            }
+
+            $pdistates = implode(',', array_map(function($state) {
+                return "'" . addslashes($state) . "'";
+            }, $cmstate));
+    
+            // $sql .= " AND `vehicle`.`PDIStatus` IN ($pdistates)";
+            $sql .= "";
+        }
+
+
+        $sql .= ';';
+
+        // DO NOT SWAP THE ORDER OF QUERY AND BIND
+        $this->db->query($sql);
+
 
         $vehicles = $this->db->resultSet();
 

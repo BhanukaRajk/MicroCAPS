@@ -1292,6 +1292,39 @@ class Supervisors extends controller
 
 
 
+    // CONTROLLER FUNCTION TO VIEW CARS + FILTERS (WORKING)
+    public function findPDICars()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewPDICars();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+
+        } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $vehicleTypes = json_decode($_POST['vehicleTypes']);
+            $completeness = json_decode($_POST['vehicleTypes']);
+
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewPDICars($vehicleTypes, $completeness);
+
+            header('Content-Type: application/json');
+            echo json_encode($data['LineCarsSet']);
+
+        } else {
+
+            $_SESSION['error_message'] = 'Request failed!';
+
+            $data['url'] = getUrl();
+            $data['LineCarsSet'] = $this->supervisorModel->viewPDICars();
+            $this->view('supervisor/assembling/vehiclelist', $data);
+        }
+    }
 
 
 
@@ -1312,10 +1345,10 @@ class Supervisors extends controller
 
             $vehicleTypes = json_decode($_POST['vehicleTypes']);
             $completeness = $_POST['completeness'];
-            $acceptance = $_POST['acceptance'];
+            // $acceptance = $_POST['acceptance'];
 
             $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewCars($vehicleTypes, $completeness, $acceptance);
+            $data['LineCarsSet'] = $this->supervisorModel->viewCars($vehicleTypes, $completeness);
 
             header('Content-Type: application/json');
             echo json_encode($data['LineCarsSet']);
@@ -1449,7 +1482,7 @@ class Supervisors extends controller
 
 
             header('Content-Type: application/json');
-            echo json_encode(true);
+            echo json_encode($data['proUpdate']);
 
         } 
 

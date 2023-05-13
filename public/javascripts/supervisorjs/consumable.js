@@ -183,6 +183,9 @@ function closeConsumeDelConfBox() {
     popupDiv.style.display = 'none';
 }
 
+
+
+
 const imagec = document.getElementById("imagec");
 const previewc = document.getElementById("img-previewc");
 const removec = document.getElementById("removec");

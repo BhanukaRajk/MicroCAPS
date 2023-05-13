@@ -47,7 +47,7 @@
                     <div class="parts-info-box-inner">
 
                         <div onchange="filterStatus()" class="parts-info-set-1">
-                            <div class="filter-btn-box">
+                            <!-- <div class="filter-btn-box">
                                 <button class="page-filter-btn">All: 22</button>
                             </div>
                             <div class="filter-btn-box">
@@ -58,7 +58,7 @@
                             </div>
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">Damaged: 2</button>
-                            </div>
+                            </div> -->
                             <div class="filter-btn-box">
                                 <label for="part-search"></label>
                                 <input class="part-searchbox" id="searchBox" oninput="searchPart()" placeholder="Search a part">
@@ -78,33 +78,35 @@
                                 </div>
                                 <div class="bottom-border"></div>
 
-                                <?php foreach ($data['components'] AS $component) {
-                                    echo '<div class="parts-table-row bottom-border">
-                                            <div class="parts-col-01">'. $component->PartName .'</div>
-                                            <div class="parts-col-02">';
-                                            
-                                            if ($component->Status == "D") echo 'PRE-DAMAGED';
-                                            else if($component->Status == "ID") echo 'DAMAGED';
-                                            else if($component->Status == "I") echo 'ISSUED';
-                                            else echo 'NOT ISSUED';
-                                            
-                                            echo '</div>
-                                            <div class="parts-col-03">
-                                                <div class="round">
-                                                    <input type="checkbox" id="'. trim($component->PartNo) .'-D" class="damage-check" '. (($component->Status == "D" || $component->Status == "ID") ? 'checked' : '' ) .' />
-                                                    <label for="'. trim($component->PartNo) .'-D"></label>
+                                <?php 
+                                if($data['components'] != null) {
+                                    foreach ($data['components'] AS $component) {
+                                        echo '<div class="parts-table-row bottom-border">
+                                                <div class="parts-col-01">'. $component->PartName .'</div>
+                                                <div class="parts-col-02">';
+                                                
+                                                if ($component->Status == "D") echo 'PRE-DAMAGED';
+                                                else if($component->Status == "ID") echo 'DAMAGED';
+                                                else if($component->Status == "I") echo 'ISSUED';
+                                                else echo 'NOT ISSUED';
+                                                
+                                                echo '</div>
+                                                <div class="parts-col-03">
+                                                    <div class="round">
+                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-D" class="damage-check" '. (($component->Status == "D" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                        <label for="'. trim($component->PartNo) .'-D"></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="parts-col-04">
-                                                <div class="round">
-                                                    <input type="checkbox" id="'. trim($component->PartNo) .'-I" class="issue-check" '. (($component->Status == "I" || $component->Status == "ID") ? 'checked' : '' ) .' />
-                                                    <label for="'. trim($component->PartNo) .'-I"></label>
+                                                <div class="parts-col-04">
+                                                    <div class="round">
+                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-I" class="issue-check" '. (($component->Status == "I" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                        <label for="'. trim($component->PartNo) .'-I"></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>';
-                                }
+                                            </div>';
+                                    }
 
-                                if($component == NULL) {
+                                } else {
                                     echo '<div class="horizontal-centralizer">
                                             <div class="marginy-4">No parts available</div>
                                             <div class=""></div>

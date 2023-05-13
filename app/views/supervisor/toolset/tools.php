@@ -17,7 +17,7 @@
       <div class="toolset-head">
         <div class="toolset-heading">Tools</div>
         <div class="toolset-adding">
-          <button onclick="" class="tool-add-btn adding-button">Add new</button>
+          <button onclick="showAddNewToolPopup()" class="tool-add-btn adding-button">Add new</button>
         </div>
       </div>
 
@@ -200,7 +200,7 @@
 
 
         <!-- ADD NEW TOOL POPUP BOX -->
-        <div class="delete-conf-blur horizontal-centralizer" id="tooladdpopupWindow">
+        <div class="delete-conf-blur horizontal-centralizer display-none" id="tooladdpopupWindow">
           <div class="vertical-centralizer">
 
             <form>
