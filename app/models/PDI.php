@@ -2,12 +2,13 @@
 
 class PDI
 {
-    private $db;
+    private Database $db;
 
     public function __construct(){
         $this->db = new Database;
     }
 
+    // Retrieve Query : Details of vehicles which are in PDI according to specific parameters (if any)
     public function onPDIVehicles($parameters = null, $arr = true ) {
 
         $condition = '';
@@ -60,6 +61,7 @@ class PDI
         }
     }
 
+    // Retrieve Query : Details of vehicles which are in PDI according to Model Name
     public function onPDIVehiclesByModel($model) {
 
         $this->db->query(
@@ -89,6 +91,7 @@ class PDI
         }
     }
 
+    // Retrieve Query : PDI Check Categories and the number of checks in each category
     public function pdiCheckCategories() {
         $this->db->query(
             'SELECT `pdi-check-category`.*,
@@ -110,6 +113,7 @@ class PDI
 
     }
 
+    // Retrieve Query : PDI Checks
     public function pdiCheckList($id) {
         $this->db->query(
             'SELECT `pdi-result`.*,`pdi-check`.CategoryId, `pdi-check`.CheckName
@@ -130,19 +134,20 @@ class PDI
         }
     }
 
+    // Retrieve Query : PDI Defect Details
     public function viewDefectSheets($id) {
         $this->db->query(
-            "SELECT `pdi-defect`.`DefectNo`, 
+            'SELECT `pdi-defect`.`DefectNo`, 
             `pdi-defect`.`RepairDescription`, 
             `pdi-defect`.`InspectionDate`, 
             `pdi-defect`.`ChassisNo`,
             `pdi-defect`.`EmployeeID`,
-            CONCAT(`employee`.`Firstname`,' ',`employee`.`Lastname`) AS `EmployeeName`,
+            CONCAT(`employee`.`Firstname`," ",`employee`.`Lastname`) AS `EmployeeName`,
             `pdi-defect`.`ReCorrection` 
             FROM `pdi-defect`
             INNER JOIN `employee`
             ON `pdi-defect`.`EmployeeID` = `employee`.`EmployeeId`
-            WHERE `pdi-defect`.`ChassisNo` = :id"
+            WHERE `pdi-defect`.`ChassisNo` = :id'
         );
 
         $this->db->bind(':id', $id);

@@ -2,12 +2,17 @@
 
 class User
 {
-    private $db;
+    private Database $db;
 
     public function __construct() {
         $this->db = new Database;
     }
 
+
+
+    /* Login */
+
+    // Retrieve Query : Checks if username exists
     public function findUserByUsername($username): bool {
 
         $this->db->query('SELECT * FROM `employee-credentials`  WHERE `employee-credentials`.Username = :username');
@@ -24,6 +29,7 @@ class User
 
     }
 
+    // Retrieve Query : User Password Verification (Authentication Function)
     public function findCredentialsByUsername($username,$password): bool {
         $this->db->query(
             'SELECT `employee-credentials`.Username, `employee-credentials`.Password
@@ -40,6 +46,7 @@ class User
         return password_verify($password, $row->Password);
     }
 
+    // Retrieve Query : Details of user to save in session and to Call Authentication Function
     public function login($username,$password) {
 
         $this->db->query(
@@ -61,6 +68,31 @@ class User
         }
     }
 
+    // Update Query : Record user login activity
+    public function markActivity($userId, $logged = 1): bool {
+
+        $this->db->query(
+            'UPDATE `employee-logs`
+                SET lastLog = CURRENT_TIMESTAMP, loggedIn = :logged
+                WHERE EmployeeId = :userId'
+        );
+
+        $this->db->bind(':userId', $userId);
+        $this->db->bind(':logged', $logged);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+
+    /* Forget Password */
+
+    // Update Query : Reset user password
     public function resetPassword($username,$password): bool {
         $this->db->query('UPDATE `employee-credentials`
                 SET `employee-credentials`.Password = :password
@@ -79,6 +111,11 @@ class User
         }
     }
 
+
+
+    /* Change Password */
+
+    // Retrieve Query : Checks if old password is correct
     public function validateOldPassword($id,$password): bool {
         $this->db->query(
             'SELECT `employee-credentials`.Password
@@ -95,6 +132,7 @@ class User
         return password_verify($password, $row->Password);
     }
 
+    // Retrieve + Update Query : Update user password
     public function updatePassword($id,$password): bool {
 
         $this->db->query(
@@ -126,23 +164,5 @@ class User
         }
     }
 
-    public function markActivity($userId, $logged = 1): bool {
-
-        $this->db->query(
-            'UPDATE `employee-logs`
-                SET lastLog = CURRENT_TIMESTAMP, loggedIn = :logged
-                WHERE EmployeeId = :userId'
-        );
-
-        $this->db->bind(':userId', $userId);
-        $this->db->bind(':logged', $logged);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 
 }

@@ -2,9 +2,9 @@
 
 class Managers extends Controller {
 
-    private $managerModel;
-    private $vehicleModel;
-    private $pdiModel;
+    private mixed $managerModel;
+    private mixed $vehicleModel;
+    private mixed $pdiModel;
 
     public function __construct(){
         $this->managerModel = $this->model('Manager');
@@ -12,7 +12,7 @@ class Managers extends Controller {
         $this->pdiModel = $this->model('PDI');
     }
 
-    // Page : Dashboard
+    /* Page : Dashboard */
     public function dashboard() {
 
         if(!isLoggedIn()){
@@ -43,13 +43,13 @@ class Managers extends Controller {
                 $data['overall'] = null;
             }
 
-            $data['onHoldComponents'] = $this->vehicleModel->componentQty('D');
+            $data['onHoldComponents'] = $this->vehicleModel->componentQty();
 
             $this->view('manager/dashboard', $data);
         }
     }
 
-    // Page : Body Shell
+    /* Page : Body Shell */
     public function bodyshell() {
 
         if(!isLoggedIn()){
@@ -68,7 +68,7 @@ class Managers extends Controller {
         }
     }
 
-    // Page : Component
+    /* Page : Component */
     public function component() {
 
         if(!isLoggedIn()){
@@ -108,7 +108,7 @@ class Managers extends Controller {
 
     }
 
-    // Page : Assembly Process
+    /* Page : Assembly Process */
     public function assembly($chassisNo = null, $stage = null) {
 
         if(!isLoggedIn()){
@@ -193,7 +193,7 @@ class Managers extends Controller {
         }
     }
 
-    // Page : Pre Delivery Inspection Results
+    /* Page : Pre Delivery Inspection Results */
     public function pdi($chassisNo = null) {
 
         if (!isLoggedIn()) {
@@ -223,7 +223,7 @@ class Managers extends Controller {
 
     }
 
-    // Page : Dispatch
+    /* Page : Dispatch */
     public function dispatch($chassisNo = null) {
 
         if(!isLoggedIn()){
@@ -251,7 +251,7 @@ class Managers extends Controller {
         }
     }
 
-    // Page : Settings
+    /* Page : Settings */
     public function settings() {
 
         if(!isLoggedIn()){
