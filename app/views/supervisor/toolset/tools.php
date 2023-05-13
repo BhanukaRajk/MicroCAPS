@@ -26,32 +26,33 @@
         <div class="toolset-toolview" id="toolBoard">
 
           <?php
-          foreach ($data['toolset'] AS $tool) {
-            echo '<div class="toolcard" onclick="expandTool(this)">
-                    <div class="cardhead">
-                      <div class="cardid">
-                        <div class="tool-id display-none">'. $tool->ToolId .'</div>
-                        <div class="toolname">'. $tool->ToolName .'</div>
-                        <div class="tool-quantity">Quantity: '. $tool->quantity .'</div>
-                      </div>
-                      <div class="toolstatuscolor">
-                        <div class="tool-status display-none">'. $tool->Status .'</div>
-                        <div class="status-circle ' . (($tool->Status == "Normal") ? 'status-green-circle' : 'status-orange-circle') . ' "></div>
-                      </div>
-                    </div>
-                    <div class="toolpicbox">
-                      <img src="' . URL_ROOT . 'public/images/tools/' . (($tool->Image != NULL) ? $tool->Image : 'none.jpeg') . '" class="toolpic" alt="' . $tool->ToolName . '">
-                    </div>
-                    <div class="tool-card-down">
-                      <div class="tool-updater ' . (($tool->Status == "Normal") ? 'available' : 'lower') . '">' . (($tool->Status == "Normal") ? 'Normal' : 'Need an attention') . '</div>
-                      <div class="toolupdate last-update">Last update: ' . $tool->LastUpdate . '</div>
-                    </div>
-                  </div>';
-          }
+          if($data['toolset'] != null) {
 
+            foreach ($data['toolset'] AS $tool) {
+              echo '<div class="toolcard" onclick="expandTool(this)">
+                      <div class="cardhead">
+                        <div class="cardid">
+                          <div class="tool-id display-none">'. $tool->ToolId .'</div>
+                          <div class="toolname">'. $tool->ToolName .'</div>
+                          <div class="tool-quantity">Quantity: '. $tool->quantity .'</div>
+                        </div>
+                        <div class="toolstatuscolor">
+                          <div class="tool-status display-none">'. $tool->Status .'</div>
+                          <div class="status-circle ' . (($tool->Status == "Normal") ? 'status-green-circle' : 'status-orange-circle') . ' "></div>
+                        </div>
+                      </div>
+                      <div class="toolpicbox">
+                        <img src="' . URL_ROOT . 'public/images/tools/' . (($tool->Image != NULL) ? $tool->Image : 'none.jpeg') . '" class="toolpic" alt="' . $tool->ToolName . '">
+                      </div>
+                      <div class="tool-card-down">
+                        <div class="tool-updater ' . (($tool->Status == "Normal") ? 'available' : 'lower') . '">' . (($tool->Status == "Normal") ? 'Normal' : 'Need an attention') . '</div>
+                        <div class="toolupdate last-update">Last update: ' . $tool->LastUpdate . '</div>
+                      </div>
+                    </div>';
+            }
 
           // DISPLAY THIS IF THERE IS NO DATA IN THE TABLE
-          if ($tool == NULL) {
+          } else {
             echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
           }
 

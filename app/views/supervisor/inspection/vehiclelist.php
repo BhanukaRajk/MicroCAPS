@@ -22,24 +22,35 @@
                 </div>
                 <div class="vehicle-detail-board">
                     <div class="vehicle-data-board" id="carList">
-
                         <?php
-                            foreach ($data['LineCarsSet'] as $car) {
-                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo">
-                                    <div onclick="this.closest(\'form\').submit()" class="carcard">
-                                        <div class="cardhead">
-                                            <div class="cardid">
-                                                <div class="carmodel">'. $car->ModelName .'</div>
-                                                <div class="chassisno">'. $car->ChassisNo .'</div>
-                                                <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                            if($data['LineCarsSet'] != null) {
+
+                                foreach ($data['LineCarsSet'] as $car) {
+                                    echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo">
+                                        <div onclick="this.closest(\'form\').submit()" class="carcard">
+                                            <div class="cardhead">
+                                                <div class="cardid">
+                                                    <div class="carmodel">'. $car->ModelName .'</div>
+                                                    <div class="chassisno">'. $car->ChassisNo .'</div>
+                                                    <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                                </div>
+                                            </div>
+                                            <div class="carpicbox">
+                                                <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                            </div>
+                                            <div></div>
+                                        </div>
+                                    </form>';
+                                }
+                            } else {
+                                echo '<div class="no-data horizontal-centralizer">
+                                        <div class="margin-top-5 vertical-centralizer">
+                                            <div> Nothing to show :( </div>
+                                            <div>
+                                                <img src="'. URL_ROOT .'public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                             </div>
                                         </div>
-                                        <div class="carpicbox">
-                                            <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
-                                        </div>
-                                        <div></div>
-                                    </div>
-                                </form>';
+                                    </div>';
                             }
                         ?>
 

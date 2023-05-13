@@ -24,33 +24,42 @@
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        foreach ($data['AssemblyLineCars'] as $car) {
-                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProcess">
-                                <div class="carcard" onClick="this.closest(\'form\').submit()">
-                                    <div class="cardhead">
-                                        <div class="cardid">
-                                            <div class="carmodel">'. $car->ModelName .'</div>
-                                            <div class="chassisno">'. ($car->ChassisNo) .'</div>
-                                            <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+
+                        if($car == NULL)  {
+                            foreach ($data['AssemblyLineCars'] as $car) {
+                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProcess">
+                                    <div class="carcard" onClick="this.closest(\'form\').submit()">
+                                        <div class="cardhead">
+                                            <div class="cardid">
+                                                <div class="carmodel">'. $car->ModelName .'</div>
+                                                <div class="chassisno">'. ($car->ChassisNo) .'</div>
+                                                <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                            </div>
+                                        </div>
+                                        <div class="carpicbox">
+                                            <img src="'. URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                        </div>
+                                        <div class="carstatus">';
+                                            if($car->CurrentStatus == "S1") { echo 'on stage 01'; }
+                                            else if($car->CurrentStatus == "S2") { echo 'on stage 02'; }
+                                            else if($car->CurrentStatus == "S3") { echo 'on stage 03'; }
+                                            else if($car->CurrentStatus == "S4") { echo 'on stage 04'; }
+                                            else { echo 'On-Hold'; }
+                                            echo '<input type="hidden" name="form-car-stage" value="' .$car->CurrentStatus. '">
                                         </div>
                                     </div>
-                                    <div class="carpicbox">
-                                        <img src="'. URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                </form>';
+                            }
+                            
+                        } else {
+                            echo '<div class="no-data horizontal-centralizer">
+                                    <div class="margin-top-5 vertical-centralizer">
+                                        <div> Nothing to show :( </div>
+                                        <div>
+                                            <img src="'. URL_ROOT .'public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                        </div>
                                     </div>
-                                    <div class="carstatus">';
-                                        if($car->CurrentStatus == "S1") { echo 'on stage 01'; }
-                                        else if($car->CurrentStatus == "S2") { echo 'on stage 02'; }
-                                        else if($car->CurrentStatus == "S3") { echo 'on stage 03'; }
-                                        else if($car->CurrentStatus == "S4") { echo 'on stage 04'; }
-                                        else { echo 'On-Hold'; }
-                                        echo '<input type="hidden" name="form-car-stage" value="' .$car->CurrentStatus. '">
-                                    </div>
-                                </div>
-                            </form>';
-                        }
-
-                        if($car == NULL) {
-                            echo '<div id="middler">Nothing to show!</div>';
+                                </div>';
                         }
                         ?>
 
