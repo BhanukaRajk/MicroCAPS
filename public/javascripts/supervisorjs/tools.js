@@ -51,7 +51,7 @@ function toolFilter() {
     fetch(BASE_URL + "Supervisors/findToolz", {
         method: "POST",
         // headers: {
-        //     // 'Content-type': 'multipart/form-data'
+            // 'Content-type': 'multipart/form-data'
         //     'Content-type': 'application/json'
         // },
         body: formData,

@@ -26,7 +26,6 @@ class Supervisor
         }
     }
 
-
     public function statusCounters()
     {
 
@@ -65,7 +64,6 @@ class Supervisor
 
     }
 
-
     // CHECK THIS EMPLOYEE IS WORKING IN FACTORY
     public function checkEmployee($empid): bool
     {
@@ -84,7 +82,6 @@ class Supervisor
         }
     
     }
-
 
     // PROVIDE THE CURRENT ACTIVITY LOGS
     public function activityLogs()
@@ -105,6 +102,194 @@ class Supervisor
             return false;
         }
         
+    }
+
+
+
+
+
+    // SETTINGS PAGE FUNCTIONS //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function updateProfileValues($id, $firstname, $lastname, $email, $mobile, $nic) {
+        $this->db->query(
+            'UPDATE employee
+            SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic
+            WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':firstname', $firstname);
+        $this->db->bind(':lastname', $lastname);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':mobile', $mobile);
+        $this->db->bind(':nic', $nic);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image): bool {
+        $this->db->query(
+            'UPDATE employee
+            SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic, image = :image
+            WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':firstname', $firstname);
+        $this->db->bind(':lastname', $lastname);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':mobile', $mobile);
+        $this->db->bind(':nic', $nic);
+        $this->db->bind(':image', $image);
+
+        if ( $this->db->execute() ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function userDetails($id) {
+        $this->db->query(
+            'SELECT *
+                FROM `employee`
+                WHERE EmployeeID = :id'
+        );
+
+        $this->db->bind(':id', $id);
+
+        $results = $this->db->single();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return null;
+        }
+    }
+
+
+
+
+
+
+
+    // VIEW LEAVES //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function ViewLeaves()
+    {
+
+        $this->db->query(
+            'SELECT `employee-leaves`.`LeaveId`, `employee-leaves`.`EmployeeId`, CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Name`, `employee-leaves`.`LeaveDate`, `employee-leaves`.`Reason`
+                FROM `employee-leaves`
+                INNER JOIN `employee`
+            ON `employee-leaves`.`EmployeeId` = `employee`.`EmployeeId`
+            -- WHERE LeaveDate > CURDATE() 
+            ORDER BY `LeaveDate` ASC;'
+        );
+
+        $leaves = $this->db->resultSet();
+
+        if ($leaves) {
+            return $leaves;
+        } else {
+            return false;
+        }
+    }
+
+    // CHECK THIS EMPLOYEE REQUESTED ANOTHER LEAVE ON THIS DATE
+    public function checkLeaves($empid, $reqdate): bool
+    {
+
+        $this->db->query(
+            'SELECT `LeaveId` FROM `employee-leaves` WHERE `EmployeeId` = :employee AND `LeaveDate` = :req_date;'
+        );
+
+        $this->db->bind(':employee', $empid);
+        $this->db->bind(':req_date', $reqdate);
+
+        $rows = $this->db->resultSet();
+
+        if($rows != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function getLeaveByID($LeaveID)
+    {
+
+        $this->db->query(
+            'SELECT * FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
+        );
+
+        $this->db->bind(':Leave', $LeaveID);
+
+        $current_leave = $this->db->single();
+
+        if ($current_leave) {
+            return $current_leave;
+        } else {
+            return false;
+        }
+    }
+
+    public function addleave($EmpId, $leavedate, $reason): bool
+    {
+        $this->db->query(
+            'INSERT INTO `employee-leaves`(EmployeeId, LeaveDate, Reason) 
+            VALUES (:empid,:leavedate,:reason);'
+        );
+
+        $this->db->bind(':empid', $EmpId);
+        $this->db->bind(':leavedate', $leavedate);
+        $this->db->bind(':reason', $reason);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function EditLeave($EmpId, $leavedate, $reason, $id): bool
+    {
+        $this->db->query(
+            'UPDATE `employee-leaves`
+            SET EmployeeId = :empid, LeaveDate = :leavedate, Reason = :reason
+            WHERE LeaveId = :id;'
+        );
+
+        $this->db->bind(':empid', $EmpId);
+        $this->db->bind(':leavedate', $leavedate);
+        $this->db->bind(':reason', $reason);
+
+        $this->db->bind(':id', $id);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // public function removeleave($ID, $leavedate) {
+    public function removeleave($LeaveID): bool
+    {
+        $this->db->query(
+            'DELETE FROM `employee-leaves` WHERE LeaveId = :leave_id;'
+        );
+
+        $this->db->bind(':leave_id', $LeaveID);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -151,9 +336,9 @@ class Supervisor
     public function viewPAQresults($ChassisNo)
     {
         $this->db->query(
-            'SELECT car.ChassisNo, car.EngineNo, car.VehicleModel, paqresult.BrakeBleeding,
-                    paqresult.GearOilLevel, paqresult.RackEnd, paqresult.Clutch,
-                    paqresult.RearAxelPlate, paqresult.Visual, paqresult.date, paqresult.Supervisor1
+            'SELECT `vehicle`.`ChassisNo`, `vehicle`.`EngineNo`, `vehicle`.VehicleModel, `operation`.BrakeBleeding,
+                    `operation`.GearOilLevel, `operation`.RackEnd, `operation`.Clutch,
+                    `operation`.RearAxelPlate, `operation`.Visual, `operation`.`date`, `operation`.Supervisor1
             FROM paqresult
             INNER JOIN car
             ON paqresult.ChassisNo = car.ChassisNo
@@ -172,46 +357,10 @@ class Supervisor
     }
 
 
-    public function userDetails($id) {
-        $this->db->query(
-            'SELECT *
-                FROM `employee`
-                WHERE EmployeeID = :id'
-        );
-
-        $this->db->bind(':id', $id);
-
-        $results = $this->db->single();
-
-        if ( $results ) {
-            return $results;
-        } else {
-            return null;
-        }
-    }
 
 
-    public function updateProfile($id, $firstname, $lastname, $email, $mobile, $nic, $image): bool {
-        $this->db->query(
-            'UPDATE employee
-            SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic, image = :image
-            WHERE EmployeeID = :id'
-        );
 
-        $this->db->bind(':id', $id);
-        $this->db->bind(':firstname', $firstname);
-        $this->db->bind(':lastname', $lastname);
-        $this->db->bind(':email', $email);
-        $this->db->bind(':mobile', $mobile);
-        $this->db->bind(':nic', $nic);
-        $this->db->bind(':image', $image);
 
-        if ( $this->db->execute() ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
     public function ViewS4Finishers()
@@ -290,18 +439,44 @@ class Supervisor
         }
     }
 
+    public function assemblerForProcess($chassisNo, $processId) {
 
-    public function addNewTask($chassis_no, $process_name, $assembler = null): bool
-    {
         $this->db->query(
-            'INSERT INTO `employee-schedule`(`ChassisNo`, `ProcessId`, `Date`, `EmployeeId`) 
-            VALUES (:chassis_number, :process, DATE_ADD(CURDATE(), INTERVAL 1 DAY), :assembler)'
+            'SELECT `employee`.`EmployeeId`, CONCAT(`employee`.firstname," ",`employee`.lastname) AS Name
+            FROM `employee`
+            WHERE EmployeeId NOT IN (SELECT EmployeeId FROM `employee-leaves` WHERE LeaveDate = :leavedate)
+            AND EmployeeId NOT IN (SELECT EmployeeId FROM `employee-schedule` WHERE (ChassisNo = :chassisNo AND ProcessId = :processId))
+            AND `employee`.Position = :position;'
         );
 
-        $this->db->bind(':chassis_number', $chassis_no);
-        $this->db->bind(':process', $process_name);
-        $this->db->bind(':assembler', $assembler);
+        //bind next day to leave date
+        $nextDay = strtotime('+1 day');
+        $this->db->bind(':leavedate', date('Y-m-d', $nextDay));
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':processId', $processId);
+        $this->db->bind(':position', 'Assembler');
 
+
+        $result = $this->db->resultSet();
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function addNewTask($chassisNo, $processID, $assembler): bool {
+        $this->db->query(
+            'INSERT INTO `employee-schedule` VALUES (:chassisNo,:processId,:assmbler,:date,DEFAULT);'
+        );
+
+        $this->db->bind(':chassisNo', $chassisNo);
+        $this->db->bind(':processId', $processID);
+        $this->db->bind(':assmbler', $assembler);
+        $nextDay = strtotime('+1 day');
+        $this->db->bind(':date', date('Y-m-d', $nextDay));
 
         if ($this->db->execute()) {
             return true;
@@ -839,7 +1014,7 @@ class Supervisor
 
 
 
-
+    // THIS FUNCTION PROVIDES THE PROCESSES FOR THE VEHICLES AT THE EACH STAGE
     public function getProcessData($chassisNo = null, $stage = null) {
         
         $this->db->query(
@@ -939,6 +1114,36 @@ class Supervisor
             }
         
         }
+
+
+        // COMPONENTS STATUS UPDATING FUNCTION
+        public function recordComponentDetails($car_id, $part_id, $issued, $damaged) {
+            $this->db->query(
+                'UPDATE `component-release` SET `Status` = :current
+                    WHERE `ChassisNo` = :chassisNo AND `PartNo` = :part;'
+            );
+
+            if($issued == 1 AND $damaged == 1) {
+                $current = 'ID';
+            } else if($issued == 1 AND $damaged == 0) {
+                $current = 'I';
+            } else if($issued == 0 AND $damaged == 1) {
+                $current = 'D';
+            } else {
+                $current ='R';
+            }
+    
+            $this->db->bind(':chassisNo', $car_id);
+            $this->db->bind(':newStage', $part_id);
+            $this->db->bind(':current', $current);
+    
+    
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     
 
 
@@ -948,171 +1153,6 @@ class Supervisor
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function ViewLeaves()
-    {
-
-        $this->db->query(
-            'SELECT `employee-leaves`.`LeaveId`, `employee-leaves`.`EmployeeId`, CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Name`, `employee-leaves`.`LeaveDate`, `employee-leaves`.`Reason`
-                FROM `employee-leaves`
-                INNER JOIN `employee`
-            ON `employee-leaves`.`EmployeeId` = `employee`.`EmployeeId`
-            -- WHERE LeaveDate > CURDATE() 
-            ORDER BY `LeaveDate` ASC;'
-        );
-
-        $leaves = $this->db->resultSet();
-
-        if ($leaves) {
-            return $leaves;
-        } else {
-            return false;
-        }
-    }
-
-
-    // CHECK THIS EMPLOYEE REQUESTED ANOTHER LEAVE ON THIS DATE
-    public function checkLeaves($empid, $reqdate): bool
-    {
-
-        $this->db->query(
-            'SELECT `LeaveId` FROM `employee-leaves` WHERE `EmployeeId` = :employee AND `LeaveDate` = :req_date;'
-        );
-
-        $this->db->bind(':employee', $empid);
-        $this->db->bind(':req_date', $reqdate);
-
-        $rows = $this->db->resultSet();
-
-        if($rows != null) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-
-    public function getLeaveByID($LeaveID)
-    {
-
-        $this->db->query(
-            'SELECT * FROM `employee-leaves` WHERE `LeaveId` = :Leave;'
-        );
-
-        $this->db->bind(':Leave', $LeaveID);
-
-        $current_leave = $this->db->single();
-
-        if ($current_leave) {
-            return $current_leave;
-        } else {
-            return false;
-        }
-    }
-
-
-    public function addleave($EmpId, $leavedate, $reason): bool
-    {
-        $this->db->query(
-            'INSERT INTO `employee-leaves`(EmployeeId, LeaveDate, Reason) 
-            VALUES (:empid,:leavedate,:reason);'
-        );
-
-        $this->db->bind(':empid', $EmpId);
-        $this->db->bind(':leavedate', $leavedate);
-        $this->db->bind(':reason', $reason);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public function EditLeave($EmpId, $leavedate, $reason, $id): bool
-    {
-        $this->db->query(
-            'UPDATE `employee-leaves`
-            SET EmployeeId = :empid, LeaveDate = :leavedate, Reason = :reason
-            WHERE LeaveId = :id;'
-        );
-
-        $this->db->bind(':empid', $EmpId);
-        $this->db->bind(':leavedate', $leavedate);
-        $this->db->bind(':reason', $reason);
-
-        $this->db->bind(':id', $id);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    // public function removeleave($ID, $leavedate) {
-    public function removeleave($LeaveID): bool
-    {
-        $this->db->query(
-            'DELETE FROM `employee-leaves` WHERE LeaveId = :leave_id;'
-        );
-
-        $this->db->bind(':leave_id', $LeaveID);
-
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
 
 
@@ -1328,7 +1368,7 @@ class Supervisor
                 DATE(`tool`.`LastUpdate`) AS `UDate`,
                 TIME(`tool`.`LastUpdate`) AS `UTime`, 
                 `tool`.`Image`, 
-                CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater`, 
+                CONCAT(`employee`.`Firstname`, " ", `employee`.`Lastname`) AS `Updater` 
                 FROM `tool`, `employee`
                 WHERE `tool`.`LastUpdateBy` = `employee`.`EmployeeId`';
 
@@ -1586,26 +1626,7 @@ class Supervisor
 
 
 
-    public function updateProfileValues($id, $firstname, $lastname, $email, $mobile, $nic) {
-        $this->db->query(
-            'UPDATE employee
-            SET firstname = :firstname, lastname = :lastname, email = :email, telephoneno = :mobile, nic = :nic
-            WHERE EmployeeID = :id'
-        );
 
-        $this->db->bind(':id', $id);
-        $this->db->bind(':firstname', $firstname);
-        $this->db->bind(':lastname', $lastname);
-        $this->db->bind(':email', $email);
-        $this->db->bind(':mobile', $mobile);
-        $this->db->bind(':nic', $nic);
-
-        if ( $this->db->execute() ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     
     public function ViewAllConsumables()
     {

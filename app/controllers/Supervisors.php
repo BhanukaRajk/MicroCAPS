@@ -69,13 +69,6 @@ class Supervisors extends controller
         }
     }
 
-
-
-
-
-
-
-
     public function dashboard()
     {
 
@@ -106,7 +99,6 @@ class Supervisors extends controller
         }
     }
 
-
     // ASSEMBLY LINE VEHICLES
     public function linevehicleview()
     {
@@ -120,95 +112,6 @@ class Supervisors extends controller
             $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
-
-
-
-    public function editprofile()
-    {
-
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['ProfileDetails'] = $this->supervisorModel->viewProfile($_SESSION['_id']);
-            $this->view('supervisor/editprofile', $data);
-        }
-    }
-
-
-
-    public function viewVehiclesByStage()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['LineCarsSet'] = $this->supervisorModel->viewAssemblyLineVehicles();
-            $this->view('supervisor/assembling/vehiclelist', $data);
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -385,7 +288,6 @@ class Supervisors extends controller
     }
 
 
-
     public function removeleave()
     {
 
@@ -434,76 +336,10 @@ class Supervisors extends controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // SCHEDULE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    public function recordScheduleStatus()
+    // THIS IS THE FUNCTION USED TO RECORD TASK STATUS (DONE OR NOT ?)
+    public function recordScheduleStatus() // WORKING
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
@@ -515,41 +351,20 @@ class Supervisors extends controller
             $process_id = $_POST['process_id'];
             $status = $_POST['status'];
 
-            // check before update
             $data['success'] = $this->supervisorModel->recordTaskStatus($car_id, $process_id, $status);
-            // echo $data['success'];
             // header('Content-Type: application/json');
             echo json_encode($data['success']);
 
-        } else {
-            $_SESSION['error_message'] = 'Request failed! :(';
-            $data['url'] = getUrl();
-            $data['taskList'] = $this->supervisorModel->ViewTaskSchedule();
-            $this->view('supervisor/scheduler/scheduletasks', $data);
         }
     }
 
-
-    public function scheduletasks()
+    // THIS IS THE FUNCTION USED TO ASSIGN ASSEMBLER TO A TASK
+    public function updateThisTask()
     {
-
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $this->view('supervisor/scheduletasks', $data);
-        }
     }
 
 
-    public function updateThisTask() {
-
-    }
-
-
-    public function removeThisTask()
+    public function removeThisTask() // WORKING
     {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -568,10 +383,8 @@ class Supervisors extends controller
             if ($this->supervisorModel->checkTaskById($data['chassis_no'], $data['process_no'])) {
 
                 if ($this->supervisorModel->removeTask($data['chassis_no'], $data['process_no'])) {
-                    // $_SESSION['return_message'] = 'Record deletion Success!';
                     $_SESSION['success_message'] = 'Record deletion Success!';
                 } else {
-                    // $_SESSION['return_message'] = 'Error! record deletion failed!';
                     $_SESSION['error_message'] = 'Error! record deletion failed!';
                 }
                 redirect('Supervisors/taskSchedule');
@@ -579,10 +392,8 @@ class Supervisors extends controller
 
             } else {
 
-                // $_SESSION['return_message'] = 'Record has been already deleted!';
                 $_SESSION['error_message'] = 'Record couldn\'t found!';
 
-                // $data['url'] = getUrl();
                 // $this->view('supervisor/leaves/leaves', $data);
                 redirect('Supervisors/taskSchedule');
             }
@@ -591,67 +402,45 @@ class Supervisors extends controller
     }
 
 
+    public function addTask() {
+
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $task = $_POST['task'];
+            $car_no = $_POST['selectedCar'];
+            $assembler = $_POST['assembler'];
+
+            header('Content-Type: application/json');
+            if ($this->supervisorModel->addNewTask($car_no, $task, $assembler)) {
+                $_SESSION['success_message'] = 'Task added successfully!';
+                echo json_encode(true);
+            } else {
+                $_SESSION['error_message'] = 'Task couldn\'t be added!';
+                echo json_encode(false);
+            }
+
+        }
+
+    }
 
 
+    public function taskSchedule()
+    {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['url'] = getUrl();
+            $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails(null,'ASC');
+            $data['taskList'] = $this->supervisorModel->ViewTaskSchedule();
+            $this->view('supervisor/scheduler/scheduletasks', $data);
+        }
+    }
 
 
 
@@ -664,7 +453,7 @@ class Supervisors extends controller
     
     // COMPONENT /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function componentsView()
+    public function componentsView() // WORKING
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
@@ -683,7 +472,7 @@ class Supervisors extends controller
             echo json_encode(array('carz' => $data['car_selection'], 'componentz' => $data['components'], 'search' => $data['chassis_no']));
 
         // FOR NORMAL POST REQUESTS
-        } elseif($_SERVER['REQUEST_METHOD'] == 'POST') {
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -701,34 +490,7 @@ class Supervisors extends controller
     }
 
 
-    // public function componentsView()
-    // {
-    //     if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-    //         redirect('Users/login');
-    //     }
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-    //         $data = [
-    //             'chassis_no' => trim($_POST['form-car-id'])
-    //         ];
-
-
-    //         $selectedValue = $_POST['selectedValue'];
-
-    //         $data['url'] = getUrl();
-    //         $data['components'] = $this->supervisorModel->viewCarComponents($data['chassis_no']);
-    //         $data['car_selection'] = $this->supervisorModel->viewCarList(['S1','S2','S3','S4']);
-    //         $this->view('supervisor/parts/vehicleparts', $data);
-    //     }
-    // }
-
-
-
-
-    public function viewCarComponent()
+    public function viewCarComponent() //WORKING (WHEN PRESSED MANAGE PARTS)
     {
 
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -741,160 +503,6 @@ class Supervisors extends controller
             $this->view('supervisor/parts/vehiclelist', $data);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // TASK /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public function addTask()
-    {
-    }
-    public function taskSchedule()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['taskList'] = $this->supervisorModel->ViewTaskSchedule();
-            $this->view('supervisor/scheduler/scheduletasks', $data);
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1047,73 +655,6 @@ class Supervisors extends controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // PDI RESULT SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function pdiresults()
     {
@@ -1154,68 +695,6 @@ class Supervisors extends controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // VEHICLE /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function vehicleview()
     {
@@ -1237,105 +716,10 @@ class Supervisors extends controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // RETURN DEFECT SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function viewDefectSheet()
     {
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1788,19 +1172,8 @@ class Supervisors extends controller
     }
 
 
-    public function getOverallProgress($chassis_no = null)
-    {
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            $data['onPDIVehicles'] = $this->supervisorModel->onPDIVehicles();
-            $this->view('supervisor/assembling/overall', $data);
-        }
-    }
-
+    // TEST RUN VEHICLE LIST SHOWS
     public function pdilinevehicleview()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
@@ -1904,7 +1277,6 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // $vehicleTypes = json_decode($_POST['vehicleTypes']);
             $completeness = $_POST['completeness'];
             $acceptance = $_POST['acceptance'];
 
@@ -1921,96 +1293,44 @@ class Supervisors extends controller
         }
     }
 
+
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function recordComponentDefects()
     {
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $car_id = $_POST['vehicle'];
+            $process_id = $_POST['part'];
+            $issued = $_POST['issued'];
+            $damaged = $_POST['damaged'];
+
+            $data['part_update'] = $this->supervisorModel->recordComponentDetails($car_id, $process_id, $issued, $damaged);
+            echo json_encode($data['part_update']);
+
+        }
+    
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2053,8 +1373,6 @@ class Supervisors extends controller
             $this->view('supervisor/assembling/vehiclelist', $data);
         }
     }
-
-
 
     // CONTROLLER FUNCTION TO VIEW CONSUMABLES + FILTERS (WORKING)
     public function findConsumables()
@@ -2103,7 +1421,7 @@ class Supervisors extends controller
             $typeOfTool = $_POST['typeOfTool'];
             $stateOfTool = $_POST['stateOfTool'];
 
-            $data['url'] = getUrl();
+            // $data['url'] = getUrl();
             $data['toolset'] = $this->supervisorModel->viewToolz($typeOfTool, $stateOfTool);
 
             header('Content-Type: application/json');
@@ -2128,7 +1446,6 @@ class Supervisors extends controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // $vehicleTypes = json_decode($_POST['vehicleTypes']);
             $search_process = $_POST['searchingTask'];
             $car_no = $_POST['selectedCar'];
 
@@ -2138,15 +1455,11 @@ class Supervisors extends controller
             header('Content-Type: application/json');
             echo json_encode($data['CaughtProcesses']);
 
-        } else { echo "searchProcesses()"; }
-        // else {
-        //     $data['url'] = getUrl();
-        //     $data['LineCarsSet'] = $this->supervisorModel->viewCars();
-        //     $this->view('supervisor/assembling/vehiclelist', $data);
-        // }
+        } 
     }
 
 
+    // THIS IS THE FUNCTION USED TO UPGRADE PROCESS COMPLETION DETAILS
     public function recordUpdateProcess()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {

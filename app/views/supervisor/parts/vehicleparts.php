@@ -17,6 +17,7 @@
 
                         <div class="vertical-centralizer">
                             <div class="parts-title" id="partPageId">Part details - <?php echo $data['chassis_no']; ?></div>
+                            <div class="display-none" id="vehicle_no"><?php echo $data['chassis_no']; ?></div>
                         </div>
 
                         <!-- <div class="vertical-centralizer"></div> -->
@@ -80,17 +81,24 @@
                                 <?php foreach ($data['components'] AS $component) {
                                     echo '<div class="parts-table-row bottom-border">
                                             <div class="parts-col-01">'. $component->PartName .'</div>
-                                            <div class="parts-col-02">'. $component->Status .'</div>
+                                            <div class="parts-col-02">';
+                                            
+                                            if ($component->Status == "D") echo 'PRE-DAMAGED';
+                                            else if($component->Status == "ID") echo 'DAMAGED';
+                                            else if($component->Status == "I") echo 'ISSUED';
+                                            else echo 'NOT ISSUED';
+                                            
+                                            echo '</div>
                                             <div class="parts-col-03">
                                                 <div class="round">
-                                                    <input type="checkbox" id="'. $component->PartNo .'-D" class="issue-check" '. (($component->Status == "DAMAGED") ? 'checked' : '' ) .' />
-                                                    <label for="'. $component->PartNo .'D"></label>
+                                                    <input type="checkbox" id="'. trim($component->PartNo) .'-D" class="damage-check" '. (($component->Status == "D" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                    <label for="'. trim($component->PartNo) .'-D"></label>
                                                 </div>
                                             </div>
                                             <div class="parts-col-04">
                                                 <div class="round">
-                                                    <input type="checkbox" id="'. $component->PartNo .'-I" class="damage-check" '. (($component->Status == "ISSUED") ? 'checked' : '' ) .' />
-                                                    <label for="'. $component->PartNo .'I"></label>
+                                                    <input type="checkbox" id="'. trim($component->PartNo) .'-I" class="issue-check" '. (($component->Status == "I" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                    <label for="'. trim($component->PartNo) .'-I"></label>
                                                 </div>
                                             </div>
                                         </div>';

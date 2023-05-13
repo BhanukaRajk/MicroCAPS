@@ -214,6 +214,19 @@ compVehicleSelector?.addEventListener('change', function() {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
 const issuedcheckboxes = document.querySelectorAll("input[type=checkbox][class=issue-check]");
 const damagedcheckboxes = document.querySelectorAll("input[type=checkbox][class=damage-check]");
@@ -232,34 +245,33 @@ function updatePartStatus() {
 
     const ButtonID = this.id;
 
-    const VehicleId = document.querySelector('#vehicle_id').innerHTML;
-    const ProcessId = ButtonID.split("-")[0];
+    const VehicleId = document.querySelector('#vehicle_no').innerHTML;
+    const PartId = ButtonID.split("-")[0];
 
     console.log(VehicleId);
-    console.log(ProcessId);
+    console.log(PartId);
 
-    let completeness, holding;
+    let ISSUED, DAMAGED;
 
-    if (document.querySelector("input[type=checkbox][name=" + ProcessId + "-con]").checked) {
-        completeness = 1;
+    if (document.querySelector("input[type=checkbox][id=" + PartId + "-I]").checked) {
+        ISSUED = 1;
     } else {
-        completeness = 0;
+        ISSUED = 0;
     }
 
-    if (document.querySelector("input[type=checkbox][name=" + ProcessId + "-hold]").checked) {
-        holding = 1;
+    if (document.querySelector("input[type=checkbox][id=" + PartId + "-D]").checked) {
+        DAMAGED = 1;
     } else {
-        holding = 0;
+        DAMAGED = 0;
     }
 
 
 
-    // JSON STRINGIFY USED BECAUSE AN ARRAY IS PASSED USING THIS checkboxesset VARIABLE
     const formData = new FormData();
-    formData.append("vehicleID", VehicleId);
-    formData.append("proID", ProcessId);
-    formData.append("completeness", completeness);
-    formData.append("holding", holding);
+    formData.append("vehicle", VehicleId);
+    formData.append("part", PartId);
+    formData.append("issued", ISSUED);
+    formData.append("damaged", DAMAGED);
 
 
     if (!formData) {
@@ -268,7 +280,7 @@ function updatePartStatus() {
     }
 
 
-    fetch(BASE_URL + "Supervisors/recordUpdateProcess", {
+    fetch(BASE_URL + "Supervisors/recordComponentDefects", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -280,10 +292,6 @@ function updatePartStatus() {
         .then((data) => {
 
             console.log("Data = " + data);
-
-            if (data) {
-                reloadChart();
-            }
 
         })
         .catch((error) => console.error(error));
