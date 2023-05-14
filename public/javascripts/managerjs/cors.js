@@ -74,8 +74,17 @@ function damagedComponents(string) {
 // Body Shell Page
 function requestShell() {
 
-    if (!validaterequestShell()) {
-        alertFaliure("Please Fill All The Fields");
+    validity = validaterequestShell();
+
+    if (!validity[0][0]) {
+        alertFaliure(validity[1][0]);
+    }
+
+    if (!validity[0][1]) {
+        alertFaliure(validity[1][1]);
+    }
+
+    if (!validity[0][0] || !validity[0][1]) {
         return;
     }
 
@@ -288,8 +297,17 @@ function jobDone(id,job) {
 // Components Page
 function createList() {
 
-    if (!validaterequestShell()) {
-        alertFaliure("Please Fill All The Fields");
+    validity = validaterequestShell();
+
+    if (!validity[0][0]) {
+        alertFaliure(validity[1][0]);
+    }
+
+    if (!validity[0][1]) {
+        alertFaliure(validity[1][1]);
+    }
+
+    if (!validity[0][0] || !validity[0][1]) {
         return;
     }
 
@@ -609,20 +627,23 @@ function validaterequestShell() {
     }
 
     let flag = [true,true];
+    let message = ['',''];
 
     type.forEach((element) => {
         if (element === "") {
             flag[0] = false;
+            message[0] = "Please Fill All The Fields";
         }
     });
 
     qty.forEach((element) => {
-        if (element == 0) {
+        if (element <= 0) {
             flag[1] = false;
+            message[1] = "Please Fill Valid Quantity";
         }
     });
 
-    return (flag[0] && flag[1]);
+    return [flag, message];
 }
 
 function validateAddShell() {

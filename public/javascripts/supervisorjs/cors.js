@@ -101,7 +101,6 @@ function paq() {
         processData: false,
         contentType: false,
         success: (response) => {
-            // console.log(response);
             location.reload(true);
         }
     });
@@ -148,8 +147,7 @@ function paqUpdate() {
         processData: false,
         contentType: false,
         success: (response) => {
-            console.log(response);
-            // location.reload(true);
+            location.reload(true);
         }
     });
 

@@ -139,14 +139,14 @@ class Vehicles extends Controller {
             ];
 
             if ($data['previous'] === 'Yes') {
-                $this->managerModel->jobDone($data['id'], $data['job']);
+                $this->vehicleModel->jobDone($data['id'], $data['job']);
             }
 
             if ($data['job'] === 'repair') {
-                $this->managerModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
+                $this->vehicleModel->addRepairJob($data['chassisNo'], $data['repairDescription']);
                 echo 'Successful';
             } else if ($data['job'] === 'paint') {
-                $this->managerModel->addPaintJob($data['chassisNo']);
+                $this->vehicleModel->addPaintJob($data['chassisNo']);
                 echo 'Successful';
             } else {
                 echo 'Error';
