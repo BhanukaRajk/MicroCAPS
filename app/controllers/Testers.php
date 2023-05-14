@@ -521,6 +521,77 @@ class Testers extends controller
     }
 
 
+    // FOR SEARCH A VEHICLE IN PDI LIST
+
+    public function searchPDI(){
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'keyword' => trim($_POST['keyword']),
+            ];
+
+            $data['onPDIVehicles'] = $this->testerModel->searchVehiclesReadyToTest($data['keyword']);
+
+            echo json_encode($data);
+        }
+
+    }
+
+
+     // FOR SEARCH A VEHICLE IN TASK MANAGER
+
+     public function searchTaskM(){
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'keyword' => trim($_POST['keyword']),
+            ];
+
+            $data['onPDIVehicles'] = $this->testerModel->searchVehiclesReadyToTest($data['keyword']);
+            $data['testers'] = $this->testerModel->getTesterNames();
+
+            echo json_encode($data);
+        }
+
+    }
+
+
+    // FOR SEARCH A VEHICLE IN MY TASKS
+
+    public function searchTask(){
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'keyword' => trim($_POST['keyword']),
+                'id' => trim($_POST['id'])
+            ];
+
+            $data['onPDIVehicles'] = $this->testerModel->searchVehiclesByTester($data['id'] ,$data['keyword']);
+
+            echo json_encode($data);
+        }
+
+    }
+
+
     // FOR VIEW VEHCILE ASSEMBLY DETAILS
 
     public function assembly($chassisNo = null, $stage = null) {

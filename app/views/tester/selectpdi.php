@@ -4,10 +4,16 @@
 <body>
 
     <section class="position-absolute page-content">
+    <div class="display-flex-row justify-content-between margin-bottom-2">
         <div class="page-heading font-weight  margin-bottom-4">
             Pre Delivery Inspection
         </div>
-
+        <div>
+                <input type="text" placeholder="Search" class="form-control" oninput="searchPDI()" id="searchId">
+                <label class="form-label">Search</label>
+        </div>
+        </div>
+        <div id = "vehicleList">
         <?php
         if ($data['onPDIVehicles'] == false) {
             echo '
@@ -37,7 +43,8 @@
                                 </div>
                                 <div class="carstatus green"> On Assembly </div>
                                 <div class="arrivaldate">Stage: '.$val.'</div>
-                            </div>';
+                            </div>
+                            </a>';
             }
 
             echo '  </div>
@@ -45,6 +52,9 @@
         }
         ?>
 
+        </div>
+
     </section>
 
     <script type="module" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/main.js"></script>
+    <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/testerjs/cors.js"></script>
