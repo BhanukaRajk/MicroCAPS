@@ -39,12 +39,12 @@
                                         <div class="carpicbox">
                                             <img src="'. URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
                                         </div>
-                                        <div class="carstatus">';
-                                            if($car->CurrentStatus == "S1") { echo 'on stage 01'; }
-                                            else if($car->CurrentStatus == "S2") { echo 'on stage 02'; }
-                                            else if($car->CurrentStatus == "S3") { echo 'on stage 03'; }
-                                            else if($car->CurrentStatus == "S4") { echo 'on stage 04'; }
-                                            else { echo 'On-Hold'; }
+                                        <div class="carmodel ';
+                                            if($car->CurrentStatus == "S1") { echo 'text-green">Stage 01'; }
+                                            else if($car->CurrentStatus == "S2") { echo 'text-green">Stage 02'; }
+                                            else if($car->CurrentStatus == "S3") { echo 'text-green">Stage 03'; }
+                                            else if($car->CurrentStatus == "S4") { echo 'text-green">Stage 04'; }
+                                            else { echo 'text-orange">On-Hold'; }
                                             echo '<input type="hidden" name="form-car-stage" value="' .$car->CurrentStatus. '">
                                         </div>
                                     </div>

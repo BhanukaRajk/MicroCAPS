@@ -32,7 +32,7 @@
                         <?php
                             if($data['LineCarsSet'] != null) {
                                 foreach ($data['LineCarsSet'] as $car) {
-                                    echo '<form method="POST" action="'. URL_ROOT .'Supervisors/pdi_results/'. $car->ChassisNo.'"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                                    echo '<form method="POST" action="'. URL_ROOT .'Supervisors/pdiresults/'. $car->ChassisNo.'"><div onclick="this.closest(\'form\').submit()" class="carcard">
                                         <div class="cardhead">
                                             <div class="cardid">
                                                 <div class="carmodel">'. $car->ModelName .'</div>
@@ -43,7 +43,9 @@
                                         <div class="carpicbox">
                                             <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
                                         </div>
-                                        <div></div>
+                                        <div>
+                                            <div class="chassisno">Engine No: '.$car->EngineNo.'</div>
+                                        </div>
                                     </div></form>';
                             } 
                         } else {

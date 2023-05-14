@@ -1,5 +1,5 @@
 .toolset-margin {
-    margin: 0 40px 30px 40px;
+    margin: 0 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;
 
@@ -14,12 +14,15 @@
     align-items: center;
     justify-content: space-between;
 
-    position: sticky;
+    /* position: sticky; */
+    position: fixed;
     background-color: #F2F2F7;
     /* border: 1px solid black; */
 
-    width: 100%;
+    /* width: 100%; */
+    width: calc(100% - 20.25rem);
     top: 4rem;
+    left: 16.25rem;
 
     padding-block: 1rem;
     padding-inline: 2rem;
@@ -33,7 +36,7 @@
 }
 
 .toolset-body {
-    margin-top: 1rem;
+    margin-top: 6.25rem;
     width: 100%;
 }
 
@@ -179,10 +182,13 @@
 
 .toolset-filterbox {
     position: fixed;
-    width: 212px;
+    /* width: 212px; */
+    width: 13.25rem;
     /* height: 520px; */
-    right: 20px;
-    top: 165px;
+    right: 1.25rem;
+    /* right: 20px; */
+    top: 10rem;
+    /* top: 165px; */
     /*padding: 23px;*/
     /*margin-inline: 20px;*/
 

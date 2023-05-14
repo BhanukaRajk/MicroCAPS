@@ -1,178 +1,63 @@
-.pdi-result-databoard {
-    margin-inline: 45px;
-    margin-block: 10px;
-}
-
-.pagehead {
-    /* font-family: 'Noto Sans'; */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 33px;
-    display: flex;
-    align-items: center;
-
-    color: #1C1F37;
-}
-
 .pdi-card-head {
     display: flex;
     flex-direction: column;
-
-    width: 263px;
-    height: 50px;
     gap: 10px;
 }
 
 .pdi-card-main {
-    width: 206px;
-    height: 15.38px;
-
-    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
+    width: 22rem;
     line-height: 20px;
-
-    color: #1C1F37;
+    color: var(--fontblue);
 }
 
 .pdi-card-sub {
-    width: 161px;
-    height: 13.85px;
-
-    font-family: 'Open Sans';
-    font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 19px;
-
-    color: #1C1F37;
-
+    color: var(--fontblue);
     opacity: 0.5;
 }
 
-.vehicle-detail-section {
-    /* position: absolute;
-    width: 1016px; */
-    height: 97px;
-    /* left: 305px;
-    top: 79px; */
-}
-
-.pdi-result-main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-block: 10px;
-
-    /*border: 2px solid black;*/
-}
-
-.pdi-vehicle-selection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.pdi-page-heading {
-    /*position: absolute;*/
-    width: 165px;
-    height: 30px;
-    left: 305px;
-    top: 79px;
-
-    /* font-family: 'Noto Sans'; */
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 33px;
-
-    color: #1C1F37;
-}
-
-.pdi-vin,
-.pdi-eng {
-    width: 292px;
-    height: 20px;
-    left: 305px;
-    top: 127px;
-
-    font-family: 'Yaldevi';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 24px;
-
-    color: #000000;
-    margin-block: 5px;
-}
-
-.pdi-data-board {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-
-    flex-wrap: wrap;
-    gap: 110px;
-
-    border: 1px solid black;
-}
-
-.pdicard {
-    width: 263px;
-    height: 305.05px;
-    flex: 1 1 20%;
-}
-
 .pdiresultbox {
-    width: 263px;
-    height: 255.05px;
-    background-color: #FFFFFF;
-    border-radius: 10px;
+    background-color: var(--white);
+    border-radius: 0.5rem;
 }
 
 .pdi-checklist {
     display: flex;
     flex-direction: row;
-    margin-inline: 10px;
-    margin-block: 5px;
-
     justify-content: space-between;
+    border-bottom: 1px solid var(--gray);
 }
 
 .pdi-checking-result {
-    background-color: green;
-    border-radius: 20px;
-
-    width: 43px;
-    height: 16px;
-
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .pdi-checking-result-text {
-
-    /* Bold/11px */
-
-    /* font-family: 'Mulish'; */
-    font-style: normal;
     font-weight: 700;
     font-size: 11px;
-    line-height: 14px;
-    /* identical to box height */
-
-    text-align: center;
-    vertical-align: sub;
-
-    letter-spacing: 0.5px;
     text-transform: uppercase;
+    color: var(--white);
+}
 
+.green-box {
+    background-color: var(--green);
+}
 
-    /* grayscale / white */
+.red-box {
+    background-color: var(--red);
+}
 
-    border: 1px solid black;
-    color: #FFFFFF;
+.yellow-box {
+    background-color: var(--yellow);
 }

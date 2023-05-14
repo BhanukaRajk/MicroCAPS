@@ -80,10 +80,10 @@
                                         </ul>
                                     </div> -->
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <label for="add-assign-emp">Assign an assembler</label>
                                     <input type="checkbox" id="add-assign-emp" onchange="allowAssign()" checked>
-                                </div>
+                                </div> -->
                                 <div>
                                     <button type="button" onclick="addTask()" class="action-one-button">Submit</button>
                                 </div>
@@ -307,16 +307,16 @@
     // });
 
 
-    function allowAssign() {
-        var checkbox = document.getElementById("add-assign-emp");
-        var input = document.getElementById("assembler");
+    // function allowAssign() {
+    //     var checkbox = document.getElementById("add-assign-emp");
+    //     var input = document.getElementById("assembler");
 
-        if (checkbox.checked) {
-            input.disabled = false;
-        } else {
-            input.disabled = true;
-        }
-    }
+    //     if (checkbox.checked) {
+    //         input.disabled = false;
+    //     } else {
+    //         input.disabled = true;
+    //     }
+    // }
 
 
 
