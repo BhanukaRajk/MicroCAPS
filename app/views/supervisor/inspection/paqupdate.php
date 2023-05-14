@@ -40,7 +40,7 @@
                                 <!-- <input type="text" id="brake_bleeding" name="brake_bleed" class="paq-input-field-short" placeholder="Normal" autocomplete="off" required> -->
                                 <select name="brake-bleed-selection" id="brake-bleed-selection" class="paq-input-field-short">
                                     <?php 
-                                    if($test_data->Brake_Bleed == "NA") {
+                                    if($test_data->BrakeBleed == "NA") {
                                         echo '<option value="Normal">Normal</option><option value="NA" selected>Need an attention</option>'; 
                                     } else {
                                         echo '<option value="Normal" selected>Normal</option><option value="NA">Need an attention</option>'; 
@@ -60,7 +60,7 @@
                                 <!-- <input type="text" id="gear_oil" name="gear_oil" class="paq-input-field-short" placeholder="Normal" autocomplete="off" required> -->
                                 <select name="gear-oil-selection" id="gear-oil-selection" class="paq-input-field-short">
                                     <?php 
-                                    if($test_data->Gear_Oil == "NA") {
+                                    if($test_data->GearOil == "NA") {
                                         echo '<option value="Normal">Normal</option><option value="NA" selected>Need an attention</option>'; 
                                     } else {
                                         echo '<option value="Normal" selected>Normal</option><option value="NA">Need an attention</option>'; 
@@ -80,7 +80,7 @@
                                 <!-- <input type="text" id="rack_end" name="rack_end" class="paq-input-field-short" placeholder="Need a special attention" autocomplete="off" required> -->
                                 <select name="rack-end-selection" id="rack-end-selection" class="paq-input-field-short">
                                     <?php 
-                                    if($test_data->Rack_End == "NA") {
+                                    if($test_data->RackEnd == "NA") {
                                         echo '<option value="Normal">Normal</option><option value="NA" selected>Need an attention</option>'; 
                                     } else {
                                         echo '<option value="Normal" selected>Normal</option><option value="NA">Need an attention</option>'; 
@@ -119,7 +119,7 @@
                             <!-- <input type="text" id="axel" name="axel" class="paq-input-field-long" placeholder="Normal" required> -->
                             <select name="axel-selection" id="axel-selection" class="paq-input-field-long">
                                 <?php 
-                                if($test_data->Axel_Plate == "NA") {
+                                if($test_data->AxelPlate == "NA") {
                                     echo '<option value="Normal">Normal</option><option value="NA" selected>Need an attention</option>'; 
                                 } else {
                                     echo '<option value="Normal" selected>Normal</option><option value="NA">Need an attention</option>'; 
@@ -134,8 +134,8 @@
                             <label for="visual">VISUAL INSPECTION AND REPORTING (ALL AREAS OF VEHICLES)</label>
                         </div>
                         <div>
-                            <textarea id="visual" name="visual" class="paq-input-field-long tall-input-1" placeholder="All of the visual components are in good condition" required><?php echo $test_data->ChassisNo; ?></textarea>
-                            <input type="hidden" id="vehicle_id_input" name="chassis_no" value="<?php echo $test_data->Visual; ?>" required>
+                            <textarea id="visual" name="visual" class="paq-input-field-long tall-input-1" placeholder="All of the visual components are in good condition" required><?php echo $test_data->Visual; ?></textarea>
+                            <input type="hidden" id="chassis_no" name="chassis_no" value="<?php echo $test_data->ChassisNo; ?>" required>
                         </div>
                     </div>
 
@@ -158,7 +158,7 @@
                             <button type="reset" class="paq-reset-button">Reset</button>
                         </div>
                         <div>
-                            <button type="submit" id="submit-btn" class="paq-submit-button">Submit</button>
+                            <button type="button" id="submit-btn" class="paq-submit-button" onclick="paqUpdate()">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -170,6 +170,7 @@
 </section>
 
 <script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/paqrecord.js"></script>
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

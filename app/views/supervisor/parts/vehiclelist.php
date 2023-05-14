@@ -23,31 +23,43 @@
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        foreach ($data['CarComp'] as $CAR) {
-                            echo '<form method="POST" action="' . URL_ROOT . 'Supervisors/componentsView"><div onclick="this.closest(\'form\').submit()" class="carcard">
-                                <div class="cardhead">
-                                    <div class="cardid">
-                                        <div class="carmodel">' . $CAR->ModelName . '</div>
-                                        <div class="chassisno">' . $CAR->ChassisNo . '</div>
-                                        <input type="hidden" name="form-car-id" value="' . $CAR->ChassisNo . '">
+
+                        if ($data['CarComp'])  {
+                            foreach ($data['CarComp'] as $CAR) {
+                                echo '<form method="POST" action="' . URL_ROOT . 'Supervisors/componentsView"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                                    <div class="cardhead">
+                                        <div class="cardid">
+                                            <div class="carmodel">' . $CAR->ModelName . '</div>
+                                            <div class="chassisno">' . $CAR->ChassisNo . '</div>
+                                            <input type="hidden" name="form-car-id" value="' . $CAR->ChassisNo . '">
+                                        </div>
+                                        <div class="carstatuscolor">
+                                            <div class="status-circle '. (($CAR->CurrentStatus == "H") ? "status-orange-circle" : "status-green-circle") .'"></div>
+                                        </div>
                                     </div>
-                                    <div class="carstatuscolor">
-                                        <div class="status-circle '. (($CAR->CurrentStatus == "H") ? "status-orange-circle" : "status-green-circle") .'"></div>
+                                    <div class="carpicbox">
+                                        <img src="' . URL_ROOT . 'public/images/cars/' . $CAR->ModelName . ' ' . $CAR->Color . '.png" class="carpic" alt="' . $CAR->ModelName . ' ' . $CAR->Color . '">
                                     </div>
-                                </div>
-                                <div class="carpicbox">
-                                    <img src="' . URL_ROOT . 'public/images/cars/' . $CAR->ModelName . ' ' . $CAR->Color . '.png" class="carpic" alt="' . $CAR->ModelName . ' ' . $CAR->Color . '">
-                                </div>
-                                <div class="carstatus">';
-                                
-                                if($CAR->CurrentStatus == "S1") { echo 'Stage 01'; }
-                                else if($CAR->CurrentStatus == "S2") { echo 'Stage 02'; }
-                                else if($CAR->CurrentStatus == "S3") { echo 'Stage 03'; }
-                                else if($CAR->CurrentStatus == "S4") { echo 'Stage 04'; }
-                                else { echo 'On-Hold'; }
-                                
-                                echo '</div>
-                            </div></form>';
+                                    <div class="carstatus">';
+                                    
+                                    if($CAR->CurrentStatus == "S1") { echo 'Stage 01'; }
+                                    else if($CAR->CurrentStatus == "S2") { echo 'Stage 02'; }
+                                    else if($CAR->CurrentStatus == "S3") { echo 'Stage 03'; }
+                                    else if($CAR->CurrentStatus == "S4") { echo 'Stage 04'; }
+                                    else { echo 'On-Hold'; }
+                                    
+                                    echo '</div>
+                                </div></form>';
+                            }
+                        } else {
+                            echo '<div class="no-data horizontal-centralizer">
+                                    <div class="margin-top-5 vertical-centralizer">
+                                        <div> Nothing to show :( </div>
+                                        <div>
+                                            <img src="'. URL_ROOT .'public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                        </div>
+                                    </div>
+                                </div>';
                         }
                         ?>
 

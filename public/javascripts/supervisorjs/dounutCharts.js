@@ -1,4 +1,4 @@
-// CHART RENDERING FUNCTION
+
 function renderChart(ctx, ltx, data, cutout = 50) {
     
     let done = data.complete/(data.complete + data.pending)*100;
@@ -15,9 +15,6 @@ function renderChart(ctx, ltx, data, cutout = 50) {
     } else {
         ltx.innerHTML = Math.floor(done) + '%';
         ltx.classList.add(chartGrid + '-2');
-        if (cutout == 50){
-            ltx.classList.add('width-rem-2');
-        }
     }
 
     var chart = new Chart(ctx, {
@@ -42,8 +39,6 @@ function renderChart(ctx, ltx, data, cutout = 50) {
     });
 }
 
-
-// DESTROY CHART ON CANVAS WHEN PAGE NOT RELOADING TO CHANGE THE CHART DETAILS
 function destroyChart(ctx) {
 
     var chart = Chart.getChart(ctx);

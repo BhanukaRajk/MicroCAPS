@@ -61,6 +61,98 @@ function updatePassword() {
     });
 }
 
+function paq() {
+
+    let chassisNo = document.getElementById("chassis_no").value;
+    let brake_bleed_selection = document.getElementById("brake-bleed-selection").value;
+    let gear_oil_selection = document.getElementById("gear-oil-selection").value;
+    let rack_end_selection = document.getElementById("rack-end-selection").value;
+    let clutch_selection = document.getElementById("clutch-selection").value;
+    let axel_selection = document.getElementById("axel-selection").value;
+    let visual = document.getElementById("visual").value;
+    let option1 = document.getElementById("option1").checked;
+    let option2 = document.getElementById("option2").checked;
+
+    let status = "";
+
+    if (option1) {
+        status = "Pass";
+    }
+
+    if (option2) {
+        status = "Fail";
+    }
+
+
+    let formdata = new FormData();
+    formdata.append("chassisNo", chassisNo);
+    formdata.append("bbs", brake_bleed_selection);
+    formdata.append("gos", gear_oil_selection);
+    formdata.append("res", rack_end_selection);
+    formdata.append("cs", clutch_selection);
+    formdata.append("as", axel_selection);
+    formdata.append("visual", visual);
+    formdata.append("final", status);
+
+    $.ajax({
+        type: 'POST',
+        url:  BASE_URL + 'Supervisors/recordPAQInspectionResults',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            location.reload(true);
+        }
+    });
+
+}
+
+function paqUpdate() {
+
+    let chassisNo = document.getElementById("chassis_no").value;
+    let brake_bleed_selection = document.getElementById("brake-bleed-selection").value;
+    let gear_oil_selection = document.getElementById("gear-oil-selection").value;
+    let rack_end_selection = document.getElementById("rack-end-selection").value;
+    let clutch_selection = document.getElementById("clutch-selection").value;
+    let axel_selection = document.getElementById("axel-selection").value;
+    let visual = document.getElementById("visual").value;
+    let option1 = document.getElementById("option1").checked;
+    let option2 = document.getElementById("option2").checked;
+
+    let status = "";
+
+    if (option1) {
+        status = "Pass";
+    }
+
+    if (option2) {
+        status = "Fail";
+    }
+
+
+    let formdata = new FormData();
+    formdata.append("chassisNo", chassisNo);
+    formdata.append("bbs", brake_bleed_selection);
+    formdata.append("gos", gear_oil_selection);
+    formdata.append("res", rack_end_selection);
+    formdata.append("cs", clutch_selection);
+    formdata.append("as", axel_selection);
+    formdata.append("visual", visual);
+    formdata.append("final", status);
+
+    $.ajax({
+        type: 'POST',
+        url:  BASE_URL + 'Supervisors/recordPAQInspectionResultsUpdate',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            location.reload(true);
+        }
+    });
+
+}
+
 function addConsumables() {
     let cname = document.getElementById("conName").value;
     let ctype =  document.getElementById("consume-type").value ;

@@ -17,7 +17,7 @@
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
                 <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div> 
                 <div class="stage-switch">
-                    <button class="back-button">Overall</button>
+                    <button class="back-button" onclick="location.href = '<?php echo URL_ROOT; ?>Supervisors/overall/<?php echo $data['chassisNo']; ?>'">Overall</button>
                 </div>
             </div>
 
@@ -101,7 +101,7 @@
                             <form action = "<?php echo URL_ROOT .'Supervisors/proceed'; ?>" method="post">
                                 <input type="hidden" name="form-car-id" value="<?php echo $data['chassisNo']; ?>">
                                 <input type="hidden" name="form-car-stage" value="AC">
-                                <button type="Submit" id="stage-passer">Proceed to Next Stage</button>
+                                <button type="Submit" id="stage-passer">Proceed to Inspection</button>
                             </form>
                         </div>
                     </div>
@@ -120,6 +120,12 @@
 <script>
 
         let s4 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
+
+        if (s4.complete/(s4.complete + s4.pending)*100 == 100) {
+            document.getElementById('stage-passer').disabled = false;
+        } else {
+            document.getElementById('stage-passer').disabled = true;
+        }
 
         var ctx = document.getElementById('Lstage04').getContext('2d');
 
