@@ -22,18 +22,9 @@
                 </div>
                 <div class="vehicle-detail-board">
                     <div class="vehicle-data-board" id="carList">
-
                         <?php
+                            if($data['LineCarsSet'] != null) {
 
-                            if (!$data['LineCarsSet']) {
-
-                                echo '<div class="horizontal-centralizer">
-                                                    <div class="marginy-4">No PAQ Available</div>
-                                                    <div class=""></div>
-                                                </div>
-                                                <div class="bottom-border"></div>';
-
-                            } else {
                                 foreach ($data['LineCarsSet'] as $car) {
                                     echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getCarInfo">
                                         <div onclick="this.closest(\'form\').submit()" class="carcard">
@@ -51,6 +42,15 @@
                                         </div>
                                     </form>';
                                 }
+                            } else {
+                                echo '<div class="no-data horizontal-centralizer">
+                                        <div class="margin-top-5 vertical-centralizer">
+                                            <div> Nothing to show :( </div>
+                                            <div>
+                                                <img src="'. URL_ROOT .'public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                            </div>
+                                        </div>
+                                    </div>';
                             }
                         ?>
 
@@ -82,8 +82,24 @@
                                                 <label for="mg">MG ZH SUV</label>
                                             </div>
                                         </li>
-
                                         <li>
+                                            <div class="filtertype">Inspection</div>
+                                            <div class="filters">
+                                                <input type="radio" id="test-pa" name="completeness" value="PA">
+                                                <label for="test-pa">Test Failed</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="radio" id="test-ac" name="completeness" value="AC">
+                                                <label for="test-ac">Not completed</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="radio" id="all-case" name="completeness" value="All" checked>
+                                                <label for="all-case">All</label>
+                                            </div>
+
+                                        </li>
+
+                                        <!-- <li>
                                             <div class="filtertype">Inspection</div>
                                             <div class="filters">
                                                 <input type="radio" id="current" name="completeness" value="CM">
@@ -98,8 +114,8 @@
                                                 <label for="all-time">All</label>
                                             </div>
 
-                                        </li>
-                                        <li>
+                                        </li> -->
+                                        <!-- <li>
                                             <div class="filtertype">Status</div>
                                             <div class="filters">
                                                 <input type="radio" id="acceptance" name="acceptance" value="Accepted">
@@ -113,7 +129,7 @@
                                                 <input type="radio" id="all-tested" name="acceptance" value="All" checked>
                                                 <label for="all-tested">All</label>
                                             </div>
-                                        </li>
+                                        </li> -->
                                     </ul>
                             </div>
                         </div>

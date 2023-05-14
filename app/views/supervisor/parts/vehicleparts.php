@@ -17,13 +17,14 @@
 
                         <div class="vertical-centralizer">
                             <div class="parts-title" id="partPageId">Part details - <?php echo $data['chassis_no']; ?></div>
+                            <div class="display-none" id="vehicle_no"><?php echo $data['chassis_no']; ?></div>
                         </div>
 
                         <!-- <div class="vertical-centralizer"></div> -->
 
                         <div class="vehicle-selection-box horizontal-centralizer">
                             <div class="vertical-centralizer">
-                                <button class="full-list-btn blue-hover" onclick="location.href='http://localhost:8080/MicroCAPS/Supervisors/viewCarComponent'">Vehicle list</button>
+                                <button class="full-list-btn blue-hover" onclick="location.href = '<?php echo URL_ROOT; ?>Supervisors/viewCarComponent'">Vehicle list</button>
                             </div>
                             <div>
                                 <label for="vehicles" class="display-none">Select Vehicle</label>
@@ -46,7 +47,7 @@
                     <div class="parts-info-box-inner">
 
                         <div onchange="filterStatus()" class="parts-info-set-1">
-                            <div class="filter-btn-box">
+                            <!-- <div class="filter-btn-box">
                                 <button class="page-filter-btn">All: 22</button>
                             </div>
                             <div class="filter-btn-box">
@@ -57,7 +58,7 @@
                             </div>
                             <div class="filter-btn-box">
                                 <button class="page-filter-btn">Damaged: 2</button>
-                            </div>
+                            </div> -->
                             <div class="filter-btn-box">
                                 <label for="part-search"></label>
                                 <input class="part-searchbox" id="searchBox" oninput="searchPart()" placeholder="Search a part">
@@ -77,26 +78,35 @@
                                 </div>
                                 <div class="bottom-border"></div>
 
-                                <?php foreach ($data['components'] AS $component) {
-                                    echo '<div class="parts-table-row bottom-border">
-                                            <div class="parts-col-01">'. $component->PartName .'</div>
-                                            <div class="parts-col-02">'. $component->Status .'</div>
-                                            <div class="parts-col-03">
-                                                <div class="round">
-                                                    <input type="checkbox" id="'. $component->PartNo .'D" '. (($component->Status == "DAMAGED") ? 'checked' : '' ) .' />
-                                                    <label for="'. $component->PartNo .'D"></label>
+                                <?php 
+                                if($data['components'] != null) {
+                                    foreach ($data['components'] AS $component) {
+                                        echo '<div class="parts-table-row bottom-border">
+                                                <div class="parts-col-01">'. $component->PartName .'</div>
+                                                <div class="parts-col-02">';
+                                                
+                                                if ($component->Status == "D") echo 'PRE-DAMAGED';
+                                                else if($component->Status == "ID") echo 'DAMAGED';
+                                                else if($component->Status == "I") echo 'ISSUED';
+                                                else echo 'NOT ISSUED';
+                                                
+                                                echo '</div>
+                                                <div class="parts-col-03">
+                                                    <div class="round">
+                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-D" class="damage-check" '. (($component->Status == "D" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                        <label for="'. trim($component->PartNo) .'-D"></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="parts-col-04">
-                                                <div class="round">
-                                                    <input type="checkbox" id="'. $component->PartNo .'I" '. (($component->Status == "ISSUED") ? 'checked' : '' ) .' />
-                                                    <label for="'. $component->PartNo .'I"></label>
+                                                <div class="parts-col-04">
+                                                    <div class="round">
+                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-I" class="issue-check" '. (($component->Status == "I" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                        <label for="'. trim($component->PartNo) .'-I"></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>';
-                                }
+                                            </div>';
+                                    }
 
-                                if($component == NULL) {
+                                } else {
                                     echo '<div class="horizontal-centralizer">
                                             <div class="marginy-4">No parts available</div>
                                             <div class=""></div>
@@ -116,7 +126,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/components.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

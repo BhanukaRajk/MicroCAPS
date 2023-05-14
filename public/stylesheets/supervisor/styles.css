@@ -1118,22 +1118,22 @@ div.select {
     visibility: hidden;
     opacity: 0;
     text-transform: capitalize;
-  }
-  
-  .visible {
+}
+
+.visible {
     visibility: visible;
     opacity: 1;
-  }
-  
-  .pop-container {
+}
+
+.pop-container {
     transition: all 5s ease-in-out;
-  }
-  
-  .pop {
+}
+
+.pop {
     animation: pop 0.7s;
-  }
-  
-  .close {
+}
+
+.close {
     position: absolute;
     top: 0.5em;
     right: 1em;
@@ -1143,51 +1143,51 @@ div.select {
     text-decoration: none;
     color: #ffffff;
     cursor: pointer;
-  }
-  
-  .close:hover {
+}
+
+.close:hover {
     color: #06D85F;
-  }
-  
-  @keyframes pop {
+}
+
+@keyframes pop {
     0% {
-      transform: scale(1);
+        transform: scale(1);
     }
-  
+
     50% {
-      transform: scale(1.4);
+        transform: scale(1.4);
     }
-  
+
     60% {
-      transform: scale(1.1);
+        transform: scale(1.1);
     }
-  
+
     70% {
-      transform: scale(1.2);
+        transform: scale(1.2);
     }
-  
+
     80% {
-      transform: scale(1);
+        transform: scale(1);
     }
-  
+
     90% {
-      transform: scale(1.1);
+        transform: scale(1.1);
     }
-  
+
     100% {
-      transform: scale(1);
+        transform: scale(1);
     }
-  }
+}
 
-  .cursor-pointer {
+.cursor-pointer {
     cursor: pointer;
-  }
+}
 
-  /* Top Nav Bar */
-    .height-rem-2p5 {
-        height: 2.5rem !important;
-    }
+/* Top Nav Bar */
+.height-rem-2p5 {
+    height: 2.5rem !important;
+}
 
-    .width-rem-2p5 {
-        width: 2.5rem !important
-    }
+.width-rem-2p5 {
+    width: 2.5rem !important
+}

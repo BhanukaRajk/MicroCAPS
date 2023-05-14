@@ -218,7 +218,6 @@
 
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/calender.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/charts.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
 
 <script>

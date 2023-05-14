@@ -17,7 +17,7 @@
       <div class="toolset-head">
         <div class="toolset-heading">Tools</div>
         <div class="toolset-adding">
-          <button onclick="" class="tool-add-btn adding-button">Add new</button>
+          <button onclick="showAddNewToolPopup()" class="tool-add-btn adding-button">Add new</button>
         </div>
       </div>
 
@@ -26,32 +26,33 @@
         <div class="toolset-toolview" id="toolBoard">
 
           <?php
-          foreach ($data['toolset'] AS $tool) {
-            echo '<div class="toolcard" onclick="expandTool(this)">
-                    <div class="cardhead">
-                      <div class="cardid">
-                        <div class="tool-id display-none">'. $tool->ToolId .'</div>
-                        <div class="toolname">'. $tool->ToolName .'</div>
-                        <div class="tool-quantity">Quantity: '. $tool->quantity .'</div>
-                      </div>
-                      <div class="toolstatuscolor">
-                        <div class="tool-status display-none">'. $tool->Status .'</div>
-                        <div class="status-circle ' . (($tool->Status == "Normal") ? 'status-green-circle' : 'status-orange-circle') . ' "></div>
-                      </div>
-                    </div>
-                    <div class="toolpicbox">
-                      <img src="' . URL_ROOT . 'public/images/tools/' . (($tool->Image != NULL) ? $tool->Image : 'none.jpeg') . '" class="toolpic" alt="' . $tool->ToolName . '">
-                    </div>
-                    <div class="tool-card-down">
-                      <div class="tool-updater ' . (($tool->Status == "Normal") ? 'available' : 'lower') . '">' . (($tool->Status == "Normal") ? 'Normal' : 'Need an attention') . '</div>
-                      <div class="toolupdate last-update">Last update: ' . $tool->LastUpdate . '</div>
-                    </div>
-                  </div>';
-          }
+          if($data['toolset'] != null) {
 
+            foreach ($data['toolset'] AS $tool) {
+              echo '<div class="toolcard" onclick="expandTool(this)">
+                      <div class="cardhead">
+                        <div class="cardid">
+                          <div class="tool-id display-none">'. $tool->ToolId .'</div>
+                          <div class="toolname">'. $tool->ToolName .'</div>
+                          <div class="tool-quantity">Quantity: '. $tool->quantity .'</div>
+                        </div>
+                        <div class="toolstatuscolor">
+                          <div class="tool-status display-none">'. $tool->Status .'</div>
+                          <div class="status-circle ' . (($tool->Status == "Normal") ? 'status-green-circle' : 'status-orange-circle') . ' "></div>
+                        </div>
+                      </div>
+                      <div class="toolpicbox">
+                        <img src="' . URL_ROOT . 'public/images/tools/' . (($tool->Image != NULL) ? $tool->Image : 'none.jpeg') . '" class="toolpic" alt="' . $tool->ToolName . '">
+                      </div>
+                      <div class="tool-card-down">
+                        <div class="tool-updater ' . (($tool->Status == "Normal") ? 'available' : 'lower') . '">' . (($tool->Status == "Normal") ? 'Normal' : 'Need an attention') . '</div>
+                        <div class="toolupdate last-update">Last update: ' . $tool->LastUpdate . '</div>
+                      </div>
+                    </div>';
+            }
 
           // DISPLAY THIS IF THERE IS NO DATA IN THE TABLE
-          if ($tool == NULL) {
+          } else {
             echo '<div class="no-data horizontal-centralizer"><div class="margin-top-5">Nothing to show :(</div></div>';
           }
 
@@ -183,7 +184,10 @@
               <div class="del-confirm-msg-box">Are you sure?</div>
               <div class="del-conf-button-set">
                 <div class="del-conf-button-box">
-                  <button type="button" class="delete-button-2">Remove</button>
+                  <form method="POST" action="<?php echo URL_ROOT; ?>Supervisors/removeThisTool">
+                    <input type="hidden" name="tool_id" id="form-tool-id">
+                    <button type="submit" class="delete-button-2">Remove</button>
+                  </form>
                 </div>
                 <div class="del-conf-button-box">
                   <button onclick="closeToolDelConfBox()" class="edit-button-2">Cancel</button>
@@ -197,40 +201,55 @@
 
 
         <!-- ADD NEW TOOL POPUP BOX -->
-        <!-- <div class="delete-conf-blur horizontal-centralizer" id="tooladdpopupWindow">
+        <div class="delete-conf-blur horizontal-centralizer display-none" id="tooladdpopupWindow">
           <div class="vertical-centralizer">
 
             <form>
               <div class="add-new-con-box">
                 <div class="add-new-con-box-content">
-                  <div class="img-grid TB">
-                    <img src="<?php //echo URL_ROOT; 
-                              ?>public/images/profile/<?php //echo $data['userDetails']->Image; 
-                                                      ?>" class="border-radius-11 width-rem-12p5" alt="Consumable" id="img-preview" />
-                    <img src="<?php //echo URL_ROOT; 
-                              ?>public/images/add.png" class="grid-add width-rem-2p5" alt="add button" />
+                  <div class="img-grid">
+                      <div style="background-image:url(<?php echo URL_ROOT; ?>public/images/placeholder.jpg)" class="border-radius-11 width-rem-12p5 height-rem-12p5 background-image" title="profilepic" id="img-previewc"></div>
+                      <img src="<?php echo URL_ROOT; ?>public/images/add.png" class="grid-add width-rem-2p5"/>
+                  </div>
+                  <div>
+                      <input type="file" id="imagec" class="display-none" name="profile" accept="image/*" />
                   </div>
                   <div class="img-remover-box">
-                    <a class="img-remover">Remove image</a>
+                    <!-- <a class="img-remover">Remove image</a> -->
                   </div>
                   <div class="new-con-name-box">
                     <label for="conName" class="display-none">Name: </label>
                     <input name="toolName" type="text" placeholder="Enter tool name" class="new-con-name" required>
                   </div>
-                  <div class="new-con-type-box"> -->
-                    <!-- <label for="conType" class="display-none">Type: </label>
-                    <input name="conType" type="text" placeholder="Type" class="new-con-type" required> -->
-                    <!-- <select name="toolStatus" id="consume-type" class="con-type-select">
-                      <option class="" disabled selected value>- Select tool status -</option>
+                  <div class="new-con-type-box">
+
+                    <label for="tool-type" class="display-none">Type: </label>
+                    <!-- <input name="conType" type="text" placeholder="Type" class="new-con-type" required> -->
+
+                    <select name="toolType" id="tool-type" class="con-type-select">
+                      <option class="con-type-select" disabled selected value>- Select tool type -</option>
+                      <option value="Hand Tool">Hand Tools</option>
+                      <option value="Power Tool">Power Tools</option>
+                    </select>
+
+                  </div>
+                  <div class="new-con-type-box">
+
+                    <label for="tool-status" class="display-none">Status: </label>
+                    <!-- <input name="conType" type="text" placeholder="Type" class="new-con-type" required> -->
+
+                    <select name="toolStatus" id="tool-status" class="con-type-select">
+                      <option class="con-type-select" disabled selected value>- Select tool status -</option>
                       <option value="Normal">Normal</option>
                       <option value="NA">Need an attention</option>
                     </select>
-                  </div> -->
-                  <!-- <div class="new-con-status-box">
-                    <label for="conStatus" class="display-none">Stock status: </label>
-                    <input name="conStatus" type="number" placeholder="Stock quantity" class="new-con-status" required>
-                  </div> -->
-                  <!-- <div class="new-con-add-btn-box">
+
+                  </div>
+                  <div class="new-con-status-box">
+                    <label for="toolQuantity" class="display-none">Tool quantity: </label>
+                    <input name="toolQuantity" id="toolQuantity" type="number" placeholder="Stock quantity" class="new-con-status" required>
+                  </div>
+                  <div class="new-con-add-btn-box">
                     <div><button class="green-btn width-50px">Add</button></div>
                     <div><button onclick="closeAddNewToolPopup()" class="red-btn width-50px">Cancel</button></div>
                   </div>
@@ -239,7 +258,7 @@
             </form>
 
           </div>
-        </div> -->
+        </div>
 
 
 
@@ -251,6 +270,6 @@
 
 
 <!-- ADD COMMON FOOTER FILE -->
-<!-- <script src="<?php // echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script> -->
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/tools.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -10,51 +10,35 @@ class Consumable
     }
 
 
-    // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING CONSUMABLES IN CARD VIEWS
-    // public function viewConsumables($consumeType = null, $cstatus = null)
-    // {
-    //     $sql = 'SELECT `ConsumableId`, `ConsumableName`, 
-    //                 `Volume`, `Weight`, 
-    //                 DATE(`LastUpdate`) AS `UDate`,
-    //                 TIME(`LastUpdate`) AS `UTime`, 
-    //                 `LastUpdateBy`, `Image` 
-    //                 FROM `consumable`, `employee`
-    //                 WHERE `ConsumableId` IS NOT NULL';
-
-
-    //     if (isset($consumeType)) {
-    //         if ($consumeType == 'Lubricants') {
-    //             $sql .= ' AND `Volume` IS NOT NULL';
-    //         } elseif ($consumeType == 'Grease') {
-    //             $sql .= ' AND `Weight` IS NOT NULL';
-    //         }
-    //     }
-
-    //     if (isset($cstatus)) {
-    //         if ($cstatus == 'Available') {
-    //             $sql .= ' AND (`Volume` >= 60 OR `Weight` >= 60)';
-    //         } elseif ($cstatus == 'Low') {
-    //             $sql .= ' AND (`Volume` < 60 OR `Weight` < 60)';
-    //         }
-    //     }
-
-    //     $sql .= ';';
-
-    //     // DO NOT SWAP THE ORDER OF QUERY AND BIND
-    //     $this->db->query($sql);
-
-    //     $consumables = $this->db->resultSet();
-
-
-    //     if ($consumables) {
-    //         return $consumables;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     // ADDING NEW CONSUMABLE
     public function addConsumable($name, $type, $status, $image) {
+
+        if ($type == 'Lubricant') {
+            $this->db->query(
+                'INSERT INTO `consumable`(`ConsumableId`, `ConsumableName`, `Volume`, `LastUpdate`, `LastUpdateBy`, `Image`) 
+                    VALUES (:id,:name,:status,CURRENT_TIMESTAMP,:by,:image);'
+            );
+            $this->db->bind(':status', $status);
+        } else {
+            $this->db->query(
+                'INSERT INTO `consumable`(`ConsumableId`, `ConsumableName`, `Weight`, `LastUpdate`, `LastUpdateBy`, `Image`) 
+                    VALUES (:id,:name,:status,CURRENT_TIMESTAMP,:by,:image);'
+            );
+            $this->db->bind(':status', $status);
+        }
+
+        $this->db->bind(':id', str_replace(" ", "", $name));
+        $this->db->bind(':name', strtoupper($name));
+//        $this->db->bind(':lastupdate', CURRENT_TIMESTAMP);
+        $this->db->bind(':by', $_SESSION['_id']);
+        $this->db->bind(':image', $image);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // UPDATING CONSUMABLE QUANTITY

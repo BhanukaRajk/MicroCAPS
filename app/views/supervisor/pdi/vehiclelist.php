@@ -14,7 +14,7 @@
         <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
-                    <div>Test run queue</div>
+                    <div>Vehicles on Test Run</div>
 
 
                     <div>
@@ -30,30 +30,31 @@
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        if (!$data['LineCarsSet']) {
-
-                            echo '<div class="horizontal-centralizer">
-                                                <div class="marginy-4">No PDI Available</div>
-                                                <div class=""></div>
+                            if($data['LineCarsSet'] != null) {
+                                foreach ($data['LineCarsSet'] as $car) {
+                                    echo '<form method="POST" action="'. URL_ROOT .'Supervisors/pdi_results/'. $car->ChassisNo.'"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                                        <div class="cardhead">
+                                            <div class="cardid">
+                                                <div class="carmodel">'. $car->ModelName .'</div>
+                                                <div class="chassisno">'. $car->ChassisNo .'</div>
+                                                <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
                                             </div>
-                                            <div class="bottom-border"></div>';
-
-                        } else { 
-                            foreach ($data['LineCarsSet'] as $car) {
-                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/pdi_results/'. $car->ChassisNo.'"><div onclick="this.closest(\'form\').submit()" class="carcard">
-                                    <div class="cardhead">
-                                        <div class="cardid">
-                                            <div class="carmodel">'. $car->ModelName .'</div>
-                                            <div class="chassisno">'. $car->ChassisNo .'</div>
-                                            <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                        </div>
+                                        <div class="carpicbox">
+                                            <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                        </div>
+                                        <div></div>
+                                    </div></form>';
+                            } 
+                        } else {
+                            echo '<div class="no-data horizontal-centralizer">
+                                    <div class="margin-top-5 vertical-centralizer">
+                                        <div> Nothing to show :( </div>
+                                        <div>
+                                            <img src="'. URL_ROOT .'public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                         </div>
                                     </div>
-                                    <div class="carpicbox">
-                                        <img src="'.  URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
-                                    </div>
-                                    <div></div>
-                                </div></form>';
-                            }
+                                </div>';
                         }
                         ?>
 
@@ -87,6 +88,22 @@
                                         </li>
 
                                         <li>
+                                            <div class="filtertype">Test Run</div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="rr-cm" name="test-state" value="CM" checked>
+                                                <label for="rr-cm">Completed</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="rr-p" name="test-state" value="P" checked>
+                                                <label for="rr-p">Pending</label>
+                                            </div>
+                                            <div class="filters">
+                                                <input type="checkbox" id="rr-nc" name="test-state" value="NC" checked>
+                                                <label for="rr-nc">Not Completed</label>
+                                            </div>
+                                        </li>
+
+                                        <!-- <li>
                                             <div class="filtertype">Inspection</div>
                                             <div class="filters">
                                                 <input type="radio" id="current" name="completeness" value="CM">
@@ -116,7 +133,7 @@
                                                 <input type="radio" id="all-tested" name="acceptance" value="All" checked>
                                                 <label for="all-tested">All</label>
                                             </div>
-                                        </li>
+                                        </li> -->
                                     </ul>
 
                             </div>
@@ -129,6 +146,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/pdinspect.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

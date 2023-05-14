@@ -1,5 +1,3 @@
-
-
 function dashboardChart() {
 
     let chassisNo = document.getElementById("dashboardChart").value;
@@ -19,12 +17,11 @@ function dashboardChart() {
 
         }
     };
-    xhttp.open("POST", "http://localhost/MicroCAPS/Vehicles/assemblyPercentageDetail", true);
+    xhttp.open("POST", BASE_URL + "Vehicles/assemblyPercentageDetail", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("chassisNo="+chassisNo);
 
 }
-
 
 function saveChanges(id, position) {
     let formdata = new FormData();
@@ -37,7 +34,7 @@ function saveChanges(id, position) {
     formdata.append("nic", document.getElementById("nic").value);
     $.ajax({
         type: 'POST',
-        url:  'http://localhost/MicroCAPS/'+position+'s/settings',
+        url:  BASE_URL+position+'s/settings',
         data: formdata,
         processData: false,
         contentType: false,
@@ -54,7 +51,7 @@ function updatePassword() {
     formdata.append("confirmPassword", document.getElementById("confirmpassword").value);
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/MicroCAPS/Users/updatePassword',
+        url: BASE_URL + 'Users/updatePassword',
         data: formdata,
         processData: false,
         contentType: false,
@@ -65,22 +62,41 @@ function updatePassword() {
 }
 
 function addConsumables() {
-    let formdata = new FormData();
-    formdata.append("image", document.getElementById("imagec").files[0]);
-    formdata.append("name", document.getElementById("conName").value);
-    formdata.append("type", document.getElementById("consume-type").value);
-    formdata.append("status", document.getElementById("status").value);
-    $.ajax({
-        type: 'POST',
-        url:  'http://localhost/MicroCAPS/Supervisors/addNewConsumables',
-        data: formdata,
-        processData: false,
-        contentType: false,
-        success: (response) => {
-            // console.log(response);
-            location.reload(true);
-        }
-    });
+    let cname = document.getElementById("conName").value;
+    let ctype =  document.getElementById("consume-type").value ;
+    let cstate = document.getElementById("status").value;
+    let imagefile = document.getElementById("imagec").files[0];
+
+    if(cname == '' || ctype == '' || cstate == '' || imagefile == null) {
+
+        document.getElementById("error_message").innerHTML = "Fill all the fields to continue!";
+        notifyMe();
+
+    }
+    else if(cstate < 0) {
+
+        document.getElementById("error_message").innerHTML = "Please enter valid input!";
+        notifyMe();
+
+    } else {
+
+        let formdata = new FormData();
+        formdata.append("image", document.getElementById("imagec").files[0]);
+        formdata.append("name", document.getElementById("conName").value);
+        formdata.append("type", document.getElementById("consume-type").value);
+        formdata.append("status", document.getElementById("status").value);
+        $.ajax({
+            type: 'POST',
+            url:  BASE_URL + 'Supervisors/addNewConsumables',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                location.reload(true);
+            }
+        });
+    }
+
 }
 
 function updateChart(ctx, ltx, data, cutout = 50) {
@@ -121,50 +137,6 @@ function updateChart(ctx, ltx, data, cutout = 50) {
         cutout: cutout
     }
     });
-}
-
-function destroyChart(ctx) {
-
-    var chart = Chart.getChart(ctx);
-
-    chart.destroy();
-
-}
-
-//Alert Success
-function alertSuccess(message) {
-    let alert = document.getElementById("alert-success");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
-    alert.innerHTML = "<i class='icon fa-check-circle margin-right-3'></i>"+message;
-
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
-    }, 5000);
-}
-
-//Alert Faliure
-function alertFaliure(message) {
-    let alert = document.getElementById("alert-faliure");
-    alert.classList.add("display-block");
-    alert.classList.add("show");
-    alert.innerHTML = "<i class='icon fa-times-circle margin-right-3'></i>"+message;
-
-    setTimeout(() => {
-        alert.classList.remove("display-block");
-        alert.classList.remove("show");
-    }, 5000);
-}
-
-//Local Storage
-function setLocalStorage(FlashState,FlashMessage) {
-    localStorage.setItem("FlashState",FlashState);
-    localStorage.setItem("FlashMessage",FlashMessage);
-}
-
-function getItem(key) {
-    return localStorage.getItem(key);
 }
 
 function destroyChart(ctx) {

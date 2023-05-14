@@ -14,7 +14,7 @@
         <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
-                    <div>Current vehicles</div>
+                    <div>Current vehicles on assembly line</div>
                     <div>
                         <label for="searchBox" class="display-none"></label>
                         <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-searchbox" placeholder="Search Chassis No">
@@ -24,32 +24,42 @@
                     <div class="vehicle-data-board" id="carList">
 
                         <?php
-                        foreach ($data['AssemblyLineCars'] as $car) {
-                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProcess">
-                                <div class="carcard" onClick="this.closest(\'form\').submit()">
-                                    <div class="cardhead">
-                                        <div class="cardid">
-                                            <div class="carmodel">'. $car->ModelName .'</div>
-                                            <div class="chassisno">'. ($car->ChassisNo) .'</div>
-                                            <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+
+                        if($car == NULL)  {
+                            foreach ($data['AssemblyLineCars'] as $car) {
+                                echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProcess">
+                                    <div class="carcard" onClick="this.closest(\'form\').submit()">
+                                        <div class="cardhead">
+                                            <div class="cardid">
+                                                <div class="carmodel">'. $car->ModelName .'</div>
+                                                <div class="chassisno">'. ($car->ChassisNo) .'</div>
+                                                <input type="hidden" name="form-car-id" value="' .$car->ChassisNo. '">
+                                            </div>
+                                        </div>
+                                        <div class="carpicbox">
+                                            <img src="'. URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                        </div>
+                                        <div class="carstatus">';
+                                            if($car->CurrentStatus == "S1") { echo 'on stage 01'; }
+                                            else if($car->CurrentStatus == "S2") { echo 'on stage 02'; }
+                                            else if($car->CurrentStatus == "S3") { echo 'on stage 03'; }
+                                            else if($car->CurrentStatus == "S4") { echo 'on stage 04'; }
+                                            else { echo 'On-Hold'; }
+                                            echo '<input type="hidden" name="form-car-stage" value="' .$car->CurrentStatus. '">
                                         </div>
                                     </div>
-                                    <div class="carpicbox">
-                                        <img src="'. URL_ROOT .'public/images/cars/'. $car->ModelName .' '. $car->Color .'.png" class="carpic" alt="Car image">
+                                </form>';
+                            }
+                            
+                        } else {
+                            echo '<div class="no-data horizontal-centralizer">
+                                    <div class="margin-top-5 vertical-centralizer">
+                                        <div> Nothing to show :( </div>
+                                        <div>
+                                            <img src="'. URL_ROOT .'public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                        </div>
                                     </div>
-                                    <div class="carstatus">';
-                                        if($car->CurrentStatus == "S1") { echo 'At Stage 01'; }
-                                        else if($car->CurrentStatus == "S2") { echo 'At Stage 02'; }
-                                        else if($car->CurrentStatus == "S3") { echo 'At Stage 03'; }
-                                        else { echo 'At Stage 04'; }
-                                        echo '<input type="hidden" name="form-car-stage" value="' .$car->CurrentStatus. '">
-                                    </div>
-                                </div>
-                            </form>';
-                        }
-
-                        if($car == NULL) {
-                            echo '<div id="middler">Nothing to show!</div>';
+                                </div>';
                         }
                         ?>
 
@@ -102,14 +112,14 @@
                                         </li>
 
                                         <li>
-                                            <div class="filtertype">Timeline</div>
+                                            <div class="filtertype">Progress</div>
                                             <div class="filters">
-                                                <input type="radio" id="current" name="timeline" value="Current" checked>
-                                                <label for="current">Current</label>
+                                                <input type="radio" id="inprogress" name="progress" value="inprogress" checked>
+                                                <label for="inprogress">In progress</label>
                                             </div>
                                             <div class="filters">
-                                                <input type="radio" id="all-time" name="timeline" value="All">
-                                                <label for="all-time">All</label>
+                                                <input type="radio" id="all-cars" name="progress" value="All">
+                                                <label for="all-cars">All</label>
                                             </div>
 
                                         </li>

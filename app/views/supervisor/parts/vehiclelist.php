@@ -13,7 +13,7 @@
         <div class="list-view-side-margins">
             <div class="databoard">
                 <div class="pagehead display-flex-row justify-content-between">
-                    <div>Assembly completed vehicles</div>
+                    <div>Assembly line car components</div>
                     <div>
                         <label for="searchBox" class="display-none"></label>
                         <input type="text" id="searchBox" oninput="searchCar()" class="vehicle-searchbox" placeholder="Search Chassis No">
@@ -24,21 +24,29 @@
 
                         <?php
                         foreach ($data['CarComp'] as $CAR) {
-                            echo '<form method="POST" action="'. URL_ROOT .'Supervisors/componentsView"><div onclick="this.closest(\'form\').submit()" class="carcard">
+                            echo '<form method="POST" action="' . URL_ROOT . 'Supervisors/componentsView"><div onclick="this.closest(\'form\').submit()" class="carcard">
                                 <div class="cardhead">
                                     <div class="cardid">
-                                        <div class="carmodel">'. $CAR->ModelName .'</div>
-                                        <div class="chassisno">'. $CAR->ChassisNo .'</div>
-                                        <input type="hidden" name="form-car-id" value="' .$CAR->ChassisNo. '">
+                                        <div class="carmodel">' . $CAR->ModelName . '</div>
+                                        <div class="chassisno">' . $CAR->ChassisNo . '</div>
+                                        <input type="hidden" name="form-car-id" value="' . $CAR->ChassisNo . '">
                                     </div>
                                     <div class="carstatuscolor">
-                                        <div class="status-circle status-orange-circle"></div>
+                                        <div class="status-circle '. (($CAR->CurrentStatus == "H") ? "status-orange-circle" : "status-green-circle") .'"></div>
                                     </div>
                                 </div>
                                 <div class="carpicbox">
-                                    <img src="' . URL_ROOT . 'public/images/cars/'. $CAR->ModelName .' '. $CAR->Color .'.png" class="carpic" alt="'. $CAR->ModelName .' '. $CAR->Color .'">
+                                    <img src="' . URL_ROOT . 'public/images/cars/' . $CAR->ModelName . ' ' . $CAR->Color . '.png" class="carpic" alt="' . $CAR->ModelName . ' ' . $CAR->Color . '">
                                 </div>
-                                <div class="carstatus">Not Inspected</div>
+                                <div class="carstatus">';
+                                
+                                if($CAR->CurrentStatus == "S1") { echo 'Stage 01'; }
+                                else if($CAR->CurrentStatus == "S2") { echo 'Stage 02'; }
+                                else if($CAR->CurrentStatus == "S3") { echo 'Stage 03'; }
+                                else if($CAR->CurrentStatus == "S4") { echo 'Stage 04'; }
+                                else { echo 'On-Hold'; }
+                                
+                                echo '</div>
                             </div></form>';
                         }
                         ?>
@@ -91,14 +99,14 @@
                                     </li>
 
                                     <li>
-                                        <div class="filtertype">Timeline</div>
+                                        <div class="filtertype">Progress</div>
                                         <div class="filters">
-                                            <input type="radio" id="current" name="timeline" value="Current" checked>
-                                            <label for="current">Current</label>
+                                            <input type="radio" id="inprogress" name="progress" value="inprogress" checked>
+                                            <label for="inprogress">In progress</label>
                                         </div>
                                         <div class="filters">
-                                            <input type="radio" id="all-time" name="timeline" value="All">
-                                            <label for="all-time">All</label>
+                                            <input type="radio" id="all-cars" name="progress" value="All">
+                                            <label for="all-cars">All</label>
                                         </div>
 
                                     </li>
@@ -114,6 +122,7 @@
     </div>
 </section>
 
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/components.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

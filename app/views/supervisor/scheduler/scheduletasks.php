@@ -28,36 +28,27 @@
                     <div class="control-box-inner horizontal-centralizer">
                         <div class="name-box vertical-centralizer">
                             <label for="TaskName" class="display-none"></label>
-                            <input type="text" id="TaskName" name="TaskName" oninput="findCarProcesses()" class="new-task-name" placeholder="Task Name" autocomplete="off" required>
-                            <!-- <ul id="taskMenu" class="">
-                                <li>HTML</li> -->
-                                <!-- <li>CSS</li>
-                                <li>JavaScript</li>
-                                <li>PHP</li>
-                                <li>Python</li>
-                                <li>jQuery</li>
-                                <li>SQL</li>
-                                <li>Bootstrap</li>
-                                <li>Node.js</li> -->
-                            <!-- </ul> -->
+                            <input type="text" id="TaskName" name="TaskName" value="" oninput="findCarProcesses()" class="new-task-name" placeholder="Task Name" autocomplete="off" required disabled>
+                            <input type="hidden" id="TaskId" name="TaskId" value="" required>
+                            <div class="custom-select">
+                                <ul id="taskMenu" class="selector-options display-none">
+                                </ul>
+                            </div>
                         </div>
                         <div class="vehicle-selection-box vertical-centralizer">
                             <label for="vehicles" class="display-none">Select Vehicle</label>
-                            <select name="vehicles" id="vehicles" class="task-vehicle-selection">
-                                <option class="" disabled selected value>- Select vehicle -</option>
+                            <select name="vehicles" id="vehicles" class="task-vehicle-selection" onchange="enableTaskFind()">
+                                <option class="" selected value="">- Select vehicle -</option>
                                 <!-- IN THIS SELECTION, VEHICLES SHOULD BE THE SAME STAGE AS THE SUPERVISOR'S STAGE-->
                                 <?php
-                                // foreach ($data['AssemblingCars'] as $carOnLine) {
-                                //      echo '<option value="' . $carOnLine->ChassisNo . '">' . $carOnLine->ChassisNo . '</option>';
-                                // }
-
-                                // if($carOnLine == NULL) {
-                                //     echo '<option disabled selected value>No vehicles on assembly line</option>';
-                                // }
+                                if($data['assemblyDetails'] == NULL) {
+                                    echo '<option disabled selected value>No vehicles on assembly line</option>';
+                                } else {
+                                    foreach ($data['assemblyDetails'] as $carOnLine) {
+                                        echo '<option value="' . $carOnLine->ChassisNo . '">' . $carOnLine->ChassisNo . '</option>';
+                                    }
+                                }
                                 ?>
-                                <option value="CN112215002A">CN112215002A</option>
-                                <option value="CN112215000A">CN112215000A</option>
-                                <option value="CN112910320A">CN112910320A</option>
                             </select>
                         </div>
                         <div class="task-add-button-box vertical-centralizer">
@@ -80,14 +71,21 @@
                                 <div class="margin-top-2">Would you like to assign an employee for this task?</div>
                                 <div>
                                     <label for="assembler-assign">Assembler name</label>
-                                    <input type="text" class="assembler-assign" id="assembler-assign">
+                                    <select name="assembler" id="assembler" class="assembler-assign">
+                                    </select>
+                                    <!-- <input type="text" class="assembler-assign" id="assembler-assign">
+                                    <input type="hidden" id="employeeId" name="employeeId" value="" required>
+                                    <div class="custom-select-2">
+                                        <ul id="taskMenu2" class="selector-options display-none">
+                                        </ul>
+                                    </div> -->
                                 </div>
                                 <div>
                                     <label for="add-assign-emp">Assign an assembler</label>
                                     <input type="checkbox" id="add-assign-emp" onchange="allowAssign()" checked>
                                 </div>
                                 <div>
-                                    <button type="submit" class="action-one-button">Submit</button>
+                                    <button type="button" onclick="addTask()" class="action-one-button">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -112,54 +110,53 @@
                 <div class="task-detail-box-inner">
 
                     <?php
-if (!$data['taskList']) {
+                    if($data['taskList'] == NULL) {
+                        echo '<div class="horizontal-centralizer no-leave-data">
+                                <div class="vertical-centralizer">
+                                    <div>No data available</div>
+                                </div>
+                            </div>';
 
-    echo '<div class="horizontal-centralizer">
-                        <div class="marginy-4">No Schedules Available</div>
-                        <div class=""></div>
-                    </div>
-                    <div class="bottom-border"></div>';
-
-} else {
-
-    foreach ($data['taskList'] as $Task) {
-        echo '<div class="task-schedule-record">
-        <div class="task-schedule-record-inner">
-            <div class="vline"></div>
-            <div class="task-status vertical-centralizer">
-                <div class="round">
-                    <input type="checkbox" name="' . $Task->ChassisNo . '-' . $Task->ProcessId . '" 
-                    class="P28_taskrecord"
-                    value="' . (($Task->Completeness == 1) ? 1 : 0) . '"
-                    id="' . $Task->ChassisNo . '-' . $Task->ProcessId . '" 
-                    ' . (($Task->Completeness == 1) ? 'checked' : '') . '>
-                    <label for="' . $Task->ChassisNo . '-' . $Task->ProcessId . '"></label>
-                </div>
-            </div>
-            <div class="vline"></div>
-            <div class="task-vehicle">
-                <div class="task-vehicle-id">' . $Task->ChassisNo . '</div>
-                <div class="task-vehicle-date">' . $Task->Date . '</div>
-            </div>
-            <div class="vline"></div>
-            <div class="task-name vertical-centralizer">
-                <div>Task: ' . $Task->ProcessName . '</div>
-            </div>
-            <div class="vline"></div>
-            <div class="task-worker vertical-centralizer">
-                <div>Assembler: ' . $Task->Worker . '</div>
-            </div>
-            <div class="vline"></div>
-            <div class="task-edit vertical-centralizer">
-                <img src="' . URL_ROOT . '/public/images/icons/edit.png" onclick="taskUpdateOpen(\''.$Task->ChassisNo. '\', \''.$Task->ProcessId. '\', \'' . $Task->Worker . '\')" class="mouse-pointer width-rem-1p25" alt="Edit">
-            </div>
-            <div class="task-edit vertical-centralizer">
-                <img src="' . URL_ROOT . '/public/images/icons/delete.png" onclick="taskDeleteConfirmation(\''.$Task->ChassisNo. '\', \''.$Task->ProcessId. '\')" class="mouse-pointer width-rem-1p25" alt="Remove">
-            </div>
-        </div>
-    </div>';
-    }
-}                    ?>
+                    } else {
+                        foreach ($data['taskList'] as $Task) {
+                            echo '<div class="task-schedule-record">
+                            <div class="task-schedule-record-inner">
+                                <div class="vline"></div>
+                                <div class="task-status vertical-centralizer">
+                                    <div class="round">
+                                        <input type="checkbox" name="' . $Task->ChassisNo . '-' . $Task->ProcessId . '" 
+                                        class="P28_taskrecord"
+                                        value="' . (($Task->Completeness == 1) ? 1 : 0) . '"
+                                        id="' . $Task->ChassisNo . '-' . $Task->ProcessId . '" 
+                                        ' . (($Task->Completeness == 1) ? 'checked' : '') . '>
+                                        <label for="' . $Task->ChassisNo . '-' . $Task->ProcessId . '"></label>
+                                    </div>
+                                </div>
+                                <div class="vline"></div>
+                                <div class="task-vehicle">
+                                    <div class="task-vehicle-id">' . $Task->ChassisNo . '</div>
+                                    <div class="task-vehicle-date">' . $Task->Date . '</div>
+                                </div>
+                                <div class="vline"></div>
+                                <div class="task-name vertical-centralizer">
+                                    <div>Task: ' . $Task->ProcessName . '</div>
+                                </div>
+                                <div class="vline"></div>
+                                <div class="task-worker vertical-centralizer">
+                                    <div>Assembler: ' . $Task->Worker . '</div>
+                                </div>
+                                <div class="vline"></div>
+                                <div class="task-edit vertical-centralizer">
+                                    <img src="' . URL_ROOT . '/public/images/icons/edit.png" onclick="taskUpdateOpen(\''.$Task->ChassisNo. '\', \''.$Task->ProcessId. '\', \'' . $Task->Worker . '\')" class="mouse-pointer width-rem-1p25" alt="Edit">
+                                </div>
+                                <div class="task-edit vertical-centralizer">
+                                    <img src="' . URL_ROOT . '/public/images/icons/delete.png" onclick="taskDeleteConfirmation(\''.$Task->ChassisNo. '\', \''.$Task->ProcessId. '\')" class="mouse-pointer width-rem-1p25" alt="Remove">
+                                </div>
+                            </div>
+                        </div>';
+                        }
+                    }
+                    ?>
 
                 </div>
             </div>
@@ -205,12 +202,12 @@ if (!$data['taskList']) {
                                     <!-- <select name="status" id="status">
                                             <option value="$state">$state</option>
                                             <?php
-                                            // foreach ($data['states'] as $state) {
-                                            //   if($state1 != $state2) {
-                                            //     echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
-                                            //   }
-                                            // }
-                                            ?>
+                                    // foreach ($data['states'] as $state) {
+                                    //   if($state1 != $state2) {
+                                    //     echo '<option value="' . $lineCar->ChassisNo . '">' . $lineCar->ChassisNo . '</option>';
+                                    //   }
+                                    // }
+                                    ?>
                                             </select> -->
 
                                 </div>
@@ -219,7 +216,7 @@ if (!$data['taskList']) {
                                 <div><button type="submit" class="action-one-button">Update</button></div>
                             </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
@@ -312,7 +309,8 @@ if (!$data['taskList']) {
 
     function allowAssign() {
         var checkbox = document.getElementById("add-assign-emp");
-        var input = document.getElementById("assembler-assign");
+        var input = document.getElementById("assembler");
+
         if (checkbox.checked) {
             input.disabled = false;
         } else {
@@ -342,9 +340,10 @@ if (!$data['taskList']) {
 
 
 
+<!-- <script src="<?php // echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script> -->
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/scheduler.js"></script>
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/schedule.js"></script>
 
 
 <!-- ADD COMMON FOOTER FILE -->
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/fetch.js"></script>
-<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/scheduler.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

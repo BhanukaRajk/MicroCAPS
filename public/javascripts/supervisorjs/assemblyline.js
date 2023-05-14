@@ -1,7 +1,7 @@
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
 const modelfilters = document.querySelectorAll("input[type=checkbox][name=car-model]");
 const stagefilters = document.querySelectorAll("input[type=checkbox][name=car-stage]");
-const timelinefilters = document.querySelectorAll("input[type=radio][name=timeline]");
+const progressfilters = document.querySelectorAll("input[type=radio][name=progress]");
 
 
 // Attach event listeners to all filter inputs
@@ -11,8 +11,8 @@ for (let model of modelfilters) {
 for (let stage of stagefilters) {
     stage.addEventListener('change', filter_cars);
 }
-for (let timeline of timelinefilters) {
-    timeline.addEventListener('change', filter_cars);
+for (let progress of progressfilters) {
+    progress.addEventListener('change', filter_cars);
 }
 
 
@@ -28,20 +28,20 @@ function filter_cars() {
         document.querySelectorAll("input[type=checkbox][name=car-stage]")
         ).map((checkbox) => (checkbox.checked ? checkbox.value : ""));
 
-    const timescale = document.querySelector(
-        "input[type=radio][name=timeline]:checked"
+    const current_progress = document.querySelector(
+        "input[type=radio][name=progress]:checked"
     ).value;
 
 
 
     console.log(JSON.stringify(modelset));
     console.log(JSON.stringify(stageset));
-    console.log(timescale);
+    console.log(current_progress);
 
     const formData = new FormData();
     formData.append("model_set", JSON.stringify(modelset));
     formData.append("stage_set", JSON.stringify(stageset));
-    formData.append("time_scale", timescale);
+    formData.append("current_progress", current_progress);
 
 
     if (!formData) {
@@ -50,12 +50,8 @@ function filter_cars() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findAssemblyLineCars", {
+    fetch(BASE_URL + "Supervisors/findAssemblyLineCars", {
         method: "POST",
-        // headers: {
-        //     'Content-type': 'multipart/form-data'
-        //     'Content-type': 'application/json'
-        // },
         body: formData,
     })
         .then((response) => response.json())
@@ -70,7 +66,7 @@ function filter_cars() {
                 let carSet = '';
 
                 data.forEach((car) => {
-                    carSet += `<form method="POST" action="http://localhost:8080/MicroCAPS/Supervisors/getProcess">
+                    carSet += `<form method="POST" action="${BASE_URL}Supervisors/getProcess">
                                 <div class="carcard" onClick="this.closest(\'form\').submit()">
                                     <div class="cardhead">
                                         <div class="cardid">
@@ -80,15 +76,15 @@ function filter_cars() {
                                         </div>
                                     </div>
                                     <div class="carpicbox">
-                                        <img src="http://localhost:8080/MicroCAPS/public/images/cars/${car.ModelName + " " + car.Color}.png" class="carpic" alt="Car image">
+                                        <img src="${BASE_URL}public/images/cars/${car.ModelName + " " + car.Color}.png" class="carpic" alt="Car image">
                                     </div>
                                     <div class="carstatus">`;
 
-                    if(car.CurrentStatus == "S1") { carSet += `At Stage 01`; }
-                    else if(car.CurrentStatus == "S2") { carSet += `At Stage 02`; }
-                    else if(car.CurrentStatus == "S3") { carSet += `At Stage 03`; }
-                    else if(car.CurrentStatus == "S4") { carSet += `At Stage 04`; }
-                    else { carSet += `Out of assembly`; }
+                    if(car.CurrentStatus == "S1") { carSet += `on stage 01`; }
+                    else if(car.CurrentStatus == "S2") { carSet += `on stage 02`; }
+                    else if(car.CurrentStatus == "S3") { carSet += `on stage 03`; }
+                    else if(car.CurrentStatus == "S4") { carSet += `on stage 04`; }
+                    else { carSet += `On-Hold`; }
 
                     carSet += `<input type="hidden" name="form-car-stage" value="${car.CurrentStatus}">
                             </div>
@@ -104,7 +100,7 @@ function filter_cars() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="${BASE_URL}public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;

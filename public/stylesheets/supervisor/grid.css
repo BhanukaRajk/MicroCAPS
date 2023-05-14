@@ -2,6 +2,12 @@
     display: grid;
     grid-template-columns: repeat(10, 1.25rem);
     grid-template-rows: repeat(10, 1.25rem);
+
+    justify-content: center;
+}
+
+.img-grid #img-preview {
+    height: 12rem;
 }
 
 .grid-add {

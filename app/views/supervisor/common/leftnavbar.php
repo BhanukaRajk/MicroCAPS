@@ -24,7 +24,8 @@
             <div class="nav_section_headings">WORKSPACE</div>
 
             <a class="<?php echo ($data['url'][1] == "linevehicleview" || 
-                                    $data['url'][1] == "getProcess"
+                                    $data['url'][1] == "getProcess" || 
+                                    $data['url'][1] == "findAssemblyLineCars"
             ) ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/findAssemblyLineCars">
                 <img src="<?php echo URL_ROOT; ?>public/images/icon3.png" class="width-rem-1p25" alt="icon3" />Assembly Process
             </a>

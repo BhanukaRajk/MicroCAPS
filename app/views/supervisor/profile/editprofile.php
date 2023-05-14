@@ -156,21 +156,8 @@
     </section>
 </div>
 
-<!--<section class="display-flex-column">-->
-<!---->
-<!--    <div class="alert fade alert-success" id="alert-success" role="alert">-->
-<!--        <i class="icon fa-check-circle margin-right-3"></i>-->
-<!--        Success-->
-<!--    </div>-->
-<!---->
-<!--    <div class="alert fade alert-failure" id="alert-failure" role="alert">-->
-<!--        <i class="icon fa-times-circle margin-right-3"></i>-->
-<!--        Failed-->
-<!--    </div>-->
-<!---->
-<!--    </div>-->
-<!--</section>-->
-
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/settings.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

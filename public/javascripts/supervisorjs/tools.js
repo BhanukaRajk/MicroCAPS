@@ -3,6 +3,7 @@ const tooltypeRadios = document.querySelectorAll("input[type=radio][name=tool-ty
 const toolstateRadios = document.querySelectorAll("input[type=radio][name=tool-state]");
 
 
+
 // ATTACH EVENT LISTENERS TO ALL FILTER INPUTS
 
 // CHECK ALL RADIO BUTTONS AND CALL FILTERING FUNCTION WHEN ANY OF THEM IS CHANGED
@@ -46,10 +47,10 @@ function toolFilter() {
     }
     
 
-    fetch("http://localhost:8080/MicroCAPS/Supervisors/findToolz", {
+    fetch(BASE_URL + "Supervisors/findToolz", {
         method: "POST",
         // headers: {
-        //     // 'Content-type': 'multipart/form-data'
+            // 'Content-type': 'multipart/form-data'
         //     'Content-type': 'application/json'
         // },
         body: formData,
@@ -81,7 +82,7 @@ function toolFilter() {
                                     </div>
                                     </div>
                                     <div class="toolpicbox">
-                                    <img src="http://localhost:8080/MicroCAPS/public/images/tools/${tool.Image != null ? tool.Image : 'none.jpeg'}" class="toolpic" alt="${tool.ToolName}">
+                                    <img src="${BASE_URL}public/images/tools/${tool.Image != null ? tool.Image : 'none.jpeg'}" class="toolpic" alt="${tool.ToolName}">
                                     </div>
                                     <div class="tool-card-down">
                                     <div class="tool-updater ${tool.Status == "Normal" ? 'available' : 'lower'}">${tool.Status == "Normal" ? 'Normal' : 'Need an attention'}</div>
@@ -99,7 +100,7 @@ function toolFilter() {
                                                     <div class="margin-top-5 vertical-centralizer">
                                                         <div> Nothing to show :( </div>
                                                         <div>
-                                                            <img src="http://localhost:8080/MicroCAPS/public/images/common/no_data.png" class="no-data-icon" alt="No Data">
+                                                            <img src="${BASE_URL}public/images/common/no_data.png" class="no-data-icon" alt="No Data">
                                                         </div>
                                                     </div>
                                                 </div>`;
@@ -152,18 +153,25 @@ function expandTool(Tool) {
 
 
 function closeAddNewToolPopup() {
-    var popupDiv = document.getElementById('tooladdpopupWindow');
-    popupDiv.style.display = 'none';
+    // var popupDiv = document.getElementById('tooladdpopupWindow');
+    // popupDiv.style.display = 'none';
+    document.getElementById("tooladdpopupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer display-none");
 }
 
 function showAddNewToolPopup() {
-    var popupDiv = document.getElementById('tooladdpopupWindow');
-    popupDiv.style.display = '';
+    // var popupDiv = document.getElementById('tooladdpopupWindow');
+    // popupDiv.style.display = '';
+    document.getElementById("tooladdpopupWindow").setAttribute("class", "delete-conf-blur horizontal-centralizer");
 }
 
 
 
-function showToolDelConfBox() {
+
+
+function showToolDelConfBox(Tool) {
+
+    // FILL THE HIDDEN INPUT FIELDS IN THE FORM
+    document.getElementById("form-tool-id").setAttribute("value", Tool);
     //// var popupDiv = document.getElementById('toolUpdatePopUp');
     //// popupDiv.style.display = 'none';  
     document.getElementById("toolDelConfirm").setAttribute("class", "delete-conf-blur horizontal-centralizer");
@@ -182,3 +190,35 @@ function closeToolUpdatePopup() {
     document.getElementById("toolUpdatePopUp").setAttribute("class", "background-bluer display-none");
     //// document.getElementsByClassName("toolset-toolview").classList.remove("noscroll");
 }
+
+
+
+const imagec = document.getElementById("imagec");
+const previewc = document.getElementById("img-previewc");
+const removec = document.getElementById("removec");
+
+previewc?.addEventListener("click", () => {
+    imagec.click();
+});
+
+imagec?.addEventListener("change", () => {
+    getImgData();
+});
+
+function getImgData() {
+    const files = imagec.files[0];
+    if (files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function () {
+            previewc.style.backgroundImage = `url(${this.result})`;
+            // preview.setAttribute('src', this.result);
+        });
+    }
+    
+}
+
+removec?.addEventListener("click", () => {
+        previewc.style.backgroundImage = `url(${BASE_URL}public/images/placeholder.jpg)`;
+        imagec.value = "";
+});
