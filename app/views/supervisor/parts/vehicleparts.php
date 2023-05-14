@@ -88,18 +88,20 @@
                                                 if ($component->Status == "D") echo 'PRE-DAMAGED';
                                                 else if($component->Status == "ID") echo 'DAMAGED';
                                                 else if($component->Status == "I") echo 'ISSUED';
+                                                else if($component->Status == "NR") echo 'REQUESTED';
+                                                else if($component->Status == "R") echo 'RECEIVED';
                                                 else echo 'NOT ISSUED';
                                                 
                                                 echo '</div>
                                                 <div class="parts-col-03">
                                                     <div class="round">
-                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-D" class="damage-check" '. (($component->Status == "D" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-D" onclick="updateComponentStatus(\''. trim($component->PartNo) .'\',\''. (($component->Status == "NR" || $component->Status == "R"  || $component->Status == "D") ? 'D' : 'ID' ) .'\')" class="damage-check" '. (($component->Status == "D" || $component->Status == "ID") ? 'checked' : '' ) .' '. (($component->Status == "NR" || $component->Status == "D" || $component->Status == "ID") ? 'disabled' : '' ) .' />
                                                         <label for="'. trim($component->PartNo) .'-D"></label>
                                                     </div>
                                                 </div>
                                                 <div class="parts-col-04">
                                                     <div class="round">
-                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-I" class="issue-check" '. (($component->Status == "I" || $component->Status == "ID") ? 'checked' : '' ) .' />
+                                                        <input type="checkbox" id="'. trim($component->PartNo) .'-I" onclick="updateComponentStatus(\''. trim($component->PartNo) .'\',\'I\')" class="issue-check" '. (($component->Status == "I") ? 'checked' : '' ) .' '. (($component->Status == "NR" || $component->Status == "I" || $component->Status == "D" || $component->Status == "ID") ? 'disabled' : '' ) .' />
                                                         <label for="'. trim($component->PartNo) .'-I"></label>
                                                     </div>
                                                 </div>

@@ -12,7 +12,7 @@ carpic {
 }
 
 .pagehead {
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -65,7 +65,7 @@ carpic {
     left: 0px;
     top: 0px;
 
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -83,7 +83,7 @@ carpic {
     left: 0px;
     top: 15px;
 
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
@@ -101,7 +101,7 @@ carpic {
 
     /* Title 3/Regular */
 
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -152,7 +152,7 @@ carpic {
 
 .filterin {
     margin: 22px 26px 22px 26px;
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -160,7 +160,7 @@ carpic {
 }
 
 .filtertype {
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 600 !important;
     font-size: 14px !important;
@@ -175,7 +175,7 @@ carpic {
 
 .filters {
 
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 600;
     font-size: 16px;

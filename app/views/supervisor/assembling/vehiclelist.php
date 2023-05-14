@@ -25,7 +25,7 @@
 
                         <?php
 
-                        if($car == NULL)  {
+                        if($data['AssemblyLineCars'])  {
                             foreach ($data['AssemblyLineCars'] as $car) {
                                 echo '<form method="POST" action="'. URL_ROOT .'Supervisors/getProcess">
                                     <div class="carcard" onClick="this.closest(\'form\').submit()">

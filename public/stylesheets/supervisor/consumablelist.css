@@ -5,7 +5,7 @@
     padding-block: 1rem;
     background-color: #F2F2F7;
 
-    font-family: 'Noto Sans', sans-serif;
+    /* font-family: 'Noto Sans', sans-serif; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -62,7 +62,7 @@
     left: 0px;
     top: 0px;
 
-    font-family: 'Proxima Nova', sans-serif;
+    /* font-family: 'Proxima Nova', sans-serif; */
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -80,7 +80,7 @@
     left: 0px;
     top: 15px;
 
-    font-family: 'Proxima Nova', sans-serif;
+    /* font-family: 'Proxima Nova', sans-serif; */
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
@@ -103,7 +103,7 @@
 
     /* Title 3/Regular */
 
-    font-family: 'Proxima Nova', sans-serif;
+    /* font-family: 'Proxima Nova', sans-serif; */
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -154,7 +154,7 @@
 
 .filterin {
     margin: 22px 26px 22px 26px;
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -162,7 +162,7 @@
 }
 
 .filtertype {
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 600 !important;
     font-size: 14px !important;
@@ -177,7 +177,7 @@
 
 .filters {
 
-    font-family: 'Proxima Nova';
+    /* font-family: 'Proxima Nova'; */
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -343,7 +343,7 @@ a {
     padding-inline: 1rem;
     /* margin-top: 0.5rem; */
 
-    /* font-family: 'Noto Sans';
+    /* /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 16px;

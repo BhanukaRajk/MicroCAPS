@@ -170,6 +170,16 @@ compVehicleSelector?.addEventListener('change', function() {
 
                 // DISPLAY ALL THE PARTS AVAILABLE
                 (data.componentz).forEach((component) => {
+
+                    Status = '';
+
+                    if (component.Status == "D") Status = 'PRE-DAMAGED';
+                    else if(component.Status == "ID") Status = 'DAMAGED';
+                    else if(component.Status == "I") Status = 'ISSUED';
+                    else if(component.Status == "NR") Status = 'REQUESTED';
+                    else if(component.Status == "R") Status = 'RECEIVED';
+                    else Status = 'NOT ISSUED';
+
                     partSet += `<div class="parts-table-row bottom-border">
                                             <div class="parts-col-01">${component.PartName}</div>
                                             <div class="parts-col-02">
@@ -180,13 +190,13 @@ compVehicleSelector?.addEventListener('change', function() {
                                             </div>
                                             <div class="parts-col-03">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}D" ${component.Status == "D" || component.Status == "ID" ? "checked" : "" } />
+                                                    <input type="checkbox" id="${component.PartNo}-D"  onclick="updateComponentStatus(${component.PartNo.trm()} ','${component.Status == "NR" || component.Status == "R"  || component.Status == "D" ? 'D' : 'ID' }')"  ${Status == "DAMAGED" ? "checked" : "" } ${component.Status == "NR" || component.Status == "D" || component.Status == "ID" ? "disabled" : "" }/>
                                                     <label for="${component.PartNo}D"></label>
                                                 </div>
                                             </div>
                                             <div class="parts-col-04">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}I" ${component.Status == "I" || component.Status == "ID" ? "checked" : "" } />
+                                                    <input type="checkbox" id="${component.PartNo}-I" onclick="updateComponentStatus(${component.PartNo.trm()} ','I')" ${Status == "ISSUED" ? "checked" : "" } ${component.Status == "NR" || component.Status == "I" || component.Status == "D" || component.Status == "ID" ? "disabled" : "" }/>
                                                     <label for="${component.PartNo}I"></label>
                                                 </div>
                                             </div>
@@ -230,51 +240,86 @@ compVehicleSelector?.addEventListener('change', function() {
 
 
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
-const issuedcheckboxes = document.querySelectorAll("input[type=checkbox][class=issue-check]");
-const damagedcheckboxes = document.querySelectorAll("input[type=checkbox][class=damage-check]");
+// const issuedcheckboxes = document.querySelectorAll("input[type=checkbox][class=issue-check]");
+// const damagedcheckboxes = document.querySelectorAll("input[type=checkbox][class=damage-check]");
 
 
-// EVENT LISTNERS TO UPDATE THE PROCESS
-for (let issuedcheckbox of issuedcheckboxes) {
-    issuedcheckbox.addEventListener('change', updatePartStatus);
-}
-for (let dmgcheckbox of damagedcheckboxes) {
-    dmgcheckbox.addEventListener('change', updatePartStatus);
-}
+// // EVENT LISTNERS TO UPDATE THE PROCESS
+// for (let issuedcheckbox of issuedcheckboxes) {
+//     issuedcheckbox.addEventListener('change', updatePartStatus);
+// }
+// for (let dmgcheckbox of damagedcheckboxes) {
+//     dmgcheckbox.addEventListener('change', updatePartStatus);
+// }
 
 
-function updatePartStatus() {
+// function updatePartStatus() {
 
-    const ButtonID = this.id;
+//     const ButtonID = this.id;
+
+//     const VehicleId = document.querySelector('#vehicle_no').innerHTML;
+//     const PartId = ButtonID.split("-")[0];
+
+//     console.log(VehicleId);
+//     console.log(PartId);
+
+//     let ISSUED, DAMAGED;
+
+//     if (document.querySelector("input[type=checkbox][id=" + PartId + "-I]").checked) {
+//         ISSUED = 1;
+//     } else {
+//         ISSUED = 0;
+//     }
+
+//     if (document.querySelector("input[type=checkbox][id=" + PartId + "-D]").checked) {
+//         DAMAGED = 1;
+//     } else {
+//         DAMAGED = 0;
+//     }
+
+
+
+//     const formData = new FormData();
+//     formData.append("vehicle", VehicleId);
+//     formData.append("part", PartId);
+//     formData.append("issued", ISSUED);
+//     formData.append("damaged", DAMAGED);
+
+
+//     if (!formData) {
+//         console.error("FormData not supported");
+//         return;
+//     }
+
+
+//     fetch(BASE_URL + "Supervisors/recordComponentDefects", {
+//         method: "POST",
+//         // headers: {
+//         //     'Content-type': 'multipart/form-data'
+//         //     'Content-type': 'application/json'
+//         // },
+//         body: formData,
+//     })
+//         .then((response) => response.json())
+//         .then((data) => {
+
+//             console.log("Data = " + data);
+
+//         })
+//         .catch((error) => console.error(error));
+// }
+
+function updateComponentStatus(PartNo, Status) {
 
     const VehicleId = document.querySelector('#vehicle_no').innerHTML;
-    const PartId = ButtonID.split("-")[0];
 
-    console.log(VehicleId);
-    console.log(PartId);
+    const checkbox = document.querySelector("input[type=checkbox][name=" + PartNo + "-" + status +"]");
 
-    let ISSUED, DAMAGED;
-
-    if (document.querySelector("input[type=checkbox][id=" + PartId + "-I]").checked) {
-        ISSUED = 1;
-    } else {
-        ISSUED = 0;
-    }
-
-    if (document.querySelector("input[type=checkbox][id=" + PartId + "-D]").checked) {
-        DAMAGED = 1;
-    } else {
-        DAMAGED = 0;
-    }
-
-
-
+    // JSON STRINGIFY USED BECAUSE AN ARRAY IS PASSED USING THIS checkboxesset VARIABLE
     const formData = new FormData();
     formData.append("vehicle", VehicleId);
-    formData.append("part", PartId);
-    formData.append("issued", ISSUED);
-    formData.append("damaged", DAMAGED);
-
+    formData.append("part", PartNo);
+    formData.append("status", Status);
 
     if (!formData) {
         console.error("FormData not supported");
@@ -282,7 +327,7 @@ function updatePartStatus() {
     }
 
 
-    fetch(BASE_URL + "Supervisors/recordComponentDefects", {
+    fetch(BASE_URL + "Supervisors/recordUpdateComponent", {
         method: "POST",
         // headers: {
         //     'Content-type': 'multipart/form-data'
@@ -293,7 +338,7 @@ function updatePartStatus() {
         .then((response) => response.json())
         .then((data) => {
 
-            console.log("Data = " + data);
+            location.reload();
 
         })
         .catch((error) => console.error(error));

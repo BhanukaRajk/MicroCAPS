@@ -6,9 +6,7 @@
         <!-- LOGO ON TOP -->
         <li>
             <div class="nav_logo">
-                <div>
-                    <img src="<?php echo URL_ROOT; ?>public/images/logo.png" class="text-center width-rem-10" alt="logo" />
-                </div>
+                <img src="<?php echo URL_ROOT; ?>public/images/nav_logo.png" class="logo-style" alt="logo" />
             </div>
         </li>
 
@@ -73,7 +71,7 @@
         <li>
             <div class="nav_section_headings">GENERAL</div>
             <a class="<?php echo ($data['url'][1] == "settings") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/settings">
-                <img src="../images/icon6.png" class="width-rem-1p25" alt="icon5" />Settings
+                <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon5" />Settings
             </a>
         </li>
 

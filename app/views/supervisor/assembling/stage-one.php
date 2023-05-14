@@ -121,6 +121,12 @@
 
         let s1 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
 
+        if (s1.complete/(s1.complete + s1.pending)*100 == 100) {
+            document.getElementById('stage-passer').disabled = false;
+        } else {
+            document.getElementById('stage-passer').disabled = true;
+        }
+
         var ctx = document.getElementById('Lstage01').getContext('2d');
 
         let ltx = document.getElementById('Lstage01-label');

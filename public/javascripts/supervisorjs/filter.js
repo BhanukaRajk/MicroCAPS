@@ -27,7 +27,7 @@ function filterVehicles() {
 
     // Send AJAX request to filter vehicles
     const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:8080/MicroCAPS/Supervisors/findCars", true);
+    xhttp.open("POST", "http://localhost/MicroCAPS/Supervisors/findCars", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
