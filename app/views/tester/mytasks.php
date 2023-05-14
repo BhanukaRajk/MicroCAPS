@@ -4,9 +4,16 @@
 <body>
 
     <section class="position-absolute page-content">
+    <div class="display-flex-row justify-content-between margin-bottom-2">
         <div class="page-heading font-weight  margin-bottom-4">
-            My Tasks
+            Task Manager
         </div>
+        <div>
+                <input type="text" placeholder="Search" class="form-control" oninput="searchTask('<?php echo  $_SESSION['_id'];?>')" id="searchId">
+                <label class="form-label">Search</label>
+        </div>
+        </div>
+        <div id = "vehicleList">
 
         <?php
         if ($data['onPDIVehicles'] == false) {
@@ -45,6 +52,8 @@
                     </div>';
         }
         ?>
+
+        </div>
 
     </section>
 

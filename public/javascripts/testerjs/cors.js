@@ -289,6 +289,139 @@ function editDefect(chassisno, defectno) {
     });
 }
 
+// SEARCH PDI
+
+function searchPDI(){
+    let keyword = document.getElementById("searchId").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var response = this.responseText;
+
+            response = JSON.parse(response);
+            let innerHTML = "";
+
+            innerHTML = pdilist(response);
+
+            const vehicleresults = document.getElementById("vehicleList");
+            vehicleresults.innerHTML = innerHTML;
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/searchPDI", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("keyword="+keyword);
+}
+
+
+// SEARCH GENERATES PDI VEHICLE LIST
+
+function pdilist(response) {
+    if (!response['onPDIVehicles']) {
+        innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                        <div class="font-weight">No Details</div>
+                    </div>`
+    } else {
+
+        innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
+                                    <div class="vehicle-data-board justify-content-evenly">`
+        
+        response['onPDIVehicles'].forEach(value => {
+            if (value.CurrentStatus == 'RR') {
+                val = 'Ready to Test';
+            }
+
+            innerHTML = innerHTML +
+            `<a href="http://localhost/MicroCAPS/testers/pdiresults/${value.ChassisNo}">
+            <div class="carcard">
+                <div class="cardhead">
+                    <div class="cardid">
+                        <div class="carmodel">${value.ModelName}</div>
+                        <div class="chassisno">${value.ChassisNo}</div>
+                    </div>
+                </div>
+                <div class="carpicbox">
+                    <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                </div>
+                <div class="carstatus green"> On Assembly </div>
+                <div class="arrivaldate">Stage: ${val}</div>
+            </div>
+            </a>`
+        });
+        innerHTML = innerHTML + `</div></div>`;
+    }
+    return innerHTML;
+}
+
+
+// SEARCH PDI
+
+function searchTask(id){
+    let keyword = document.getElementById("searchId").value;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var response = this.responseText;
+
+            response = JSON.parse(response);
+            let innerHTML = "";
+
+            innerHTML = tasklist(response);
+
+            const vehicleresults = document.getElementById("vehicleList");
+            vehicleresults.innerHTML = innerHTML;
+
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/searchTask", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("keyword="+keyword+"&id="+id);
+}
+
+
+// SEARCH GENERATES PDI VEHICLE LIST
+
+function tasklist(response) {
+    if (!response['onPDIVehicles']) {
+        innerHTML = `<div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
+                        <div class="font-weight">No Details</div>
+                    </div>`
+    } else {
+
+        innerHTML = `<div class="vehicle-detail-board  margin-bottom-4">
+                                    <div class="vehicle-data-board justify-content-evenly">`
+        
+        response['onPDIVehicles'].forEach(value => {
+            if (value.CurrentStatus == 'RR') {
+                val = 'Ready to Test';
+            }
+
+            innerHTML = innerHTML +
+            `<a href="http://localhost/MicroCAPS/testers/pdi/${value.ChassisNo}">
+            <div class="carcard">
+                <div class="cardhead">
+                    <div class="cardid">
+                        <div class="carmodel">${value.ModelName}</div>
+                        <div class="chassisno">${value.ChassisNo}</div>
+                    </div>
+                </div>
+                <div class="carpicbox">
+                    <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
+                </div>
+                <div class="carstatus green"> On Assembly </div>
+                <div class="arrivaldate">Stage: ${val}</div>
+            </div>
+            </a>`
+        });
+        innerHTML = innerHTML + `</div></div>`;
+    }
+    return innerHTML;
+}
+
 
 // SEARCH
 

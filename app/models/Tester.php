@@ -179,6 +179,34 @@ class Tester {
     }
 
 
+     // SEARCH VEHCILE DETAILS BY ASSIGNED TESTER ID
+
+     public function searchVehiclesByTester($id, $chassisNo) {
+
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo 
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE `vehicle`.PDIStatus = :pdi AND `vehicle`.TesterId = :id AND `vehicle`.ChassisNo LIKE :chassisNo
+                ORDER BY `vehicle`.`ArrivalDate` ASC
+                LIMIT 10;'
+        );
+
+        $this->db->bind(':pdi', 'P');
+        $this->db->bind(':id', $id);
+        $this->db->bind(':chassisNo', '%'.$chassisNo . '%');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+
     // GET VEHICLE COUNTS FOR THE DASHBOARD
 
     public function vehicleCount(){
@@ -228,6 +256,30 @@ class Tester {
 
         $this->db->bind(':status', 'RR');
         $this->db->bind(':pdi', 'CM');
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function searchVehiclesReadyToTest($chassisNo) {
+
+        $this->db->query(
+            'SELECT `vehicle`.ChassisNo, `vehicle`.Color, `vehicle`.CurrentStatus,`vehicle`.PDIStatus, `vehicle-model`.ModelName, `vehicle`.EngineNo, `vehicle`.TesterId  
+                FROM `vehicle` 
+                INNER JOIN `vehicle-model`
+                ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
+                WHERE (`vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus != :pdi) AND (`vehicle`.ChassisNo LIKE :chassisNo OR `vehicle-model`.ModelName LIKE :chassisNo)
+                ORDER BY `vehicle`.`ArrivalDate` ASC;'
+        );
+
+        $this->db->bind(':status', 'RR');
+        $this->db->bind(':pdi', 'CM');
+        $this->db->bind(':chassisNo', '%'.$chassisNo . '%');
 
         $results = $this->db->resultSet();
 
