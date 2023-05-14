@@ -1,8 +1,8 @@
 // BUTTON ENABLING AND DISABLING PROCESS HANDLER /////////////////////////////////////////////////////////////////////////////////
 
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
-const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
-const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
+// const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
+// const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
 
 // DISABLE ALL THE CONNECTION BUTTONS WHEN HOLD BUTTON PRESSED
 for (let hdcheckbox of holdingcheckboxes) {

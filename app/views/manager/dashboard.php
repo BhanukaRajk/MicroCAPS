@@ -56,6 +56,7 @@
                                                 ';
                                 } else {
                                     $cnt = 1;
+                                    $sentence = '';
                                     $string = '';
                                     foreach ($data['onHoldComponents'] as $value) {
 
@@ -65,8 +66,8 @@
                                             $color = $value->VehicleColor;
                                         }
 
-                                        $string = $string .'&type'.$cnt.'='.$value->ModelNo.'&color'.$cnt.'='.$color.'&qty'.$cnt.'='.$value->Qty;
-                                        $cnt++;
+                                        $string = $string . '&type'.$cnt.'='.$value->ModelNo.'&color'.$cnt.'='.$value->VehicleColor.'&qty'.$cnt.'='.$value->Qty;
+                                        $cnt++;                                  
 
                                         echo '<div class="display-flex-row justify-content-between border-bottom width-rem-20">
                                                 <div class="display-flex-column padding-bottom-3">

@@ -278,8 +278,6 @@ class Vehicles extends Controller {
                 echo 'Error';
             }
 
-
-
         }
     }
 

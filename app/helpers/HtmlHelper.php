@@ -46,9 +46,9 @@ function generateMRF($post, $vehicleModel): array|string {
 
     $data = [
         'componentRequestDetails' => [
-            'M0001' => $array1,
-            'M0002' => $array2,
-            'M0003' => $array3
+            'M0001' => removeInnerRepeatingArrays($array1),
+            'M0002' => removeInnerRepeatingArrays($array2),
+            'M0003' => removeInnerRepeatingArrays($array3)
         ],
         'components' => [
             'M0001' => $vehicleModel['M0001'],
@@ -185,4 +185,15 @@ function createHtml($data,$type): string {
 
     return $file;
 
+}
+
+function removeInnerRepeatingArrays($array): array {
+
+    $uniqueArrays = array();
+    foreach ($array as $subArray) {
+        if (!in_array($subArray, $uniqueArrays)) {
+            $uniqueArrays[] = $subArray;
+        }
+    }
+    return $uniqueArrays;
 }

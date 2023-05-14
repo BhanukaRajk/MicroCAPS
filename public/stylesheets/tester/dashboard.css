@@ -38,7 +38,7 @@
     left: 305px;
     top: 79px;
 
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -147,7 +147,7 @@
 
 .db-heading {
     margin-top: 1rem;
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-size: 26px;
 }
 

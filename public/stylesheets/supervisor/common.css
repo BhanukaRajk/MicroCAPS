@@ -38,7 +38,7 @@ button {
     border-radius: 24px;
 
 
-    font-family: 'Proxima Nova', sans-serif;
+    /* font-family: 'Proxima Nova', sans-serif; */
     font-style: normal;
     font-weight: 600 !important;
     font-size: 30px !important;
@@ -193,7 +193,7 @@ button {
     left: 0px;
     top: 0px;
     background: #081A51;
-    border-radius: 0 10px 10px 0;
+    /* border-radius: 0 10px 10px 0; */
 }
 
 li a {

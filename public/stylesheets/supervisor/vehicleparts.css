@@ -27,7 +27,7 @@
     width: 500px;
     height: 30px;
 
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -117,7 +117,7 @@
     width: 602.02px;
     height: 30px;
 
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -218,7 +218,7 @@
     height: 36px;
     padding-inline: 10px !important;
 
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -237,7 +237,7 @@
     height: 36px;
     padding-inline: 10px !important;
 
-    font-family: 'Noto Sans';
+    /* font-family: 'Noto Sans'; */
     font-style: normal;
     font-weight: 700;
     font-size: 16px;

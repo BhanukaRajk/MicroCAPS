@@ -530,7 +530,7 @@ class Supervisors extends controller
     }
 
 
-    public function recordComponentDefects()
+    public function recordUpdateComponent()
     {
         if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
             redirect('Users/login');
@@ -539,11 +539,10 @@ class Supervisors extends controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $car_id = $_POST['vehicle'];
-            $process_id = $_POST['part'];
-            $issued = $_POST['issued'];
-            $damaged = $_POST['damaged'];
+            $part_id = $_POST['part'];
+            $status = $_POST['status'];
 
-            $data['part_update'] = $this->supervisorModel->recordComponentDetails($car_id, $process_id, $issued, $damaged);
+            $data['part_update'] = $this->supervisorModel->recordComponentDetails($car_id, $part_id, $status);
             echo json_encode($data['part_update']);
 
         }

@@ -457,7 +457,6 @@ class Vehicle {
         );
 
         $this->db->bind(':model', $ModelNo);
-        $this->db->bind(':status', 'D');
 
         $results = $this->db->resultSet();
 
@@ -558,9 +557,7 @@ class Vehicle {
     // Retrieve Query : Details of all Damaged components
     public function currentDamagedComponents() {
 
-        $this->db->query('SELECT ChassisNo, PartNo FROM `component-release` WHERE Status = :status;');
-
-        $this->db->bind(':status', 'D');
+        $this->db->query('SELECT ChassisNo, PartNo FROM `component-release` WHERE Status IN ("D","ID");');
 
         $results = $this->db->resultSet();
 

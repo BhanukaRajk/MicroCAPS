@@ -1039,26 +1039,16 @@ class Supervisor
     }
 
     // COMPONENTS STATUS UPDATING FUNCTION
-    public function recordComponentDetails($car_id, $part_id, $issued, $damaged)
+    public function recordComponentDetails($car_id, $part_id, $status)
     {
         $this->db->query(
-            'UPDATE `component-release` SET `Status` = :current
+            'UPDATE `component-release` SET `Status` = :status
                     WHERE `ChassisNo` = :chassisNo AND `PartNo` = :part;'
         );
 
-        if ($issued == 1 AND $damaged == 1) {
-            $current = 'ID';
-        } else if ($issued == 1 AND $damaged == 0) {
-            $current = 'I';
-        } else if ($issued == 0 AND $damaged == 1) {
-            $current = 'D';
-        } else {
-            $current = 'R';
-        }
-
         $this->db->bind(':chassisNo', $car_id);
         $this->db->bind(':part', $part_id);
-        $this->db->bind(':current', $current);
+        $this->db->bind(':status', $status);
 
 
         if ($this->db->execute()) {
