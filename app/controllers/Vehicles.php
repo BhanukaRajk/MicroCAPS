@@ -3,13 +3,13 @@
 class Vehicles extends Controller {
 
     private mixed $vehicleModel;
-    private mixed $managerModel;
-    private mixed $pdiModel;
+    // private mixed $managerModel;
+    // private mixed $pdiModel;
 
     public function __construct(){
         $this->vehicleModel = $this->model('Vehicle');
-        $this->managerModel = $this->model('Manager');
-        $this->pdiModel = $this->model('PDI');
+        // $this->managerModel = $this->model('Manager');
+        // $this->pdiModel = $this->model('PDI');
     }
 
 
@@ -430,17 +430,17 @@ class Vehicles extends Controller {
 
                 echo json_encode($data);
 
-            } else if ($data['type'] == 'pdi') {
+            // } else if ($data['type'] == 'pdi') {
 
-                if ($data['searchType'] == 'chassisNo') {
-                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['ChassisNo' => $data['keyword']]);
-                } else if ($data['searchType'] == 'model') {
-                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['ModelName' => $data['keyword']]);
-                } else if ($data['searchType'] == 'tester') {
-                    $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['Tester' => $data['keyword']]);
-                }
+            //     if ($data['searchType'] == 'chassisNo') {
+            //         $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['ChassisNo' => $data['keyword']]);
+            //     } else if ($data['searchType'] == 'model') {
+            //         $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['ModelName' => $data['keyword']]);
+            //     } else if ($data['searchType'] == 'tester') {
+            //         $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles(['Tester' => $data['keyword']]);
+            //     }
 
-                echo json_encode($data);
+            //     echo json_encode($data);
 
             } else if ($data['type'] == 'dispatch') {
 
