@@ -112,6 +112,7 @@ button {
 .databoard {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .TT {

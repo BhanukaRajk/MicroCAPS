@@ -11,8 +11,8 @@ carpic {
     left: 70rem !important;
 }
 
-.pagehead {
-    /* font-family: 'Noto Sans'; */
+/* .pagehead {
+    font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -21,13 +21,13 @@ carpic {
     align-items: center;
 
     color: #1C1F37;
-}
+} */
 
 .vehicle-detail-board {
     display: flex;
     flex-direction: row;
 
-    padding-top: 25px;
+    padding-top: 6.25rem;
 }
 
 .vehicle-data-board {
