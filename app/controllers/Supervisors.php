@@ -1154,7 +1154,7 @@ class Supervisors extends controller
                 'Stock' => trim($_POST['stock'])
             ];
 
-            if (!$this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
+            if ($this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
 
                 if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'])) {
                     $_SESSION['success_message'] = 'Consumable quantity updated!';
