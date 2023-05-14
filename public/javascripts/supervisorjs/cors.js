@@ -62,21 +62,41 @@ function updatePassword() {
 }
 
 function addConsumables() {
-    let formdata = new FormData();
-    formdata.append("image", document.getElementById("imagec").files[0]);
-    formdata.append("name", document.getElementById("conName").value);
-    formdata.append("type", document.getElementById("consume-type").value);
-    formdata.append("status", document.getElementById("status").value);
-    $.ajax({
-        type: 'POST',
-        url:  BASE_URL + 'Supervisors/addNewConsumables',
-        data: formdata,
-        processData: false,
-        contentType: false,
-        success: (response) => {
-            location.reload(true);
-        }
-    });
+    let cname = document.getElementById("conName").value;
+    let ctype =  document.getElementById("consume-type").value ;
+    let cstate = document.getElementById("status").value;
+    let imagefile = document.getElementById("imagec").files[0];
+
+    if(cname == '' || ctype == '' || cstate == '' || imagefile == null) {
+
+        document.getElementById("error_message").innerHTML = "Fill all the fields to continue!";
+        notifyMe();
+
+    }
+    else if(cstate < 0) {
+
+        document.getElementById("error_message").innerHTML = "Please enter valid input!";
+        notifyMe();
+
+    } else {
+
+        let formdata = new FormData();
+        formdata.append("image", document.getElementById("imagec").files[0]);
+        formdata.append("name", document.getElementById("conName").value);
+        formdata.append("type", document.getElementById("consume-type").value);
+        formdata.append("status", document.getElementById("status").value);
+        $.ajax({
+            type: 'POST',
+            url:  BASE_URL + 'Supervisors/addNewConsumables',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                location.reload(true);
+            }
+        });
+    }
+
 }
 
 function updateChart(ctx, ltx, data, cutout = 50) {

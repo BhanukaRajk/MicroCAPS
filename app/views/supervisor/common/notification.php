@@ -9,15 +9,15 @@ $_SESSION['success_message'] = '';
 $_SESSION['error_message'] = '';
 
 // IF THERE IS A MESSAGE AVAILABLE, DISPLAY IT WITH CORRESPONDING COLOUR
-echo ($error_message == '') ? '<div id="messagebox" class="hideme success-msg">
-                                    <div onclick="closeNotify()" class="closemsg"><img src="'. URL_ROOT .'public/images/icons/closeicon.png" class="closemsgicon" alt="X"></div>
-                                    <div><strong>SUCCESS!</strong></div>
-                                    <div>'. $success_message .'</div>
-                                </div>' :
-                                '<div id="messagebox" class="hideme error-msg">
+echo ($success_message == '') ? '<div id="messagebox" class="hideme error-msg">
                                     <div onclick="closeNotify()" class="closemsg"><img src="'. URL_ROOT .'public/images/icons/closeicon.png" class="closemsgicon" alt="X"></div>
                                     <div><strong>ERROR!</strong></div>
-                                    <div>'. $error_message .'</div>
+                                    <div id="error_message">'. $error_message .'</div>
+                                </div>' :
+                                '<div id="messagebox" class="hideme success-msg">
+                                    <div onclick="closeNotify()" class="closemsg"><img src="'. URL_ROOT .'public/images/icons/closeicon.png" class="closemsgicon" alt="X"></div>
+                                    <div><strong>SUCCESS!</strong></div>
+                                    <div id="success_message">'. $success_message .'</div>
                                 </div>';
 
 // CHECK IF THERE IS A MESSAGE AVAILABLE, AND RUN THE NOTIFY ME() FUNCTION TO DISPLAY IT
