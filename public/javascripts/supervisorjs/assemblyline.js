@@ -78,13 +78,13 @@ function filter_cars() {
                                     <div class="carpicbox">
                                         <img src="${BASE_URL}public/images/cars/${car.ModelName + " " + car.Color}.png" class="carpic" alt="Car image">
                                     </div>
-                                    <div class="carstatus">`;
+                                    <div class="carmodel `;
 
-                    if(car.CurrentStatus == "S1") { carSet += `on stage 01`; }
-                    else if(car.CurrentStatus == "S2") { carSet += `on stage 02`; }
-                    else if(car.CurrentStatus == "S3") { carSet += `on stage 03`; }
-                    else if(car.CurrentStatus == "S4") { carSet += `on stage 04`; }
-                    else { carSet += `On-Hold`; }
+                    if(car.CurrentStatus == "S1") { carSet += `text-green">Stage 01`; }
+                    else if(car.CurrentStatus == "S2") { carSet += `text-green">Stage 02`; }
+                    else if(car.CurrentStatus == "S3") { carSet += `text-green">Stage 03`; }
+                    else if(car.CurrentStatus == "S4") { carSet += `text-green">Stage 04`; }
+                    else { carSet += `text-orange">On-Hold`; }
 
                     carSet += `<input type="hidden" name="form-car-stage" value="${car.CurrentStatus}">
                             </div>

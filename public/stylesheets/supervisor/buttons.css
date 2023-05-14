@@ -270,7 +270,7 @@
     border-radius: 30px;
     font-size: 16px;
     background-color: white;
-    background-image: url('http://localhost/MicroCAPS/public/images/icons/search.png');
+    background-image: url('http://localhost:8080/MicroCAPS/public/images/icons/search.png');
     background-position: 9px 6px;
     background-size: 30px;
     background-repeat: no-repeat;

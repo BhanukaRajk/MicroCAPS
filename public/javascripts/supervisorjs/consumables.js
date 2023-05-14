@@ -24,6 +24,6 @@ function getImgData() {
 }
 
 removec?.addEventListener("click", () => {
-        previewc.style.backgroundImage = `url(http://localhost/MicroCAPS/public/images/placeholder.jpg)`;
+        previewc.style.backgroundImage = `url(http://localhost:8080/MicroCAPS/public/images/placeholder.jpg)`;
         imagec.value = "";
 });
