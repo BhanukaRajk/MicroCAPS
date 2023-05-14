@@ -182,12 +182,7 @@ compVehicleSelector?.addEventListener('change', function() {
 
                     partSet += `<div class="parts-table-row bottom-border">
                                             <div class="parts-col-01">${component.PartName}</div>
-                                            <div class="parts-col-02">
-                                            ${component.Status == "I" ? "ISSUED" : 
-                                                (component.Status == "D" ? "PRE-DAMAGED" : 
-                                                (component.Status == "ID" ? "DAMAGED" : "NOT ISSUED" ))
-                                            }
-                                            </div>
+                                            <div class="parts-col-02">${Status}</div>
                                             <div class="parts-col-03">
                                                 <div class="round">
                                                     <input type="checkbox" id="${component.PartNo}-D"  onclick="updateComponentStatus(${component.PartNo.trm()} ','${component.Status == "NR" || component.Status == "R"  || component.Status == "D" ? 'D' : 'ID' }')"  ${Status == "DAMAGED" ? "checked" : "" } ${component.Status == "NR" || component.Status == "D" || component.Status == "ID" ? "disabled" : "" }/>
