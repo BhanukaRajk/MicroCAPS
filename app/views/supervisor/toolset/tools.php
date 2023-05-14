@@ -163,7 +163,7 @@
               </div>
             </form>
               <div class="display-flex-row justify-content-center marginy-3">
-                <div><button onclick="showToolDelConfBox()" class="delete-button consume-update">Remove item</button></div>
+                <div><button onclick="showToolDelConfBox(this)" class="delete-button consume-update">Remove item</button></div>
               </div>
             <div class="display-flex-row justify-content-center margin-top-2">
               <div><a onclick="closeToolUpdatePopup()" class="mouse-pointer">Close</a></div>
@@ -219,7 +219,7 @@
                   </div>
                   <div class="new-con-name-box">
                     <label for="conName" class="display-none">Name: </label>
-                    <input name="toolName" type="text" placeholder="Enter tool name" class="new-con-name" required>
+                    <input name="toolName" id="tool-name" type="text" placeholder="Enter tool name" class="new-con-name">
                   </div>
                   <div class="new-con-type-box">
 
@@ -247,10 +247,10 @@
                   </div>
                   <div class="new-con-status-box">
                     <label for="toolQuantity" class="display-none">Tool quantity: </label>
-                    <input name="toolQuantity" id="toolQuantity" type="number" placeholder="Stock quantity" class="new-con-status" required>
+                    <input name="toolQuantity" id="tool-quantity" type="number" placeholder="Stock quantity" class="new-con-status">
                   </div>
                   <div class="new-con-add-btn-box">
-                    <div><button class="green-btn width-50px">Add</button></div>
+                    <div><button type = "button" onclick="addTools()" class="green-btn width-50px">Add</button></div>
                     <div><button onclick="closeAddNewToolPopup()" class="red-btn width-50px">Cancel</button></div>
                   </div>
                 </div>
@@ -270,6 +270,6 @@
 
 
 <!-- ADD COMMON FOOTER FILE -->
-<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cfetch.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
 <script type="text/javascript" src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/tools.js"></script>
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

@@ -249,8 +249,9 @@ li a:hover:not(.active) {
 }
 
 .page-content {
-    left: 16.25rem;
-    top: 4rem;
+    left: 20rem;
+    top: 6rem;
+    right: 3rem;
 }
 
 .page-heading {

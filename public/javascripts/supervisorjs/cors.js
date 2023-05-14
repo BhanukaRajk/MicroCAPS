@@ -153,6 +153,48 @@ function paqUpdate() {
 
 }
 
+function addTools() {
+
+    let toolName = document.getElementById("tool-name").value;
+    let toolType =  document.getElementById("tool-type").value ;
+    let toolStatus = document.getElementById("tool-status").value;
+    let toolQuantity = document.getElementById("tool-quantity").value;
+    let imagefile = document.getElementById("imagec").files[0];
+
+    if(toolName == '' || toolType == '' || toolStatus == '' || toolQuantity == '' || imagefile == null) {
+
+        document.getElementById("error_message").innerHTML = "Fill all the fields to continue!";
+        notifyMe();
+
+    }
+    else if(toolQuantity < 0) {
+
+        document.getElementById("error_message").innerHTML = "Please enter valid input!";
+        notifyMe();
+
+    } else {
+
+        let formdata = new FormData();
+        formdata.append("image", imagefile);
+        formdata.append("toolName", toolName);
+        formdata.append("toolType", toolType);
+        formdata.append("toolStatus", toolStatus);
+        formdata.append("toolQuantity", toolQuantity);
+        $.ajax({
+            type: 'POST',
+            url:  BASE_URL + 'Supervisors/addNewTool',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                console.log(response);
+                // location.reload(true);
+            }
+        });
+    }
+
+}
+
 function addConsumables() {
     let cname = document.getElementById("conName").value;
     let ctype =  document.getElementById("consume-type").value ;

@@ -20,6 +20,8 @@
 @import "overall.css";
 @import "vehiclelist.css";
 @import "stages.css";
+@import "flex.css";
+@import "button.css";
 
 
 body {
@@ -722,25 +724,6 @@ h3 {
     padding-inline: 1rem;
 }
 
-/* row */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    background-color: var(--white);
-}
-
-.column {
-    --margin-x: 10%;
-    --margin-y: 8%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    background-color: var(--white);
-    margin-top: calc(1 * var(--margin-y));
-    margin-right: calc(3.5 * var(--margin-x));
-    margin-left: calc(3.5 * var(--margin-x))
-}
 
 /* Width in REM */
 .width-rem-0p75 {
@@ -871,6 +854,12 @@ h3 {
     box-shadow: none;
 }
 
+.btn:disabled {
+    opacity: .65;
+    cursor: default;
+    background-color: var(--btn-bg) !important;
+}
+
 .btn-primary {
     --btn-color: var(--blue);
     --btn-bg: white;
@@ -893,12 +882,43 @@ h3 {
     --btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--btn-focus-shadow-rgb), .5);
 }
 
+.btn-blue {
+    --btn-bg: var(--blue);
+    --btn-color: var(--white);
+    --btn-border-color: none;
+    --btn-hover-bg: none;
+    --btn-hover-color: var(--blue);
+    --btn-hover-border-color: var(--blue);
+    --btn-width: 7.5rem;
+    --btn-font-size: 0.7rem;
+}
+
 .btn-green {
     --btn-color: var(--green);
     --btn-border-color: var(--green);
     --btn-hover-color: var(--green);
     --btn-hover-bg: #e8f5e973;
     --btn-hover-border-color: var(--green);
+}
+
+.btn-red {
+    --btn-color: var(--red);
+    --btn-border-color: var(--red);
+    --btn-hover-color: var(--red);
+    --btn-hover-bg: #ee0b0b14;
+    --btn-hover-border-color: var(--red);
+}
+
+.btn-red-2 {
+    --btn-bg: var(--red);
+    --btn-color: var(--white);
+    --btn-border-color: none;
+    --btn-hover-bg: none;
+    --btn-hover-color: var(--red);
+    --btn-hover-border-color: var(--red);
+    --btn-width: 7rem;
+    --btn-height: 2rem;
+    --btn-font-size: 0.7rem;
 }
 
 /* Form */

@@ -835,20 +835,7 @@ class Supervisors extends controller
 
 
     // PDI RESULT SHEET /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public function pdiresults()
-    {
-        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
-            redirect('Users/login');
-        }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['url'] = getUrl();
-            // $data['consumableset'] = $this->supervisorModel->ViewAllConsumables();
-            // echo "\n\n\n\n\n";
-            // print_r($data);
-            $this->view('supervisor/pdi/pdiresults', $data);
-        }
-    }
 
     public function testRunQueue()
     {
@@ -881,7 +868,7 @@ class Supervisors extends controller
         }
     }
 
-    public function pdi_results($id)
+    public function pdiresults($id)
     {
 
         echo $id;
@@ -890,12 +877,11 @@ class Supervisors extends controller
             redirect('users/login');
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data['pdiVehicle'] = $this->supervisorModel->pdiVehicle($id);
             $data['pdiCheckCategories'] = $this->supervisorModel->pdiCheckCategories();
             $data['pdiCheckList'] = $this->supervisorModel->pdiCheckList($id);
             $data['id'] = $id;
-            //$data['defects'] = $this->supervisorModel->viewDefectSheets($id);
             $this->view('supervisor/pdi/pdiresults', $data);
         }
     }
@@ -1241,8 +1227,8 @@ class Supervisors extends controller
 
 
     // TOOL ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public function addNewTools() {
+
+    public function addNewTool() {
 
         if (!isLoggedIn()) {
             redirect('Users/login');
@@ -1253,21 +1239,21 @@ class Supervisors extends controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'name' => trim($_POST['name']),
-                'type' => trim($_POST['type']),
-                'quantity' => trim($_POST['quantity']),
-                'status' => trim($_POST['status'])
+                'name' => trim($_POST['toolName']),
+                'type' => trim($_POST['toolType']),
+                'status' => trim($_POST['toolStatus']),
+                'quantity' => trim($_POST['toolQuantity'])
             ];
 
             if (isset($_FILES['image'])) {
 
-                $toolpic = strval($data['name']) . '.jpg';
-                $to = '../public/images/tools/' . $toolpic;
+                $profile = strval($data['name']) . '.jpg';
+                $to = '../public/images/tools/' . $profile;
 
                 $from = $_FILES['image']['tmp_name'];
 
                 if (move_uploaded_file($from, $to)) {
-                    if ($this->supervisorModel->addNewTool($data['name'], $data['type'], $data['quantity'], $data['status'], $toolpic))
+                    if ($this->supervisorModel->addTool($data['name'], $data['type'], $data['status'], $data['quantity'], $profile))
                         $_SESSION['success_message'] = 'Success! Saved Changes';
                     else
                         $_SESSION['error_message'] = 'Error! Could not save changes';
