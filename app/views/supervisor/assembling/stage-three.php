@@ -121,6 +121,12 @@
 
         let s3 = {complete: <?php echo $data['stageSum']['completed']; ?>, pending: <?php echo $data['stageSum']['pending']; ?>}
 
+        if (s3.complete/(s3.complete + s3.pending)*100 == 100) {
+            document.getElementById('stage-passer').disabled = false;
+        } else {
+            document.getElementById('stage-passer').disabled = true;
+        }
+
         var ctx = document.getElementById('Lstage03').getContext('2d');
 
         let ltx = document.getElementById('Lstage03-label');

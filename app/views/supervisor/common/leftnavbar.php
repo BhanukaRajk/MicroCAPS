@@ -71,7 +71,7 @@
         <li>
             <div class="nav_section_headings">GENERAL</div>
             <a class="<?php echo ($data['url'][1] == "settings") ? 'active' : '' ; ?>" href="<?php echo URL_ROOT; ?>Supervisors/settings">
-                <img src="../images/icon6.png" class="width-rem-1p25" alt="icon5" />Settings
+                <img src="<?php echo URL_ROOT; ?>public/images/icon6.png" class="width-rem-1p25" alt="icon5" />Settings
             </a>
         </li>
 

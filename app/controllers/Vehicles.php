@@ -353,6 +353,45 @@ class Vehicles extends Controller {
 
     }
 
+    // Function to Get Assembly Stage Details by Chassis No
+    public function assemblyStagePercentageDetail() {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'chassisNo' => trim($_POST['chassisNo']),
+                'stage' => trim($_POST['stage'])
+            ];
+
+            if ($data['stage'] == 'Lstage01')
+                $data['stage'] = 'S1';
+            elseif ( $data['stage'] == 'Lstage02' )
+                $data['stage'] = 'S2';
+            elseif ( $data['stage'] == 'Lstage03' )
+                $data['stage'] = 'S3';
+            elseif ( $data['stage'] == 'Lstage04' )
+                $data['stage'] = 'S4';
+
+
+            $data['overall'] = [
+                'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'Pending', $data['stage']), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'OnHold', $data['stage']), "Weight")),
+                'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($data['chassisNo'], 'completed', $data['stage']), "Weight"))
+            ];
+
+            if ($data['overall']) {
+                echo json_encode($data);
+            }
+
+        }
+
+    }
+
 
 
     /* Search Related */

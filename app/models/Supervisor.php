@@ -365,28 +365,12 @@ class Supervisor
         }
     }
 
-    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final)
+    public function recordPAQresults($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final, $Supervisor)
     {
 
-        for ($record = 1; $record <= 7; $record++) {
-
-            // Insert the value
-            $this->db->query(
-
-                'UPDATE `operation` 
-                SET `Status` = :VAL'. $record .',
-                `SupervisorId` = :supervisor,
-                `Date` = CURRENT_TIMESTAMP 
-                WHERE `ChassisNo` = :chassisNo AND `OpId` = :ID' . $record . ';'
-
-            );
-        
-            // Bind the parameters
-            $this->db->bind(':ID' . $record, 'OPT000'.$record);
-        
-            // Execute the query
-            $this->db->execute();
-        }
+        $this->db->query(
+            'INSERT INTO `operation` VALUES (:chassisNo, DEFAULT, :VAL1, :VAL2, :VAL3, :VAL4, :VAL5, :VAL6, :VAL7, :supervisor, CURDATE());'
+        );
 
         $this->db->bind(':chassisNo', $ChassisNo);
         $this->db->bind(':VAL1', $BrakeBleeding);
@@ -396,7 +380,7 @@ class Supervisor
         $this->db->bind(':VAL5', $RAP);
         $this->db->bind(':VAL6', $Visual);
         $this->db->bind(':VAL7', $Final);
-        $this->db->bind(':supervisor', $_SESSION['_name']);
+        $this->db->bind(':supervisor', $Supervisor);
 
         if ($this->db->execute()) {
             return true;
@@ -404,6 +388,57 @@ class Supervisor
             return false;
         }
 
+    }
+
+    public function recordPAQresultsUpdate($ChassisNo, $BrakeBleeding, $GearOilLevel, $Adjustment, $Clutch, $RAP, $Visual, $Final, $Supervisor)
+    {
+
+        $this->db->query(
+            'UPDATE `operation` 
+                SET `Attempt` = `Attempt` + 1, `BrakeBleed` = :VAL1, `GearOil` = :VAL2, `RackEnd` = :VAL3, `Clutch` = :VAL4, `AxelPlate` = :VAL5, `Visual` = :VAL6, `Final` = :VAL7, `SupervisorId` = :supervisor, `Date` = CURDATE() 
+                WHERE `ChassisNo` = :chassisNo;'
+        );
+
+        $this->db->bind(':chassisNo', $ChassisNo);
+        $this->db->bind(':VAL1', $BrakeBleeding);
+        $this->db->bind(':VAL2', $GearOilLevel);
+        $this->db->bind(':VAL3', $Adjustment);
+        $this->db->bind(':VAL4', $Clutch);
+        $this->db->bind(':VAL5', $RAP);
+        $this->db->bind(':VAL6', $Visual);
+        $this->db->bind(':VAL7', $Final);
+        $this->db->bind(':supervisor', $Supervisor);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function getPDIChecklist() {
+        $this->db->query(
+            'SELECT `CheckId` FROM `pdi-check`;'
+        );
+
+        $results = $this->db->resultSet();
+
+        if ( $results ) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
+
+    public function sendtoRR($id, $checkid) {
+
+        $this->db->query( 'INSERT INTO `pdi-result` VALUES (:id, :checkid, DEFAULT);');
+
+        $this->db->bind(':id', $id);
+        $this->db->bind(':checkid', $checkid);
+
+        $this->db->execute();
     }
 
 
@@ -730,12 +765,12 @@ class Supervisor
     public function retrievePAQdata($car_id)
     {
         $this->db->query(
-            'SELECT `opearation`.* , 
+            'SELECT `operation`.* , 
                         `vehicle`.`EngineNo`, 
                         `vehicle-model`.`ModelName` 
-                        FROM `vehicle`, `vehicle-model`, `opearation`
+                        FROM `vehicle`, `vehicle-model`, `operation`
                         WHERE `vehicle`.`ChassisNo` = :car 
-                        AND `opearation`.`ChassisNo` = `vehicle`.`ChassiaNo` 
+                        AND `operation`.`ChassisNo` = `vehicle`.`ChassisNo` 
                         AND `vehicle`.`ModelNo` = `vehicle-model`.`ModelNo`;'
         );
 
@@ -749,6 +784,8 @@ class Supervisor
             return false;
         }
     }
+
+
 
     public function createPAQForm($car_id)
     {

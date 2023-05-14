@@ -115,7 +115,7 @@
                         </div>
                         <div>
                             <textarea id="visual" name="visual" class="paq-input-field-long tall-input-1" placeholder="All of the visual components are in good condition" required></textarea>
-                            <input type="hidden" id="vehicle_id_input" name="chassis_no" value="<?php echo $test_data->ChassisNo; ?>" required>
+                            <input type="hidden" id="chassis_no" name="chassis_no" value="<?php echo $test_data->ChassisNo; ?>" required>
 
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                             <button type="reset" class="paq-reset-button">Reset</button>
                         </div>
                         <div>
-                            <button type="submit" id="submit-btn" class="paq-submit-button">Submit</button>
+                            <button type="button" id="submit-btn" class="paq-submit-button" onclick="paq()">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -151,6 +151,7 @@
 </section>
 
 <script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/paqrecord.js"></script>
+<script src="<?php echo URL_ROOT; ?>public/javascripts/supervisorjs/cors.js"></script>
 
 <!-- ADD COMMON FOOTER FILE -->
 <?php require_once APP_ROOT . '/views/supervisor/includes/footer.php'; ?>

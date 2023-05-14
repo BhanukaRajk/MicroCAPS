@@ -1,8 +1,8 @@
 // BUTTON ENABLING AND DISABLING PROCESS HANDLER /////////////////////////////////////////////////////////////////////////////////
 
 // GET ALL FILTER CHECKBOXES AND RADIO BUTTONS
-// const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
-// const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
+const completenesscheckboxes = document.querySelectorAll("input[type=checkbox][class=connected-btn]");
+const holdingcheckboxes = document.querySelectorAll("input[type=checkbox][class=holding-btn]");
 
 // DISABLE ALL THE CONNECTION BUTTONS WHEN HOLD BUTTON PRESSED
 for (let hdcheckbox of holdingcheckboxes) {
@@ -94,7 +94,10 @@ function reloadChart() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+
             var response = this.responseText;
+
+            response = JSON.parse(response);
 
             destroyChart(document.getElementById(stage));
 
@@ -102,7 +105,13 @@ function reloadChart() {
 
             let ltx = document.getElementById(stage+'-label');
 
-            updateChart(ctx, ltx, JSON.parse(response), 110);
+            updateChart(ctx, ltx, response, 110);
+
+            if (response['overall'].completed/(parseInt(response['overall'].completed) + parseInt(response['overall'].pending))*100 == 100) {
+                document.getElementById('stage-passer').disabled = false;
+            } else {
+                document.getElementById('stage-passer').disabled = true;
+            }
 
         }
     };

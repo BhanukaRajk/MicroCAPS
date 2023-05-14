@@ -574,75 +574,122 @@ class Supervisors extends controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'ChassisNo' => trim($_POST['chassis_no']),
-                'BrakeBleed' => trim($_POST['brake-bleed-selection']),
-                'GearOil' => trim($_POST['gear-oil-selection']),
-                'RackEnd' => trim($_POST['rack-end-selection']),
-                'ClutchAdjust' => trim($_POST['clutch-selection']),
-                'RearAxel' => trim($_POST['axel-selection']),
+                'ChassisNo' => trim($_POST['chassisNo']),
+                'BrakeBleed' => trim($_POST['bbs']),
+                'GearOil' => trim($_POST['gos']),
+                'RackEnd' => trim($_POST['res']),
+                'ClutchAdjust' => trim($_POST['cs']),
+                'RearAxel' => trim($_POST['as']),
                 'VisualIns' => trim($_POST['visual']),
-                'FinalResult' => trim($_POST['final_result'])
+                'FinalResult' => trim($_POST['final'])
             ];
 
-            if ($this->supervisorModel->checkVehicle($data['ChassisNo'])) {
+            if ($this->supervisorModel->recordPAQresults($data['ChassisNo'],
+                $data['BrakeBleed'],
+                $data['GearOil'],
+                $data['RackEnd'],
+                $data['ClutchAdjust'],
+                $data['RearAxel'],
+                $data['VisualIns'],
+                $data['FinalResult'],
+                $_SESSION['_id'])) {
 
-                if ($this->supervisorModel->recordPAQresults($data['ChassisNo'], 
-                                                    $data['BrakeBleed'], 
-                                                    $data['GearOil'], 
-                                                    $data['RackEnd'], 
-                                                    $data['ClutchAdjust'], 
-                                                    $data['RearAxel'], 
-                                                    $data['VisualIns'], 
-                                                    $data['FinalResult'],
-                                                    $_SESSION['_id']))
-                {
-                    if($data['FinalResult'] == "Passed") {
-                        $PDIChecks = $this->vehicleModel->getPDIChecklist();
-                        
-                        foreach ($PDIChecks as $PDIcase) {
-                            $this->vehicleModel->sendtoRR($data['chassis_no'], $PDIcase->CheckId);
-                        }
+                if($data['FinalResult'] == "Pass") {
 
-                        if($this->supervisorModel->stageChanger($data['chassis_no'], "RR")) {
-                            $_SESSION['success_message'] = 'Success! Vehicle sent to test run';
-                        }
+                    $PDIChecks = $this->vehicleModel->getPDIChecklist();
 
-                    } else {
+                    foreach ($PDIChecks as $PDIcase) {
+                        $this->vehicleModel->sendtoRR($data['ChassisNo'], $PDIcase->CheckId);
+                    }
 
-                        if($this->supervisorModel->stageChanger($data['chassis_no'], "PA")) {
-                            $_SESSION['success_message'] = 'Success! Vehicle has to be rechecked';
-                        }
-
+                    if($this->supervisorModel->stageChanger($data['ChassisNo'], "RR")) {
+                        $_SESSION['success_message'] = 'Success! Vehicle sent to test run';
                     }
 
                 } else {
 
-                    $_SESSION['error_message'] = 'Error! record saving failed!';
-                    
-                }
+                    if($this->supervisorModel->stageChanger($data['ChassisNo'], "PA")) {
+                        $_SESSION['success_message'] = 'Success! Vehicle has to be rechecked';
+                    }
 
-                redirect('Supervisors/testRunQueue');
+                }
 
             } else {
 
-                $_SESSION['error_message'] = 'Oops! The vehicle could not be found';
-                redirect('Supervisors/testRunQueue');
-
-                // $data['url'] = getUrl();
-                // $this->view('supervisor/inspection/paqrecord', $data);
+                $_SESSION['error_message'] = 'Error! record saving failed!';
 
             }
 
         } else {
 
             $_SESSION['error_message'] = 'Request failed!';
-            redirect('Supervisors/testRunQueue');
-
-            // $data['url'] = getUrl();
-            // $this->view('supervisor/inspection/paqrecord', $data);
 
         }
-    
+
+        redirect('Supervisor/testRunQueue');
+
+    }
+
+    public function recordPAQInspectionResultsUpdate()
+    {
+
+        if (!isLoggedIn() || $_SESSION['_position'] != 'Supervisor') {
+            redirect('Users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['chassisNo']),
+                'BrakeBleed' => trim($_POST['bbs']),
+                'GearOil' => trim($_POST['gos']),
+                'RackEnd' => trim($_POST['res']),
+                'ClutchAdjust' => trim($_POST['cs']),
+                'RearAxel' => trim($_POST['as']),
+                'VisualIns' => trim($_POST['visual']),
+                'FinalResult' => trim($_POST['final'])
+            ];
+
+            if ($this->supervisorModel->recordPAQresultsUpdate($data['ChassisNo'],
+                $data['BrakeBleed'],
+                $data['GearOil'],
+                $data['RackEnd'],
+                $data['ClutchAdjust'],
+                $data['RearAxel'],
+                $data['VisualIns'],
+                $data['FinalResult'],
+                $_SESSION['_id'])) {
+
+                if($data['FinalResult'] == "Pass") {
+
+                    $PDIChecks = $this->supervisorModel->getPDIChecklist();
+
+                    foreach ($PDIChecks as $PDIcase) {
+                        $this->supervisorModel->sendtoRR($data['ChassisNo'], $PDIcase->CheckId);
+                    }
+
+                    if($this->supervisorModel->stageChanger($data['ChassisNo'], "RR")) {
+                        $_SESSION['success_message'] = 'Success! Vehicle sent to test run';
+                    }
+
+                }
+
+            } else {
+
+                $_SESSION['error_message'] = 'Error! record saving failed!';
+
+            }
+
+        } else {
+
+            $_SESSION['error_message'] = 'Request failed!';
+
+        }
+
+        redirect('Supervisor/testRunQueue');
+
     }
 
     // THIS FUNCTION SENDS UPDATING PAQ DATA TO THE MODEL
@@ -962,6 +1009,11 @@ class Supervisors extends controller
             if ($this->supervisorModel->checkCarById($data['chassisNo'], $data['stage'])) {
 
                 $data['url'] = getUrl();
+
+                if ($data['stage'] == 'H') {
+                    $data['stage'] = $this->vehicleModel->holdStage($data['chassisNo'])->StageNo;
+                }
+
                 $data['FormCarData'] = $this->supervisorModel->getProcessData($data['chassisNo'], $data['stage']);
 
                 
@@ -1484,6 +1536,40 @@ class Supervisors extends controller
             echo json_encode($data['proUpdate']);
 
         } 
+
+    }
+
+    public function overall($chassisNo) {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            $data = [
+                'ChassisNo' => $chassisNo,
+                'overall' => [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed'), "Weight"))
+                ],
+                'stage01' => [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S1'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S1'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S1'), "Weight"))
+                ],
+                'stage02' => [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S2'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S2'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S2'), "Weight"))
+                ],
+                'stage03' => [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S3'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S3'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S3'), "Weight"))
+                ],
+                'stage04' => [
+                    'pending' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'Pending', 'S4'), "Weight") + $this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'OnHold', 'S4'), "Weight")),
+                    'completed' => json_encode($this->Sum($this->vehicleModel->getProcessStatus($chassisNo, 'completed', 'S4'), "Weight"))
+                ],
+                'assemblyDetails' => $this->vehicleModel->assemblyDetails()
+            ];
+            $this->view('supervisor/assembling/overall', $data);
+        }
+
 
     }
 
