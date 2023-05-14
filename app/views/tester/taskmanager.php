@@ -8,10 +8,10 @@
         <div class="page-heading font-weight  margin-bottom-4">
             Task Manager
         </div>
-        <!-- <div>
-                <input type="text" placeholder="Search" class="form-control" oninput="searchTaskM()" id="searchId">
+        <div>
+                <input type="text" placeholder="Search" class="form-control" oninput="searchTaskM('<?php echo  $_SESSION['_id'];?>')" id="searchId">
                 <label class="form-label">Search</label>
-        </div> -->
+        </div>
         </div>
         <div id = "vehicleList">
 
