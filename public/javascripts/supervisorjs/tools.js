@@ -171,7 +171,8 @@ function showAddNewToolPopup() {
 function showToolDelConfBox(Tool) {
 
     // FILL THE HIDDEN INPUT FIELDS IN THE FORM
-    document.getElementById("form-tool-id").setAttribute("value", Tool);
+    let id = document.getElementById('status-form-tool-id').value;
+    document.getElementById("form-tool-id").setAttribute("value", id);
     //// var popupDiv = document.getElementById('toolUpdatePopUp');
     //// popupDiv.style.display = 'none';  
     document.getElementById("toolDelConfirm").setAttribute("class", "delete-conf-blur horizontal-centralizer");

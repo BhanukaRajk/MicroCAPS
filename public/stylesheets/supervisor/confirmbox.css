@@ -8,7 +8,7 @@
     background-color: #FFFFFFAA;
     position: fixed;
 
-    z-index: 125;
+    z-index: 1000;
 }
 
 .del-confirm-box {

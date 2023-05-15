@@ -483,7 +483,7 @@ class Supervisor
         $this->db->query(
             'SELECT `employee`.`EmployeeId`, CONCAT(`employee`.firstname," ",`employee`.lastname) AS Name
             FROM `employee`
-            WHERE EmployeeId NOT IN (SELECT EmployeeId FROM `employee-leaves` WHERE LeaveDate = :leavedate)
+            WHERE EmployeeId NOT IN (SELECT EmployeeId FROM `employee-leaves` WHERE LeaveDate = :leavedate AND Progress = 1)
             AND EmployeeId NOT IN (SELECT EmployeeId FROM `employee-schedule` WHERE (ChassisNo = :chassisNo AND ProcessId = :processId))
             AND `employee`.Position = :position;'
         );
@@ -877,13 +877,13 @@ class Supervisor
 
     public function pdiCheckCategories() {
         $this->db->query(
-            'SELECT `pdi-check-category`.`CategoryId`, `pdi-check-category`.`Title`, `pdi-check-category`.`SubTitle`,
-            COUNT(*) AS count
-            FROM `pdi-check-category`
-            INNER JOIN `pdi-check`
-            ON `pdi-check-category`.`CategoryId` = `pdi-check`.`CategoryId`
-            GROUP BY `pdi-check-category`.`CategoryId`
-            ORDER BY count ASC'
+            'SELECT `pdi-check-category`.*,
+                COUNT(*) AS count
+                FROM `pdi-check-category`
+                INNER JOIN `pdi-check`
+                ON `pdi-check-category`.`CategoryId` = `pdi-check`.`CategoryId`
+                GROUP BY `pdi-check-category`.`CategoryId`
+                ORDER BY count ASC'
         );
 
         $results = $this->db->resultSet();
@@ -896,6 +896,7 @@ class Supervisor
 
     }
 
+    // Retrieve Query : PDI Checks
     public function pdiCheckList($id) {
         $this->db->query(
             'SELECT `pdi-result`.*,`pdi-check`.CategoryId, `pdi-check`.CheckName
@@ -1294,6 +1295,27 @@ class Supervisor
 
 
     // THIS FUNCTION IS USED TO FETCH DATA FOR FILTERING TOOLS IN CARD VIEWS
+
+    public function addTool($name, $type, $status, $quantity, $image) {
+
+        $this->db->query(
+            'INSERT INTO `tool`(`ToolName`, `Status`, `LastUpdate`, `LastUpdateBy`, `Image`, `quantity`, `ToolType`) 
+                    VALUES (:name,:status,CURRENT_TIMESTAMP,:by,:image, :quantity, :type);'
+        );
+
+        $this->db->bind(':name', ucwords($name));
+        $this->db->bind(':status', $status);
+        $this->db->bind(':by', $_SESSION['_id']);
+        $this->db->bind(':image', $image);
+        $this->db->bind(':quantity', $quantity);
+        $this->db->bind(':type', $type);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function viewToolz($toolType = null, $toolStatus = null)
     {
         $sql = 'SELECT `tool`.`ToolId`, 
@@ -1328,7 +1350,11 @@ class Supervisor
         // DO NOT SWAP THE ORDER OF QUERY AND BIND
         $this->db->query($sql);
 
-        $this->db->bind(':toolType', $toolType);
+        if ($toolType != null) {
+            if ($toolType != 'All') {
+                $this->db->bind(':toolType', $toolType);
+            }
+        }
 
         $tools = $this->db->resultSet();
 

@@ -17,7 +17,7 @@
                 <div class="heading">On Going Assembly - <?php echo $data['chassisNo']; ?></div>
                 <div class="display-none" id="vehicle_id"><?php echo $data['chassisNo']; ?></div> 
                 <div class="stage-switch">
-                    <button class="back-button">Overall</button>
+                    <button class="back-button" onclick="location.href = '<?php echo URL_ROOT; ?>Supervisors/overall/<?php echo $data['chassisNo']; ?>'">Overall</button>
                 </div>
             </div>
 
