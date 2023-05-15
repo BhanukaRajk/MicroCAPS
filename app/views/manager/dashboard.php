@@ -145,10 +145,10 @@
                     <div class="dash-card-right-datalines dash-card-headings ">Quick Access</div>
                     <div class="dash-card-right-datalines dash-quickbtns-frame ">
                         <a href="<?php echo URL_ROOT; ?>managers/bodyshell">
-                            <button type="button" class="btn btn-primary btn-blue ">Request Body Shell</button>
+                            <button type="button" class="btn btn-primary btn-blue">Request Body Shell</button>
                         </a>
                         <a href="<?php echo URL_ROOT; ?>managers/dispatch">
-                            <button type="button" class="btn btn-primary btn-blue ">Dispatch Vehicles</button>
+                            <button type="button" class="btn btn-primary btn-blue">Dispatch Vehicles</button>
                         </a>
                     </div>
                 </div>

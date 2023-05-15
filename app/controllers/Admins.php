@@ -4,12 +4,12 @@ class Admins extends controller {
 
     private $adminModel;
     private $vehicleModel;
-    private $pdiModel;
+    // private $pdiModel;
 
     public function __construct(){
         $this->adminModel = $this->model('Admin');
         $this->vehicleModel = $this->model('Vehicle');
-        $this->pdiModel = $this->model('Pdi');
+        // $this->pdiModel = $this->model('Pdi');
     }
 
     public function dashboard() {
@@ -47,7 +47,51 @@ class Admins extends controller {
                     'telephone' => trim($_POST['telephone']),
                     'position' => trim($_POST['position']),
                     'account' => $_POST['account'] === 'Yes' ? 'Yes' : 'No',
+                    'emp_err' => '',
+                    'id_err' => '',
+                    'tp_err' => '',
+                    'email_err' => ''
                 ];
+
+                if(!preg_match('/^[a-zA-Z]+$/', $data['firstname']) || !preg_match('/^[a-zA-Z]+$/', $data['lastname'])){
+                    $data['emp_err'] = 'Not a valid Name';
+                    echo 'notvalidname';
+                }
+
+                if(strlen($data['nic']) == 12){
+                    if (!preg_match('/^[0-9]{12}$/', $data['nic'])) {
+                        $data['id_err'] = 'Not a valid Id';
+                        echo 'notvalidid';
+                    }
+                } else if (strlen($data['nic']) == 10){
+                    if (!preg_match('/^[0-9]{9}$/', substr($data['nic'],0,9)) || (substr($data['nic'], -1) !== 'V' && substr($data['nic'], -1) !== 'v')) {
+                        $data['id_err'] = 'Not a valid Id';
+                        echo 'notvalidid';
+                    }
+                } else {
+                    $data['id_err'] = 'Not a valid Id';
+                    echo 'notvalidid';
+                }
+
+                if(strlen($data['telephone']) == 10){
+                    if (!preg_match('/^[0-9]{10}$/', $data['telephone']) || $data['telephone'][0] !== '0' || $data['telephone'][1] !== '7') {
+                        $data['tp_err'] = 'Not a valid Telephone';
+                        echo 'notvalidtp';
+                    }
+                } else if (strlen($data['telephone']) == 9){
+                    if (!preg_match('/^[0-9]{9}$/', $data['telephone']) || $data['telephone'][0] !== '7') {
+                        $data['tp_err'] = 'Not a valid Telephone';
+                        echo 'notvalidtp';
+                    }
+                } else {
+                    $data['tp_err'] = 'Not a valid Telephone';
+                    echo 'notvalidtp';
+                }
+
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = 'Not a valid Email';
+                    echo 'notvalidemail';
+                }
 
                 $data['id'] = $this->adminModel->getLastId()->id + 1;
 
@@ -58,17 +102,20 @@ class Admins extends controller {
                 else
                     $data['id'] = '0' . strval($data['id']);
 
-                if ($this->adminModel->addEmployee($data)) {
-                    if ($data['account'] === 'Yes') {
-                        if ($this->adminModel->createUser($data)) {
-                            echo "Successful";
-                        } else {
-                            echo "Successful";
+                if(empty($data['emp_err']) && empty($data['id_err']) && empty($data['tp_err']) && empty($data['email_err'])){
+                    if ($this->adminModel->addEmployee($data)) {
+                        if ($data['account'] === 'Yes') {
+                            if ($this->adminModel->createUser($data)) {
+                                echo "Successful";
+                            } else {
+                                echo "Successful";
+                            }
                         }
+                    } else {
+                        echo "Error";
                     }
-                } else {
-                    echo "Error";/////////meka error ennoni//////////////////////
                 }
+                
             }
             else if ($action == 'edit') {
                 
@@ -82,11 +129,59 @@ class Admins extends controller {
                     'position' => trim($_POST['position']),
                 ];
 
-                if ($this->adminModel->editEmployee($data)) {
-                    echo "Successful";
-                } else {
-                    echo "Error";
+                if(!preg_match('/^[a-zA-Z]+$/', $data['firstname']) || !preg_match('/^[a-zA-Z]+$/', $data['lastname'])){
+                    $data['emp_err'] = 'Not a valid Name';
+                    echo 'notvalidname';
                 }
+
+                if(strlen($data['nic']) == 12){
+                    if (!preg_match('/^[0-9]{12}$/', $data['nic'])) {
+                        $data['id_err'] = 'Not a valid Id';
+                        echo 'notvalidid';
+                    }
+                } else if (strlen($data['nic']) == 10){
+                    if (!preg_match('/^[0-9]{9}$/', substr($data['nic'],0,9)) || (substr($data['nic'], -1) !== 'V' && substr($data['nic'], -1) !== 'v')) {
+                        $data['id_err'] = 'Not a valid Id';
+                        echo 'notvalidid';
+                    }
+                } else {
+                    $data['id_err'] = 'Not a valid Id';
+                    echo 'notvalidid';
+                }
+
+                if(strlen($data['telephone']) == 10){
+                    if (!preg_match('/^[0-9]{10}$/', $data['telephone']) || $data['telephone'][0] !== '0' || $data['telephone'][1] !== '7') {
+                        $data['tp_err'] = 'Not a valid Telephone';
+                        echo 'notvalidtp';
+                    }
+                } else if (strlen($data['telephone']) == 9){
+                    if (!preg_match('/^[0-9]{9}$/', $data['telephone']) || $data['telephone'][0] !== '7') {
+                        $data['tp_err'] = 'Not a valid Telephone';
+                        echo 'notvalidtp';
+                    }
+                } else {
+                    $data['tp_err'] = 'Not a valid Telephone';
+                    echo 'notvalidtp';
+                }
+
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                    $data['email_err'] = 'Not a valid Email';
+                    echo 'notvalidemail';
+                }
+
+                if(empty($data['emp_err']) && empty($data['id_err']) && empty($data['tp_err']) && empty($data['email_err'])){
+                    if ($this->adminModel->editEmployee($data)) {
+                            echo "Successful";
+                        } else {
+                            echo "Error";
+                        }
+                }
+
+                // if ($this->adminModel->editEmployee($data)) {
+                //     echo "Successful";
+                // } else {
+                //     echo "Error";
+                // }
             }
             else if ($action == 'delete') {
                 $data = [
@@ -153,7 +248,8 @@ class Admins extends controller {
         else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             if ($action == 'add') {
-                $this->view('admin/addEmployee');
+                $data['managerCount'] = $this->adminModel->employeeCount('Manager');
+                $this->view('admin/addEmployee', $data);
             }
             else if ($action == 'edit') { 
                 $data['employee'] = $this->adminModel->employeeDetailsById($id);
@@ -185,13 +281,6 @@ class Admins extends controller {
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails();
-                $data['holdStage'] = array();
-
-                if ($data['assemblyDetails']) {
-                    foreach ($data['assemblyDetails'] as $value) {
-                        $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
-                    }
-                }
                 $this->view('admin/assembly', $data);
             }
         } else if ($stage == null) {
@@ -257,6 +346,7 @@ class Admins extends controller {
         }
     }
 
+
     public function assemblystage($chassisNo) {
         if(!isLoggedIn()){
             redirect('users/login');
@@ -294,29 +384,7 @@ class Admins extends controller {
         }
     }
 
-    public function pdi($chassisNo = null) {
-
-        if (!isLoggedIn()) {
-            redirect('users/login');
-        }
-
-        if ($chassisNo == null) {
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
-                $this->view('admin/pdi', $data);
-            }
-        } else {
-            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                $data['ChassisNo'] = $chassisNo;
-                $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
-                $data['onPDIVehicle'] = $this->pdiModel->onPDIVehicles(['chassisNo' => $chassisNo], false);
-                $data['pdiCheckCategories'] = $this->pdiModel->pdiCheckCategories();
-                $data['pdiCheckList'] = $this->pdiModel->pdiCheckList($chassisNo);
-                $this->view('admin/pdidetails',$data);
-            }
-        }
-
-    }
+    
 
     public function dispatch() {
 
@@ -329,6 +397,7 @@ class Admins extends controller {
             $this->view('admin/dispatch', $data);
         }
     }
+
 
     public function settings() {
 
@@ -375,5 +444,29 @@ class Admins extends controller {
         }
     }
 
+    // public function viewpdi()
+    // {
 
+    //     if (!isLoggedIn()) {
+    //         redirect('users/login');
+    //     }
+
+    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //         $data['onPDIVehicles'] = $this->adminModel->onPDIVehicles();
+    //         $this->view('admin/viewpdi', $data);
+    //     }
+    // }
+
+    public function viewpdi()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data['onPDIVehicles'] = $this->vehicleModel->vehiclesReadyToTest();
+            $this->view('admin/viewpdi', $data);
+        }
+    }
 }

@@ -72,12 +72,12 @@
             <div class="admin-dash-quick-access">
                 <div class="dash-card-right-datalines dash-card-headings ">Quick Access</div>
                 <div class="dash-card-right-datalines dash-quickbtns-frame ">
-                    <!-- <a href="<?php //echo URL_ROOT; ?>managers/bodyshell">
-                        <button type="button" class="dash-quickbtn">Request Body Shell</button>
+                    <a href="<?php echo URL_ROOT; ?>admins/employees/add">
+                        <button type="button" class="btn btn-primary btn-blue2">Add Employees</button>
                     </a>
-                    <a href="<?php //echo URL_ROOT; ?>managers/test">
-                        <button type="button" class="dash-quickbtn">Dispatch Vehicles</button>
-                    </a> -->
+                    <a href="<?php echo URL_ROOT; ?>admins/dispatch">
+                        <button type="button" class="btn btn-primary btn-blue2">Dispatch Vehicles</button>
+                    </a>
                 </div>
             </div>
             <div class="display-flex-column align-items-center border-radius-1 background-white padding-3" id="calender">
