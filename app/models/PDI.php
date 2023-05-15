@@ -24,7 +24,7 @@ class PDI
                         $condition .= 'AND CONCAT(`employee`.Firstname," ",`employee`.Lastname) LIKE :'.$key.' ';
                         break;
                     default:
-                        $condition .= 'AND `vehicle`.'.$key.' LIKE : '.$key.' ';
+                        $condition .= 'AND `vehicle`.'.$key.' LIKE :'.$key.' ';
                         break;
                 }
                 $array[] = [ 'key' => ':'.$key, 'parameter' => $value ];
