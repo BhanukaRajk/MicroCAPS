@@ -43,6 +43,7 @@
                         </div>
                         <div class="carstatus ', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'available' : 'lower') : (($item->Volume >= 60) ? 'available' : 'lower'), '">', ($item->Volume == NULL) ? (($item->Weight >= 60) ? 'Available' : 'Low in stock') : (($item->Volume >= 60) ? 'Available' : 'Low in stock'), '</div>
                         <div class="chassisno con-last-update">Last update: ', $item->UDate ,' at ', substr($item->UTime, 0, 5) ,' </div>
+                        <div class="chassisno con-last-update">By: ', $item->Updater ,' </div>
                       </div>';
               }
             }

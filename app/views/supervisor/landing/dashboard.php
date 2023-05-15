@@ -75,7 +75,7 @@
                                                         <div class="">Color: '. $part->Color .'</div>
                                                     </div>
                                                 </div>
-                                                <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5 red-box">
+                                                <div class="display-flex-column justify-content-center align-items-center border-radius-0p5 width-rem-6 height-rem-1p5">
                                                     <div class="'. (($part->RequestStatus == "Requested") ? 'result-text-req' : 'result-text-not-req' ) .'">'. $part->RequestStatus .'</div>
                                                 </div>
                                             </div>
@@ -137,7 +137,7 @@
                     <div class="dash-card-quickaccess test1">
                         <div class="dash-card-right-datalines dash-card-headings test1">Quick Access</div>
                         <div class="dash-card-right-datalines dash-quickbtns-frame test1">
-                            <a href="<?php echo URL_ROOT; ?>supervisors/componentsView">
+                            <a href="<?php echo URL_ROOT; ?>supervisors/viewCarComponent">
                                 <button type="button" class="dash-quickbtn">Issue Parts</button>
                             </a>
                             <a href="<?php echo URL_ROOT; ?>Supervisors/leaves">

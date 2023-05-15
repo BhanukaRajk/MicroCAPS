@@ -83,6 +83,8 @@ function consumeFilter() {
                                     </div>
                                     <div class="carstatus ${consume.Volume == null ? (consume.Weight >= 60 ? 'available' : 'lower') : (consume.Volume >= 60 ? 'available' : 'lower')}">${consume.Volume == null ? (consume.Weight >= 60 ? 'Available' : 'Low in stock') : (consume.Volume >= 60 ? 'Available' : 'Low in stock')}</div>
                                     <div class="chassisno con-last-update">Last update: ${consume.UDate} at ${consume.UTime.substring(0, 5)} </div>
+                                    <div class="chassisno con-last-update">By: ${consume.Updater} </div>
+
                                     </div>`;
                 });
 
