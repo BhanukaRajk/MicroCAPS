@@ -10,8 +10,7 @@
         </div>
         
         <div  id="vehicleList">
-        <!-- <div class="display-flex-column align-items-start margin-top-3"> -->
-            <?php
+        <?php
             if ($data['assemblyDetails'] == false) {
                 echo '
                             <div class="display-flex-row justify-content-center align-items-center border-bottom width-100 paddingy-6">
@@ -45,9 +44,15 @@
                     $CurrentStatus = stage($value->CurrentStatus);
 
                     if ($CurrentStatus == false) {
-                        $CurrentStatus = stage($data['holdStage'][$key]->StageNo);
-                        $word = 'On Hold';
-                        $css = 'red';
+                        if ($value->CurrentStatus == 'H') {
+                            $CurrentStatus = stage($data['holdStage'][$key]->StageNo);
+                            $word = 'On Hold';
+                            $css = 'red';
+                        } else {
+                            $CurrentStatus = 'PAQ Inspection';
+                            $word = 'Assembly Completed';
+                            $css = 'green';
+                        }
                     }
 
                     echo '<a href="' . URL_ROOT . 'admins/assembly/' . $value->ChassisNo . '">

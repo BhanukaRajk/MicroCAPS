@@ -4,12 +4,12 @@ class Admins extends controller {
 
     private $adminModel;
     private $vehicleModel;
-    // private $pdiModel;
+    private $pdiModel;
 
     public function __construct(){
         $this->adminModel = $this->model('Admin');
         $this->vehicleModel = $this->model('Vehicle');
-        // $this->pdiModel = $this->model('Pdi');
+        $this->pdiModel = $this->model('Pdi');
     }
 
     public function dashboard() {
@@ -281,6 +281,13 @@ class Admins extends controller {
         if ($chassisNo == null) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $data['assemblyDetails'] = $this->vehicleModel->assemblyDetails();
+
+                if ($data['assemblyDetails']) {
+                    foreach ($data['assemblyDetails'] as $value) {
+                        $data['holdStage'][] = $this->vehicleModel->holdStage($value->ChassisNo);
+                    }
+                }
+
                 $this->view('admin/assembly', $data);
             }
         } else if ($stage == null) {
@@ -457,7 +464,7 @@ class Admins extends controller {
     //     }
     // }
 
-    public function viewpdi()
+    public function pdi()
     {
 
         if (!isLoggedIn()) {
@@ -465,8 +472,8 @@ class Admins extends controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $data['onPDIVehicles'] = $this->vehicleModel->vehiclesReadyToTest();
-            $this->view('admin/viewpdi', $data);
+            $data['onPDIVehicles'] = $this->pdiModel->onPDIVehicles();
+            $this->view('admin/pdi', $data);
         }
     }
 }

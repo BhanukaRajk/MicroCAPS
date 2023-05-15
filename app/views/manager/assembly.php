@@ -35,7 +35,6 @@
         </div>
         
         <div  id="vehicleList">
-        <!-- <div class="display-flex-column align-items-start margin-top-3"> -->
             <?php
             if ($data['assemblyDetails'] == false) {
                 echo '

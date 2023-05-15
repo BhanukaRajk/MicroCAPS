@@ -151,7 +151,7 @@
                 <div class="filters">
 
 
-                    <div class="filtertype">Vehicle Type</div>
+                    <div class="filtertype">Employee Type</div>
                     <form method="POST" action="<?php echo URL_ROOT; ?>admins/employees">
                         <div class="filters">
                             <input type="checkbox" id="manager" name="manager" value="Manager" <?php echo ($data['managerDetail'] == null) ? "" : "checked" ?>>
