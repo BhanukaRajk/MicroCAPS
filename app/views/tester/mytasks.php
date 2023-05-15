@@ -42,7 +42,7 @@
                                 <div class="carpicbox">
                                     <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
                                 </div>
-                                <div class="carstatus green"> On Assembly </div>
+                                <div class="carstatus green"> PDI </div>
                                 <div class="arrivaldate">Stage: '.$val.'</div>
                             </div>
                             </a>';

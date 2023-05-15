@@ -345,7 +345,7 @@ function pdilist(response) {
                 <div class="carpicbox">
                     <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
                 </div>
-                <div class="carstatus green"> On Assembly </div>
+                <div class="carstatus green"> PDI </div>
                 <div class="arrivaldate">Stage: ${val}</div>
             </div>
             </a>`
@@ -412,7 +412,7 @@ function tasklist(response) {
                 <div class="carpicbox">
                     <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
                 </div>
-                <div class="carstatus green"> On Assembly </div>
+                <div class="carstatus green"> PDI </div>
                 <div class="arrivaldate">Stage: ${val}</div>
             </div>
             </a>`
@@ -495,7 +495,7 @@ function taskmlist(response, id) {
             <div class="carpicbox">
                 <img src="http://localhost/MicroCAPS/public/images/cars/${value.ModelName} ${value.Color}.png" class="carpic" alt="${value.ModelName}${value.Color}">
             </div>
-            <div class="carstatus green"> On Assembly </div>
+            <div class="carstatus green"> PDI </div>
             <div class="arrivaldate margin-top-1">Assigned to: ${testername}</div>
             <div class="mytasks font-size-13 display-flex-row align-items-center margin-top-2 margin-bottom-0 marginx-0">
                 <div>
