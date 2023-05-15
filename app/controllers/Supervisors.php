@@ -596,10 +596,10 @@ class Supervisors extends controller
 
                 if($data['FinalResult'] == "Pass") {
 
-                    $PDIChecks = $this->vehicleModel->getPDIChecklist();
+                    $PDIChecks = $this->supervisorModel->getPDIChecklist();
 
                     foreach ($PDIChecks as $PDIcase) {
-                        $this->vehicleModel->sendtoRR($data['ChassisNo'], $PDIcase->CheckId);
+                        $this->supervisorModel->sendtoRR($data['ChassisNo'], $PDIcase->CheckId);
                     }
 
                     if($this->supervisorModel->stageChanger($data['ChassisNo'], "RR")) {

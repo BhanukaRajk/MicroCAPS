@@ -24,7 +24,7 @@ class PDI
                         $condition .= 'AND CONCAT(`employee`.Firstname," ",`employee`.Lastname) LIKE :'.$key.' ';
                         break;
                     default:
-                        $condition .= 'AND `vehicle`.'.$key.' LIKE :'.$key.' ';
+                        $condition .= 'AND `vehicle`.'.$key.' LIKE : '.$key.' ';
                         break;
                 }
                 $array[] = [ 'key' => ':'.$key, 'parameter' => $value ];
@@ -45,7 +45,7 @@ class PDI
 
         $this->db->bind(':status', 'RR');
         foreach ($array as $item) {
-            $this->db->bind($item['key'], $item['parameter'].'%');
+            $this->db->bind($item['key'], '%'.$item['parameter'].'%');
         }
 
         if ( $arr ) {
@@ -73,14 +73,12 @@ class PDI
                 ON `vehicle`.TesterId = `employee`.EmployeeId
                 WHERE `vehicle-model`.ModelName LIKE :model 
                   AND `vehicle`.CurrentStatus = :status 
-                  AND `vehicle`.PDIStatus = :pdi 
                 ORDER BY `vehicle`.ChassisNo DESC
                 LIMIT 10;'
         );
 
-        $this->db->bind(':model', $model . '%');
+        $this->db->bind(':model', '%' . $model . '%');
         $this->db->bind(':status', 'PDI');
-        $this->db->bind(':pdi', 'NC');
 
         $results = $this->db->resultSet();
 

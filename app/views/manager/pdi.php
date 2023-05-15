@@ -51,7 +51,7 @@
                         $word = 'Not Started';
                         $css = 'red';
                     } else {
-                        if ($value->PDIStatus == 'NC') {
+                        if ($value->PDIStatus == 'P') {
                             $word = 'In Progress';
                             $css = 'orange';
                         } else {
@@ -75,7 +75,7 @@
                                         <img src="' . URL_ROOT . 'public/images/cars/'. $value->ModelName . ' ' . $value->Color .'.png" class="carpic" alt="' . $value->ModelName . ' ' . $value->Color . '">
                                     </div>
                                     <div class="carstatus '.$css.'"> '.$word.' </div>
-                                    <div class="arrivaldate">Stage: PDI </div>
+                                    <div class="arrivaldate margin-top-1">Assigned to: '.$value->Tester.'</div>
                                 </div>';
                 }
 

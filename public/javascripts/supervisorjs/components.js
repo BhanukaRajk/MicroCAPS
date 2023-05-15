@@ -185,13 +185,13 @@ compVehicleSelector?.addEventListener('change', function() {
                                             <div class="parts-col-02">${Status}</div>
                                             <div class="parts-col-03">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}-D"  onclick="updateComponentStatus(${component.PartNo.trm()} ','${component.Status == "NR" || component.Status == "R"  || component.Status == "D" ? 'D' : 'ID' }')"  ${Status == "DAMAGED" ? "checked" : "" } ${component.Status == "NR" || component.Status == "D" || component.Status == "ID" ? "disabled" : "" }/>
+                                                    <input type="checkbox" id="${component.PartNo}-D"  onclick="updateComponentStatus(${component.PartNo} ','${component.Status == "NR" || component.Status == "R"  || component.Status == "D" ? 'D' : 'ID' }')"  ${Status == "DAMAGED" ? "checked" : "" } ${component.Status == "NR" || component.Status == "D" || component.Status == "ID" ? "disabled" : "" }/>
                                                     <label for="${component.PartNo}D"></label>
                                                 </div>
                                             </div>
                                             <div class="parts-col-04">
                                                 <div class="round">
-                                                    <input type="checkbox" id="${component.PartNo}-I" onclick="updateComponentStatus(${component.PartNo.trm()} ','I')" ${Status == "ISSUED" ? "checked" : "" } ${component.Status == "NR" || component.Status == "I" || component.Status == "D" || component.Status == "ID" ? "disabled" : "" }/>
+                                                    <input type="checkbox" id="${component.PartNo}-I" onclick="updateComponentStatus(${component.PartNo} ','I')" ${Status == "ISSUED" ? "checked" : "" } ${component.Status == "NR" || component.Status == "I" || component.Status == "D" || component.Status == "ID" ? "disabled" : "" }/>
                                                     <label for="${component.PartNo}I"></label>
                                                 </div>
                                             </div>

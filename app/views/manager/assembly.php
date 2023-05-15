@@ -70,9 +70,15 @@
                     $CurrentStatus = stage($value->CurrentStatus);
 
                     if ($CurrentStatus == false) {
-                        $CurrentStatus = stage($data['holdStage'][$key]->StageNo);
-                        $word = 'On Hold';
-                        $css = 'red';
+                        if ($value->CurrentStatus == 'H') {
+                            $CurrentStatus = stage($data['holdStage'][$key]->StageNo);
+                            $word = 'On Hold';
+                            $css = 'red';
+                        } else {
+                            $CurrentStatus = 'PAQ Inspection';
+                            $word = 'Assembly Completed';
+                            $css = 'green';
+                        }
                     }
 
                     echo '<a href="' . URL_ROOT . 'managers/assembly/' . $value->ChassisNo . '">

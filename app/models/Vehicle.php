@@ -602,7 +602,7 @@ class Vehicle {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE (`vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H") OR `vehicle`.CurrentStatus LIKE :status) AND `vehicle`.ChassisNo LIKE :chassisNo
+                WHERE (`vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H","AC") OR `vehicle`.CurrentStatus LIKE :status) AND `vehicle`.ChassisNo LIKE :chassisNo
                 ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
 
@@ -626,7 +626,7 @@ class Vehicle {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H") AND `vehicle-model`.ModelName LIKE :ModelNo
+                WHERE `vehicle`.CurrentStatus IN ("S1","S2","S3","S4","H","AC") AND `vehicle-model`.ModelName LIKE :ModelNo
                 ORDER BY `vehicle`.ChassisNo '.$order.';'
         );
 

@@ -47,6 +47,15 @@ assemblyVehicles?.addEventListener("change", () => {
     }
 });
 
+let pdiVehicles = document.getElementById("pdiVehicles");
+
+pdiVehicles?.addEventListener("change", () => {
+    let selectedValue = pdiVehicles.value;
+    if (selectedValue) {
+        window.location.href = selectedValue;
+    }
+});
+
 // Toggle Search
 const searchBar = document.querySelector('#search-bar');
 const searchButton = document.querySelector('#search-button');

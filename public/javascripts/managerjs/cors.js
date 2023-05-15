@@ -407,6 +407,7 @@ function component() {
             document.getElementById("chassiNoC").innerHTML = `Chassis No : ${response['vehicles'].ChassisNo}`;
             document.getElementById("colorC").innerHTML = `Color : ${response['vehicles'].Color}`
             document.getElementById("selected").innerHTML = compList(response);
+            document.getElementById("select-all").checked = false;
 
         }
     };

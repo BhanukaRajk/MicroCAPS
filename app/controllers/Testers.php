@@ -244,6 +244,15 @@ class Testers extends controller
             $data['pdiCheckList'] = $this->testerModel->pdiCheckList($chassisno);
             $data['id'] = $chassisno;
             $data['defects'] = $this->testerModel->viewDefectSheets($chassisno);
+            $data['completeStatus'] = true;
+
+            foreach ($data['pdiCheckList'] as $pdiCheck) {
+                if ($pdiCheck->Result != 'OK') {
+                    $data['completeStatus'] = false;
+                    break;
+                }
+            }
+
             $this->view('tester/pdi', $data);
         }
     }
