@@ -539,7 +539,7 @@ class Supervisor
                 FROM `employee-schedule`, `employee`, `stage-process`
                 WHERE `employee-schedule`.`ProcessId` = `stage-process`.`ProcessId` AND 
                         `employee-schedule`.`EmployeeId` = `employee`.`EmployeeId` AND 
-                        (`employee-schedule`.`Date` < CURRENT_DATE() OR `employee-schedule`.`Completeness` = "0");'
+                        (`employee-schedule`.`Date` >= CURRENT_DATE() OR `employee-schedule`.`Completeness` = "0");'
         );
 
         $tasks = $this->db->resultSet();

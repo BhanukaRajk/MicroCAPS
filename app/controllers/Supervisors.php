@@ -1205,9 +1205,17 @@ class Supervisors extends controller
                 'Stock' => trim($_POST['stock'])
             ];
 
+            if(intval($_POST['stock']) != 0) {
+                $_SESSION['error_message'] = 'කරුණාකර නිවැරදි දත්ත ඇතුලත් කරන්න';
+                redirect('Supervisors/findConsumables');
+            }
+
+            echo 'Hi';
+
             if ($this->supervisorModel->checkConsumeById($data['ConsumeId'])) {
 
-                if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'])) {
+                if ($this->supervisorModel->updateConsumableQuantity($data['ConsumeId'], $data['Stock'], $data['ConsumeType'], $_SESSION['_id'])) {
+                    // $_SESSION['success_message'] = 'දත්ත සියල්ල සුරකින ලදි!';
                     $_SESSION['success_message'] = 'Consumable quantity updated!';
                 } else {
                     $_SESSION['error_message'] = 'Error! Could not update information..';
@@ -1219,13 +1227,13 @@ class Supervisors extends controller
 
             }
 
-            redirect('Supervisors/viewConsumables');
+            redirect('Supervisors/findConsumables');
 
         } else {
 
                 $_SESSION['error_message'] = 'Request failed! :(';
                 // $data['url'] = getUrl();
-                redirect('Supervisors/viewConsumables');
+                redirect('Supervisors/findConsumables');
                 // $this->view('supervisor/consumables/consumablelist', $data);
 
         }

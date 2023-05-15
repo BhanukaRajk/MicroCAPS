@@ -57,7 +57,7 @@
     cursor: pointer;
 }
 
-.success-msg .closemsgicon {
+/* .success-msg .closemsgicon {
     border: 1px solid #3cae4f;
     border-radius: 1rem;
 }
@@ -65,7 +65,7 @@
 .error-msg .closemsgicon {
     border: 1px solid #c82727;
     border-radius: 1rem;
-}
+} */
   
   #messagebox.shows {
     -webkit-animation: fadein 0.5s, fadeout 0.5s 9.5s;
