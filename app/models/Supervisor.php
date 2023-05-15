@@ -1080,13 +1080,12 @@ class Supervisor
     public function recordComponentDetails($car_id, $part_id, $status)
     {
         $this->db->query(
-            'UPDATE `component-release` SET `Status` = :status
-                    WHERE `ChassisNo` = :chassisNo AND `PartNo` = :part;'
+            'UPDATE `component-release` SET `Status` = :cstatus WHERE `ChassisNo` = :chassisNo AND `PartNo` = :part;'
         );
 
         $this->db->bind(':chassisNo', $car_id);
         $this->db->bind(':part', $part_id);
-        $this->db->bind(':status', $status);
+        $this->db->bind(':cstatus', $status);
 
 
         if ($this->db->execute()) {

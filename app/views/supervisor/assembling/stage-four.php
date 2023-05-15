@@ -48,7 +48,7 @@
                 <div class="stage-controls">
                     <div class="stage-control-rowset">
                         <div class="stage-control-rowset-heading">
-                            <div class="option1">Connected</div>
+                            <div class="option1">Completed</div>
                             <div class="option2">Hold</div>
                         </div>
 

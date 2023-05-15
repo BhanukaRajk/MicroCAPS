@@ -308,7 +308,9 @@ function updateComponentStatus(PartNo, Status) {
 
     const VehicleId = document.querySelector('#vehicle_no').innerHTML;
 
-    const checkbox = document.querySelector("input[type=checkbox][name=" + PartNo + "-" + status +"]");
+    const checkbox = document.querySelector("input[type=checkbox][name=" + PartNo + "-" + Status +"]");
+
+    // console.log(checkbox);
 
     // JSON STRINGIFY USED BECAUSE AN ARRAY IS PASSED USING THIS checkboxesset VARIABLE
     const formData = new FormData();
@@ -324,10 +326,6 @@ function updateComponentStatus(PartNo, Status) {
 
     fetch(BASE_URL + "Supervisors/recordUpdateComponent", {
         method: "POST",
-        // headers: {
-        //     'Content-type': 'multipart/form-data'
-        //     'Content-type': 'application/json'
-        // },
         body: formData,
     })
         .then((response) => response.json())
