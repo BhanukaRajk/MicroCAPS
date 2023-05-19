@@ -1,0 +1,82 @@
+/* Root */
+@import "features/root.css";
+
+/* Margins */
+@import "features/margin.css";
+
+/* Padding */
+@import "features/padding.css";
+
+/* Flex */
+@import "features/flex.css";
+
+/* Grid */
+@import "features/grid.css";
+
+/* Display */
+@import "features/display.css";
+
+/* Heights */
+@import "features/height.css";
+
+/* Widths */
+@import "features/width.css";
+
+/* Borders */
+@import "features/border.css";
+
+/* Background */
+@import "features/background.css";
+
+/* Text */
+@import "features/text.css";
+
+/* Position */
+@import "features/position.css";
+
+/* Scroll */
+@import "components/scroll.css";
+
+/* Button */
+@import "components/button.css";
+
+/* Form */
+@import "components/form.css";
+
+/* Checboxs */
+@import "components/checkbox.css";
+
+/* Flash Message */
+@import "components/flash.css";
+
+/* Pop Up*/
+@import "components/popup.css";
+
+/* Select */
+@import "components/select.css";
+
+/* Calender */
+@import "components/calender.css";
+
+/* Charts */
+@import "components/chart.css";
+
+/* Search */
+@import "components/search.css";
+
+/* Navigation */
+@import "components/navigation.css";
+
+/* Table */ 
+@import "components/table.css";
+
+/* Page */
+@import "pages/common.css";
+
+@import "pages/dashboard.css";
+
+@import "pages/vehiclelist.css";
+
+@import "pages/pdi.css";
+
+@import "pages/defectSheet.css";

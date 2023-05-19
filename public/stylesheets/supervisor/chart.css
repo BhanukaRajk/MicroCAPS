@@ -1,0 +1,54 @@
+#myChart {
+    width: 300px !important;
+    height: 230px !important;
+}
+
+#stage01,
+#stage02,
+#stage03,
+#stage04 {
+    width: 10rem !important;
+    height: 10rem !important;
+}
+
+.chart-percentage {
+    position: absolute;
+    top: 15.3rem;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--fontgray);
+}
+
+.chart-percentage-ao {
+    font-size: 4rem;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: var(--fontgray);
+    justify-self: center;
+    align-self: center;
+}
+
+.chart-percentage-stage{
+    font-size: 2rem;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    color: var(--fontgray);
+    height: 2rem;
+    width: 3rem;
+}
+
+.dash-darkblue-circle {
+    background-color: #0853dd;
+}
+
+.dash-lightblue-circle {
+    background-color: #3ba5fb;
+}
+
+.dash-graph-color-circle {
+    height: 0.5rem;
+    width: 0.5rem;
+    margin: auto 0.5rem auto 0rem;
+    border-radius: 50%;
+}

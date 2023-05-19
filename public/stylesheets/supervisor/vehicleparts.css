@@ -1,0 +1,250 @@
+.parts-view-margin {
+    display: flex;
+    flex-direction: column;
+
+    margin-inline: 48px;
+    margin-block: 13px;
+}
+
+.parts-top-section {
+    width: 100%;
+    height: 58px;
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.parts-top-section-breaker {
+    margin: 10px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.parts-title {
+    width: 500px;
+    height: 30px;
+
+    /* font-family: 'Noto Sans'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+
+    color: #1C1F37;
+}
+
+.parts-back-button {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+
+    color: #2773FF;
+
+    width: 149.16px;
+    height: 33px;
+
+    border: 1px solid #2773FF;
+    border-radius: 4px;
+    transition-duration: 0.15s;
+}
+
+.parts-back-button:hover {
+    background-color: #2773FF20;
+    transition-duration: 0.15s;
+}
+
+.parts-info-box {
+    width: 100%;
+    /*height: 480px;*/
+    /*height: 540px;*/
+
+    margin-top: 10px;
+
+    background: #FFFFFF;
+    /*border: 1px solid #D7D7D7;*/
+    /*box-shadow: 0 5px 10px #F1F2FA;*/
+    border-radius: 8px;
+
+}
+
+.parts-info-box-inner {
+    margin: 25px 48px 30px 48px;
+}
+
+.parts-info-set-1,
+.parts-info-set-2 {
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.parts-info-set-1 {
+    /* padding-block: 18px; */
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5%;
+
+}
+
+.filter-btn-box {
+    margin-block: 18px;
+}
+
+
+.parts-info-top {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.parts-heading {
+    width: 602.02px;
+    height: 30px;
+
+    /* font-family: 'Noto Sans'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+
+    color: #1C1F37;
+}
+
+
+
+.parts-vehicle-data {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.parts-data-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px 0;
+
+}
+
+.parts-data-field,
+.parts-inspector {
+    width: 300px;
+}
+
+
+
+
+
+
+
+
+
+.bottom-border {
+    border-bottom: 1px solid #DADADA;
+}
+
+.parts-col-01 {
+    width: 400px;
+    text-align: center;
+}
+
+.parts-col-02 {
+    width: 200px;
+}
+
+.parts-col-03 {
+    width: 200px;
+}
+
+.parts-col-04 {
+    width: 200px;
+}
+
+.parts-col-05 {
+    width: 210px;
+}
+
+.parts-col-01,
+.parts-col-02,
+.parts-col-03,
+.parts-col-04,
+.parts-col-05 {
+    height: 40px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+
+    color: #1C1F37;
+}
+
+
+.parts-table-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.parts-bold {
+    font-weight: bold;
+}
+
+.vehicle-selection-box {
+    gap: 1rem;
+}
+
+.vehicle-selection-box .full-list-btn {
+    width: 150px;
+    height: 36px;
+    padding-inline: 10px !important;
+
+    /* font-family: 'Noto Sans'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: #017EFA !important;
+    background-color: #FFFFFF !important;
+
+    border: 1px solid #017EFA !important;
+    border-radius: 6px !important;
+
+}
+
+.vehicle-selection-box .vehicle-selection {
+    width: 200px;
+    height: 36px;
+    padding-inline: 10px !important;
+
+    /* font-family: 'Noto Sans'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    color: #017EFA !important;
+    border: 1px solid #017EFA !important;
+    border-radius: 6px !important;
+}

@@ -1,0 +1,100 @@
+/* Text */
+.text-left {
+    text-align: left !important
+}
+
+.text-center {
+    text-align: center !important
+}
+
+.text-right {
+    text-align: right !important
+}
+
+.text-justify {
+    text-align: justify !important
+}
+
+.text-center {
+    text-align: center !important
+}
+
+/* Color */
+.text-black {
+    color: var(--black) !important
+}
+
+.text-white {
+    color: var(--white) !important
+}
+
+.text-blue {
+    color: var(--blue) !important
+}
+
+.text-darkblue {
+    color: var(--darkblue) !important
+}
+
+.text-lightblue {
+    color: var(--lightblue) !important
+}
+
+.text-hover-blue {
+    --text-color: var(--blue) !important
+}
+
+.text-hover-red {
+    --text-color: var(--red) !important
+}
+
+.text-gray {
+    color: var(--gray) !important
+}
+
+.text-fontgray {
+    color: var(--fontgray) !important
+}
+
+
+
+.text-decoration-none {
+    text-decoration: none !important
+}
+
+/* Weights */
+.font-weight {
+    font-weight: 700;
+}
+
+.font-size {
+    font-size: 12px !important;
+}
+
+.font-size-14 {
+    font-size: 14px !important;
+}
+
+.font-size-20 {
+    font-size: 20px !important;
+}
+
+.font-size-24 {
+    font-size: 24px !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+label.description {
+    position: relative;
+    top: 0.6rem;
+    left: 1.5rem;
+    background: white;
+    padding: 0 0.5rem;
+}
+
+.lette-spacing-5 {
+    letter-spacing: 5px;
+}

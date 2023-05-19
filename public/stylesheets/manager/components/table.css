@@ -1,0 +1,24 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.th,
+.td {
+    padding: 8px;
+    width: 30%;
+    text-align: center;
+}
+
+.tr {
+    border-bottom: 1px solid var(--gray);
+}
+
+.th {
+    background-color: var(--darkblue);
+    color: white;
+}
+
+.td {
+    color: var(--fontgray);
+}

@@ -1,0 +1,404 @@
+.pagehead {
+    position: fixed;
+    top: 4rem;
+    left: 16.25rem;
+
+    width: calc(100% - 20.25rem);
+    padding-inline: 2rem;
+
+    padding-block: 1rem;
+    background-color: #F2F2F7;
+
+    /* font-family: 'Noto Sans', sans-serif; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+
+    color: #1C1F37;
+}
+
+
+.vehicle-detail-board {
+    display: flex;
+    flex-direction: row;
+
+    padding-top: 6.25rem;
+}
+
+.vehicle-data-board {
+    display: flex;
+    flex-direction: row;
+
+    flex-wrap: wrap;
+    /* gap: 27px; */
+    /* margin-inline-end: 250px; */
+    margin-inline-end: 190px;
+}
+
+.carcard {
+    /*position: absolute;*/
+    width: 221px;
+    height: 200px;
+
+    margin-inline-end: 27px;
+    margin-block-end: 27px;
+    padding: 23px;
+
+    background: #FFFFFF;
+    cursor: pointer;
+    /* Shadow/light */
+
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.carmodel {
+    height: 15px;
+    left: 0px;
+    top: 0px;
+
+    /* font-family: 'Proxima Nova', sans-serif; */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 15px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.chassisno {
+    /*position: absolute;
+    width: 82px;*/
+    height: 12px;
+    left: 0px;
+    top: 15px;
+
+    /* font-family: 'Proxima Nova', sans-serif; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 12px;
+    /* identical to box height */
+
+
+    /* Grey/500 */
+
+    color: #A6AFBA;
+}
+
+.carstatuscolor {
+    display: flex;
+    justify-content: right;
+}
+
+.carstatus {
+    height: 18px;
+
+    /* Title 3/Regular */
+
+    /* font-family: 'Proxima Nova', sans-serif; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+    /* identical to box height */
+
+
+    /* Grey/500 */
+
+    color: #A6AFBA;
+}
+
+.cardhead {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.carpicbox {
+    text-align: center;
+}
+
+.carpic {
+    height: 113px;
+}
+
+.filterbox {
+    position: fixed;
+    width: 212px;
+    /* height: 520px; */
+    right: 20px;
+    /*top: 165px;*/
+    /*padding: 23px;*/
+    /*margin-inline: 20px;*/
+
+    background: #FFFFFF;
+    /* Shadow/light */
+
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    /*justify-content: space-between;*/
+}
+
+.filterin {
+    margin: 22px 26px 22px 26px;
+    /* font-family: 'Proxima Nova'; */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.filtertype {
+    /* font-family: 'Proxima Nova'; */
+    font-style: normal;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    line-height: 14px !important;
+    /* identical to box height */
+
+
+    /* Grey/700 */
+
+    color: #4C5C6B;
+}
+
+.filters {
+
+    /* font-family: 'Proxima Nova'; */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    /* identical to box height */
+
+
+    /* Grey/500 */
+
+    color: #A6AFBA;
+    margin-block: 15px;
+    /*border: black solid 1px;*/
+}
+
+a {
+    text-decoration: none;
+}
+
+.status-circle {
+    width: 15px;
+    height: 15px;
+    /*margin: auto 1rem auto 0.5rem;*/
+    border-radius: 50%;
+}
+
+/* GRAPH OPTION 1 */
+.status-green-circle {
+    background-color: #17B978;
+}
+
+/* GRAPH OPTION 2 */
+.status-orange-circle {
+    background-color: #FD5F00;
+}
+
+.available {
+    color: #17B978;
+}
+
+.lower {
+    color: #FD5F00;
+}
+
+.filterbox ul {
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1 em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-inline: 30px;
+}
+
+
+
+
+
+
+.consumable-detail-popup {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    position: fixed;
+
+    width: 700px;
+    height: 360px;
+    left: 507px;
+    top:160px;
+
+    padding: 40px 30px;
+
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 8px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+    border-radius: 24px;
+
+    gap: 15px 0;
+
+    z-index: 1;
+}
+
+.popup-left,
+.popup-right {
+    width: 325px;
+}
+
+.cs-popup-csname {
+    font-size: 24px;
+    margin-block: 20px;
+}
+
+
+.border-div {
+    border-right: #bbbbbb solid 1px;
+}
+
+
+.consume-update {
+    width: 18rem !important;
+    height: 2.4rem !important;
+    font-size: 16px !important;
+}
+
+
+.last-update {
+    font-size: small;
+}
+
+.popup-box-heading1 {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.consumable-popup-img {
+    height: 200px;
+    margin-block: 30px;
+}
+
+.add-new-con-box {
+    width: 24rem;
+    background-color: #FFFFFF;
+    padding: 3rem 3rem;
+
+    /* border: 1px solid #000000; */
+    box-shadow: 0px 4px 8px rgba(76, 92, 107, 0.5), 0px 18px 36px rgba(166, 175, 186, 0.3);
+    border-radius: 15px;
+}
+
+.img-remover-box {
+    width: 100%;
+    padding-block: 1rem;
+    text-align: center;
+}
+
+.add-new-con-box .img-remover {
+    color: red;
+}
+
+.add-new-con-box .new-con-name-box,
+.add-new-con-box .new-con-type-box,
+.add-new-con-box .new-con-status-box {
+    padding-top: 0.5rem;
+    width: 100%;
+}
+
+.new-con-name,
+.new-con-type,
+.new-con-status {
+    width: calc(100% - 2rem);
+    height: 2rem;
+    padding-inline: 1rem;
+
+    border: 1px solid #4C5C6B;
+    border-radius: 15px;
+
+}
+
+.con-type-select {
+    width: 100%;
+    height: 36px;
+
+    padding-inline: 1rem;
+    /* margin-top: 0.5rem; */
+
+    /* /* font-family: 'Noto Sans'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px; */
+    /* identical to box height */
+
+    color: #4C5C6B !important;
+    border: 1px solid #4C5C6B !important;
+    border-radius: 15px !important;
+    
+
+}
+
+.new-con-add-btn-box {
+    margin-top: 2rem;
+    
+    display: flex;
+    flex-direction: row;
+    gap: 1rem
+}
+
+.width-50px {
+    width: 185px !important;
+}
+
+
+
+.filter-btn {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+
+.filter-button {
+    width: 100px;
+    height: 30px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #017EFA;
+    color: #FFFFFF;
+}
+
+.filter-button:hover {
+    background-color: #017dfabb;
+    box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15), 0px 18px 36px rgba(166, 175, 186, 0.2);
+}
+
+
+.line {
+    border-top:1px solid #4C5C6B;
+}

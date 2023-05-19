@@ -1,0 +1,75 @@
+.overlay {
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    left: 16.25rem;
+    right: 0;
+    background: rgb(0 0 0 / 16%);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    text-transform: capitalize;
+  }
+  
+  .visible {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .pop-container {
+    transition: all 5s ease-in-out;
+  }
+  
+  .pop {
+    animation: pop 0.7s;
+  }
+  
+  .close {
+    position: absolute;
+    top: 0.5em;
+    right: 1em;
+    transition: all 200ms;
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  .close:hover {
+    color: #06D85F;
+  }
+  
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+  
+    50% {
+      transform: scale(1.4);
+    }
+  
+    60% {
+      transform: scale(1.1);
+    }
+  
+    70% {
+      transform: scale(1.2);
+    }
+  
+    80% {
+      transform: scale(1);
+    }
+  
+    90% {
+      transform: scale(1.1);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }

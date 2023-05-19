@@ -1,0 +1,250 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:600,700';
+
+.ds-page {
+  position: absolute;
+  left: 16.25rem;
+  right: 0rem;
+  top: 4rem;
+  bottom: 0rem;
+  background-color: rgb(242, 243, 247);
+}
+
+.ds-board-2 {
+  margin-inline: 45px;
+  margin-block: 10px;
+}
+
+.ds-section {
+  height: 80px;
+}
+
+.ds-section-2 {
+  top: 2.7rem;
+  position: relative;
+}
+
+.ds-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-block: 10px;
+  top: 1rem;
+  position: relative;
+}
+
+.ds-page-heading-large {
+  height: 50px;
+  left: 305px;
+  top: 79px;
+
+  /* font-family: 'Noto Sans'; */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 33px;
+
+  color: #1C1F37;
+}
+
+.ds-page-heading-small {
+  height: 30px;
+  left: 305px;
+  top: 79px;
+
+  /* font-family: 'Noto Sans'; */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 33px;
+
+  color: #1C1F37;
+}
+
+.ds-data-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  flex-wrap: wrap;
+  gap: 110px;
+}
+
+/* #ds-body {
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F7;
+    justify-content: center;
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+} */
+
+/* .ds-container {
+    background-color: white;
+    border-radius: 15px;
+    top: 7rem;
+    position: fixed;
+    padding: 1em;
+    width: 35%;
+} */
+
+.ds-button {
+  border: 1px solid #2773FF;
+  color: #2773FF;
+  background-color: white;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 2rem auto;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ds-button:hover {
+  color: #ffffff;
+  background-color: #1B2B65;
+  opacity: 1;
+}
+
+.ds-delete-button {
+  color: #B10202;
+  text-decoration: none;
+  border: 1px solid #B10202;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding-inline: 1rem;
+  cursor: pointer;
+  padding-block: 0.25rem;
+  transition: 0.2s;
+  font-weight: 700;
+}
+
+.ds-delete-button:hover {
+  color: #ffffff;
+  background-color: #B10202;
+  opacity: 1;
+}
+
+.ds-edit-button {
+  color: #017EFA;
+  text-decoration: none;
+  border: 1px solid #017EFA;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding-inline: 1.6rem;
+  cursor: pointer;
+  padding-block: 0.25rem;
+  transition: 0.2s;
+  font-weight: 700;
+}
+
+.ds-edit-button:hover {
+  color: #ffffff;
+  background-color: #1B2B65;
+  opacity: 1;
+}
+
+.ds-table {
+  margin: auto;
+  min-width: 300px;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.ds-table tr:first-child {
+  border-top: none;
+  background: #418CFD;
+  color: #fff;
+}
+
+.ds-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  /* background-color: #ebf3f9; */
+}
+
+/* .ds-table tr:nth-child(odd):not(:first-child) {
+  background-color: #ebf3f9;
+} */
+
+.ds-table th {
+  display: none;
+}
+
+.ds-table td {
+  display: block;
+}
+
+.ds-table td:first-child {
+  margin-top: .5em;
+}
+
+.ds-table td:last-child {
+  margin-bottom: .5em;
+}
+
+.ds-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #000;
+}
+
+.ds-table th,
+.ds-table td {
+  text-align: left;
+}
+
+.ds-table {
+  color: #333;
+  border-radius: .4em;
+  overflow: hidden;
+}
+
+.ds-table tr {
+  border-color: #bfbfbf;
+}
+
+.ds-table th,
+.ds-table td {
+  padding: .5em 1em;
+}
+
+@media screen and (max-width: 601px) {
+  .ds-table tr:nth-child(2) {
+    border-top: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .ds-table tr:hover:not(:first-child) {
+    background-color: #fff;
+  }
+
+  .ds-table td:before {
+    display: none;
+  }
+
+  .ds-table th,
+  .ds-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+
+  .ds-table th:first-child,
+  .ds-table td:first-child {
+    padding-left: 0;
+  }
+
+  .ds-table th:last-child,
+  .ds-table td:last-child {
+    padding-right: 0;
+  }
+
+  .ds-table th,
+  .ds-table td {
+    padding: 1em !important;
+  }
+}

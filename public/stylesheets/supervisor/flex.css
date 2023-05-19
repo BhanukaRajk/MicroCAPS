@@ -1,0 +1,128 @@
+/* Item alignment */
+.align-items-start {
+    align-items: flex-start !important
+}
+
+.align-items-center {
+    align-items: center !important
+}
+
+.align-items-end {
+    align-items: flex-end !important
+}
+
+.align-items-stretch {
+    align-items: stretch !important
+}
+
+.align-items-baseline {
+    align-items: baseline !important
+}
+
+.align-self-center {
+    align-self: center !important;
+}
+
+/* Justify content */
+.justify-content-start {
+    justify-content: flex-start !important
+}
+
+.justify-content-center {
+    justify-content: center !important
+}
+
+.justify-content-end {
+    justify-content: flex-end !important
+}
+
+.justify-content-between {
+    justify-content: space-between !important
+}
+
+.justify-content-around {
+    justify-content: space-around !important
+}
+
+.justify-content-evenly {
+    justify-content: space-evenly !important
+}
+
+/* Flex */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: var(--white);
+}
+
+.column {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: var(--white);
+    margin-top: calc(1 * var(--margin-y));
+    margin-right: calc(3.5 * var(--margin-x));
+    margin-left: calc(3.5 * var(--margin-x))
+}
+
+.display-flex-row {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.display-flex-column {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.inner-layout {
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+/* Gap */
+.gap-0p5 {
+    gap: 0.5rem;
+}
+
+.gap-0p75 {
+    gap: 0.75rem;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.gap-3 {
+    gap: 3rem;
+}
+
+.gap-2p1 {
+    gap: 2.1rem;
+}
+
+.gap-5 {
+    gap: 5rem;
+}
+
+.gap-10 {
+    gap: 10rem;
+}
+
+.gap-46 {
+    gap: 46rem;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+}

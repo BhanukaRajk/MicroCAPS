@@ -1,7 +1,9 @@
-*.DS_Store
+**/.DS_Store
 .DS_Store
 
-/app/config/config.php
-/app/views/includes/header.php
+app/views/includes/header.php
 
 .idea/
+
+app/views/PAGE_STRUCTURE.txt
+app/config/config.php

@@ -1,0 +1,294 @@
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* SUPERVISOR DELETE BUTTONS */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+.delete-button {
+    color: #B10202;
+    text-decoration: none;
+    border: 0.1rem solid #B10202;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    padding-inline: 1rem;
+    cursor: pointer;
+    padding-block: 0.25rem;
+    transition: 0.2s;
+}
+
+/* .delete-button:hover {
+    color: #fb6e32;
+    border: 0.1rem solid #fb6e32;
+    background-color: #fff0e9;
+} */
+
+.delete-button:hover {
+    color: #ffffff;
+    background-color: #B10202;
+}
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+
+
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* SUPERVISOR EDIT BUTTONS */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+.edit-button {
+    color: #017EFA;
+    /* color: #2773FF; */
+    text-decoration: none;
+    border: 0.1rem solid #017EFA;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    padding-inline: 2rem;
+    cursor: pointer;
+    padding-block: 0.25rem;
+    transition: 0.2s;
+}
+
+/* .edit-button:hover {
+    color: #5fc1f5;
+    border: 0.1rem solid #5fc1f5;
+    background-color: #ebf8ff;
+} */
+.edit-button:hover {
+    color: #ffffff;
+    background-color: #017EFA;
+}
+
+
+.cancel-button {
+    color: #2f2f2f;
+    /* color: #2773FF; */
+    text-decoration: none;
+    border: none;
+    /* border: 0.1rem solid #017EFA; */
+    background-color: #b8b8b8;
+    border-radius: 0.5rem;
+    padding-inline: 2rem;
+    cursor: pointer;
+    padding-block: 0.25rem;
+    transition: 0.2s;
+}
+
+/* .edit-button:hover {
+    color: #5fc1f5;
+    border: 0.1rem solid #5fc1f5;
+    background-color: #ebf8ff;
+} */
+.cancel-button:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+/* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX */
+
+
+.blue-hover:hover {
+    color: #ffffff !important;
+    background-color: #017EFA !important;
+
+    transition: 0.25s;
+}
+
+.page-filter-btn,
+.page-filter-btn-clicked {
+    width: 150px;
+    height: 36px;
+
+    align-items: center;
+    
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+
+    color: #017EFA;
+    background-color: #FFFFFF;
+    border: 1px solid #017EFA;
+    border-radius: 18px;
+}
+
+.page-filter-btn {
+    color: #017EFA;
+    background-color: #FFFFFF;
+    border: 1px solid #017EFA;
+}
+
+.page-filter-btn-clicked {
+    color: #FFFFFF;
+    background-color: #017EFA;
+    border: 1px solid #017EFA;
+}
+
+.green-btn {
+    /* width: 100%; */
+    height: 2rem;
+
+    color: #17B978;
+    background-color: #FFFFFF;
+    border: 1.5px solid #17B978;
+    border-radius: 10px;
+    
+    transition: 0.25s;
+}
+
+.green-btn:hover {
+    color: #FFFFFF;
+    background-color: #17B978;
+    transition: 0.25s;
+}
+
+.red-btn {
+    /* width: 100%; */
+    height: 2rem;
+
+    color: #000000;
+    background-color: #FFFFFF;
+    border: 1.5px solid #000000;
+    border-radius: 10px;
+}
+
+.red-btn:hover {
+    color: #FFFFFF;
+    background-color: #000000;
+    transition: 0.25s;
+}
+
+
+.adding-button {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    color: #FFFFFF;
+    background-color: #017EFA;
+
+    border: none;
+    border-radius: 1rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* .edit-button:hover {
+    color: #5fc1f5;
+    border: 0.1rem solid #5fc1f5;
+    background-color: #ebf8ff;
+} */
+.adding-button:hover {
+    background-color: #000080;
+}
+
+
+
+
+.action-one-button {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    color: #FFFFFF;
+    background-color: #017EFA;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    
+    border: none;
+    border-radius: 0.5rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.action-one-button:hover {
+    background-color: #000080;
+}
+
+.free-action-button {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+
+    color: #000000;
+    background-color: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+    border: 1px solid #DDDDDD;
+    border-radius: 0.5rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.free-action-button:hover {
+    background-color: #DDDDDD;
+}
+
+
+
+
+.vehicle-searchbox {
+    width: 212px;
+}
+
+.part-searchbox {
+    width: 180px;
+}
+
+
+
+.part-searchbox,
+.vehicle-searchbox {
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('http://localhost/MicroCAPS/public/images/icons/search.png');
+    background-position: 9px 6px;
+    background-size: 30px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 46px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.part-searchbox:focus,
+.vehicle-searchbox:focus {
+    border: 2px solid #017EFA;
+}
+
+
+button.paginate {
+    color: #FFFFFF;
+    background: #2773ff;
+    border: none;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.2rem;
+}
