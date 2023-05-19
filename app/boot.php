@@ -5,7 +5,7 @@
 
     /* Helpers */
     require_once 'helpers/DateHelper.php';
-    require_once 'helpers/EmailHelper.php';
+    // require_once 'helpers/EmailHelper.php';
     require_once 'helpers/UrlHelper.php';
     require_once 'helpers/SessionHelper.php';
 
