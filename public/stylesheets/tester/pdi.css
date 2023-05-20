@@ -33,6 +33,13 @@
     border-bottom: 1px solid var(--gray);
 }
 
+.pdi-checklist-2 {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* border-bottom: 1px solid var(--gray); */
+}
+
 .pdi-checking-result {
     width: 3rem;
     height: 1.5rem;

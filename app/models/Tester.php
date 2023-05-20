@@ -273,9 +273,11 @@ class Tester {
                 FROM `vehicle` 
                 INNER JOIN `vehicle-model`
                 ON `vehicle`.ModelNo = `vehicle-model`.ModelNo
-                WHERE (`vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus != :pdi) AND (`vehicle`.ChassisNo LIKE :chassisNo OR `vehicle-model`.ModelName LIKE :chassisNo)
+                WHERE (`vehicle`.CurrentStatus = :status AND `vehicle`.PDIStatus != :pdi) AND (`vehicle`.ChassisNo LIKE :chassisNo)
                 ORDER BY `vehicle`.`ArrivalDate` ASC;'
         );
+
+        // OR `vehicle-model`.ModelName LIKE :chassisNo
 
         $this->db->bind(':status', 'RR');
         $this->db->bind(':pdi', 'CM');
@@ -523,6 +525,36 @@ class Tester {
     }
 
 
+    public function selectAll($chassisno, $result) {
+        $this->db->query(
+            "SELECT `pdi-check`.`CheckId` 
+            FROM `pdi-check`"
+        );
+
+        $data['id'] = $this->db->resultSet();
+
+        $flag = true;
+
+        foreach($data['id'] as $value) {
+            $this->db->query(
+                "UPDATE `pdi-result` 
+                SET `Result` = :Result 
+                WHERE `pdi-result`.`ChassisNo` = :ChassisNo AND `pdi-result`.`CheckId` = :CheckId"
+            );
+
+            $this->db->bind(':ChassisNo', $chassisno);
+            $this->db->bind(':CheckId', $value->CheckId);
+            $this->db->bind(':Result', $result);
+
+           if (!$this->db->execute()){
+                $flag = false;
+           }
+        } 
+
+        return $flag;
+    }
+
+
     // GET PDI RESULTS
 
     public function viewPDI($id){
@@ -602,10 +634,10 @@ class Tester {
     public function notCompletedPDI($chassisno){
         $this->db->query('SELECT `pdi-result`.* 
                                     FROM `pdi-result` 
-                                    WHERE `pdi-result`.`ChassisNo` = :chassisno AND `pdi-result`.`Result` = :result');
+                                    WHERE `pdi-result`.`ChassisNo` = :chassisno AND `pdi-result`.`Result` != :result');
 
         $this->db->bind(':chassisno', $chassisno);
-        $this->db->bind(':result', 'SA');
+        $this->db->bind(':result', 'OK');
 
         $results = $this->db->resultSet();
 

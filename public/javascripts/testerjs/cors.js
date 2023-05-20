@@ -60,6 +60,27 @@ function selectAllPDI(ChassisNo, CategoryId, Result) {
     xhttp.send("ChassisNo="+ChassisNo+"&CategoryId="+CategoryId+"&Result="+Result);
 }
 
+function selectAll(ChassisNo, Result) {
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var response = this.responseText;
+
+            if (response.trim() == "Successful") {
+                location.reload();
+                setLocalStorage("Successful","Status Changed Successfully");
+            } else {
+                location.reload();
+                setLocalStorage("Error","Error Completing Job");
+            }
+        }
+    };
+    xhttp.open("POST", "http://localhost/MicroCAPS/Testers/selectAll", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("ChassisNo="+ChassisNo+"&Result="+Result);
+}
+
 
 // ADD A VEHICLE TO MY TASKS
 

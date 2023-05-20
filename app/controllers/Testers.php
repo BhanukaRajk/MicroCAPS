@@ -326,6 +326,33 @@ class Testers extends controller
     }
 
 
+    public function selectAll()
+    {
+
+        if (!isLoggedIn()) {
+            redirect('users/login');
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'ChassisNo' => trim($_POST['ChassisNo']),
+                'Result' => trim($_POST['Result'])
+            ];
+
+            $result = $this->testerModel->selectAll($data['ChassisNo'], $data['Result']);
+
+            if ($result) {
+                echo 'Successful';
+            } else {
+                echo 'Error';
+            }
+        }
+    }
+
+
     // FOR PROFILE SETTINGS
 
     public function settings()

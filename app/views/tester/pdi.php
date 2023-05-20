@@ -19,6 +19,13 @@
                 <button class="btn btn-primary btn-blue width-rem-12" onClick="location.href='<?php echo URL_ROOT; ?>testers/defect_sheet/<?php echo $data['pdiVehicle']->ChassisNo ?>'">Edit Defect Sheet</button>
                 <button class="btn btn-primary btn-grn width-rem-12" onClick="completeTask('<?php echo $data['pdiVehicle']->ChassisNo ?>', '<?php echo $_SESSION['_id'] ?>')">Mark As Completed</button>
             </div>
+            <div class="pdiresultbox padding-3 pdi-checklist-2">
+                <div class="padding-bottom-3 font-size bold">Select All</div>
+                <div class="display-flex-row justify-content-between">
+                    <input type="radio" name="" value="OK" class="round-checkbox-green" onChange="selectAll('<?php echo $data['pdiVehicle']->ChassisNo ?>', 'OK')">
+                    <input type="radio" name="" value="SA" class="round-checkbox-red" onChange="selectAll('<?php echo $data['pdiVehicle']->ChassisNo ?>', 'SA')">
+                </div>
+            </div>
         </div>
 
 
